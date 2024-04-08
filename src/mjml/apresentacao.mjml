@@ -1,0 +1,36 @@
+<mjml>
+  <mj-head>
+    <mj-title> {{ subject }} Baixar Apresentação </mj-title>
+  </mj-head>
+
+  <mj-body background-color="#fff">
+    <mj-section>
+      <mj-column width="100%">
+        <mj-text font-size="24px" font-weight="bold">
+          {{ subject }} - Baixar Apresentação
+        </mj-text>
+      </mj-column>
+
+      <mj-column width="100%">
+        <mj-text font-size="16px"> Nome: {{ nome }} </mj-text>
+
+        <mj-text font-size="16px"> E-mail: {{ email }} </mj-text>
+
+        <mj-text font-size="16px"> Telefone: {{ telefone }} </mj-text>
+
+        <mj-button
+          background-color="#729f2d"
+          font-size="20px"
+          padding="5px 15px"
+          text-align="left"
+          href="{{ pdf }}"
+          >Baixar Apresentação
+        </mj-button>
+
+        <mj-divider border-width="1px" />
+
+        <mj-text font-size="13px"> {{ data }} </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
