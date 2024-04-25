@@ -40,7 +40,7 @@ const WhatsApp = ({ data }: Props) => {
         href={`https://api.whatsapp.com/send?phone=55${number}`}
         aria-label="Botão WhatsApp"
       >
-        <RiWhatsappFill size={40} className="text-green" />
+        <RiWhatsappFill size={40} className="text-green p-1" />
       </a>
     </div>
   );
