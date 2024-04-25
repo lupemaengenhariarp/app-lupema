@@ -125,6 +125,12 @@ const FooterApp = ({ data }: Props) => {
           <Link href="/assessoria" className="block hover:text-green">
             Imprensa
           </Link>
+          <Link
+            href="http://blog.lupemaengenharia.com.br"
+            className="block hover:text-green"
+          >
+            Blog
+          </Link>
         </div>
       </div>
       <CoolText />

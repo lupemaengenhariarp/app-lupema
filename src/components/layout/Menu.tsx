@@ -55,6 +55,12 @@ const MenuApp = ({ data }: Props) => {
           <LinkPath path="/empreendimentos/todos" label="Empreendimentos" />
           <LinkPath path="/noticias" label="Notícias" />
           <LinkPath path="/assessoria" label="Imprensa" />
+          <Link
+            href="http://blog.lupemaengenharia.com.br"
+            className="hover:text-green"
+          >
+            Blog
+          </Link>
         </div>
         <div className="flex flex-col">
           <div className="flex flex-col space-y-3 md:space-y-4 text-xl">
