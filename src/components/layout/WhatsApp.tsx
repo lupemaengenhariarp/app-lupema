@@ -26,7 +26,7 @@ const WhatsApp = ({ data }: Props) => {
   }, []);
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 drop-shadow-md">
+    <div className="fixed bottom-6 flex flex-col items-center justify-center right-6 z-50 drop-shadow-md">
       {device && (
         <a href={`tel:${data.coTelefone}`} aria-label="Botão Telefone">
           <MdWifiCalling3
@@ -40,7 +40,7 @@ const WhatsApp = ({ data }: Props) => {
         href={`https://api.whatsapp.com/send?phone=55${number}`}
         aria-label="Botão WhatsApp"
       >
-        <RiWhatsappFill size={60} className="text-green" />
+        <RiWhatsappFill size={65} className="text-green" />
       </a>
     </div>
   );
