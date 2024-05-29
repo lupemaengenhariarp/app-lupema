@@ -34,6 +34,7 @@ import SlideApp from '../../components/layout/Slide';
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import Aos from 'aos';
+import InputMask from 'react-input-mask';
 
 const Verso = () => {
   const carousel1 = [
@@ -82,6 +83,41 @@ const Verso = () => {
     />,
   ];
   const [result, setResult] = useState(false);
+  const [phone, setPhone] = useState('');
+
+  const handlePhoneChange = (e) => {
+    setPhone(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+
+    // Remove non-numeric characters from the phone number
+    const phoneNumber = phone.replace(/\D/g, '');
+    formData.set('telefone', phoneNumber);
+
+    // Use fetch or axios to send formData to your backend
+    fetch(form.action, {
+      method: form.method,
+      body: formData,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        setResult(true);
+      });
+  };
+
   const Error = () => {
     return (
       <div className="mt-7 bg-white rounded-xl text-center p-2">
@@ -91,6 +127,7 @@ const Verso = () => {
       </div>
     );
   };
+
   useEffect(() => {
     Aos.init({ duration: 400, easing: 'ease', once: false });
     const currentURL = window.location.href;
@@ -179,13 +216,22 @@ const Verso = () => {
                   </label>
                   <label for="tel" class="my-4 block">
                     <span class="text-sm">Telefone</span>
-                    <input
-                      type="tel"
-                      name="telefone"
-                      id="tel"
-                      required
-                      class="rounded-lg 2xl:rounded-xl block w-full py-[6px] 2xl:py-[10px]"
-                    />
+                    <InputMask
+                      mask="(99) 99999-9999"
+                      value={phone}
+                      onChange={handlePhoneChange}
+                    >
+                      {(inputProps) => (
+                        <input
+                          {...inputProps}
+                          type="tel"
+                          name="telefone"
+                          id="tel"
+                          required
+                          className="rounded-lg 2xl:rounded-xl block w-full py-[6px] 2xl:py-[10px]"
+                        ></input>
+                      )}
+                    </InputMask>
                   </label>
                   <label for="check" class="flex my-3">
                     <input type="checkbox" name="check" id="check" required />
