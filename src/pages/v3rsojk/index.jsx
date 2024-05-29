@@ -79,6 +79,36 @@ const Verso = () => {
     />,
   ];
   const [result, setResult] = useState(false);
+  const [phone, setPhone] = useState('');
+
+  const handlePhoneChange = (event) => {
+    setPhone(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const formData = new FormData(form);
+    const unmaskedPhone = phone.replace(/\D/g, '');
+    formData.set('telefone', unmaskedPhone);
+
+    fetch(form.action, {
+      method: form.method,
+      body: formData,
+    })
+      .then((response) => {
+        if (response.ok) {
+          form.reset();
+          setResult(false);
+        } else {
+          setResult(true);
+        }
+      })
+      .catch(() => {
+        setResult(true);
+      });
+  };
+
   const Error = () => {
     return (
       <div className="mt-7 bg-white rounded-xl text-center p-2">
@@ -88,6 +118,7 @@ const Verso = () => {
       </div>
     );
   };
+
   useEffect(() => {
     Aos.init({ duration: 400, easing: 'ease', once: false });
     const currentURL = window.location.href;
@@ -96,7 +127,6 @@ const Verso = () => {
       setResult(true);
     }
   }, []);
-
   return (
     <div>
       <header className="bg-white py-8 rounded-b-2xl relative z-10">
@@ -182,6 +212,8 @@ const Verso = () => {
                       type="tel"
                       name="telefone"
                       id="tel"
+                      value={phone}
+                      onChange={handlePhoneChange}
                       required
                       className="rounded-lg 2xl:rounded-xl block w-full py-[6px] 2xl:py-[10px]"
                     />
