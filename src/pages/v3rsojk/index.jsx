@@ -32,7 +32,6 @@ import logomaya from './assets/img/logo-maya.svg';
 import tour360 from './assets/img/360.svg';
 import SlideApp from '../../components/layout/Slide';
 import { useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet';
 import Aos from 'aos';
 
 const Verso = () => {
@@ -102,7 +101,7 @@ const Verso = () => {
 
   return (
     <div>
-      <header class="bg-white py-8 rounded-b-2xl relative z-10">
+      <header className="bg-white py-8 rounded-b-2xl relative z-10">
         <div className="container grid grid-cols-2 sm:grid-cols-3 gap-6 justify-center items-center">
           <img
             className="w-[200px] mx-auto hidden sm:block"
@@ -126,7 +125,7 @@ const Verso = () => {
         </div>
       </header>
       <main>
-        <section class="w-full -translate-y-6 relative" id="hero">
+        <section className="w-full -translate-y-6 relative" id="hero">
           <div className="hero">
             <picture>
               <source
@@ -144,10 +143,10 @@ const Verso = () => {
               <img src={heroJpeg.src} alt="Hero Verso" />
             </picture>
           </div>
-          <div class="relative xl:absolute top-0 left-0 right-0 z-10 w-full h-full">
-            <div class="xl:container flex items-center justify-end h-full hero-wrap bg-pink xl:bg-transparent px-8 xl:px-0 py-[40px] sm:py-[80px] xl:py-0">
-              <div class="text-white px-0 sm:px-12 xl:px-0 xl:w-[380px] 2xl:xl:w-[500px]">
-                <p class="text-[2rem] sm:text-[2.5rem] 2xl:text-[3rem] font-sans leading-[2.2rem] sm:leading-[3rem] 2xl:leading-[3.2rem]">
+          <div className="relative xl:absolute top-0 left-0 right-0 z-10 w-full h-full">
+            <div className="xl:container flex items-center justify-end h-full hero-wrap bg-pink xl:bg-transparent px-8 xl:px-0 py-[40px] sm:py-[80px] xl:py-0">
+              <div className="text-white px-0 sm:px-12 xl:px-0 xl:w-[380px] 2xl:xl:w-[500px]">
+                <p className="text-[2rem] sm:text-[2.5rem] 2xl:text-[3rem] font-sans leading-[2.2rem] sm:leading-[3rem] 2xl:leading-[3.2rem]">
                   Lançamento na Região Sul de Rio Preto. Saiba mais sobre o
                   V3RSO JK
                 </p>
@@ -155,303 +154,167 @@ const Verso = () => {
                   id="RDV3RSOJK"
                   action="https://www.terracelupema.com.br/inc/prosses.php"
                   method="post"
-                  class="mt-6"
+                  className="mt-6"
                 >
-                  <label for="name" class="my-4 block">
-                    <span class="text-sm">Nome</span>
+                  <label htmlFor="name" className="my-4 block">
+                    <span className="text-sm">Nome</span>
                     <input
                       type="text"
                       name="nome"
                       id="name"
                       required
-                      class="rounded-lg 2xl:rounded-xl block w-full py-[6px] 2xl:py-[10px]"
+                      className="rounded-lg 2xl:rounded-xl block w-full py-[6px] 2xl:py-[10px]"
                     />
                   </label>
-                  <label for="email" class="my-4 block">
-                    <span class="text-sm">E-mail</span>
+                  <label htmlFor="email" className="my-4 block">
+                    <span className="text-sm">E-mail</span>
                     <input
                       type="email"
                       name="email"
                       id="email"
                       required
-                      class="rounded-lg 2xl:rounded-xl block w-full py-[6px] 2xl:py-[10px]"
+                      className="rounded-lg 2xl:rounded-xl block w-full py-[6px] 2xl:py-[10px]"
                     />
                   </label>
-                  <label for="tel" class="my-4 block">
-                    <span class="text-sm">Telefone</span>
+                  <label htmlFor="tel" className="my-4 block">
+                    <span className="text-sm">Telefone</span>
                     <input
                       type="tel"
                       name="telefone"
                       id="tel"
                       required
-                      class="rounded-lg 2xl:rounded-xl block w-full py-[6px] 2xl:py-[10px]"
+                      className="rounded-lg 2xl:rounded-xl block w-full py-[6px] 2xl:py-[10px]"
                     />
                   </label>
-                  <label for="check" class="flex my-3">
+                  <label htmlFor="check" className="flex my-3">
                     <input type="checkbox" name="check" id="check" required />
-                    <span class="text-xs leading-2 ml-2">
-                      Concordo que os dados pessoais fornecidos serão utilizados
-                      para o envio de conteúdo informativo e publicitário sobre
-                      os produtos, serviços e assuntos gerais do Grupo Lupema,
-                      podendo ser compartilhado com intermediadores parceiros
-                      para o oferecimento dos produtos Lupema, nos termos da{' '}
-                      <a
-                        href="https://www.lupemaengenharia.com.br/politica-de-privacidade"
-                        target="_blank"
-                      >
-                        <u>Política de Privacidade</u>
-                      </a>{' '}
-                      e da Lei Geral de Proteção de Dados.
+                    <span className="text-xs leading-2 ml-2">
+                      Concordo que os dados aqui preenchidos sejam coletados
+                      para uso de marketing.
                     </span>
                   </label>
-                  <input type="hidden" name="lp" value="verso" />
-                  <input
-                    type="submit"
-                    value="FALE COM UM CONSULTOR"
-                    class="rounded-lg 2xl:rounded-xl block w-full bg-black mt-6 py-2 2xl:py-4 uppercase cursor-pointer"
-                  />
                   {result ? <Error /> : ''}
+                  <button
+                    type="submit"
+                    className="bg-golden text-gray w-full py-4 mt-2 rounded-lg 2xl:rounded-xl hover:bg-yellow-400"
+                  >
+                    Enviar
+                  </button>
                 </form>
               </div>
             </div>
           </div>
         </section>
-        <section class="container py-12">
-          <h1
-            class="text-pink uppercase text-center text-[2rem] sm:text-[2.5rem] font-sans"
-            data-aos="fade-up"
-          >
-            SOBRE O EMPREENDIMENTO
-          </h1>
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 mt-6">
-            <div class="slide" data-aos="fade-right">
-              <SlideApp
-                items={carousel1}
-                largura={{ desktop: 0, mobile: 0 }}
-                infinite={true}
-                navigation={false}
-                dots={true}
-                autoPlay={true}
-              ></SlideApp>
-              <div class="px-6">
-                <h2 class="text-xl text-pink block my-2 font-semibold">
-                  Housi AppSpace
-                </h2>
-                <p>
-                  Ter, na palma da mão, serviços conectados, conveniências e
-                  descontos exclusivos faz toda a diferença.
-                </p>
-              </div>
+        <section className="container mt-16 xl:mt-[150px] px-0 sm:px-6">
+          <div className="text-center" data-aos="fade-up">
+            <img
+              className="sm:w-4/5 mx-auto"
+              src={houseWebp.src}
+              alt="House Verso"
+            />
+            <p className="text-[1.4rem] font-sans text-pink font-semibold mb-5">
+              SOBRE O EMPREENDIMENTO
+            </p>
+            <p className="text-gray-dark text-[1.2rem] font-sans leading-8">
+              Prepare-se para um novo e exclusivo conceito de viver bem, onde o
+              requinte e sofisticação encontram-se perfeitamente harmonizados.
+              No V3RSO JK, cada detalhe foi meticulosamente planejado para
+              proporcionar uma experiência de vida incomparável.
+            </p>
+          </div>
+        </section>
+        <section className="container mt-16 xl:mt-[100px] px-0 sm:px-6 relative">
+          <div className="flex items-center justify-center mb-8 relative">
+            <h2 className="hidden">Lazer</h2>
+            <div className="flex-grow">
+              <img
+                className="hidden sm:block w-5/6 mx-auto"
+                src={logomaya.src}
+                alt="Logo Maya"
+              />
             </div>
+            <img
+              className="hidden sm:block w-[500px] mx-auto"
+              src={tour360.src}
+              alt="Tour 360"
+            />
+            <div className="flex-grow">
+              <img
+                className="w-[90%] sm:hidden mx-auto"
+                src={logomaya.src}
+                alt="Logo Maya"
+              />
+            </div>
+          </div>
+          <SlideApp items={carousel2} />
+        </section>
+        <section className="container mt-16 xl:mt-[150px] px-0 sm:px-6 relative">
+          <div className="text-center mb-8" data-aos="fade-up">
+            <h2 className="text-pink text-[2rem] sm:text-[2.5rem] 2xl:text-[3rem] font-semibold">
+              LOCALIZAÇÃO
+            </h2>
+          </div>
+          <div className="grid xl:grid-cols-2 gap-8 relative">
             <div data-aos="fade-up">
-              <picture>
-                <source type="image/webp" src={localizacaoWebp.src} />
-                <source type="image/jpeg" src={localizacaoJpeg.src} />
-                <img
-                  src={localizacaoJpeg.src}
-                  alt="Imagem localização"
-                  className="rounded-[35px]"
-                />
-              </picture>
-              <div class="px-6">
-                <h2 class="text-xl text-pink block my-2 font-semibold">
-                  Localização
-                </h2>
-                <p>
-                  O lugar perfeito para escrever a sua história. O V3RSO JK está
-                  localizado na Região Sul de Rio Preto.
-                </p>
-              </div>
-            </div>
-            <div class="slide" data-aos="fade-left">
-              <SlideApp
-                items={carousel2}
-                largura={{ desktop: 0, mobile: 0 }}
-                infinite={true}
-                navigation={false}
-                dots={true}
-                autoPlay={true}
-              />
-              <div class="px-6">
-                <h2 class="text-xl text-pink block my-2 font-semibold">
-                  Área de lazer
-                </h2>
-                <p>
-                  Ambientes com estrutura moderna e equipada para aproveitar
-                  cada momento de lazer do seu jeito.
-                </p>
-              </div>
-            </div>
-          </div>
-          <a
-            href="#hero"
-            class="bg-pink  text-center text-white py-4 uppercase mt-6 rounded-xl px-6 sm:px-12 max-w-max block mx-auto"
-          >
-            Saiba mais sobre o empreendimento
-          </a>
-        </section>
-        <section class="py-12" data-aos="fade-up">
-          <div class="xl:h-[480px] 2xl:h-[700px] bg-black relative grid">
-            <picture>
-              <source type="image/webp" src={houseWebp.src} />
-              <source type="image/jpeg" src={houseJpeg.src} />
               <img
-                src={houseJpeg.src}
-                alt="Ambiente house"
-                className="xl:h-[480px] 2xl:h-[700px] order-2 xl:order-1"
+                className="rounded-[35px]"
+                src={localizacaoWebp.src}
+                alt="Localização"
               />
-            </picture>
-            <div class="relative xl:absolute top-0 left-0 w-full h-[480px] 2xl:h-[700px] order-1 xl:order-2">
-              <div class="container flex items-center justify-end h-full">
-                <div class=" py-6 px-6 text-white w-full xl:w-[400px]">
-                  <h1 class="uppercase text-[2rem] sm:text-[2.5rem] font-sans leading-10">
-                    EM SINTONIA<br></br> COM O SEU<br></br> RITMO DE VIDA
-                  </h1>
-                  <p class="mt-4">
-                    O V3RSO é um convite para experimentar o avanço que vivemos
-                    a cada dia.
-                  </p>
-                  <p class="my-4">
-                    Um empreendimento que recria o tradicional e dá início a
-                    novas formas, com mais tecnologia e inovação.
-                  </p>
-                  <p>
-                    É a representação da evolução do hoje, que pode se tornar o
-                    grande clássico do amanhã.
-                  </p>
-                  <a
-                    href="#hero"
-                    class="bg-pink text-white py-4 uppercase mt-6 rounded-xl px-12 block mx-0 xl:mx-auto text-center"
-                  >
-                    Receba informações exclusivas sobre o V3RSO JK
-                  </a>
-                </div>
-              </div>
             </div>
-          </div>
-        </section>
-        <section class="sm:container py-12">
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
-            <div class="pl-8" data-aos="fade-right">
-              <p class="text-lg">
-                Estamos esperando por você no
-                <span class="text-pink"> Shopping Iguatemi</span> para mostrar
-                todos os detalhes do nosso lançamento. Ponto de referência:{' '}
-                <span class="text-pink">em frente a loja iPlace.</span>
+            <div
+              className="text-gray-dark text-[1.2rem] font-sans leading-8"
+              data-aos="fade-up"
+            >
+              <p>
+                Situado na região mais nobre de Rio Preto, o V3RSO JK oferece
+                fácil acesso às principais vias da cidade, além de estar próximo
+                aos mais variados estabelecimentos comerciais e de lazer, como
+                shoppings, restaurantes e parques.
               </p>
-              <a
-                href="#hero"
-                class="bg-pink button-aproveite text-white text-center py-4 uppercase mt-8 rounded-xl px-6 max-w-max block mx-auto sm:mx-0"
-              >
-                APROVEITE AS CONDIÇÕES DE LANÇAMENTO
-              </a>
+              <p className="mt-5">
+                Com a praticidade de uma localização privilegiada, você terá
+                tudo o que precisa ao seu alcance, garantindo uma rotina mais
+                leve e prática.
+              </p>
             </div>
-            <picture data-aos="fade-left" class="col-span-2">
-              <source type="image/webp" src={iguatemiWebp.src} />
-              <source type="image/jpeg" src={iguatemiJpeg.src} />
+          </div>
+        </section>
+        <section className="container mt-16 xl:mt-[100px] px-0 sm:px-6 relative">
+          <div className="text-center mb-8" data-aos="fade-up">
+            <h2 className="text-pink text-[2rem] sm:text-[2.5rem] 2xl:text-[3rem] font-semibold">
+              IGUATEMI
+            </h2>
+          </div>
+          <div className="grid xl:grid-cols-2 gap-8 relative">
+            <div data-aos="fade-up">
               <img
-                src={iguatemiJpeg.src}
-                alt="Foto iguatemi"
-                className="sm:rounded-[35px]"
+                className="rounded-[35px]"
+                src={iguatemiWebp.src}
+                alt="Iguatemi"
               />
-            </picture>
+            </div>
+            <div
+              className="text-gray-dark text-[1.2rem] font-sans leading-8"
+              data-aos="fade-up"
+            >
+              <p>
+                Tenha o Shopping Iguatemi como sua extensão de casa. A poucos
+                minutos do V3RSO JK, este centro de compras oferece as melhores
+                lojas, uma ampla variedade de restaurantes, serviços
+                diferenciados e entretenimento para todas as idades.
+              </p>
+              <p className="mt-5">
+                Aproveite ao máximo essa comodidade e tenha à sua disposição um
+                mundo de possibilidades, tornando seu dia a dia mais prático e
+                agradável.
+              </p>
+            </div>
           </div>
         </section>
       </main>
-      <footer>
-        <div class="bg-graylight py-12 px-4">
-          <div class="w-full lg:w-[70%] mx-auto lg:flex items-center">
-            <img
-              src={logoLupema.src}
-              alt="Logo Lupema"
-              class="w-[180px] mr-6 mb-4 lg:mb-0"
-            />
-            <small>
-              Empreendimento aprovado conforme alvará de construção nº 3634,
-              emitido em 29 de novembro de 2021 pela Prefeitura de São José do
-              Rio Preto/SP. Incorporação registrada sob o R.4 da matrícula
-              195.233, do 1º Registro de Imóveis de São José do Rio Preto/SP.
-            </small>
-          </div>
-        </div>
-        <div class="bg-black py-3 text-white/30">
-          <div class="container sm:flex text-center items-center justify-center">
-            <small>Lupema Engenharia | Todos os direitos reservados</small>
-            <div class="flex ml-4 items-center justify-center sm:justify-start">
-              <small>Desenvolvido por: </small>
-              <a
-                href="https://mayacomunicacao.com.br"
-                title="Maya Comunicação"
-                class="ml-2"
-              >
-                <img src={logomaya.src} alt="Logo Maya Comunicação" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
-
-      <a
-        href="http://tour360.lupemaengenharia.com.br/tour-verso"
-        target="_blank"
-        class="fixed bottom-8 text-center left-8 drop-shadow-[-3px_3px_7px_rgba(0,0,0,0.30)] block bg-black p-4 rounded-xl cursor-pointer"
-      >
-        <img src={tour360.src} alt="Tour virtual" />
-        <span class="uppercase font-bold text-white">Tour Virtual</span>
-      </a>
-      <Helmet>
-        <script defer>
-          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-MXDT5DX');`}
-        </script>
-      </Helmet>
-
-      <noscript>
-        <iframe
-          src="https://www.googletagmanager.com/ns.html?id=GTM-MXDT5DX"
-          height="0"
-          width="0"
-          style={{ display: 'none', visibility: 'hidden' }}
-        ></iframe>
-      </noscript>
-
-      <script
-        type="text/javascript"
-        async
-        src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/c978fde6-9d5f-4c3e-a5dc-2a629b3aec05-loader.js"
-      ></script>
     </div>
   );
 };
+
 export default Verso;
-
-export const getStaticProps = async () => {
-  const { pageBy } = await ClientApp.query({
-    pageBy: [
-      {
-        pageId: 201,
-      },
-      {
-        informacoesDeContato: {
-          coTelefone: true,
-          coWhatsapp: true,
-          coEmail: true,
-          coEndereco: true,
-          linkFacebook: true,
-          linkInstagram: true,
-          linkYoutube: true,
-        },
-      },
-    ],
-  });
-
-  return {
-    props: {
-      data: {
-        social: pageBy?.informacoesDeContato,
-      },
-    },
-    revalidate: 30,
-  };
-};
