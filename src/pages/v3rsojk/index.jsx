@@ -1,3 +1,6 @@
+import React, { useEffect, useState } from 'react';
+import InputMask from 'react-input-mask';
+import Aos from 'aos';
 import ClientApp from '../../lib/genql';
 import logoPowered from './assets/img/logo-powered.svg';
 import logoVerso from './assets/img/logo-verso.svg';
@@ -14,12 +17,10 @@ import housi2Jpeg from './assets/img/HOUSI/2.jpeg';
 import housi1Jpeg from './assets/img/HOUSI/1.jpeg';
 import houseWebp from './assets/img/house.webp';
 import houseJpeg from './assets/img/house.jpeg';
-
 import localizacaoWebp from './assets/img/localizacao.webp';
 import localizacaoJpeg from './assets/img/localizacao.jpg';
 import iguatemiWebp from './assets/img/iguatemi.webp';
 import iguatemiJpeg from './assets/img/iguatemi.jpeg';
-
 import LAZER1jpeg from './assets/img/LAZER/1.jpeg';
 import LAZER2jpeg from './assets/img/LAZER/2.jpeg';
 import LAZER3jpeg from './assets/img/LAZER/3.jpeg';
@@ -27,12 +28,9 @@ import LAZER4jpeg from './assets/img/LAZER/4.jpeg';
 import LAZER5jpeg from './assets/img/LAZER/5.jpeg';
 import LAZER6jpeg from './assets/img/LAZER/6.jpeg';
 import LAZER7jpeg from './assets/img/LAZER/7.jpeg';
-
 import logomaya from './assets/img/logo-maya.svg';
 import tour360 from './assets/img/360.svg';
 import SlideApp from '../../components/layout/Slide';
-import { useEffect, useState } from 'react';
-import Aos from 'aos';
 
 const Verso = () => {
   const carousel1 = [
@@ -178,7 +176,9 @@ const Verso = () => {
                   </label>
                   <label htmlFor="tel" className="my-4 block">
                     <span className="text-sm">Telefone</span>
-                    <input
+                    <InputMask
+                      mask="(99) 99999-9999"
+                      maskChar={null}
                       type="tel"
                       name="telefone"
                       id="tel"
