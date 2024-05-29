@@ -193,7 +193,7 @@ const Verso = () => {
                   action="https://www.terracelupema.com.br/inc/prosses.php"
                   method="post"
                   class="mt-6"
-                  onSubmit={handleSubmit}
+                  // onSubmit={handleSubmit}
                 >
                   <label for="name" class="my-4 block">
                     <span class="text-sm">Nome</span>
