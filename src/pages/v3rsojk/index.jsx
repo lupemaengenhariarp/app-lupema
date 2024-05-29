@@ -94,11 +94,9 @@ const Verso = () => {
     const form = e.target;
     const formData = new FormData(form);
 
-    // Remove non-numeric characters from the phone number
     const phoneNumber = phone.replace(/\D/g, '');
     formData.set('telefone', phoneNumber);
 
-    // Use fetch or axios to send formData to your backend
     fetch(form.action, {
       method: form.method,
       body: formData,
