@@ -27,11 +27,11 @@ const WhatsApp = ({ data }: Props) => {
   }, []);
 
   return (
-    <div className="fixed bottom-6 flex flex-col items-center justify-center right-44 z-50 drop-shadow-md">
+    <div className="fixed bottom-6 flex flex-col items-center justify-center right-4 gap-4 z-50 drop-shadow-md">
       {device && (
         <a href={`tel:${data.coTelefone}`} aria-label="Botão Telefone">
           <MdWifiCalling3
-            size={55}
+            size={64}
             className="text-black bg-green rounded-full py-1 px-1 block mb-3"
           />
         </a>
