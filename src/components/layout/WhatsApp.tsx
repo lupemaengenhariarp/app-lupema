@@ -30,7 +30,10 @@ const WhatsApp = ({ data }: Props) => {
     <div className="fixed bottom-6 flex flex-col items-center justify-center right-44 z-50 drop-shadow-md">
       {device && (
         <a href={`tel:${data.coTelefone}`} aria-label="Botão Telefone">
-          <Image src={'/whatsapp.png'} alt="whatsapp" width={64} height={64} />
+          <MdWifiCalling3
+            size={55}
+            className="text-black bg-green rounded-full py-1 px-1 block mb-3"
+          />
         </a>
       )}
 
