@@ -29,7 +29,7 @@ const AboutHome = ({ about }: Props) => {
             <p
               className="px-4 pt-3 pb-1 text-sm leading-8"
               dangerouslySetInnerHTML={{
-                __html: about?.descricaoSobreHome || '',
+                __html: about?.descricaoSobreHome || ''
               }}
             />
           </div>
@@ -45,9 +45,18 @@ const AboutHome = ({ about }: Props) => {
           <span className="absolute -bottom-7 right-6 sm:-right-6 h-[200px] w-[250px] sm:w-[300px] border border-green bg-transparent -z-10"></span>
         </div>
       </div>
-      <Link href="/a-lupema" className="button mt-14 mx-auto">
-        Conheça mais
-      </Link>
+      <div className="flex flex-col md:flex-row items-center justify-center md:gap-x-16 pt-12 md:pt-0">
+        <Link href="/a-lupema" className="button mt-14">
+          Conheça mais
+        </Link>
+        <Link
+          href="http://blog.lupemaengenharia.com.br/"
+          className="button mt-14"
+          target="_blank"
+        >
+          Acesse nosso blog
+        </Link>
+      </div>
     </section>
   );
 };
