@@ -47,9 +47,9 @@ const ClientArea: NextPage<Props> = ({ data }) => {
             >
               {data.social.coTelefone}
             </a>
-            <a href={`tel:+55${data.social.coWhatsapp}`} className="button">
+            {/*<a href={`tel:+55${data.social.coWhatsapp}`} className="button">
               {data.social.coWhatsapp}
-            </a>
+            </a>*/}
             <a
               href={data.social.linkFacebook}
               className="ml-4"
