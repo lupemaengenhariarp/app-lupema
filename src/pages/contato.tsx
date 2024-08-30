@@ -25,7 +25,7 @@ const ContatoApp: NextPage<Props> = ({ data }) => {
 
   const pageForms: IPageForms = {
     '#fale-conosco': 'fale_conosco',
-    '#trabalhe-conosco': 'trabalhe_conosco',
+    // '#trabalhe-conosco': 'trabalhe_conosco',
     '#seja-nosso-fornecedor': 'fornecedor',
     '#ofereca-sua-area': 'oferecasuaarea',
   };
@@ -58,33 +58,29 @@ const ContatoApp: NextPage<Props> = ({ data }) => {
           </h2>
           <div className={`${toggle && 'hidden'} sm:block`}>
             <button
-              className={`text-2xl py-4 block hover:text-green ${
-                form === 'fale_conosco' && 'text-green'
-              }`}
+              className={`text-2xl py-4 block hover:text-green ${form === 'fale_conosco' && 'text-green'
+                }`}
               onClick={() => setForm((prev) => (prev = 'fale_conosco'))}
             >
               Fale conosco
             </button>
-            <button
-              className={`text-2xl py-4 block hover:text-green ${
-                form === 'trabalhe_conosco' && 'text-green'
-              }`}
+            {/* <button
+              className={`text-2xl py-4 block hover:text-green ${form === 'trabalhe_conosco' && 'text-green'
+                }`}
               onClick={() => setForm((prev) => (prev = 'trabalhe_conosco'))}
             >
               Trabalhe conosco
-            </button>
+            </button> */}
             <button
-              className={`text-2xl py-4 block hover:text-green ${
-                form === 'fornecedor' && 'text-green'
-              }`}
+              className={`text-2xl py-4 block hover:text-green ${form === 'fornecedor' && 'text-green'
+                }`}
               onClick={() => setForm((prev) => (prev = 'fornecedor'))}
             >
               Seja nosso fornecedor
             </button>
             <button
-              className={`text-2xl py-4 block hover:text-green ${
-                form === 'cadastroImobiCorretores' && 'text-green'
-              }`}
+              className={`text-2xl py-4 block hover:text-green ${form === 'cadastroImobiCorretores' && 'text-green'
+                }`}
               onClick={() =>
                 setForm((prev) => (prev = 'cadastroImobiCorretores'))
               }
@@ -92,9 +88,8 @@ const ContatoApp: NextPage<Props> = ({ data }) => {
               Cadastro de imobiliárias e corretores
             </button>
             <button
-              className={`text-2xl py-4 block hover:text-green ${
-                form === 'oferecasuaarea' && 'text-green'
-              }`}
+              className={`text-2xl py-4 block hover:text-green ${form === 'oferecasuaarea' && 'text-green'
+                }`}
               onClick={() => setForm((prev) => (prev = 'oferecasuaarea'))}
             >
               Ofereça sua área
