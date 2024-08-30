@@ -97,11 +97,13 @@ const MenuApp = ({ data }: Props) => {
             {data.coEmail}
           </a>
           <a
-            href="https://goo.gl/maps/JGVmXZHQkEPRbeqp8"
+            // href="https://goo.gl/maps/JGVmXZHQkEPRbeqp8"
+            href="https://www.google.com/maps/@-20.8344,-49.4070091,3a,75y,296.39h,87.18t/data=!3m6!1e1!3m4!1sJ7nryPnuRo4WMIkSUFvexA!2e0!7i16384!8i8192?coh=205409&entry=ttu"
             className="flex items-center justify-center sm:justify-start text-green my-12"
           >
             <GoLocation size={24} />
-            <h2 className="ml-3">Como chegar na LStore</h2>
+            {/* <h2 className="ml-3">Como chegar na LStore</h2> */}
+            <h2 className="ml-3">Stand do Recanto</h2>
           </a>
           <h2 className="text-green mb-2">Escritório</h2>
           <p
