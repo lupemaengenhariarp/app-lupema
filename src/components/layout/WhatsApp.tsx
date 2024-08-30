@@ -38,7 +38,8 @@ const WhatsApp = ({ data }: Props) => {
       )}
 
       <a
-        href={`https://api.whatsapp.com/send?phone=55${number}`}
+        // href={`https://api.whatsapp.com/send?phone=55${number}`}
+        href={`https://api.whatsapp.com/send?phone=55${number}&text=Olá%2C%20vim%20através%20do%20website%20da%20Lupema%20Engenharia%20e%20gostaria%20de%20saber%20mais%20informações.`}
         aria-label="Botão WhatsApp"
       >
         <Image

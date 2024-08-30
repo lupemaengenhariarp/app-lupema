@@ -53,7 +53,8 @@ const FooterApp = ({ data }: Props) => {
             Central de relacionamentos
           </a>
           <a
-            href="https://api.whatsapp.com/send?phone=5517996430381"
+            // href="https://api.whatsapp.com/send?phone=5517996430381"
+            href={`https://api.whatsapp.com/send?phone=551740092328&text=Olá%2C%20vim%20através%20do%20website%20da%20Lupema%20Engenharia%20e%20gostaria%20de%20saber%20mais%20informações.`}
             className="button my-4 text-sm"
           >
             Canal de vendas
