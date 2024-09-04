@@ -10,10 +10,6 @@ const FaleConosco = () => {
     return axiosInstance.post('../api/sendEmail', data);
   });
 
-  // if (mutation.isSuccess) {
-  //   setValue('send');
-  // }
-
   return (
     <div>
       <h1 className="text-2xl">Fale conosco</h1>
@@ -74,11 +70,18 @@ const FaleConosco = () => {
             />
             <Error inputName="mensagem" />
 
-            <input
+            {/* <input
               type="submit"
               value="Enviar"
               className="bg-green text-black uppercase font-semibold"
-            />
+            /> */}
+
+            <button
+              type="submit"
+              className="bg-black text-white uppercase font-semibold mt-4 block w-full py-2"
+            >
+              Enviar
+            </button>
 
             <label htmlFor="aceite">
               <Field type="checkbox" name="termos" id="aceite" />
@@ -116,7 +119,8 @@ const initialValues: IInitialValues = {
   email: '',
   telefone: '',
   mensagem: '',
-  assunto: undefined,
+  // assunto: undefined,
+  assunto: '',
   termos: false,
 };
 
