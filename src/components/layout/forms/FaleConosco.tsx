@@ -7,8 +7,12 @@ import MensageApp from '../Mensage';
 
 const FaleConosco = () => {
   const mutation = useMutation((data: IInitialValues) => {
-    return axiosInstance.post('api/sendEmail', data);
+    return axiosInstance.post('../api/sendEmail', data);
   });
+
+  if (mutation.isSuccess) {
+    setValue('send');
+  }
 
   return (
     <div>
