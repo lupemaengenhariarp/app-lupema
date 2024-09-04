@@ -10,9 +10,9 @@ const FaleConosco = () => {
     return axiosInstance.post('../api/sendEmail', data);
   });
 
-  if (mutation.isSuccess) {
-    setValue('send');
-  }
+  // if (mutation.isSuccess) {
+  //   setValue('send');
+  // }
 
   return (
     <div>
