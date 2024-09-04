@@ -70,13 +70,6 @@ const FaleConosco = () => {
               className="bg-green text-black uppercase font-semibold"
             />
 
-            {/* <button
-              type="submit"
-              className="bg-green text-black uppercase font-semibold"
-            >
-              Enviar
-            </button> */}
-
             <label htmlFor="aceite">
               <Field type="checkbox" name="termos" id="aceite" />
               <span className="ml-2">
@@ -114,7 +107,6 @@ const initialValues: IInitialValues = {
   telefone: '',
   mensagem: '',
   assunto: undefined,
-  // assunto: '',
   termos: false,
 };
 
