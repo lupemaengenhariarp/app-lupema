@@ -16,7 +16,6 @@ const FaleConosco = () => {
       <p className="text-green">
         Entre em contato com a Lupema e tire suas dúvidas.
       </p>
-
       {mutation.isSuccess && (
         <MensageApp
           text="Enviado com sucesso, obrigado pelo seu contato!"
@@ -63,22 +62,34 @@ const FaleConosco = () => {
             </Field>
             <Error inputName="assunto" />
 
-            <Field type="textarea" name="mensagem" row={4} placeholder="Mensagem" />
+            <Field as="textarea" name="mensagem" row={4} placeholder="Mensagem" />
             <Error inputName="mensagem" />
+
+            <input
+              type="submit" value="Enviar"
+              className="bg-green text-black uppercase font-semibold"
+            />
+
+            {/* <button
+              type="submit"
+              className="bg-green text-black uppercase font-semibold"
+            >
+              Enviar
+            </button> */}
 
             <label htmlFor="aceite">
               <Field type="checkbox" name="termos" id="aceite" />
-              <span className="ml-2">Li e concordo com a
-                <a href="/politica-de-privacidade" className="ml-2 underline italic">
+              <span className="ml-2">
+                Li e concordo com a
+                <a
+                  href="/politica-de-privacidade"
+                  className="ml-2 underline italic"
+                >
                   política de privacidade
                 </a>
               </span>
             </label>
             <Error inputName="termos" />
-
-            <button type="submit" className="bg-green text-black uppercase font-semibold">
-              Enviar
-            </button>
           </Form>
         )}
       </Formik>
@@ -102,8 +113,8 @@ const initialValues: IInitialValues = {
   email: '',
   telefone: '',
   mensagem: '',
-  // assunto: undefined,
-  assunto: '',
+  assunto: undefined,
+  // assunto: '',
   termos: false,
 };
 
