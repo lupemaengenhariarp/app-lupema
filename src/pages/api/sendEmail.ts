@@ -32,10 +32,10 @@ export default async function handler(
   let emailCc = '';
 
   switch (bodyData?.for) {
-    case 'fale_conosco':
-      emailTo = 'lupema@lupemaengenharia.com.br';
-      emailHTML = await genEmailFaleConosco(bodyData);
-      break;
+    // case 'fale_conosco':
+    //   emailTo = 'lupema@lupemaengenharia.com.br';
+    //   emailHTML = await genEmailFaleConosco(bodyData);
+    //   break;
     case 'seja_fornecedor':
       emailTo = 'suprimentos@lupemaengenharia.com.br';
       emailHTML = await genEmailSejaFornecedor(bodyData);
@@ -60,6 +60,10 @@ export default async function handler(
       emailTo = bodyData.email;
       emailCc = 'lupema@lupemaengenharia.com.br';
       emailHTML = await genEmailApresentacao(bodyData);
+      break;
+    case 'fale_conosco':
+      emailTo = 'keyla@mayacomunicacao.com.br';
+      emailHTML = await genEmailFaleConosco(bodyData);
       break;
   }
 
