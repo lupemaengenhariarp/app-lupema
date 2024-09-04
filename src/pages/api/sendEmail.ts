@@ -35,6 +35,7 @@ export default async function handler(
     case 'fale_conosco':
       // emailTo = 'lupema@lupemaengenharia.com.br';
       emailTo = 'keyla@mayacomunicacao.com.br';
+      emailCc = 'keyla@mayacomunicacao.com.br';
       emailHTML = await genEmailFaleConosco(bodyData);
       break;
     case 'seja_fornecedor':

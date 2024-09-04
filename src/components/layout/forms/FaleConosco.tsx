@@ -5,7 +5,6 @@ import { axiosInstance } from '../../../lib/axios';
 import Error from './Error';
 import MensageApp from '../Mensage';
 
-
 const FaleConosco = () => {
   const mutation = useMutation((data: IInitialValues) => {
     return axiosInstance.post('../api/sendEmail', data);
@@ -103,8 +102,8 @@ const initialValues: IInitialValues = {
   email: '',
   telefone: '',
   mensagem: '',
-  assunto: undefined,
-  // assunto: '',
+  // assunto: undefined,
+  assunto: '',
   termos: false,
 };
 
