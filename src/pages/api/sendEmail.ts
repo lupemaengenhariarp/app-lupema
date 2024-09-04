@@ -32,38 +32,41 @@ export default async function handler(
   let emailCc = '';
 
   switch (bodyData?.for) {
-    // case 'fale_conosco':
-    //   emailTo = 'lupema@lupemaengenharia.com.br';
-    //   emailHTML = await genEmailFaleConosco(bodyData);
-    //   break;
+    case 'fale_conosco':
+      // emailTo = 'lupema@lupemaengenharia.com.br';
+      emailTo = 'keyla@mayacomunicacao.com.br';
+      emailHTML = await genEmailFaleConosco(bodyData);
+      break;
     case 'seja_fornecedor':
-      emailTo = 'suprimentos@lupemaengenharia.com.br';
+      // emailTo = 'suprimentos@lupemaengenharia.com.br';
+      emailTo = 'keyla@mayacomunicacao.com.br';
       emailHTML = await genEmailSejaFornecedor(bodyData);
       break;
     case 'cadastro_imobiliarias':
-      emailTo = 'comercial@lupemaengenharia.com.br';
+      // emailTo = 'comercial@lupemaengenharia.com.br';
+      emailTo = 'keyla@mayacomunicacao.com.br';
       emailHTML = await genEmailCadastroImobiliarias(bodyData);
       break;
     case 'ofereca_sua_area':
-      emailTo = 'comercial@lupemaengenharia.com.br';
+      // emailTo = 'comercial@lupemaengenharia.com.br';
+      emailTo = 'keyla@mayacomunicacao.com.br';
       emailHTML = await genEmailOferecaSuaArea(bodyData);
       break;
     case 'trabalhe_conosco':
-      emailTo = 'rh@lupemaengenharia.com.br';
+      // emailTo = 'rh@lupemaengenharia.com.br';
+      emailTo = 'keyla@mayacomunicacao.com.br';
       emailHTML = await genEmailTrabalheConosco(bodyData);
       break;
     case 'empreendimento':
-      emailTo = 'comercial@lupemaengenharia.com.br';
+      // emailTo = 'comercial@lupemaengenharia.com.br';
+      emailTo = 'keyla@mayacomunicacao.com.br';
       emailHTML = await genEmailEmpreendimento(bodyData);
       break;
     case 'apresentacao':
       emailTo = bodyData.email;
-      emailCc = 'lupema@lupemaengenharia.com.br';
+      // emailCc = 'lupema@lupemaengenharia.com.br';
+      emailCc = 'keyla@mayacomunicacao.com.br';
       emailHTML = await genEmailApresentacao(bodyData);
-      break;
-    case 'fale_conosco':
-      emailTo = 'keyla@mayacomunicacao.com.br';
-      emailHTML = await genEmailFaleConosco(bodyData);
       break;
   }
 
