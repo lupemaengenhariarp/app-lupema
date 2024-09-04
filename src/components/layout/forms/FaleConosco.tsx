@@ -5,10 +5,19 @@ import { axiosInstance } from '../../../lib/axios';
 import Error from './Error';
 import MensageApp from '../Mensage';
 
-const FaleConosco = () => {
+interface Props {
+  setValue: (value: string) => void;
+  file: string | undefined;
+}
+
+const FaleConosco = ({ setValue, file }: Props) => {
   const mutation = useMutation((data: IInitialValues) => {
     return axiosInstance.post('../api/sendEmail', data);
   });
+
+  // if (mutation.isSuccess) {
+  //   setValue('send');
+  // }
 
   return (
     <div>
@@ -16,11 +25,13 @@ const FaleConosco = () => {
       <p className="text-green">
         Entre em contato com a Lupema e tire suas dúvidas.
       </p>
+
       {mutation.isSuccess && (
         <MensageApp
           text="Enviado com sucesso, obrigado pelo seu contato!"
           type="c_success"
         />
+      setValue('send');
       )}
       {mutation.isError && (
         <MensageApp text="Erro ao enviar os dados." type="c_error" />
@@ -32,6 +43,7 @@ const FaleConosco = () => {
         onSubmit={(data) => {
           let formData = {
             ...data,
+            pdf: file,
             data: new Date().toLocaleString(),
             subject: 'Novo contato via site: fale-conosco',
             for: 'fale_conosco',
@@ -62,40 +74,22 @@ const FaleConosco = () => {
             </Field>
             <Error inputName="assunto" />
 
-            <Field
-              as="textarea"
-              name="mensagem"
-              row={4}
-              placeholder="Mensagem"
-            />
+            <Field type="textarea" name="mensagem" row={4} placeholder="Mensagem" />
             <Error inputName="mensagem" />
-
-            {/* <input
-              type="submit"
-              value="Enviar"
-              className="bg-green text-black uppercase font-semibold"
-            /> */}
-
-            <button
-              type="submit"
-              className="bg-black text-white uppercase font-semibold mt-4 block w-full py-2"
-            >
-              Enviar
-            </button>
 
             <label htmlFor="aceite">
               <Field type="checkbox" name="termos" id="aceite" />
-              <span className="ml-2">
-                Li e concordo com a
-                <a
-                  href="/politica-de-privacidade"
-                  className="ml-2 underline italic"
-                >
+              <span className="ml-2">Li e concordo com a
+                <a href="/politica-de-privacidade" className="ml-2 underline italic"                >
                   política de privacidade
                 </a>
               </span>
             </label>
             <Error inputName="termos" />
+
+            <button type="submit" className="bg-green text-black uppercase font-semibold"  >
+              Enviar
+            </button>
           </Form>
         )}
       </Formik>
@@ -119,8 +113,8 @@ const initialValues: IInitialValues = {
   email: '',
   telefone: '',
   mensagem: '',
-  // assunto: undefined,
-  assunto: '',
+  assunto: undefined,
+  // assunto: '',
   termos: false,
 };
 
