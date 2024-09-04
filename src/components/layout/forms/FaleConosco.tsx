@@ -31,7 +31,7 @@ const FaleConosco = ({ setValue, file }: Props) => {
           text="Enviado com sucesso, obrigado pelo seu contato!"
           type="c_success"
         />
-      setValue('send');
+        // setValue('send');
       )}
       {mutation.isError && (
         <MensageApp text="Erro ao enviar os dados." type="c_error" />
