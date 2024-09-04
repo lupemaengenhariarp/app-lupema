@@ -5,19 +5,11 @@ import { axiosInstance } from '../../../lib/axios';
 import Error from './Error';
 import MensageApp from '../Mensage';
 
-interface Props {
-  setValue: (value: string) => void;
-  file: string | undefined;
-}
 
-const FaleConosco = ({ setValue, file }: Props) => {
+const FaleConosco = () => {
   const mutation = useMutation((data: IInitialValues) => {
     return axiosInstance.post('../api/sendEmail', data);
   });
-
-  // if (mutation.isSuccess) {
-  //   setValue('send');
-  // }
 
   return (
     <div>
@@ -31,7 +23,6 @@ const FaleConosco = ({ setValue, file }: Props) => {
           text="Enviado com sucesso, obrigado pelo seu contato!"
           type="c_success"
         />
-        // setValue('send');
       )}
       {mutation.isError && (
         <MensageApp text="Erro ao enviar os dados." type="c_error" />
@@ -43,7 +34,6 @@ const FaleConosco = ({ setValue, file }: Props) => {
         onSubmit={(data) => {
           let formData = {
             ...data,
-            pdf: file,
             data: new Date().toLocaleString(),
             subject: 'Novo contato via site: fale-conosco',
             for: 'fale_conosco',
@@ -80,14 +70,14 @@ const FaleConosco = ({ setValue, file }: Props) => {
             <label htmlFor="aceite">
               <Field type="checkbox" name="termos" id="aceite" />
               <span className="ml-2">Li e concordo com a
-                <a href="/politica-de-privacidade" className="ml-2 underline italic"                >
+                <a href="/politica-de-privacidade" className="ml-2 underline italic">
                   política de privacidade
                 </a>
               </span>
             </label>
             <Error inputName="termos" />
 
-            <button type="submit" className="bg-green text-black uppercase font-semibold"  >
+            <button type="submit" className="bg-green text-black uppercase font-semibold">
               Enviar
             </button>
           </Form>
