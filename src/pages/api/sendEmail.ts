@@ -33,13 +33,15 @@ export default async function handler(
 
   switch (bodyData?.for) {
     case 'fale_conosco':
-      emailTo = bodyData.email;
-      emailCc = 'lupema@lupemaengenharia.com.br';
+      // emailTo = bodyData.email;
+      emailTo = 'lupema@lupemaengenharia.com.br';
+      emailCc = '';
       emailHTML = await genEmailFaleConosco(bodyData);
       break;
     case 'seja_fornecedor':
-      emailTo = bodyData.email;
-      emailCc = 'suprimentos@lupemaengenharia.com.br';
+      // emailTo = bodyData.email;
+      emailTo = 'suprimentos@lupemaengenharia.com.br';
+      emailCc = '';
       emailHTML = await genEmailSejaFornecedor(bodyData);
       break;
     case 'cadastro_imobiliarias':
