@@ -33,35 +33,33 @@ export default async function handler(
 
   switch (bodyData?.for) {
     case 'fale_conosco':
-      // emailTo = bodyData.email;
-      emailTo = 'lupema@lupemaengenharia.com.br';
       emailCc = '';
+      emailTo = 'lupema@lupemaengenharia.com.br';
       emailHTML = await genEmailFaleConosco(bodyData);
       break;
     case 'seja_fornecedor':
-      // emailTo = bodyData.email;
-      emailTo = 'suprimentos@lupemaengenharia.com.br';
       emailCc = '';
+      emailTo = 'suprimentos@lupemaengenharia.com.br';
       emailHTML = await genEmailSejaFornecedor(bodyData);
       break;
     case 'cadastro_imobiliarias':
-      emailTo = bodyData.email;
-      emailCc = 'comercial@lupemaengenharia.com.br';
+      emailCc = '';
+      emailTo = 'comercial@lupemaengenharia.com.br';
       emailHTML = await genEmailCadastroImobiliarias(bodyData);
       break;
     case 'ofereca_sua_area':
-      emailTo = bodyData.email;
-      emailCc = 'comercial@lupemaengenharia.com.br';
+      emailCc = '';
+      emailTo = 'comercial@lupemaengenharia.com.br';
       emailHTML = await genEmailOferecaSuaArea(bodyData);
       break;
     case 'trabalhe_conosco':
-      emailTo = bodyData.email;
-      emailCc = 'rh@lupemaengenharia.com.br';
+      emailCc = '';
+      emailTo = 'rh@lupemaengenharia.com.br';
       emailHTML = await genEmailTrabalheConosco(bodyData);
       break;
     case 'empreendimento':
-      emailTo = bodyData.email;
-      emailCc = 'comercial@lupemaengenharia.com.br';
+      emailCc = '';
+      emailTo = 'comercial@lupemaengenharia.com.br';
       emailHTML = await genEmailEmpreendimento(bodyData);
       break;
     case 'apresentacao':
