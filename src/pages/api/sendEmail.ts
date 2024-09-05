@@ -71,14 +71,27 @@ export default async function handler(
       break;
   }
 
-  await clientMail
-    .sendTransacEmail({
-      to: [{ name: 'Lupema', email: `${emailTo}` }],
-      bcc: [{ name: 'Lupema', email: `${emailCc}` }],
-      sender: { name: 'Lupema', email: 'lupema@lupemaengenharia.com.br' },
-      subject: bodyData?.subject,
-      htmlContent: emailHTML,
-    })
-    .then((response) => res.send({ success: true }))
-    .catch((err) => res.send({ success: false }));
+  if (emailCc == null || emailCc == '') {
+    await clientMail
+      .sendTransacEmail({
+        to: [{ name: 'Lupema', email: `${emailTo}` }],
+        // bcc: [{ name: 'Lupema', email: `${emailCc}` }],
+        sender: { name: 'Lupema', email: 'lupema@lupemaengenharia.com.br' },
+        subject: bodyData?.subject,
+        htmlContent: emailHTML,
+      })
+      .then((response) => res.send({ success: true }))
+      .catch((err) => res.send({ success: false }));
+  } else {
+    await clientMail
+      .sendTransacEmail({
+        to: [{ name: 'Lupema', email: `${emailTo}` }],
+        bcc: [{ name: 'Lupema', email: `${emailCc}` }],
+        sender: { name: 'Lupema', email: 'lupema@lupemaengenharia.com.br' },
+        subject: bodyData?.subject,
+        htmlContent: emailHTML,
+      })
+      .then((response) => res.send({ success: true }))
+      .catch((err) => res.send({ success: false }));
+  }
 }

@@ -7,7 +7,7 @@ import MensageApp from '../Mensage';
 
 const OferecaSuaArea = () => {
   const mutation = useMutation((data: IInitialValues) => {
-    return axiosInstance.post('api/sendEmail', data);
+    return axiosInstance.post('../api/sendEmail', data);
   });
 
   return (
