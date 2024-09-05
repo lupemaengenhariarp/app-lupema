@@ -16,8 +16,6 @@
 
         <mj-text font-size="16px"> Telefone: {{ telefone }} </mj-text>
 
-        <mj-text font-size="16px"> Assunto: {{ assunto }} </mj-text>
-
         <mj-text font-size="16px"> Mensagem: {{ mensagem }} </mj-text>
 
         <mj-divider border-width="1px" />
