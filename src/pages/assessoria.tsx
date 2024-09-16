@@ -7,6 +7,7 @@ import {
   RootQueryToArquivoAssessoriaConnection,
 } from '../generated';
 import ClientApp from '../lib/genql';
+import FormAssessoria from '../components/layout/forms/FormAssessoria';
 
 interface Props {
   data: {
@@ -44,7 +45,7 @@ const AssessoriaApp: NextPage<Props> = ({ data }) => {
               {data.page.assessoria?.assEmail}
             </a>
           </div>
-          <form action="" method="POST" className="mt-4">
+          {/* <form action="/api/sendEmail.ts" method="POST" className="mt-4">
             <input className="w-full mb-4" type="text" placeholder="Nome" />
             <input
               className="w-full mb-4"
@@ -79,7 +80,10 @@ const AssessoriaApp: NextPage<Props> = ({ data }) => {
                 </a>
               </span>
             </label>
-          </form>
+          </form> */}
+          <div className="block w-full">
+            <FormAssessoria />
+          </div>
         </div>
       </section>
       <section className="bg-bgi border-b border-b-green/50 pb-[40px] md:pb-[80px]">
