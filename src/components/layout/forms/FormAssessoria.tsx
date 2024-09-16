@@ -5,13 +5,9 @@ import { axiosInstance } from '../../../lib/axios';
 import Error from './Error';
 import MensageApp from '../Mensage';
 
-interface Props {
-  name: string | undefined;
-}
-
 const FormAssessoria = () => {
   const mutation = useMutation((data: IInitialValues) => {
-    return axiosInstance.post('../api/sendEmail', data);
+    return axiosInstance.post('../api/sendEmail', data)
   });
 
   return (

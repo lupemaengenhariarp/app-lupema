@@ -23,7 +23,7 @@ const AssessoriaApp: NextPage<Props> = ({ data }) => {
       <div className="relative h-[200px] sm:h-[350px] md:h-[500px] border-b-4 border-b-green">
         <Image
           src={data.page.featuredImage?.node.sourceUrl || ''}
-          alt="Imagem Empreendimentos Lupema"
+          alt="Imagem Assessoria Lupema"
           fill
           className="object-cover"
         />
