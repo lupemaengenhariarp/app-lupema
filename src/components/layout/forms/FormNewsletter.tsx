@@ -12,7 +12,7 @@ const FormNewsletter = () => {
 
   return (
     <>
-      {mutation.isSuccess && (
+      {/* {mutation.isSuccess && (
         <MensageApp
           text="Enviado com sucesso, obrigado pelo seu contato!"
           type="success"
@@ -21,7 +21,7 @@ const FormNewsletter = () => {
       {mutation.isError && (
         <MensageApp text="Erro ao enviar os dados." type="error" />
       )}
-      {mutation.isLoading && <span className="text-white">Enviando...</span>}
+      {mutation.isLoading && <span className="text-white">Enviando...</span>} */}
       <Formik
         initialValues={initialValues}
         onSubmit={(data) => {
@@ -71,6 +71,17 @@ const FormNewsletter = () => {
           </Form>
         )}
       </Formik>
+
+      {mutation.isSuccess && (
+        <MensageApp
+          text="Enviado com sucesso, obrigado pelo seu contato!"
+          type="success"
+        />
+      )}
+      {mutation.isError && (
+        <MensageApp text="Erro ao enviar os dados." type="error" />
+      )}
+      {mutation.isLoading && <span className="text-white">Enviando...</span>}
     </>
   );
 };
