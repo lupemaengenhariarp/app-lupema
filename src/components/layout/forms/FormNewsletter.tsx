@@ -22,69 +22,70 @@ const FormNewsletter = () => {
         <MensageApp text="Erro ao enviar os dados." type="error" />
       )}
       {mutation.isLoading && <span className="text-white">Enviando...</span>} */}
-      <div>
-        <Formik
-          initialValues={initialValues}
-          onSubmit={(data) => {
-            let formData = {
-              ...data,
-              data: new Date().toLocaleString(),
-              subject: 'Novo contato via site: Newsletter ' + name,
-              for: 'newsletter',
-            };
 
-            mutation.mutate(formData);
-          }}
-          validationSchema={Schema}
-        >
-          {() => (
-            <Form className="col-span-2">
-              <div className="flex flex-col gap-4 sm:flex-row items-center justify-between">
-                <Field type="text" name="nome" placeholder="Nome" className="py-2 px-4 w-full sm:w-1/2 mb-4 sm:mb-0" />
-                <Error inputName="nome" />
+      <Formik
+        initialValues={initialValues}
+        onSubmit={(data) => {
+          let formData = {
+            ...data,
+            data: new Date().toLocaleString(),
+            subject: 'Novo contato via site: Newsletter ' + name,
+            for: 'newsletter',
+          };
 
-                <Field type="email" name="email" placeholder="E-mail" className="py-2 px-4 w-full sm:w-1/2 mb-4 sm:mb-0" />
-                <Error inputName="email" />
+          mutation.mutate(formData);
+        }}
+        validationSchema={Schema}
+      >
+        {() => (
+          <Form className="col-span-2">
+            <div className="flex flex-col gap-4 sm:flex-row items-center justify-between">
+              <Field type="text" name="nome" placeholder="Nome" className="py-2 px-4 w-full sm:w-1/2 mb-4 sm:mb-0" />
+              <Error inputName="nome" />
 
-                <input
-                  type="submit"
-                  value="Enviar"
-                  className="py-2 px-4 bg-black text-green font-semibold uppercase w-full sm:w-auto hover:bg-transparent hover:border hover:border-black hover:text-black"
-                />
-              </div>
+              <Field type="email" name="email" placeholder="E-mail" className="py-2 px-4 w-full sm:w-1/2 mb-4 sm:mb-0" />
+              <Error inputName="email" />
 
-              <label htmlFor="aceite">
-                <Field
-                  type="checkbox"
-                  name="termos"
-                  id="aceite"
-                  className="inline-block mr-2"
-                />
-                Li e concordo com a
-                <a
-                  href="/politica-de-privacidade"
-                  className="ml-2 underline italic"
-                >
-                  política de privacidade
-                </a>
-              </label>
-              <Error inputName="termos" />
-            </Form>
-          )}
-        </Formik>
+              <input
+                type="submit"
+                value="Enviar"
+                className="py-2 px-4 bg-black text-green font-semibold uppercase w-full sm:w-auto hover:bg-transparent hover:border hover:border-black hover:text-black"
+              />
+            </div>
 
-        {mutation.isSuccess && (
-          <MensageApp
-            text="Enviado com sucesso, obrigado pelo seu contato!"
-            type="success"
-          />
+            <label htmlFor="aceite">
+              <Field
+                type="checkbox"
+                name="termos"
+                id="aceite"
+                className="inline-block mr-2"
+              />
+              Li e concordo com a
+              <a
+                href="/politica-de-privacidade"
+                className="ml-2 underline italic"
+              >
+                política de privacidade
+              </a>
+            </label>
+            <Error inputName="termos" />
+          </Form>
         )}
-        {mutation.isError && (
-          <MensageApp text="Erro ao enviar os dados." type="error" />
-        )}
-        {mutation.isLoading && <span className="text-white">Enviando...</span>}
-      </div>
+      </Formik>
+
+      {mutation.isSuccess && (
+        <MensageApp
+          text="Enviado com sucesso, obrigado pelo seu contato!"
+          type="success"
+        />
+      )}
+      {mutation.isError && (
+        <MensageApp text="Erro ao enviar os dados." type="error" />
+      )}
+      {mutation.isLoading && <span className="text-white">Enviando...</span>}
+
     </>
+
   );
 };
 
