@@ -60,6 +60,10 @@ export default async function handler(
       emailTo = 'pedro.rodrigues@lupemaengenharia.com.br';
       emailHTML = await genEmailEmpreendimento(bodyData);
       break;
+    case 'newsletter':
+      emailTo = 'comercial4@lupemaengenharia.com.br';
+      emailHTML = await genEmailEmpreendimento(bodyData);
+      break;
     case 'apresentacao':
       emailTo = bodyData.email;
       emailCc = 'lupema@lupemaengenharia.com.br';

@@ -1,3 +1,5 @@
+import FormNewsletter from "./forms/FormNewsletter";
+
 const NewsletterApp = () => {
   return (
     <section className="bg-green py-16">
@@ -6,7 +8,8 @@ const NewsletterApp = () => {
           <h1 className="text-5xl">Cadastre-se:</h1>
           <p>Informe seu e-mail e receba nossas novidades</p>
         </div>
-        <form action="" className="col-span-2">
+        <FormNewsletter />
+        {/* <form action="" className="col-span-2">
           <div className="flex flex-col gap-4 sm:flex-row items-center justify-between">
             <input
               type="text"
@@ -41,7 +44,7 @@ const NewsletterApp = () => {
               </a>
             </span>
           </label>
-        </form>
+        </form> */}
       </div>
     </section>
   );
