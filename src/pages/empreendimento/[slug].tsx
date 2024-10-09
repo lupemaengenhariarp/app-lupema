@@ -44,8 +44,8 @@ interface mediaItem {
 
 interface PropsGallery {
   videosOutos:
-    | (Empreendimento_Empreendimento_videosOutos | undefined)[]
-    | undefined;
+  | (Empreendimento_Empreendimento_videosOutos | undefined)[]
+  | undefined;
   imagensOutros: (MediaItem | undefined)[] | undefined;
 }
 
@@ -136,9 +136,19 @@ const EmpreendimentoApp: NextPage<Props> = ({ data }) => {
     const videos = videosOutos;
     const imagens = imagensOutros;
 
+    // COM RANDOM PARA MOSTRAR VÍDEOS DE FORMA ALEATÓRIA
+    // function shuffleArray(array: any[]) {
+    //   for (let i = array.length - 1; i > 0; i--) {
+    //     const j = Math.floor(Math.random() * (i + 1));
+    //     [array[i], array[j]] = [array[j], array[i]];
+    //   }
+    //   return array;
+    // }
+
+    // SEM RANDOM E FOR INVERTIDO PARA MOSTRAR OS VÍDEOS DE FORMA DECRESCENTE
     function shuffleArray(array: any[]) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
+      for (let i = array.length + 1; i < 0; i++) {
+        const j = Math.floor((i - 1));
         [array[i], array[j]] = [array[j], array[i]];
       }
       return array;
