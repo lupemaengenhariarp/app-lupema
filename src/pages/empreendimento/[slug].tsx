@@ -145,7 +145,7 @@ const EmpreendimentoApp: NextPage<Props> = ({ data }) => {
     //   return array;
     // }
 
-    // SEM RANDOM E FOR -- PARA MOSTRAR OS VÍDEOS DE FORMA DECRESCENTE
+    // SEM RANDOM E FOR -- PARA MOSTRAR OS VÍDEOS DE FORMA DECRESCENTE COM ARRAY REVERSE PARA INVERTER O ARRAY
     function shuffleArray(array: any[]) {
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor((i - 1));

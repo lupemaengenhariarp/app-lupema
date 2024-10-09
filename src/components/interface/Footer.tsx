@@ -100,7 +100,7 @@ const FooterApp = ({ data }: Props) => {
         </div>
         <div className="space-y-3">
           {/* <Link href="/contato#trabalhe-conosco" className="block hover:text-green"> Trabalhe conosco </Link> */}
-          <Link href="https://lupemaengenharia.empregare.com/pt-br/vagas"
+          <Link href="https://lupemaengenharia.vagas.solides.com.br"
             className="block hover:text-green">
             Trabalhe conosco
           </Link>

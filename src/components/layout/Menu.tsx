@@ -66,7 +66,7 @@ const MenuApp = ({ data }: Props) => {
           <div className="flex flex-col space-y-3 md:space-y-4 text-xl">
             <LinkPath path="/contato#fale-conosco" label="Fale Conosco" />
             {/* <LinkPath path="/contato#trabalhe-conosco" label="Trabalhe Conosco" /> */}
-            <LinkPath path="https://lupemaengenharia.empregare.com/pt-br/vagas" label="Trabalhe Conosco" />
+            <LinkPath path="https://lupemaengenharia.vagas.solides.com.br" label="Trabalhe Conosco" />
             <LinkPath path="/contato#seja-nosso-fornecedor" label="Seja nosso fornecedor" />
             <LinkPath path="/contato#ofereca-sua-area" label="Ofereça sua área" />
           </div>
