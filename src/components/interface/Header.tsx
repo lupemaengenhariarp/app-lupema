@@ -68,6 +68,10 @@ const HeaderApp = ({ data }: Props) => {
       </div>
 
       <div className="hidden sm:flex items-center justify-end sm:w-[60%] xl:w-[40%] h-[100px] sm:h-[72px]">
+        <a
+          href={`https://lancamentos.lupemaengenharia.com.br/ouvidoria`}
+          className="mb-1 mr-4 inline-block border border-white py-2 w-[100px] text-white text-center cursor-pointer hover:bg-zinc-300 hover:text-black transition"
+        >SAC</a>
         {device ? (
           <a
             href={`tel:${data.coTelefone}`}
@@ -83,11 +87,10 @@ const HeaderApp = ({ data }: Props) => {
           </div>
         )}
         <div
-          className={`w-0 pl-4 transition-all ${
-            clickSearch
+          className={`w-0 pl-4 transition-all ${clickSearch
               ? 'w-[360px] visible opacity-100'
               : 'w-0 invisible opacity-0'
-          }`}
+            }`}
         >
           <SearchApp />
         </div>
@@ -101,9 +104,8 @@ const HeaderApp = ({ data }: Props) => {
       </div>
 
       <div
-        className={`fixed top-0 left-0 right-0 w-full h-full overflow-auto bg-bgi bg-repeat ${
-          status ? 'block' : 'hidden'
-        }`}
+        className={`fixed top-0 left-0 right-0 w-full h-full overflow-auto bg-bgi bg-repeat ${status ? 'block' : 'hidden'
+          }`}
       >
         <MenuApp data={data} />
       </div>
