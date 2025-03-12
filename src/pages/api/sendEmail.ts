@@ -37,7 +37,6 @@ export default async function handler(
       emailHTML = await genEmailFaleConosco(bodyData);
       break;
     case 'seja_fornecedor':
-      //emailTo = 'suprimentos@lupemaengenharia.com.br';
       emailTo = 'victor.silva@lupemaengenharia.com.br';
       emailHTML = await genEmailSejaFornecedor(bodyData);
       break;
