@@ -7,7 +7,7 @@ import {
 } from 'react-icons/io';
 import { GoLocation } from 'react-icons/go';
 import Link from 'next/link';
-import Logo from '../../../public/logo-2.svg';
+import Logo from '../../../public/logo.svg';
 import { useMenuMobileContext } from '../../context/menuMobileContext';
 import { Page_Informacoesdecontato } from '../../generated';
 
