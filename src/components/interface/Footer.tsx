@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { BsFacebook, BsInstagram, BsYoutube } from 'react-icons/bs';
 import CoolText from '../layout/CoolText';
-import Logo from '../../../public/logo-2.svg';
+import Logo from '../../../public/logo.svg';
 import { Page_Informacoesdecontato } from '../../generated';
 
 interface Props {
