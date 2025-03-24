@@ -24,7 +24,7 @@ const ProtecaoDeDados: NextPage = () => {
   return (
     <section className="container w-full md:w-[70%] py-[40px] md:py-[80px] mt-[100px] sm:mt-[74px]">
       <h1 className="text-2xl sm:text-3xl text-green text-center">
-        Preteção de Dados
+        Proteção de Dados
       </h1>
       <p className="mb-8 text-center">
         Formulário de solicitação de informações de dados pessoais
