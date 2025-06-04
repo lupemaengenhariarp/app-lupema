@@ -59,6 +59,12 @@ const FooterApp = ({ data }: Props) => {
           >
             Canal de vendas
           </a>
+          <a
+            href={`https://lancamentos.lupemaengenharia.com.br/ouvidoria`}
+            className="button my-4 text-sm"
+          >
+            SAC
+          </a>
         </div>
         <div className="space-y-3">
           <h2 className="text-green text-lg">Encontre seu Lupema</h2>
