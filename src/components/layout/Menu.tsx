@@ -74,6 +74,12 @@ const MenuApp = ({ data }: Props) => {
             <a className="text-green" href="/area-do-cliente">
               Área do cliente
             </a>
+            <a className="text-green" href="https://api.whatsapp.com/send?phone=551721379137&text=Ol%C3%A1%2C%20vim%20atrav%C3%A9s%20do%20website%20da%20Lupema%20Engenharia%20e%20gostaria%20de%20saber%20mais%20informa%C3%A7%C3%B5es">
+              Dúvidas
+            </a>
+            <a className="text-green" href="https://lancamentos.lupemaengenharia.com.br/ouvidoria">
+              SAC
+            </a>
           </div>
         </div>
         <div className="pb-6 sm:pb-0">
@@ -98,12 +104,14 @@ const MenuApp = ({ data }: Props) => {
           </a>
           <a
             // href="https://goo.gl/maps/JGVmXZHQkEPRbeqp8"
-            href="https://www.google.com/maps/@-20.8344,-49.4070091,3a,75y,296.39h,87.18t/data=!3m6!1e1!3m4!1sJ7nryPnuRo4WMIkSUFvexA!2e0!7i16384!8i8192?coh=205409&entry=ttu"
+            // href="https://www.google.com/maps/@-20.8344,-49.4070091,3a,75y,296.39h,87.18t/data=!3m6!1e1!3m4!1sJ7nryPnuRo4WMIkSUFvexA!2e0!7i16384!8i8192?coh=205409&entry=ttu"
+            href="https://maps.app.goo.gl/awd3SjjKdUmDjeTZ8"
             className="flex items-center justify-center sm:justify-start text-green my-12"
           >
             <GoLocation size={24} />
             {/* <h2 className="ml-3">Como chegar na LStore</h2> */}
-            <h2 className="ml-3">Stand do Recanto</h2>
+            <h2 className="ml-3">Central de decorados LStore</h2>
+            {/* <h2 className="ml-3">Stand do Recanto</h2> */}
           </a>
           <h2 className="text-green mb-2">Escritório</h2>
           <p
