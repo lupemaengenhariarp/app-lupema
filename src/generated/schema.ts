@@ -35,6 +35,15 @@ export interface RootQuery {
     categories?: RootQueryToCategoryConnection
     /** A 0bject */
     category?: Category
+    /** An object of the CentraldeDecorado Type.  */
+    centraldeDecorado?: CentraldeDecorado
+    /**
+     * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
+     * A CentraldeDecorado object
+     */
+    centraldeDecoradoBy?: CentraldeDecorado
+    /** Connection between the RootQuery type and the CentraldeDecorado type */
+    centraldeDecorados?: RootQueryToCentraldeDecoradoConnection
     /** Returns a Comment */
     comment?: Comment
     /** Connection between the RootQuery type and the Comment type */
@@ -200,6 +209,11 @@ export interface ArquivoAssessoria {
      * The id field matches the WP_Post-&gt;ID field.
      */
     arquivoAssessoriaId: Scalars['Int']
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * The ancestors of the content node.
+     */
+    ancestors?: ArquivoAssessoriaToArquivoAssessoriaConnection
     /** Connection between the ContentNode type and the ContentType type */
     contentType?: ContentNodeToContentTypeConnectionEdge
     /** The name of the Content Type the node belongs to */
@@ -224,10 +238,18 @@ export interface ArquivoAssessoria {
     enqueuedStylesheets?: ContentNodeToEnqueuedStylesheetConnection
     /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
     guid?: Scalars['String']
+    /** Whether the arq_assessoria object is password protected. */
+    hasPassword?: Scalars['Boolean']
     /** The globally unique identifier of the arq_assessoria object. */
     id: Scalars['ID']
+    /** Whether the node is a Comment */
+    isComment: Scalars['Boolean']
     /** Whether the node is a Content Node */
     isContentNode: Scalars['Boolean']
+    /** Whether the node represents the front page. */
+    isFrontPage: Scalars['Boolean']
+    /** Whether  the node represents the blog page. */
+    isPostsPage: Scalars['Boolean']
     /** Whether the object is a node in the preview state */
     isPreview?: Scalars['Boolean']
     /** Whether the object is restricted from the current viewer */
@@ -242,6 +264,13 @@ export interface ArquivoAssessoria {
     modified?: Scalars['String']
     /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
     modifiedGmt?: Scalars['String']
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have a parent
+     * The parent of the content node.
+     */
+    parent?: ArquivoAssessoriaToParentConnectionEdge
+    /** The password for the arq_assessoria object. */
+    password?: Scalars['String']
     /** Connection between the ArquivoAssessoria type and the ArquivoAssessoria type */
     preview?: ArquivoAssessoriaToPreviewConnectionEdge
     /** The database id of the preview node */
@@ -263,15 +292,15 @@ export interface ArquivoAssessoria {
 
 
 /** An object with an ID */
-export type Node = (ArquivoAssessoria | ContentType | Taxonomy | User | Comment | EnqueuedScript | EnqueuedStylesheet | MediaItem | Page | Post | Category | Empreendimento | PostFormat | Tag | UserRole | Banner | Menu | MenuItem | Plugin | Theme | CommentAuthor) & { __isUnion?: true }
+export type Node = (ArquivoAssessoria | ContentType | Taxonomy | EnqueuedScript | EnqueuedStylesheet | User | Comment | MediaItem | Page | Post | Category | CentraldeDecorado | Empreendimento | PostFormat | Tag | UserRole | Banner | Menu | MenuItem | Plugin | Theme | CommentAuthor) & { __isUnion?: true }
 
 
 /** Nodes used to manage content */
-export type ContentNode = (ArquivoAssessoria | MediaItem | Page | Post | Empreendimento | Banner) & { __isUnion?: true }
+export type ContentNode = (ArquivoAssessoria | MediaItem | Page | Post | CentraldeDecorado | Empreendimento | Banner) & { __isUnion?: true }
 
 
 /** Any node that has a URI */
-export type UniformResourceIdentifiable = (ArquivoAssessoria | ContentType | User | MediaItem | Page | Post | Category | Empreendimento | PostFormat | Tag | Banner) & { __isUnion?: true }
+export type UniformResourceIdentifiable = (ArquivoAssessoria | ContentType | User | Comment | MediaItem | Page | Post | Category | CentraldeDecorado | Empreendimento | PostFormat | Tag | Banner) & { __isUnion?: true }
 
 
 /** Connection between the ContentNode type and the ContentType type */
@@ -285,11 +314,11 @@ export interface ContentNodeToContentTypeConnectionEdge {
 
 
 /** A singular connection from one Node to another, with support for relational data on the &quot;edge&quot; of the connection. */
-export type OneToOneConnection = (ContentNodeToContentTypeConnectionEdge | ContentNodeToEditLockConnectionEdge | CommentToCommenterConnectionEdge | CommentToContentNodeConnectionEdge | CommentToParentCommentConnectionEdge | NodeWithAuthorToUserConnectionEdge | ContentNodeToEditLastConnectionEdge | HierarchicalContentNodeToParentContentNodeConnectionEdge | NodeWithFeaturedImageToMediaItemConnectionEdge | NodeWithRevisionsToContentNodeConnectionEdge | PageToPreviewConnectionEdge | EmpreendimentoToPreviewConnectionEdge | CategoryToParentCategoryConnectionEdge | CategoryToTaxonomyConnectionEdge | PostFormatToTaxonomyConnectionEdge | PostToPreviewConnectionEdge | TagToTaxonomyConnectionEdge | ArquivoAssessoriaToPreviewConnectionEdge | BannerToPreviewConnectionEdge | MenuItemToMenuItemLinkableConnectionEdge | MenuItemToMenuConnectionEdge) & { __isUnion?: true }
+export type OneToOneConnection = (ContentNodeToContentTypeConnectionEdge | ContentNodeToEditLockConnectionEdge | CommentToCommenterConnectionEdge | CommentToContentNodeConnectionEdge | CommentToParentCommentConnectionEdge | NodeWithAuthorToUserConnectionEdge | ContentNodeToEditLastConnectionEdge | HierarchicalContentNodeToParentContentNodeConnectionEdge | NodeWithFeaturedImageToMediaItemConnectionEdge | NodeWithRevisionsToContentNodeConnectionEdge | PageToPreviewConnectionEdge | CentraldeDecoradoToParentConnectionEdge | CentraldeDecoradoToPreviewConnectionEdge | EmpreendimentoToParentConnectionEdge | EmpreendimentoToPreviewConnectionEdge | CategoryToParentCategoryConnectionEdge | CategoryToTaxonomyConnectionEdge | PostToParentConnectionEdge | PostFormatToTaxonomyConnectionEdge | PostToPreviewConnectionEdge | TagToTaxonomyConnectionEdge | ArquivoAssessoriaToParentConnectionEdge | ArquivoAssessoriaToPreviewConnectionEdge | BannerToParentConnectionEdge | BannerToPreviewConnectionEdge | MenuItemToMenuItemLinkableConnectionEdge | MenuItemToMenuConnectionEdge) & { __isUnion?: true }
 
 
 /** Relational context between connected nodes */
-export type Edge = (ContentNodeToContentTypeConnectionEdge | TaxonomyToContentTypeConnectionEdge | ContentTypeToTaxonomyConnectionEdge | ContentTypeToContentNodeConnectionEdge | ContentNodeToEditLockConnectionEdge | CommentToCommenterConnectionEdge | CommentToContentNodeConnectionEdge | CommentToParentCommentConnectionEdge | CommentToCommentConnectionEdge | UserToCommentConnectionEdge | UserToEnqueuedScriptConnectionEdge | UserToEnqueuedStylesheetConnectionEdge | NodeWithAuthorToUserConnectionEdge | HierarchicalContentNodeToContentNodeAncestorsConnectionEdge | HierarchicalContentNodeToContentNodeChildrenConnectionEdge | ContentNodeToEnqueuedScriptConnectionEdge | ContentNodeToEnqueuedStylesheetConnectionEdge | ContentNodeToEditLastConnectionEdge | HierarchicalContentNodeToParentContentNodeConnectionEdge | MediaItemToCommentConnectionEdge | UserToMediaItemConnectionEdge | NodeWithFeaturedImageToMediaItemConnectionEdge | NodeWithRevisionsToContentNodeConnectionEdge | PageToCommentConnectionEdge | PageToPreviewConnectionEdge | PageToRevisionConnectionEdge | UserToPageConnectionEdge | TermNodeToEnqueuedScriptConnectionEdge | TermNodeToEnqueuedStylesheetConnectionEdge | CategoryToAncestorsCategoryConnectionEdge | CategoryToCategoryConnectionEdge | CategoryToContentNodeConnectionEdge | EmpreendimentoToCategoryConnectionEdge | EmpreendimentoToPreviewConnectionEdge | EmpreendimentoToTermNodeConnectionEdge | CategoryToEmpreendimentoConnectionEdge | CategoryToParentCategoryConnectionEdge | CategoryToPostConnectionEdge | CategoryToTaxonomyConnectionEdge | PostToCategoryConnectionEdge | PostToCommentConnectionEdge | PostFormatToContentNodeConnectionEdge | PostFormatToPostConnectionEdge | PostFormatToTaxonomyConnectionEdge | PostToPostFormatConnectionEdge | PostToPreviewConnectionEdge | PostToRevisionConnectionEdge | TagToContentNodeConnectionEdge | TagToPostConnectionEdge | TagToTaxonomyConnectionEdge | PostToTagConnectionEdge | PostToTermNodeConnectionEdge | UserToPostConnectionEdge | UserToRevisionsConnectionEdge | UserToUserRoleConnectionEdge | ArquivoAssessoriaToPreviewConnectionEdge | RootQueryToArquivoAssessoriaConnectionEdge | BannerToPreviewConnectionEdge | RootQueryToBannerConnectionEdge | RootQueryToCategoryConnectionEdge | RootQueryToCommentConnectionEdge | RootQueryToContentNodeConnectionEdge | RootQueryToContentTypeConnectionEdge | RootQueryToEmpreendimentoConnectionEdge | RootQueryToMediaItemConnectionEdge | MenuItemToMenuItemConnectionEdge | MenuItemToMenuItemLinkableConnectionEdge | MenuItemToMenuConnectionEdge | MenuToMenuItemConnectionEdge | RootQueryToMenuItemConnectionEdge | RootQueryToMenuConnectionEdge | RootQueryToPageConnectionEdge | RootQueryToPluginConnectionEdge | RootQueryToPostFormatConnectionEdge | RootQueryToPostConnectionEdge | RootQueryToEnqueuedScriptConnectionEdge | RootQueryToEnqueuedStylesheetConnectionEdge | RootQueryToRevisionsConnectionEdge | RootQueryToTagConnectionEdge | RootQueryToTaxonomyConnectionEdge | RootQueryToTermNodeConnectionEdge | RootQueryToThemeConnectionEdge | RootQueryToUserRoleConnectionEdge | RootQueryToUserConnectionEdge) & { __isUnion?: true }
+export type Edge = (ContentNodeToContentTypeConnectionEdge | TaxonomyToContentTypeConnectionEdge | TermNodeToEnqueuedScriptConnectionEdge | TermNodeToEnqueuedStylesheetConnectionEdge | TaxonomyToTermNodeConnectionEdge | ContentTypeToTaxonomyConnectionEdge | ContentTypeToContentNodeConnectionEdge | ContentNodeToEditLockConnectionEdge | CommentToCommenterConnectionEdge | CommentToContentNodeConnectionEdge | CommentToParentCommentConnectionEdge | CommentToCommentConnectionEdge | UserToCommentConnectionEdge | UserToEnqueuedScriptConnectionEdge | UserToEnqueuedStylesheetConnectionEdge | NodeWithAuthorToUserConnectionEdge | HierarchicalContentNodeToContentNodeAncestorsConnectionEdge | HierarchicalContentNodeToContentNodeChildrenConnectionEdge | ContentNodeToEnqueuedScriptConnectionEdge | ContentNodeToEnqueuedStylesheetConnectionEdge | ContentNodeToEditLastConnectionEdge | HierarchicalContentNodeToParentContentNodeConnectionEdge | MediaItemToCommentConnectionEdge | UserToMediaItemConnectionEdge | NodeWithFeaturedImageToMediaItemConnectionEdge | NodeWithRevisionsToContentNodeConnectionEdge | PageToCommentConnectionEdge | PageToPreviewConnectionEdge | PageToRevisionConnectionEdge | UserToPageConnectionEdge | PostToPostConnectionEdge | CategoryToAncestorsCategoryConnectionEdge | CentraldeDecoradoToCentraldeDecoradoConnectionEdge | CentraldeDecoradoToCategoryConnectionEdge | CentraldeDecoradoToParentConnectionEdge | CentraldeDecoradoToPreviewConnectionEdge | CentraldeDecoradoToTermNodeConnectionEdge | CategoryToCentraldeDecoradoConnectionEdge | CategoryToCategoryConnectionEdge | CategoryToContentNodeConnectionEdge | EmpreendimentoToEmpreendimentoConnectionEdge | EmpreendimentoToCategoryConnectionEdge | EmpreendimentoToParentConnectionEdge | EmpreendimentoToPreviewConnectionEdge | EmpreendimentoToTermNodeConnectionEdge | CategoryToEmpreendimentoConnectionEdge | CategoryToParentCategoryConnectionEdge | CategoryToPostConnectionEdge | CategoryToTaxonomyConnectionEdge | PostToCategoryConnectionEdge | PostToCommentConnectionEdge | PostToParentConnectionEdge | PostFormatToContentNodeConnectionEdge | PostFormatToPostConnectionEdge | PostFormatToTaxonomyConnectionEdge | PostToPostFormatConnectionEdge | PostToPreviewConnectionEdge | PostToRevisionConnectionEdge | TagToContentNodeConnectionEdge | TagToPostConnectionEdge | TagToTaxonomyConnectionEdge | PostToTagConnectionEdge | PostToTermNodeConnectionEdge | UserToPostConnectionEdge | UserToRevisionsConnectionEdge | UserToUserRoleConnectionEdge | ArquivoAssessoriaToArquivoAssessoriaConnectionEdge | ArquivoAssessoriaToParentConnectionEdge | ArquivoAssessoriaToPreviewConnectionEdge | RootQueryToArquivoAssessoriaConnectionEdge | BannerToBannerConnectionEdge | BannerToParentConnectionEdge | BannerToPreviewConnectionEdge | RootQueryToBannerConnectionEdge | RootQueryToCategoryConnectionEdge | RootQueryToCentraldeDecoradoConnectionEdge | RootQueryToCommentConnectionEdge | RootQueryToContentNodeConnectionEdge | RootQueryToContentTypeConnectionEdge | RootQueryToEmpreendimentoConnectionEdge | RootQueryToMediaItemConnectionEdge | MenuItemToMenuItemConnectionEdge | MenuItemToMenuItemLinkableConnectionEdge | MenuItemToMenuConnectionEdge | MenuToMenuItemConnectionEdge | RootQueryToMenuItemConnectionEdge | RootQueryToMenuConnectionEdge | RootQueryToPageConnectionEdge | RootQueryToPluginConnectionEdge | RootQueryToPostFormatConnectionEdge | RootQueryToPostConnectionEdge | RootQueryToEnqueuedScriptConnectionEdge | RootQueryToEnqueuedStylesheetConnectionEdge | RootQueryToRevisionsConnectionEdge | RootQueryToTagConnectionEdge | RootQueryToTaxonomyConnectionEdge | RootQueryToTermNodeConnectionEdge | RootQueryToThemeConnectionEdge | RootQueryToUserRoleConnectionEdge | RootQueryToUserConnectionEdge) & { __isUnion?: true }
 
 
 /** Edge between a Node and a connected ContentType */
@@ -320,6 +349,8 @@ export interface ContentType {
     hierarchical?: Scalars['Boolean']
     /** The globally unique identifier of the post-type object. */
     id: Scalars['ID']
+    /** Whether the node is a Comment */
+    isComment: Scalars['Boolean']
     /** Whether the node is a Content Node */
     isContentNode: Scalars['Boolean']
     /** Whether this page is set to the static front page. */
@@ -383,11 +414,11 @@ export type TaxonomyConnection = (ContentTypeToTaxonomyConnection | RootQueryToT
 
 
 /** A plural connection from one Node Type in the Graph to another Node Type, with support for relational data via &quot;edges&quot;. */
-export type Connection = (ContentTypeToTaxonomyConnection | TaxonomyToContentTypeConnection | ContentTypeToContentNodeConnection | UserToCommentConnection | CommentToCommentConnection | UserToEnqueuedScriptConnection | UserToEnqueuedStylesheetConnection | UserToMediaItemConnection | HierarchicalContentNodeToContentNodeAncestorsConnection | HierarchicalContentNodeToContentNodeChildrenConnection | ContentNodeToEnqueuedScriptConnection | ContentNodeToEnqueuedStylesheetConnection | MediaItemToCommentConnection | UserToPageConnection | PageToCommentConnection | PageToRevisionConnection | UserToPostConnection | PostToCategoryConnection | TermNodeToEnqueuedScriptConnection | TermNodeToEnqueuedStylesheetConnection | CategoryToAncestorsCategoryConnection | CategoryToCategoryConnection | CategoryToContentNodeConnection | CategoryToEmpreendimentoConnection | EmpreendimentoToCategoryConnection | EmpreendimentoToTermNodeConnection | CategoryToPostConnection | PostToCommentConnection | PostToPostFormatConnection | PostFormatToContentNodeConnection | PostFormatToPostConnection | PostToRevisionConnection | PostToTagConnection | TagToContentNodeConnection | TagToPostConnection | PostToTermNodeConnection | UserToRevisionsConnection | UserToUserRoleConnection | RootQueryToArquivoAssessoriaConnection | RootQueryToBannerConnection | RootQueryToCategoryConnection | RootQueryToCommentConnection | RootQueryToContentNodeConnection | RootQueryToContentTypeConnection | RootQueryToEmpreendimentoConnection | RootQueryToMediaItemConnection | MenuToMenuItemConnection | MenuItemToMenuItemConnection | RootQueryToMenuItemConnection | RootQueryToMenuConnection | RootQueryToPageConnection | RootQueryToPluginConnection | RootQueryToPostFormatConnection | RootQueryToPostConnection | RootQueryToEnqueuedScriptConnection | RootQueryToEnqueuedStylesheetConnection | RootQueryToRevisionsConnection | RootQueryToTagConnection | RootQueryToTaxonomyConnection | RootQueryToTermNodeConnection | RootQueryToThemeConnection | RootQueryToUserRoleConnection | RootQueryToUserConnection) & { __isUnion?: true }
+export type Connection = (ContentTypeToTaxonomyConnection | TaxonomyToContentTypeConnection | TaxonomyToTermNodeConnection | TermNodeToEnqueuedScriptConnection | TermNodeToEnqueuedStylesheetConnection | ContentTypeToContentNodeConnection | UserToCommentConnection | CommentToCommentConnection | UserToEnqueuedScriptConnection | UserToEnqueuedStylesheetConnection | UserToMediaItemConnection | HierarchicalContentNodeToContentNodeAncestorsConnection | HierarchicalContentNodeToContentNodeChildrenConnection | ContentNodeToEnqueuedScriptConnection | ContentNodeToEnqueuedStylesheetConnection | MediaItemToCommentConnection | UserToPageConnection | PageToCommentConnection | PageToRevisionConnection | UserToPostConnection | PostToPostConnection | PostToCategoryConnection | CategoryToAncestorsCategoryConnection | CategoryToCentraldeDecoradoConnection | CentraldeDecoradoToCentraldeDecoradoConnection | CentraldeDecoradoToCategoryConnection | CentraldeDecoradoToTermNodeConnection | CategoryToCategoryConnection | CategoryToContentNodeConnection | CategoryToEmpreendimentoConnection | EmpreendimentoToEmpreendimentoConnection | EmpreendimentoToCategoryConnection | EmpreendimentoToTermNodeConnection | CategoryToPostConnection | PostToCommentConnection | PostToPostFormatConnection | PostFormatToContentNodeConnection | PostFormatToPostConnection | PostToRevisionConnection | PostToTagConnection | TagToContentNodeConnection | TagToPostConnection | PostToTermNodeConnection | UserToRevisionsConnection | UserToUserRoleConnection | ArquivoAssessoriaToArquivoAssessoriaConnection | RootQueryToArquivoAssessoriaConnection | BannerToBannerConnection | RootQueryToBannerConnection | RootQueryToCategoryConnection | RootQueryToCentraldeDecoradoConnection | RootQueryToCommentConnection | RootQueryToContentNodeConnection | RootQueryToContentTypeConnection | RootQueryToEmpreendimentoConnection | RootQueryToMediaItemConnection | MenuToMenuItemConnection | MenuItemToMenuItemConnection | RootQueryToMenuItemConnection | RootQueryToMenuConnection | RootQueryToPageConnection | RootQueryToPluginConnection | RootQueryToPostFormatConnection | RootQueryToPostConnection | RootQueryToEnqueuedScriptConnection | RootQueryToEnqueuedStylesheetConnection | RootQueryToRevisionsConnection | RootQueryToTagConnection | RootQueryToTaxonomyConnection | RootQueryToTermNodeConnection | RootQueryToThemeConnection | RootQueryToUserRoleConnection | RootQueryToUserConnection) & { __isUnion?: true }
 
 
 /** Information about pagination in a connection. */
-export type PageInfo = (TaxonomyToContentTypeConnectionPageInfo | ContentTypeToTaxonomyConnectionPageInfo | ContentTypeToContentNodeConnectionPageInfo | CommentToCommentConnectionPageInfo | UserToCommentConnectionPageInfo | UserToEnqueuedScriptConnectionPageInfo | UserToEnqueuedStylesheetConnectionPageInfo | HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo | HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo | ContentNodeToEnqueuedScriptConnectionPageInfo | ContentNodeToEnqueuedStylesheetConnectionPageInfo | MediaItemToCommentConnectionPageInfo | UserToMediaItemConnectionPageInfo | PageToCommentConnectionPageInfo | PageToRevisionConnectionPageInfo | UserToPageConnectionPageInfo | TermNodeToEnqueuedScriptConnectionPageInfo | TermNodeToEnqueuedStylesheetConnectionPageInfo | CategoryToAncestorsCategoryConnectionPageInfo | CategoryToCategoryConnectionPageInfo | CategoryToContentNodeConnectionPageInfo | EmpreendimentoToCategoryConnectionPageInfo | EmpreendimentoToTermNodeConnectionPageInfo | CategoryToEmpreendimentoConnectionPageInfo | CategoryToPostConnectionPageInfo | PostToCategoryConnectionPageInfo | PostToCommentConnectionPageInfo | PostFormatToContentNodeConnectionPageInfo | PostFormatToPostConnectionPageInfo | PostToPostFormatConnectionPageInfo | PostToRevisionConnectionPageInfo | TagToContentNodeConnectionPageInfo | TagToPostConnectionPageInfo | PostToTagConnectionPageInfo | PostToTermNodeConnectionPageInfo | UserToPostConnectionPageInfo | UserToRevisionsConnectionPageInfo | UserToUserRoleConnectionPageInfo | RootQueryToArquivoAssessoriaConnectionPageInfo | RootQueryToBannerConnectionPageInfo | RootQueryToCategoryConnectionPageInfo | RootQueryToCommentConnectionPageInfo | RootQueryToContentNodeConnectionPageInfo | RootQueryToContentTypeConnectionPageInfo | RootQueryToEmpreendimentoConnectionPageInfo | RootQueryToMediaItemConnectionPageInfo | MenuItemToMenuItemConnectionPageInfo | MenuToMenuItemConnectionPageInfo | RootQueryToMenuItemConnectionPageInfo | RootQueryToMenuConnectionPageInfo | RootQueryToPageConnectionPageInfo | RootQueryToPluginConnectionPageInfo | RootQueryToPostFormatConnectionPageInfo | RootQueryToPostConnectionPageInfo | RootQueryToEnqueuedScriptConnectionPageInfo | RootQueryToEnqueuedStylesheetConnectionPageInfo | RootQueryToRevisionsConnectionPageInfo | RootQueryToTagConnectionPageInfo | RootQueryToTaxonomyConnectionPageInfo | RootQueryToTermNodeConnectionPageInfo | RootQueryToThemeConnectionPageInfo | RootQueryToUserRoleConnectionPageInfo | RootQueryToUserConnectionPageInfo) & { __isUnion?: true }
+export type PageInfo = (TaxonomyToContentTypeConnectionPageInfo | TermNodeToEnqueuedScriptConnectionPageInfo | TermNodeToEnqueuedStylesheetConnectionPageInfo | TaxonomyToTermNodeConnectionPageInfo | ContentTypeToTaxonomyConnectionPageInfo | ContentTypeToContentNodeConnectionPageInfo | CommentToCommentConnectionPageInfo | UserToCommentConnectionPageInfo | UserToEnqueuedScriptConnectionPageInfo | UserToEnqueuedStylesheetConnectionPageInfo | HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo | HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo | ContentNodeToEnqueuedScriptConnectionPageInfo | ContentNodeToEnqueuedStylesheetConnectionPageInfo | MediaItemToCommentConnectionPageInfo | UserToMediaItemConnectionPageInfo | PageToCommentConnectionPageInfo | PageToRevisionConnectionPageInfo | UserToPageConnectionPageInfo | PostToPostConnectionPageInfo | CategoryToAncestorsCategoryConnectionPageInfo | CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo | CentraldeDecoradoToCategoryConnectionPageInfo | CentraldeDecoradoToTermNodeConnectionPageInfo | CategoryToCentraldeDecoradoConnectionPageInfo | CategoryToCategoryConnectionPageInfo | CategoryToContentNodeConnectionPageInfo | EmpreendimentoToEmpreendimentoConnectionPageInfo | EmpreendimentoToCategoryConnectionPageInfo | EmpreendimentoToTermNodeConnectionPageInfo | CategoryToEmpreendimentoConnectionPageInfo | CategoryToPostConnectionPageInfo | PostToCategoryConnectionPageInfo | PostToCommentConnectionPageInfo | PostFormatToContentNodeConnectionPageInfo | PostFormatToPostConnectionPageInfo | PostToPostFormatConnectionPageInfo | PostToRevisionConnectionPageInfo | TagToContentNodeConnectionPageInfo | TagToPostConnectionPageInfo | PostToTagConnectionPageInfo | PostToTermNodeConnectionPageInfo | UserToPostConnectionPageInfo | UserToRevisionsConnectionPageInfo | UserToUserRoleConnectionPageInfo | ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo | RootQueryToArquivoAssessoriaConnectionPageInfo | BannerToBannerConnectionPageInfo | RootQueryToBannerConnectionPageInfo | RootQueryToCategoryConnectionPageInfo | RootQueryToCentraldeDecoradoConnectionPageInfo | RootQueryToCommentConnectionPageInfo | RootQueryToContentNodeConnectionPageInfo | RootQueryToContentTypeConnectionPageInfo | RootQueryToEmpreendimentoConnectionPageInfo | RootQueryToMediaItemConnectionPageInfo | MenuItemToMenuItemConnectionPageInfo | MenuToMenuItemConnectionPageInfo | RootQueryToMenuItemConnectionPageInfo | RootQueryToMenuConnectionPageInfo | RootQueryToPageConnectionPageInfo | RootQueryToPluginConnectionPageInfo | RootQueryToPostFormatConnectionPageInfo | RootQueryToPostConnectionPageInfo | RootQueryToEnqueuedScriptConnectionPageInfo | RootQueryToEnqueuedStylesheetConnectionPageInfo | RootQueryToRevisionsConnectionPageInfo | RootQueryToTagConnectionPageInfo | RootQueryToTaxonomyConnectionPageInfo | RootQueryToTermNodeConnectionPageInfo | RootQueryToThemeConnectionPageInfo | RootQueryToUserRoleConnectionPageInfo | RootQueryToUserConnectionPageInfo) & { __isUnion?: true }
 
 
 /** Edge between a Node and a connected Taxonomy */
@@ -398,6 +429,8 @@ export type TaxonomyConnectionEdge = (ContentTypeToTaxonomyConnectionEdge | Cate
 export interface Taxonomy {
     /** List of Content Types associated with the Taxonomy */
     connectedContentTypes?: TaxonomyToContentTypeConnection
+    /** List of Term Nodes associated with the Taxonomy */
+    connectedTerms?: TaxonomyToTermNodeConnection
     /** Description of the taxonomy. This field is equivalent to WP_Taxonomy-&gt;description */
     description?: Scalars['String']
     /** The plural name of the post type within the GraphQL Schema. */
@@ -416,7 +449,7 @@ export interface Taxonomy {
     name?: Scalars['String']
     /** Whether the taxonomy is publicly queryable */
     public?: Scalars['Boolean']
-    /** Name of content type to diplay in REST API &quot;wp/v2&quot; namespace. */
+    /** Name of content type to display in REST API &quot;wp/v2&quot; namespace. */
     restBase?: Scalars['String']
     /** The REST Controller class assigned to handling this content type. */
     restControllerClass?: Scalars['String']
@@ -461,7 +494,7 @@ export type ContentTypeConnectionPageInfo = (TaxonomyToContentTypeConnectionPage
 
 
 /** Information about pagination in a connection. */
-export type WPPageInfo = (TaxonomyToContentTypeConnectionPageInfo | ContentTypeToTaxonomyConnectionPageInfo | ContentTypeToContentNodeConnectionPageInfo | CommentToCommentConnectionPageInfo | UserToCommentConnectionPageInfo | UserToEnqueuedScriptConnectionPageInfo | UserToEnqueuedStylesheetConnectionPageInfo | HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo | HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo | ContentNodeToEnqueuedScriptConnectionPageInfo | ContentNodeToEnqueuedStylesheetConnectionPageInfo | MediaItemToCommentConnectionPageInfo | UserToMediaItemConnectionPageInfo | PageToCommentConnectionPageInfo | PageToRevisionConnectionPageInfo | UserToPageConnectionPageInfo | TermNodeToEnqueuedScriptConnectionPageInfo | TermNodeToEnqueuedStylesheetConnectionPageInfo | CategoryToAncestorsCategoryConnectionPageInfo | CategoryToCategoryConnectionPageInfo | CategoryToContentNodeConnectionPageInfo | EmpreendimentoToCategoryConnectionPageInfo | EmpreendimentoToTermNodeConnectionPageInfo | CategoryToEmpreendimentoConnectionPageInfo | CategoryToPostConnectionPageInfo | PostToCategoryConnectionPageInfo | PostToCommentConnectionPageInfo | PostFormatToContentNodeConnectionPageInfo | PostFormatToPostConnectionPageInfo | PostToPostFormatConnectionPageInfo | PostToRevisionConnectionPageInfo | TagToContentNodeConnectionPageInfo | TagToPostConnectionPageInfo | PostToTagConnectionPageInfo | PostToTermNodeConnectionPageInfo | UserToPostConnectionPageInfo | UserToRevisionsConnectionPageInfo | UserToUserRoleConnectionPageInfo | RootQueryToArquivoAssessoriaConnectionPageInfo | RootQueryToBannerConnectionPageInfo | RootQueryToCategoryConnectionPageInfo | RootQueryToCommentConnectionPageInfo | RootQueryToContentNodeConnectionPageInfo | RootQueryToContentTypeConnectionPageInfo | RootQueryToEmpreendimentoConnectionPageInfo | RootQueryToMediaItemConnectionPageInfo | MenuItemToMenuItemConnectionPageInfo | MenuToMenuItemConnectionPageInfo | RootQueryToMenuItemConnectionPageInfo | RootQueryToMenuConnectionPageInfo | RootQueryToPageConnectionPageInfo | RootQueryToPluginConnectionPageInfo | RootQueryToPostFormatConnectionPageInfo | RootQueryToPostConnectionPageInfo | RootQueryToEnqueuedScriptConnectionPageInfo | RootQueryToEnqueuedStylesheetConnectionPageInfo | RootQueryToRevisionsConnectionPageInfo | RootQueryToTagConnectionPageInfo | RootQueryToTaxonomyConnectionPageInfo | RootQueryToTermNodeConnectionPageInfo | RootQueryToThemeConnectionPageInfo | RootQueryToUserRoleConnectionPageInfo | RootQueryToUserConnectionPageInfo) & { __isUnion?: true }
+export type WPPageInfo = (TaxonomyToContentTypeConnectionPageInfo | TermNodeToEnqueuedScriptConnectionPageInfo | TermNodeToEnqueuedStylesheetConnectionPageInfo | TaxonomyToTermNodeConnectionPageInfo | ContentTypeToTaxonomyConnectionPageInfo | ContentTypeToContentNodeConnectionPageInfo | CommentToCommentConnectionPageInfo | UserToCommentConnectionPageInfo | UserToEnqueuedScriptConnectionPageInfo | UserToEnqueuedStylesheetConnectionPageInfo | HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo | HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo | ContentNodeToEnqueuedScriptConnectionPageInfo | ContentNodeToEnqueuedStylesheetConnectionPageInfo | MediaItemToCommentConnectionPageInfo | UserToMediaItemConnectionPageInfo | PageToCommentConnectionPageInfo | PageToRevisionConnectionPageInfo | UserToPageConnectionPageInfo | PostToPostConnectionPageInfo | CategoryToAncestorsCategoryConnectionPageInfo | CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo | CentraldeDecoradoToCategoryConnectionPageInfo | CentraldeDecoradoToTermNodeConnectionPageInfo | CategoryToCentraldeDecoradoConnectionPageInfo | CategoryToCategoryConnectionPageInfo | CategoryToContentNodeConnectionPageInfo | EmpreendimentoToEmpreendimentoConnectionPageInfo | EmpreendimentoToCategoryConnectionPageInfo | EmpreendimentoToTermNodeConnectionPageInfo | CategoryToEmpreendimentoConnectionPageInfo | CategoryToPostConnectionPageInfo | PostToCategoryConnectionPageInfo | PostToCommentConnectionPageInfo | PostFormatToContentNodeConnectionPageInfo | PostFormatToPostConnectionPageInfo | PostToPostFormatConnectionPageInfo | PostToRevisionConnectionPageInfo | TagToContentNodeConnectionPageInfo | TagToPostConnectionPageInfo | PostToTagConnectionPageInfo | PostToTermNodeConnectionPageInfo | UserToPostConnectionPageInfo | UserToRevisionsConnectionPageInfo | UserToUserRoleConnectionPageInfo | ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo | RootQueryToArquivoAssessoriaConnectionPageInfo | BannerToBannerConnectionPageInfo | RootQueryToBannerConnectionPageInfo | RootQueryToCategoryConnectionPageInfo | RootQueryToCentraldeDecoradoConnectionPageInfo | RootQueryToCommentConnectionPageInfo | RootQueryToContentNodeConnectionPageInfo | RootQueryToContentTypeConnectionPageInfo | RootQueryToEmpreendimentoConnectionPageInfo | RootQueryToMediaItemConnectionPageInfo | MenuItemToMenuItemConnectionPageInfo | MenuToMenuItemConnectionPageInfo | RootQueryToMenuItemConnectionPageInfo | RootQueryToMenuConnectionPageInfo | RootQueryToPageConnectionPageInfo | RootQueryToPluginConnectionPageInfo | RootQueryToPostFormatConnectionPageInfo | RootQueryToPostConnectionPageInfo | RootQueryToEnqueuedScriptConnectionPageInfo | RootQueryToEnqueuedStylesheetConnectionPageInfo | RootQueryToRevisionsConnectionPageInfo | RootQueryToTagConnectionPageInfo | RootQueryToTaxonomyConnectionPageInfo | RootQueryToTermNodeConnectionPageInfo | RootQueryToThemeConnectionPageInfo | RootQueryToUserRoleConnectionPageInfo | RootQueryToUserConnectionPageInfo) & { __isUnion?: true }
 
 
 /** An edge in a connection */
@@ -485,6 +518,252 @@ export interface TaxonomyToContentTypeConnectionPageInfo {
     /** When paginating backwards, the cursor to continue. */
     startCursor?: Scalars['String']
     __typename: 'TaxonomyToContentTypeConnectionPageInfo'
+}
+
+
+/** Connection between the Taxonomy type and the TermNode type */
+export interface TaxonomyToTermNodeConnection {
+    /** Edges for the TaxonomyToTermNodeConnection connection */
+    edges: TaxonomyToTermNodeConnectionEdge[]
+    /** The nodes of the connection, without the edges */
+    nodes: TermNode[]
+    /** Information about pagination in a connection. */
+    pageInfo: TaxonomyToTermNodeConnectionPageInfo
+    __typename: 'TaxonomyToTermNodeConnection'
+}
+
+
+/** Connection to TermNode Nodes */
+export type TermNodeConnection = (TaxonomyToTermNodeConnection | CentraldeDecoradoToTermNodeConnection | EmpreendimentoToTermNodeConnection | PostToTermNodeConnection | RootQueryToTermNodeConnection) & { __isUnion?: true }
+
+
+/** Edge between a Node and a connected TermNode */
+export type TermNodeConnectionEdge = (TaxonomyToTermNodeConnectionEdge | CentraldeDecoradoToTermNodeConnectionEdge | EmpreendimentoToTermNodeConnectionEdge | PostToTermNodeConnectionEdge | RootQueryToTermNodeConnectionEdge) & { __isUnion?: true }
+
+
+/** Terms are nodes within a Taxonomy, used to group and relate other nodes. */
+export type TermNode = (Category | PostFormat | Tag) & { __isUnion?: true }
+
+
+/** Connection between the TermNode type and the EnqueuedScript type */
+export interface TermNodeToEnqueuedScriptConnection {
+    /** Edges for the TermNodeToEnqueuedScriptConnection connection */
+    edges: TermNodeToEnqueuedScriptConnectionEdge[]
+    /** The nodes of the connection, without the edges */
+    nodes: EnqueuedScript[]
+    /** Information about pagination in a connection. */
+    pageInfo: TermNodeToEnqueuedScriptConnectionPageInfo
+    __typename: 'TermNodeToEnqueuedScriptConnection'
+}
+
+
+/** Connection to EnqueuedScript Nodes */
+export type EnqueuedScriptConnection = (TermNodeToEnqueuedScriptConnection | UserToEnqueuedScriptConnection | ContentNodeToEnqueuedScriptConnection | RootQueryToEnqueuedScriptConnection) & { __isUnion?: true }
+
+
+/** Edge between a Node and a connected EnqueuedScript */
+export type EnqueuedScriptConnectionEdge = (TermNodeToEnqueuedScriptConnectionEdge | UserToEnqueuedScriptConnectionEdge | ContentNodeToEnqueuedScriptConnectionEdge | RootQueryToEnqueuedScriptConnectionEdge) & { __isUnion?: true }
+
+
+/** Script enqueued by the CMS */
+export interface EnqueuedScript {
+    /** The inline code to be run after the asset is loaded. */
+    after?: (Scalars['String'] | undefined)[]
+    /**
+     * @deprecated Use `EnqueuedAsset.media` instead.
+     * Deprecated
+     */
+    args?: Scalars['Boolean']
+    /** The inline code to be run before the asset is loaded. */
+    before?: (Scalars['String'] | undefined)[]
+    /** The HTML conditional comment for the enqueued asset. E.g. IE 6, lte IE 7, etc */
+    conditional?: Scalars['String']
+    /** Dependencies needed to use this asset */
+    dependencies?: (EnqueuedScript | undefined)[]
+    /**
+     * @deprecated Use `EnqueuedScript.extraData` instead.
+     * Extra information needed for the script
+     */
+    extra?: Scalars['String']
+    /** Extra data supplied to the enqueued script */
+    extraData?: Scalars['String']
+    /** The loading group to which this asset belongs. */
+    group?: Scalars['Int']
+    /** The location where this script should be loaded */
+    groupLocation?: ScriptLoadingGroupLocationEnum
+    /** The handle of the enqueued asset */
+    handle?: Scalars['String']
+    /** The global ID of the enqueued script */
+    id: Scalars['ID']
+    /** The source of the asset */
+    src?: Scalars['String']
+    /** The loading strategy to use on the script tag */
+    strategy?: ScriptLoadingStrategyEnum
+    /** The version of the enqueued script */
+    version?: Scalars['String']
+    __typename: 'EnqueuedScript'
+}
+
+
+/** Asset enqueued by the CMS */
+export type EnqueuedAsset = (EnqueuedScript | EnqueuedStylesheet) & { __isUnion?: true }
+
+
+/** Location in the document where the script to be loaded */
+export type ScriptLoadingGroupLocationEnum = 'FOOTER' | 'HEADER'
+
+
+/** The strategy to use when loading the script */
+export type ScriptLoadingStrategyEnum = 'ASYNC' | 'DEFER'
+
+
+/** Page Info on the connected EnqueuedScriptConnectionEdge */
+export type EnqueuedScriptConnectionPageInfo = (TermNodeToEnqueuedScriptConnectionPageInfo | UserToEnqueuedScriptConnectionPageInfo | ContentNodeToEnqueuedScriptConnectionPageInfo | RootQueryToEnqueuedScriptConnectionPageInfo) & { __isUnion?: true }
+
+
+/** An edge in a connection */
+export interface TermNodeToEnqueuedScriptConnectionEdge {
+    /** A cursor for use in pagination */
+    cursor?: Scalars['String']
+    /** The item at the end of the edge */
+    node: EnqueuedScript
+    __typename: 'TermNodeToEnqueuedScriptConnectionEdge'
+}
+
+
+/** Page Info on the &quot;TermNodeToEnqueuedScriptConnection&quot; */
+export interface TermNodeToEnqueuedScriptConnectionPageInfo {
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Scalars['String']
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Scalars['String']
+    __typename: 'TermNodeToEnqueuedScriptConnectionPageInfo'
+}
+
+
+/** Connection between the TermNode type and the EnqueuedStylesheet type */
+export interface TermNodeToEnqueuedStylesheetConnection {
+    /** Edges for the TermNodeToEnqueuedStylesheetConnection connection */
+    edges: TermNodeToEnqueuedStylesheetConnectionEdge[]
+    /** The nodes of the connection, without the edges */
+    nodes: EnqueuedStylesheet[]
+    /** Information about pagination in a connection. */
+    pageInfo: TermNodeToEnqueuedStylesheetConnectionPageInfo
+    __typename: 'TermNodeToEnqueuedStylesheetConnection'
+}
+
+
+/** Connection to EnqueuedStylesheet Nodes */
+export type EnqueuedStylesheetConnection = (TermNodeToEnqueuedStylesheetConnection | UserToEnqueuedStylesheetConnection | ContentNodeToEnqueuedStylesheetConnection | RootQueryToEnqueuedStylesheetConnection) & { __isUnion?: true }
+
+
+/** Edge between a Node and a connected EnqueuedStylesheet */
+export type EnqueuedStylesheetConnectionEdge = (TermNodeToEnqueuedStylesheetConnectionEdge | UserToEnqueuedStylesheetConnectionEdge | ContentNodeToEnqueuedStylesheetConnectionEdge | RootQueryToEnqueuedStylesheetConnectionEdge) & { __isUnion?: true }
+
+
+/** Stylesheet enqueued by the CMS */
+export interface EnqueuedStylesheet {
+    /** The inline code to be run after the asset is loaded. */
+    after?: (Scalars['String'] | undefined)[]
+    /**
+     * @deprecated Use `EnqueuedAsset.media` instead.
+     * Deprecated
+     */
+    args?: Scalars['Boolean']
+    /** The inline code to be run before the asset is loaded. */
+    before?: (Scalars['String'] | undefined)[]
+    /** The HTML conditional comment for the enqueued asset. E.g. IE 6, lte IE 7, etc */
+    conditional?: Scalars['String']
+    /** Dependencies needed to use this asset */
+    dependencies?: (EnqueuedStylesheet | undefined)[]
+    /**
+     * @deprecated Use `EnqueuedScript.extraData` instead.
+     * Extra information needed for the script
+     */
+    extra?: Scalars['String']
+    /** The loading group to which this asset belongs. */
+    group?: Scalars['Int']
+    /** The handle of the enqueued asset */
+    handle?: Scalars['String']
+    /** The global ID of the enqueued stylesheet */
+    id: Scalars['ID']
+    /** Whether the enqueued style is RTL or not */
+    isRtl?: Scalars['Boolean']
+    /** The media attribute to use for the link */
+    media?: Scalars['String']
+    /** The absolute path to the enqueued style. Set when the stylesheet is meant to load inline. */
+    path?: Scalars['String']
+    /** The `rel` attribute to use for the link */
+    rel?: Scalars['String']
+    /** The source of the asset */
+    src?: Scalars['String']
+    /** Optional suffix, used in combination with RTL */
+    suffix?: Scalars['String']
+    /** The title of the enqueued style. Used for preferred/alternate stylesheets. */
+    title?: Scalars['String']
+    /** The version of the enqueued style */
+    version?: Scalars['String']
+    __typename: 'EnqueuedStylesheet'
+}
+
+
+/** Page Info on the connected EnqueuedStylesheetConnectionEdge */
+export type EnqueuedStylesheetConnectionPageInfo = (TermNodeToEnqueuedStylesheetConnectionPageInfo | UserToEnqueuedStylesheetConnectionPageInfo | ContentNodeToEnqueuedStylesheetConnectionPageInfo | RootQueryToEnqueuedStylesheetConnectionPageInfo) & { __isUnion?: true }
+
+
+/** An edge in a connection */
+export interface TermNodeToEnqueuedStylesheetConnectionEdge {
+    /** A cursor for use in pagination */
+    cursor?: Scalars['String']
+    /** The item at the end of the edge */
+    node: EnqueuedStylesheet
+    __typename: 'TermNodeToEnqueuedStylesheetConnectionEdge'
+}
+
+
+/** Page Info on the &quot;TermNodeToEnqueuedStylesheetConnection&quot; */
+export interface TermNodeToEnqueuedStylesheetConnectionPageInfo {
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Scalars['String']
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Scalars['String']
+    __typename: 'TermNodeToEnqueuedStylesheetConnectionPageInfo'
+}
+
+
+/** Page Info on the connected TermNodeConnectionEdge */
+export type TermNodeConnectionPageInfo = (TaxonomyToTermNodeConnectionPageInfo | CentraldeDecoradoToTermNodeConnectionPageInfo | EmpreendimentoToTermNodeConnectionPageInfo | PostToTermNodeConnectionPageInfo | RootQueryToTermNodeConnectionPageInfo) & { __isUnion?: true }
+
+
+/** An edge in a connection */
+export interface TaxonomyToTermNodeConnectionEdge {
+    /** A cursor for use in pagination */
+    cursor?: Scalars['String']
+    /** The item at the end of the edge */
+    node: TermNode
+    __typename: 'TaxonomyToTermNodeConnectionEdge'
+}
+
+
+/** Page Info on the &quot;TaxonomyToTermNodeConnection&quot; */
+export interface TaxonomyToTermNodeConnectionPageInfo {
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Scalars['String']
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Scalars['String']
+    __typename: 'TaxonomyToTermNodeConnectionPageInfo'
 }
 
 
@@ -517,7 +796,7 @@ export interface ContentTypeToTaxonomyConnectionPageInfo {
 
 
 /** Allowed Content Types */
-export type ContentTypeEnum = 'ARQ_ASSESSORIA' | 'ATTACHMENT' | 'BANNER_HOME' | 'EMPREENDIMENTOS' | 'PAGE' | 'POST'
+export type ContentTypeEnum = 'ARQ_ASSESSORIA' | 'ATTACHMENT' | 'BANNER_HOME' | 'CENTRALDECORADO' | 'EMPREENDIMENTOS' | 'PAGE' | 'POST'
 
 
 /** The column to use when filtering by date */
@@ -533,7 +812,7 @@ export type ContentTypeToContentNodeConnectionWhereArgsMetaTypeEnum = 'BINARY' |
 
 
 /** The MimeType of the object */
-export type MimeTypeEnum = 'APPLICATION_JAVA' | 'APPLICATION_MSWORD' | 'APPLICATION_OCTET_STREAM' | 'APPLICATION_ONENOTE' | 'APPLICATION_OXPS' | 'APPLICATION_PDF' | 'APPLICATION_RAR' | 'APPLICATION_RTF' | 'APPLICATION_TTAF_XML' | 'APPLICATION_VND_APPLE_KEYNOTE' | 'APPLICATION_VND_APPLE_NUMBERS' | 'APPLICATION_VND_APPLE_PAGES' | 'APPLICATION_VND_MS_ACCESS' | 'APPLICATION_VND_MS_EXCEL' | 'APPLICATION_VND_MS_EXCEL_ADDIN_MACROENABLED_12' | 'APPLICATION_VND_MS_EXCEL_SHEET_BINARY_MACROENABLED_12' | 'APPLICATION_VND_MS_EXCEL_SHEET_MACROENABLED_12' | 'APPLICATION_VND_MS_EXCEL_TEMPLATE_MACROENABLED_12' | 'APPLICATION_VND_MS_POWERPOINT' | 'APPLICATION_VND_MS_POWERPOINT_ADDIN_MACROENABLED_12' | 'APPLICATION_VND_MS_POWERPOINT_PRESENTATION_MACROENABLED_12' | 'APPLICATION_VND_MS_POWERPOINT_SLIDESHOW_MACROENABLED_12' | 'APPLICATION_VND_MS_POWERPOINT_SLIDE_MACROENABLED_12' | 'APPLICATION_VND_MS_POWERPOINT_TEMPLATE_MACROENABLED_12' | 'APPLICATION_VND_MS_PROJECT' | 'APPLICATION_VND_MS_WORD_DOCUMENT_MACROENABLED_12' | 'APPLICATION_VND_MS_WORD_TEMPLATE_MACROENABLED_12' | 'APPLICATION_VND_MS_WRITE' | 'APPLICATION_VND_MS_XPSDOCUMENT' | 'APPLICATION_VND_OASIS_OPENDOCUMENT_CHART' | 'APPLICATION_VND_OASIS_OPENDOCUMENT_DATABASE' | 'APPLICATION_VND_OASIS_OPENDOCUMENT_FORMULA' | 'APPLICATION_VND_OASIS_OPENDOCUMENT_GRAPHICS' | 'APPLICATION_VND_OASIS_OPENDOCUMENT_PRESENTATION' | 'APPLICATION_VND_OASIS_OPENDOCUMENT_SPREADSHEET' | 'APPLICATION_VND_OASIS_OPENDOCUMENT_TEXT' | 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_PRESENTATION' | 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_SLIDE' | 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_SLIDESHOW' | 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_TEMPLATE' | 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_SHEET' | 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_TEMPLATE' | 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_DOCUMENT' | 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_TEMPLATE' | 'APPLICATION_WORDPERFECT' | 'APPLICATION_X_7Z_COMPRESSED' | 'APPLICATION_X_GZIP' | 'APPLICATION_X_TAR' | 'APPLICATION_ZIP' | 'AUDIO_AAC' | 'AUDIO_FLAC' | 'AUDIO_MIDI' | 'AUDIO_MPEG' | 'AUDIO_OGG' | 'AUDIO_WAV' | 'AUDIO_X_MATROSKA' | 'AUDIO_X_MS_WAX' | 'AUDIO_X_MS_WMA' | 'AUDIO_X_REALAUDIO' | 'IMAGE_BMP' | 'IMAGE_GIF' | 'IMAGE_HEIC' | 'IMAGE_JPEG' | 'IMAGE_PNG' | 'IMAGE_SVG_XML' | 'IMAGE_TIFF' | 'IMAGE_WEBP' | 'IMAGE_X_ICON' | 'TEXT_CALENDAR' | 'TEXT_CSS' | 'TEXT_CSV' | 'TEXT_PLAIN' | 'TEXT_RICHTEXT' | 'TEXT_TAB_SEPARATED_VALUES' | 'TEXT_VTT' | 'VIDEO_3GPP' | 'VIDEO_3GPP2' | 'VIDEO_AVI' | 'VIDEO_DIVX' | 'VIDEO_MP4' | 'VIDEO_MPEG' | 'VIDEO_OGG' | 'VIDEO_QUICKTIME' | 'VIDEO_WEBM' | 'VIDEO_X_FLV' | 'VIDEO_X_MATROSKA' | 'VIDEO_X_MS_ASF' | 'VIDEO_X_MS_WM' | 'VIDEO_X_MS_WMV' | 'VIDEO_X_MS_WMX'
+export type MimeTypeEnum = 'APPLICATION_JAVA' | 'APPLICATION_MSWORD' | 'APPLICATION_OCTET_STREAM' | 'APPLICATION_ONENOTE' | 'APPLICATION_OXPS' | 'APPLICATION_PDF' | 'APPLICATION_RAR' | 'APPLICATION_RTF' | 'APPLICATION_TTAF_XML' | 'APPLICATION_VND_APPLE_KEYNOTE' | 'APPLICATION_VND_APPLE_NUMBERS' | 'APPLICATION_VND_APPLE_PAGES' | 'APPLICATION_VND_MS_ACCESS' | 'APPLICATION_VND_MS_EXCEL' | 'APPLICATION_VND_MS_EXCEL_ADDIN_MACROENABLED_12' | 'APPLICATION_VND_MS_EXCEL_SHEET_BINARY_MACROENABLED_12' | 'APPLICATION_VND_MS_EXCEL_SHEET_MACROENABLED_12' | 'APPLICATION_VND_MS_EXCEL_TEMPLATE_MACROENABLED_12' | 'APPLICATION_VND_MS_POWERPOINT' | 'APPLICATION_VND_MS_POWERPOINT_ADDIN_MACROENABLED_12' | 'APPLICATION_VND_MS_POWERPOINT_PRESENTATION_MACROENABLED_12' | 'APPLICATION_VND_MS_POWERPOINT_SLIDESHOW_MACROENABLED_12' | 'APPLICATION_VND_MS_POWERPOINT_SLIDE_MACROENABLED_12' | 'APPLICATION_VND_MS_POWERPOINT_TEMPLATE_MACROENABLED_12' | 'APPLICATION_VND_MS_PROJECT' | 'APPLICATION_VND_MS_WORD_DOCUMENT_MACROENABLED_12' | 'APPLICATION_VND_MS_WORD_TEMPLATE_MACROENABLED_12' | 'APPLICATION_VND_MS_WRITE' | 'APPLICATION_VND_MS_XPSDOCUMENT' | 'APPLICATION_VND_OASIS_OPENDOCUMENT_CHART' | 'APPLICATION_VND_OASIS_OPENDOCUMENT_DATABASE' | 'APPLICATION_VND_OASIS_OPENDOCUMENT_FORMULA' | 'APPLICATION_VND_OASIS_OPENDOCUMENT_GRAPHICS' | 'APPLICATION_VND_OASIS_OPENDOCUMENT_PRESENTATION' | 'APPLICATION_VND_OASIS_OPENDOCUMENT_SPREADSHEET' | 'APPLICATION_VND_OASIS_OPENDOCUMENT_TEXT' | 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_PRESENTATION' | 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_SLIDE' | 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_SLIDESHOW' | 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_TEMPLATE' | 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_SHEET' | 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_TEMPLATE' | 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_DOCUMENT' | 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_TEMPLATE' | 'APPLICATION_WORDPERFECT' | 'APPLICATION_X_7Z_COMPRESSED' | 'APPLICATION_X_GZIP' | 'APPLICATION_X_TAR' | 'APPLICATION_ZIP' | 'AUDIO_AAC' | 'AUDIO_FLAC' | 'AUDIO_MIDI' | 'AUDIO_MPEG' | 'AUDIO_OGG' | 'AUDIO_WAV' | 'AUDIO_X_MATROSKA' | 'AUDIO_X_MS_WAX' | 'AUDIO_X_MS_WMA' | 'AUDIO_X_REALAUDIO' | 'IMAGE_AVIF' | 'IMAGE_BMP' | 'IMAGE_GIF' | 'IMAGE_HEIC' | 'IMAGE_HEIC_SEQUENCE' | 'IMAGE_HEIF' | 'IMAGE_HEIF_SEQUENCE' | 'IMAGE_JPEG' | 'IMAGE_PNG' | 'IMAGE_SVG_XML' | 'IMAGE_TIFF' | 'IMAGE_WEBP' | 'IMAGE_X_ICON' | 'TEXT_CALENDAR' | 'TEXT_CSS' | 'TEXT_CSV' | 'TEXT_PLAIN' | 'TEXT_RICHTEXT' | 'TEXT_TAB_SEPARATED_VALUES' | 'TEXT_VTT' | 'VIDEO_3GPP' | 'VIDEO_3GPP2' | 'VIDEO_AVI' | 'VIDEO_DIVX' | 'VIDEO_MP4' | 'VIDEO_MPEG' | 'VIDEO_OGG' | 'VIDEO_QUICKTIME' | 'VIDEO_WEBM' | 'VIDEO_X_FLV' | 'VIDEO_X_MATROSKA' | 'VIDEO_X_MS_ASF' | 'VIDEO_X_MS_WM' | 'VIDEO_X_MS_WMV' | 'VIDEO_X_MS_WMX'
 
 
 /** Field to order the connection by */
@@ -704,8 +983,14 @@ export interface User {
     firstName?: Scalars['String']
     /** The globally unique identifier for the user object. */
     id: Scalars['ID']
+    /** Whether the node is a Comment */
+    isComment: Scalars['Boolean']
     /** Whether the node is a Content Node */
     isContentNode: Scalars['Boolean']
+    /** Whether the node represents the front page. */
+    isFrontPage: Scalars['Boolean']
+    /** Whether  the node represents the blog page. */
+    isPostsPage: Scalars['Boolean']
     /** Whether the object is restricted from the current viewer */
     isRestricted?: Scalars['Boolean']
     /** Whether the node is a Term */
@@ -716,7 +1001,7 @@ export interface User {
     locale?: Scalars['String']
     /** Connection between the User type and the mediaItem type */
     mediaItems?: UserToMediaItemConnection
-    /** Display name of the user. This is equivalent to the WP_User-&gt;dispaly_name property. */
+    /** Display name of the user. This is equivalent to the WP_User-&gt;display_name property. */
     name?: Scalars['String']
     /** The nicename for the user. This field is equivalent to WP_User-&gt;user_nicename */
     nicename?: Scalars['String']
@@ -756,7 +1041,7 @@ export type Commenter = (User | CommentAuthor) & { __isUnion?: true }
 
 
 /** Object that can be identified with a Database ID */
-export type DatabaseIdentifier = (ArquivoAssessoria | User | Comment | MediaItem | Page | Post | Category | Empreendimento | PostFormat | Tag | Banner | Menu | MenuItem | CommentAuthor) & { __isUnion?: true }
+export type DatabaseIdentifier = (ArquivoAssessoria | User | Comment | MediaItem | Page | Post | Category | CentraldeDecorado | Empreendimento | PostFormat | Tag | Banner | Menu | MenuItem | CommentAuthor) & { __isUnion?: true }
 
 
 /** Avatars are profile images for users. WordPress by default uses the Gravatar service to host and fetch avatars from. */
@@ -795,6 +1080,10 @@ export type AvatarRatingEnum = 'G' | 'PG' | 'R' | 'X'
 export type CommentsConnectionOrderbyEnum = 'COMMENT_AGENT' | 'COMMENT_APPROVED' | 'COMMENT_AUTHOR' | 'COMMENT_AUTHOR_EMAIL' | 'COMMENT_AUTHOR_IP' | 'COMMENT_AUTHOR_URL' | 'COMMENT_CONTENT' | 'COMMENT_DATE' | 'COMMENT_DATE_GMT' | 'COMMENT_ID' | 'COMMENT_IN' | 'COMMENT_KARMA' | 'COMMENT_PARENT' | 'COMMENT_POST_ID' | 'COMMENT_TYPE' | 'USER_ID'
 
 
+/** The status of the comment object. */
+export type CommentStatusEnum = 'APPROVE' | 'HOLD' | 'SPAM' | 'TRASH'
+
+
 /** Connection between the User type and the Comment type */
 export interface UserToCommentConnection {
     /** Edges for the UserToCommentConnection connection */
@@ -826,7 +1115,10 @@ export interface Comment {
     approved?: Scalars['Boolean']
     /** The author of the comment */
     author?: CommentToCommenterConnectionEdge
-    /** IP address for the author. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL. */
+    /**
+     * @deprecated Use the ipAddress field on the edge between the comment and author
+     * IP address for the author at the time of commenting. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL.
+     */
     authorIp?: Scalars['String']
     /**
      * @deprecated Deprecated in favor of databaseId
@@ -845,10 +1137,22 @@ export interface Comment {
     dateGmt?: Scalars['String']
     /** The globally unique identifier for the comment object */
     id: Scalars['ID']
+    /** Whether the node is a Comment */
+    isComment: Scalars['Boolean']
+    /** Whether the node is a Content Node */
+    isContentNode: Scalars['Boolean']
+    /** Whether the node represents the front page. */
+    isFrontPage: Scalars['Boolean']
+    /** Whether  the node represents the blog page. */
+    isPostsPage: Scalars['Boolean']
     /** Whether the object is restricted from the current viewer */
     isRestricted?: Scalars['Boolean']
+    /** Whether the node is a Term */
+    isTermNode: Scalars['Boolean']
     /** Karma value for the comment. This field is equivalent to WP_Comment-&gt;comment_karma and the value matching the &quot;comment_karma&quot; column in SQL. */
     karma?: Scalars['Int']
+    /** The permalink of the comment */
+    link?: Scalars['String']
     /** Connection between the Comment type and the Comment type */
     parent?: CommentToParentCommentConnectionEdge
     /** The database id of the parent comment node or null if it is the root comment */
@@ -861,6 +1165,8 @@ export interface Comment {
     status?: CommentStatusEnum
     /** Type of comment. This field is equivalent to WP_Comment-&gt;comment_type and the value matching the &quot;comment_type&quot; column in SQL. */
     type?: Scalars['String']
+    /** The unique resource identifier path */
+    uri?: Scalars['String']
     __typename: 'Comment'
 }
 
@@ -869,8 +1175,16 @@ export interface Comment {
 export interface CommentToCommenterConnectionEdge {
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: Scalars['String']
+    /** The email address representing the author for this particular comment */
+    email?: Scalars['String']
+    /** IP address of the author at the time of making this comment. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL. */
+    ipAddress?: Scalars['String']
+    /** The display name of the comment author for this particular comment */
+    name?: Scalars['String']
     /** The node of the connection, without the edges */
     node: Commenter
+    /** The url entered for the comment author on this particular comment */
+    url?: Scalars['String']
     __typename: 'CommentToCommenterConnectionEdge'
 }
 
@@ -943,10 +1257,6 @@ export interface CommentToCommentConnectionPageInfo {
 export type CommentConnectionPageInfo = (CommentToCommentConnectionPageInfo | UserToCommentConnectionPageInfo | MediaItemToCommentConnectionPageInfo | PageToCommentConnectionPageInfo | PostToCommentConnectionPageInfo | RootQueryToCommentConnectionPageInfo) & { __isUnion?: true }
 
 
-/** The status of the comment object. */
-export type CommentStatusEnum = 'APPROVE' | 'HOLD' | 'SPAM' | 'TRASH'
-
-
 /** An edge in a connection */
 export interface UserToCommentConnectionEdge {
     /** A cursor for use in pagination */
@@ -983,42 +1293,6 @@ export interface UserToEnqueuedScriptConnection {
 }
 
 
-/** Connection to EnqueuedScript Nodes */
-export type EnqueuedScriptConnection = (UserToEnqueuedScriptConnection | ContentNodeToEnqueuedScriptConnection | TermNodeToEnqueuedScriptConnection | RootQueryToEnqueuedScriptConnection) & { __isUnion?: true }
-
-
-/** Edge between a Node and a connected EnqueuedScript */
-export type EnqueuedScriptConnectionEdge = (UserToEnqueuedScriptConnectionEdge | ContentNodeToEnqueuedScriptConnectionEdge | TermNodeToEnqueuedScriptConnectionEdge | RootQueryToEnqueuedScriptConnectionEdge) & { __isUnion?: true }
-
-
-/** Script enqueued by the CMS */
-export interface EnqueuedScript {
-    /** @todo */
-    args?: Scalars['Boolean']
-    /** Dependencies needed to use this asset */
-    dependencies?: (EnqueuedScript | undefined)[]
-    /** Extra information needed for the script */
-    extra?: Scalars['String']
-    /** The handle of the enqueued asset */
-    handle?: Scalars['String']
-    /** The ID of the enqueued asset */
-    id: Scalars['ID']
-    /** The source of the asset */
-    src?: Scalars['String']
-    /** The version of the enqueued asset */
-    version?: Scalars['String']
-    __typename: 'EnqueuedScript'
-}
-
-
-/** Asset enqueued by the CMS */
-export type EnqueuedAsset = (EnqueuedScript | EnqueuedStylesheet) & { __isUnion?: true }
-
-
-/** Page Info on the connected EnqueuedScriptConnectionEdge */
-export type EnqueuedScriptConnectionPageInfo = (UserToEnqueuedScriptConnectionPageInfo | ContentNodeToEnqueuedScriptConnectionPageInfo | TermNodeToEnqueuedScriptConnectionPageInfo | RootQueryToEnqueuedScriptConnectionPageInfo) & { __isUnion?: true }
-
-
 /** An edge in a connection */
 export interface UserToEnqueuedScriptConnectionEdge {
     /** A cursor for use in pagination */
@@ -1053,38 +1327,6 @@ export interface UserToEnqueuedStylesheetConnection {
     pageInfo: UserToEnqueuedStylesheetConnectionPageInfo
     __typename: 'UserToEnqueuedStylesheetConnection'
 }
-
-
-/** Connection to EnqueuedStylesheet Nodes */
-export type EnqueuedStylesheetConnection = (UserToEnqueuedStylesheetConnection | ContentNodeToEnqueuedStylesheetConnection | TermNodeToEnqueuedStylesheetConnection | RootQueryToEnqueuedStylesheetConnection) & { __isUnion?: true }
-
-
-/** Edge between a Node and a connected EnqueuedStylesheet */
-export type EnqueuedStylesheetConnectionEdge = (UserToEnqueuedStylesheetConnectionEdge | ContentNodeToEnqueuedStylesheetConnectionEdge | TermNodeToEnqueuedStylesheetConnectionEdge | RootQueryToEnqueuedStylesheetConnectionEdge) & { __isUnion?: true }
-
-
-/** Stylesheet enqueued by the CMS */
-export interface EnqueuedStylesheet {
-    /** @todo */
-    args?: Scalars['Boolean']
-    /** Dependencies needed to use this asset */
-    dependencies?: (EnqueuedScript | undefined)[]
-    /** Extra information needed for the script */
-    extra?: Scalars['String']
-    /** The handle of the enqueued asset */
-    handle?: Scalars['String']
-    /** The ID of the enqueued asset */
-    id: Scalars['ID']
-    /** The source of the asset */
-    src?: Scalars['String']
-    /** The version of the enqueued asset */
-    version?: Scalars['String']
-    __typename: 'EnqueuedStylesheet'
-}
-
-
-/** Page Info on the connected EnqueuedStylesheetConnectionEdge */
-export type EnqueuedStylesheetConnectionPageInfo = (UserToEnqueuedStylesheetConnectionPageInfo | ContentNodeToEnqueuedStylesheetConnectionPageInfo | TermNodeToEnqueuedStylesheetConnectionPageInfo | RootQueryToEnqueuedStylesheetConnectionPageInfo) & { __isUnion?: true }
 
 
 /** An edge in a connection */
@@ -1179,14 +1421,26 @@ export interface MediaItem {
     enqueuedScripts?: ContentNodeToEnqueuedScriptConnection
     /** Connection between the ContentNode type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: ContentNodeToEnqueuedStylesheetConnection
+    /** The filename of the mediaItem for the specified size (default size is full) */
+    file?: Scalars['String']
+    /** The path to the original file relative to the uploads directory */
+    filePath?: Scalars['String']
     /** The filesize in bytes of the resource */
     fileSize?: Scalars['Int']
     /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
     guid?: Scalars['String']
+    /** Whether the attachment object is password protected. */
+    hasPassword?: Scalars['Boolean']
     /** The globally unique identifier of the attachment object. */
     id: Scalars['ID']
+    /** Whether the node is a Comment */
+    isComment: Scalars['Boolean']
     /** Whether the node is a Content Node */
     isContentNode: Scalars['Boolean']
+    /** Whether the node represents the front page. */
+    isFrontPage: Scalars['Boolean']
+    /** Whether  the node represents the blog page. */
+    isPostsPage: Scalars['Boolean']
     /** Whether the object is a node in the preview state */
     isPreview?: Scalars['Boolean']
     /** Whether the object is restricted from the current viewer */
@@ -1220,6 +1474,8 @@ export interface MediaItem {
     parentDatabaseId?: Scalars['Int']
     /** The globally unique identifier of the parent node. */
     parentId?: Scalars['ID']
+    /** The password for the attachment object. */
+    password?: Scalars['String']
     /** The database id of the preview node */
     previewRevisionDatabaseId?: Scalars['Int']
     /** Whether the object is a node in the preview state */
@@ -1245,7 +1501,7 @@ export interface MediaItem {
 
 
 /** A node that can have a template associated with it */
-export type NodeWithTemplate = (ArquivoAssessoria | MediaItem | Page | Post | Empreendimento | Banner) & { __isUnion?: true }
+export type NodeWithTemplate = (ArquivoAssessoria | MediaItem | Page | Post | CentraldeDecorado | Empreendimento | Banner) & { __isUnion?: true }
 
 
 /** The template assigned to a node of content */
@@ -1253,7 +1509,7 @@ export type ContentTemplate = (DefaultTemplate) & { __isUnion?: true }
 
 
 /** A node that NodeWith a title */
-export type NodeWithTitle = (ArquivoAssessoria | MediaItem | Page | Post | Empreendimento | Banner) & { __isUnion?: true }
+export type NodeWithTitle = (ArquivoAssessoria | MediaItem | Page | Post | CentraldeDecorado | Empreendimento | Banner) & { __isUnion?: true }
 
 
 /** A node that can have an author assigned to it */
@@ -1498,6 +1754,8 @@ export type MediaItemSizeEnum = 'LARGE' | 'MEDIUM' | 'MEDIUM_LARGE' | 'THUMBNAIL
 export interface MediaDetails {
     /** The filename of the mediaItem */
     file?: Scalars['String']
+    /** The path to the mediaItem relative to the uploads directory */
+    filePath?: Scalars['String']
     /** The height of the mediaItem */
     height?: Scalars['Int']
     /** Meta information associated with the mediaItem */
@@ -1544,6 +1802,8 @@ export interface MediaItemMeta {
 export interface MediaSize {
     /** The filename of the referenced size */
     file?: Scalars['String']
+    /** The path of the file for the referenced size (default size is full) */
+    filePath?: Scalars['String']
     /** The filesize of the resource */
     fileSize?: Scalars['Int']
     /** The height of the referenced size */
@@ -1616,7 +1876,7 @@ export type PageConnectionEdge = (PageToPreviewConnectionEdge | PageToRevisionCo
 export interface Page {
     /** Returns ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
     ancestors?: HierarchicalContentNodeToContentNodeAncestorsConnection
-    /** Added to the GraphQL Schema because the ACF Field Group &quot;Assessoria&quot; was set to Show in GraphQL. */
+    /** Added to the GraphQL Schema because the ACF Field Group &quot;Acessória&quot; was set to Show in GraphQL. */
     assessoria?: Page_Assessoria
     /** Connection between the NodeWithAuthor type and the User type */
     author?: NodeWithAuthorToUserConnectionEdge
@@ -1664,10 +1924,14 @@ export interface Page {
     featuredImageId?: Scalars['ID']
     /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
     guid?: Scalars['String']
+    /** Whether the page object is password protected. */
+    hasPassword?: Scalars['Boolean']
     /** The globally unique identifier of the page object. */
     id: Scalars['ID']
     /** Added to the GraphQL Schema because the ACF Field Group &quot;Informações de contato&quot; was set to Show in GraphQL. */
     informacoesDeContato?: Page_Informacoesdecontato
+    /** Whether the node is a Comment */
+    isComment: Scalars['Boolean']
     /** Whether the node is a Content Node */
     isContentNode: Scalars['Boolean']
     /** Whether this page is set to the static front page. */
@@ -1705,6 +1969,8 @@ export interface Page {
     parentDatabaseId?: Scalars['Int']
     /** The globally unique identifier of the parent node. */
     parentId?: Scalars['ID']
+    /** The password for the page object. */
+    password?: Scalars['String']
     /** Connection between the Page type and the page type */
     preview?: PageToPreviewConnectionEdge
     /** The database id of the preview node */
@@ -1730,7 +1996,7 @@ export interface Page {
 
 
 /** Nodes that can be seen in a preview (unpublished) state. */
-export type Previewable = (ArquivoAssessoria | Page | Post | Empreendimento | Banner) & { __isUnion?: true }
+export type Previewable = (ArquivoAssessoria | Page | Post | CentraldeDecorado | Empreendimento | Banner) & { __isUnion?: true }
 
 
 /** A node that supports the content editor */
@@ -1738,7 +2004,7 @@ export type NodeWithContentEditor = (Page | Post) & { __isUnion?: true }
 
 
 /** A node that can have a featured image set */
-export type NodeWithFeaturedImage = (Page | Post | Empreendimento) & { __isUnion?: true }
+export type NodeWithFeaturedImage = (Page | Post | CentraldeDecorado | Empreendimento) & { __isUnion?: true }
 
 
 /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
@@ -1770,7 +2036,7 @@ export type NodeWithPageAttributes = (Page) & { __isUnion?: true }
 
 
 /** Nodes that can be linked to as Menu Items */
-export type MenuItemLinkable = (ArquivoAssessoria | Page | Post | Category | Empreendimento | Tag | Banner) & { __isUnion?: true }
+export type MenuItemLinkable = (ArquivoAssessoria | Page | Post | Category | CentraldeDecorado | Empreendimento | Tag | Banner) & { __isUnion?: true }
 
 
 /** Field Group */
@@ -1786,7 +2052,7 @@ export interface Page_Assessoria {
 
 
 /** A Field Group registered by ACF */
-export type AcfFieldGroup = (Page_Assessoria | Page_Conteusobre | Page_Conteusobre_item | Page_Informacoesdecontato | Empreendimento_Empreendimento | Empreendimento_Empreendimento_andamentoDaObra | Empreendimento_Empreendimento_diferenciaisItems | Empreendimento_Empreendimento_itemsPlantas | Empreendimento_Empreendimento_itensAreacomuns | Empreendimento_Empreendimento_pontosDeReferencia | Empreendimento_Empreendimento_videosOutos | Empreendimento_Housiverso | Empreendimento_Housiverso_diferencial | ArquivoAssessoria_DownAssessoria | Banner_BannerHome | Banner_BannerHome_BhConteudo | Banner_BannerHome_ImagensProntas) & { __isUnion?: true }
+export type AcfFieldGroup = (Page_Assessoria | Page_Conteusobre | Page_Conteusobre_item | Page_Informacoesdecontato | CentraldeDecorado_Centraldedecorados | Empreendimento_Empreendimento | Empreendimento_Empreendimento_andamentoDaObra | Empreendimento_Empreendimento_diferenciaisItems | Empreendimento_Empreendimento_itemsPlantas | Empreendimento_Empreendimento_itensAreacomuns | Empreendimento_Empreendimento_pontosDeReferencia | Empreendimento_Empreendimento_videosOutos | Empreendimento_Housiverso | Empreendimento_Housiverso_diferencial | ArquivoAssessoria_DownAssessoria | Banner_BannerHome | Banner_BannerHome_BhConteudo | Banner_BannerHome_ImagensProntas) & { __isUnion?: true }
 
 
 /** Connection between the Page type and the Comment type */
@@ -1968,15 +2234,20 @@ export interface UserToPostConnection {
 
 
 /** Connection to post Nodes */
-export type PostConnection = (UserToPostConnection | CategoryToPostConnection | PostFormatToPostConnection | PostToRevisionConnection | TagToPostConnection | RootQueryToPostConnection) & { __isUnion?: true }
+export type PostConnection = (UserToPostConnection | PostToPostConnection | CategoryToPostConnection | PostFormatToPostConnection | PostToRevisionConnection | TagToPostConnection | RootQueryToPostConnection) & { __isUnion?: true }
 
 
 /** Edge between a Node and a connected post */
-export type PostConnectionEdge = (CategoryToPostConnectionEdge | PostFormatToPostConnectionEdge | PostToPreviewConnectionEdge | PostToRevisionConnectionEdge | TagToPostConnectionEdge | UserToPostConnectionEdge | RootQueryToPostConnectionEdge) & { __isUnion?: true }
+export type PostConnectionEdge = (PostToPostConnectionEdge | CategoryToPostConnectionEdge | PostToParentConnectionEdge | PostFormatToPostConnectionEdge | PostToPreviewConnectionEdge | PostToRevisionConnectionEdge | TagToPostConnectionEdge | UserToPostConnectionEdge | RootQueryToPostConnectionEdge) & { __isUnion?: true }
 
 
 /** The post type */
 export interface Post {
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * The ancestors of the content node.
+     */
+    ancestors?: PostToPostConnection
     /** Connection between the NodeWithAuthor type and the User type */
     author?: NodeWithAuthorToUserConnectionEdge
     /** The database identifier of the author of the node */
@@ -2023,10 +2294,18 @@ export interface Post {
     featuredImageId?: Scalars['ID']
     /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
     guid?: Scalars['String']
+    /** Whether the post object is password protected. */
+    hasPassword?: Scalars['Boolean']
     /** The globally unique identifier of the post object. */
     id: Scalars['ID']
+    /** Whether the node is a Comment */
+    isComment: Scalars['Boolean']
     /** Whether the node is a Content Node */
     isContentNode: Scalars['Boolean']
+    /** Whether the node represents the front page. */
+    isFrontPage: Scalars['Boolean']
+    /** Whether  the node represents the blog page. */
+    isPostsPage: Scalars['Boolean']
     /** Whether the object is a node in the preview state */
     isPreview?: Scalars['Boolean']
     /** Whether the object is restricted from the current viewer */
@@ -2045,6 +2324,13 @@ export interface Post {
     modified?: Scalars['String']
     /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
     modifiedGmt?: Scalars['String']
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have a parent
+     * The parent of the content node.
+     */
+    parent?: PostToParentConnectionEdge
+    /** The password for the post object. */
+    password?: Scalars['String']
     /** Whether the pings are open or closed for this particular post. */
     pingStatus?: Scalars['String']
     /** URLs that have been pinged. */
@@ -2094,6 +2380,52 @@ export type NodeWithExcerpt = (Post) & { __isUnion?: true }
 export type NodeWithTrackbacks = (Post) & { __isUnion?: true }
 
 
+/** Connection between the Post type and the post type */
+export interface PostToPostConnection {
+    /** Edges for the PostToPostConnection connection */
+    edges: PostToPostConnectionEdge[]
+    /** The nodes of the connection, without the edges */
+    nodes: Post[]
+    /** Information about pagination in a connection. */
+    pageInfo: PostToPostConnectionPageInfo
+    __typename: 'PostToPostConnection'
+}
+
+
+/** An edge in a connection */
+export interface PostToPostConnectionEdge {
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * A cursor for use in pagination
+     */
+    cursor?: Scalars['String']
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * The item at the end of the edge
+     */
+    node: Post
+    __typename: 'PostToPostConnectionEdge'
+}
+
+
+/** Page Info on the &quot;PostToPostConnection&quot; */
+export interface PostToPostConnectionPageInfo {
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Scalars['String']
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Scalars['String']
+    __typename: 'PostToPostConnectionPageInfo'
+}
+
+
+/** Page Info on the connected PostConnectionEdge */
+export type PostConnectionPageInfo = (PostToPostConnectionPageInfo | CategoryToPostConnectionPageInfo | PostFormatToPostConnectionPageInfo | PostToRevisionConnectionPageInfo | TagToPostConnectionPageInfo | UserToPostConnectionPageInfo | RootQueryToPostConnectionPageInfo) & { __isUnion?: true }
+
+
 /** Options for ordering the connection by */
 export type TermObjectsConnectionOrderbyEnum = 'COUNT' | 'DESCRIPTION' | 'NAME' | 'SLUG' | 'TERM_GROUP' | 'TERM_ID' | 'TERM_ORDER'
 
@@ -2111,11 +2443,11 @@ export interface PostToCategoryConnection {
 
 
 /** Connection to category Nodes */
-export type CategoryConnection = (PostToCategoryConnection | CategoryToAncestorsCategoryConnection | CategoryToCategoryConnection | EmpreendimentoToCategoryConnection | RootQueryToCategoryConnection) & { __isUnion?: true }
+export type CategoryConnection = (PostToCategoryConnection | CategoryToAncestorsCategoryConnection | CentraldeDecoradoToCategoryConnection | CategoryToCategoryConnection | EmpreendimentoToCategoryConnection | RootQueryToCategoryConnection) & { __isUnion?: true }
 
 
 /** Edge between a Node and a connected category */
-export type CategoryConnectionEdge = (CategoryToAncestorsCategoryConnectionEdge | CategoryToCategoryConnectionEdge | EmpreendimentoToCategoryConnectionEdge | CategoryToParentCategoryConnectionEdge | PostToCategoryConnectionEdge | RootQueryToCategoryConnectionEdge) & { __isUnion?: true }
+export type CategoryConnectionEdge = (CategoryToAncestorsCategoryConnectionEdge | CentraldeDecoradoToCategoryConnectionEdge | CategoryToCategoryConnectionEdge | EmpreendimentoToCategoryConnectionEdge | CategoryToParentCategoryConnectionEdge | PostToCategoryConnectionEdge | RootQueryToCategoryConnectionEdge) & { __isUnion?: true }
 
 
 /** The category type */
@@ -2127,6 +2459,8 @@ export interface Category {
      * The id field matches the WP_Post-&gt;ID field.
      */
     categoryId?: Scalars['Int']
+    /** Connection between the Category type and the CentraldeDecorado type */
+    centraldeDecorados?: CategoryToCentraldeDecoradoConnection
     /** Connection between the category type and its children categories. */
     children?: CategoryToCategoryConnection
     /** Connection between the Category type and the ContentNode type */
@@ -2143,10 +2477,16 @@ export interface Category {
     enqueuedScripts?: TermNodeToEnqueuedScriptConnection
     /** Connection between the TermNode type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: TermNodeToEnqueuedStylesheetConnection
-    /** The unique resource identifier path */
+    /** The globally unique ID for the object */
     id: Scalars['ID']
+    /** Whether the node is a Comment */
+    isComment: Scalars['Boolean']
     /** Whether the node is a Content Node */
     isContentNode: Scalars['Boolean']
+    /** Whether the node represents the front page. */
+    isFrontPage: Scalars['Boolean']
+    /** Whether  the node represents the blog page. */
+    isPostsPage: Scalars['Boolean']
     /** Whether the object is restricted from the current viewer */
     isRestricted?: Scalars['Boolean']
     /** Whether the node is a Term */
@@ -2176,82 +2516,6 @@ export interface Category {
     /** The unique resource identifier path */
     uri?: Scalars['String']
     __typename: 'Category'
-}
-
-
-/** Terms are nodes within a Taxonomy, used to group and relate other nodes. */
-export type TermNode = (Category | PostFormat | Tag) & { __isUnion?: true }
-
-
-/** Connection between the TermNode type and the EnqueuedScript type */
-export interface TermNodeToEnqueuedScriptConnection {
-    /** Edges for the TermNodeToEnqueuedScriptConnection connection */
-    edges: TermNodeToEnqueuedScriptConnectionEdge[]
-    /** The nodes of the connection, without the edges */
-    nodes: EnqueuedScript[]
-    /** Information about pagination in a connection. */
-    pageInfo: TermNodeToEnqueuedScriptConnectionPageInfo
-    __typename: 'TermNodeToEnqueuedScriptConnection'
-}
-
-
-/** An edge in a connection */
-export interface TermNodeToEnqueuedScriptConnectionEdge {
-    /** A cursor for use in pagination */
-    cursor?: Scalars['String']
-    /** The item at the end of the edge */
-    node: EnqueuedScript
-    __typename: 'TermNodeToEnqueuedScriptConnectionEdge'
-}
-
-
-/** Page Info on the &quot;TermNodeToEnqueuedScriptConnection&quot; */
-export interface TermNodeToEnqueuedScriptConnectionPageInfo {
-    /** When paginating forwards, the cursor to continue. */
-    endCursor?: Scalars['String']
-    /** When paginating forwards, are there more items? */
-    hasNextPage: Scalars['Boolean']
-    /** When paginating backwards, are there more items? */
-    hasPreviousPage: Scalars['Boolean']
-    /** When paginating backwards, the cursor to continue. */
-    startCursor?: Scalars['String']
-    __typename: 'TermNodeToEnqueuedScriptConnectionPageInfo'
-}
-
-
-/** Connection between the TermNode type and the EnqueuedStylesheet type */
-export interface TermNodeToEnqueuedStylesheetConnection {
-    /** Edges for the TermNodeToEnqueuedStylesheetConnection connection */
-    edges: TermNodeToEnqueuedStylesheetConnectionEdge[]
-    /** The nodes of the connection, without the edges */
-    nodes: EnqueuedStylesheet[]
-    /** Information about pagination in a connection. */
-    pageInfo: TermNodeToEnqueuedStylesheetConnectionPageInfo
-    __typename: 'TermNodeToEnqueuedStylesheetConnection'
-}
-
-
-/** An edge in a connection */
-export interface TermNodeToEnqueuedStylesheetConnectionEdge {
-    /** A cursor for use in pagination */
-    cursor?: Scalars['String']
-    /** The item at the end of the edge */
-    node: EnqueuedStylesheet
-    __typename: 'TermNodeToEnqueuedStylesheetConnectionEdge'
-}
-
-
-/** Page Info on the &quot;TermNodeToEnqueuedStylesheetConnection&quot; */
-export interface TermNodeToEnqueuedStylesheetConnectionPageInfo {
-    /** When paginating forwards, the cursor to continue. */
-    endCursor?: Scalars['String']
-    /** When paginating forwards, are there more items? */
-    hasNextPage: Scalars['Boolean']
-    /** When paginating backwards, are there more items? */
-    hasPreviousPage: Scalars['Boolean']
-    /** When paginating backwards, the cursor to continue. */
-    startCursor?: Scalars['String']
-    __typename: 'TermNodeToEnqueuedStylesheetConnectionPageInfo'
 }
 
 
@@ -2296,7 +2560,315 @@ export interface CategoryToAncestorsCategoryConnectionPageInfo {
 
 
 /** Page Info on the connected CategoryConnectionEdge */
-export type CategoryConnectionPageInfo = (CategoryToAncestorsCategoryConnectionPageInfo | CategoryToCategoryConnectionPageInfo | EmpreendimentoToCategoryConnectionPageInfo | PostToCategoryConnectionPageInfo | RootQueryToCategoryConnectionPageInfo) & { __isUnion?: true }
+export type CategoryConnectionPageInfo = (CategoryToAncestorsCategoryConnectionPageInfo | CentraldeDecoradoToCategoryConnectionPageInfo | CategoryToCategoryConnectionPageInfo | EmpreendimentoToCategoryConnectionPageInfo | PostToCategoryConnectionPageInfo | RootQueryToCategoryConnectionPageInfo) & { __isUnion?: true }
+
+export type CategoryToCentraldeDecoradoConnectionWhereArgsMetaCompareEnum = 'BETWEEN' | 'EQUAL_TO' | 'EXISTS' | 'GREATER_THAN' | 'GREATER_THAN_OR_EQUAL_TO' | 'IN' | 'LESS_THAN' | 'LESS_THAN_OR_EQUAL_TO' | 'LIKE' | 'NOT_BETWEEN' | 'NOT_EQUAL_TO' | 'NOT_EXISTS' | 'NOT_IN' | 'NOT_LIKE'
+
+export type CategoryToCentraldeDecoradoConnectionWhereArgsMetaTypeEnum = 'BINARY' | 'CHAR' | 'DATE' | 'DATETIME' | 'DECIMAL' | 'NUMERIC' | 'SIGNED' | 'TIME' | 'UNSIGNED'
+
+
+/** Connection between the Category type and the CentraldeDecorado type */
+export interface CategoryToCentraldeDecoradoConnection {
+    /** Edges for the CategoryToCentraldeDecoradoConnection connection */
+    edges: CategoryToCentraldeDecoradoConnectionEdge[]
+    /** The nodes of the connection, without the edges */
+    nodes: CentraldeDecorado[]
+    /** Information about pagination in a connection. */
+    pageInfo: CategoryToCentraldeDecoradoConnectionPageInfo
+    __typename: 'CategoryToCentraldeDecoradoConnection'
+}
+
+
+/** Connection to CentraldeDecorado Nodes */
+export type CentraldeDecoradoConnection = (CategoryToCentraldeDecoradoConnection | CentraldeDecoradoToCentraldeDecoradoConnection | RootQueryToCentraldeDecoradoConnection) & { __isUnion?: true }
+
+
+/** Edge between a Node and a connected CentraldeDecorado */
+export type CentraldeDecoradoConnectionEdge = (CentraldeDecoradoToCentraldeDecoradoConnectionEdge | CentraldeDecoradoToParentConnectionEdge | CentraldeDecoradoToPreviewConnectionEdge | CategoryToCentraldeDecoradoConnectionEdge | RootQueryToCentraldeDecoradoConnectionEdge) & { __isUnion?: true }
+
+
+/** The CentraldeDecorado type */
+export interface CentraldeDecorado {
+    /**
+     * @deprecated Deprecated in favor of the databaseId field
+     * The id field matches the WP_Post-&gt;ID field.
+     */
+    centraldeDecoradoId: Scalars['Int']
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * The ancestors of the content node.
+     */
+    ancestors?: CentraldeDecoradoToCentraldeDecoradoConnection
+    /** Connection between the CentraldeDecorado type and the category type */
+    categories?: CentraldeDecoradoToCategoryConnection
+    /** Added to the GraphQL Schema because the ACF Field Group &quot;Central de decorados&quot; was set to Show in GraphQL. */
+    centralDeDecorados?: CentraldeDecorado_Centraldedecorados
+    /** Connection between the ContentNode type and the ContentType type */
+    contentType?: ContentNodeToContentTypeConnectionEdge
+    /** The name of the Content Type the node belongs to */
+    contentTypeName: Scalars['String']
+    /** The unique identifier stored in the database */
+    databaseId: Scalars['Int']
+    /** Post publishing date. */
+    date?: Scalars['String']
+    /** The publishing date set in GMT. */
+    dateGmt?: Scalars['String']
+    /** The desired slug of the post */
+    desiredSlug?: Scalars['String']
+    /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
+    editingLockedBy?: ContentNodeToEditLockConnectionEdge
+    /** The RSS enclosure for the object */
+    enclosure?: Scalars['String']
+    /** Connection between the ContentNode type and the EnqueuedScript type */
+    enqueuedScripts?: ContentNodeToEnqueuedScriptConnection
+    /** Connection between the ContentNode type and the EnqueuedStylesheet type */
+    enqueuedStylesheets?: ContentNodeToEnqueuedStylesheetConnection
+    /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
+    featuredImage?: NodeWithFeaturedImageToMediaItemConnectionEdge
+    /** The database identifier for the featured image node assigned to the content node */
+    featuredImageDatabaseId?: Scalars['Int']
+    /** Globally unique ID of the featured image assigned to the node */
+    featuredImageId?: Scalars['ID']
+    /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+    guid?: Scalars['String']
+    /** Whether the centraldecorado object is password protected. */
+    hasPassword?: Scalars['Boolean']
+    /** The globally unique identifier of the centraldecorado object. */
+    id: Scalars['ID']
+    /** Whether the node is a Comment */
+    isComment: Scalars['Boolean']
+    /** Whether the node is a Content Node */
+    isContentNode: Scalars['Boolean']
+    /** Whether the node represents the front page. */
+    isFrontPage: Scalars['Boolean']
+    /** Whether  the node represents the blog page. */
+    isPostsPage: Scalars['Boolean']
+    /** Whether the object is a node in the preview state */
+    isPreview?: Scalars['Boolean']
+    /** Whether the object is restricted from the current viewer */
+    isRestricted?: Scalars['Boolean']
+    /** Whether the node is a Term */
+    isTermNode: Scalars['Boolean']
+    /** The user that most recently edited the node */
+    lastEditedBy?: ContentNodeToEditLastConnectionEdge
+    /** The permalink of the post */
+    link?: Scalars['String']
+    /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
+    modified?: Scalars['String']
+    /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
+    modifiedGmt?: Scalars['String']
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have a parent
+     * The parent of the content node.
+     */
+    parent?: CentraldeDecoradoToParentConnectionEdge
+    /** The password for the centraldecorado object. */
+    password?: Scalars['String']
+    /** Connection between the CentraldeDecorado type and the CentraldeDecorado type */
+    preview?: CentraldeDecoradoToPreviewConnectionEdge
+    /** The database id of the preview node */
+    previewRevisionDatabaseId?: Scalars['Int']
+    /** Whether the object is a node in the preview state */
+    previewRevisionId?: Scalars['ID']
+    /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+    slug?: Scalars['String']
+    /** The current status of the object */
+    status?: Scalars['String']
+    /** The template assigned to the node */
+    template?: ContentTemplate
+    /** Connection between the CentraldeDecorado type and the TermNode type */
+    terms?: CentraldeDecoradoToTermNodeConnection
+    /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
+    title?: Scalars['String']
+    /** The unique resource identifier path */
+    uri?: Scalars['String']
+    __typename: 'CentraldeDecorado'
+}
+
+
+/** Connection between the CentraldeDecorado type and the CentraldeDecorado type */
+export interface CentraldeDecoradoToCentraldeDecoradoConnection {
+    /** Edges for the CentraldeDecoradoToCentraldeDecoradoConnection connection */
+    edges: CentraldeDecoradoToCentraldeDecoradoConnectionEdge[]
+    /** The nodes of the connection, without the edges */
+    nodes: CentraldeDecorado[]
+    /** Information about pagination in a connection. */
+    pageInfo: CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo
+    __typename: 'CentraldeDecoradoToCentraldeDecoradoConnection'
+}
+
+
+/** An edge in a connection */
+export interface CentraldeDecoradoToCentraldeDecoradoConnectionEdge {
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * A cursor for use in pagination
+     */
+    cursor?: Scalars['String']
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * The item at the end of the edge
+     */
+    node: CentraldeDecorado
+    __typename: 'CentraldeDecoradoToCentraldeDecoradoConnectionEdge'
+}
+
+
+/** Page Info on the &quot;CentraldeDecoradoToCentraldeDecoradoConnection&quot; */
+export interface CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo {
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Scalars['String']
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Scalars['String']
+    __typename: 'CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo'
+}
+
+
+/** Page Info on the connected CentraldeDecoradoConnectionEdge */
+export type CentraldeDecoradoConnectionPageInfo = (CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo | CategoryToCentraldeDecoradoConnectionPageInfo | RootQueryToCentraldeDecoradoConnectionPageInfo) & { __isUnion?: true }
+
+
+/** Connection between the CentraldeDecorado type and the category type */
+export interface CentraldeDecoradoToCategoryConnection {
+    /** Edges for the CentraldeDecoradoToCategoryConnection connection */
+    edges: CentraldeDecoradoToCategoryConnectionEdge[]
+    /** The nodes of the connection, without the edges */
+    nodes: Category[]
+    /** Information about pagination in a connection. */
+    pageInfo: CentraldeDecoradoToCategoryConnectionPageInfo
+    __typename: 'CentraldeDecoradoToCategoryConnection'
+}
+
+
+/** An edge in a connection */
+export interface CentraldeDecoradoToCategoryConnectionEdge {
+    /** A cursor for use in pagination */
+    cursor?: Scalars['String']
+    /** The item at the end of the edge */
+    node: Category
+    __typename: 'CentraldeDecoradoToCategoryConnectionEdge'
+}
+
+
+/** Page Info on the &quot;CentraldeDecoradoToCategoryConnection&quot; */
+export interface CentraldeDecoradoToCategoryConnectionPageInfo {
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Scalars['String']
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Scalars['String']
+    __typename: 'CentraldeDecoradoToCategoryConnectionPageInfo'
+}
+
+
+/** Field Group */
+export interface CentraldeDecorado_Centraldedecorados {
+    atendimentoDomingo?: Scalars['String']
+    atendimentoFeriado?: Scalars['String']
+    atendimentoSabado?: Scalars['String']
+    atendimentoSemana?: Scalars['String']
+    enderecoBairro?: Scalars['String']
+    enderecoCidade?: Scalars['String']
+    enderecoNumero?: Scalars['String']
+    enderecoRua?: Scalars['String']
+    /** The name of the ACF Field Group */
+    fieldGroupName?: Scalars['String']
+    /** Resolução recomendada: 1920 x 1080px. */
+    imagemPrincipal?: MediaItem
+    telefone?: Scalars['String']
+    whatsapp?: Scalars['String']
+    __typename: 'CentraldeDecorado_Centraldedecorados'
+}
+
+
+/** Connection between the CentraldeDecorado type and the CentraldeDecorado type */
+export interface CentraldeDecoradoToParentConnectionEdge {
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: Scalars['String']
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have a parent
+     * The node of the connection, without the edges
+     */
+    node: CentraldeDecorado
+    __typename: 'CentraldeDecoradoToParentConnectionEdge'
+}
+
+
+/** Connection between the CentraldeDecorado type and the CentraldeDecorado type */
+export interface CentraldeDecoradoToPreviewConnectionEdge {
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: Scalars['String']
+    /** The node of the connection, without the edges */
+    node: CentraldeDecorado
+    __typename: 'CentraldeDecoradoToPreviewConnectionEdge'
+}
+
+
+/** Connection between the CentraldeDecorado type and the TermNode type */
+export interface CentraldeDecoradoToTermNodeConnection {
+    /** Edges for the CentraldeDecoradoToTermNodeConnection connection */
+    edges: CentraldeDecoradoToTermNodeConnectionEdge[]
+    /** The nodes of the connection, without the edges */
+    nodes: TermNode[]
+    /** Information about pagination in a connection. */
+    pageInfo: CentraldeDecoradoToTermNodeConnectionPageInfo
+    __typename: 'CentraldeDecoradoToTermNodeConnection'
+}
+
+
+/** An edge in a connection */
+export interface CentraldeDecoradoToTermNodeConnectionEdge {
+    /** A cursor for use in pagination */
+    cursor?: Scalars['String']
+    /** The item at the end of the edge */
+    node: TermNode
+    __typename: 'CentraldeDecoradoToTermNodeConnectionEdge'
+}
+
+
+/** Page Info on the &quot;CentraldeDecoradoToTermNodeConnection&quot; */
+export interface CentraldeDecoradoToTermNodeConnectionPageInfo {
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Scalars['String']
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Scalars['String']
+    __typename: 'CentraldeDecoradoToTermNodeConnectionPageInfo'
+}
+
+
+/** An edge in a connection */
+export interface CategoryToCentraldeDecoradoConnectionEdge {
+    /** A cursor for use in pagination */
+    cursor?: Scalars['String']
+    /** The item at the end of the edge */
+    node: CentraldeDecorado
+    __typename: 'CategoryToCentraldeDecoradoConnectionEdge'
+}
+
+
+/** Page Info on the &quot;CategoryToCentraldeDecoradoConnection&quot; */
+export interface CategoryToCentraldeDecoradoConnectionPageInfo {
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Scalars['String']
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Scalars['String']
+    __typename: 'CategoryToCentraldeDecoradoConnectionPageInfo'
+}
 
 
 /** Connection between the Category type and the category type */
@@ -2336,7 +2908,7 @@ export interface CategoryToCategoryConnectionPageInfo {
 
 
 /** Allowed Content Types of the Category taxonomy. */
-export type ContentTypesOfCategoryEnum = 'EMPREENDIMENTOS' | 'POST'
+export type ContentTypesOfCategoryEnum = 'CENTRALDECORADO' | 'EMPREENDIMENTOS' | 'POST'
 
 export type CategoryToContentNodeConnectionWhereArgsMetaCompareEnum = 'BETWEEN' | 'EQUAL_TO' | 'EXISTS' | 'GREATER_THAN' | 'GREATER_THAN_OR_EQUAL_TO' | 'IN' | 'LESS_THAN' | 'LESS_THAN_OR_EQUAL_TO' | 'LIKE' | 'NOT_BETWEEN' | 'NOT_EQUAL_TO' | 'NOT_EXISTS' | 'NOT_IN' | 'NOT_LIKE'
 
@@ -2396,11 +2968,11 @@ export interface CategoryToEmpreendimentoConnection {
 
 
 /** Connection to Empreendimento Nodes */
-export type EmpreendimentoConnection = (CategoryToEmpreendimentoConnection | RootQueryToEmpreendimentoConnection) & { __isUnion?: true }
+export type EmpreendimentoConnection = (CategoryToEmpreendimentoConnection | EmpreendimentoToEmpreendimentoConnection | RootQueryToEmpreendimentoConnection) & { __isUnion?: true }
 
 
 /** Edge between a Node and a connected Empreendimento */
-export type EmpreendimentoConnectionEdge = (EmpreendimentoToPreviewConnectionEdge | CategoryToEmpreendimentoConnectionEdge | RootQueryToEmpreendimentoConnectionEdge) & { __isUnion?: true }
+export type EmpreendimentoConnectionEdge = (EmpreendimentoToEmpreendimentoConnectionEdge | EmpreendimentoToParentConnectionEdge | EmpreendimentoToPreviewConnectionEdge | CategoryToEmpreendimentoConnectionEdge | RootQueryToEmpreendimentoConnectionEdge) & { __isUnion?: true }
 
 
 /** The Empreendimento type */
@@ -2410,6 +2982,11 @@ export interface Empreendimento {
      * The id field matches the WP_Post-&gt;ID field.
      */
     empreendimentoId: Scalars['Int']
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * The ancestors of the content node.
+     */
+    ancestors?: EmpreendimentoToEmpreendimentoConnection
     /** Connection between the Empreendimento type and the category type */
     categories?: EmpreendimentoToCategoryConnection
     /** Connection between the ContentNode type and the ContentType type */
@@ -2442,12 +3019,20 @@ export interface Empreendimento {
     featuredImageId?: Scalars['ID']
     /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
     guid?: Scalars['String']
+    /** Whether the empreendimentos object is password protected. */
+    hasPassword?: Scalars['Boolean']
     /** Added to the GraphQL Schema because the ACF Field Group &quot;Housi - Verso&quot; was set to Show in GraphQL. */
     housiVerso?: Empreendimento_Housiverso
     /** The globally unique identifier of the empreendimentos object. */
     id: Scalars['ID']
+    /** Whether the node is a Comment */
+    isComment: Scalars['Boolean']
     /** Whether the node is a Content Node */
     isContentNode: Scalars['Boolean']
+    /** Whether the node represents the front page. */
+    isFrontPage: Scalars['Boolean']
+    /** Whether  the node represents the blog page. */
+    isPostsPage: Scalars['Boolean']
     /** Whether the object is a node in the preview state */
     isPreview?: Scalars['Boolean']
     /** Whether the object is restricted from the current viewer */
@@ -2462,6 +3047,13 @@ export interface Empreendimento {
     modified?: Scalars['String']
     /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
     modifiedGmt?: Scalars['String']
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have a parent
+     * The parent of the content node.
+     */
+    parent?: EmpreendimentoToParentConnectionEdge
+    /** The password for the empreendimentos object. */
+    password?: Scalars['String']
     /** Connection between the Empreendimento type and the Empreendimento type */
     preview?: EmpreendimentoToPreviewConnectionEdge
     /** The database id of the preview node */
@@ -2482,6 +3074,52 @@ export interface Empreendimento {
     uri?: Scalars['String']
     __typename: 'Empreendimento'
 }
+
+
+/** Connection between the Empreendimento type and the Empreendimento type */
+export interface EmpreendimentoToEmpreendimentoConnection {
+    /** Edges for the EmpreendimentoToEmpreendimentoConnection connection */
+    edges: EmpreendimentoToEmpreendimentoConnectionEdge[]
+    /** The nodes of the connection, without the edges */
+    nodes: Empreendimento[]
+    /** Information about pagination in a connection. */
+    pageInfo: EmpreendimentoToEmpreendimentoConnectionPageInfo
+    __typename: 'EmpreendimentoToEmpreendimentoConnection'
+}
+
+
+/** An edge in a connection */
+export interface EmpreendimentoToEmpreendimentoConnectionEdge {
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * A cursor for use in pagination
+     */
+    cursor?: Scalars['String']
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * The item at the end of the edge
+     */
+    node: Empreendimento
+    __typename: 'EmpreendimentoToEmpreendimentoConnectionEdge'
+}
+
+
+/** Page Info on the &quot;EmpreendimentoToEmpreendimentoConnection&quot; */
+export interface EmpreendimentoToEmpreendimentoConnectionPageInfo {
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Scalars['String']
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Scalars['String']
+    __typename: 'EmpreendimentoToEmpreendimentoConnectionPageInfo'
+}
+
+
+/** Page Info on the connected EmpreendimentoConnectionEdge */
+export type EmpreendimentoConnectionPageInfo = (EmpreendimentoToEmpreendimentoConnectionPageInfo | CategoryToEmpreendimentoConnectionPageInfo | RootQueryToEmpreendimentoConnectionPageInfo) & { __isUnion?: true }
 
 
 /** Connection between the Empreendimento type and the category type */
@@ -2639,6 +3277,19 @@ export interface Empreendimento_Housiverso_diferencial {
 
 
 /** Connection between the Empreendimento type and the Empreendimento type */
+export interface EmpreendimentoToParentConnectionEdge {
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: Scalars['String']
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have a parent
+     * The node of the connection, without the edges
+     */
+    node: Empreendimento
+    __typename: 'EmpreendimentoToParentConnectionEdge'
+}
+
+
+/** Connection between the Empreendimento type and the Empreendimento type */
 export interface EmpreendimentoToPreviewConnectionEdge {
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: Scalars['String']
@@ -2658,18 +3309,6 @@ export interface EmpreendimentoToTermNodeConnection {
     pageInfo: EmpreendimentoToTermNodeConnectionPageInfo
     __typename: 'EmpreendimentoToTermNodeConnection'
 }
-
-
-/** Connection to TermNode Nodes */
-export type TermNodeConnection = (EmpreendimentoToTermNodeConnection | PostToTermNodeConnection | RootQueryToTermNodeConnection) & { __isUnion?: true }
-
-
-/** Edge between a Node and a connected TermNode */
-export type TermNodeConnectionEdge = (EmpreendimentoToTermNodeConnectionEdge | PostToTermNodeConnectionEdge | RootQueryToTermNodeConnectionEdge) & { __isUnion?: true }
-
-
-/** Page Info on the connected TermNodeConnectionEdge */
-export type TermNodeConnectionPageInfo = (EmpreendimentoToTermNodeConnectionPageInfo | PostToTermNodeConnectionPageInfo | RootQueryToTermNodeConnectionPageInfo) & { __isUnion?: true }
 
 
 /** An edge in a connection */
@@ -2694,10 +3333,6 @@ export interface EmpreendimentoToTermNodeConnectionPageInfo {
     startCursor?: Scalars['String']
     __typename: 'EmpreendimentoToTermNodeConnectionPageInfo'
 }
-
-
-/** Page Info on the connected EmpreendimentoConnectionEdge */
-export type EmpreendimentoConnectionPageInfo = (CategoryToEmpreendimentoConnectionPageInfo | RootQueryToEmpreendimentoConnectionPageInfo) & { __isUnion?: true }
 
 
 /** An edge in a connection */
@@ -2774,10 +3409,6 @@ export interface CategoryToPostConnectionPageInfo {
 }
 
 
-/** Page Info on the connected PostConnectionEdge */
-export type PostConnectionPageInfo = (CategoryToPostConnectionPageInfo | PostFormatToPostConnectionPageInfo | PostToRevisionConnectionPageInfo | TagToPostConnectionPageInfo | UserToPostConnectionPageInfo | RootQueryToPostConnectionPageInfo) & { __isUnion?: true }
-
-
 /** Connection between the Category type and the Taxonomy type */
 export interface CategoryToTaxonomyConnectionEdge {
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -2848,6 +3479,19 @@ export interface PostToCommentConnectionPageInfo {
 }
 
 
+/** Connection between the Post type and the post type */
+export interface PostToParentConnectionEdge {
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: Scalars['String']
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have a parent
+     * The node of the connection, without the edges
+     */
+    node: Post
+    __typename: 'PostToParentConnectionEdge'
+}
+
+
 /** Connection between the Post type and the postFormat type */
 export interface PostToPostFormatConnection {
     /** Edges for the PostToPostFormatConnection connection */
@@ -2882,10 +3526,16 @@ export interface PostFormat {
     enqueuedScripts?: TermNodeToEnqueuedScriptConnection
     /** Connection between the TermNode type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: TermNodeToEnqueuedStylesheetConnection
-    /** The unique resource identifier path */
+    /** The globally unique ID for the object */
     id: Scalars['ID']
+    /** Whether the node is a Comment */
+    isComment: Scalars['Boolean']
     /** Whether the node is a Content Node */
     isContentNode: Scalars['Boolean']
+    /** Whether the node represents the front page. */
+    isFrontPage: Scalars['Boolean']
+    /** Whether  the node represents the blog page. */
+    isPostsPage: Scalars['Boolean']
     /** Whether the object is restricted from the current viewer */
     isRestricted?: Scalars['Boolean']
     /** Whether the node is a Term */
@@ -3123,10 +3773,16 @@ export interface Tag {
     enqueuedScripts?: TermNodeToEnqueuedScriptConnection
     /** Connection between the TermNode type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: TermNodeToEnqueuedStylesheetConnection
-    /** The unique resource identifier path */
+    /** The globally unique ID for the object */
     id: Scalars['ID']
+    /** Whether the node is a Comment */
+    isComment: Scalars['Boolean']
     /** Whether the node is a Content Node */
     isContentNode: Scalars['Boolean']
+    /** Whether the node represents the front page. */
+    isFrontPage: Scalars['Boolean']
+    /** Whether  the node represents the blog page. */
+    isPostsPage: Scalars['Boolean']
     /** Whether the object is restricted from the current viewer */
     isRestricted?: Scalars['Boolean']
     /** Whether the node is a Term */
@@ -3444,6 +4100,60 @@ export interface UserToUserRoleConnectionPageInfo {
 }
 
 
+/** Connection between the ArquivoAssessoria type and the ArquivoAssessoria type */
+export interface ArquivoAssessoriaToArquivoAssessoriaConnection {
+    /** Edges for the ArquivoAssessoriaToArquivoAssessoriaConnection connection */
+    edges: ArquivoAssessoriaToArquivoAssessoriaConnectionEdge[]
+    /** The nodes of the connection, without the edges */
+    nodes: ArquivoAssessoria[]
+    /** Information about pagination in a connection. */
+    pageInfo: ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo
+    __typename: 'ArquivoAssessoriaToArquivoAssessoriaConnection'
+}
+
+
+/** Connection to ArquivoAssessoria Nodes */
+export type ArquivoAssessoriaConnection = (ArquivoAssessoriaToArquivoAssessoriaConnection | RootQueryToArquivoAssessoriaConnection) & { __isUnion?: true }
+
+
+/** Edge between a Node and a connected ArquivoAssessoria */
+export type ArquivoAssessoriaConnectionEdge = (ArquivoAssessoriaToArquivoAssessoriaConnectionEdge | ArquivoAssessoriaToParentConnectionEdge | ArquivoAssessoriaToPreviewConnectionEdge | RootQueryToArquivoAssessoriaConnectionEdge) & { __isUnion?: true }
+
+
+/** Page Info on the connected ArquivoAssessoriaConnectionEdge */
+export type ArquivoAssessoriaConnectionPageInfo = (ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo | RootQueryToArquivoAssessoriaConnectionPageInfo) & { __isUnion?: true }
+
+
+/** An edge in a connection */
+export interface ArquivoAssessoriaToArquivoAssessoriaConnectionEdge {
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * A cursor for use in pagination
+     */
+    cursor?: Scalars['String']
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * The item at the end of the edge
+     */
+    node: ArquivoAssessoria
+    __typename: 'ArquivoAssessoriaToArquivoAssessoriaConnectionEdge'
+}
+
+
+/** Page Info on the &quot;ArquivoAssessoriaToArquivoAssessoriaConnection&quot; */
+export interface ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo {
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Scalars['String']
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Scalars['String']
+    __typename: 'ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo'
+}
+
+
 /** Field Group */
 export interface ArquivoAssessoria_DownAssessoria {
     downDescricao?: Scalars['String']
@@ -3458,6 +4168,19 @@ export interface ArquivoAssessoria_DownAssessoria {
 
 
 /** Connection between the ArquivoAssessoria type and the ArquivoAssessoria type */
+export interface ArquivoAssessoriaToParentConnectionEdge {
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: Scalars['String']
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have a parent
+     * The node of the connection, without the edges
+     */
+    node: ArquivoAssessoria
+    __typename: 'ArquivoAssessoriaToParentConnectionEdge'
+}
+
+
+/** Connection between the ArquivoAssessoria type and the ArquivoAssessoria type */
 export interface ArquivoAssessoriaToPreviewConnectionEdge {
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: Scalars['String']
@@ -3465,10 +4188,6 @@ export interface ArquivoAssessoriaToPreviewConnectionEdge {
     node: ArquivoAssessoria
     __typename: 'ArquivoAssessoriaToPreviewConnectionEdge'
 }
-
-
-/** Edge between a Node and a connected ArquivoAssessoria */
-export type ArquivoAssessoriaConnectionEdge = (ArquivoAssessoriaToPreviewConnectionEdge | RootQueryToArquivoAssessoriaConnectionEdge) & { __isUnion?: true }
 
 export type RootQueryToArquivoAssessoriaConnectionWhereArgsMetaCompareEnum = 'BETWEEN' | 'EQUAL_TO' | 'EXISTS' | 'GREATER_THAN' | 'GREATER_THAN_OR_EQUAL_TO' | 'IN' | 'LESS_THAN' | 'LESS_THAN_OR_EQUAL_TO' | 'LIKE' | 'NOT_BETWEEN' | 'NOT_EQUAL_TO' | 'NOT_EXISTS' | 'NOT_IN' | 'NOT_LIKE'
 
@@ -3485,14 +4204,6 @@ export interface RootQueryToArquivoAssessoriaConnection {
     pageInfo: RootQueryToArquivoAssessoriaConnectionPageInfo
     __typename: 'RootQueryToArquivoAssessoriaConnection'
 }
-
-
-/** Connection to ArquivoAssessoria Nodes */
-export type ArquivoAssessoriaConnection = (RootQueryToArquivoAssessoriaConnection) & { __isUnion?: true }
-
-
-/** Page Info on the connected ArquivoAssessoriaConnectionEdge */
-export type ArquivoAssessoriaConnectionPageInfo = (RootQueryToArquivoAssessoriaConnectionPageInfo) & { __isUnion?: true }
 
 
 /** An edge in a connection */
@@ -3530,6 +4241,11 @@ export interface Banner {
      * The id field matches the WP_Post-&gt;ID field.
      */
     bannerId: Scalars['Int']
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * The ancestors of the content node.
+     */
+    ancestors?: BannerToBannerConnection
     /** Added to the GraphQL Schema because the ACF Field Group &quot;Banner_home&quot; was set to Show in GraphQL. */
     banner_home?: Banner_BannerHome
     /** Connection between the ContentNode type and the ContentType type */
@@ -3554,10 +4270,18 @@ export interface Banner {
     enqueuedStylesheets?: ContentNodeToEnqueuedStylesheetConnection
     /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
     guid?: Scalars['String']
+    /** Whether the banner_home object is password protected. */
+    hasPassword?: Scalars['Boolean']
     /** The globally unique identifier of the banner_home object. */
     id: Scalars['ID']
+    /** Whether the node is a Comment */
+    isComment: Scalars['Boolean']
     /** Whether the node is a Content Node */
     isContentNode: Scalars['Boolean']
+    /** Whether the node represents the front page. */
+    isFrontPage: Scalars['Boolean']
+    /** Whether  the node represents the blog page. */
+    isPostsPage: Scalars['Boolean']
     /** Whether the object is a node in the preview state */
     isPreview?: Scalars['Boolean']
     /** Whether the object is restricted from the current viewer */
@@ -3572,6 +4296,13 @@ export interface Banner {
     modified?: Scalars['String']
     /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
     modifiedGmt?: Scalars['String']
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have a parent
+     * The parent of the content node.
+     */
+    parent?: BannerToParentConnectionEdge
+    /** The password for the banner_home object. */
+    password?: Scalars['String']
     /** Connection between the Banner type and the Banner type */
     preview?: BannerToPreviewConnectionEdge
     /** The database id of the preview node */
@@ -3589,6 +4320,60 @@ export interface Banner {
     /** The unique resource identifier path */
     uri?: Scalars['String']
     __typename: 'Banner'
+}
+
+
+/** Connection between the Banner type and the Banner type */
+export interface BannerToBannerConnection {
+    /** Edges for the BannerToBannerConnection connection */
+    edges: BannerToBannerConnectionEdge[]
+    /** The nodes of the connection, without the edges */
+    nodes: Banner[]
+    /** Information about pagination in a connection. */
+    pageInfo: BannerToBannerConnectionPageInfo
+    __typename: 'BannerToBannerConnection'
+}
+
+
+/** Connection to Banner Nodes */
+export type BannerConnection = (BannerToBannerConnection | RootQueryToBannerConnection) & { __isUnion?: true }
+
+
+/** Edge between a Node and a connected Banner */
+export type BannerConnectionEdge = (BannerToBannerConnectionEdge | BannerToParentConnectionEdge | BannerToPreviewConnectionEdge | RootQueryToBannerConnectionEdge) & { __isUnion?: true }
+
+
+/** Page Info on the connected BannerConnectionEdge */
+export type BannerConnectionPageInfo = (BannerToBannerConnectionPageInfo | RootQueryToBannerConnectionPageInfo) & { __isUnion?: true }
+
+
+/** An edge in a connection */
+export interface BannerToBannerConnectionEdge {
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * A cursor for use in pagination
+     */
+    cursor?: Scalars['String']
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * The item at the end of the edge
+     */
+    node: Banner
+    __typename: 'BannerToBannerConnectionEdge'
+}
+
+
+/** Page Info on the &quot;BannerToBannerConnection&quot; */
+export interface BannerToBannerConnectionPageInfo {
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Scalars['String']
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Scalars['String']
+    __typename: 'BannerToBannerConnectionPageInfo'
 }
 
 
@@ -3642,6 +4427,19 @@ export type Banner_BannerHome_QualEOEmpreendimento = (Empreendimento) & { __isUn
 
 
 /** Connection between the Banner type and the Banner type */
+export interface BannerToParentConnectionEdge {
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: Scalars['String']
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have a parent
+     * The node of the connection, without the edges
+     */
+    node: Banner
+    __typename: 'BannerToParentConnectionEdge'
+}
+
+
+/** Connection between the Banner type and the Banner type */
 export interface BannerToPreviewConnectionEdge {
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: Scalars['String']
@@ -3649,10 +4447,6 @@ export interface BannerToPreviewConnectionEdge {
     node: Banner
     __typename: 'BannerToPreviewConnectionEdge'
 }
-
-
-/** Edge between a Node and a connected Banner */
-export type BannerConnectionEdge = (BannerToPreviewConnectionEdge | RootQueryToBannerConnectionEdge) & { __isUnion?: true }
 
 export type RootQueryToBannerConnectionWhereArgsMetaCompareEnum = 'BETWEEN' | 'EQUAL_TO' | 'EXISTS' | 'GREATER_THAN' | 'GREATER_THAN_OR_EQUAL_TO' | 'IN' | 'LESS_THAN' | 'LESS_THAN_OR_EQUAL_TO' | 'LIKE' | 'NOT_BETWEEN' | 'NOT_EQUAL_TO' | 'NOT_EXISTS' | 'NOT_IN' | 'NOT_LIKE'
 
@@ -3669,14 +4463,6 @@ export interface RootQueryToBannerConnection {
     pageInfo: RootQueryToBannerConnectionPageInfo
     __typename: 'RootQueryToBannerConnection'
 }
-
-
-/** Connection to Banner Nodes */
-export type BannerConnection = (RootQueryToBannerConnection) & { __isUnion?: true }
-
-
-/** Page Info on the connected BannerConnectionEdge */
-export type BannerConnectionPageInfo = (RootQueryToBannerConnectionPageInfo) & { __isUnion?: true }
 
 
 /** An edge in a connection */
@@ -3741,6 +4527,50 @@ export interface RootQueryToCategoryConnectionPageInfo {
 
 /** The Type of Identifier used to fetch a single resource. Default is ID. */
 export type CategoryIdType = 'DATABASE_ID' | 'ID' | 'NAME' | 'SLUG' | 'URI'
+
+
+/** The Type of Identifier used to fetch a single resource. Default is ID. */
+export type CentraldeDecoradoIdType = 'DATABASE_ID' | 'ID' | 'SLUG' | 'URI'
+
+export type RootQueryToCentraldeDecoradoConnectionWhereArgsMetaCompareEnum = 'BETWEEN' | 'EQUAL_TO' | 'EXISTS' | 'GREATER_THAN' | 'GREATER_THAN_OR_EQUAL_TO' | 'IN' | 'LESS_THAN' | 'LESS_THAN_OR_EQUAL_TO' | 'LIKE' | 'NOT_BETWEEN' | 'NOT_EQUAL_TO' | 'NOT_EXISTS' | 'NOT_IN' | 'NOT_LIKE'
+
+export type RootQueryToCentraldeDecoradoConnectionWhereArgsMetaTypeEnum = 'BINARY' | 'CHAR' | 'DATE' | 'DATETIME' | 'DECIMAL' | 'NUMERIC' | 'SIGNED' | 'TIME' | 'UNSIGNED'
+
+
+/** Connection between the RootQuery type and the CentraldeDecorado type */
+export interface RootQueryToCentraldeDecoradoConnection {
+    /** Edges for the RootQueryToCentraldeDecoradoConnection connection */
+    edges: RootQueryToCentraldeDecoradoConnectionEdge[]
+    /** The nodes of the connection, without the edges */
+    nodes: CentraldeDecorado[]
+    /** Information about pagination in a connection. */
+    pageInfo: RootQueryToCentraldeDecoradoConnectionPageInfo
+    __typename: 'RootQueryToCentraldeDecoradoConnection'
+}
+
+
+/** An edge in a connection */
+export interface RootQueryToCentraldeDecoradoConnectionEdge {
+    /** A cursor for use in pagination */
+    cursor?: Scalars['String']
+    /** The item at the end of the edge */
+    node: CentraldeDecorado
+    __typename: 'RootQueryToCentraldeDecoradoConnectionEdge'
+}
+
+
+/** Page Info on the &quot;RootQueryToCentraldeDecoradoConnection&quot; */
+export interface RootQueryToCentraldeDecoradoConnectionPageInfo {
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Scalars['String']
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Scalars['String']
+    __typename: 'RootQueryToCentraldeDecoradoConnectionPageInfo'
+}
 
 
 /** The Type of Identifier used to fetch a single comment node. Default is "ID". To be used along with the "id" field. */
@@ -4153,7 +4983,7 @@ export type MenuItemLinkableConnectionEdge = (MenuItemToMenuItemLinkableConnecti
 
 
 /** Deprecated in favor of MenuItemLinkeable Interface */
-export type MenuItemObjectUnion = (Post | Page | Banner | ArquivoAssessoria | Empreendimento | Category | Tag) & { __isUnion?: true }
+export type MenuItemObjectUnion = (Post | Page | Banner | ArquivoAssessoria | Empreendimento | CentraldeDecorado | Category | Tag) & { __isUnion?: true }
 
 
 /** Connection between the MenuItem type and the Menu type */
@@ -4849,7 +5679,7 @@ export type UsersConnectionOrderbyEnum = 'DISPLAY_NAME' | 'EMAIL' | 'LOGIN' | 'L
 
 
 /** Names of available user roles */
-export type UserRoleEnum = 'ADMINISTRATOR' | 'AUTHOR' | 'CONTRIBUTOR' | 'EDITOR' | 'SUBSCRIBER'
+export type UserRoleEnum = 'ADMINISTRATOR' | 'AUTHOR' | 'CONTRIBUTOR' | 'EDITOR' | 'SEO_EDITOR' | 'SEO_MANAGER' | 'SUBSCRIBER'
 
 
 /** Column used for searching for users. */
@@ -4920,6 +5750,8 @@ export interface RootMutation {
     createBanner?: CreateBannerPayload
     /** The createCategory mutation */
     createCategory?: CreateCategoryPayload
+    /** The createCentraldeDecorado mutation */
+    createCentraldeDecorado?: CreateCentraldeDecoradoPayload
     /** The createComment mutation */
     createComment?: CreateCommentPayload
     /** The createEmpreendimento mutation */
@@ -4942,6 +5774,8 @@ export interface RootMutation {
     deleteBanner?: DeleteBannerPayload
     /** The deleteCategory mutation */
     deleteCategory?: DeleteCategoryPayload
+    /** The deleteCentraldeDecorado mutation */
+    deleteCentraldeDecorado?: DeleteCentraldeDecoradoPayload
     /** The deleteComment mutation */
     deleteComment?: DeleteCommentPayload
     /** The deleteEmpreendimento mutation */
@@ -4974,6 +5808,8 @@ export interface RootMutation {
     updateBanner?: UpdateBannerPayload
     /** The updateCategory mutation */
     updateCategory?: UpdateCategoryPayload
+    /** The updateCentraldeDecorado mutation */
+    updateCentraldeDecorado?: UpdateCentraldeDecoradoPayload
     /** The updateComment mutation */
     updateComment?: UpdateCommentPayload
     /** The updateEmpreendimento mutation */
@@ -5023,6 +5859,16 @@ export interface CreateCategoryPayload {
     /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
     clientMutationId?: Scalars['String']
     __typename: 'CreateCategoryPayload'
+}
+
+
+/** The payload for the createCentraldeDecorado mutation. */
+export interface CreateCentraldeDecoradoPayload {
+    /** The Post object mutation type. */
+    centraldeDecorado?: CentraldeDecorado
+    /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+    clientMutationId?: Scalars['String']
+    __typename: 'CreateCentraldeDecoradoPayload'
 }
 
 
@@ -5138,13 +5984,25 @@ export interface DeleteBannerPayload {
 
 /** The payload for the deleteCategory mutation. */
 export interface DeleteCategoryPayload {
-    /** The deteted term object */
+    /** The deleted term object */
     category?: Category
     /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
     clientMutationId?: Scalars['String']
     /** The ID of the deleted object */
     deletedId?: Scalars['ID']
     __typename: 'DeleteCategoryPayload'
+}
+
+
+/** The payload for the deleteCentraldeDecorado mutation. */
+export interface DeleteCentraldeDecoradoPayload {
+    /** The object before it was deleted */
+    centraldeDecorado?: CentraldeDecorado
+    /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+    clientMutationId?: Scalars['String']
+    /** The ID of the deleted object */
+    deletedId?: Scalars['ID']
+    __typename: 'DeleteCentraldeDecoradoPayload'
 }
 
 
@@ -5214,7 +6072,7 @@ export interface DeletePostFormatPayload {
     clientMutationId?: Scalars['String']
     /** The ID of the deleted object */
     deletedId?: Scalars['ID']
-    /** The deteted term object */
+    /** The deleted term object */
     postFormat?: PostFormat
     __typename: 'DeletePostFormatPayload'
 }
@@ -5226,7 +6084,7 @@ export interface DeleteTagPayload {
     clientMutationId?: Scalars['String']
     /** The ID of the deleted object */
     deletedId?: Scalars['ID']
-    /** The deteted term object */
+    /** The deleted term object */
     tag?: Tag
     __typename: 'DeleteTagPayload'
 }
@@ -5318,6 +6176,16 @@ export interface UpdateCategoryPayload {
     /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
     clientMutationId?: Scalars['String']
     __typename: 'UpdateCategoryPayload'
+}
+
+
+/** The payload for the updateCentraldeDecorado mutation. */
+export interface UpdateCentraldeDecoradoPayload {
+    /** The Post object mutation type. */
+    centraldeDecorado?: CentraldeDecorado
+    /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+    clientMutationId?: Scalars['String']
+    __typename: 'UpdateCentraldeDecoradoPayload'
 }
 
 
@@ -5462,14 +6330,14 @@ export interface RootQueryRequest{
     id: Scalars['ID'],
     /** Type of unique identifier to fetch by. Default is Global ID */
     idType?: (ArquivoAssessoriaIdType | null),
-    /** Whether to return the node as a preview instance */
+    /** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
     asPreview?: (Scalars['Boolean'] | null)},ArquivoAssessoriaRequest]
     /**
      * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
      * A ArquivoAssessoria object
      */
     arquivoAssessoriaBy?: [{
-    /** Get the object by its global ID */
+    /** Get the ArquivoAssessoria object by its global ID */
     id?: (Scalars['ID'] | null),
     /** Get the ArquivoAssessoria by its database ID */
     arquivoAssessoriaId?: (Scalars['Int'] | null),
@@ -5495,14 +6363,14 @@ export interface RootQueryRequest{
     id: Scalars['ID'],
     /** Type of unique identifier to fetch by. Default is Global ID */
     idType?: (BannerIdType | null),
-    /** Whether to return the node as a preview instance */
+    /** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
     asPreview?: (Scalars['Boolean'] | null)},BannerRequest]
     /**
      * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
      * A Banner object
      */
     bannerBy?: [{
-    /** Get the object by its global ID */
+    /** Get the Banner object by its global ID */
     id?: (Scalars['ID'] | null),
     /** Get the Banner by its database ID */
     bannerId?: (Scalars['Int'] | null),
@@ -5540,6 +6408,39 @@ export interface RootQueryRequest{
     id: Scalars['ID'],
     /** Type of unique identifier to fetch by. Default is Global ID */
     idType?: (CategoryIdType | null)},CategoryRequest]
+    /** An object of the CentraldeDecorado Type.  */
+    centraldeDecorado?: [{
+    /** The globally unique identifier of the object. */
+    id: Scalars['ID'],
+    /** Type of unique identifier to fetch by. Default is Global ID */
+    idType?: (CentraldeDecoradoIdType | null),
+    /** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
+    asPreview?: (Scalars['Boolean'] | null)},CentraldeDecoradoRequest]
+    /**
+     * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
+     * A CentraldeDecorado object
+     */
+    centraldeDecoradoBy?: [{
+    /** Get the CentraldeDecorado object by its global ID */
+    id?: (Scalars['ID'] | null),
+    /** Get the CentraldeDecorado by its database ID */
+    centraldeDecoradoId?: (Scalars['Int'] | null),
+    /** Get the CentraldeDecorado by its uri */
+    uri?: (Scalars['String'] | null),
+    /** Get the CentraldeDecorado by its slug (only available for non-hierarchical types) */
+    slug?: (Scalars['String'] | null)},CentraldeDecoradoRequest] | CentraldeDecoradoRequest
+    /** Connection between the RootQuery type and the CentraldeDecorado type */
+    centraldeDecorados?: [{
+    /** The number of items to return after the referenced "after" cursor */
+    first?: (Scalars['Int'] | null),
+    /** The number of items to return before the referenced "before" cursor */
+    last?: (Scalars['Int'] | null),
+    /** Cursor used along with the "first" argument to reference where in the dataset to get data */
+    after?: (Scalars['String'] | null),
+    /** Cursor used along with the "last" argument to reference where in the dataset to get data */
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (RootQueryToCentraldeDecoradoConnectionWhereArgs | null)},RootQueryToCentraldeDecoradoConnectionRequest] | RootQueryToCentraldeDecoradoConnectionRequest
     /** Returns a Comment */
     comment?: [{
     /** Unique identifier for the comment node. */
@@ -5566,7 +6467,7 @@ export interface RootQueryRequest{
     idType?: (ContentNodeIdTypeEnum | null),
     /** The content type the node is used for. Required when idType is set to "name" or "slug" */
     contentType?: (ContentTypeEnum | null),
-    /** Whether to return the node as a preview instance */
+    /** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
     asPreview?: (Scalars['Boolean'] | null)},ContentNodeRequest]
     /** Connection between the RootQuery type and the ContentNode type */
     contentNodes?: [{
@@ -5604,14 +6505,14 @@ export interface RootQueryRequest{
     id: Scalars['ID'],
     /** Type of unique identifier to fetch by. Default is Global ID */
     idType?: (EmpreendimentoIdType | null),
-    /** Whether to return the node as a preview instance */
+    /** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
     asPreview?: (Scalars['Boolean'] | null)},EmpreendimentoRequest]
     /**
      * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
      * A Empreendimento object
      */
     empreendimentoBy?: [{
-    /** Get the object by its global ID */
+    /** Get the Empreendimento object by its global ID */
     id?: (Scalars['ID'] | null),
     /** Get the Empreendimento by its database ID */
     empreendimentoId?: (Scalars['Int'] | null),
@@ -5639,14 +6540,14 @@ export interface RootQueryRequest{
     id: Scalars['ID'],
     /** Type of unique identifier to fetch by. Default is Global ID */
     idType?: (MediaItemIdType | null),
-    /** Whether to return the node as a preview instance */
+    /** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
     asPreview?: (Scalars['Boolean'] | null)},MediaItemRequest]
     /**
      * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
      * A mediaItem object
      */
     mediaItemBy?: [{
-    /** Get the object by its global ID */
+    /** Get the mediaItem object by its global ID */
     id?: (Scalars['ID'] | null),
     /** Get the mediaItem by its database ID */
     mediaItemId?: (Scalars['Int'] | null),
@@ -5716,14 +6617,14 @@ export interface RootQueryRequest{
     id: Scalars['ID'],
     /** Type of unique identifier to fetch by. Default is Global ID */
     idType?: (PageIdType | null),
-    /** Whether to return the node as a preview instance */
+    /** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
     asPreview?: (Scalars['Boolean'] | null)},PageRequest]
     /**
      * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
      * A page object
      */
     pageBy?: [{
-    /** Get the object by its global ID */
+    /** Get the page object by its global ID */
     id?: (Scalars['ID'] | null),
     /** Get the page by its database ID */
     pageId?: (Scalars['Int'] | null),
@@ -5763,14 +6664,14 @@ export interface RootQueryRequest{
     id: Scalars['ID'],
     /** Type of unique identifier to fetch by. Default is Global ID */
     idType?: (PostIdType | null),
-    /** Whether to return the node as a preview instance */
+    /** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
     asPreview?: (Scalars['Boolean'] | null)},PostRequest]
     /**
      * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
      * A post object
      */
     postBy?: [{
-    /** Get the object by its global ID */
+    /** Get the post object by its global ID */
     id?: (Scalars['ID'] | null),
     /** Get the post by its database ID */
     postId?: (Scalars['Int'] | null),
@@ -6001,6 +6902,19 @@ export interface ArquivoAssessoriaRequest{
      * The id field matches the WP_Post-&gt;ID field.
      */
     arquivoAssessoriaId?: boolean | number
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * The ancestors of the content node.
+     */
+    ancestors?: [{
+    /** The number of items to return after the referenced "after" cursor */
+    first?: (Scalars['Int'] | null),
+    /** The number of items to return before the referenced "before" cursor */
+    last?: (Scalars['Int'] | null),
+    /** Cursor used along with the "first" argument to reference where in the dataset to get data */
+    after?: (Scalars['String'] | null),
+    /** Cursor used along with the "last" argument to reference where in the dataset to get data */
+    before?: (Scalars['String'] | null)},ArquivoAssessoriaToArquivoAssessoriaConnectionRequest] | ArquivoAssessoriaToArquivoAssessoriaConnectionRequest
     /** Connection between the ContentNode type and the ContentType type */
     contentType?: ContentNodeToContentTypeConnectionEdgeRequest
     /** The name of the Content Type the node belongs to */
@@ -6041,10 +6955,18 @@ export interface ArquivoAssessoriaRequest{
     before?: (Scalars['String'] | null)},ContentNodeToEnqueuedStylesheetConnectionRequest] | ContentNodeToEnqueuedStylesheetConnectionRequest
     /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
     guid?: boolean | number
+    /** Whether the arq_assessoria object is password protected. */
+    hasPassword?: boolean | number
     /** The globally unique identifier of the arq_assessoria object. */
     id?: boolean | number
+    /** Whether the node is a Comment */
+    isComment?: boolean | number
     /** Whether the node is a Content Node */
     isContentNode?: boolean | number
+    /** Whether the node represents the front page. */
+    isFrontPage?: boolean | number
+    /** Whether  the node represents the blog page. */
+    isPostsPage?: boolean | number
     /** Whether the object is a node in the preview state */
     isPreview?: boolean | number
     /** Whether the object is restricted from the current viewer */
@@ -6059,6 +6981,13 @@ export interface ArquivoAssessoriaRequest{
     modified?: boolean | number
     /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
     modifiedGmt?: boolean | number
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have a parent
+     * The parent of the content node.
+     */
+    parent?: ArquivoAssessoriaToParentConnectionEdgeRequest
+    /** The password for the arq_assessoria object. */
+    password?: boolean | number
     /** Connection between the ArquivoAssessoria type and the ArquivoAssessoria type */
     preview?: ArquivoAssessoriaToPreviewConnectionEdgeRequest
     /** The database id of the preview node */
@@ -6089,14 +7018,15 @@ export interface NodeRequest{
     on_ArquivoAssessoria?: ArquivoAssessoriaRequest
     on_ContentType?: ContentTypeRequest
     on_Taxonomy?: TaxonomyRequest
-    on_User?: UserRequest
-    on_Comment?: CommentRequest
     on_EnqueuedScript?: EnqueuedScriptRequest
     on_EnqueuedStylesheet?: EnqueuedStylesheetRequest
+    on_User?: UserRequest
+    on_Comment?: CommentRequest
     on_MediaItem?: MediaItemRequest
     on_Page?: PageRequest
     on_Post?: PostRequest
     on_Category?: CategoryRequest
+    on_CentraldeDecorado?: CentraldeDecoradoRequest
     on_Empreendimento?: EmpreendimentoRequest
     on_PostFormat?: PostFormatRequest
     on_Tag?: TagRequest
@@ -6152,10 +7082,16 @@ export interface ContentNodeRequest{
     before?: (Scalars['String'] | null)},ContentNodeToEnqueuedStylesheetConnectionRequest] | ContentNodeToEnqueuedStylesheetConnectionRequest
     /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
     guid?: boolean | number
-    /** The unique resource identifier path */
+    /** The globally unique ID for the object */
     id?: boolean | number
+    /** Whether the node is a Comment */
+    isComment?: boolean | number
     /** Whether the node is a Content Node */
     isContentNode?: boolean | number
+    /** Whether the node represents the front page. */
+    isFrontPage?: boolean | number
+    /** Whether  the node represents the blog page. */
+    isPostsPage?: boolean | number
     /** Whether the object is a node in the preview state */
     isPreview?: boolean | number
     /** Whether the object is restricted from the current viewer */
@@ -6186,6 +7122,7 @@ export interface ContentNodeRequest{
     on_MediaItem?: MediaItemRequest
     on_Page?: PageRequest
     on_Post?: PostRequest
+    on_CentraldeDecorado?: CentraldeDecoradoRequest
     on_Empreendimento?: EmpreendimentoRequest
     on_Banner?: BannerRequest
     __typename?: boolean | number
@@ -6195,10 +7132,16 @@ export interface ContentNodeRequest{
 
 /** Any node that has a URI */
 export interface UniformResourceIdentifiableRequest{
-    /** The unique resource identifier path */
+    /** The globally unique ID for the object */
     id?: boolean | number
+    /** Whether the node is a Comment */
+    isComment?: boolean | number
     /** Whether the node is a Content Node */
     isContentNode?: boolean | number
+    /** Whether the node represents the front page. */
+    isFrontPage?: boolean | number
+    /** Whether  the node represents the blog page. */
+    isPostsPage?: boolean | number
     /** Whether the node is a Term */
     isTermNode?: boolean | number
     /** The unique resource identifier path */
@@ -6206,10 +7149,12 @@ export interface UniformResourceIdentifiableRequest{
     on_ArquivoAssessoria?: ArquivoAssessoriaRequest
     on_ContentType?: ContentTypeRequest
     on_User?: UserRequest
+    on_Comment?: CommentRequest
     on_MediaItem?: MediaItemRequest
     on_Page?: PageRequest
     on_Post?: PostRequest
     on_Category?: CategoryRequest
+    on_CentraldeDecorado?: CentraldeDecoradoRequest
     on_Empreendimento?: EmpreendimentoRequest
     on_PostFormat?: PostFormatRequest
     on_Tag?: TagRequest
@@ -6247,13 +7192,19 @@ export interface OneToOneConnectionRequest{
     on_NodeWithFeaturedImageToMediaItemConnectionEdge?: NodeWithFeaturedImageToMediaItemConnectionEdgeRequest
     on_NodeWithRevisionsToContentNodeConnectionEdge?: NodeWithRevisionsToContentNodeConnectionEdgeRequest
     on_PageToPreviewConnectionEdge?: PageToPreviewConnectionEdgeRequest
+    on_CentraldeDecoradoToParentConnectionEdge?: CentraldeDecoradoToParentConnectionEdgeRequest
+    on_CentraldeDecoradoToPreviewConnectionEdge?: CentraldeDecoradoToPreviewConnectionEdgeRequest
+    on_EmpreendimentoToParentConnectionEdge?: EmpreendimentoToParentConnectionEdgeRequest
     on_EmpreendimentoToPreviewConnectionEdge?: EmpreendimentoToPreviewConnectionEdgeRequest
     on_CategoryToParentCategoryConnectionEdge?: CategoryToParentCategoryConnectionEdgeRequest
     on_CategoryToTaxonomyConnectionEdge?: CategoryToTaxonomyConnectionEdgeRequest
+    on_PostToParentConnectionEdge?: PostToParentConnectionEdgeRequest
     on_PostFormatToTaxonomyConnectionEdge?: PostFormatToTaxonomyConnectionEdgeRequest
     on_PostToPreviewConnectionEdge?: PostToPreviewConnectionEdgeRequest
     on_TagToTaxonomyConnectionEdge?: TagToTaxonomyConnectionEdgeRequest
+    on_ArquivoAssessoriaToParentConnectionEdge?: ArquivoAssessoriaToParentConnectionEdgeRequest
     on_ArquivoAssessoriaToPreviewConnectionEdge?: ArquivoAssessoriaToPreviewConnectionEdgeRequest
+    on_BannerToParentConnectionEdge?: BannerToParentConnectionEdgeRequest
     on_BannerToPreviewConnectionEdge?: BannerToPreviewConnectionEdgeRequest
     on_MenuItemToMenuItemLinkableConnectionEdge?: MenuItemToMenuItemLinkableConnectionEdgeRequest
     on_MenuItemToMenuConnectionEdge?: MenuItemToMenuConnectionEdgeRequest
@@ -6270,6 +7221,9 @@ export interface EdgeRequest{
     node?: NodeRequest
     on_ContentNodeToContentTypeConnectionEdge?: ContentNodeToContentTypeConnectionEdgeRequest
     on_TaxonomyToContentTypeConnectionEdge?: TaxonomyToContentTypeConnectionEdgeRequest
+    on_TermNodeToEnqueuedScriptConnectionEdge?: TermNodeToEnqueuedScriptConnectionEdgeRequest
+    on_TermNodeToEnqueuedStylesheetConnectionEdge?: TermNodeToEnqueuedStylesheetConnectionEdgeRequest
+    on_TaxonomyToTermNodeConnectionEdge?: TaxonomyToTermNodeConnectionEdgeRequest
     on_ContentTypeToTaxonomyConnectionEdge?: ContentTypeToTaxonomyConnectionEdgeRequest
     on_ContentTypeToContentNodeConnectionEdge?: ContentTypeToContentNodeConnectionEdgeRequest
     on_ContentNodeToEditLockConnectionEdge?: ContentNodeToEditLockConnectionEdgeRequest
@@ -6295,12 +7249,19 @@ export interface EdgeRequest{
     on_PageToPreviewConnectionEdge?: PageToPreviewConnectionEdgeRequest
     on_PageToRevisionConnectionEdge?: PageToRevisionConnectionEdgeRequest
     on_UserToPageConnectionEdge?: UserToPageConnectionEdgeRequest
-    on_TermNodeToEnqueuedScriptConnectionEdge?: TermNodeToEnqueuedScriptConnectionEdgeRequest
-    on_TermNodeToEnqueuedStylesheetConnectionEdge?: TermNodeToEnqueuedStylesheetConnectionEdgeRequest
+    on_PostToPostConnectionEdge?: PostToPostConnectionEdgeRequest
     on_CategoryToAncestorsCategoryConnectionEdge?: CategoryToAncestorsCategoryConnectionEdgeRequest
+    on_CentraldeDecoradoToCentraldeDecoradoConnectionEdge?: CentraldeDecoradoToCentraldeDecoradoConnectionEdgeRequest
+    on_CentraldeDecoradoToCategoryConnectionEdge?: CentraldeDecoradoToCategoryConnectionEdgeRequest
+    on_CentraldeDecoradoToParentConnectionEdge?: CentraldeDecoradoToParentConnectionEdgeRequest
+    on_CentraldeDecoradoToPreviewConnectionEdge?: CentraldeDecoradoToPreviewConnectionEdgeRequest
+    on_CentraldeDecoradoToTermNodeConnectionEdge?: CentraldeDecoradoToTermNodeConnectionEdgeRequest
+    on_CategoryToCentraldeDecoradoConnectionEdge?: CategoryToCentraldeDecoradoConnectionEdgeRequest
     on_CategoryToCategoryConnectionEdge?: CategoryToCategoryConnectionEdgeRequest
     on_CategoryToContentNodeConnectionEdge?: CategoryToContentNodeConnectionEdgeRequest
+    on_EmpreendimentoToEmpreendimentoConnectionEdge?: EmpreendimentoToEmpreendimentoConnectionEdgeRequest
     on_EmpreendimentoToCategoryConnectionEdge?: EmpreendimentoToCategoryConnectionEdgeRequest
+    on_EmpreendimentoToParentConnectionEdge?: EmpreendimentoToParentConnectionEdgeRequest
     on_EmpreendimentoToPreviewConnectionEdge?: EmpreendimentoToPreviewConnectionEdgeRequest
     on_EmpreendimentoToTermNodeConnectionEdge?: EmpreendimentoToTermNodeConnectionEdgeRequest
     on_CategoryToEmpreendimentoConnectionEdge?: CategoryToEmpreendimentoConnectionEdgeRequest
@@ -6309,6 +7270,7 @@ export interface EdgeRequest{
     on_CategoryToTaxonomyConnectionEdge?: CategoryToTaxonomyConnectionEdgeRequest
     on_PostToCategoryConnectionEdge?: PostToCategoryConnectionEdgeRequest
     on_PostToCommentConnectionEdge?: PostToCommentConnectionEdgeRequest
+    on_PostToParentConnectionEdge?: PostToParentConnectionEdgeRequest
     on_PostFormatToContentNodeConnectionEdge?: PostFormatToContentNodeConnectionEdgeRequest
     on_PostFormatToPostConnectionEdge?: PostFormatToPostConnectionEdgeRequest
     on_PostFormatToTaxonomyConnectionEdge?: PostFormatToTaxonomyConnectionEdgeRequest
@@ -6323,11 +7285,16 @@ export interface EdgeRequest{
     on_UserToPostConnectionEdge?: UserToPostConnectionEdgeRequest
     on_UserToRevisionsConnectionEdge?: UserToRevisionsConnectionEdgeRequest
     on_UserToUserRoleConnectionEdge?: UserToUserRoleConnectionEdgeRequest
+    on_ArquivoAssessoriaToArquivoAssessoriaConnectionEdge?: ArquivoAssessoriaToArquivoAssessoriaConnectionEdgeRequest
+    on_ArquivoAssessoriaToParentConnectionEdge?: ArquivoAssessoriaToParentConnectionEdgeRequest
     on_ArquivoAssessoriaToPreviewConnectionEdge?: ArquivoAssessoriaToPreviewConnectionEdgeRequest
     on_RootQueryToArquivoAssessoriaConnectionEdge?: RootQueryToArquivoAssessoriaConnectionEdgeRequest
+    on_BannerToBannerConnectionEdge?: BannerToBannerConnectionEdgeRequest
+    on_BannerToParentConnectionEdge?: BannerToParentConnectionEdgeRequest
     on_BannerToPreviewConnectionEdge?: BannerToPreviewConnectionEdgeRequest
     on_RootQueryToBannerConnectionEdge?: RootQueryToBannerConnectionEdgeRequest
     on_RootQueryToCategoryConnectionEdge?: RootQueryToCategoryConnectionEdgeRequest
+    on_RootQueryToCentraldeDecoradoConnectionEdge?: RootQueryToCentraldeDecoradoConnectionEdgeRequest
     on_RootQueryToCommentConnectionEdge?: RootQueryToCommentConnectionEdgeRequest
     on_RootQueryToContentNodeConnectionEdge?: RootQueryToContentNodeConnectionEdgeRequest
     on_RootQueryToContentTypeConnectionEdge?: RootQueryToContentTypeConnectionEdgeRequest
@@ -6413,6 +7380,8 @@ export interface ContentTypeRequest{
     hierarchical?: boolean | number
     /** The globally unique identifier of the post-type object. */
     id?: boolean | number
+    /** Whether the node is a Comment */
+    isComment?: boolean | number
     /** Whether the node is a Content Node */
     isContentNode?: boolean | number
     /** Whether this page is set to the static front page. */
@@ -6498,6 +7467,9 @@ export interface ConnectionRequest{
     pageInfo?: PageInfoRequest
     on_ContentTypeToTaxonomyConnection?: ContentTypeToTaxonomyConnectionRequest
     on_TaxonomyToContentTypeConnection?: TaxonomyToContentTypeConnectionRequest
+    on_TaxonomyToTermNodeConnection?: TaxonomyToTermNodeConnectionRequest
+    on_TermNodeToEnqueuedScriptConnection?: TermNodeToEnqueuedScriptConnectionRequest
+    on_TermNodeToEnqueuedStylesheetConnection?: TermNodeToEnqueuedStylesheetConnectionRequest
     on_ContentTypeToContentNodeConnection?: ContentTypeToContentNodeConnectionRequest
     on_UserToCommentConnection?: UserToCommentConnectionRequest
     on_CommentToCommentConnection?: CommentToCommentConnectionRequest
@@ -6513,13 +7485,17 @@ export interface ConnectionRequest{
     on_PageToCommentConnection?: PageToCommentConnectionRequest
     on_PageToRevisionConnection?: PageToRevisionConnectionRequest
     on_UserToPostConnection?: UserToPostConnectionRequest
+    on_PostToPostConnection?: PostToPostConnectionRequest
     on_PostToCategoryConnection?: PostToCategoryConnectionRequest
-    on_TermNodeToEnqueuedScriptConnection?: TermNodeToEnqueuedScriptConnectionRequest
-    on_TermNodeToEnqueuedStylesheetConnection?: TermNodeToEnqueuedStylesheetConnectionRequest
     on_CategoryToAncestorsCategoryConnection?: CategoryToAncestorsCategoryConnectionRequest
+    on_CategoryToCentraldeDecoradoConnection?: CategoryToCentraldeDecoradoConnectionRequest
+    on_CentraldeDecoradoToCentraldeDecoradoConnection?: CentraldeDecoradoToCentraldeDecoradoConnectionRequest
+    on_CentraldeDecoradoToCategoryConnection?: CentraldeDecoradoToCategoryConnectionRequest
+    on_CentraldeDecoradoToTermNodeConnection?: CentraldeDecoradoToTermNodeConnectionRequest
     on_CategoryToCategoryConnection?: CategoryToCategoryConnectionRequest
     on_CategoryToContentNodeConnection?: CategoryToContentNodeConnectionRequest
     on_CategoryToEmpreendimentoConnection?: CategoryToEmpreendimentoConnectionRequest
+    on_EmpreendimentoToEmpreendimentoConnection?: EmpreendimentoToEmpreendimentoConnectionRequest
     on_EmpreendimentoToCategoryConnection?: EmpreendimentoToCategoryConnectionRequest
     on_EmpreendimentoToTermNodeConnection?: EmpreendimentoToTermNodeConnectionRequest
     on_CategoryToPostConnection?: CategoryToPostConnectionRequest
@@ -6534,9 +7510,12 @@ export interface ConnectionRequest{
     on_PostToTermNodeConnection?: PostToTermNodeConnectionRequest
     on_UserToRevisionsConnection?: UserToRevisionsConnectionRequest
     on_UserToUserRoleConnection?: UserToUserRoleConnectionRequest
+    on_ArquivoAssessoriaToArquivoAssessoriaConnection?: ArquivoAssessoriaToArquivoAssessoriaConnectionRequest
     on_RootQueryToArquivoAssessoriaConnection?: RootQueryToArquivoAssessoriaConnectionRequest
+    on_BannerToBannerConnection?: BannerToBannerConnectionRequest
     on_RootQueryToBannerConnection?: RootQueryToBannerConnectionRequest
     on_RootQueryToCategoryConnection?: RootQueryToCategoryConnectionRequest
+    on_RootQueryToCentraldeDecoradoConnection?: RootQueryToCentraldeDecoradoConnectionRequest
     on_RootQueryToCommentConnection?: RootQueryToCommentConnectionRequest
     on_RootQueryToContentNodeConnection?: RootQueryToContentNodeConnectionRequest
     on_RootQueryToContentTypeConnection?: RootQueryToContentTypeConnectionRequest
@@ -6575,6 +7554,9 @@ export interface PageInfoRequest{
     /** When paginating backwards, the cursor to continue. */
     startCursor?: boolean | number
     on_TaxonomyToContentTypeConnectionPageInfo?: TaxonomyToContentTypeConnectionPageInfoRequest
+    on_TermNodeToEnqueuedScriptConnectionPageInfo?: TermNodeToEnqueuedScriptConnectionPageInfoRequest
+    on_TermNodeToEnqueuedStylesheetConnectionPageInfo?: TermNodeToEnqueuedStylesheetConnectionPageInfoRequest
+    on_TaxonomyToTermNodeConnectionPageInfo?: TaxonomyToTermNodeConnectionPageInfoRequest
     on_ContentTypeToTaxonomyConnectionPageInfo?: ContentTypeToTaxonomyConnectionPageInfoRequest
     on_ContentTypeToContentNodeConnectionPageInfo?: ContentTypeToContentNodeConnectionPageInfoRequest
     on_CommentToCommentConnectionPageInfo?: CommentToCommentConnectionPageInfoRequest
@@ -6590,11 +7572,15 @@ export interface PageInfoRequest{
     on_PageToCommentConnectionPageInfo?: PageToCommentConnectionPageInfoRequest
     on_PageToRevisionConnectionPageInfo?: PageToRevisionConnectionPageInfoRequest
     on_UserToPageConnectionPageInfo?: UserToPageConnectionPageInfoRequest
-    on_TermNodeToEnqueuedScriptConnectionPageInfo?: TermNodeToEnqueuedScriptConnectionPageInfoRequest
-    on_TermNodeToEnqueuedStylesheetConnectionPageInfo?: TermNodeToEnqueuedStylesheetConnectionPageInfoRequest
+    on_PostToPostConnectionPageInfo?: PostToPostConnectionPageInfoRequest
     on_CategoryToAncestorsCategoryConnectionPageInfo?: CategoryToAncestorsCategoryConnectionPageInfoRequest
+    on_CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo?: CentraldeDecoradoToCentraldeDecoradoConnectionPageInfoRequest
+    on_CentraldeDecoradoToCategoryConnectionPageInfo?: CentraldeDecoradoToCategoryConnectionPageInfoRequest
+    on_CentraldeDecoradoToTermNodeConnectionPageInfo?: CentraldeDecoradoToTermNodeConnectionPageInfoRequest
+    on_CategoryToCentraldeDecoradoConnectionPageInfo?: CategoryToCentraldeDecoradoConnectionPageInfoRequest
     on_CategoryToCategoryConnectionPageInfo?: CategoryToCategoryConnectionPageInfoRequest
     on_CategoryToContentNodeConnectionPageInfo?: CategoryToContentNodeConnectionPageInfoRequest
+    on_EmpreendimentoToEmpreendimentoConnectionPageInfo?: EmpreendimentoToEmpreendimentoConnectionPageInfoRequest
     on_EmpreendimentoToCategoryConnectionPageInfo?: EmpreendimentoToCategoryConnectionPageInfoRequest
     on_EmpreendimentoToTermNodeConnectionPageInfo?: EmpreendimentoToTermNodeConnectionPageInfoRequest
     on_CategoryToEmpreendimentoConnectionPageInfo?: CategoryToEmpreendimentoConnectionPageInfoRequest
@@ -6612,9 +7598,12 @@ export interface PageInfoRequest{
     on_UserToPostConnectionPageInfo?: UserToPostConnectionPageInfoRequest
     on_UserToRevisionsConnectionPageInfo?: UserToRevisionsConnectionPageInfoRequest
     on_UserToUserRoleConnectionPageInfo?: UserToUserRoleConnectionPageInfoRequest
+    on_ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo?: ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfoRequest
     on_RootQueryToArquivoAssessoriaConnectionPageInfo?: RootQueryToArquivoAssessoriaConnectionPageInfoRequest
+    on_BannerToBannerConnectionPageInfo?: BannerToBannerConnectionPageInfoRequest
     on_RootQueryToBannerConnectionPageInfo?: RootQueryToBannerConnectionPageInfoRequest
     on_RootQueryToCategoryConnectionPageInfo?: RootQueryToCategoryConnectionPageInfoRequest
+    on_RootQueryToCentraldeDecoradoConnectionPageInfo?: RootQueryToCentraldeDecoradoConnectionPageInfoRequest
     on_RootQueryToCommentConnectionPageInfo?: RootQueryToCommentConnectionPageInfoRequest
     on_RootQueryToContentNodeConnectionPageInfo?: RootQueryToContentNodeConnectionPageInfoRequest
     on_RootQueryToContentTypeConnectionPageInfo?: RootQueryToContentTypeConnectionPageInfoRequest
@@ -6670,6 +7659,16 @@ export interface TaxonomyRequest{
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
     before?: (Scalars['String'] | null)},TaxonomyToContentTypeConnectionRequest] | TaxonomyToContentTypeConnectionRequest
+    /** List of Term Nodes associated with the Taxonomy */
+    connectedTerms?: [{
+    /** The number of items to return after the referenced "after" cursor */
+    first?: (Scalars['Int'] | null),
+    /** The number of items to return before the referenced "before" cursor */
+    last?: (Scalars['Int'] | null),
+    /** Cursor used along with the "first" argument to reference where in the dataset to get data */
+    after?: (Scalars['String'] | null),
+    /** Cursor used along with the "last" argument to reference where in the dataset to get data */
+    before?: (Scalars['String'] | null)},TaxonomyToTermNodeConnectionRequest] | TaxonomyToTermNodeConnectionRequest
     /** Description of the taxonomy. This field is equivalent to WP_Taxonomy-&gt;description */
     description?: boolean | number
     /** The plural name of the post type within the GraphQL Schema. */
@@ -6688,7 +7687,7 @@ export interface TaxonomyRequest{
     name?: boolean | number
     /** Whether the taxonomy is publicly queryable */
     public?: boolean | number
-    /** Name of content type to diplay in REST API &quot;wp/v2&quot; namespace. */
+    /** Name of content type to display in REST API &quot;wp/v2&quot; namespace. */
     restBase?: boolean | number
     /** The REST Controller class assigned to handling this content type. */
     restControllerClass?: boolean | number
@@ -6769,6 +7768,9 @@ export interface WPPageInfoRequest{
     /** When paginating backwards, the cursor to continue. */
     startCursor?: boolean | number
     on_TaxonomyToContentTypeConnectionPageInfo?: TaxonomyToContentTypeConnectionPageInfoRequest
+    on_TermNodeToEnqueuedScriptConnectionPageInfo?: TermNodeToEnqueuedScriptConnectionPageInfoRequest
+    on_TermNodeToEnqueuedStylesheetConnectionPageInfo?: TermNodeToEnqueuedStylesheetConnectionPageInfoRequest
+    on_TaxonomyToTermNodeConnectionPageInfo?: TaxonomyToTermNodeConnectionPageInfoRequest
     on_ContentTypeToTaxonomyConnectionPageInfo?: ContentTypeToTaxonomyConnectionPageInfoRequest
     on_ContentTypeToContentNodeConnectionPageInfo?: ContentTypeToContentNodeConnectionPageInfoRequest
     on_CommentToCommentConnectionPageInfo?: CommentToCommentConnectionPageInfoRequest
@@ -6784,11 +7786,15 @@ export interface WPPageInfoRequest{
     on_PageToCommentConnectionPageInfo?: PageToCommentConnectionPageInfoRequest
     on_PageToRevisionConnectionPageInfo?: PageToRevisionConnectionPageInfoRequest
     on_UserToPageConnectionPageInfo?: UserToPageConnectionPageInfoRequest
-    on_TermNodeToEnqueuedScriptConnectionPageInfo?: TermNodeToEnqueuedScriptConnectionPageInfoRequest
-    on_TermNodeToEnqueuedStylesheetConnectionPageInfo?: TermNodeToEnqueuedStylesheetConnectionPageInfoRequest
+    on_PostToPostConnectionPageInfo?: PostToPostConnectionPageInfoRequest
     on_CategoryToAncestorsCategoryConnectionPageInfo?: CategoryToAncestorsCategoryConnectionPageInfoRequest
+    on_CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo?: CentraldeDecoradoToCentraldeDecoradoConnectionPageInfoRequest
+    on_CentraldeDecoradoToCategoryConnectionPageInfo?: CentraldeDecoradoToCategoryConnectionPageInfoRequest
+    on_CentraldeDecoradoToTermNodeConnectionPageInfo?: CentraldeDecoradoToTermNodeConnectionPageInfoRequest
+    on_CategoryToCentraldeDecoradoConnectionPageInfo?: CategoryToCentraldeDecoradoConnectionPageInfoRequest
     on_CategoryToCategoryConnectionPageInfo?: CategoryToCategoryConnectionPageInfoRequest
     on_CategoryToContentNodeConnectionPageInfo?: CategoryToContentNodeConnectionPageInfoRequest
+    on_EmpreendimentoToEmpreendimentoConnectionPageInfo?: EmpreendimentoToEmpreendimentoConnectionPageInfoRequest
     on_EmpreendimentoToCategoryConnectionPageInfo?: EmpreendimentoToCategoryConnectionPageInfoRequest
     on_EmpreendimentoToTermNodeConnectionPageInfo?: EmpreendimentoToTermNodeConnectionPageInfoRequest
     on_CategoryToEmpreendimentoConnectionPageInfo?: CategoryToEmpreendimentoConnectionPageInfoRequest
@@ -6806,9 +7812,12 @@ export interface WPPageInfoRequest{
     on_UserToPostConnectionPageInfo?: UserToPostConnectionPageInfoRequest
     on_UserToRevisionsConnectionPageInfo?: UserToRevisionsConnectionPageInfoRequest
     on_UserToUserRoleConnectionPageInfo?: UserToUserRoleConnectionPageInfoRequest
+    on_ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo?: ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfoRequest
     on_RootQueryToArquivoAssessoriaConnectionPageInfo?: RootQueryToArquivoAssessoriaConnectionPageInfoRequest
+    on_BannerToBannerConnectionPageInfo?: BannerToBannerConnectionPageInfoRequest
     on_RootQueryToBannerConnectionPageInfo?: RootQueryToBannerConnectionPageInfoRequest
     on_RootQueryToCategoryConnectionPageInfo?: RootQueryToCategoryConnectionPageInfoRequest
+    on_RootQueryToCentraldeDecoradoConnectionPageInfo?: RootQueryToCentraldeDecoradoConnectionPageInfoRequest
     on_RootQueryToCommentConnectionPageInfo?: RootQueryToCommentConnectionPageInfoRequest
     on_RootQueryToContentNodeConnectionPageInfo?: RootQueryToContentNodeConnectionPageInfoRequest
     on_RootQueryToContentTypeConnectionPageInfo?: RootQueryToContentTypeConnectionPageInfoRequest
@@ -6849,6 +7858,468 @@ export interface TaxonomyToContentTypeConnectionEdgeRequest{
 
 /** Page Info on the &quot;TaxonomyToContentTypeConnection&quot; */
 export interface TaxonomyToContentTypeConnectionPageInfoRequest{
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: boolean | number
+    /** When paginating forwards, are there more items? */
+    hasNextPage?: boolean | number
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage?: boolean | number
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Connection between the Taxonomy type and the TermNode type */
+export interface TaxonomyToTermNodeConnectionRequest{
+    /** Edges for the TaxonomyToTermNodeConnection connection */
+    edges?: TaxonomyToTermNodeConnectionEdgeRequest
+    /** The nodes of the connection, without the edges */
+    nodes?: TermNodeRequest
+    /** Information about pagination in a connection. */
+    pageInfo?: TaxonomyToTermNodeConnectionPageInfoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Connection to TermNode Nodes */
+export interface TermNodeConnectionRequest{
+    /** A list of edges (relational context) between RootQuery and connected TermNode Nodes */
+    edges?: TermNodeConnectionEdgeRequest
+    /** A list of connected TermNode Nodes */
+    nodes?: TermNodeRequest
+    /** Information about pagination in a connection. */
+    pageInfo?: TermNodeConnectionPageInfoRequest
+    on_TaxonomyToTermNodeConnection?: TaxonomyToTermNodeConnectionRequest
+    on_CentraldeDecoradoToTermNodeConnection?: CentraldeDecoradoToTermNodeConnectionRequest
+    on_EmpreendimentoToTermNodeConnection?: EmpreendimentoToTermNodeConnectionRequest
+    on_PostToTermNodeConnection?: PostToTermNodeConnectionRequest
+    on_RootQueryToTermNodeConnection?: RootQueryToTermNodeConnectionRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Edge between a Node and a connected TermNode */
+export interface TermNodeConnectionEdgeRequest{
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: boolean | number
+    /** The connected TermNode Node */
+    node?: TermNodeRequest
+    on_TaxonomyToTermNodeConnectionEdge?: TaxonomyToTermNodeConnectionEdgeRequest
+    on_CentraldeDecoradoToTermNodeConnectionEdge?: CentraldeDecoradoToTermNodeConnectionEdgeRequest
+    on_EmpreendimentoToTermNodeConnectionEdge?: EmpreendimentoToTermNodeConnectionEdgeRequest
+    on_PostToTermNodeConnectionEdge?: PostToTermNodeConnectionEdgeRequest
+    on_RootQueryToTermNodeConnectionEdge?: RootQueryToTermNodeConnectionEdgeRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Terms are nodes within a Taxonomy, used to group and relate other nodes. */
+export interface TermNodeRequest{
+    /** The number of objects connected to the object */
+    count?: boolean | number
+    /** Identifies the primary key from the database. */
+    databaseId?: boolean | number
+    /** The description of the object */
+    description?: boolean | number
+    /** Connection between the TermNode type and the EnqueuedScript type */
+    enqueuedScripts?: [{
+    /** The number of items to return after the referenced "after" cursor */
+    first?: (Scalars['Int'] | null),
+    /** The number of items to return before the referenced "before" cursor */
+    last?: (Scalars['Int'] | null),
+    /** Cursor used along with the "first" argument to reference where in the dataset to get data */
+    after?: (Scalars['String'] | null),
+    /** Cursor used along with the "last" argument to reference where in the dataset to get data */
+    before?: (Scalars['String'] | null)},TermNodeToEnqueuedScriptConnectionRequest] | TermNodeToEnqueuedScriptConnectionRequest
+    /** Connection between the TermNode type and the EnqueuedStylesheet type */
+    enqueuedStylesheets?: [{
+    /** The number of items to return after the referenced "after" cursor */
+    first?: (Scalars['Int'] | null),
+    /** The number of items to return before the referenced "before" cursor */
+    last?: (Scalars['Int'] | null),
+    /** Cursor used along with the "first" argument to reference where in the dataset to get data */
+    after?: (Scalars['String'] | null),
+    /** Cursor used along with the "last" argument to reference where in the dataset to get data */
+    before?: (Scalars['String'] | null)},TermNodeToEnqueuedStylesheetConnectionRequest] | TermNodeToEnqueuedStylesheetConnectionRequest
+    /** The globally unique ID for the object */
+    id?: boolean | number
+    /** Whether the node is a Comment */
+    isComment?: boolean | number
+    /** Whether the node is a Content Node */
+    isContentNode?: boolean | number
+    /** Whether the node represents the front page. */
+    isFrontPage?: boolean | number
+    /** Whether  the node represents the blog page. */
+    isPostsPage?: boolean | number
+    /** Whether the object is restricted from the current viewer */
+    isRestricted?: boolean | number
+    /** Whether the node is a Term */
+    isTermNode?: boolean | number
+    /** The link to the term */
+    link?: boolean | number
+    /** The human friendly name of the object. */
+    name?: boolean | number
+    /** An alphanumeric identifier for the object unique to its type. */
+    slug?: boolean | number
+    /** The name of the taxonomy that the object is associated with */
+    taxonomyName?: boolean | number
+    /** The ID of the term group that this term object belongs to */
+    termGroupId?: boolean | number
+    /** The taxonomy ID that the object is associated with */
+    termTaxonomyId?: boolean | number
+    /** The unique resource identifier path */
+    uri?: boolean | number
+    on_Category?: CategoryRequest
+    on_PostFormat?: PostFormatRequest
+    on_Tag?: TagRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Connection between the TermNode type and the EnqueuedScript type */
+export interface TermNodeToEnqueuedScriptConnectionRequest{
+    /** Edges for the TermNodeToEnqueuedScriptConnection connection */
+    edges?: TermNodeToEnqueuedScriptConnectionEdgeRequest
+    /** The nodes of the connection, without the edges */
+    nodes?: EnqueuedScriptRequest
+    /** Information about pagination in a connection. */
+    pageInfo?: TermNodeToEnqueuedScriptConnectionPageInfoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Connection to EnqueuedScript Nodes */
+export interface EnqueuedScriptConnectionRequest{
+    /** A list of edges (relational context) between ContentNode and connected EnqueuedScript Nodes */
+    edges?: EnqueuedScriptConnectionEdgeRequest
+    /** A list of connected EnqueuedScript Nodes */
+    nodes?: EnqueuedScriptRequest
+    /** Information about pagination in a connection. */
+    pageInfo?: EnqueuedScriptConnectionPageInfoRequest
+    on_TermNodeToEnqueuedScriptConnection?: TermNodeToEnqueuedScriptConnectionRequest
+    on_UserToEnqueuedScriptConnection?: UserToEnqueuedScriptConnectionRequest
+    on_ContentNodeToEnqueuedScriptConnection?: ContentNodeToEnqueuedScriptConnectionRequest
+    on_RootQueryToEnqueuedScriptConnection?: RootQueryToEnqueuedScriptConnectionRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Edge between a Node and a connected EnqueuedScript */
+export interface EnqueuedScriptConnectionEdgeRequest{
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: boolean | number
+    /** The connected EnqueuedScript Node */
+    node?: EnqueuedScriptRequest
+    on_TermNodeToEnqueuedScriptConnectionEdge?: TermNodeToEnqueuedScriptConnectionEdgeRequest
+    on_UserToEnqueuedScriptConnectionEdge?: UserToEnqueuedScriptConnectionEdgeRequest
+    on_ContentNodeToEnqueuedScriptConnectionEdge?: ContentNodeToEnqueuedScriptConnectionEdgeRequest
+    on_RootQueryToEnqueuedScriptConnectionEdge?: RootQueryToEnqueuedScriptConnectionEdgeRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Script enqueued by the CMS */
+export interface EnqueuedScriptRequest{
+    /** The inline code to be run after the asset is loaded. */
+    after?: boolean | number
+    /**
+     * @deprecated Use `EnqueuedAsset.media` instead.
+     * Deprecated
+     */
+    args?: boolean | number
+    /** The inline code to be run before the asset is loaded. */
+    before?: boolean | number
+    /** The HTML conditional comment for the enqueued asset. E.g. IE 6, lte IE 7, etc */
+    conditional?: boolean | number
+    /** Dependencies needed to use this asset */
+    dependencies?: EnqueuedScriptRequest
+    /**
+     * @deprecated Use `EnqueuedScript.extraData` instead.
+     * Extra information needed for the script
+     */
+    extra?: boolean | number
+    /** Extra data supplied to the enqueued script */
+    extraData?: boolean | number
+    /** The loading group to which this asset belongs. */
+    group?: boolean | number
+    /** The location where this script should be loaded */
+    groupLocation?: boolean | number
+    /** The handle of the enqueued asset */
+    handle?: boolean | number
+    /** The global ID of the enqueued script */
+    id?: boolean | number
+    /** The source of the asset */
+    src?: boolean | number
+    /** The loading strategy to use on the script tag */
+    strategy?: boolean | number
+    /** The version of the enqueued script */
+    version?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Asset enqueued by the CMS */
+export interface EnqueuedAssetRequest{
+    /** The inline code to be run after the asset is loaded. */
+    after?: boolean | number
+    /**
+     * @deprecated Use `EnqueuedAsset.media` instead.
+     * Deprecated
+     */
+    args?: boolean | number
+    /** The inline code to be run before the asset is loaded. */
+    before?: boolean | number
+    /** The HTML conditional comment for the enqueued asset. E.g. IE 6, lte IE 7, etc */
+    conditional?: boolean | number
+    /** Dependencies needed to use this asset */
+    dependencies?: EnqueuedAssetRequest
+    /**
+     * @deprecated Use `EnqueuedScript.extraData` instead.
+     * Extra information needed for the script
+     */
+    extra?: boolean | number
+    /** The loading group to which this asset belongs. */
+    group?: boolean | number
+    /** The handle of the enqueued asset */
+    handle?: boolean | number
+    /** The ID of the enqueued asset */
+    id?: boolean | number
+    /** The source of the asset */
+    src?: boolean | number
+    /** The version of the enqueued asset */
+    version?: boolean | number
+    on_EnqueuedScript?: EnqueuedScriptRequest
+    on_EnqueuedStylesheet?: EnqueuedStylesheetRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Page Info on the connected EnqueuedScriptConnectionEdge */
+export interface EnqueuedScriptConnectionPageInfoRequest{
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: boolean | number
+    /** When paginating forwards, are there more items? */
+    hasNextPage?: boolean | number
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage?: boolean | number
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: boolean | number
+    on_TermNodeToEnqueuedScriptConnectionPageInfo?: TermNodeToEnqueuedScriptConnectionPageInfoRequest
+    on_UserToEnqueuedScriptConnectionPageInfo?: UserToEnqueuedScriptConnectionPageInfoRequest
+    on_ContentNodeToEnqueuedScriptConnectionPageInfo?: ContentNodeToEnqueuedScriptConnectionPageInfoRequest
+    on_RootQueryToEnqueuedScriptConnectionPageInfo?: RootQueryToEnqueuedScriptConnectionPageInfoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** An edge in a connection */
+export interface TermNodeToEnqueuedScriptConnectionEdgeRequest{
+    /** A cursor for use in pagination */
+    cursor?: boolean | number
+    /** The item at the end of the edge */
+    node?: EnqueuedScriptRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Page Info on the &quot;TermNodeToEnqueuedScriptConnection&quot; */
+export interface TermNodeToEnqueuedScriptConnectionPageInfoRequest{
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: boolean | number
+    /** When paginating forwards, are there more items? */
+    hasNextPage?: boolean | number
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage?: boolean | number
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Connection between the TermNode type and the EnqueuedStylesheet type */
+export interface TermNodeToEnqueuedStylesheetConnectionRequest{
+    /** Edges for the TermNodeToEnqueuedStylesheetConnection connection */
+    edges?: TermNodeToEnqueuedStylesheetConnectionEdgeRequest
+    /** The nodes of the connection, without the edges */
+    nodes?: EnqueuedStylesheetRequest
+    /** Information about pagination in a connection. */
+    pageInfo?: TermNodeToEnqueuedStylesheetConnectionPageInfoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Connection to EnqueuedStylesheet Nodes */
+export interface EnqueuedStylesheetConnectionRequest{
+    /** A list of edges (relational context) between ContentNode and connected EnqueuedStylesheet Nodes */
+    edges?: EnqueuedStylesheetConnectionEdgeRequest
+    /** A list of connected EnqueuedStylesheet Nodes */
+    nodes?: EnqueuedStylesheetRequest
+    /** Information about pagination in a connection. */
+    pageInfo?: EnqueuedStylesheetConnectionPageInfoRequest
+    on_TermNodeToEnqueuedStylesheetConnection?: TermNodeToEnqueuedStylesheetConnectionRequest
+    on_UserToEnqueuedStylesheetConnection?: UserToEnqueuedStylesheetConnectionRequest
+    on_ContentNodeToEnqueuedStylesheetConnection?: ContentNodeToEnqueuedStylesheetConnectionRequest
+    on_RootQueryToEnqueuedStylesheetConnection?: RootQueryToEnqueuedStylesheetConnectionRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Edge between a Node and a connected EnqueuedStylesheet */
+export interface EnqueuedStylesheetConnectionEdgeRequest{
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: boolean | number
+    /** The connected EnqueuedStylesheet Node */
+    node?: EnqueuedStylesheetRequest
+    on_TermNodeToEnqueuedStylesheetConnectionEdge?: TermNodeToEnqueuedStylesheetConnectionEdgeRequest
+    on_UserToEnqueuedStylesheetConnectionEdge?: UserToEnqueuedStylesheetConnectionEdgeRequest
+    on_ContentNodeToEnqueuedStylesheetConnectionEdge?: ContentNodeToEnqueuedStylesheetConnectionEdgeRequest
+    on_RootQueryToEnqueuedStylesheetConnectionEdge?: RootQueryToEnqueuedStylesheetConnectionEdgeRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Stylesheet enqueued by the CMS */
+export interface EnqueuedStylesheetRequest{
+    /** The inline code to be run after the asset is loaded. */
+    after?: boolean | number
+    /**
+     * @deprecated Use `EnqueuedAsset.media` instead.
+     * Deprecated
+     */
+    args?: boolean | number
+    /** The inline code to be run before the asset is loaded. */
+    before?: boolean | number
+    /** The HTML conditional comment for the enqueued asset. E.g. IE 6, lte IE 7, etc */
+    conditional?: boolean | number
+    /** Dependencies needed to use this asset */
+    dependencies?: EnqueuedStylesheetRequest
+    /**
+     * @deprecated Use `EnqueuedScript.extraData` instead.
+     * Extra information needed for the script
+     */
+    extra?: boolean | number
+    /** The loading group to which this asset belongs. */
+    group?: boolean | number
+    /** The handle of the enqueued asset */
+    handle?: boolean | number
+    /** The global ID of the enqueued stylesheet */
+    id?: boolean | number
+    /** Whether the enqueued style is RTL or not */
+    isRtl?: boolean | number
+    /** The media attribute to use for the link */
+    media?: boolean | number
+    /** The absolute path to the enqueued style. Set when the stylesheet is meant to load inline. */
+    path?: boolean | number
+    /** The `rel` attribute to use for the link */
+    rel?: boolean | number
+    /** The source of the asset */
+    src?: boolean | number
+    /** Optional suffix, used in combination with RTL */
+    suffix?: boolean | number
+    /** The title of the enqueued style. Used for preferred/alternate stylesheets. */
+    title?: boolean | number
+    /** The version of the enqueued style */
+    version?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Page Info on the connected EnqueuedStylesheetConnectionEdge */
+export interface EnqueuedStylesheetConnectionPageInfoRequest{
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: boolean | number
+    /** When paginating forwards, are there more items? */
+    hasNextPage?: boolean | number
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage?: boolean | number
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: boolean | number
+    on_TermNodeToEnqueuedStylesheetConnectionPageInfo?: TermNodeToEnqueuedStylesheetConnectionPageInfoRequest
+    on_UserToEnqueuedStylesheetConnectionPageInfo?: UserToEnqueuedStylesheetConnectionPageInfoRequest
+    on_ContentNodeToEnqueuedStylesheetConnectionPageInfo?: ContentNodeToEnqueuedStylesheetConnectionPageInfoRequest
+    on_RootQueryToEnqueuedStylesheetConnectionPageInfo?: RootQueryToEnqueuedStylesheetConnectionPageInfoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** An edge in a connection */
+export interface TermNodeToEnqueuedStylesheetConnectionEdgeRequest{
+    /** A cursor for use in pagination */
+    cursor?: boolean | number
+    /** The item at the end of the edge */
+    node?: EnqueuedStylesheetRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Page Info on the &quot;TermNodeToEnqueuedStylesheetConnection&quot; */
+export interface TermNodeToEnqueuedStylesheetConnectionPageInfoRequest{
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: boolean | number
+    /** When paginating forwards, are there more items? */
+    hasNextPage?: boolean | number
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage?: boolean | number
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Page Info on the connected TermNodeConnectionEdge */
+export interface TermNodeConnectionPageInfoRequest{
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: boolean | number
+    /** When paginating forwards, are there more items? */
+    hasNextPage?: boolean | number
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage?: boolean | number
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: boolean | number
+    on_TaxonomyToTermNodeConnectionPageInfo?: TaxonomyToTermNodeConnectionPageInfoRequest
+    on_CentraldeDecoradoToTermNodeConnectionPageInfo?: CentraldeDecoradoToTermNodeConnectionPageInfoRequest
+    on_EmpreendimentoToTermNodeConnectionPageInfo?: EmpreendimentoToTermNodeConnectionPageInfoRequest
+    on_PostToTermNodeConnectionPageInfo?: PostToTermNodeConnectionPageInfoRequest
+    on_RootQueryToTermNodeConnectionPageInfo?: RootQueryToTermNodeConnectionPageInfoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** An edge in a connection */
+export interface TaxonomyToTermNodeConnectionEdgeRequest{
+    /** A cursor for use in pagination */
+    cursor?: boolean | number
+    /** The item at the end of the edge */
+    node?: TermNodeRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Page Info on the &quot;TaxonomyToTermNodeConnection&quot; */
+export interface TaxonomyToTermNodeConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
     /** When paginating forwards, are there more items? */
@@ -6925,7 +8396,7 @@ name?: (Scalars['String'] | null),
 nameIn?: ((Scalars['String'] | null)[] | null),
 /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
 notIn?: ((Scalars['ID'] | null)[] | null),
-/** What paramater to use to order the objects by. */
+/** What parameter to use to order the objects by. */
 orderby?: ((PostObjectsConnectionOrderbyInput | null)[] | null),
 /** Use ID to return only children. Use 0 to return only top-level items */
 parent?: (Scalars['ID'] | null),
@@ -7266,8 +8737,14 @@ export interface UserRequest{
     firstName?: boolean | number
     /** The globally unique identifier for the user object. */
     id?: boolean | number
+    /** Whether the node is a Comment */
+    isComment?: boolean | number
     /** Whether the node is a Content Node */
     isContentNode?: boolean | number
+    /** Whether the node represents the front page. */
+    isFrontPage?: boolean | number
+    /** Whether  the node represents the blog page. */
+    isPostsPage?: boolean | number
     /** Whether the object is restricted from the current viewer */
     isRestricted?: boolean | number
     /** Whether the node is a Term */
@@ -7288,7 +8765,7 @@ export interface UserRequest{
     before?: (Scalars['String'] | null),
     /** Arguments for filtering the connection */
     where?: (UserToMediaItemConnectionWhereArgs | null)},UserToMediaItemConnectionRequest] | UserToMediaItemConnectionRequest
-    /** Display name of the user. This is equivalent to the WP_User-&gt;dispaly_name property. */
+    /** Display name of the user. This is equivalent to the WP_User-&gt;display_name property. */
     name?: boolean | number
     /** The nicename for the user. This field is equivalent to WP_User-&gt;user_nicename */
     nicename?: boolean | number
@@ -7396,6 +8873,7 @@ export interface DatabaseIdentifierRequest{
     on_Page?: PageRequest
     on_Post?: PostRequest
     on_Category?: CategoryRequest
+    on_CentraldeDecorado?: CentraldeDecoradoRequest
     on_Empreendimento?: EmpreendimentoRequest
     on_PostFormat?: PostFormatRequest
     on_Tag?: TagRequest
@@ -7495,6 +8973,8 @@ parentNotIn?: ((Scalars['ID'] | null)[] | null),
 search?: (Scalars['String'] | null),
 /** Comment status to limit results by. */
 status?: (Scalars['String'] | null),
+/** One or more Comment Statuses to limit results by */
+statusIn?: ((CommentStatusEnum | null)[] | null),
 /** Include comments for a specific user ID. */
 userId?: (Scalars['ID'] | null)}
 
@@ -7560,7 +9040,10 @@ export interface CommentRequest{
     approved?: boolean | number
     /** The author of the comment */
     author?: CommentToCommenterConnectionEdgeRequest
-    /** IP address for the author. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL. */
+    /**
+     * @deprecated Use the ipAddress field on the edge between the comment and author
+     * IP address for the author at the time of commenting. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL.
+     */
     authorIp?: boolean | number
     /**
      * @deprecated Deprecated in favor of databaseId
@@ -7581,10 +9064,22 @@ export interface CommentRequest{
     dateGmt?: boolean | number
     /** The globally unique identifier for the comment object */
     id?: boolean | number
+    /** Whether the node is a Comment */
+    isComment?: boolean | number
+    /** Whether the node is a Content Node */
+    isContentNode?: boolean | number
+    /** Whether the node represents the front page. */
+    isFrontPage?: boolean | number
+    /** Whether  the node represents the blog page. */
+    isPostsPage?: boolean | number
     /** Whether the object is restricted from the current viewer */
     isRestricted?: boolean | number
+    /** Whether the node is a Term */
+    isTermNode?: boolean | number
     /** Karma value for the comment. This field is equivalent to WP_Comment-&gt;comment_karma and the value matching the &quot;comment_karma&quot; column in SQL. */
     karma?: boolean | number
+    /** The permalink of the comment */
+    link?: boolean | number
     /** Connection between the Comment type and the Comment type */
     parent?: [{
     /** Arguments for filtering the connection */
@@ -7609,6 +9104,8 @@ export interface CommentRequest{
     status?: boolean | number
     /** Type of comment. This field is equivalent to WP_Comment-&gt;comment_type and the value matching the &quot;comment_type&quot; column in SQL. */
     type?: boolean | number
+    /** The unique resource identifier path */
+    uri?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -7618,8 +9115,16 @@ export interface CommentRequest{
 export interface CommentToCommenterConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
+    /** The email address representing the author for this particular comment */
+    email?: boolean | number
+    /** IP address of the author at the time of making this comment. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL. */
+    ipAddress?: boolean | number
+    /** The display name of the comment author for this particular comment */
+    name?: boolean | number
     /** The node of the connection, without the edges */
     node?: CommenterRequest
+    /** The url entered for the comment author on this particular comment */
+    url?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -7706,6 +9211,8 @@ parentNotIn?: ((Scalars['ID'] | null)[] | null),
 search?: (Scalars['String'] | null),
 /** Comment status to limit results by. */
 status?: (Scalars['String'] | null),
+/** One or more Comment Statuses to limit results by */
+statusIn?: ((CommentStatusEnum | null)[] | null),
 /** Include comments for a specific user ID. */
 userId?: (Scalars['ID'] | null)}
 
@@ -7779,6 +9286,8 @@ parentNotIn?: ((Scalars['ID'] | null)[] | null),
 search?: (Scalars['String'] | null),
 /** Comment status to limit results by. */
 status?: (Scalars['String'] | null),
+/** One or more Comment Statuses to limit results by */
+statusIn?: ((CommentStatusEnum | null)[] | null),
 /** Include comments for a specific user ID. */
 userId?: (Scalars['ID'] | null)}
 
@@ -7882,101 +9391,6 @@ export interface UserToEnqueuedScriptConnectionRequest{
 }
 
 
-/** Connection to EnqueuedScript Nodes */
-export interface EnqueuedScriptConnectionRequest{
-    /** A list of edges (relational context) between ContentNode and connected EnqueuedScript Nodes */
-    edges?: EnqueuedScriptConnectionEdgeRequest
-    /** A list of connected EnqueuedScript Nodes */
-    nodes?: EnqueuedScriptRequest
-    /** Information about pagination in a connection. */
-    pageInfo?: EnqueuedScriptConnectionPageInfoRequest
-    on_UserToEnqueuedScriptConnection?: UserToEnqueuedScriptConnectionRequest
-    on_ContentNodeToEnqueuedScriptConnection?: ContentNodeToEnqueuedScriptConnectionRequest
-    on_TermNodeToEnqueuedScriptConnection?: TermNodeToEnqueuedScriptConnectionRequest
-    on_RootQueryToEnqueuedScriptConnection?: RootQueryToEnqueuedScriptConnectionRequest
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** Edge between a Node and a connected EnqueuedScript */
-export interface EnqueuedScriptConnectionEdgeRequest{
-    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-    cursor?: boolean | number
-    /** The connected EnqueuedScript Node */
-    node?: EnqueuedScriptRequest
-    on_UserToEnqueuedScriptConnectionEdge?: UserToEnqueuedScriptConnectionEdgeRequest
-    on_ContentNodeToEnqueuedScriptConnectionEdge?: ContentNodeToEnqueuedScriptConnectionEdgeRequest
-    on_TermNodeToEnqueuedScriptConnectionEdge?: TermNodeToEnqueuedScriptConnectionEdgeRequest
-    on_RootQueryToEnqueuedScriptConnectionEdge?: RootQueryToEnqueuedScriptConnectionEdgeRequest
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** Script enqueued by the CMS */
-export interface EnqueuedScriptRequest{
-    /** @todo */
-    args?: boolean | number
-    /** Dependencies needed to use this asset */
-    dependencies?: EnqueuedScriptRequest
-    /** Extra information needed for the script */
-    extra?: boolean | number
-    /** The handle of the enqueued asset */
-    handle?: boolean | number
-    /** The ID of the enqueued asset */
-    id?: boolean | number
-    /** The source of the asset */
-    src?: boolean | number
-    /** The version of the enqueued asset */
-    version?: boolean | number
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** Asset enqueued by the CMS */
-export interface EnqueuedAssetRequest{
-    /** @todo */
-    args?: boolean | number
-    /** Dependencies needed to use this asset */
-    dependencies?: EnqueuedScriptRequest
-    /** Extra information needed for the script */
-    extra?: boolean | number
-    /** The handle of the enqueued asset */
-    handle?: boolean | number
-    /** The ID of the enqueued asset */
-    id?: boolean | number
-    /** The source of the asset */
-    src?: boolean | number
-    /** The version of the enqueued asset */
-    version?: boolean | number
-    on_EnqueuedScript?: EnqueuedScriptRequest
-    on_EnqueuedStylesheet?: EnqueuedStylesheetRequest
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** Page Info on the connected EnqueuedScriptConnectionEdge */
-export interface EnqueuedScriptConnectionPageInfoRequest{
-    /** When paginating forwards, the cursor to continue. */
-    endCursor?: boolean | number
-    /** When paginating forwards, are there more items? */
-    hasNextPage?: boolean | number
-    /** When paginating backwards, are there more items? */
-    hasPreviousPage?: boolean | number
-    /** When paginating backwards, the cursor to continue. */
-    startCursor?: boolean | number
-    on_UserToEnqueuedScriptConnectionPageInfo?: UserToEnqueuedScriptConnectionPageInfoRequest
-    on_ContentNodeToEnqueuedScriptConnectionPageInfo?: ContentNodeToEnqueuedScriptConnectionPageInfoRequest
-    on_TermNodeToEnqueuedScriptConnectionPageInfo?: TermNodeToEnqueuedScriptConnectionPageInfoRequest
-    on_RootQueryToEnqueuedScriptConnectionPageInfo?: RootQueryToEnqueuedScriptConnectionPageInfoRequest
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
 /** An edge in a connection */
 export interface UserToEnqueuedScriptConnectionEdgeRequest{
     /** A cursor for use in pagination */
@@ -8011,78 +9425,6 @@ export interface UserToEnqueuedStylesheetConnectionRequest{
     nodes?: EnqueuedStylesheetRequest
     /** Information about pagination in a connection. */
     pageInfo?: UserToEnqueuedStylesheetConnectionPageInfoRequest
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** Connection to EnqueuedStylesheet Nodes */
-export interface EnqueuedStylesheetConnectionRequest{
-    /** A list of edges (relational context) between ContentNode and connected EnqueuedStylesheet Nodes */
-    edges?: EnqueuedStylesheetConnectionEdgeRequest
-    /** A list of connected EnqueuedStylesheet Nodes */
-    nodes?: EnqueuedStylesheetRequest
-    /** Information about pagination in a connection. */
-    pageInfo?: EnqueuedStylesheetConnectionPageInfoRequest
-    on_UserToEnqueuedStylesheetConnection?: UserToEnqueuedStylesheetConnectionRequest
-    on_ContentNodeToEnqueuedStylesheetConnection?: ContentNodeToEnqueuedStylesheetConnectionRequest
-    on_TermNodeToEnqueuedStylesheetConnection?: TermNodeToEnqueuedStylesheetConnectionRequest
-    on_RootQueryToEnqueuedStylesheetConnection?: RootQueryToEnqueuedStylesheetConnectionRequest
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** Edge between a Node and a connected EnqueuedStylesheet */
-export interface EnqueuedStylesheetConnectionEdgeRequest{
-    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-    cursor?: boolean | number
-    /** The connected EnqueuedStylesheet Node */
-    node?: EnqueuedStylesheetRequest
-    on_UserToEnqueuedStylesheetConnectionEdge?: UserToEnqueuedStylesheetConnectionEdgeRequest
-    on_ContentNodeToEnqueuedStylesheetConnectionEdge?: ContentNodeToEnqueuedStylesheetConnectionEdgeRequest
-    on_TermNodeToEnqueuedStylesheetConnectionEdge?: TermNodeToEnqueuedStylesheetConnectionEdgeRequest
-    on_RootQueryToEnqueuedStylesheetConnectionEdge?: RootQueryToEnqueuedStylesheetConnectionEdgeRequest
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** Stylesheet enqueued by the CMS */
-export interface EnqueuedStylesheetRequest{
-    /** @todo */
-    args?: boolean | number
-    /** Dependencies needed to use this asset */
-    dependencies?: EnqueuedScriptRequest
-    /** Extra information needed for the script */
-    extra?: boolean | number
-    /** The handle of the enqueued asset */
-    handle?: boolean | number
-    /** The ID of the enqueued asset */
-    id?: boolean | number
-    /** The source of the asset */
-    src?: boolean | number
-    /** The version of the enqueued asset */
-    version?: boolean | number
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** Page Info on the connected EnqueuedStylesheetConnectionEdge */
-export interface EnqueuedStylesheetConnectionPageInfoRequest{
-    /** When paginating forwards, the cursor to continue. */
-    endCursor?: boolean | number
-    /** When paginating forwards, are there more items? */
-    hasNextPage?: boolean | number
-    /** When paginating backwards, are there more items? */
-    hasPreviousPage?: boolean | number
-    /** When paginating backwards, the cursor to continue. */
-    startCursor?: boolean | number
-    on_UserToEnqueuedStylesheetConnectionPageInfo?: UserToEnqueuedStylesheetConnectionPageInfoRequest
-    on_ContentNodeToEnqueuedStylesheetConnectionPageInfo?: ContentNodeToEnqueuedStylesheetConnectionPageInfoRequest
-    on_TermNodeToEnqueuedStylesheetConnectionPageInfo?: TermNodeToEnqueuedStylesheetConnectionPageInfoRequest
-    on_RootQueryToEnqueuedStylesheetConnectionPageInfo?: RootQueryToEnqueuedStylesheetConnectionPageInfoRequest
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -8140,7 +9482,7 @@ name?: (Scalars['String'] | null),
 nameIn?: ((Scalars['String'] | null)[] | null),
 /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
 notIn?: ((Scalars['ID'] | null)[] | null),
-/** What paramater to use to order the objects by. */
+/** What parameter to use to order the objects by. */
 orderby?: ((PostObjectsConnectionOrderbyInput | null)[] | null),
 /** Use ID to return only children. Use 0 to return only top-level items */
 parent?: (Scalars['ID'] | null),
@@ -8308,16 +9650,32 @@ export interface MediaItemRequest{
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
     before?: (Scalars['String'] | null)},ContentNodeToEnqueuedStylesheetConnectionRequest] | ContentNodeToEnqueuedStylesheetConnectionRequest
+    /** The filename of the mediaItem for the specified size (default size is full) */
+    file?: [{
+    /** Size of the MediaItem to return */
+    size?: (MediaItemSizeEnum | null)}] | boolean | number
+    /** The path to the original file relative to the uploads directory */
+    filePath?: [{
+    /** Size of the MediaItem to return */
+    size?: (MediaItemSizeEnum | null)}] | boolean | number
     /** The filesize in bytes of the resource */
     fileSize?: [{
     /** Size of the MediaItem to return */
     size?: (MediaItemSizeEnum | null)}] | boolean | number
     /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
     guid?: boolean | number
+    /** Whether the attachment object is password protected. */
+    hasPassword?: boolean | number
     /** The globally unique identifier of the attachment object. */
     id?: boolean | number
+    /** Whether the node is a Comment */
+    isComment?: boolean | number
     /** Whether the node is a Content Node */
     isContentNode?: boolean | number
+    /** Whether the node represents the front page. */
+    isFrontPage?: boolean | number
+    /** Whether  the node represents the blog page. */
+    isPostsPage?: boolean | number
     /** Whether the object is a node in the preview state */
     isPreview?: boolean | number
     /** Whether the object is restricted from the current viewer */
@@ -8351,6 +9709,8 @@ export interface MediaItemRequest{
     parentDatabaseId?: boolean | number
     /** The globally unique identifier of the parent node. */
     parentId?: boolean | number
+    /** The password for the attachment object. */
+    password?: boolean | number
     /** The database id of the preview node */
     previewRevisionDatabaseId?: boolean | number
     /** Whether the object is a node in the preview state */
@@ -8394,6 +9754,7 @@ export interface NodeWithTemplateRequest{
     on_MediaItem?: MediaItemRequest
     on_Page?: PageRequest
     on_Post?: PostRequest
+    on_CentraldeDecorado?: CentraldeDecoradoRequest
     on_Empreendimento?: EmpreendimentoRequest
     on_Banner?: BannerRequest
     __typename?: boolean | number
@@ -8423,6 +9784,7 @@ export interface NodeWithTitleRequest{
     on_MediaItem?: MediaItemRequest
     on_Page?: PageRequest
     on_Post?: PostRequest
+    on_CentraldeDecorado?: CentraldeDecoradoRequest
     on_Empreendimento?: EmpreendimentoRequest
     on_Banner?: BannerRequest
     __typename?: boolean | number
@@ -8541,8 +9903,14 @@ export interface HierarchicalContentNodeRequest{
     guid?: boolean | number
     /** The globally unique ID for the object */
     id?: boolean | number
+    /** Whether the node is a Comment */
+    isComment?: boolean | number
     /** Whether the node is a Content Node */
     isContentNode?: boolean | number
+    /** Whether the node represents the front page. */
+    isFrontPage?: boolean | number
+    /** Whether  the node represents the blog page. */
+    isPostsPage?: boolean | number
     /** Whether the object is a node in the preview state */
     isPreview?: boolean | number
     /** Whether the object is restricted from the current viewer */
@@ -8620,7 +9988,7 @@ name?: (Scalars['String'] | null),
 nameIn?: ((Scalars['String'] | null)[] | null),
 /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
 notIn?: ((Scalars['ID'] | null)[] | null),
-/** What paramater to use to order the objects by. */
+/** What parameter to use to order the objects by. */
 orderby?: ((PostObjectsConnectionOrderbyInput | null)[] | null),
 /** Use ID to return only children. Use 0 to return only top-level items */
 parent?: (Scalars['ID'] | null),
@@ -8711,7 +10079,7 @@ name?: (Scalars['String'] | null),
 nameIn?: ((Scalars['String'] | null)[] | null),
 /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
 notIn?: ((Scalars['ID'] | null)[] | null),
-/** What paramater to use to order the objects by. */
+/** What parameter to use to order the objects by. */
 orderby?: ((PostObjectsConnectionOrderbyInput | null)[] | null),
 /** Use ID to return only children. Use 0 to return only top-level items */
 parent?: (Scalars['ID'] | null),
@@ -8940,6 +10308,8 @@ parentNotIn?: ((Scalars['ID'] | null)[] | null),
 search?: (Scalars['String'] | null),
 /** Comment status to limit results by. */
 status?: (Scalars['String'] | null),
+/** One or more Comment Statuses to limit results by */
+statusIn?: ((CommentStatusEnum | null)[] | null),
 /** Include comments for a specific user ID. */
 userId?: (Scalars['ID'] | null)}
 
@@ -8987,6 +10357,8 @@ export interface MediaItemToCommentConnectionPageInfoRequest{
 export interface MediaDetailsRequest{
     /** The filename of the mediaItem */
     file?: boolean | number
+    /** The path to the mediaItem relative to the uploads directory */
+    filePath?: boolean | number
     /** The height of the mediaItem */
     height?: boolean | number
     /** Meta information associated with the mediaItem */
@@ -9039,6 +10411,8 @@ export interface MediaItemMetaRequest{
 export interface MediaSizeRequest{
     /** The filename of the referenced size */
     file?: boolean | number
+    /** The path of the file for the referenced size (default size is full) */
+    filePath?: boolean | number
     /** The filesize of the resource */
     fileSize?: boolean | number
     /** The height of the referenced size */
@@ -9125,7 +10499,7 @@ name?: (Scalars['String'] | null),
 nameIn?: ((Scalars['String'] | null)[] | null),
 /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
 notIn?: ((Scalars['ID'] | null)[] | null),
-/** What paramater to use to order the objects by. */
+/** What parameter to use to order the objects by. */
 orderby?: ((PostObjectsConnectionOrderbyInput | null)[] | null),
 /** Use ID to return only children. Use 0 to return only top-level items */
 parent?: (Scalars['ID'] | null),
@@ -9215,7 +10589,7 @@ export interface PageRequest{
     before?: (Scalars['String'] | null),
     /** Arguments for filtering the connection */
     where?: (HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgs | null)},HierarchicalContentNodeToContentNodeAncestorsConnectionRequest] | HierarchicalContentNodeToContentNodeAncestorsConnectionRequest
-    /** Added to the GraphQL Schema because the ACF Field Group &quot;Assessoria&quot; was set to Show in GraphQL. */
+    /** Added to the GraphQL Schema because the ACF Field Group &quot;Acessória&quot; was set to Show in GraphQL. */
     assessoria?: Page_AssessoriaRequest
     /** Connection between the NodeWithAuthor type and the User type */
     author?: NodeWithAuthorToUserConnectionEdgeRequest
@@ -9301,10 +10675,14 @@ export interface PageRequest{
     featuredImageId?: boolean | number
     /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
     guid?: boolean | number
+    /** Whether the page object is password protected. */
+    hasPassword?: boolean | number
     /** The globally unique identifier of the page object. */
     id?: boolean | number
     /** Added to the GraphQL Schema because the ACF Field Group &quot;Informações de contato&quot; was set to Show in GraphQL. */
     informacoesDeContato?: Page_InformacoesdecontatoRequest
+    /** Whether the node is a Comment */
+    isComment?: boolean | number
     /** Whether the node is a Content Node */
     isContentNode?: boolean | number
     /** Whether this page is set to the static front page. */
@@ -9342,6 +10720,8 @@ export interface PageRequest{
     parentDatabaseId?: boolean | number
     /** The globally unique identifier of the parent node. */
     parentId?: boolean | number
+    /** The password for the page object. */
+    password?: boolean | number
     /** Connection between the Page type and the page type */
     preview?: PageToPreviewConnectionEdgeRequest
     /** The database id of the preview node */
@@ -9390,6 +10770,7 @@ export interface PreviewableRequest{
     on_ArquivoAssessoria?: ArquivoAssessoriaRequest
     on_Page?: PageRequest
     on_Post?: PostRequest
+    on_CentraldeDecorado?: CentraldeDecoradoRequest
     on_Empreendimento?: EmpreendimentoRequest
     on_Banner?: BannerRequest
     __typename?: boolean | number
@@ -9424,6 +10805,7 @@ export interface NodeWithFeaturedImageRequest{
     id?: boolean | number
     on_Page?: PageRequest
     on_Post?: PostRequest
+    on_CentraldeDecorado?: CentraldeDecoradoRequest
     on_Empreendimento?: EmpreendimentoRequest
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -9483,10 +10865,16 @@ export interface NodeWithPageAttributesRequest{
 export interface MenuItemLinkableRequest{
     /** The unique identifier stored in the database */
     databaseId?: boolean | number
-    /** The unique resource identifier path */
+    /** The globally unique ID for the object */
     id?: boolean | number
+    /** Whether the node is a Comment */
+    isComment?: boolean | number
     /** Whether the node is a Content Node */
     isContentNode?: boolean | number
+    /** Whether the node represents the front page. */
+    isFrontPage?: boolean | number
+    /** Whether  the node represents the blog page. */
+    isPostsPage?: boolean | number
     /** Whether the node is a Term */
     isTermNode?: boolean | number
     /** The unique resource identifier path */
@@ -9495,6 +10883,7 @@ export interface MenuItemLinkableRequest{
     on_Page?: PageRequest
     on_Post?: PostRequest
     on_Category?: CategoryRequest
+    on_CentraldeDecorado?: CentraldeDecoradoRequest
     on_Empreendimento?: EmpreendimentoRequest
     on_Tag?: TagRequest
     on_Banner?: BannerRequest
@@ -9524,6 +10913,7 @@ export interface AcfFieldGroupRequest{
     on_Page_Conteusobre?: Page_ConteusobreRequest
     on_Page_Conteusobre_item?: Page_Conteusobre_itemRequest
     on_Page_Informacoesdecontato?: Page_InformacoesdecontatoRequest
+    on_CentraldeDecorado_Centraldedecorados?: CentraldeDecorado_CentraldedecoradosRequest
     on_Empreendimento_Empreendimento?: Empreendimento_EmpreendimentoRequest
     on_Empreendimento_Empreendimento_andamentoDaObra?: Empreendimento_Empreendimento_andamentoDaObraRequest
     on_Empreendimento_Empreendimento_diferenciaisItems?: Empreendimento_Empreendimento_diferenciaisItemsRequest
@@ -9600,6 +10990,8 @@ parentNotIn?: ((Scalars['ID'] | null)[] | null),
 search?: (Scalars['String'] | null),
 /** Comment status to limit results by. */
 status?: (Scalars['String'] | null),
+/** One or more Comment Statuses to limit results by */
+statusIn?: ((CommentStatusEnum | null)[] | null),
 /** Include comments for a specific user ID. */
 userId?: (Scalars['ID'] | null)}
 
@@ -9731,7 +11123,7 @@ name?: (Scalars['String'] | null),
 nameIn?: ((Scalars['String'] | null)[] | null),
 /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
 notIn?: ((Scalars['ID'] | null)[] | null),
-/** What paramater to use to order the objects by. */
+/** What parameter to use to order the objects by. */
 orderby?: ((PostObjectsConnectionOrderbyInput | null)[] | null),
 /** Use ID to return only children. Use 0 to return only top-level items */
 parent?: (Scalars['ID'] | null),
@@ -9880,7 +11272,7 @@ name?: (Scalars['String'] | null),
 nameIn?: ((Scalars['String'] | null)[] | null),
 /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
 notIn?: ((Scalars['ID'] | null)[] | null),
-/** What paramater to use to order the objects by. */
+/** What parameter to use to order the objects by. */
 orderby?: ((PostObjectsConnectionOrderbyInput | null)[] | null),
 /** Use ID to return only children. Use 0 to return only top-level items */
 parent?: (Scalars['ID'] | null),
@@ -9946,6 +11338,7 @@ export interface PostConnectionRequest{
     /** Information about pagination in a connection. */
     pageInfo?: PostConnectionPageInfoRequest
     on_UserToPostConnection?: UserToPostConnectionRequest
+    on_PostToPostConnection?: PostToPostConnectionRequest
     on_CategoryToPostConnection?: CategoryToPostConnectionRequest
     on_PostFormatToPostConnection?: PostFormatToPostConnectionRequest
     on_PostToRevisionConnection?: PostToRevisionConnectionRequest
@@ -9962,7 +11355,9 @@ export interface PostConnectionEdgeRequest{
     cursor?: boolean | number
     /** The connected post Node */
     node?: PostRequest
+    on_PostToPostConnectionEdge?: PostToPostConnectionEdgeRequest
     on_CategoryToPostConnectionEdge?: CategoryToPostConnectionEdgeRequest
+    on_PostToParentConnectionEdge?: PostToParentConnectionEdgeRequest
     on_PostFormatToPostConnectionEdge?: PostFormatToPostConnectionEdgeRequest
     on_PostToPreviewConnectionEdge?: PostToPreviewConnectionEdgeRequest
     on_PostToRevisionConnectionEdge?: PostToRevisionConnectionEdgeRequest
@@ -9976,6 +11371,19 @@ export interface PostConnectionEdgeRequest{
 
 /** The post type */
 export interface PostRequest{
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * The ancestors of the content node.
+     */
+    ancestors?: [{
+    /** The number of items to return after the referenced "after" cursor */
+    first?: (Scalars['Int'] | null),
+    /** The number of items to return before the referenced "before" cursor */
+    last?: (Scalars['Int'] | null),
+    /** Cursor used along with the "first" argument to reference where in the dataset to get data */
+    after?: (Scalars['String'] | null),
+    /** Cursor used along with the "last" argument to reference where in the dataset to get data */
+    before?: (Scalars['String'] | null)},PostToPostConnectionRequest] | PostToPostConnectionRequest
     /** Connection between the NodeWithAuthor type and the User type */
     author?: NodeWithAuthorToUserConnectionEdgeRequest
     /** The database identifier of the author of the node */
@@ -10062,10 +11470,18 @@ export interface PostRequest{
     featuredImageId?: boolean | number
     /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
     guid?: boolean | number
+    /** Whether the post object is password protected. */
+    hasPassword?: boolean | number
     /** The globally unique identifier of the post object. */
     id?: boolean | number
+    /** Whether the node is a Comment */
+    isComment?: boolean | number
     /** Whether the node is a Content Node */
     isContentNode?: boolean | number
+    /** Whether the node represents the front page. */
+    isFrontPage?: boolean | number
+    /** Whether  the node represents the blog page. */
+    isPostsPage?: boolean | number
     /** Whether the object is a node in the preview state */
     isPreview?: boolean | number
     /** Whether the object is restricted from the current viewer */
@@ -10084,6 +11500,13 @@ export interface PostRequest{
     modified?: boolean | number
     /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
     modifiedGmt?: boolean | number
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have a parent
+     * The parent of the content node.
+     */
+    parent?: PostToParentConnectionEdgeRequest
+    /** The password for the post object. */
+    password?: boolean | number
     /** Whether the pings are open or closed for this particular post. */
     pingStatus?: boolean | number
     /** URLs that have been pinged. */
@@ -10198,6 +11621,73 @@ export interface NodeWithTrackbacksRequest{
 }
 
 
+/** Connection between the Post type and the post type */
+export interface PostToPostConnectionRequest{
+    /** Edges for the PostToPostConnection connection */
+    edges?: PostToPostConnectionEdgeRequest
+    /** The nodes of the connection, without the edges */
+    nodes?: PostRequest
+    /** Information about pagination in a connection. */
+    pageInfo?: PostToPostConnectionPageInfoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** An edge in a connection */
+export interface PostToPostConnectionEdgeRequest{
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * A cursor for use in pagination
+     */
+    cursor?: boolean | number
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * The item at the end of the edge
+     */
+    node?: PostRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Page Info on the &quot;PostToPostConnection&quot; */
+export interface PostToPostConnectionPageInfoRequest{
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: boolean | number
+    /** When paginating forwards, are there more items? */
+    hasNextPage?: boolean | number
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage?: boolean | number
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Page Info on the connected PostConnectionEdge */
+export interface PostConnectionPageInfoRequest{
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: boolean | number
+    /** When paginating forwards, are there more items? */
+    hasNextPage?: boolean | number
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage?: boolean | number
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: boolean | number
+    on_PostToPostConnectionPageInfo?: PostToPostConnectionPageInfoRequest
+    on_CategoryToPostConnectionPageInfo?: CategoryToPostConnectionPageInfoRequest
+    on_PostFormatToPostConnectionPageInfo?: PostFormatToPostConnectionPageInfoRequest
+    on_PostToRevisionConnectionPageInfo?: PostToRevisionConnectionPageInfoRequest
+    on_TagToPostConnectionPageInfo?: TagToPostConnectionPageInfoRequest
+    on_UserToPostConnectionPageInfo?: UserToPostConnectionPageInfoRequest
+    on_RootQueryToPostConnectionPageInfo?: RootQueryToPostConnectionPageInfoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
 /** Arguments for filtering the PostToCategoryConnection connection */
 export interface PostToCategoryConnectionWhereArgs {
 /** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
@@ -10267,6 +11757,7 @@ export interface CategoryConnectionRequest{
     pageInfo?: CategoryConnectionPageInfoRequest
     on_PostToCategoryConnection?: PostToCategoryConnectionRequest
     on_CategoryToAncestorsCategoryConnection?: CategoryToAncestorsCategoryConnectionRequest
+    on_CentraldeDecoradoToCategoryConnection?: CentraldeDecoradoToCategoryConnectionRequest
     on_CategoryToCategoryConnection?: CategoryToCategoryConnectionRequest
     on_EmpreendimentoToCategoryConnection?: EmpreendimentoToCategoryConnectionRequest
     on_RootQueryToCategoryConnection?: RootQueryToCategoryConnectionRequest
@@ -10282,6 +11773,7 @@ export interface CategoryConnectionEdgeRequest{
     /** The connected category Node */
     node?: CategoryRequest
     on_CategoryToAncestorsCategoryConnectionEdge?: CategoryToAncestorsCategoryConnectionEdgeRequest
+    on_CentraldeDecoradoToCategoryConnectionEdge?: CentraldeDecoradoToCategoryConnectionEdgeRequest
     on_CategoryToCategoryConnectionEdge?: CategoryToCategoryConnectionEdgeRequest
     on_EmpreendimentoToCategoryConnectionEdge?: EmpreendimentoToCategoryConnectionEdgeRequest
     on_CategoryToParentCategoryConnectionEdge?: CategoryToParentCategoryConnectionEdgeRequest
@@ -10309,6 +11801,18 @@ export interface CategoryRequest{
      * The id field matches the WP_Post-&gt;ID field.
      */
     categoryId?: boolean | number
+    /** Connection between the Category type and the CentraldeDecorado type */
+    centraldeDecorados?: [{
+    /** The number of items to return after the referenced "after" cursor */
+    first?: (Scalars['Int'] | null),
+    /** The number of items to return before the referenced "before" cursor */
+    last?: (Scalars['Int'] | null),
+    /** Cursor used along with the "first" argument to reference where in the dataset to get data */
+    after?: (Scalars['String'] | null),
+    /** Cursor used along with the "last" argument to reference where in the dataset to get data */
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (CategoryToCentraldeDecoradoConnectionWhereArgs | null)},CategoryToCentraldeDecoradoConnectionRequest] | CategoryToCentraldeDecoradoConnectionRequest
     /** Connection between the category type and its children categories. */
     children?: [{
     /** The number of items to return after the referenced "after" cursor */
@@ -10371,10 +11875,16 @@ export interface CategoryRequest{
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
     before?: (Scalars['String'] | null)},TermNodeToEnqueuedStylesheetConnectionRequest] | TermNodeToEnqueuedStylesheetConnectionRequest
-    /** The unique resource identifier path */
+    /** The globally unique ID for the object */
     id?: boolean | number
+    /** Whether the node is a Comment */
+    isComment?: boolean | number
     /** Whether the node is a Content Node */
     isContentNode?: boolean | number
+    /** Whether the node represents the front page. */
+    isFrontPage?: boolean | number
+    /** Whether  the node represents the blog page. */
+    isPostsPage?: boolean | number
     /** Whether the object is restricted from the current viewer */
     isRestricted?: boolean | number
     /** Whether the node is a Term */
@@ -10418,142 +11928,6 @@ export interface CategoryRequest{
 }
 
 
-/** Terms are nodes within a Taxonomy, used to group and relate other nodes. */
-export interface TermNodeRequest{
-    /** The number of objects connected to the object */
-    count?: boolean | number
-    /** Identifies the primary key from the database. */
-    databaseId?: boolean | number
-    /** The description of the object */
-    description?: boolean | number
-    /** Connection between the TermNode type and the EnqueuedScript type */
-    enqueuedScripts?: [{
-    /** The number of items to return after the referenced "after" cursor */
-    first?: (Scalars['Int'] | null),
-    /** The number of items to return before the referenced "before" cursor */
-    last?: (Scalars['Int'] | null),
-    /** Cursor used along with the "first" argument to reference where in the dataset to get data */
-    after?: (Scalars['String'] | null),
-    /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},TermNodeToEnqueuedScriptConnectionRequest] | TermNodeToEnqueuedScriptConnectionRequest
-    /** Connection between the TermNode type and the EnqueuedStylesheet type */
-    enqueuedStylesheets?: [{
-    /** The number of items to return after the referenced "after" cursor */
-    first?: (Scalars['Int'] | null),
-    /** The number of items to return before the referenced "before" cursor */
-    last?: (Scalars['Int'] | null),
-    /** Cursor used along with the "first" argument to reference where in the dataset to get data */
-    after?: (Scalars['String'] | null),
-    /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},TermNodeToEnqueuedStylesheetConnectionRequest] | TermNodeToEnqueuedStylesheetConnectionRequest
-    /** The unique resource identifier path */
-    id?: boolean | number
-    /** Whether the node is a Content Node */
-    isContentNode?: boolean | number
-    /** Whether the object is restricted from the current viewer */
-    isRestricted?: boolean | number
-    /** Whether the node is a Term */
-    isTermNode?: boolean | number
-    /** The link to the term */
-    link?: boolean | number
-    /** The human friendly name of the object. */
-    name?: boolean | number
-    /** An alphanumeric identifier for the object unique to its type. */
-    slug?: boolean | number
-    /** The name of the taxonomy that the object is associated with */
-    taxonomyName?: boolean | number
-    /** The ID of the term group that this term object belongs to */
-    termGroupId?: boolean | number
-    /** The taxonomy ID that the object is associated with */
-    termTaxonomyId?: boolean | number
-    /** The unique resource identifier path */
-    uri?: boolean | number
-    on_Category?: CategoryRequest
-    on_PostFormat?: PostFormatRequest
-    on_Tag?: TagRequest
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** Connection between the TermNode type and the EnqueuedScript type */
-export interface TermNodeToEnqueuedScriptConnectionRequest{
-    /** Edges for the TermNodeToEnqueuedScriptConnection connection */
-    edges?: TermNodeToEnqueuedScriptConnectionEdgeRequest
-    /** The nodes of the connection, without the edges */
-    nodes?: EnqueuedScriptRequest
-    /** Information about pagination in a connection. */
-    pageInfo?: TermNodeToEnqueuedScriptConnectionPageInfoRequest
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** An edge in a connection */
-export interface TermNodeToEnqueuedScriptConnectionEdgeRequest{
-    /** A cursor for use in pagination */
-    cursor?: boolean | number
-    /** The item at the end of the edge */
-    node?: EnqueuedScriptRequest
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** Page Info on the &quot;TermNodeToEnqueuedScriptConnection&quot; */
-export interface TermNodeToEnqueuedScriptConnectionPageInfoRequest{
-    /** When paginating forwards, the cursor to continue. */
-    endCursor?: boolean | number
-    /** When paginating forwards, are there more items? */
-    hasNextPage?: boolean | number
-    /** When paginating backwards, are there more items? */
-    hasPreviousPage?: boolean | number
-    /** When paginating backwards, the cursor to continue. */
-    startCursor?: boolean | number
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** Connection between the TermNode type and the EnqueuedStylesheet type */
-export interface TermNodeToEnqueuedStylesheetConnectionRequest{
-    /** Edges for the TermNodeToEnqueuedStylesheetConnection connection */
-    edges?: TermNodeToEnqueuedStylesheetConnectionEdgeRequest
-    /** The nodes of the connection, without the edges */
-    nodes?: EnqueuedStylesheetRequest
-    /** Information about pagination in a connection. */
-    pageInfo?: TermNodeToEnqueuedStylesheetConnectionPageInfoRequest
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** An edge in a connection */
-export interface TermNodeToEnqueuedStylesheetConnectionEdgeRequest{
-    /** A cursor for use in pagination */
-    cursor?: boolean | number
-    /** The item at the end of the edge */
-    node?: EnqueuedStylesheetRequest
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** Page Info on the &quot;TermNodeToEnqueuedStylesheetConnection&quot; */
-export interface TermNodeToEnqueuedStylesheetConnectionPageInfoRequest{
-    /** When paginating forwards, the cursor to continue. */
-    endCursor?: boolean | number
-    /** When paginating forwards, are there more items? */
-    hasNextPage?: boolean | number
-    /** When paginating backwards, are there more items? */
-    hasPreviousPage?: boolean | number
-    /** When paginating backwards, the cursor to continue. */
-    startCursor?: boolean | number
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
 /** Term node with hierarchical (parent/child) relationships */
 export interface HierarchicalTermNodeRequest{
     /** The number of objects connected to the object */
@@ -10584,8 +11958,14 @@ export interface HierarchicalTermNodeRequest{
     before?: (Scalars['String'] | null)},TermNodeToEnqueuedStylesheetConnectionRequest] | TermNodeToEnqueuedStylesheetConnectionRequest
     /** The globally unique ID for the object */
     id?: boolean | number
+    /** Whether the node is a Comment */
+    isComment?: boolean | number
     /** Whether the node is a Content Node */
     isContentNode?: boolean | number
+    /** Whether the node represents the front page. */
+    isFrontPage?: boolean | number
+    /** Whether  the node represents the blog page. */
+    isPostsPage?: boolean | number
     /** Whether the object is restricted from the current viewer */
     isRestricted?: boolean | number
     /** Whether the node is a Term */
@@ -10664,10 +12044,567 @@ export interface CategoryConnectionPageInfoRequest{
     /** When paginating backwards, the cursor to continue. */
     startCursor?: boolean | number
     on_CategoryToAncestorsCategoryConnectionPageInfo?: CategoryToAncestorsCategoryConnectionPageInfoRequest
+    on_CentraldeDecoradoToCategoryConnectionPageInfo?: CentraldeDecoradoToCategoryConnectionPageInfoRequest
     on_CategoryToCategoryConnectionPageInfo?: CategoryToCategoryConnectionPageInfoRequest
     on_EmpreendimentoToCategoryConnectionPageInfo?: EmpreendimentoToCategoryConnectionPageInfoRequest
     on_PostToCategoryConnectionPageInfo?: PostToCategoryConnectionPageInfoRequest
     on_RootQueryToCategoryConnectionPageInfo?: RootQueryToCategoryConnectionPageInfoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Arguments for filtering the CategoryToCentraldeDecoradoConnection connection */
+export interface CategoryToCentraldeDecoradoConnectionWhereArgs {
+/** Category ID */
+categoryId?: (Scalars['Int'] | null),
+/** Array of category IDs, used to display objects from one category OR another */
+categoryIn?: ((Scalars['ID'] | null)[] | null),
+/** Use Category Slug */
+categoryName?: (Scalars['String'] | null),
+/** Array of category IDs, used to display objects from one category OR another */
+categoryNotIn?: ((Scalars['ID'] | null)[] | null),
+/** Filter the connection based on dates */
+dateQuery?: (DateQueryInput | null),
+/** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+hasPassword?: (Scalars['Boolean'] | null),
+/** Specific database ID of the object */
+id?: (Scalars['Int'] | null),
+/** Array of IDs for the objects to retrieve */
+in?: ((Scalars['ID'] | null)[] | null),metaQuery?: (CategoryToCentraldeDecoradoConnectionWhereArgsMetaQuery | null),
+/** Get objects with a specific mimeType property */
+mimeType?: (MimeTypeEnum | null),
+/** Slug / post_name of the object */
+name?: (Scalars['String'] | null),
+/** Specify objects to retrieve. Use slugs */
+nameIn?: ((Scalars['String'] | null)[] | null),
+/** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+notIn?: ((Scalars['ID'] | null)[] | null),
+/** What parameter to use to order the objects by. */
+orderby?: ((PostObjectsConnectionOrderbyInput | null)[] | null),
+/** Use ID to return only children. Use 0 to return only top-level items */
+parent?: (Scalars['ID'] | null),
+/** Specify objects whose parent is in an array */
+parentIn?: ((Scalars['ID'] | null)[] | null),
+/** Specify posts whose parent is not in an array */
+parentNotIn?: ((Scalars['ID'] | null)[] | null),
+/** Show posts with a specific password. */
+password?: (Scalars['String'] | null),
+/** Show Posts based on a keyword search */
+search?: (Scalars['String'] | null),
+/** Retrieve posts where post status is in an array. */
+stati?: ((PostStatusEnum | null)[] | null),
+/** Show posts with a specific status. */
+status?: (PostStatusEnum | null),taxQuery?: (TaxQuery | null),
+/** Title of the object */
+title?: (Scalars['String'] | null)}
+
+export interface CategoryToCentraldeDecoradoConnectionWhereArgsMetaQuery {metaArray?: ((CategoryToCentraldeDecoradoConnectionWhereArgsMetaArray | null)[] | null),relation?: (RelationEnum | null)}
+
+export interface CategoryToCentraldeDecoradoConnectionWhereArgsMetaArray {
+/** Custom field value */
+compare?: (CategoryToCentraldeDecoradoConnectionWhereArgsMetaCompareEnum | null),
+/** Custom field key */
+key?: (Scalars['String'] | null),
+/** Custom field value */
+type?: (CategoryToCentraldeDecoradoConnectionWhereArgsMetaTypeEnum | null),
+/** Custom field value */
+value?: (Scalars['String'] | null)}
+
+
+/** Connection between the Category type and the CentraldeDecorado type */
+export interface CategoryToCentraldeDecoradoConnectionRequest{
+    /** Edges for the CategoryToCentraldeDecoradoConnection connection */
+    edges?: CategoryToCentraldeDecoradoConnectionEdgeRequest
+    /** The nodes of the connection, without the edges */
+    nodes?: CentraldeDecoradoRequest
+    /** Information about pagination in a connection. */
+    pageInfo?: CategoryToCentraldeDecoradoConnectionPageInfoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Connection to CentraldeDecorado Nodes */
+export interface CentraldeDecoradoConnectionRequest{
+    /** A list of edges (relational context) between RootQuery and connected CentraldeDecorado Nodes */
+    edges?: CentraldeDecoradoConnectionEdgeRequest
+    /** A list of connected CentraldeDecorado Nodes */
+    nodes?: CentraldeDecoradoRequest
+    /** Information about pagination in a connection. */
+    pageInfo?: CentraldeDecoradoConnectionPageInfoRequest
+    on_CategoryToCentraldeDecoradoConnection?: CategoryToCentraldeDecoradoConnectionRequest
+    on_CentraldeDecoradoToCentraldeDecoradoConnection?: CentraldeDecoradoToCentraldeDecoradoConnectionRequest
+    on_RootQueryToCentraldeDecoradoConnection?: RootQueryToCentraldeDecoradoConnectionRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Edge between a Node and a connected CentraldeDecorado */
+export interface CentraldeDecoradoConnectionEdgeRequest{
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: boolean | number
+    /** The connected CentraldeDecorado Node */
+    node?: CentraldeDecoradoRequest
+    on_CentraldeDecoradoToCentraldeDecoradoConnectionEdge?: CentraldeDecoradoToCentraldeDecoradoConnectionEdgeRequest
+    on_CentraldeDecoradoToParentConnectionEdge?: CentraldeDecoradoToParentConnectionEdgeRequest
+    on_CentraldeDecoradoToPreviewConnectionEdge?: CentraldeDecoradoToPreviewConnectionEdgeRequest
+    on_CategoryToCentraldeDecoradoConnectionEdge?: CategoryToCentraldeDecoradoConnectionEdgeRequest
+    on_RootQueryToCentraldeDecoradoConnectionEdge?: RootQueryToCentraldeDecoradoConnectionEdgeRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** The CentraldeDecorado type */
+export interface CentraldeDecoradoRequest{
+    /**
+     * @deprecated Deprecated in favor of the databaseId field
+     * The id field matches the WP_Post-&gt;ID field.
+     */
+    centraldeDecoradoId?: boolean | number
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * The ancestors of the content node.
+     */
+    ancestors?: [{
+    /** The number of items to return after the referenced "after" cursor */
+    first?: (Scalars['Int'] | null),
+    /** The number of items to return before the referenced "before" cursor */
+    last?: (Scalars['Int'] | null),
+    /** Cursor used along with the "first" argument to reference where in the dataset to get data */
+    after?: (Scalars['String'] | null),
+    /** Cursor used along with the "last" argument to reference where in the dataset to get data */
+    before?: (Scalars['String'] | null)},CentraldeDecoradoToCentraldeDecoradoConnectionRequest] | CentraldeDecoradoToCentraldeDecoradoConnectionRequest
+    /** Connection between the CentraldeDecorado type and the category type */
+    categories?: [{
+    /** The number of items to return after the referenced "after" cursor */
+    first?: (Scalars['Int'] | null),
+    /** The number of items to return before the referenced "before" cursor */
+    last?: (Scalars['Int'] | null),
+    /** Cursor used along with the "first" argument to reference where in the dataset to get data */
+    after?: (Scalars['String'] | null),
+    /** Cursor used along with the "last" argument to reference where in the dataset to get data */
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (CentraldeDecoradoToCategoryConnectionWhereArgs | null)},CentraldeDecoradoToCategoryConnectionRequest] | CentraldeDecoradoToCategoryConnectionRequest
+    /** Added to the GraphQL Schema because the ACF Field Group &quot;Central de decorados&quot; was set to Show in GraphQL. */
+    centralDeDecorados?: CentraldeDecorado_CentraldedecoradosRequest
+    /** Connection between the ContentNode type and the ContentType type */
+    contentType?: ContentNodeToContentTypeConnectionEdgeRequest
+    /** The name of the Content Type the node belongs to */
+    contentTypeName?: boolean | number
+    /** The unique identifier stored in the database */
+    databaseId?: boolean | number
+    /** Post publishing date. */
+    date?: boolean | number
+    /** The publishing date set in GMT. */
+    dateGmt?: boolean | number
+    /** The desired slug of the post */
+    desiredSlug?: boolean | number
+    /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
+    editingLockedBy?: ContentNodeToEditLockConnectionEdgeRequest
+    /** The RSS enclosure for the object */
+    enclosure?: boolean | number
+    /** Connection between the ContentNode type and the EnqueuedScript type */
+    enqueuedScripts?: [{
+    /** The number of items to return after the referenced "after" cursor */
+    first?: (Scalars['Int'] | null),
+    /** The number of items to return before the referenced "before" cursor */
+    last?: (Scalars['Int'] | null),
+    /** Cursor used along with the "first" argument to reference where in the dataset to get data */
+    after?: (Scalars['String'] | null),
+    /** Cursor used along with the "last" argument to reference where in the dataset to get data */
+    before?: (Scalars['String'] | null)},ContentNodeToEnqueuedScriptConnectionRequest] | ContentNodeToEnqueuedScriptConnectionRequest
+    /** Connection between the ContentNode type and the EnqueuedStylesheet type */
+    enqueuedStylesheets?: [{
+    /** The number of items to return after the referenced "after" cursor */
+    first?: (Scalars['Int'] | null),
+    /** The number of items to return before the referenced "before" cursor */
+    last?: (Scalars['Int'] | null),
+    /** Cursor used along with the "first" argument to reference where in the dataset to get data */
+    after?: (Scalars['String'] | null),
+    /** Cursor used along with the "last" argument to reference where in the dataset to get data */
+    before?: (Scalars['String'] | null)},ContentNodeToEnqueuedStylesheetConnectionRequest] | ContentNodeToEnqueuedStylesheetConnectionRequest
+    /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
+    featuredImage?: NodeWithFeaturedImageToMediaItemConnectionEdgeRequest
+    /** The database identifier for the featured image node assigned to the content node */
+    featuredImageDatabaseId?: boolean | number
+    /** Globally unique ID of the featured image assigned to the node */
+    featuredImageId?: boolean | number
+    /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+    guid?: boolean | number
+    /** Whether the centraldecorado object is password protected. */
+    hasPassword?: boolean | number
+    /** The globally unique identifier of the centraldecorado object. */
+    id?: boolean | number
+    /** Whether the node is a Comment */
+    isComment?: boolean | number
+    /** Whether the node is a Content Node */
+    isContentNode?: boolean | number
+    /** Whether the node represents the front page. */
+    isFrontPage?: boolean | number
+    /** Whether  the node represents the blog page. */
+    isPostsPage?: boolean | number
+    /** Whether the object is a node in the preview state */
+    isPreview?: boolean | number
+    /** Whether the object is restricted from the current viewer */
+    isRestricted?: boolean | number
+    /** Whether the node is a Term */
+    isTermNode?: boolean | number
+    /** The user that most recently edited the node */
+    lastEditedBy?: ContentNodeToEditLastConnectionEdgeRequest
+    /** The permalink of the post */
+    link?: boolean | number
+    /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
+    modified?: boolean | number
+    /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
+    modifiedGmt?: boolean | number
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have a parent
+     * The parent of the content node.
+     */
+    parent?: CentraldeDecoradoToParentConnectionEdgeRequest
+    /** The password for the centraldecorado object. */
+    password?: boolean | number
+    /** Connection between the CentraldeDecorado type and the CentraldeDecorado type */
+    preview?: CentraldeDecoradoToPreviewConnectionEdgeRequest
+    /** The database id of the preview node */
+    previewRevisionDatabaseId?: boolean | number
+    /** Whether the object is a node in the preview state */
+    previewRevisionId?: boolean | number
+    /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+    slug?: boolean | number
+    /** The current status of the object */
+    status?: boolean | number
+    /** The template assigned to the node */
+    template?: ContentTemplateRequest
+    /** Connection between the CentraldeDecorado type and the TermNode type */
+    terms?: [{
+    /** The number of items to return after the referenced "after" cursor */
+    first?: (Scalars['Int'] | null),
+    /** The number of items to return before the referenced "before" cursor */
+    last?: (Scalars['Int'] | null),
+    /** Cursor used along with the "first" argument to reference where in the dataset to get data */
+    after?: (Scalars['String'] | null),
+    /** Cursor used along with the "last" argument to reference where in the dataset to get data */
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (CentraldeDecoradoToTermNodeConnectionWhereArgs | null)},CentraldeDecoradoToTermNodeConnectionRequest] | CentraldeDecoradoToTermNodeConnectionRequest
+    /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
+    title?: [{
+    /** Format of the field output */
+    format?: (PostObjectFieldFormatEnum | null)}] | boolean | number
+    /** The unique resource identifier path */
+    uri?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Connection between the CentraldeDecorado type and the CentraldeDecorado type */
+export interface CentraldeDecoradoToCentraldeDecoradoConnectionRequest{
+    /** Edges for the CentraldeDecoradoToCentraldeDecoradoConnection connection */
+    edges?: CentraldeDecoradoToCentraldeDecoradoConnectionEdgeRequest
+    /** The nodes of the connection, without the edges */
+    nodes?: CentraldeDecoradoRequest
+    /** Information about pagination in a connection. */
+    pageInfo?: CentraldeDecoradoToCentraldeDecoradoConnectionPageInfoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** An edge in a connection */
+export interface CentraldeDecoradoToCentraldeDecoradoConnectionEdgeRequest{
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * A cursor for use in pagination
+     */
+    cursor?: boolean | number
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * The item at the end of the edge
+     */
+    node?: CentraldeDecoradoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Page Info on the &quot;CentraldeDecoradoToCentraldeDecoradoConnection&quot; */
+export interface CentraldeDecoradoToCentraldeDecoradoConnectionPageInfoRequest{
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: boolean | number
+    /** When paginating forwards, are there more items? */
+    hasNextPage?: boolean | number
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage?: boolean | number
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Page Info on the connected CentraldeDecoradoConnectionEdge */
+export interface CentraldeDecoradoConnectionPageInfoRequest{
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: boolean | number
+    /** When paginating forwards, are there more items? */
+    hasNextPage?: boolean | number
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage?: boolean | number
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: boolean | number
+    on_CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo?: CentraldeDecoradoToCentraldeDecoradoConnectionPageInfoRequest
+    on_CategoryToCentraldeDecoradoConnectionPageInfo?: CategoryToCentraldeDecoradoConnectionPageInfoRequest
+    on_RootQueryToCentraldeDecoradoConnectionPageInfo?: RootQueryToCentraldeDecoradoConnectionPageInfoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Arguments for filtering the CentraldeDecoradoToCategoryConnection connection */
+export interface CentraldeDecoradoToCategoryConnectionWhereArgs {
+/** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
+cacheDomain?: (Scalars['String'] | null),
+/** Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0. */
+childOf?: (Scalars['Int'] | null),
+/** True to limit results to terms that have no children. This parameter has no effect on non-hierarchical taxonomies. Default false. */
+childless?: (Scalars['Boolean'] | null),
+/** Retrieve terms where the description is LIKE the input value. Default empty. */
+descriptionLike?: (Scalars['String'] | null),
+/** Array of term ids to exclude. If $include is non-empty, $exclude is ignored. Default empty array. */
+exclude?: ((Scalars['ID'] | null)[] | null),
+/** Array of term ids to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array. */
+excludeTree?: ((Scalars['ID'] | null)[] | null),
+/** Whether to hide terms not assigned to any posts. Accepts true or false. Default false */
+hideEmpty?: (Scalars['Boolean'] | null),
+/** Whether to include terms that have non-empty descendants (even if $hide_empty is set to true). Default true. */
+hierarchical?: (Scalars['Boolean'] | null),
+/** Array of term ids to include. Default empty array. */
+include?: ((Scalars['ID'] | null)[] | null),
+/** Array of names to return term(s) for. Default empty. */
+name?: ((Scalars['String'] | null)[] | null),
+/** Retrieve terms where the name is LIKE the input value. Default empty. */
+nameLike?: (Scalars['String'] | null),
+/** Array of object IDs. Results will be limited to terms associated with these objects. */
+objectIds?: ((Scalars['ID'] | null)[] | null),
+/** Direction the connection should be ordered in */
+order?: (OrderEnum | null),
+/** Field(s) to order terms by. Defaults to 'name'. */
+orderby?: (TermObjectsConnectionOrderbyEnum | null),
+/** Whether to pad the quantity of a term's children in the quantity of each term's "count" object variable. Default false. */
+padCounts?: (Scalars['Boolean'] | null),
+/** Parent term ID to retrieve direct-child terms of. Default empty. */
+parent?: (Scalars['Int'] | null),
+/** Search criteria to match terms. Will be SQL-formatted with wildcards before and after. Default empty. */
+search?: (Scalars['String'] | null),
+/** Array of slugs to return term(s) for. Default empty. */
+slug?: ((Scalars['String'] | null)[] | null),
+/** Array of term taxonomy IDs, to match when querying terms. */
+termTaxonomId?: ((Scalars['ID'] | null)[] | null),
+/** Array of term taxonomy IDs, to match when querying terms. */
+termTaxonomyId?: ((Scalars['ID'] | null)[] | null),
+/** Whether to prime meta caches for matched terms. Default true. */
+updateTermMetaCache?: (Scalars['Boolean'] | null)}
+
+
+/** Connection between the CentraldeDecorado type and the category type */
+export interface CentraldeDecoradoToCategoryConnectionRequest{
+    /** Edges for the CentraldeDecoradoToCategoryConnection connection */
+    edges?: CentraldeDecoradoToCategoryConnectionEdgeRequest
+    /** The nodes of the connection, without the edges */
+    nodes?: CategoryRequest
+    /** Information about pagination in a connection. */
+    pageInfo?: CentraldeDecoradoToCategoryConnectionPageInfoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** An edge in a connection */
+export interface CentraldeDecoradoToCategoryConnectionEdgeRequest{
+    /** A cursor for use in pagination */
+    cursor?: boolean | number
+    /** The item at the end of the edge */
+    node?: CategoryRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Page Info on the &quot;CentraldeDecoradoToCategoryConnection&quot; */
+export interface CentraldeDecoradoToCategoryConnectionPageInfoRequest{
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: boolean | number
+    /** When paginating forwards, are there more items? */
+    hasNextPage?: boolean | number
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage?: boolean | number
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Field Group */
+export interface CentraldeDecorado_CentraldedecoradosRequest{
+    atendimentoDomingo?: boolean | number
+    atendimentoFeriado?: boolean | number
+    atendimentoSabado?: boolean | number
+    atendimentoSemana?: boolean | number
+    enderecoBairro?: boolean | number
+    enderecoCidade?: boolean | number
+    enderecoNumero?: boolean | number
+    enderecoRua?: boolean | number
+    /** The name of the ACF Field Group */
+    fieldGroupName?: boolean | number
+    /** Resolução recomendada: 1920 x 1080px. */
+    imagemPrincipal?: MediaItemRequest
+    telefone?: boolean | number
+    whatsapp?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Connection between the CentraldeDecorado type and the CentraldeDecorado type */
+export interface CentraldeDecoradoToParentConnectionEdgeRequest{
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: boolean | number
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have a parent
+     * The node of the connection, without the edges
+     */
+    node?: CentraldeDecoradoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Connection between the CentraldeDecorado type and the CentraldeDecorado type */
+export interface CentraldeDecoradoToPreviewConnectionEdgeRequest{
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: boolean | number
+    /** The node of the connection, without the edges */
+    node?: CentraldeDecoradoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Arguments for filtering the CentraldeDecoradoToTermNodeConnection connection */
+export interface CentraldeDecoradoToTermNodeConnectionWhereArgs {
+/** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
+cacheDomain?: (Scalars['String'] | null),
+/** Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0. */
+childOf?: (Scalars['Int'] | null),
+/** True to limit results to terms that have no children. This parameter has no effect on non-hierarchical taxonomies. Default false. */
+childless?: (Scalars['Boolean'] | null),
+/** Retrieve terms where the description is LIKE the input value. Default empty. */
+descriptionLike?: (Scalars['String'] | null),
+/** Array of term ids to exclude. If $include is non-empty, $exclude is ignored. Default empty array. */
+exclude?: ((Scalars['ID'] | null)[] | null),
+/** Array of term ids to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array. */
+excludeTree?: ((Scalars['ID'] | null)[] | null),
+/** Whether to hide terms not assigned to any posts. Accepts true or false. Default false */
+hideEmpty?: (Scalars['Boolean'] | null),
+/** Whether to include terms that have non-empty descendants (even if $hide_empty is set to true). Default true. */
+hierarchical?: (Scalars['Boolean'] | null),
+/** Array of term ids to include. Default empty array. */
+include?: ((Scalars['ID'] | null)[] | null),
+/** Array of names to return term(s) for. Default empty. */
+name?: ((Scalars['String'] | null)[] | null),
+/** Retrieve terms where the name is LIKE the input value. Default empty. */
+nameLike?: (Scalars['String'] | null),
+/** Array of object IDs. Results will be limited to terms associated with these objects. */
+objectIds?: ((Scalars['ID'] | null)[] | null),
+/** Direction the connection should be ordered in */
+order?: (OrderEnum | null),
+/** Field(s) to order terms by. Defaults to 'name'. */
+orderby?: (TermObjectsConnectionOrderbyEnum | null),
+/** Whether to pad the quantity of a term's children in the quantity of each term's "count" object variable. Default false. */
+padCounts?: (Scalars['Boolean'] | null),
+/** Parent term ID to retrieve direct-child terms of. Default empty. */
+parent?: (Scalars['Int'] | null),
+/** Search criteria to match terms. Will be SQL-formatted with wildcards before and after. Default empty. */
+search?: (Scalars['String'] | null),
+/** Array of slugs to return term(s) for. Default empty. */
+slug?: ((Scalars['String'] | null)[] | null),
+/** The Taxonomy to filter terms by */
+taxonomies?: ((TaxonomyEnum | null)[] | null),
+/** Array of term taxonomy IDs, to match when querying terms. */
+termTaxonomId?: ((Scalars['ID'] | null)[] | null),
+/** Array of term taxonomy IDs, to match when querying terms. */
+termTaxonomyId?: ((Scalars['ID'] | null)[] | null),
+/** Whether to prime meta caches for matched terms. Default true. */
+updateTermMetaCache?: (Scalars['Boolean'] | null)}
+
+
+/** Connection between the CentraldeDecorado type and the TermNode type */
+export interface CentraldeDecoradoToTermNodeConnectionRequest{
+    /** Edges for the CentraldeDecoradoToTermNodeConnection connection */
+    edges?: CentraldeDecoradoToTermNodeConnectionEdgeRequest
+    /** The nodes of the connection, without the edges */
+    nodes?: TermNodeRequest
+    /** Information about pagination in a connection. */
+    pageInfo?: CentraldeDecoradoToTermNodeConnectionPageInfoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** An edge in a connection */
+export interface CentraldeDecoradoToTermNodeConnectionEdgeRequest{
+    /** A cursor for use in pagination */
+    cursor?: boolean | number
+    /** The item at the end of the edge */
+    node?: TermNodeRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Page Info on the &quot;CentraldeDecoradoToTermNodeConnection&quot; */
+export interface CentraldeDecoradoToTermNodeConnectionPageInfoRequest{
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: boolean | number
+    /** When paginating forwards, are there more items? */
+    hasNextPage?: boolean | number
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage?: boolean | number
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** An edge in a connection */
+export interface CategoryToCentraldeDecoradoConnectionEdgeRequest{
+    /** A cursor for use in pagination */
+    cursor?: boolean | number
+    /** The item at the end of the edge */
+    node?: CentraldeDecoradoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Page Info on the &quot;CategoryToCentraldeDecoradoConnection&quot; */
+export interface CategoryToCentraldeDecoradoConnectionPageInfoRequest{
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: boolean | number
+    /** When paginating forwards, are there more items? */
+    hasNextPage?: boolean | number
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage?: boolean | number
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -10778,7 +12715,7 @@ name?: (Scalars['String'] | null),
 nameIn?: ((Scalars['String'] | null)[] | null),
 /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
 notIn?: ((Scalars['ID'] | null)[] | null),
-/** What paramater to use to order the objects by. */
+/** What parameter to use to order the objects by. */
 orderby?: ((PostObjectsConnectionOrderbyInput | null)[] | null),
 /** Use ID to return only children. Use 0 to return only top-level items */
 parent?: (Scalars['ID'] | null),
@@ -10875,7 +12812,7 @@ name?: (Scalars['String'] | null),
 nameIn?: ((Scalars['String'] | null)[] | null),
 /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
 notIn?: ((Scalars['ID'] | null)[] | null),
-/** What paramater to use to order the objects by. */
+/** What parameter to use to order the objects by. */
 orderby?: ((PostObjectsConnectionOrderbyInput | null)[] | null),
 /** Use ID to return only children. Use 0 to return only top-level items */
 parent?: (Scalars['ID'] | null),
@@ -10929,6 +12866,7 @@ export interface EmpreendimentoConnectionRequest{
     /** Information about pagination in a connection. */
     pageInfo?: EmpreendimentoConnectionPageInfoRequest
     on_CategoryToEmpreendimentoConnection?: CategoryToEmpreendimentoConnectionRequest
+    on_EmpreendimentoToEmpreendimentoConnection?: EmpreendimentoToEmpreendimentoConnectionRequest
     on_RootQueryToEmpreendimentoConnection?: RootQueryToEmpreendimentoConnectionRequest
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -10941,6 +12879,8 @@ export interface EmpreendimentoConnectionEdgeRequest{
     cursor?: boolean | number
     /** The connected Empreendimento Node */
     node?: EmpreendimentoRequest
+    on_EmpreendimentoToEmpreendimentoConnectionEdge?: EmpreendimentoToEmpreendimentoConnectionEdgeRequest
+    on_EmpreendimentoToParentConnectionEdge?: EmpreendimentoToParentConnectionEdgeRequest
     on_EmpreendimentoToPreviewConnectionEdge?: EmpreendimentoToPreviewConnectionEdgeRequest
     on_CategoryToEmpreendimentoConnectionEdge?: CategoryToEmpreendimentoConnectionEdgeRequest
     on_RootQueryToEmpreendimentoConnectionEdge?: RootQueryToEmpreendimentoConnectionEdgeRequest
@@ -10956,6 +12896,19 @@ export interface EmpreendimentoRequest{
      * The id field matches the WP_Post-&gt;ID field.
      */
     empreendimentoId?: boolean | number
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * The ancestors of the content node.
+     */
+    ancestors?: [{
+    /** The number of items to return after the referenced "after" cursor */
+    first?: (Scalars['Int'] | null),
+    /** The number of items to return before the referenced "before" cursor */
+    last?: (Scalars['Int'] | null),
+    /** Cursor used along with the "first" argument to reference where in the dataset to get data */
+    after?: (Scalars['String'] | null),
+    /** Cursor used along with the "last" argument to reference where in the dataset to get data */
+    before?: (Scalars['String'] | null)},EmpreendimentoToEmpreendimentoConnectionRequest] | EmpreendimentoToEmpreendimentoConnectionRequest
     /** Connection between the Empreendimento type and the category type */
     categories?: [{
     /** The number of items to return after the referenced "after" cursor */
@@ -11014,12 +12967,20 @@ export interface EmpreendimentoRequest{
     featuredImageId?: boolean | number
     /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
     guid?: boolean | number
+    /** Whether the empreendimentos object is password protected. */
+    hasPassword?: boolean | number
     /** Added to the GraphQL Schema because the ACF Field Group &quot;Housi - Verso&quot; was set to Show in GraphQL. */
     housiVerso?: Empreendimento_HousiversoRequest
     /** The globally unique identifier of the empreendimentos object. */
     id?: boolean | number
+    /** Whether the node is a Comment */
+    isComment?: boolean | number
     /** Whether the node is a Content Node */
     isContentNode?: boolean | number
+    /** Whether the node represents the front page. */
+    isFrontPage?: boolean | number
+    /** Whether  the node represents the blog page. */
+    isPostsPage?: boolean | number
     /** Whether the object is a node in the preview state */
     isPreview?: boolean | number
     /** Whether the object is restricted from the current viewer */
@@ -11034,6 +12995,13 @@ export interface EmpreendimentoRequest{
     modified?: boolean | number
     /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
     modifiedGmt?: boolean | number
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have a parent
+     * The parent of the content node.
+     */
+    parent?: EmpreendimentoToParentConnectionEdgeRequest
+    /** The password for the empreendimentos object. */
+    password?: boolean | number
     /** Connection between the Empreendimento type and the Empreendimento type */
     preview?: EmpreendimentoToPreviewConnectionEdgeRequest
     /** The database id of the preview node */
@@ -11064,6 +13032,69 @@ export interface EmpreendimentoRequest{
     format?: (PostObjectFieldFormatEnum | null)}] | boolean | number
     /** The unique resource identifier path */
     uri?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Connection between the Empreendimento type and the Empreendimento type */
+export interface EmpreendimentoToEmpreendimentoConnectionRequest{
+    /** Edges for the EmpreendimentoToEmpreendimentoConnection connection */
+    edges?: EmpreendimentoToEmpreendimentoConnectionEdgeRequest
+    /** The nodes of the connection, without the edges */
+    nodes?: EmpreendimentoRequest
+    /** Information about pagination in a connection. */
+    pageInfo?: EmpreendimentoToEmpreendimentoConnectionPageInfoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** An edge in a connection */
+export interface EmpreendimentoToEmpreendimentoConnectionEdgeRequest{
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * A cursor for use in pagination
+     */
+    cursor?: boolean | number
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * The item at the end of the edge
+     */
+    node?: EmpreendimentoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Page Info on the &quot;EmpreendimentoToEmpreendimentoConnection&quot; */
+export interface EmpreendimentoToEmpreendimentoConnectionPageInfoRequest{
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: boolean | number
+    /** When paginating forwards, are there more items? */
+    hasNextPage?: boolean | number
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage?: boolean | number
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Page Info on the connected EmpreendimentoConnectionEdge */
+export interface EmpreendimentoConnectionPageInfoRequest{
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: boolean | number
+    /** When paginating forwards, are there more items? */
+    hasNextPage?: boolean | number
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage?: boolean | number
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: boolean | number
+    on_EmpreendimentoToEmpreendimentoConnectionPageInfo?: EmpreendimentoToEmpreendimentoConnectionPageInfoRequest
+    on_CategoryToEmpreendimentoConnectionPageInfo?: CategoryToEmpreendimentoConnectionPageInfoRequest
+    on_RootQueryToEmpreendimentoConnectionPageInfo?: RootQueryToEmpreendimentoConnectionPageInfoRequest
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -11282,6 +13313,20 @@ export interface Empreendimento_Housiverso_diferencialRequest{
 
 
 /** Connection between the Empreendimento type and the Empreendimento type */
+export interface EmpreendimentoToParentConnectionEdgeRequest{
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: boolean | number
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have a parent
+     * The node of the connection, without the edges
+     */
+    node?: EmpreendimentoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Connection between the Empreendimento type and the Empreendimento type */
 export interface EmpreendimentoToPreviewConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -11353,54 +13398,6 @@ export interface EmpreendimentoToTermNodeConnectionRequest{
 }
 
 
-/** Connection to TermNode Nodes */
-export interface TermNodeConnectionRequest{
-    /** A list of edges (relational context) between RootQuery and connected TermNode Nodes */
-    edges?: TermNodeConnectionEdgeRequest
-    /** A list of connected TermNode Nodes */
-    nodes?: TermNodeRequest
-    /** Information about pagination in a connection. */
-    pageInfo?: TermNodeConnectionPageInfoRequest
-    on_EmpreendimentoToTermNodeConnection?: EmpreendimentoToTermNodeConnectionRequest
-    on_PostToTermNodeConnection?: PostToTermNodeConnectionRequest
-    on_RootQueryToTermNodeConnection?: RootQueryToTermNodeConnectionRequest
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** Edge between a Node and a connected TermNode */
-export interface TermNodeConnectionEdgeRequest{
-    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-    cursor?: boolean | number
-    /** The connected TermNode Node */
-    node?: TermNodeRequest
-    on_EmpreendimentoToTermNodeConnectionEdge?: EmpreendimentoToTermNodeConnectionEdgeRequest
-    on_PostToTermNodeConnectionEdge?: PostToTermNodeConnectionEdgeRequest
-    on_RootQueryToTermNodeConnectionEdge?: RootQueryToTermNodeConnectionEdgeRequest
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** Page Info on the connected TermNodeConnectionEdge */
-export interface TermNodeConnectionPageInfoRequest{
-    /** When paginating forwards, the cursor to continue. */
-    endCursor?: boolean | number
-    /** When paginating forwards, are there more items? */
-    hasNextPage?: boolean | number
-    /** When paginating backwards, are there more items? */
-    hasPreviousPage?: boolean | number
-    /** When paginating backwards, the cursor to continue. */
-    startCursor?: boolean | number
-    on_EmpreendimentoToTermNodeConnectionPageInfo?: EmpreendimentoToTermNodeConnectionPageInfoRequest
-    on_PostToTermNodeConnectionPageInfo?: PostToTermNodeConnectionPageInfoRequest
-    on_RootQueryToTermNodeConnectionPageInfo?: RootQueryToTermNodeConnectionPageInfoRequest
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
 /** An edge in a connection */
 export interface EmpreendimentoToTermNodeConnectionEdgeRequest{
     /** A cursor for use in pagination */
@@ -11422,23 +13419,6 @@ export interface EmpreendimentoToTermNodeConnectionPageInfoRequest{
     hasPreviousPage?: boolean | number
     /** When paginating backwards, the cursor to continue. */
     startCursor?: boolean | number
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** Page Info on the connected EmpreendimentoConnectionEdge */
-export interface EmpreendimentoConnectionPageInfoRequest{
-    /** When paginating forwards, the cursor to continue. */
-    endCursor?: boolean | number
-    /** When paginating forwards, are there more items? */
-    hasNextPage?: boolean | number
-    /** When paginating backwards, are there more items? */
-    hasPreviousPage?: boolean | number
-    /** When paginating backwards, the cursor to continue. */
-    startCursor?: boolean | number
-    on_CategoryToEmpreendimentoConnectionPageInfo?: CategoryToEmpreendimentoConnectionPageInfoRequest
-    on_RootQueryToEmpreendimentoConnectionPageInfo?: RootQueryToEmpreendimentoConnectionPageInfoRequest
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -11515,7 +13495,7 @@ name?: (Scalars['String'] | null),
 nameIn?: ((Scalars['String'] | null)[] | null),
 /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
 notIn?: ((Scalars['ID'] | null)[] | null),
-/** What paramater to use to order the objects by. */
+/** What parameter to use to order the objects by. */
 orderby?: ((PostObjectsConnectionOrderbyInput | null)[] | null),
 /** Use ID to return only children. Use 0 to return only top-level items */
 parent?: (Scalars['ID'] | null),
@@ -11593,27 +13573,6 @@ export interface CategoryToPostConnectionPageInfoRequest{
     hasPreviousPage?: boolean | number
     /** When paginating backwards, the cursor to continue. */
     startCursor?: boolean | number
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** Page Info on the connected PostConnectionEdge */
-export interface PostConnectionPageInfoRequest{
-    /** When paginating forwards, the cursor to continue. */
-    endCursor?: boolean | number
-    /** When paginating forwards, are there more items? */
-    hasNextPage?: boolean | number
-    /** When paginating backwards, are there more items? */
-    hasPreviousPage?: boolean | number
-    /** When paginating backwards, the cursor to continue. */
-    startCursor?: boolean | number
-    on_CategoryToPostConnectionPageInfo?: CategoryToPostConnectionPageInfoRequest
-    on_PostFormatToPostConnectionPageInfo?: PostFormatToPostConnectionPageInfoRequest
-    on_PostToRevisionConnectionPageInfo?: PostToRevisionConnectionPageInfoRequest
-    on_TagToPostConnectionPageInfo?: TagToPostConnectionPageInfoRequest
-    on_UserToPostConnectionPageInfo?: UserToPostConnectionPageInfoRequest
-    on_RootQueryToPostConnectionPageInfo?: RootQueryToPostConnectionPageInfoRequest
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -11714,6 +13673,8 @@ parentNotIn?: ((Scalars['ID'] | null)[] | null),
 search?: (Scalars['String'] | null),
 /** Comment status to limit results by. */
 status?: (Scalars['String'] | null),
+/** One or more Comment Statuses to limit results by */
+statusIn?: ((CommentStatusEnum | null)[] | null),
 /** Include comments for a specific user ID. */
 userId?: (Scalars['ID'] | null)}
 
@@ -11752,6 +13713,20 @@ export interface PostToCommentConnectionPageInfoRequest{
     hasPreviousPage?: boolean | number
     /** When paginating backwards, the cursor to continue. */
     startCursor?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Connection between the Post type and the post type */
+export interface PostToParentConnectionEdgeRequest{
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: boolean | number
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have a parent
+     * The node of the connection, without the edges
+     */
+    node?: PostRequest
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -11884,10 +13859,16 @@ export interface PostFormatRequest{
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
     before?: (Scalars['String'] | null)},TermNodeToEnqueuedStylesheetConnectionRequest] | TermNodeToEnqueuedStylesheetConnectionRequest
-    /** The unique resource identifier path */
+    /** The globally unique ID for the object */
     id?: boolean | number
+    /** Whether the node is a Comment */
+    isComment?: boolean | number
     /** Whether the node is a Content Node */
     isContentNode?: boolean | number
+    /** Whether the node represents the front page. */
+    isFrontPage?: boolean | number
+    /** Whether  the node represents the blog page. */
+    isPostsPage?: boolean | number
     /** Whether the object is restricted from the current viewer */
     isRestricted?: boolean | number
     /** Whether the node is a Term */
@@ -11950,7 +13931,7 @@ name?: (Scalars['String'] | null),
 nameIn?: ((Scalars['String'] | null)[] | null),
 /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
 notIn?: ((Scalars['ID'] | null)[] | null),
-/** What paramater to use to order the objects by. */
+/** What parameter to use to order the objects by. */
 orderby?: ((PostObjectsConnectionOrderbyInput | null)[] | null),
 /** Use ID to return only children. Use 0 to return only top-level items */
 parent?: (Scalars['ID'] | null),
@@ -12055,7 +14036,7 @@ name?: (Scalars['String'] | null),
 nameIn?: ((Scalars['String'] | null)[] | null),
 /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
 notIn?: ((Scalars['ID'] | null)[] | null),
-/** What paramater to use to order the objects by. */
+/** What parameter to use to order the objects by. */
 orderby?: ((PostObjectsConnectionOrderbyInput | null)[] | null),
 /** Use ID to return only children. Use 0 to return only top-level items */
 parent?: (Scalars['ID'] | null),
@@ -12237,7 +14218,7 @@ name?: (Scalars['String'] | null),
 nameIn?: ((Scalars['String'] | null)[] | null),
 /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
 notIn?: ((Scalars['ID'] | null)[] | null),
-/** What paramater to use to order the objects by. */
+/** What parameter to use to order the objects by. */
 orderby?: ((PostObjectsConnectionOrderbyInput | null)[] | null),
 /** Use ID to return only children. Use 0 to return only top-level items */
 parent?: (Scalars['ID'] | null),
@@ -12447,10 +14428,16 @@ export interface TagRequest{
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
     before?: (Scalars['String'] | null)},TermNodeToEnqueuedStylesheetConnectionRequest] | TermNodeToEnqueuedStylesheetConnectionRequest
-    /** The unique resource identifier path */
+    /** The globally unique ID for the object */
     id?: boolean | number
+    /** Whether the node is a Comment */
+    isComment?: boolean | number
     /** Whether the node is a Content Node */
     isContentNode?: boolean | number
+    /** Whether the node represents the front page. */
+    isFrontPage?: boolean | number
+    /** Whether  the node represents the blog page. */
+    isPostsPage?: boolean | number
     /** Whether the object is restricted from the current viewer */
     isRestricted?: boolean | number
     /** Whether the node is a Term */
@@ -12513,7 +14500,7 @@ name?: (Scalars['String'] | null),
 nameIn?: ((Scalars['String'] | null)[] | null),
 /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
 notIn?: ((Scalars['ID'] | null)[] | null),
-/** What paramater to use to order the objects by. */
+/** What parameter to use to order the objects by. */
 orderby?: ((PostObjectsConnectionOrderbyInput | null)[] | null),
 /** Use ID to return only children. Use 0 to return only top-level items */
 parent?: (Scalars['ID'] | null),
@@ -12618,7 +14605,7 @@ name?: (Scalars['String'] | null),
 nameIn?: ((Scalars['String'] | null)[] | null),
 /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
 notIn?: ((Scalars['ID'] | null)[] | null),
-/** What paramater to use to order the objects by. */
+/** What parameter to use to order the objects by. */
 orderby?: ((PostObjectsConnectionOrderbyInput | null)[] | null),
 /** Use ID to return only children. Use 0 to return only top-level items */
 parent?: (Scalars['ID'] | null),
@@ -12888,7 +14875,7 @@ name?: (Scalars['String'] | null),
 nameIn?: ((Scalars['String'] | null)[] | null),
 /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
 notIn?: ((Scalars['ID'] | null)[] | null),
-/** What paramater to use to order the objects by. */
+/** What parameter to use to order the objects by. */
 orderby?: ((PostObjectsConnectionOrderbyInput | null)[] | null),
 /** Use ID to return only children. Use 0 to return only top-level items */
 parent?: (Scalars['ID'] | null),
@@ -13060,6 +15047,98 @@ export interface UserToUserRoleConnectionPageInfoRequest{
 }
 
 
+/** Connection between the ArquivoAssessoria type and the ArquivoAssessoria type */
+export interface ArquivoAssessoriaToArquivoAssessoriaConnectionRequest{
+    /** Edges for the ArquivoAssessoriaToArquivoAssessoriaConnection connection */
+    edges?: ArquivoAssessoriaToArquivoAssessoriaConnectionEdgeRequest
+    /** The nodes of the connection, without the edges */
+    nodes?: ArquivoAssessoriaRequest
+    /** Information about pagination in a connection. */
+    pageInfo?: ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Connection to ArquivoAssessoria Nodes */
+export interface ArquivoAssessoriaConnectionRequest{
+    /** A list of edges (relational context) between RootQuery and connected ArquivoAssessoria Nodes */
+    edges?: ArquivoAssessoriaConnectionEdgeRequest
+    /** A list of connected ArquivoAssessoria Nodes */
+    nodes?: ArquivoAssessoriaRequest
+    /** Information about pagination in a connection. */
+    pageInfo?: ArquivoAssessoriaConnectionPageInfoRequest
+    on_ArquivoAssessoriaToArquivoAssessoriaConnection?: ArquivoAssessoriaToArquivoAssessoriaConnectionRequest
+    on_RootQueryToArquivoAssessoriaConnection?: RootQueryToArquivoAssessoriaConnectionRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Edge between a Node and a connected ArquivoAssessoria */
+export interface ArquivoAssessoriaConnectionEdgeRequest{
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: boolean | number
+    /** The connected ArquivoAssessoria Node */
+    node?: ArquivoAssessoriaRequest
+    on_ArquivoAssessoriaToArquivoAssessoriaConnectionEdge?: ArquivoAssessoriaToArquivoAssessoriaConnectionEdgeRequest
+    on_ArquivoAssessoriaToParentConnectionEdge?: ArquivoAssessoriaToParentConnectionEdgeRequest
+    on_ArquivoAssessoriaToPreviewConnectionEdge?: ArquivoAssessoriaToPreviewConnectionEdgeRequest
+    on_RootQueryToArquivoAssessoriaConnectionEdge?: RootQueryToArquivoAssessoriaConnectionEdgeRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Page Info on the connected ArquivoAssessoriaConnectionEdge */
+export interface ArquivoAssessoriaConnectionPageInfoRequest{
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: boolean | number
+    /** When paginating forwards, are there more items? */
+    hasNextPage?: boolean | number
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage?: boolean | number
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: boolean | number
+    on_ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo?: ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfoRequest
+    on_RootQueryToArquivoAssessoriaConnectionPageInfo?: RootQueryToArquivoAssessoriaConnectionPageInfoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** An edge in a connection */
+export interface ArquivoAssessoriaToArquivoAssessoriaConnectionEdgeRequest{
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * A cursor for use in pagination
+     */
+    cursor?: boolean | number
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * The item at the end of the edge
+     */
+    node?: ArquivoAssessoriaRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Page Info on the &quot;ArquivoAssessoriaToArquivoAssessoriaConnection&quot; */
+export interface ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfoRequest{
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: boolean | number
+    /** When paginating forwards, are there more items? */
+    hasNextPage?: boolean | number
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage?: boolean | number
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
 /** Field Group */
 export interface ArquivoAssessoria_DownAssessoriaRequest{
     downDescricao?: boolean | number
@@ -13075,24 +15154,25 @@ export interface ArquivoAssessoria_DownAssessoriaRequest{
 
 
 /** Connection between the ArquivoAssessoria type and the ArquivoAssessoria type */
-export interface ArquivoAssessoriaToPreviewConnectionEdgeRequest{
+export interface ArquivoAssessoriaToParentConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
-    /** The node of the connection, without the edges */
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have a parent
+     * The node of the connection, without the edges
+     */
     node?: ArquivoAssessoriaRequest
     __typename?: boolean | number
     __scalar?: boolean | number
 }
 
 
-/** Edge between a Node and a connected ArquivoAssessoria */
-export interface ArquivoAssessoriaConnectionEdgeRequest{
+/** Connection between the ArquivoAssessoria type and the ArquivoAssessoria type */
+export interface ArquivoAssessoriaToPreviewConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
-    /** The connected ArquivoAssessoria Node */
+    /** The node of the connection, without the edges */
     node?: ArquivoAssessoriaRequest
-    on_ArquivoAssessoriaToPreviewConnectionEdge?: ArquivoAssessoriaToPreviewConnectionEdgeRequest
-    on_RootQueryToArquivoAssessoriaConnectionEdge?: RootQueryToArquivoAssessoriaConnectionEdgeRequest
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -13116,7 +15196,7 @@ name?: (Scalars['String'] | null),
 nameIn?: ((Scalars['String'] | null)[] | null),
 /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
 notIn?: ((Scalars['ID'] | null)[] | null),
-/** What paramater to use to order the objects by. */
+/** What parameter to use to order the objects by. */
 orderby?: ((PostObjectsConnectionOrderbyInput | null)[] | null),
 /** Use ID to return only children. Use 0 to return only top-level items */
 parent?: (Scalars['ID'] | null),
@@ -13161,36 +15241,6 @@ export interface RootQueryToArquivoAssessoriaConnectionRequest{
 }
 
 
-/** Connection to ArquivoAssessoria Nodes */
-export interface ArquivoAssessoriaConnectionRequest{
-    /** A list of edges (relational context) between RootQuery and connected ArquivoAssessoria Nodes */
-    edges?: ArquivoAssessoriaConnectionEdgeRequest
-    /** A list of connected ArquivoAssessoria Nodes */
-    nodes?: ArquivoAssessoriaRequest
-    /** Information about pagination in a connection. */
-    pageInfo?: ArquivoAssessoriaConnectionPageInfoRequest
-    on_RootQueryToArquivoAssessoriaConnection?: RootQueryToArquivoAssessoriaConnectionRequest
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** Page Info on the connected ArquivoAssessoriaConnectionEdge */
-export interface ArquivoAssessoriaConnectionPageInfoRequest{
-    /** When paginating forwards, the cursor to continue. */
-    endCursor?: boolean | number
-    /** When paginating forwards, are there more items? */
-    hasNextPage?: boolean | number
-    /** When paginating backwards, are there more items? */
-    hasPreviousPage?: boolean | number
-    /** When paginating backwards, the cursor to continue. */
-    startCursor?: boolean | number
-    on_RootQueryToArquivoAssessoriaConnectionPageInfo?: RootQueryToArquivoAssessoriaConnectionPageInfoRequest
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
 /** An edge in a connection */
 export interface RootQueryToArquivoAssessoriaConnectionEdgeRequest{
     /** A cursor for use in pagination */
@@ -13224,6 +15274,19 @@ export interface BannerRequest{
      * The id field matches the WP_Post-&gt;ID field.
      */
     bannerId?: boolean | number
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * The ancestors of the content node.
+     */
+    ancestors?: [{
+    /** The number of items to return after the referenced "after" cursor */
+    first?: (Scalars['Int'] | null),
+    /** The number of items to return before the referenced "before" cursor */
+    last?: (Scalars['Int'] | null),
+    /** Cursor used along with the "first" argument to reference where in the dataset to get data */
+    after?: (Scalars['String'] | null),
+    /** Cursor used along with the "last" argument to reference where in the dataset to get data */
+    before?: (Scalars['String'] | null)},BannerToBannerConnectionRequest] | BannerToBannerConnectionRequest
     /** Added to the GraphQL Schema because the ACF Field Group &quot;Banner_home&quot; was set to Show in GraphQL. */
     banner_home?: Banner_BannerHomeRequest
     /** Connection between the ContentNode type and the ContentType type */
@@ -13264,10 +15327,18 @@ export interface BannerRequest{
     before?: (Scalars['String'] | null)},ContentNodeToEnqueuedStylesheetConnectionRequest] | ContentNodeToEnqueuedStylesheetConnectionRequest
     /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
     guid?: boolean | number
+    /** Whether the banner_home object is password protected. */
+    hasPassword?: boolean | number
     /** The globally unique identifier of the banner_home object. */
     id?: boolean | number
+    /** Whether the node is a Comment */
+    isComment?: boolean | number
     /** Whether the node is a Content Node */
     isContentNode?: boolean | number
+    /** Whether the node represents the front page. */
+    isFrontPage?: boolean | number
+    /** Whether  the node represents the blog page. */
+    isPostsPage?: boolean | number
     /** Whether the object is a node in the preview state */
     isPreview?: boolean | number
     /** Whether the object is restricted from the current viewer */
@@ -13282,6 +15353,13 @@ export interface BannerRequest{
     modified?: boolean | number
     /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
     modifiedGmt?: boolean | number
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have a parent
+     * The parent of the content node.
+     */
+    parent?: BannerToParentConnectionEdgeRequest
+    /** The password for the banner_home object. */
+    password?: boolean | number
     /** Connection between the Banner type and the Banner type */
     preview?: BannerToPreviewConnectionEdgeRequest
     /** The database id of the preview node */
@@ -13300,6 +15378,98 @@ export interface BannerRequest{
     format?: (PostObjectFieldFormatEnum | null)}] | boolean | number
     /** The unique resource identifier path */
     uri?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Connection between the Banner type and the Banner type */
+export interface BannerToBannerConnectionRequest{
+    /** Edges for the BannerToBannerConnection connection */
+    edges?: BannerToBannerConnectionEdgeRequest
+    /** The nodes of the connection, without the edges */
+    nodes?: BannerRequest
+    /** Information about pagination in a connection. */
+    pageInfo?: BannerToBannerConnectionPageInfoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Connection to Banner Nodes */
+export interface BannerConnectionRequest{
+    /** A list of edges (relational context) between RootQuery and connected Banner Nodes */
+    edges?: BannerConnectionEdgeRequest
+    /** A list of connected Banner Nodes */
+    nodes?: BannerRequest
+    /** Information about pagination in a connection. */
+    pageInfo?: BannerConnectionPageInfoRequest
+    on_BannerToBannerConnection?: BannerToBannerConnectionRequest
+    on_RootQueryToBannerConnection?: RootQueryToBannerConnectionRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Edge between a Node and a connected Banner */
+export interface BannerConnectionEdgeRequest{
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: boolean | number
+    /** The connected Banner Node */
+    node?: BannerRequest
+    on_BannerToBannerConnectionEdge?: BannerToBannerConnectionEdgeRequest
+    on_BannerToParentConnectionEdge?: BannerToParentConnectionEdgeRequest
+    on_BannerToPreviewConnectionEdge?: BannerToPreviewConnectionEdgeRequest
+    on_RootQueryToBannerConnectionEdge?: RootQueryToBannerConnectionEdgeRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Page Info on the connected BannerConnectionEdge */
+export interface BannerConnectionPageInfoRequest{
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: boolean | number
+    /** When paginating forwards, are there more items? */
+    hasNextPage?: boolean | number
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage?: boolean | number
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: boolean | number
+    on_BannerToBannerConnectionPageInfo?: BannerToBannerConnectionPageInfoRequest
+    on_RootQueryToBannerConnectionPageInfo?: RootQueryToBannerConnectionPageInfoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** An edge in a connection */
+export interface BannerToBannerConnectionEdgeRequest{
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * A cursor for use in pagination
+     */
+    cursor?: boolean | number
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * The item at the end of the edge
+     */
+    node?: BannerRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Page Info on the &quot;BannerToBannerConnection&quot; */
+export interface BannerToBannerConnectionPageInfoRequest{
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: boolean | number
+    /** When paginating forwards, are there more items? */
+    hasNextPage?: boolean | number
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage?: boolean | number
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -13370,24 +15540,25 @@ export interface Banner_BannerHome_QualEOEmpreendimentoRequest{
 
 
 /** Connection between the Banner type and the Banner type */
-export interface BannerToPreviewConnectionEdgeRequest{
+export interface BannerToParentConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
-    /** The node of the connection, without the edges */
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have a parent
+     * The node of the connection, without the edges
+     */
     node?: BannerRequest
     __typename?: boolean | number
     __scalar?: boolean | number
 }
 
 
-/** Edge between a Node and a connected Banner */
-export interface BannerConnectionEdgeRequest{
+/** Connection between the Banner type and the Banner type */
+export interface BannerToPreviewConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
-    /** The connected Banner Node */
+    /** The node of the connection, without the edges */
     node?: BannerRequest
-    on_BannerToPreviewConnectionEdge?: BannerToPreviewConnectionEdgeRequest
-    on_RootQueryToBannerConnectionEdge?: RootQueryToBannerConnectionEdgeRequest
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -13411,7 +15582,7 @@ name?: (Scalars['String'] | null),
 nameIn?: ((Scalars['String'] | null)[] | null),
 /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
 notIn?: ((Scalars['ID'] | null)[] | null),
-/** What paramater to use to order the objects by. */
+/** What parameter to use to order the objects by. */
 orderby?: ((PostObjectsConnectionOrderbyInput | null)[] | null),
 /** Use ID to return only children. Use 0 to return only top-level items */
 parent?: (Scalars['ID'] | null),
@@ -13451,36 +15622,6 @@ export interface RootQueryToBannerConnectionRequest{
     nodes?: BannerRequest
     /** Information about pagination in a connection. */
     pageInfo?: RootQueryToBannerConnectionPageInfoRequest
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** Connection to Banner Nodes */
-export interface BannerConnectionRequest{
-    /** A list of edges (relational context) between RootQuery and connected Banner Nodes */
-    edges?: BannerConnectionEdgeRequest
-    /** A list of connected Banner Nodes */
-    nodes?: BannerRequest
-    /** Information about pagination in a connection. */
-    pageInfo?: BannerConnectionPageInfoRequest
-    on_RootQueryToBannerConnection?: RootQueryToBannerConnectionRequest
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** Page Info on the connected BannerConnectionEdge */
-export interface BannerConnectionPageInfoRequest{
-    /** When paginating forwards, the cursor to continue. */
-    endCursor?: boolean | number
-    /** When paginating forwards, are there more items? */
-    hasNextPage?: boolean | number
-    /** When paginating backwards, are there more items? */
-    hasPreviousPage?: boolean | number
-    /** When paginating backwards, the cursor to continue. */
-    startCursor?: boolean | number
-    on_RootQueryToBannerConnectionPageInfo?: RootQueryToBannerConnectionPageInfoRequest
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -13597,6 +15738,103 @@ export interface RootQueryToCategoryConnectionPageInfoRequest{
 }
 
 
+/** Arguments for filtering the RootQueryToCentraldeDecoradoConnection connection */
+export interface RootQueryToCentraldeDecoradoConnectionWhereArgs {
+/** Category ID */
+categoryId?: (Scalars['Int'] | null),
+/** Array of category IDs, used to display objects from one category OR another */
+categoryIn?: ((Scalars['ID'] | null)[] | null),
+/** Use Category Slug */
+categoryName?: (Scalars['String'] | null),
+/** Array of category IDs, used to display objects from one category OR another */
+categoryNotIn?: ((Scalars['ID'] | null)[] | null),
+/** Filter the connection based on dates */
+dateQuery?: (DateQueryInput | null),
+/** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+hasPassword?: (Scalars['Boolean'] | null),
+/** Specific database ID of the object */
+id?: (Scalars['Int'] | null),
+/** Array of IDs for the objects to retrieve */
+in?: ((Scalars['ID'] | null)[] | null),metaQuery?: (RootQueryToCentraldeDecoradoConnectionWhereArgsMetaQuery | null),
+/** Get objects with a specific mimeType property */
+mimeType?: (MimeTypeEnum | null),
+/** Slug / post_name of the object */
+name?: (Scalars['String'] | null),
+/** Specify objects to retrieve. Use slugs */
+nameIn?: ((Scalars['String'] | null)[] | null),
+/** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+notIn?: ((Scalars['ID'] | null)[] | null),
+/** What parameter to use to order the objects by. */
+orderby?: ((PostObjectsConnectionOrderbyInput | null)[] | null),
+/** Use ID to return only children. Use 0 to return only top-level items */
+parent?: (Scalars['ID'] | null),
+/** Specify objects whose parent is in an array */
+parentIn?: ((Scalars['ID'] | null)[] | null),
+/** Specify posts whose parent is not in an array */
+parentNotIn?: ((Scalars['ID'] | null)[] | null),
+/** Show posts with a specific password. */
+password?: (Scalars['String'] | null),
+/** Show Posts based on a keyword search */
+search?: (Scalars['String'] | null),
+/** Retrieve posts where post status is in an array. */
+stati?: ((PostStatusEnum | null)[] | null),
+/** Show posts with a specific status. */
+status?: (PostStatusEnum | null),taxQuery?: (TaxQuery | null),
+/** Title of the object */
+title?: (Scalars['String'] | null)}
+
+export interface RootQueryToCentraldeDecoradoConnectionWhereArgsMetaQuery {metaArray?: ((RootQueryToCentraldeDecoradoConnectionWhereArgsMetaArray | null)[] | null),relation?: (RelationEnum | null)}
+
+export interface RootQueryToCentraldeDecoradoConnectionWhereArgsMetaArray {
+/** Custom field value */
+compare?: (RootQueryToCentraldeDecoradoConnectionWhereArgsMetaCompareEnum | null),
+/** Custom field key */
+key?: (Scalars['String'] | null),
+/** Custom field value */
+type?: (RootQueryToCentraldeDecoradoConnectionWhereArgsMetaTypeEnum | null),
+/** Custom field value */
+value?: (Scalars['String'] | null)}
+
+
+/** Connection between the RootQuery type and the CentraldeDecorado type */
+export interface RootQueryToCentraldeDecoradoConnectionRequest{
+    /** Edges for the RootQueryToCentraldeDecoradoConnection connection */
+    edges?: RootQueryToCentraldeDecoradoConnectionEdgeRequest
+    /** The nodes of the connection, without the edges */
+    nodes?: CentraldeDecoradoRequest
+    /** Information about pagination in a connection. */
+    pageInfo?: RootQueryToCentraldeDecoradoConnectionPageInfoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** An edge in a connection */
+export interface RootQueryToCentraldeDecoradoConnectionEdgeRequest{
+    /** A cursor for use in pagination */
+    cursor?: boolean | number
+    /** The item at the end of the edge */
+    node?: CentraldeDecoradoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Page Info on the &quot;RootQueryToCentraldeDecoradoConnection&quot; */
+export interface RootQueryToCentraldeDecoradoConnectionPageInfoRequest{
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: boolean | number
+    /** When paginating forwards, are there more items? */
+    hasNextPage?: boolean | number
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage?: boolean | number
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
 /** Arguments for filtering the RootQueryToCommentConnection connection */
 export interface RootQueryToCommentConnectionWhereArgs {
 /** Comment author email address. */
@@ -13655,6 +15893,8 @@ parentNotIn?: ((Scalars['ID'] | null)[] | null),
 search?: (Scalars['String'] | null),
 /** Comment status to limit results by. */
 status?: (Scalars['String'] | null),
+/** One or more Comment Statuses to limit results by */
+statusIn?: ((CommentStatusEnum | null)[] | null),
 /** Include comments for a specific user ID. */
 userId?: (Scalars['ID'] | null)}
 
@@ -13718,7 +15958,7 @@ name?: (Scalars['String'] | null),
 nameIn?: ((Scalars['String'] | null)[] | null),
 /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
 notIn?: ((Scalars['ID'] | null)[] | null),
-/** What paramater to use to order the objects by. */
+/** What parameter to use to order the objects by. */
 orderby?: ((PostObjectsConnectionOrderbyInput | null)[] | null),
 /** Use ID to return only children. Use 0 to return only top-level items */
 parent?: (Scalars['ID'] | null),
@@ -13865,7 +16105,7 @@ name?: (Scalars['String'] | null),
 nameIn?: ((Scalars['String'] | null)[] | null),
 /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
 notIn?: ((Scalars['ID'] | null)[] | null),
-/** What paramater to use to order the objects by. */
+/** What parameter to use to order the objects by. */
 orderby?: ((PostObjectsConnectionOrderbyInput | null)[] | null),
 /** Use ID to return only children. Use 0 to return only top-level items */
 parent?: (Scalars['ID'] | null),
@@ -13987,7 +16227,7 @@ name?: (Scalars['String'] | null),
 nameIn?: ((Scalars['String'] | null)[] | null),
 /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
 notIn?: ((Scalars['ID'] | null)[] | null),
-/** What paramater to use to order the objects by. */
+/** What parameter to use to order the objects by. */
 orderby?: ((PostObjectsConnectionOrderbyInput | null)[] | null),
 /** Use ID to return only children. Use 0 to return only top-level items */
 parent?: (Scalars['ID'] | null),
@@ -14315,6 +16555,7 @@ export interface MenuItemObjectUnionRequest{
     on_Banner?:BannerRequest,
     on_ArquivoAssessoria?:ArquivoAssessoriaRequest,
     on_Empreendimento?:EmpreendimentoRequest,
+    on_CentraldeDecorado?:CentraldeDecoradoRequest,
     on_Category?:CategoryRequest,
     on_Tag?:TagRequest,
     on_Node?: NodeRequest,
@@ -14547,7 +16788,7 @@ name?: (Scalars['String'] | null),
 nameIn?: ((Scalars['String'] | null)[] | null),
 /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
 notIn?: ((Scalars['ID'] | null)[] | null),
-/** What paramater to use to order the objects by. */
+/** What parameter to use to order the objects by. */
 orderby?: ((PostObjectsConnectionOrderbyInput | null)[] | null),
 /** Use ID to return only children. Use 0 to return only top-level items */
 parent?: (Scalars['ID'] | null),
@@ -14853,7 +17094,7 @@ name?: (Scalars['String'] | null),
 nameIn?: ((Scalars['String'] | null)[] | null),
 /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
 notIn?: ((Scalars['ID'] | null)[] | null),
-/** What paramater to use to order the objects by. */
+/** What parameter to use to order the objects by. */
 orderby?: ((PostObjectsConnectionOrderbyInput | null)[] | null),
 /** Use ID to return only children. Use 0 to return only top-level items */
 parent?: (Scalars['ID'] | null),
@@ -15049,7 +17290,7 @@ name?: (Scalars['String'] | null),
 nameIn?: ((Scalars['String'] | null)[] | null),
 /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
 notIn?: ((Scalars['ID'] | null)[] | null),
-/** What paramater to use to order the objects by. */
+/** What parameter to use to order the objects by. */
 orderby?: ((PostObjectsConnectionOrderbyInput | null)[] | null),
 /** Use ID to return only children. Use 0 to return only top-level items */
 parent?: (Scalars['ID'] | null),
@@ -15500,7 +17741,7 @@ nicename?: (Scalars['String'] | null),
 nicenameIn?: ((Scalars['String'] | null)[] | null),
 /** An array of nicenames to exclude. Users matching one of these nicenames will not be included in results. */
 nicenameNotIn?: ((Scalars['String'] | null)[] | null),
-/** What paramater to use to order the objects by. */
+/** What parameter to use to order the objects by. */
 orderby?: ((UsersConnectionOrderbyInput | null)[] | null),
 /** An array of role names that users must match to be included in results. Note that this is an inclusive list: users must match *each* role. */
 role?: (UserRoleEnum | null),
@@ -15618,6 +17859,10 @@ export interface RootMutationRequest{
     createCategory?: [{
     /** Input for the createCategory mutation */
     input: CreateCategoryInput},CreateCategoryPayloadRequest]
+    /** The createCentraldeDecorado mutation */
+    createCentraldeDecorado?: [{
+    /** Input for the createCentraldeDecorado mutation */
+    input: CreateCentraldeDecoradoInput},CreateCentraldeDecoradoPayloadRequest]
     /** The createComment mutation */
     createComment?: [{
     /** Input for the createComment mutation */
@@ -15662,6 +17907,10 @@ export interface RootMutationRequest{
     deleteCategory?: [{
     /** Input for the deleteCategory mutation */
     input: DeleteCategoryInput},DeleteCategoryPayloadRequest]
+    /** The deleteCentraldeDecorado mutation */
+    deleteCentraldeDecorado?: [{
+    /** Input for the deleteCentraldeDecorado mutation */
+    input: DeleteCentraldeDecoradoInput},DeleteCentraldeDecoradoPayloadRequest]
     /** The deleteComment mutation */
     deleteComment?: [{
     /** Input for the deleteComment mutation */
@@ -15726,6 +17975,10 @@ export interface RootMutationRequest{
     updateCategory?: [{
     /** Input for the updateCategory mutation */
     input: UpdateCategoryInput},UpdateCategoryPayloadRequest]
+    /** The updateCentraldeDecorado mutation */
+    updateCentraldeDecorado?: [{
+    /** Input for the updateCentraldeDecorado mutation */
+    input: UpdateCentraldeDecoradoInput},UpdateCentraldeDecoradoPayloadRequest]
     /** The updateComment mutation */
     updateComment?: [{
     /** Input for the updateComment mutation */
@@ -15835,7 +18088,9 @@ clientMutationId?: (Scalars['String'] | null),
 description?: (Scalars['String'] | null),
 /** The name of the category object to mutate */
 name: Scalars['String'],
-/** The ID of the category that should be set as the parent */
+/** The database ID of the category that should be set as the parent. This field cannot be used in conjunction with parentId */
+parentDatabaseId?: (Scalars['Int'] | null),
+/** The ID of the category that should be set as the parent. This field cannot be used in conjunction with parentDatabaseId */
 parentId?: (Scalars['ID'] | null),
 /** If this argument exists then the slug will be checked to see if it is not an existing valid term. If that check succeeds (it is not a valid term), then it is added and the term id is given. If it fails, then a check is made to whether the taxonomy is hierarchical and the parent argument is not empty. If the second check succeeds, the term will be inserted and the term id will be given. If the slug argument is empty, then it will be calculated from the term name. */
 slug?: (Scalars['String'] | null)}
@@ -15845,6 +18100,57 @@ slug?: (Scalars['String'] | null)}
 export interface CreateCategoryPayloadRequest{
     /** The created category */
     category?: CategoryRequest
+    /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+    clientMutationId?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Input for the createCentraldeDecorado mutation. */
+export interface CreateCentraldeDecoradoInput {
+/** Set connections between the CentraldeDecorado and categories */
+categories?: (CentraldeDecoradoCategoriesInput | null),
+/** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+clientMutationId?: (Scalars['String'] | null),
+/** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
+date?: (Scalars['String'] | null),
+/** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+menuOrder?: (Scalars['Int'] | null),
+/** The password used to protect the content of the object */
+password?: (Scalars['String'] | null),
+/** The slug of the object */
+slug?: (Scalars['String'] | null),
+/** The status of the object */
+status?: (PostStatusEnum | null),
+/** The title of the object */
+title?: (Scalars['String'] | null)}
+
+
+/** Set relationships between the CentraldeDecorado to categories */
+export interface CentraldeDecoradoCategoriesInput {
+/** If true, this will append the category to existing related categories. If false, this will replace existing relationships. Default true. */
+append?: (Scalars['Boolean'] | null),
+/** The input list of items to set. */
+nodes?: ((CentraldeDecoradoCategoriesNodeInput | null)[] | null)}
+
+
+/** List of categories to connect the CentraldeDecorado to. If an ID is set, it will be used to create the connection. If not, it will look for a slug. If neither are valid existing terms, and the site is configured to allow terms to be created during post mutations, a term will be created using the Name if it exists in the input, then fallback to the slug if it exists. */
+export interface CentraldeDecoradoCategoriesNodeInput {
+/** The description of the category. This field is used to set a description of the category if a new one is created during the mutation. */
+description?: (Scalars['String'] | null),
+/** The ID of the category. If present, this will be used to connect to the CentraldeDecorado. If no existing category exists with this ID, no connection will be made. */
+id?: (Scalars['ID'] | null),
+/** The name of the category. This field is used to create a new term, if term creation is enabled in nested mutations, and if one does not already exist with the provided slug or ID or if a slug or ID is not provided. If no name is included and a term is created, the creation will fallback to the slug field. */
+name?: (Scalars['String'] | null),
+/** The slug of the category. If no ID is present, this field will be used to make a connection. If no existing term exists with this slug, this field will be used as a fallback to the Name field when creating a new term to connect to, if term creation is enabled as a nested mutation. */
+slug?: (Scalars['String'] | null)}
+
+
+/** The payload for the createCentraldeDecorado mutation. */
+export interface CreateCentraldeDecoradoPayloadRequest{
+    /** The Post object mutation type. */
+    centraldeDecorado?: CentraldeDecoradoRequest
     /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
     clientMutationId?: boolean | number
     __typename?: boolean | number
@@ -16294,8 +18600,33 @@ id: Scalars['ID']}
 
 /** The payload for the deleteCategory mutation. */
 export interface DeleteCategoryPayloadRequest{
-    /** The deteted term object */
+    /** The deleted term object */
     category?: CategoryRequest
+    /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+    clientMutationId?: boolean | number
+    /** The ID of the deleted object */
+    deletedId?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Input for the deleteCentraldeDecorado mutation. */
+export interface DeleteCentraldeDecoradoInput {
+/** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+clientMutationId?: (Scalars['String'] | null),
+/** Whether the object should be force deleted instead of being moved to the trash */
+forceDelete?: (Scalars['Boolean'] | null),
+/** The ID of the CentraldeDecorado to delete */
+id: Scalars['ID'],
+/** Override the edit lock when another user is editing the post */
+ignoreEditLock?: (Scalars['Boolean'] | null)}
+
+
+/** The payload for the deleteCentraldeDecorado mutation. */
+export interface DeleteCentraldeDecoradoPayloadRequest{
+    /** The object before it was deleted */
+    centraldeDecorado?: CentraldeDecoradoRequest
     /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
     clientMutationId?: boolean | number
     /** The ID of the deleted object */
@@ -16440,7 +18771,7 @@ export interface DeletePostFormatPayloadRequest{
     clientMutationId?: boolean | number
     /** The ID of the deleted object */
     deletedId?: boolean | number
-    /** The deteted term object */
+    /** The deleted term object */
     postFormat?: PostFormatRequest
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -16461,7 +18792,7 @@ export interface DeleteTagPayloadRequest{
     clientMutationId?: boolean | number
     /** The ID of the deleted object */
     deletedId?: boolean | number
-    /** The deteted term object */
+    /** The deleted term object */
     tag?: TagRequest
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -16686,7 +19017,9 @@ description?: (Scalars['String'] | null),
 id: Scalars['ID'],
 /** The name of the category object to mutate */
 name?: (Scalars['String'] | null),
-/** The ID of the category that should be set as the parent */
+/** The database ID of the category that should be set as the parent. This field cannot be used in conjunction with parentId */
+parentDatabaseId?: (Scalars['Int'] | null),
+/** The ID of the category that should be set as the parent. This field cannot be used in conjunction with parentDatabaseId */
 parentId?: (Scalars['ID'] | null),
 /** If this argument exists then the slug will be checked to see if it is not an existing valid term. If that check succeeds (it is not a valid term), then it is added and the term id is given. If it fails, then a check is made to whether the taxonomy is hierarchical and the parent argument is not empty. If the second check succeeds, the term will be inserted and the term id will be given. If the slug argument is empty, then it will be calculated from the term name. */
 slug?: (Scalars['String'] | null)}
@@ -16696,6 +19029,41 @@ slug?: (Scalars['String'] | null)}
 export interface UpdateCategoryPayloadRequest{
     /** The created category */
     category?: CategoryRequest
+    /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+    clientMutationId?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Input for the updateCentraldeDecorado mutation. */
+export interface UpdateCentraldeDecoradoInput {
+/** Set connections between the CentraldeDecorado and categories */
+categories?: (CentraldeDecoradoCategoriesInput | null),
+/** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+clientMutationId?: (Scalars['String'] | null),
+/** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
+date?: (Scalars['String'] | null),
+/** The ID of the CentraldeDecorado object */
+id: Scalars['ID'],
+/** Override the edit lock when another user is editing the post */
+ignoreEditLock?: (Scalars['Boolean'] | null),
+/** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+menuOrder?: (Scalars['Int'] | null),
+/** The password used to protect the content of the object */
+password?: (Scalars['String'] | null),
+/** The slug of the object */
+slug?: (Scalars['String'] | null),
+/** The status of the object */
+status?: (PostStatusEnum | null),
+/** The title of the object */
+title?: (Scalars['String'] | null)}
+
+
+/** The payload for the updateCentraldeDecorado mutation. */
+export interface UpdateCentraldeDecoradoPayloadRequest{
+    /** The Post object mutation type. */
+    centraldeDecorado?: CentraldeDecoradoRequest
     /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
     clientMutationId?: boolean | number
     __typename?: boolean | number
@@ -17149,7 +19517,7 @@ export const isArquivoAssessoria = (obj?: { __typename?: any } | null): obj is A
 
 
 
-const Node_possibleTypes: string[] = ['ArquivoAssessoria','ContentType','Taxonomy','User','Comment','EnqueuedScript','EnqueuedStylesheet','MediaItem','Page','Post','Category','Empreendimento','PostFormat','Tag','UserRole','Banner','Menu','MenuItem','Plugin','Theme','CommentAuthor']
+const Node_possibleTypes: string[] = ['ArquivoAssessoria','ContentType','Taxonomy','EnqueuedScript','EnqueuedStylesheet','User','Comment','MediaItem','Page','Post','Category','CentraldeDecorado','Empreendimento','PostFormat','Tag','UserRole','Banner','Menu','MenuItem','Plugin','Theme','CommentAuthor']
 export const isNode = (obj?: { __typename?: any } | null): obj is Node => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isNode"')
   return Node_possibleTypes.includes(obj.__typename)
@@ -17157,7 +19525,7 @@ export const isNode = (obj?: { __typename?: any } | null): obj is Node => {
 
 
 
-const ContentNode_possibleTypes: string[] = ['ArquivoAssessoria','MediaItem','Page','Post','Empreendimento','Banner']
+const ContentNode_possibleTypes: string[] = ['ArquivoAssessoria','MediaItem','Page','Post','CentraldeDecorado','Empreendimento','Banner']
 export const isContentNode = (obj?: { __typename?: any } | null): obj is ContentNode => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isContentNode"')
   return ContentNode_possibleTypes.includes(obj.__typename)
@@ -17165,7 +19533,7 @@ export const isContentNode = (obj?: { __typename?: any } | null): obj is Content
 
 
 
-const UniformResourceIdentifiable_possibleTypes: string[] = ['ArquivoAssessoria','ContentType','User','MediaItem','Page','Post','Category','Empreendimento','PostFormat','Tag','Banner']
+const UniformResourceIdentifiable_possibleTypes: string[] = ['ArquivoAssessoria','ContentType','User','Comment','MediaItem','Page','Post','Category','CentraldeDecorado','Empreendimento','PostFormat','Tag','Banner']
 export const isUniformResourceIdentifiable = (obj?: { __typename?: any } | null): obj is UniformResourceIdentifiable => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isUniformResourceIdentifiable"')
   return UniformResourceIdentifiable_possibleTypes.includes(obj.__typename)
@@ -17181,7 +19549,7 @@ export const isContentNodeToContentTypeConnectionEdge = (obj?: { __typename?: an
 
 
 
-const OneToOneConnection_possibleTypes: string[] = ['ContentNodeToContentTypeConnectionEdge','ContentNodeToEditLockConnectionEdge','CommentToCommenterConnectionEdge','CommentToContentNodeConnectionEdge','CommentToParentCommentConnectionEdge','NodeWithAuthorToUserConnectionEdge','ContentNodeToEditLastConnectionEdge','HierarchicalContentNodeToParentContentNodeConnectionEdge','NodeWithFeaturedImageToMediaItemConnectionEdge','NodeWithRevisionsToContentNodeConnectionEdge','PageToPreviewConnectionEdge','EmpreendimentoToPreviewConnectionEdge','CategoryToParentCategoryConnectionEdge','CategoryToTaxonomyConnectionEdge','PostFormatToTaxonomyConnectionEdge','PostToPreviewConnectionEdge','TagToTaxonomyConnectionEdge','ArquivoAssessoriaToPreviewConnectionEdge','BannerToPreviewConnectionEdge','MenuItemToMenuItemLinkableConnectionEdge','MenuItemToMenuConnectionEdge']
+const OneToOneConnection_possibleTypes: string[] = ['ContentNodeToContentTypeConnectionEdge','ContentNodeToEditLockConnectionEdge','CommentToCommenterConnectionEdge','CommentToContentNodeConnectionEdge','CommentToParentCommentConnectionEdge','NodeWithAuthorToUserConnectionEdge','ContentNodeToEditLastConnectionEdge','HierarchicalContentNodeToParentContentNodeConnectionEdge','NodeWithFeaturedImageToMediaItemConnectionEdge','NodeWithRevisionsToContentNodeConnectionEdge','PageToPreviewConnectionEdge','CentraldeDecoradoToParentConnectionEdge','CentraldeDecoradoToPreviewConnectionEdge','EmpreendimentoToParentConnectionEdge','EmpreendimentoToPreviewConnectionEdge','CategoryToParentCategoryConnectionEdge','CategoryToTaxonomyConnectionEdge','PostToParentConnectionEdge','PostFormatToTaxonomyConnectionEdge','PostToPreviewConnectionEdge','TagToTaxonomyConnectionEdge','ArquivoAssessoriaToParentConnectionEdge','ArquivoAssessoriaToPreviewConnectionEdge','BannerToParentConnectionEdge','BannerToPreviewConnectionEdge','MenuItemToMenuItemLinkableConnectionEdge','MenuItemToMenuConnectionEdge']
 export const isOneToOneConnection = (obj?: { __typename?: any } | null): obj is OneToOneConnection => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isOneToOneConnection"')
   return OneToOneConnection_possibleTypes.includes(obj.__typename)
@@ -17189,7 +19557,7 @@ export const isOneToOneConnection = (obj?: { __typename?: any } | null): obj is 
 
 
 
-const Edge_possibleTypes: string[] = ['ContentNodeToContentTypeConnectionEdge','TaxonomyToContentTypeConnectionEdge','ContentTypeToTaxonomyConnectionEdge','ContentTypeToContentNodeConnectionEdge','ContentNodeToEditLockConnectionEdge','CommentToCommenterConnectionEdge','CommentToContentNodeConnectionEdge','CommentToParentCommentConnectionEdge','CommentToCommentConnectionEdge','UserToCommentConnectionEdge','UserToEnqueuedScriptConnectionEdge','UserToEnqueuedStylesheetConnectionEdge','NodeWithAuthorToUserConnectionEdge','HierarchicalContentNodeToContentNodeAncestorsConnectionEdge','HierarchicalContentNodeToContentNodeChildrenConnectionEdge','ContentNodeToEnqueuedScriptConnectionEdge','ContentNodeToEnqueuedStylesheetConnectionEdge','ContentNodeToEditLastConnectionEdge','HierarchicalContentNodeToParentContentNodeConnectionEdge','MediaItemToCommentConnectionEdge','UserToMediaItemConnectionEdge','NodeWithFeaturedImageToMediaItemConnectionEdge','NodeWithRevisionsToContentNodeConnectionEdge','PageToCommentConnectionEdge','PageToPreviewConnectionEdge','PageToRevisionConnectionEdge','UserToPageConnectionEdge','TermNodeToEnqueuedScriptConnectionEdge','TermNodeToEnqueuedStylesheetConnectionEdge','CategoryToAncestorsCategoryConnectionEdge','CategoryToCategoryConnectionEdge','CategoryToContentNodeConnectionEdge','EmpreendimentoToCategoryConnectionEdge','EmpreendimentoToPreviewConnectionEdge','EmpreendimentoToTermNodeConnectionEdge','CategoryToEmpreendimentoConnectionEdge','CategoryToParentCategoryConnectionEdge','CategoryToPostConnectionEdge','CategoryToTaxonomyConnectionEdge','PostToCategoryConnectionEdge','PostToCommentConnectionEdge','PostFormatToContentNodeConnectionEdge','PostFormatToPostConnectionEdge','PostFormatToTaxonomyConnectionEdge','PostToPostFormatConnectionEdge','PostToPreviewConnectionEdge','PostToRevisionConnectionEdge','TagToContentNodeConnectionEdge','TagToPostConnectionEdge','TagToTaxonomyConnectionEdge','PostToTagConnectionEdge','PostToTermNodeConnectionEdge','UserToPostConnectionEdge','UserToRevisionsConnectionEdge','UserToUserRoleConnectionEdge','ArquivoAssessoriaToPreviewConnectionEdge','RootQueryToArquivoAssessoriaConnectionEdge','BannerToPreviewConnectionEdge','RootQueryToBannerConnectionEdge','RootQueryToCategoryConnectionEdge','RootQueryToCommentConnectionEdge','RootQueryToContentNodeConnectionEdge','RootQueryToContentTypeConnectionEdge','RootQueryToEmpreendimentoConnectionEdge','RootQueryToMediaItemConnectionEdge','MenuItemToMenuItemConnectionEdge','MenuItemToMenuItemLinkableConnectionEdge','MenuItemToMenuConnectionEdge','MenuToMenuItemConnectionEdge','RootQueryToMenuItemConnectionEdge','RootQueryToMenuConnectionEdge','RootQueryToPageConnectionEdge','RootQueryToPluginConnectionEdge','RootQueryToPostFormatConnectionEdge','RootQueryToPostConnectionEdge','RootQueryToEnqueuedScriptConnectionEdge','RootQueryToEnqueuedStylesheetConnectionEdge','RootQueryToRevisionsConnectionEdge','RootQueryToTagConnectionEdge','RootQueryToTaxonomyConnectionEdge','RootQueryToTermNodeConnectionEdge','RootQueryToThemeConnectionEdge','RootQueryToUserRoleConnectionEdge','RootQueryToUserConnectionEdge']
+const Edge_possibleTypes: string[] = ['ContentNodeToContentTypeConnectionEdge','TaxonomyToContentTypeConnectionEdge','TermNodeToEnqueuedScriptConnectionEdge','TermNodeToEnqueuedStylesheetConnectionEdge','TaxonomyToTermNodeConnectionEdge','ContentTypeToTaxonomyConnectionEdge','ContentTypeToContentNodeConnectionEdge','ContentNodeToEditLockConnectionEdge','CommentToCommenterConnectionEdge','CommentToContentNodeConnectionEdge','CommentToParentCommentConnectionEdge','CommentToCommentConnectionEdge','UserToCommentConnectionEdge','UserToEnqueuedScriptConnectionEdge','UserToEnqueuedStylesheetConnectionEdge','NodeWithAuthorToUserConnectionEdge','HierarchicalContentNodeToContentNodeAncestorsConnectionEdge','HierarchicalContentNodeToContentNodeChildrenConnectionEdge','ContentNodeToEnqueuedScriptConnectionEdge','ContentNodeToEnqueuedStylesheetConnectionEdge','ContentNodeToEditLastConnectionEdge','HierarchicalContentNodeToParentContentNodeConnectionEdge','MediaItemToCommentConnectionEdge','UserToMediaItemConnectionEdge','NodeWithFeaturedImageToMediaItemConnectionEdge','NodeWithRevisionsToContentNodeConnectionEdge','PageToCommentConnectionEdge','PageToPreviewConnectionEdge','PageToRevisionConnectionEdge','UserToPageConnectionEdge','PostToPostConnectionEdge','CategoryToAncestorsCategoryConnectionEdge','CentraldeDecoradoToCentraldeDecoradoConnectionEdge','CentraldeDecoradoToCategoryConnectionEdge','CentraldeDecoradoToParentConnectionEdge','CentraldeDecoradoToPreviewConnectionEdge','CentraldeDecoradoToTermNodeConnectionEdge','CategoryToCentraldeDecoradoConnectionEdge','CategoryToCategoryConnectionEdge','CategoryToContentNodeConnectionEdge','EmpreendimentoToEmpreendimentoConnectionEdge','EmpreendimentoToCategoryConnectionEdge','EmpreendimentoToParentConnectionEdge','EmpreendimentoToPreviewConnectionEdge','EmpreendimentoToTermNodeConnectionEdge','CategoryToEmpreendimentoConnectionEdge','CategoryToParentCategoryConnectionEdge','CategoryToPostConnectionEdge','CategoryToTaxonomyConnectionEdge','PostToCategoryConnectionEdge','PostToCommentConnectionEdge','PostToParentConnectionEdge','PostFormatToContentNodeConnectionEdge','PostFormatToPostConnectionEdge','PostFormatToTaxonomyConnectionEdge','PostToPostFormatConnectionEdge','PostToPreviewConnectionEdge','PostToRevisionConnectionEdge','TagToContentNodeConnectionEdge','TagToPostConnectionEdge','TagToTaxonomyConnectionEdge','PostToTagConnectionEdge','PostToTermNodeConnectionEdge','UserToPostConnectionEdge','UserToRevisionsConnectionEdge','UserToUserRoleConnectionEdge','ArquivoAssessoriaToArquivoAssessoriaConnectionEdge','ArquivoAssessoriaToParentConnectionEdge','ArquivoAssessoriaToPreviewConnectionEdge','RootQueryToArquivoAssessoriaConnectionEdge','BannerToBannerConnectionEdge','BannerToParentConnectionEdge','BannerToPreviewConnectionEdge','RootQueryToBannerConnectionEdge','RootQueryToCategoryConnectionEdge','RootQueryToCentraldeDecoradoConnectionEdge','RootQueryToCommentConnectionEdge','RootQueryToContentNodeConnectionEdge','RootQueryToContentTypeConnectionEdge','RootQueryToEmpreendimentoConnectionEdge','RootQueryToMediaItemConnectionEdge','MenuItemToMenuItemConnectionEdge','MenuItemToMenuItemLinkableConnectionEdge','MenuItemToMenuConnectionEdge','MenuToMenuItemConnectionEdge','RootQueryToMenuItemConnectionEdge','RootQueryToMenuConnectionEdge','RootQueryToPageConnectionEdge','RootQueryToPluginConnectionEdge','RootQueryToPostFormatConnectionEdge','RootQueryToPostConnectionEdge','RootQueryToEnqueuedScriptConnectionEdge','RootQueryToEnqueuedStylesheetConnectionEdge','RootQueryToRevisionsConnectionEdge','RootQueryToTagConnectionEdge','RootQueryToTaxonomyConnectionEdge','RootQueryToTermNodeConnectionEdge','RootQueryToThemeConnectionEdge','RootQueryToUserRoleConnectionEdge','RootQueryToUserConnectionEdge']
 export const isEdge = (obj?: { __typename?: any } | null): obj is Edge => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isEdge"')
   return Edge_possibleTypes.includes(obj.__typename)
@@ -17229,7 +19597,7 @@ export const isTaxonomyConnection = (obj?: { __typename?: any } | null): obj is 
 
 
 
-const Connection_possibleTypes: string[] = ['ContentTypeToTaxonomyConnection','TaxonomyToContentTypeConnection','ContentTypeToContentNodeConnection','UserToCommentConnection','CommentToCommentConnection','UserToEnqueuedScriptConnection','UserToEnqueuedStylesheetConnection','UserToMediaItemConnection','HierarchicalContentNodeToContentNodeAncestorsConnection','HierarchicalContentNodeToContentNodeChildrenConnection','ContentNodeToEnqueuedScriptConnection','ContentNodeToEnqueuedStylesheetConnection','MediaItemToCommentConnection','UserToPageConnection','PageToCommentConnection','PageToRevisionConnection','UserToPostConnection','PostToCategoryConnection','TermNodeToEnqueuedScriptConnection','TermNodeToEnqueuedStylesheetConnection','CategoryToAncestorsCategoryConnection','CategoryToCategoryConnection','CategoryToContentNodeConnection','CategoryToEmpreendimentoConnection','EmpreendimentoToCategoryConnection','EmpreendimentoToTermNodeConnection','CategoryToPostConnection','PostToCommentConnection','PostToPostFormatConnection','PostFormatToContentNodeConnection','PostFormatToPostConnection','PostToRevisionConnection','PostToTagConnection','TagToContentNodeConnection','TagToPostConnection','PostToTermNodeConnection','UserToRevisionsConnection','UserToUserRoleConnection','RootQueryToArquivoAssessoriaConnection','RootQueryToBannerConnection','RootQueryToCategoryConnection','RootQueryToCommentConnection','RootQueryToContentNodeConnection','RootQueryToContentTypeConnection','RootQueryToEmpreendimentoConnection','RootQueryToMediaItemConnection','MenuToMenuItemConnection','MenuItemToMenuItemConnection','RootQueryToMenuItemConnection','RootQueryToMenuConnection','RootQueryToPageConnection','RootQueryToPluginConnection','RootQueryToPostFormatConnection','RootQueryToPostConnection','RootQueryToEnqueuedScriptConnection','RootQueryToEnqueuedStylesheetConnection','RootQueryToRevisionsConnection','RootQueryToTagConnection','RootQueryToTaxonomyConnection','RootQueryToTermNodeConnection','RootQueryToThemeConnection','RootQueryToUserRoleConnection','RootQueryToUserConnection']
+const Connection_possibleTypes: string[] = ['ContentTypeToTaxonomyConnection','TaxonomyToContentTypeConnection','TaxonomyToTermNodeConnection','TermNodeToEnqueuedScriptConnection','TermNodeToEnqueuedStylesheetConnection','ContentTypeToContentNodeConnection','UserToCommentConnection','CommentToCommentConnection','UserToEnqueuedScriptConnection','UserToEnqueuedStylesheetConnection','UserToMediaItemConnection','HierarchicalContentNodeToContentNodeAncestorsConnection','HierarchicalContentNodeToContentNodeChildrenConnection','ContentNodeToEnqueuedScriptConnection','ContentNodeToEnqueuedStylesheetConnection','MediaItemToCommentConnection','UserToPageConnection','PageToCommentConnection','PageToRevisionConnection','UserToPostConnection','PostToPostConnection','PostToCategoryConnection','CategoryToAncestorsCategoryConnection','CategoryToCentraldeDecoradoConnection','CentraldeDecoradoToCentraldeDecoradoConnection','CentraldeDecoradoToCategoryConnection','CentraldeDecoradoToTermNodeConnection','CategoryToCategoryConnection','CategoryToContentNodeConnection','CategoryToEmpreendimentoConnection','EmpreendimentoToEmpreendimentoConnection','EmpreendimentoToCategoryConnection','EmpreendimentoToTermNodeConnection','CategoryToPostConnection','PostToCommentConnection','PostToPostFormatConnection','PostFormatToContentNodeConnection','PostFormatToPostConnection','PostToRevisionConnection','PostToTagConnection','TagToContentNodeConnection','TagToPostConnection','PostToTermNodeConnection','UserToRevisionsConnection','UserToUserRoleConnection','ArquivoAssessoriaToArquivoAssessoriaConnection','RootQueryToArquivoAssessoriaConnection','BannerToBannerConnection','RootQueryToBannerConnection','RootQueryToCategoryConnection','RootQueryToCentraldeDecoradoConnection','RootQueryToCommentConnection','RootQueryToContentNodeConnection','RootQueryToContentTypeConnection','RootQueryToEmpreendimentoConnection','RootQueryToMediaItemConnection','MenuToMenuItemConnection','MenuItemToMenuItemConnection','RootQueryToMenuItemConnection','RootQueryToMenuConnection','RootQueryToPageConnection','RootQueryToPluginConnection','RootQueryToPostFormatConnection','RootQueryToPostConnection','RootQueryToEnqueuedScriptConnection','RootQueryToEnqueuedStylesheetConnection','RootQueryToRevisionsConnection','RootQueryToTagConnection','RootQueryToTaxonomyConnection','RootQueryToTermNodeConnection','RootQueryToThemeConnection','RootQueryToUserRoleConnection','RootQueryToUserConnection']
 export const isConnection = (obj?: { __typename?: any } | null): obj is Connection => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isConnection"')
   return Connection_possibleTypes.includes(obj.__typename)
@@ -17237,7 +19605,7 @@ export const isConnection = (obj?: { __typename?: any } | null): obj is Connecti
 
 
 
-const PageInfo_possibleTypes: string[] = ['TaxonomyToContentTypeConnectionPageInfo','ContentTypeToTaxonomyConnectionPageInfo','ContentTypeToContentNodeConnectionPageInfo','CommentToCommentConnectionPageInfo','UserToCommentConnectionPageInfo','UserToEnqueuedScriptConnectionPageInfo','UserToEnqueuedStylesheetConnectionPageInfo','HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo','HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo','ContentNodeToEnqueuedScriptConnectionPageInfo','ContentNodeToEnqueuedStylesheetConnectionPageInfo','MediaItemToCommentConnectionPageInfo','UserToMediaItemConnectionPageInfo','PageToCommentConnectionPageInfo','PageToRevisionConnectionPageInfo','UserToPageConnectionPageInfo','TermNodeToEnqueuedScriptConnectionPageInfo','TermNodeToEnqueuedStylesheetConnectionPageInfo','CategoryToAncestorsCategoryConnectionPageInfo','CategoryToCategoryConnectionPageInfo','CategoryToContentNodeConnectionPageInfo','EmpreendimentoToCategoryConnectionPageInfo','EmpreendimentoToTermNodeConnectionPageInfo','CategoryToEmpreendimentoConnectionPageInfo','CategoryToPostConnectionPageInfo','PostToCategoryConnectionPageInfo','PostToCommentConnectionPageInfo','PostFormatToContentNodeConnectionPageInfo','PostFormatToPostConnectionPageInfo','PostToPostFormatConnectionPageInfo','PostToRevisionConnectionPageInfo','TagToContentNodeConnectionPageInfo','TagToPostConnectionPageInfo','PostToTagConnectionPageInfo','PostToTermNodeConnectionPageInfo','UserToPostConnectionPageInfo','UserToRevisionsConnectionPageInfo','UserToUserRoleConnectionPageInfo','RootQueryToArquivoAssessoriaConnectionPageInfo','RootQueryToBannerConnectionPageInfo','RootQueryToCategoryConnectionPageInfo','RootQueryToCommentConnectionPageInfo','RootQueryToContentNodeConnectionPageInfo','RootQueryToContentTypeConnectionPageInfo','RootQueryToEmpreendimentoConnectionPageInfo','RootQueryToMediaItemConnectionPageInfo','MenuItemToMenuItemConnectionPageInfo','MenuToMenuItemConnectionPageInfo','RootQueryToMenuItemConnectionPageInfo','RootQueryToMenuConnectionPageInfo','RootQueryToPageConnectionPageInfo','RootQueryToPluginConnectionPageInfo','RootQueryToPostFormatConnectionPageInfo','RootQueryToPostConnectionPageInfo','RootQueryToEnqueuedScriptConnectionPageInfo','RootQueryToEnqueuedStylesheetConnectionPageInfo','RootQueryToRevisionsConnectionPageInfo','RootQueryToTagConnectionPageInfo','RootQueryToTaxonomyConnectionPageInfo','RootQueryToTermNodeConnectionPageInfo','RootQueryToThemeConnectionPageInfo','RootQueryToUserRoleConnectionPageInfo','RootQueryToUserConnectionPageInfo']
+const PageInfo_possibleTypes: string[] = ['TaxonomyToContentTypeConnectionPageInfo','TermNodeToEnqueuedScriptConnectionPageInfo','TermNodeToEnqueuedStylesheetConnectionPageInfo','TaxonomyToTermNodeConnectionPageInfo','ContentTypeToTaxonomyConnectionPageInfo','ContentTypeToContentNodeConnectionPageInfo','CommentToCommentConnectionPageInfo','UserToCommentConnectionPageInfo','UserToEnqueuedScriptConnectionPageInfo','UserToEnqueuedStylesheetConnectionPageInfo','HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo','HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo','ContentNodeToEnqueuedScriptConnectionPageInfo','ContentNodeToEnqueuedStylesheetConnectionPageInfo','MediaItemToCommentConnectionPageInfo','UserToMediaItemConnectionPageInfo','PageToCommentConnectionPageInfo','PageToRevisionConnectionPageInfo','UserToPageConnectionPageInfo','PostToPostConnectionPageInfo','CategoryToAncestorsCategoryConnectionPageInfo','CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo','CentraldeDecoradoToCategoryConnectionPageInfo','CentraldeDecoradoToTermNodeConnectionPageInfo','CategoryToCentraldeDecoradoConnectionPageInfo','CategoryToCategoryConnectionPageInfo','CategoryToContentNodeConnectionPageInfo','EmpreendimentoToEmpreendimentoConnectionPageInfo','EmpreendimentoToCategoryConnectionPageInfo','EmpreendimentoToTermNodeConnectionPageInfo','CategoryToEmpreendimentoConnectionPageInfo','CategoryToPostConnectionPageInfo','PostToCategoryConnectionPageInfo','PostToCommentConnectionPageInfo','PostFormatToContentNodeConnectionPageInfo','PostFormatToPostConnectionPageInfo','PostToPostFormatConnectionPageInfo','PostToRevisionConnectionPageInfo','TagToContentNodeConnectionPageInfo','TagToPostConnectionPageInfo','PostToTagConnectionPageInfo','PostToTermNodeConnectionPageInfo','UserToPostConnectionPageInfo','UserToRevisionsConnectionPageInfo','UserToUserRoleConnectionPageInfo','ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo','RootQueryToArquivoAssessoriaConnectionPageInfo','BannerToBannerConnectionPageInfo','RootQueryToBannerConnectionPageInfo','RootQueryToCategoryConnectionPageInfo','RootQueryToCentraldeDecoradoConnectionPageInfo','RootQueryToCommentConnectionPageInfo','RootQueryToContentNodeConnectionPageInfo','RootQueryToContentTypeConnectionPageInfo','RootQueryToEmpreendimentoConnectionPageInfo','RootQueryToMediaItemConnectionPageInfo','MenuItemToMenuItemConnectionPageInfo','MenuToMenuItemConnectionPageInfo','RootQueryToMenuItemConnectionPageInfo','RootQueryToMenuConnectionPageInfo','RootQueryToPageConnectionPageInfo','RootQueryToPluginConnectionPageInfo','RootQueryToPostFormatConnectionPageInfo','RootQueryToPostConnectionPageInfo','RootQueryToEnqueuedScriptConnectionPageInfo','RootQueryToEnqueuedStylesheetConnectionPageInfo','RootQueryToRevisionsConnectionPageInfo','RootQueryToTagConnectionPageInfo','RootQueryToTaxonomyConnectionPageInfo','RootQueryToTermNodeConnectionPageInfo','RootQueryToThemeConnectionPageInfo','RootQueryToUserRoleConnectionPageInfo','RootQueryToUserConnectionPageInfo']
 export const isPageInfo = (obj?: { __typename?: any } | null): obj is PageInfo => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isPageInfo"')
   return PageInfo_possibleTypes.includes(obj.__typename)
@@ -17285,7 +19653,7 @@ export const isContentTypeConnectionPageInfo = (obj?: { __typename?: any } | nul
 
 
 
-const WPPageInfo_possibleTypes: string[] = ['TaxonomyToContentTypeConnectionPageInfo','ContentTypeToTaxonomyConnectionPageInfo','ContentTypeToContentNodeConnectionPageInfo','CommentToCommentConnectionPageInfo','UserToCommentConnectionPageInfo','UserToEnqueuedScriptConnectionPageInfo','UserToEnqueuedStylesheetConnectionPageInfo','HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo','HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo','ContentNodeToEnqueuedScriptConnectionPageInfo','ContentNodeToEnqueuedStylesheetConnectionPageInfo','MediaItemToCommentConnectionPageInfo','UserToMediaItemConnectionPageInfo','PageToCommentConnectionPageInfo','PageToRevisionConnectionPageInfo','UserToPageConnectionPageInfo','TermNodeToEnqueuedScriptConnectionPageInfo','TermNodeToEnqueuedStylesheetConnectionPageInfo','CategoryToAncestorsCategoryConnectionPageInfo','CategoryToCategoryConnectionPageInfo','CategoryToContentNodeConnectionPageInfo','EmpreendimentoToCategoryConnectionPageInfo','EmpreendimentoToTermNodeConnectionPageInfo','CategoryToEmpreendimentoConnectionPageInfo','CategoryToPostConnectionPageInfo','PostToCategoryConnectionPageInfo','PostToCommentConnectionPageInfo','PostFormatToContentNodeConnectionPageInfo','PostFormatToPostConnectionPageInfo','PostToPostFormatConnectionPageInfo','PostToRevisionConnectionPageInfo','TagToContentNodeConnectionPageInfo','TagToPostConnectionPageInfo','PostToTagConnectionPageInfo','PostToTermNodeConnectionPageInfo','UserToPostConnectionPageInfo','UserToRevisionsConnectionPageInfo','UserToUserRoleConnectionPageInfo','RootQueryToArquivoAssessoriaConnectionPageInfo','RootQueryToBannerConnectionPageInfo','RootQueryToCategoryConnectionPageInfo','RootQueryToCommentConnectionPageInfo','RootQueryToContentNodeConnectionPageInfo','RootQueryToContentTypeConnectionPageInfo','RootQueryToEmpreendimentoConnectionPageInfo','RootQueryToMediaItemConnectionPageInfo','MenuItemToMenuItemConnectionPageInfo','MenuToMenuItemConnectionPageInfo','RootQueryToMenuItemConnectionPageInfo','RootQueryToMenuConnectionPageInfo','RootQueryToPageConnectionPageInfo','RootQueryToPluginConnectionPageInfo','RootQueryToPostFormatConnectionPageInfo','RootQueryToPostConnectionPageInfo','RootQueryToEnqueuedScriptConnectionPageInfo','RootQueryToEnqueuedStylesheetConnectionPageInfo','RootQueryToRevisionsConnectionPageInfo','RootQueryToTagConnectionPageInfo','RootQueryToTaxonomyConnectionPageInfo','RootQueryToTermNodeConnectionPageInfo','RootQueryToThemeConnectionPageInfo','RootQueryToUserRoleConnectionPageInfo','RootQueryToUserConnectionPageInfo']
+const WPPageInfo_possibleTypes: string[] = ['TaxonomyToContentTypeConnectionPageInfo','TermNodeToEnqueuedScriptConnectionPageInfo','TermNodeToEnqueuedStylesheetConnectionPageInfo','TaxonomyToTermNodeConnectionPageInfo','ContentTypeToTaxonomyConnectionPageInfo','ContentTypeToContentNodeConnectionPageInfo','CommentToCommentConnectionPageInfo','UserToCommentConnectionPageInfo','UserToEnqueuedScriptConnectionPageInfo','UserToEnqueuedStylesheetConnectionPageInfo','HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo','HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo','ContentNodeToEnqueuedScriptConnectionPageInfo','ContentNodeToEnqueuedStylesheetConnectionPageInfo','MediaItemToCommentConnectionPageInfo','UserToMediaItemConnectionPageInfo','PageToCommentConnectionPageInfo','PageToRevisionConnectionPageInfo','UserToPageConnectionPageInfo','PostToPostConnectionPageInfo','CategoryToAncestorsCategoryConnectionPageInfo','CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo','CentraldeDecoradoToCategoryConnectionPageInfo','CentraldeDecoradoToTermNodeConnectionPageInfo','CategoryToCentraldeDecoradoConnectionPageInfo','CategoryToCategoryConnectionPageInfo','CategoryToContentNodeConnectionPageInfo','EmpreendimentoToEmpreendimentoConnectionPageInfo','EmpreendimentoToCategoryConnectionPageInfo','EmpreendimentoToTermNodeConnectionPageInfo','CategoryToEmpreendimentoConnectionPageInfo','CategoryToPostConnectionPageInfo','PostToCategoryConnectionPageInfo','PostToCommentConnectionPageInfo','PostFormatToContentNodeConnectionPageInfo','PostFormatToPostConnectionPageInfo','PostToPostFormatConnectionPageInfo','PostToRevisionConnectionPageInfo','TagToContentNodeConnectionPageInfo','TagToPostConnectionPageInfo','PostToTagConnectionPageInfo','PostToTermNodeConnectionPageInfo','UserToPostConnectionPageInfo','UserToRevisionsConnectionPageInfo','UserToUserRoleConnectionPageInfo','ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo','RootQueryToArquivoAssessoriaConnectionPageInfo','BannerToBannerConnectionPageInfo','RootQueryToBannerConnectionPageInfo','RootQueryToCategoryConnectionPageInfo','RootQueryToCentraldeDecoradoConnectionPageInfo','RootQueryToCommentConnectionPageInfo','RootQueryToContentNodeConnectionPageInfo','RootQueryToContentTypeConnectionPageInfo','RootQueryToEmpreendimentoConnectionPageInfo','RootQueryToMediaItemConnectionPageInfo','MenuItemToMenuItemConnectionPageInfo','MenuToMenuItemConnectionPageInfo','RootQueryToMenuItemConnectionPageInfo','RootQueryToMenuConnectionPageInfo','RootQueryToPageConnectionPageInfo','RootQueryToPluginConnectionPageInfo','RootQueryToPostFormatConnectionPageInfo','RootQueryToPostConnectionPageInfo','RootQueryToEnqueuedScriptConnectionPageInfo','RootQueryToEnqueuedStylesheetConnectionPageInfo','RootQueryToRevisionsConnectionPageInfo','RootQueryToTagConnectionPageInfo','RootQueryToTaxonomyConnectionPageInfo','RootQueryToTermNodeConnectionPageInfo','RootQueryToThemeConnectionPageInfo','RootQueryToUserRoleConnectionPageInfo','RootQueryToUserConnectionPageInfo']
 export const isWPPageInfo = (obj?: { __typename?: any } | null): obj is WPPageInfo => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isWPPageInfo"')
   return WPPageInfo_possibleTypes.includes(obj.__typename)
@@ -17305,6 +19673,182 @@ const TaxonomyToContentTypeConnectionPageInfo_possibleTypes: string[] = ['Taxono
 export const isTaxonomyToContentTypeConnectionPageInfo = (obj?: { __typename?: any } | null): obj is TaxonomyToContentTypeConnectionPageInfo => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isTaxonomyToContentTypeConnectionPageInfo"')
   return TaxonomyToContentTypeConnectionPageInfo_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const TaxonomyToTermNodeConnection_possibleTypes: string[] = ['TaxonomyToTermNodeConnection']
+export const isTaxonomyToTermNodeConnection = (obj?: { __typename?: any } | null): obj is TaxonomyToTermNodeConnection => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isTaxonomyToTermNodeConnection"')
+  return TaxonomyToTermNodeConnection_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const TermNodeConnection_possibleTypes: string[] = ['TaxonomyToTermNodeConnection','CentraldeDecoradoToTermNodeConnection','EmpreendimentoToTermNodeConnection','PostToTermNodeConnection','RootQueryToTermNodeConnection']
+export const isTermNodeConnection = (obj?: { __typename?: any } | null): obj is TermNodeConnection => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isTermNodeConnection"')
+  return TermNodeConnection_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const TermNodeConnectionEdge_possibleTypes: string[] = ['TaxonomyToTermNodeConnectionEdge','CentraldeDecoradoToTermNodeConnectionEdge','EmpreendimentoToTermNodeConnectionEdge','PostToTermNodeConnectionEdge','RootQueryToTermNodeConnectionEdge']
+export const isTermNodeConnectionEdge = (obj?: { __typename?: any } | null): obj is TermNodeConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isTermNodeConnectionEdge"')
+  return TermNodeConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const TermNode_possibleTypes: string[] = ['Category','PostFormat','Tag']
+export const isTermNode = (obj?: { __typename?: any } | null): obj is TermNode => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isTermNode"')
+  return TermNode_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const TermNodeToEnqueuedScriptConnection_possibleTypes: string[] = ['TermNodeToEnqueuedScriptConnection']
+export const isTermNodeToEnqueuedScriptConnection = (obj?: { __typename?: any } | null): obj is TermNodeToEnqueuedScriptConnection => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isTermNodeToEnqueuedScriptConnection"')
+  return TermNodeToEnqueuedScriptConnection_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const EnqueuedScriptConnection_possibleTypes: string[] = ['TermNodeToEnqueuedScriptConnection','UserToEnqueuedScriptConnection','ContentNodeToEnqueuedScriptConnection','RootQueryToEnqueuedScriptConnection']
+export const isEnqueuedScriptConnection = (obj?: { __typename?: any } | null): obj is EnqueuedScriptConnection => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isEnqueuedScriptConnection"')
+  return EnqueuedScriptConnection_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const EnqueuedScriptConnectionEdge_possibleTypes: string[] = ['TermNodeToEnqueuedScriptConnectionEdge','UserToEnqueuedScriptConnectionEdge','ContentNodeToEnqueuedScriptConnectionEdge','RootQueryToEnqueuedScriptConnectionEdge']
+export const isEnqueuedScriptConnectionEdge = (obj?: { __typename?: any } | null): obj is EnqueuedScriptConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isEnqueuedScriptConnectionEdge"')
+  return EnqueuedScriptConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const EnqueuedScript_possibleTypes: string[] = ['EnqueuedScript']
+export const isEnqueuedScript = (obj?: { __typename?: any } | null): obj is EnqueuedScript => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isEnqueuedScript"')
+  return EnqueuedScript_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const EnqueuedAsset_possibleTypes: string[] = ['EnqueuedScript','EnqueuedStylesheet']
+export const isEnqueuedAsset = (obj?: { __typename?: any } | null): obj is EnqueuedAsset => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isEnqueuedAsset"')
+  return EnqueuedAsset_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const EnqueuedScriptConnectionPageInfo_possibleTypes: string[] = ['TermNodeToEnqueuedScriptConnectionPageInfo','UserToEnqueuedScriptConnectionPageInfo','ContentNodeToEnqueuedScriptConnectionPageInfo','RootQueryToEnqueuedScriptConnectionPageInfo']
+export const isEnqueuedScriptConnectionPageInfo = (obj?: { __typename?: any } | null): obj is EnqueuedScriptConnectionPageInfo => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isEnqueuedScriptConnectionPageInfo"')
+  return EnqueuedScriptConnectionPageInfo_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const TermNodeToEnqueuedScriptConnectionEdge_possibleTypes: string[] = ['TermNodeToEnqueuedScriptConnectionEdge']
+export const isTermNodeToEnqueuedScriptConnectionEdge = (obj?: { __typename?: any } | null): obj is TermNodeToEnqueuedScriptConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isTermNodeToEnqueuedScriptConnectionEdge"')
+  return TermNodeToEnqueuedScriptConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const TermNodeToEnqueuedScriptConnectionPageInfo_possibleTypes: string[] = ['TermNodeToEnqueuedScriptConnectionPageInfo']
+export const isTermNodeToEnqueuedScriptConnectionPageInfo = (obj?: { __typename?: any } | null): obj is TermNodeToEnqueuedScriptConnectionPageInfo => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isTermNodeToEnqueuedScriptConnectionPageInfo"')
+  return TermNodeToEnqueuedScriptConnectionPageInfo_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const TermNodeToEnqueuedStylesheetConnection_possibleTypes: string[] = ['TermNodeToEnqueuedStylesheetConnection']
+export const isTermNodeToEnqueuedStylesheetConnection = (obj?: { __typename?: any } | null): obj is TermNodeToEnqueuedStylesheetConnection => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isTermNodeToEnqueuedStylesheetConnection"')
+  return TermNodeToEnqueuedStylesheetConnection_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const EnqueuedStylesheetConnection_possibleTypes: string[] = ['TermNodeToEnqueuedStylesheetConnection','UserToEnqueuedStylesheetConnection','ContentNodeToEnqueuedStylesheetConnection','RootQueryToEnqueuedStylesheetConnection']
+export const isEnqueuedStylesheetConnection = (obj?: { __typename?: any } | null): obj is EnqueuedStylesheetConnection => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isEnqueuedStylesheetConnection"')
+  return EnqueuedStylesheetConnection_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const EnqueuedStylesheetConnectionEdge_possibleTypes: string[] = ['TermNodeToEnqueuedStylesheetConnectionEdge','UserToEnqueuedStylesheetConnectionEdge','ContentNodeToEnqueuedStylesheetConnectionEdge','RootQueryToEnqueuedStylesheetConnectionEdge']
+export const isEnqueuedStylesheetConnectionEdge = (obj?: { __typename?: any } | null): obj is EnqueuedStylesheetConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isEnqueuedStylesheetConnectionEdge"')
+  return EnqueuedStylesheetConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const EnqueuedStylesheet_possibleTypes: string[] = ['EnqueuedStylesheet']
+export const isEnqueuedStylesheet = (obj?: { __typename?: any } | null): obj is EnqueuedStylesheet => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isEnqueuedStylesheet"')
+  return EnqueuedStylesheet_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const EnqueuedStylesheetConnectionPageInfo_possibleTypes: string[] = ['TermNodeToEnqueuedStylesheetConnectionPageInfo','UserToEnqueuedStylesheetConnectionPageInfo','ContentNodeToEnqueuedStylesheetConnectionPageInfo','RootQueryToEnqueuedStylesheetConnectionPageInfo']
+export const isEnqueuedStylesheetConnectionPageInfo = (obj?: { __typename?: any } | null): obj is EnqueuedStylesheetConnectionPageInfo => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isEnqueuedStylesheetConnectionPageInfo"')
+  return EnqueuedStylesheetConnectionPageInfo_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const TermNodeToEnqueuedStylesheetConnectionEdge_possibleTypes: string[] = ['TermNodeToEnqueuedStylesheetConnectionEdge']
+export const isTermNodeToEnqueuedStylesheetConnectionEdge = (obj?: { __typename?: any } | null): obj is TermNodeToEnqueuedStylesheetConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isTermNodeToEnqueuedStylesheetConnectionEdge"')
+  return TermNodeToEnqueuedStylesheetConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const TermNodeToEnqueuedStylesheetConnectionPageInfo_possibleTypes: string[] = ['TermNodeToEnqueuedStylesheetConnectionPageInfo']
+export const isTermNodeToEnqueuedStylesheetConnectionPageInfo = (obj?: { __typename?: any } | null): obj is TermNodeToEnqueuedStylesheetConnectionPageInfo => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isTermNodeToEnqueuedStylesheetConnectionPageInfo"')
+  return TermNodeToEnqueuedStylesheetConnectionPageInfo_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const TermNodeConnectionPageInfo_possibleTypes: string[] = ['TaxonomyToTermNodeConnectionPageInfo','CentraldeDecoradoToTermNodeConnectionPageInfo','EmpreendimentoToTermNodeConnectionPageInfo','PostToTermNodeConnectionPageInfo','RootQueryToTermNodeConnectionPageInfo']
+export const isTermNodeConnectionPageInfo = (obj?: { __typename?: any } | null): obj is TermNodeConnectionPageInfo => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isTermNodeConnectionPageInfo"')
+  return TermNodeConnectionPageInfo_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const TaxonomyToTermNodeConnectionEdge_possibleTypes: string[] = ['TaxonomyToTermNodeConnectionEdge']
+export const isTaxonomyToTermNodeConnectionEdge = (obj?: { __typename?: any } | null): obj is TaxonomyToTermNodeConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isTaxonomyToTermNodeConnectionEdge"')
+  return TaxonomyToTermNodeConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const TaxonomyToTermNodeConnectionPageInfo_possibleTypes: string[] = ['TaxonomyToTermNodeConnectionPageInfo']
+export const isTaxonomyToTermNodeConnectionPageInfo = (obj?: { __typename?: any } | null): obj is TaxonomyToTermNodeConnectionPageInfo => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isTaxonomyToTermNodeConnectionPageInfo"')
+  return TaxonomyToTermNodeConnectionPageInfo_possibleTypes.includes(obj.__typename)
 }
 
 
@@ -17421,7 +19965,7 @@ export const isCommenter = (obj?: { __typename?: any } | null): obj is Commenter
 
 
 
-const DatabaseIdentifier_possibleTypes: string[] = ['ArquivoAssessoria','User','Comment','MediaItem','Page','Post','Category','Empreendimento','PostFormat','Tag','Banner','Menu','MenuItem','CommentAuthor']
+const DatabaseIdentifier_possibleTypes: string[] = ['ArquivoAssessoria','User','Comment','MediaItem','Page','Post','Category','CentraldeDecorado','Empreendimento','PostFormat','Tag','Banner','Menu','MenuItem','CommentAuthor']
 export const isDatabaseIdentifier = (obj?: { __typename?: any } | null): obj is DatabaseIdentifier => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isDatabaseIdentifier"')
   return DatabaseIdentifier_possibleTypes.includes(obj.__typename)
@@ -17557,46 +20101,6 @@ export const isUserToEnqueuedScriptConnection = (obj?: { __typename?: any } | nu
 
 
 
-const EnqueuedScriptConnection_possibleTypes: string[] = ['UserToEnqueuedScriptConnection','ContentNodeToEnqueuedScriptConnection','TermNodeToEnqueuedScriptConnection','RootQueryToEnqueuedScriptConnection']
-export const isEnqueuedScriptConnection = (obj?: { __typename?: any } | null): obj is EnqueuedScriptConnection => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isEnqueuedScriptConnection"')
-  return EnqueuedScriptConnection_possibleTypes.includes(obj.__typename)
-}
-
-
-
-const EnqueuedScriptConnectionEdge_possibleTypes: string[] = ['UserToEnqueuedScriptConnectionEdge','ContentNodeToEnqueuedScriptConnectionEdge','TermNodeToEnqueuedScriptConnectionEdge','RootQueryToEnqueuedScriptConnectionEdge']
-export const isEnqueuedScriptConnectionEdge = (obj?: { __typename?: any } | null): obj is EnqueuedScriptConnectionEdge => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isEnqueuedScriptConnectionEdge"')
-  return EnqueuedScriptConnectionEdge_possibleTypes.includes(obj.__typename)
-}
-
-
-
-const EnqueuedScript_possibleTypes: string[] = ['EnqueuedScript']
-export const isEnqueuedScript = (obj?: { __typename?: any } | null): obj is EnqueuedScript => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isEnqueuedScript"')
-  return EnqueuedScript_possibleTypes.includes(obj.__typename)
-}
-
-
-
-const EnqueuedAsset_possibleTypes: string[] = ['EnqueuedScript','EnqueuedStylesheet']
-export const isEnqueuedAsset = (obj?: { __typename?: any } | null): obj is EnqueuedAsset => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isEnqueuedAsset"')
-  return EnqueuedAsset_possibleTypes.includes(obj.__typename)
-}
-
-
-
-const EnqueuedScriptConnectionPageInfo_possibleTypes: string[] = ['UserToEnqueuedScriptConnectionPageInfo','ContentNodeToEnqueuedScriptConnectionPageInfo','TermNodeToEnqueuedScriptConnectionPageInfo','RootQueryToEnqueuedScriptConnectionPageInfo']
-export const isEnqueuedScriptConnectionPageInfo = (obj?: { __typename?: any } | null): obj is EnqueuedScriptConnectionPageInfo => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isEnqueuedScriptConnectionPageInfo"')
-  return EnqueuedScriptConnectionPageInfo_possibleTypes.includes(obj.__typename)
-}
-
-
-
 const UserToEnqueuedScriptConnectionEdge_possibleTypes: string[] = ['UserToEnqueuedScriptConnectionEdge']
 export const isUserToEnqueuedScriptConnectionEdge = (obj?: { __typename?: any } | null): obj is UserToEnqueuedScriptConnectionEdge => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isUserToEnqueuedScriptConnectionEdge"')
@@ -17617,38 +20121,6 @@ const UserToEnqueuedStylesheetConnection_possibleTypes: string[] = ['UserToEnque
 export const isUserToEnqueuedStylesheetConnection = (obj?: { __typename?: any } | null): obj is UserToEnqueuedStylesheetConnection => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isUserToEnqueuedStylesheetConnection"')
   return UserToEnqueuedStylesheetConnection_possibleTypes.includes(obj.__typename)
-}
-
-
-
-const EnqueuedStylesheetConnection_possibleTypes: string[] = ['UserToEnqueuedStylesheetConnection','ContentNodeToEnqueuedStylesheetConnection','TermNodeToEnqueuedStylesheetConnection','RootQueryToEnqueuedStylesheetConnection']
-export const isEnqueuedStylesheetConnection = (obj?: { __typename?: any } | null): obj is EnqueuedStylesheetConnection => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isEnqueuedStylesheetConnection"')
-  return EnqueuedStylesheetConnection_possibleTypes.includes(obj.__typename)
-}
-
-
-
-const EnqueuedStylesheetConnectionEdge_possibleTypes: string[] = ['UserToEnqueuedStylesheetConnectionEdge','ContentNodeToEnqueuedStylesheetConnectionEdge','TermNodeToEnqueuedStylesheetConnectionEdge','RootQueryToEnqueuedStylesheetConnectionEdge']
-export const isEnqueuedStylesheetConnectionEdge = (obj?: { __typename?: any } | null): obj is EnqueuedStylesheetConnectionEdge => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isEnqueuedStylesheetConnectionEdge"')
-  return EnqueuedStylesheetConnectionEdge_possibleTypes.includes(obj.__typename)
-}
-
-
-
-const EnqueuedStylesheet_possibleTypes: string[] = ['EnqueuedStylesheet']
-export const isEnqueuedStylesheet = (obj?: { __typename?: any } | null): obj is EnqueuedStylesheet => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isEnqueuedStylesheet"')
-  return EnqueuedStylesheet_possibleTypes.includes(obj.__typename)
-}
-
-
-
-const EnqueuedStylesheetConnectionPageInfo_possibleTypes: string[] = ['UserToEnqueuedStylesheetConnectionPageInfo','ContentNodeToEnqueuedStylesheetConnectionPageInfo','TermNodeToEnqueuedStylesheetConnectionPageInfo','RootQueryToEnqueuedStylesheetConnectionPageInfo']
-export const isEnqueuedStylesheetConnectionPageInfo = (obj?: { __typename?: any } | null): obj is EnqueuedStylesheetConnectionPageInfo => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isEnqueuedStylesheetConnectionPageInfo"')
-  return EnqueuedStylesheetConnectionPageInfo_possibleTypes.includes(obj.__typename)
 }
 
 
@@ -17701,7 +20173,7 @@ export const isMediaItem = (obj?: { __typename?: any } | null): obj is MediaItem
 
 
 
-const NodeWithTemplate_possibleTypes: string[] = ['ArquivoAssessoria','MediaItem','Page','Post','Empreendimento','Banner']
+const NodeWithTemplate_possibleTypes: string[] = ['ArquivoAssessoria','MediaItem','Page','Post','CentraldeDecorado','Empreendimento','Banner']
 export const isNodeWithTemplate = (obj?: { __typename?: any } | null): obj is NodeWithTemplate => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isNodeWithTemplate"')
   return NodeWithTemplate_possibleTypes.includes(obj.__typename)
@@ -17717,7 +20189,7 @@ export const isContentTemplate = (obj?: { __typename?: any } | null): obj is Con
 
 
 
-const NodeWithTitle_possibleTypes: string[] = ['ArquivoAssessoria','MediaItem','Page','Post','Empreendimento','Banner']
+const NodeWithTitle_possibleTypes: string[] = ['ArquivoAssessoria','MediaItem','Page','Post','CentraldeDecorado','Empreendimento','Banner']
 export const isNodeWithTitle = (obj?: { __typename?: any } | null): obj is NodeWithTitle => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isNodeWithTitle"')
   return NodeWithTitle_possibleTypes.includes(obj.__typename)
@@ -17981,7 +20453,7 @@ export const isPage = (obj?: { __typename?: any } | null): obj is Page => {
 
 
 
-const Previewable_possibleTypes: string[] = ['ArquivoAssessoria','Page','Post','Empreendimento','Banner']
+const Previewable_possibleTypes: string[] = ['ArquivoAssessoria','Page','Post','CentraldeDecorado','Empreendimento','Banner']
 export const isPreviewable = (obj?: { __typename?: any } | null): obj is Previewable => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isPreviewable"')
   return Previewable_possibleTypes.includes(obj.__typename)
@@ -17997,7 +20469,7 @@ export const isNodeWithContentEditor = (obj?: { __typename?: any } | null): obj 
 
 
 
-const NodeWithFeaturedImage_possibleTypes: string[] = ['Page','Post','Empreendimento']
+const NodeWithFeaturedImage_possibleTypes: string[] = ['Page','Post','CentraldeDecorado','Empreendimento']
 export const isNodeWithFeaturedImage = (obj?: { __typename?: any } | null): obj is NodeWithFeaturedImage => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isNodeWithFeaturedImage"')
   return NodeWithFeaturedImage_possibleTypes.includes(obj.__typename)
@@ -18037,7 +20509,7 @@ export const isNodeWithPageAttributes = (obj?: { __typename?: any } | null): obj
 
 
 
-const MenuItemLinkable_possibleTypes: string[] = ['ArquivoAssessoria','Page','Post','Category','Empreendimento','Tag','Banner']
+const MenuItemLinkable_possibleTypes: string[] = ['ArquivoAssessoria','Page','Post','Category','CentraldeDecorado','Empreendimento','Tag','Banner']
 export const isMenuItemLinkable = (obj?: { __typename?: any } | null): obj is MenuItemLinkable => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isMenuItemLinkable"')
   return MenuItemLinkable_possibleTypes.includes(obj.__typename)
@@ -18053,7 +20525,7 @@ export const isPage_Assessoria = (obj?: { __typename?: any } | null): obj is Pag
 
 
 
-const AcfFieldGroup_possibleTypes: string[] = ['Page_Assessoria','Page_Conteusobre','Page_Conteusobre_item','Page_Informacoesdecontato','Empreendimento_Empreendimento','Empreendimento_Empreendimento_andamentoDaObra','Empreendimento_Empreendimento_diferenciaisItems','Empreendimento_Empreendimento_itemsPlantas','Empreendimento_Empreendimento_itensAreacomuns','Empreendimento_Empreendimento_pontosDeReferencia','Empreendimento_Empreendimento_videosOutos','Empreendimento_Housiverso','Empreendimento_Housiverso_diferencial','ArquivoAssessoria_DownAssessoria','Banner_BannerHome','Banner_BannerHome_BhConteudo','Banner_BannerHome_ImagensProntas']
+const AcfFieldGroup_possibleTypes: string[] = ['Page_Assessoria','Page_Conteusobre','Page_Conteusobre_item','Page_Informacoesdecontato','CentraldeDecorado_Centraldedecorados','Empreendimento_Empreendimento','Empreendimento_Empreendimento_andamentoDaObra','Empreendimento_Empreendimento_diferenciaisItems','Empreendimento_Empreendimento_itemsPlantas','Empreendimento_Empreendimento_itensAreacomuns','Empreendimento_Empreendimento_pontosDeReferencia','Empreendimento_Empreendimento_videosOutos','Empreendimento_Housiverso','Empreendimento_Housiverso_diferencial','ArquivoAssessoria_DownAssessoria','Banner_BannerHome','Banner_BannerHome_BhConteudo','Banner_BannerHome_ImagensProntas']
 export const isAcfFieldGroup = (obj?: { __typename?: any } | null): obj is AcfFieldGroup => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isAcfFieldGroup"')
   return AcfFieldGroup_possibleTypes.includes(obj.__typename)
@@ -18173,7 +20645,7 @@ export const isUserToPostConnection = (obj?: { __typename?: any } | null): obj i
 
 
 
-const PostConnection_possibleTypes: string[] = ['UserToPostConnection','CategoryToPostConnection','PostFormatToPostConnection','PostToRevisionConnection','TagToPostConnection','RootQueryToPostConnection']
+const PostConnection_possibleTypes: string[] = ['UserToPostConnection','PostToPostConnection','CategoryToPostConnection','PostFormatToPostConnection','PostToRevisionConnection','TagToPostConnection','RootQueryToPostConnection']
 export const isPostConnection = (obj?: { __typename?: any } | null): obj is PostConnection => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isPostConnection"')
   return PostConnection_possibleTypes.includes(obj.__typename)
@@ -18181,7 +20653,7 @@ export const isPostConnection = (obj?: { __typename?: any } | null): obj is Post
 
 
 
-const PostConnectionEdge_possibleTypes: string[] = ['CategoryToPostConnectionEdge','PostFormatToPostConnectionEdge','PostToPreviewConnectionEdge','PostToRevisionConnectionEdge','TagToPostConnectionEdge','UserToPostConnectionEdge','RootQueryToPostConnectionEdge']
+const PostConnectionEdge_possibleTypes: string[] = ['PostToPostConnectionEdge','CategoryToPostConnectionEdge','PostToParentConnectionEdge','PostFormatToPostConnectionEdge','PostToPreviewConnectionEdge','PostToRevisionConnectionEdge','TagToPostConnectionEdge','UserToPostConnectionEdge','RootQueryToPostConnectionEdge']
 export const isPostConnectionEdge = (obj?: { __typename?: any } | null): obj is PostConnectionEdge => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isPostConnectionEdge"')
   return PostConnectionEdge_possibleTypes.includes(obj.__typename)
@@ -18213,6 +20685,38 @@ export const isNodeWithTrackbacks = (obj?: { __typename?: any } | null): obj is 
 
 
 
+const PostToPostConnection_possibleTypes: string[] = ['PostToPostConnection']
+export const isPostToPostConnection = (obj?: { __typename?: any } | null): obj is PostToPostConnection => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isPostToPostConnection"')
+  return PostToPostConnection_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const PostToPostConnectionEdge_possibleTypes: string[] = ['PostToPostConnectionEdge']
+export const isPostToPostConnectionEdge = (obj?: { __typename?: any } | null): obj is PostToPostConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isPostToPostConnectionEdge"')
+  return PostToPostConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const PostToPostConnectionPageInfo_possibleTypes: string[] = ['PostToPostConnectionPageInfo']
+export const isPostToPostConnectionPageInfo = (obj?: { __typename?: any } | null): obj is PostToPostConnectionPageInfo => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isPostToPostConnectionPageInfo"')
+  return PostToPostConnectionPageInfo_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const PostConnectionPageInfo_possibleTypes: string[] = ['PostToPostConnectionPageInfo','CategoryToPostConnectionPageInfo','PostFormatToPostConnectionPageInfo','PostToRevisionConnectionPageInfo','TagToPostConnectionPageInfo','UserToPostConnectionPageInfo','RootQueryToPostConnectionPageInfo']
+export const isPostConnectionPageInfo = (obj?: { __typename?: any } | null): obj is PostConnectionPageInfo => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isPostConnectionPageInfo"')
+  return PostConnectionPageInfo_possibleTypes.includes(obj.__typename)
+}
+
+
+
 const PostToCategoryConnection_possibleTypes: string[] = ['PostToCategoryConnection']
 export const isPostToCategoryConnection = (obj?: { __typename?: any } | null): obj is PostToCategoryConnection => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isPostToCategoryConnection"')
@@ -18221,7 +20725,7 @@ export const isPostToCategoryConnection = (obj?: { __typename?: any } | null): o
 
 
 
-const CategoryConnection_possibleTypes: string[] = ['PostToCategoryConnection','CategoryToAncestorsCategoryConnection','CategoryToCategoryConnection','EmpreendimentoToCategoryConnection','RootQueryToCategoryConnection']
+const CategoryConnection_possibleTypes: string[] = ['PostToCategoryConnection','CategoryToAncestorsCategoryConnection','CentraldeDecoradoToCategoryConnection','CategoryToCategoryConnection','EmpreendimentoToCategoryConnection','RootQueryToCategoryConnection']
 export const isCategoryConnection = (obj?: { __typename?: any } | null): obj is CategoryConnection => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isCategoryConnection"')
   return CategoryConnection_possibleTypes.includes(obj.__typename)
@@ -18229,7 +20733,7 @@ export const isCategoryConnection = (obj?: { __typename?: any } | null): obj is 
 
 
 
-const CategoryConnectionEdge_possibleTypes: string[] = ['CategoryToAncestorsCategoryConnectionEdge','CategoryToCategoryConnectionEdge','EmpreendimentoToCategoryConnectionEdge','CategoryToParentCategoryConnectionEdge','PostToCategoryConnectionEdge','RootQueryToCategoryConnectionEdge']
+const CategoryConnectionEdge_possibleTypes: string[] = ['CategoryToAncestorsCategoryConnectionEdge','CentraldeDecoradoToCategoryConnectionEdge','CategoryToCategoryConnectionEdge','EmpreendimentoToCategoryConnectionEdge','CategoryToParentCategoryConnectionEdge','PostToCategoryConnectionEdge','RootQueryToCategoryConnectionEdge']
 export const isCategoryConnectionEdge = (obj?: { __typename?: any } | null): obj is CategoryConnectionEdge => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isCategoryConnectionEdge"')
   return CategoryConnectionEdge_possibleTypes.includes(obj.__typename)
@@ -18241,62 +20745,6 @@ const Category_possibleTypes: string[] = ['Category']
 export const isCategory = (obj?: { __typename?: any } | null): obj is Category => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isCategory"')
   return Category_possibleTypes.includes(obj.__typename)
-}
-
-
-
-const TermNode_possibleTypes: string[] = ['Category','PostFormat','Tag']
-export const isTermNode = (obj?: { __typename?: any } | null): obj is TermNode => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isTermNode"')
-  return TermNode_possibleTypes.includes(obj.__typename)
-}
-
-
-
-const TermNodeToEnqueuedScriptConnection_possibleTypes: string[] = ['TermNodeToEnqueuedScriptConnection']
-export const isTermNodeToEnqueuedScriptConnection = (obj?: { __typename?: any } | null): obj is TermNodeToEnqueuedScriptConnection => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isTermNodeToEnqueuedScriptConnection"')
-  return TermNodeToEnqueuedScriptConnection_possibleTypes.includes(obj.__typename)
-}
-
-
-
-const TermNodeToEnqueuedScriptConnectionEdge_possibleTypes: string[] = ['TermNodeToEnqueuedScriptConnectionEdge']
-export const isTermNodeToEnqueuedScriptConnectionEdge = (obj?: { __typename?: any } | null): obj is TermNodeToEnqueuedScriptConnectionEdge => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isTermNodeToEnqueuedScriptConnectionEdge"')
-  return TermNodeToEnqueuedScriptConnectionEdge_possibleTypes.includes(obj.__typename)
-}
-
-
-
-const TermNodeToEnqueuedScriptConnectionPageInfo_possibleTypes: string[] = ['TermNodeToEnqueuedScriptConnectionPageInfo']
-export const isTermNodeToEnqueuedScriptConnectionPageInfo = (obj?: { __typename?: any } | null): obj is TermNodeToEnqueuedScriptConnectionPageInfo => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isTermNodeToEnqueuedScriptConnectionPageInfo"')
-  return TermNodeToEnqueuedScriptConnectionPageInfo_possibleTypes.includes(obj.__typename)
-}
-
-
-
-const TermNodeToEnqueuedStylesheetConnection_possibleTypes: string[] = ['TermNodeToEnqueuedStylesheetConnection']
-export const isTermNodeToEnqueuedStylesheetConnection = (obj?: { __typename?: any } | null): obj is TermNodeToEnqueuedStylesheetConnection => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isTermNodeToEnqueuedStylesheetConnection"')
-  return TermNodeToEnqueuedStylesheetConnection_possibleTypes.includes(obj.__typename)
-}
-
-
-
-const TermNodeToEnqueuedStylesheetConnectionEdge_possibleTypes: string[] = ['TermNodeToEnqueuedStylesheetConnectionEdge']
-export const isTermNodeToEnqueuedStylesheetConnectionEdge = (obj?: { __typename?: any } | null): obj is TermNodeToEnqueuedStylesheetConnectionEdge => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isTermNodeToEnqueuedStylesheetConnectionEdge"')
-  return TermNodeToEnqueuedStylesheetConnectionEdge_possibleTypes.includes(obj.__typename)
-}
-
-
-
-const TermNodeToEnqueuedStylesheetConnectionPageInfo_possibleTypes: string[] = ['TermNodeToEnqueuedStylesheetConnectionPageInfo']
-export const isTermNodeToEnqueuedStylesheetConnectionPageInfo = (obj?: { __typename?: any } | null): obj is TermNodeToEnqueuedStylesheetConnectionPageInfo => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isTermNodeToEnqueuedStylesheetConnectionPageInfo"')
-  return TermNodeToEnqueuedStylesheetConnectionPageInfo_possibleTypes.includes(obj.__typename)
 }
 
 
@@ -18333,10 +20781,162 @@ export const isCategoryToAncestorsCategoryConnectionPageInfo = (obj?: { __typena
 
 
 
-const CategoryConnectionPageInfo_possibleTypes: string[] = ['CategoryToAncestorsCategoryConnectionPageInfo','CategoryToCategoryConnectionPageInfo','EmpreendimentoToCategoryConnectionPageInfo','PostToCategoryConnectionPageInfo','RootQueryToCategoryConnectionPageInfo']
+const CategoryConnectionPageInfo_possibleTypes: string[] = ['CategoryToAncestorsCategoryConnectionPageInfo','CentraldeDecoradoToCategoryConnectionPageInfo','CategoryToCategoryConnectionPageInfo','EmpreendimentoToCategoryConnectionPageInfo','PostToCategoryConnectionPageInfo','RootQueryToCategoryConnectionPageInfo']
 export const isCategoryConnectionPageInfo = (obj?: { __typename?: any } | null): obj is CategoryConnectionPageInfo => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isCategoryConnectionPageInfo"')
   return CategoryConnectionPageInfo_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const CategoryToCentraldeDecoradoConnection_possibleTypes: string[] = ['CategoryToCentraldeDecoradoConnection']
+export const isCategoryToCentraldeDecoradoConnection = (obj?: { __typename?: any } | null): obj is CategoryToCentraldeDecoradoConnection => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isCategoryToCentraldeDecoradoConnection"')
+  return CategoryToCentraldeDecoradoConnection_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const CentraldeDecoradoConnection_possibleTypes: string[] = ['CategoryToCentraldeDecoradoConnection','CentraldeDecoradoToCentraldeDecoradoConnection','RootQueryToCentraldeDecoradoConnection']
+export const isCentraldeDecoradoConnection = (obj?: { __typename?: any } | null): obj is CentraldeDecoradoConnection => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isCentraldeDecoradoConnection"')
+  return CentraldeDecoradoConnection_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const CentraldeDecoradoConnectionEdge_possibleTypes: string[] = ['CentraldeDecoradoToCentraldeDecoradoConnectionEdge','CentraldeDecoradoToParentConnectionEdge','CentraldeDecoradoToPreviewConnectionEdge','CategoryToCentraldeDecoradoConnectionEdge','RootQueryToCentraldeDecoradoConnectionEdge']
+export const isCentraldeDecoradoConnectionEdge = (obj?: { __typename?: any } | null): obj is CentraldeDecoradoConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isCentraldeDecoradoConnectionEdge"')
+  return CentraldeDecoradoConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const CentraldeDecorado_possibleTypes: string[] = ['CentraldeDecorado']
+export const isCentraldeDecorado = (obj?: { __typename?: any } | null): obj is CentraldeDecorado => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isCentraldeDecorado"')
+  return CentraldeDecorado_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const CentraldeDecoradoToCentraldeDecoradoConnection_possibleTypes: string[] = ['CentraldeDecoradoToCentraldeDecoradoConnection']
+export const isCentraldeDecoradoToCentraldeDecoradoConnection = (obj?: { __typename?: any } | null): obj is CentraldeDecoradoToCentraldeDecoradoConnection => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isCentraldeDecoradoToCentraldeDecoradoConnection"')
+  return CentraldeDecoradoToCentraldeDecoradoConnection_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const CentraldeDecoradoToCentraldeDecoradoConnectionEdge_possibleTypes: string[] = ['CentraldeDecoradoToCentraldeDecoradoConnectionEdge']
+export const isCentraldeDecoradoToCentraldeDecoradoConnectionEdge = (obj?: { __typename?: any } | null): obj is CentraldeDecoradoToCentraldeDecoradoConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isCentraldeDecoradoToCentraldeDecoradoConnectionEdge"')
+  return CentraldeDecoradoToCentraldeDecoradoConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo_possibleTypes: string[] = ['CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo']
+export const isCentraldeDecoradoToCentraldeDecoradoConnectionPageInfo = (obj?: { __typename?: any } | null): obj is CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isCentraldeDecoradoToCentraldeDecoradoConnectionPageInfo"')
+  return CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const CentraldeDecoradoConnectionPageInfo_possibleTypes: string[] = ['CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo','CategoryToCentraldeDecoradoConnectionPageInfo','RootQueryToCentraldeDecoradoConnectionPageInfo']
+export const isCentraldeDecoradoConnectionPageInfo = (obj?: { __typename?: any } | null): obj is CentraldeDecoradoConnectionPageInfo => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isCentraldeDecoradoConnectionPageInfo"')
+  return CentraldeDecoradoConnectionPageInfo_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const CentraldeDecoradoToCategoryConnection_possibleTypes: string[] = ['CentraldeDecoradoToCategoryConnection']
+export const isCentraldeDecoradoToCategoryConnection = (obj?: { __typename?: any } | null): obj is CentraldeDecoradoToCategoryConnection => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isCentraldeDecoradoToCategoryConnection"')
+  return CentraldeDecoradoToCategoryConnection_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const CentraldeDecoradoToCategoryConnectionEdge_possibleTypes: string[] = ['CentraldeDecoradoToCategoryConnectionEdge']
+export const isCentraldeDecoradoToCategoryConnectionEdge = (obj?: { __typename?: any } | null): obj is CentraldeDecoradoToCategoryConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isCentraldeDecoradoToCategoryConnectionEdge"')
+  return CentraldeDecoradoToCategoryConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const CentraldeDecoradoToCategoryConnectionPageInfo_possibleTypes: string[] = ['CentraldeDecoradoToCategoryConnectionPageInfo']
+export const isCentraldeDecoradoToCategoryConnectionPageInfo = (obj?: { __typename?: any } | null): obj is CentraldeDecoradoToCategoryConnectionPageInfo => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isCentraldeDecoradoToCategoryConnectionPageInfo"')
+  return CentraldeDecoradoToCategoryConnectionPageInfo_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const CentraldeDecorado_Centraldedecorados_possibleTypes: string[] = ['CentraldeDecorado_Centraldedecorados']
+export const isCentraldeDecorado_Centraldedecorados = (obj?: { __typename?: any } | null): obj is CentraldeDecorado_Centraldedecorados => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isCentraldeDecorado_Centraldedecorados"')
+  return CentraldeDecorado_Centraldedecorados_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const CentraldeDecoradoToParentConnectionEdge_possibleTypes: string[] = ['CentraldeDecoradoToParentConnectionEdge']
+export const isCentraldeDecoradoToParentConnectionEdge = (obj?: { __typename?: any } | null): obj is CentraldeDecoradoToParentConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isCentraldeDecoradoToParentConnectionEdge"')
+  return CentraldeDecoradoToParentConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const CentraldeDecoradoToPreviewConnectionEdge_possibleTypes: string[] = ['CentraldeDecoradoToPreviewConnectionEdge']
+export const isCentraldeDecoradoToPreviewConnectionEdge = (obj?: { __typename?: any } | null): obj is CentraldeDecoradoToPreviewConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isCentraldeDecoradoToPreviewConnectionEdge"')
+  return CentraldeDecoradoToPreviewConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const CentraldeDecoradoToTermNodeConnection_possibleTypes: string[] = ['CentraldeDecoradoToTermNodeConnection']
+export const isCentraldeDecoradoToTermNodeConnection = (obj?: { __typename?: any } | null): obj is CentraldeDecoradoToTermNodeConnection => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isCentraldeDecoradoToTermNodeConnection"')
+  return CentraldeDecoradoToTermNodeConnection_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const CentraldeDecoradoToTermNodeConnectionEdge_possibleTypes: string[] = ['CentraldeDecoradoToTermNodeConnectionEdge']
+export const isCentraldeDecoradoToTermNodeConnectionEdge = (obj?: { __typename?: any } | null): obj is CentraldeDecoradoToTermNodeConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isCentraldeDecoradoToTermNodeConnectionEdge"')
+  return CentraldeDecoradoToTermNodeConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const CentraldeDecoradoToTermNodeConnectionPageInfo_possibleTypes: string[] = ['CentraldeDecoradoToTermNodeConnectionPageInfo']
+export const isCentraldeDecoradoToTermNodeConnectionPageInfo = (obj?: { __typename?: any } | null): obj is CentraldeDecoradoToTermNodeConnectionPageInfo => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isCentraldeDecoradoToTermNodeConnectionPageInfo"')
+  return CentraldeDecoradoToTermNodeConnectionPageInfo_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const CategoryToCentraldeDecoradoConnectionEdge_possibleTypes: string[] = ['CategoryToCentraldeDecoradoConnectionEdge']
+export const isCategoryToCentraldeDecoradoConnectionEdge = (obj?: { __typename?: any } | null): obj is CategoryToCentraldeDecoradoConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isCategoryToCentraldeDecoradoConnectionEdge"')
+  return CategoryToCentraldeDecoradoConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const CategoryToCentraldeDecoradoConnectionPageInfo_possibleTypes: string[] = ['CategoryToCentraldeDecoradoConnectionPageInfo']
+export const isCategoryToCentraldeDecoradoConnectionPageInfo = (obj?: { __typename?: any } | null): obj is CategoryToCentraldeDecoradoConnectionPageInfo => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isCategoryToCentraldeDecoradoConnectionPageInfo"')
+  return CategoryToCentraldeDecoradoConnectionPageInfo_possibleTypes.includes(obj.__typename)
 }
 
 
@@ -18397,7 +20997,7 @@ export const isCategoryToEmpreendimentoConnection = (obj?: { __typename?: any } 
 
 
 
-const EmpreendimentoConnection_possibleTypes: string[] = ['CategoryToEmpreendimentoConnection','RootQueryToEmpreendimentoConnection']
+const EmpreendimentoConnection_possibleTypes: string[] = ['CategoryToEmpreendimentoConnection','EmpreendimentoToEmpreendimentoConnection','RootQueryToEmpreendimentoConnection']
 export const isEmpreendimentoConnection = (obj?: { __typename?: any } | null): obj is EmpreendimentoConnection => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isEmpreendimentoConnection"')
   return EmpreendimentoConnection_possibleTypes.includes(obj.__typename)
@@ -18405,7 +21005,7 @@ export const isEmpreendimentoConnection = (obj?: { __typename?: any } | null): o
 
 
 
-const EmpreendimentoConnectionEdge_possibleTypes: string[] = ['EmpreendimentoToPreviewConnectionEdge','CategoryToEmpreendimentoConnectionEdge','RootQueryToEmpreendimentoConnectionEdge']
+const EmpreendimentoConnectionEdge_possibleTypes: string[] = ['EmpreendimentoToEmpreendimentoConnectionEdge','EmpreendimentoToParentConnectionEdge','EmpreendimentoToPreviewConnectionEdge','CategoryToEmpreendimentoConnectionEdge','RootQueryToEmpreendimentoConnectionEdge']
 export const isEmpreendimentoConnectionEdge = (obj?: { __typename?: any } | null): obj is EmpreendimentoConnectionEdge => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isEmpreendimentoConnectionEdge"')
   return EmpreendimentoConnectionEdge_possibleTypes.includes(obj.__typename)
@@ -18417,6 +21017,38 @@ const Empreendimento_possibleTypes: string[] = ['Empreendimento']
 export const isEmpreendimento = (obj?: { __typename?: any } | null): obj is Empreendimento => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isEmpreendimento"')
   return Empreendimento_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const EmpreendimentoToEmpreendimentoConnection_possibleTypes: string[] = ['EmpreendimentoToEmpreendimentoConnection']
+export const isEmpreendimentoToEmpreendimentoConnection = (obj?: { __typename?: any } | null): obj is EmpreendimentoToEmpreendimentoConnection => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isEmpreendimentoToEmpreendimentoConnection"')
+  return EmpreendimentoToEmpreendimentoConnection_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const EmpreendimentoToEmpreendimentoConnectionEdge_possibleTypes: string[] = ['EmpreendimentoToEmpreendimentoConnectionEdge']
+export const isEmpreendimentoToEmpreendimentoConnectionEdge = (obj?: { __typename?: any } | null): obj is EmpreendimentoToEmpreendimentoConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isEmpreendimentoToEmpreendimentoConnectionEdge"')
+  return EmpreendimentoToEmpreendimentoConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const EmpreendimentoToEmpreendimentoConnectionPageInfo_possibleTypes: string[] = ['EmpreendimentoToEmpreendimentoConnectionPageInfo']
+export const isEmpreendimentoToEmpreendimentoConnectionPageInfo = (obj?: { __typename?: any } | null): obj is EmpreendimentoToEmpreendimentoConnectionPageInfo => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isEmpreendimentoToEmpreendimentoConnectionPageInfo"')
+  return EmpreendimentoToEmpreendimentoConnectionPageInfo_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const EmpreendimentoConnectionPageInfo_possibleTypes: string[] = ['EmpreendimentoToEmpreendimentoConnectionPageInfo','CategoryToEmpreendimentoConnectionPageInfo','RootQueryToEmpreendimentoConnectionPageInfo']
+export const isEmpreendimentoConnectionPageInfo = (obj?: { __typename?: any } | null): obj is EmpreendimentoConnectionPageInfo => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isEmpreendimentoConnectionPageInfo"')
+  return EmpreendimentoConnectionPageInfo_possibleTypes.includes(obj.__typename)
 }
 
 
@@ -18517,6 +21149,14 @@ export const isEmpreendimento_Housiverso_diferencial = (obj?: { __typename?: any
 
 
 
+const EmpreendimentoToParentConnectionEdge_possibleTypes: string[] = ['EmpreendimentoToParentConnectionEdge']
+export const isEmpreendimentoToParentConnectionEdge = (obj?: { __typename?: any } | null): obj is EmpreendimentoToParentConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isEmpreendimentoToParentConnectionEdge"')
+  return EmpreendimentoToParentConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
 const EmpreendimentoToPreviewConnectionEdge_possibleTypes: string[] = ['EmpreendimentoToPreviewConnectionEdge']
 export const isEmpreendimentoToPreviewConnectionEdge = (obj?: { __typename?: any } | null): obj is EmpreendimentoToPreviewConnectionEdge => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isEmpreendimentoToPreviewConnectionEdge"')
@@ -18533,30 +21173,6 @@ export const isEmpreendimentoToTermNodeConnection = (obj?: { __typename?: any } 
 
 
 
-const TermNodeConnection_possibleTypes: string[] = ['EmpreendimentoToTermNodeConnection','PostToTermNodeConnection','RootQueryToTermNodeConnection']
-export const isTermNodeConnection = (obj?: { __typename?: any } | null): obj is TermNodeConnection => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isTermNodeConnection"')
-  return TermNodeConnection_possibleTypes.includes(obj.__typename)
-}
-
-
-
-const TermNodeConnectionEdge_possibleTypes: string[] = ['EmpreendimentoToTermNodeConnectionEdge','PostToTermNodeConnectionEdge','RootQueryToTermNodeConnectionEdge']
-export const isTermNodeConnectionEdge = (obj?: { __typename?: any } | null): obj is TermNodeConnectionEdge => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isTermNodeConnectionEdge"')
-  return TermNodeConnectionEdge_possibleTypes.includes(obj.__typename)
-}
-
-
-
-const TermNodeConnectionPageInfo_possibleTypes: string[] = ['EmpreendimentoToTermNodeConnectionPageInfo','PostToTermNodeConnectionPageInfo','RootQueryToTermNodeConnectionPageInfo']
-export const isTermNodeConnectionPageInfo = (obj?: { __typename?: any } | null): obj is TermNodeConnectionPageInfo => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isTermNodeConnectionPageInfo"')
-  return TermNodeConnectionPageInfo_possibleTypes.includes(obj.__typename)
-}
-
-
-
 const EmpreendimentoToTermNodeConnectionEdge_possibleTypes: string[] = ['EmpreendimentoToTermNodeConnectionEdge']
 export const isEmpreendimentoToTermNodeConnectionEdge = (obj?: { __typename?: any } | null): obj is EmpreendimentoToTermNodeConnectionEdge => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isEmpreendimentoToTermNodeConnectionEdge"')
@@ -18569,14 +21185,6 @@ const EmpreendimentoToTermNodeConnectionPageInfo_possibleTypes: string[] = ['Emp
 export const isEmpreendimentoToTermNodeConnectionPageInfo = (obj?: { __typename?: any } | null): obj is EmpreendimentoToTermNodeConnectionPageInfo => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isEmpreendimentoToTermNodeConnectionPageInfo"')
   return EmpreendimentoToTermNodeConnectionPageInfo_possibleTypes.includes(obj.__typename)
-}
-
-
-
-const EmpreendimentoConnectionPageInfo_possibleTypes: string[] = ['CategoryToEmpreendimentoConnectionPageInfo','RootQueryToEmpreendimentoConnectionPageInfo']
-export const isEmpreendimentoConnectionPageInfo = (obj?: { __typename?: any } | null): obj is EmpreendimentoConnectionPageInfo => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isEmpreendimentoConnectionPageInfo"')
-  return EmpreendimentoConnectionPageInfo_possibleTypes.includes(obj.__typename)
 }
 
 
@@ -18629,14 +21237,6 @@ export const isCategoryToPostConnectionPageInfo = (obj?: { __typename?: any } | 
 
 
 
-const PostConnectionPageInfo_possibleTypes: string[] = ['CategoryToPostConnectionPageInfo','PostFormatToPostConnectionPageInfo','PostToRevisionConnectionPageInfo','TagToPostConnectionPageInfo','UserToPostConnectionPageInfo','RootQueryToPostConnectionPageInfo']
-export const isPostConnectionPageInfo = (obj?: { __typename?: any } | null): obj is PostConnectionPageInfo => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isPostConnectionPageInfo"')
-  return PostConnectionPageInfo_possibleTypes.includes(obj.__typename)
-}
-
-
-
 const CategoryToTaxonomyConnectionEdge_possibleTypes: string[] = ['CategoryToTaxonomyConnectionEdge']
 export const isCategoryToTaxonomyConnectionEdge = (obj?: { __typename?: any } | null): obj is CategoryToTaxonomyConnectionEdge => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isCategoryToTaxonomyConnectionEdge"')
@@ -18681,6 +21281,14 @@ const PostToCommentConnectionPageInfo_possibleTypes: string[] = ['PostToCommentC
 export const isPostToCommentConnectionPageInfo = (obj?: { __typename?: any } | null): obj is PostToCommentConnectionPageInfo => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isPostToCommentConnectionPageInfo"')
   return PostToCommentConnectionPageInfo_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const PostToParentConnectionEdge_possibleTypes: string[] = ['PostToParentConnectionEdge']
+export const isPostToParentConnectionEdge = (obj?: { __typename?: any } | null): obj is PostToParentConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isPostToParentConnectionEdge"')
+  return PostToParentConnectionEdge_possibleTypes.includes(obj.__typename)
 }
 
 
@@ -19061,10 +21669,66 @@ export const isUserToUserRoleConnectionPageInfo = (obj?: { __typename?: any } | 
 
 
 
+const ArquivoAssessoriaToArquivoAssessoriaConnection_possibleTypes: string[] = ['ArquivoAssessoriaToArquivoAssessoriaConnection']
+export const isArquivoAssessoriaToArquivoAssessoriaConnection = (obj?: { __typename?: any } | null): obj is ArquivoAssessoriaToArquivoAssessoriaConnection => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isArquivoAssessoriaToArquivoAssessoriaConnection"')
+  return ArquivoAssessoriaToArquivoAssessoriaConnection_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const ArquivoAssessoriaConnection_possibleTypes: string[] = ['ArquivoAssessoriaToArquivoAssessoriaConnection','RootQueryToArquivoAssessoriaConnection']
+export const isArquivoAssessoriaConnection = (obj?: { __typename?: any } | null): obj is ArquivoAssessoriaConnection => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isArquivoAssessoriaConnection"')
+  return ArquivoAssessoriaConnection_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const ArquivoAssessoriaConnectionEdge_possibleTypes: string[] = ['ArquivoAssessoriaToArquivoAssessoriaConnectionEdge','ArquivoAssessoriaToParentConnectionEdge','ArquivoAssessoriaToPreviewConnectionEdge','RootQueryToArquivoAssessoriaConnectionEdge']
+export const isArquivoAssessoriaConnectionEdge = (obj?: { __typename?: any } | null): obj is ArquivoAssessoriaConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isArquivoAssessoriaConnectionEdge"')
+  return ArquivoAssessoriaConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const ArquivoAssessoriaConnectionPageInfo_possibleTypes: string[] = ['ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo','RootQueryToArquivoAssessoriaConnectionPageInfo']
+export const isArquivoAssessoriaConnectionPageInfo = (obj?: { __typename?: any } | null): obj is ArquivoAssessoriaConnectionPageInfo => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isArquivoAssessoriaConnectionPageInfo"')
+  return ArquivoAssessoriaConnectionPageInfo_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const ArquivoAssessoriaToArquivoAssessoriaConnectionEdge_possibleTypes: string[] = ['ArquivoAssessoriaToArquivoAssessoriaConnectionEdge']
+export const isArquivoAssessoriaToArquivoAssessoriaConnectionEdge = (obj?: { __typename?: any } | null): obj is ArquivoAssessoriaToArquivoAssessoriaConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isArquivoAssessoriaToArquivoAssessoriaConnectionEdge"')
+  return ArquivoAssessoriaToArquivoAssessoriaConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo_possibleTypes: string[] = ['ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo']
+export const isArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo = (obj?: { __typename?: any } | null): obj is ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo"')
+  return ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo_possibleTypes.includes(obj.__typename)
+}
+
+
+
 const ArquivoAssessoria_DownAssessoria_possibleTypes: string[] = ['ArquivoAssessoria_DownAssessoria']
 export const isArquivoAssessoria_DownAssessoria = (obj?: { __typename?: any } | null): obj is ArquivoAssessoria_DownAssessoria => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isArquivoAssessoria_DownAssessoria"')
   return ArquivoAssessoria_DownAssessoria_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const ArquivoAssessoriaToParentConnectionEdge_possibleTypes: string[] = ['ArquivoAssessoriaToParentConnectionEdge']
+export const isArquivoAssessoriaToParentConnectionEdge = (obj?: { __typename?: any } | null): obj is ArquivoAssessoriaToParentConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isArquivoAssessoriaToParentConnectionEdge"')
+  return ArquivoAssessoriaToParentConnectionEdge_possibleTypes.includes(obj.__typename)
 }
 
 
@@ -19077,34 +21741,10 @@ export const isArquivoAssessoriaToPreviewConnectionEdge = (obj?: { __typename?: 
 
 
 
-const ArquivoAssessoriaConnectionEdge_possibleTypes: string[] = ['ArquivoAssessoriaToPreviewConnectionEdge','RootQueryToArquivoAssessoriaConnectionEdge']
-export const isArquivoAssessoriaConnectionEdge = (obj?: { __typename?: any } | null): obj is ArquivoAssessoriaConnectionEdge => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isArquivoAssessoriaConnectionEdge"')
-  return ArquivoAssessoriaConnectionEdge_possibleTypes.includes(obj.__typename)
-}
-
-
-
 const RootQueryToArquivoAssessoriaConnection_possibleTypes: string[] = ['RootQueryToArquivoAssessoriaConnection']
 export const isRootQueryToArquivoAssessoriaConnection = (obj?: { __typename?: any } | null): obj is RootQueryToArquivoAssessoriaConnection => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isRootQueryToArquivoAssessoriaConnection"')
   return RootQueryToArquivoAssessoriaConnection_possibleTypes.includes(obj.__typename)
-}
-
-
-
-const ArquivoAssessoriaConnection_possibleTypes: string[] = ['RootQueryToArquivoAssessoriaConnection']
-export const isArquivoAssessoriaConnection = (obj?: { __typename?: any } | null): obj is ArquivoAssessoriaConnection => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isArquivoAssessoriaConnection"')
-  return ArquivoAssessoriaConnection_possibleTypes.includes(obj.__typename)
-}
-
-
-
-const ArquivoAssessoriaConnectionPageInfo_possibleTypes: string[] = ['RootQueryToArquivoAssessoriaConnectionPageInfo']
-export const isArquivoAssessoriaConnectionPageInfo = (obj?: { __typename?: any } | null): obj is ArquivoAssessoriaConnectionPageInfo => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isArquivoAssessoriaConnectionPageInfo"')
-  return ArquivoAssessoriaConnectionPageInfo_possibleTypes.includes(obj.__typename)
 }
 
 
@@ -19129,6 +21769,54 @@ const Banner_possibleTypes: string[] = ['Banner']
 export const isBanner = (obj?: { __typename?: any } | null): obj is Banner => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isBanner"')
   return Banner_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const BannerToBannerConnection_possibleTypes: string[] = ['BannerToBannerConnection']
+export const isBannerToBannerConnection = (obj?: { __typename?: any } | null): obj is BannerToBannerConnection => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isBannerToBannerConnection"')
+  return BannerToBannerConnection_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const BannerConnection_possibleTypes: string[] = ['BannerToBannerConnection','RootQueryToBannerConnection']
+export const isBannerConnection = (obj?: { __typename?: any } | null): obj is BannerConnection => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isBannerConnection"')
+  return BannerConnection_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const BannerConnectionEdge_possibleTypes: string[] = ['BannerToBannerConnectionEdge','BannerToParentConnectionEdge','BannerToPreviewConnectionEdge','RootQueryToBannerConnectionEdge']
+export const isBannerConnectionEdge = (obj?: { __typename?: any } | null): obj is BannerConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isBannerConnectionEdge"')
+  return BannerConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const BannerConnectionPageInfo_possibleTypes: string[] = ['BannerToBannerConnectionPageInfo','RootQueryToBannerConnectionPageInfo']
+export const isBannerConnectionPageInfo = (obj?: { __typename?: any } | null): obj is BannerConnectionPageInfo => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isBannerConnectionPageInfo"')
+  return BannerConnectionPageInfo_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const BannerToBannerConnectionEdge_possibleTypes: string[] = ['BannerToBannerConnectionEdge']
+export const isBannerToBannerConnectionEdge = (obj?: { __typename?: any } | null): obj is BannerToBannerConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isBannerToBannerConnectionEdge"')
+  return BannerToBannerConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const BannerToBannerConnectionPageInfo_possibleTypes: string[] = ['BannerToBannerConnectionPageInfo']
+export const isBannerToBannerConnectionPageInfo = (obj?: { __typename?: any } | null): obj is BannerToBannerConnectionPageInfo => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isBannerToBannerConnectionPageInfo"')
+  return BannerToBannerConnectionPageInfo_possibleTypes.includes(obj.__typename)
 }
 
 
@@ -19165,6 +21853,14 @@ export const isBanner_BannerHome_QualEOEmpreendimento = (obj?: { __typename?: an
 
 
 
+const BannerToParentConnectionEdge_possibleTypes: string[] = ['BannerToParentConnectionEdge']
+export const isBannerToParentConnectionEdge = (obj?: { __typename?: any } | null): obj is BannerToParentConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isBannerToParentConnectionEdge"')
+  return BannerToParentConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
 const BannerToPreviewConnectionEdge_possibleTypes: string[] = ['BannerToPreviewConnectionEdge']
 export const isBannerToPreviewConnectionEdge = (obj?: { __typename?: any } | null): obj is BannerToPreviewConnectionEdge => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isBannerToPreviewConnectionEdge"')
@@ -19173,34 +21869,10 @@ export const isBannerToPreviewConnectionEdge = (obj?: { __typename?: any } | nul
 
 
 
-const BannerConnectionEdge_possibleTypes: string[] = ['BannerToPreviewConnectionEdge','RootQueryToBannerConnectionEdge']
-export const isBannerConnectionEdge = (obj?: { __typename?: any } | null): obj is BannerConnectionEdge => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isBannerConnectionEdge"')
-  return BannerConnectionEdge_possibleTypes.includes(obj.__typename)
-}
-
-
-
 const RootQueryToBannerConnection_possibleTypes: string[] = ['RootQueryToBannerConnection']
 export const isRootQueryToBannerConnection = (obj?: { __typename?: any } | null): obj is RootQueryToBannerConnection => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isRootQueryToBannerConnection"')
   return RootQueryToBannerConnection_possibleTypes.includes(obj.__typename)
-}
-
-
-
-const BannerConnection_possibleTypes: string[] = ['RootQueryToBannerConnection']
-export const isBannerConnection = (obj?: { __typename?: any } | null): obj is BannerConnection => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isBannerConnection"')
-  return BannerConnection_possibleTypes.includes(obj.__typename)
-}
-
-
-
-const BannerConnectionPageInfo_possibleTypes: string[] = ['RootQueryToBannerConnectionPageInfo']
-export const isBannerConnectionPageInfo = (obj?: { __typename?: any } | null): obj is BannerConnectionPageInfo => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isBannerConnectionPageInfo"')
-  return BannerConnectionPageInfo_possibleTypes.includes(obj.__typename)
 }
 
 
@@ -19241,6 +21913,30 @@ const RootQueryToCategoryConnectionPageInfo_possibleTypes: string[] = ['RootQuer
 export const isRootQueryToCategoryConnectionPageInfo = (obj?: { __typename?: any } | null): obj is RootQueryToCategoryConnectionPageInfo => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isRootQueryToCategoryConnectionPageInfo"')
   return RootQueryToCategoryConnectionPageInfo_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const RootQueryToCentraldeDecoradoConnection_possibleTypes: string[] = ['RootQueryToCentraldeDecoradoConnection']
+export const isRootQueryToCentraldeDecoradoConnection = (obj?: { __typename?: any } | null): obj is RootQueryToCentraldeDecoradoConnection => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isRootQueryToCentraldeDecoradoConnection"')
+  return RootQueryToCentraldeDecoradoConnection_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const RootQueryToCentraldeDecoradoConnectionEdge_possibleTypes: string[] = ['RootQueryToCentraldeDecoradoConnectionEdge']
+export const isRootQueryToCentraldeDecoradoConnectionEdge = (obj?: { __typename?: any } | null): obj is RootQueryToCentraldeDecoradoConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isRootQueryToCentraldeDecoradoConnectionEdge"')
+  return RootQueryToCentraldeDecoradoConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const RootQueryToCentraldeDecoradoConnectionPageInfo_possibleTypes: string[] = ['RootQueryToCentraldeDecoradoConnectionPageInfo']
+export const isRootQueryToCentraldeDecoradoConnectionPageInfo = (obj?: { __typename?: any } | null): obj is RootQueryToCentraldeDecoradoConnectionPageInfo => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isRootQueryToCentraldeDecoradoConnectionPageInfo"')
+  return RootQueryToCentraldeDecoradoConnectionPageInfo_possibleTypes.includes(obj.__typename)
 }
 
 
@@ -19469,7 +22165,7 @@ export const isMenuItemLinkableConnectionEdge = (obj?: { __typename?: any } | nu
 
 
 
-const MenuItemObjectUnion_possibleTypes: string[] = ['Post','Page','Banner','ArquivoAssessoria','Empreendimento','Category','Tag']
+const MenuItemObjectUnion_possibleTypes: string[] = ['Post','Page','Banner','ArquivoAssessoria','Empreendimento','CentraldeDecorado','Category','Tag']
 export const isMenuItemObjectUnion = (obj?: { __typename?: any } | null): obj is MenuItemObjectUnion => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isMenuItemObjectUnion"')
   return MenuItemObjectUnion_possibleTypes.includes(obj.__typename)
@@ -20013,6 +22709,14 @@ export const isCreateCategoryPayload = (obj?: { __typename?: any } | null): obj 
 
 
 
+const CreateCentraldeDecoradoPayload_possibleTypes: string[] = ['CreateCentraldeDecoradoPayload']
+export const isCreateCentraldeDecoradoPayload = (obj?: { __typename?: any } | null): obj is CreateCentraldeDecoradoPayload => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isCreateCentraldeDecoradoPayload"')
+  return CreateCentraldeDecoradoPayload_possibleTypes.includes(obj.__typename)
+}
+
+
+
 const CreateCommentPayload_possibleTypes: string[] = ['CreateCommentPayload']
 export const isCreateCommentPayload = (obj?: { __typename?: any } | null): obj is CreateCommentPayload => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isCreateCommentPayload"')
@@ -20097,6 +22801,14 @@ const DeleteCategoryPayload_possibleTypes: string[] = ['DeleteCategoryPayload']
 export const isDeleteCategoryPayload = (obj?: { __typename?: any } | null): obj is DeleteCategoryPayload => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isDeleteCategoryPayload"')
   return DeleteCategoryPayload_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const DeleteCentraldeDecoradoPayload_possibleTypes: string[] = ['DeleteCentraldeDecoradoPayload']
+export const isDeleteCentraldeDecoradoPayload = (obj?: { __typename?: any } | null): obj is DeleteCentraldeDecoradoPayload => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isDeleteCentraldeDecoradoPayload"')
+  return DeleteCentraldeDecoradoPayload_possibleTypes.includes(obj.__typename)
 }
 
 
@@ -20221,6 +22933,14 @@ export const isUpdateCategoryPayload = (obj?: { __typename?: any } | null): obj 
 
 
 
+const UpdateCentraldeDecoradoPayload_possibleTypes: string[] = ['UpdateCentraldeDecoradoPayload']
+export const isUpdateCentraldeDecoradoPayload = (obj?: { __typename?: any } | null): obj is UpdateCentraldeDecoradoPayload => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isUpdateCentraldeDecoradoPayload"')
+  return UpdateCentraldeDecoradoPayload_possibleTypes.includes(obj.__typename)
+}
+
+
+
 const UpdateCommentPayload_possibleTypes: string[] = ['UpdateCommentPayload']
 export const isUpdateCommentPayload = (obj?: { __typename?: any } | null): obj is UpdateCommentPayload => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isUpdateCommentPayload"')
@@ -20321,7 +23041,7 @@ arquivoAssessoria: ((args: {
 id: Scalars['ID'],
 /** Type of unique identifier to fetch by. Default is Global ID */
 idType?: (ArquivoAssessoriaIdType | null),
-/** Whether to return the node as a preview instance */
+/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
 asPreview?: (Scalars['Boolean'] | null)}) => ArquivoAssessoriaPromiseChain & {get: <R extends ArquivoAssessoriaRequest>(request: R, defaultValue?: (FieldsSelection<ArquivoAssessoria, R> | undefined)) => Promise<(FieldsSelection<ArquivoAssessoria, R> | undefined)>}),
     
 /**
@@ -20329,7 +23049,7 @@ asPreview?: (Scalars['Boolean'] | null)}) => ArquivoAssessoriaPromiseChain & {ge
  * A ArquivoAssessoria object
  */
 arquivoAssessoriaBy: ((args?: {
-/** Get the object by its global ID */
+/** Get the ArquivoAssessoria object by its global ID */
 id?: (Scalars['ID'] | null),
 /** Get the ArquivoAssessoria by its database ID */
 arquivoAssessoriaId?: (Scalars['Int'] | null),
@@ -20357,7 +23077,7 @@ banner: ((args: {
 id: Scalars['ID'],
 /** Type of unique identifier to fetch by. Default is Global ID */
 idType?: (BannerIdType | null),
-/** Whether to return the node as a preview instance */
+/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
 asPreview?: (Scalars['Boolean'] | null)}) => BannerPromiseChain & {get: <R extends BannerRequest>(request: R, defaultValue?: (FieldsSelection<Banner, R> | undefined)) => Promise<(FieldsSelection<Banner, R> | undefined)>}),
     
 /**
@@ -20365,7 +23085,7 @@ asPreview?: (Scalars['Boolean'] | null)}) => BannerPromiseChain & {get: <R exten
  * A Banner object
  */
 bannerBy: ((args?: {
-/** Get the object by its global ID */
+/** Get the Banner object by its global ID */
 id?: (Scalars['ID'] | null),
 /** Get the Banner by its database ID */
 bannerId?: (Scalars['Int'] | null),
@@ -20407,6 +23127,42 @@ id: Scalars['ID'],
 /** Type of unique identifier to fetch by. Default is Global ID */
 idType?: (CategoryIdType | null)}) => CategoryPromiseChain & {get: <R extends CategoryRequest>(request: R, defaultValue?: (FieldsSelection<Category, R> | undefined)) => Promise<(FieldsSelection<Category, R> | undefined)>}),
     
+/** An object of the CentraldeDecorado Type.  */
+centraldeDecorado: ((args: {
+/** The globally unique identifier of the object. */
+id: Scalars['ID'],
+/** Type of unique identifier to fetch by. Default is Global ID */
+idType?: (CentraldeDecoradoIdType | null),
+/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
+asPreview?: (Scalars['Boolean'] | null)}) => CentraldeDecoradoPromiseChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecorado, R> | undefined)) => Promise<(FieldsSelection<CentraldeDecorado, R> | undefined)>}),
+    
+/**
+ * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
+ * A CentraldeDecorado object
+ */
+centraldeDecoradoBy: ((args?: {
+/** Get the CentraldeDecorado object by its global ID */
+id?: (Scalars['ID'] | null),
+/** Get the CentraldeDecorado by its database ID */
+centraldeDecoradoId?: (Scalars['Int'] | null),
+/** Get the CentraldeDecorado by its uri */
+uri?: (Scalars['String'] | null),
+/** Get the CentraldeDecorado by its slug (only available for non-hierarchical types) */
+slug?: (Scalars['String'] | null)}) => CentraldeDecoradoPromiseChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecorado, R> | undefined)) => Promise<(FieldsSelection<CentraldeDecorado, R> | undefined)>})&(CentraldeDecoradoPromiseChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecorado, R> | undefined)) => Promise<(FieldsSelection<CentraldeDecorado, R> | undefined)>}),
+    
+/** Connection between the RootQuery type and the CentraldeDecorado type */
+centraldeDecorados: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (RootQueryToCentraldeDecoradoConnectionWhereArgs | null)}) => RootQueryToCentraldeDecoradoConnectionPromiseChain & {get: <R extends RootQueryToCentraldeDecoradoConnectionRequest>(request: R, defaultValue?: (FieldsSelection<RootQueryToCentraldeDecoradoConnection, R> | undefined)) => Promise<(FieldsSelection<RootQueryToCentraldeDecoradoConnection, R> | undefined)>})&(RootQueryToCentraldeDecoradoConnectionPromiseChain & {get: <R extends RootQueryToCentraldeDecoradoConnectionRequest>(request: R, defaultValue?: (FieldsSelection<RootQueryToCentraldeDecoradoConnection, R> | undefined)) => Promise<(FieldsSelection<RootQueryToCentraldeDecoradoConnection, R> | undefined)>}),
+    
 /** Returns a Comment */
 comment: ((args: {
 /** Unique identifier for the comment node. */
@@ -20435,7 +23191,7 @@ id: Scalars['ID'],
 idType?: (ContentNodeIdTypeEnum | null),
 /** The content type the node is used for. Required when idType is set to "name" or "slug" */
 contentType?: (ContentTypeEnum | null),
-/** Whether to return the node as a preview instance */
+/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
 asPreview?: (Scalars['Boolean'] | null)}) => ContentNodePromiseChain & {get: <R extends ContentNodeRequest>(request: R, defaultValue?: (FieldsSelection<ContentNode, R> | undefined)) => Promise<(FieldsSelection<ContentNode, R> | undefined)>}),
     
 /** Connection between the RootQuery type and the ContentNode type */
@@ -20478,7 +23234,7 @@ empreendimento: ((args: {
 id: Scalars['ID'],
 /** Type of unique identifier to fetch by. Default is Global ID */
 idType?: (EmpreendimentoIdType | null),
-/** Whether to return the node as a preview instance */
+/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
 asPreview?: (Scalars['Boolean'] | null)}) => EmpreendimentoPromiseChain & {get: <R extends EmpreendimentoRequest>(request: R, defaultValue?: (FieldsSelection<Empreendimento, R> | undefined)) => Promise<(FieldsSelection<Empreendimento, R> | undefined)>}),
     
 /**
@@ -20486,7 +23242,7 @@ asPreview?: (Scalars['Boolean'] | null)}) => EmpreendimentoPromiseChain & {get: 
  * A Empreendimento object
  */
 empreendimentoBy: ((args?: {
-/** Get the object by its global ID */
+/** Get the Empreendimento object by its global ID */
 id?: (Scalars['ID'] | null),
 /** Get the Empreendimento by its database ID */
 empreendimentoId?: (Scalars['Int'] | null),
@@ -20517,7 +23273,7 @@ mediaItem: ((args: {
 id: Scalars['ID'],
 /** Type of unique identifier to fetch by. Default is Global ID */
 idType?: (MediaItemIdType | null),
-/** Whether to return the node as a preview instance */
+/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
 asPreview?: (Scalars['Boolean'] | null)}) => MediaItemPromiseChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Promise<(FieldsSelection<MediaItem, R> | undefined)>}),
     
 /**
@@ -20525,7 +23281,7 @@ asPreview?: (Scalars['Boolean'] | null)}) => MediaItemPromiseChain & {get: <R ex
  * A mediaItem object
  */
 mediaItemBy: ((args?: {
-/** Get the object by its global ID */
+/** Get the mediaItem object by its global ID */
 id?: (Scalars['ID'] | null),
 /** Get the mediaItem by its database ID */
 mediaItemId?: (Scalars['Int'] | null),
@@ -20603,7 +23359,7 @@ page: ((args: {
 id: Scalars['ID'],
 /** Type of unique identifier to fetch by. Default is Global ID */
 idType?: (PageIdType | null),
-/** Whether to return the node as a preview instance */
+/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
 asPreview?: (Scalars['Boolean'] | null)}) => PagePromiseChain & {get: <R extends PageRequest>(request: R, defaultValue?: (FieldsSelection<Page, R> | undefined)) => Promise<(FieldsSelection<Page, R> | undefined)>}),
     
 /**
@@ -20611,7 +23367,7 @@ asPreview?: (Scalars['Boolean'] | null)}) => PagePromiseChain & {get: <R extends
  * A page object
  */
 pageBy: ((args?: {
-/** Get the object by its global ID */
+/** Get the page object by its global ID */
 id?: (Scalars['ID'] | null),
 /** Get the page by its database ID */
 pageId?: (Scalars['Int'] | null),
@@ -20655,7 +23411,7 @@ post: ((args: {
 id: Scalars['ID'],
 /** Type of unique identifier to fetch by. Default is Global ID */
 idType?: (PostIdType | null),
-/** Whether to return the node as a preview instance */
+/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
 asPreview?: (Scalars['Boolean'] | null)}) => PostPromiseChain & {get: <R extends PostRequest>(request: R, defaultValue?: (FieldsSelection<Post, R> | undefined)) => Promise<(FieldsSelection<Post, R> | undefined)>}),
     
 /**
@@ -20663,7 +23419,7 @@ asPreview?: (Scalars['Boolean'] | null)}) => PostPromiseChain & {get: <R extends
  * A post object
  */
 postBy: ((args?: {
-/** Get the object by its global ID */
+/** Get the post object by its global ID */
 id?: (Scalars['ID'] | null),
 /** Get the post by its database ID */
 postId?: (Scalars['Int'] | null),
@@ -20875,7 +23631,7 @@ arquivoAssessoria: ((args: {
 id: Scalars['ID'],
 /** Type of unique identifier to fetch by. Default is Global ID */
 idType?: (ArquivoAssessoriaIdType | null),
-/** Whether to return the node as a preview instance */
+/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
 asPreview?: (Scalars['Boolean'] | null)}) => ArquivoAssessoriaObservableChain & {get: <R extends ArquivoAssessoriaRequest>(request: R, defaultValue?: (FieldsSelection<ArquivoAssessoria, R> | undefined)) => Observable<(FieldsSelection<ArquivoAssessoria, R> | undefined)>}),
     
 /**
@@ -20883,7 +23639,7 @@ asPreview?: (Scalars['Boolean'] | null)}) => ArquivoAssessoriaObservableChain & 
  * A ArquivoAssessoria object
  */
 arquivoAssessoriaBy: ((args?: {
-/** Get the object by its global ID */
+/** Get the ArquivoAssessoria object by its global ID */
 id?: (Scalars['ID'] | null),
 /** Get the ArquivoAssessoria by its database ID */
 arquivoAssessoriaId?: (Scalars['Int'] | null),
@@ -20911,7 +23667,7 @@ banner: ((args: {
 id: Scalars['ID'],
 /** Type of unique identifier to fetch by. Default is Global ID */
 idType?: (BannerIdType | null),
-/** Whether to return the node as a preview instance */
+/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
 asPreview?: (Scalars['Boolean'] | null)}) => BannerObservableChain & {get: <R extends BannerRequest>(request: R, defaultValue?: (FieldsSelection<Banner, R> | undefined)) => Observable<(FieldsSelection<Banner, R> | undefined)>}),
     
 /**
@@ -20919,7 +23675,7 @@ asPreview?: (Scalars['Boolean'] | null)}) => BannerObservableChain & {get: <R ex
  * A Banner object
  */
 bannerBy: ((args?: {
-/** Get the object by its global ID */
+/** Get the Banner object by its global ID */
 id?: (Scalars['ID'] | null),
 /** Get the Banner by its database ID */
 bannerId?: (Scalars['Int'] | null),
@@ -20961,6 +23717,42 @@ id: Scalars['ID'],
 /** Type of unique identifier to fetch by. Default is Global ID */
 idType?: (CategoryIdType | null)}) => CategoryObservableChain & {get: <R extends CategoryRequest>(request: R, defaultValue?: (FieldsSelection<Category, R> | undefined)) => Observable<(FieldsSelection<Category, R> | undefined)>}),
     
+/** An object of the CentraldeDecorado Type.  */
+centraldeDecorado: ((args: {
+/** The globally unique identifier of the object. */
+id: Scalars['ID'],
+/** Type of unique identifier to fetch by. Default is Global ID */
+idType?: (CentraldeDecoradoIdType | null),
+/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
+asPreview?: (Scalars['Boolean'] | null)}) => CentraldeDecoradoObservableChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecorado, R> | undefined)) => Observable<(FieldsSelection<CentraldeDecorado, R> | undefined)>}),
+    
+/**
+ * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
+ * A CentraldeDecorado object
+ */
+centraldeDecoradoBy: ((args?: {
+/** Get the CentraldeDecorado object by its global ID */
+id?: (Scalars['ID'] | null),
+/** Get the CentraldeDecorado by its database ID */
+centraldeDecoradoId?: (Scalars['Int'] | null),
+/** Get the CentraldeDecorado by its uri */
+uri?: (Scalars['String'] | null),
+/** Get the CentraldeDecorado by its slug (only available for non-hierarchical types) */
+slug?: (Scalars['String'] | null)}) => CentraldeDecoradoObservableChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecorado, R> | undefined)) => Observable<(FieldsSelection<CentraldeDecorado, R> | undefined)>})&(CentraldeDecoradoObservableChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecorado, R> | undefined)) => Observable<(FieldsSelection<CentraldeDecorado, R> | undefined)>}),
+    
+/** Connection between the RootQuery type and the CentraldeDecorado type */
+centraldeDecorados: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (RootQueryToCentraldeDecoradoConnectionWhereArgs | null)}) => RootQueryToCentraldeDecoradoConnectionObservableChain & {get: <R extends RootQueryToCentraldeDecoradoConnectionRequest>(request: R, defaultValue?: (FieldsSelection<RootQueryToCentraldeDecoradoConnection, R> | undefined)) => Observable<(FieldsSelection<RootQueryToCentraldeDecoradoConnection, R> | undefined)>})&(RootQueryToCentraldeDecoradoConnectionObservableChain & {get: <R extends RootQueryToCentraldeDecoradoConnectionRequest>(request: R, defaultValue?: (FieldsSelection<RootQueryToCentraldeDecoradoConnection, R> | undefined)) => Observable<(FieldsSelection<RootQueryToCentraldeDecoradoConnection, R> | undefined)>}),
+    
 /** Returns a Comment */
 comment: ((args: {
 /** Unique identifier for the comment node. */
@@ -20989,7 +23781,7 @@ id: Scalars['ID'],
 idType?: (ContentNodeIdTypeEnum | null),
 /** The content type the node is used for. Required when idType is set to "name" or "slug" */
 contentType?: (ContentTypeEnum | null),
-/** Whether to return the node as a preview instance */
+/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
 asPreview?: (Scalars['Boolean'] | null)}) => ContentNodeObservableChain & {get: <R extends ContentNodeRequest>(request: R, defaultValue?: (FieldsSelection<ContentNode, R> | undefined)) => Observable<(FieldsSelection<ContentNode, R> | undefined)>}),
     
 /** Connection between the RootQuery type and the ContentNode type */
@@ -21032,7 +23824,7 @@ empreendimento: ((args: {
 id: Scalars['ID'],
 /** Type of unique identifier to fetch by. Default is Global ID */
 idType?: (EmpreendimentoIdType | null),
-/** Whether to return the node as a preview instance */
+/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
 asPreview?: (Scalars['Boolean'] | null)}) => EmpreendimentoObservableChain & {get: <R extends EmpreendimentoRequest>(request: R, defaultValue?: (FieldsSelection<Empreendimento, R> | undefined)) => Observable<(FieldsSelection<Empreendimento, R> | undefined)>}),
     
 /**
@@ -21040,7 +23832,7 @@ asPreview?: (Scalars['Boolean'] | null)}) => EmpreendimentoObservableChain & {ge
  * A Empreendimento object
  */
 empreendimentoBy: ((args?: {
-/** Get the object by its global ID */
+/** Get the Empreendimento object by its global ID */
 id?: (Scalars['ID'] | null),
 /** Get the Empreendimento by its database ID */
 empreendimentoId?: (Scalars['Int'] | null),
@@ -21071,7 +23863,7 @@ mediaItem: ((args: {
 id: Scalars['ID'],
 /** Type of unique identifier to fetch by. Default is Global ID */
 idType?: (MediaItemIdType | null),
-/** Whether to return the node as a preview instance */
+/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
 asPreview?: (Scalars['Boolean'] | null)}) => MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Observable<(FieldsSelection<MediaItem, R> | undefined)>}),
     
 /**
@@ -21079,7 +23871,7 @@ asPreview?: (Scalars['Boolean'] | null)}) => MediaItemObservableChain & {get: <R
  * A mediaItem object
  */
 mediaItemBy: ((args?: {
-/** Get the object by its global ID */
+/** Get the mediaItem object by its global ID */
 id?: (Scalars['ID'] | null),
 /** Get the mediaItem by its database ID */
 mediaItemId?: (Scalars['Int'] | null),
@@ -21157,7 +23949,7 @@ page: ((args: {
 id: Scalars['ID'],
 /** Type of unique identifier to fetch by. Default is Global ID */
 idType?: (PageIdType | null),
-/** Whether to return the node as a preview instance */
+/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
 asPreview?: (Scalars['Boolean'] | null)}) => PageObservableChain & {get: <R extends PageRequest>(request: R, defaultValue?: (FieldsSelection<Page, R> | undefined)) => Observable<(FieldsSelection<Page, R> | undefined)>}),
     
 /**
@@ -21165,7 +23957,7 @@ asPreview?: (Scalars['Boolean'] | null)}) => PageObservableChain & {get: <R exte
  * A page object
  */
 pageBy: ((args?: {
-/** Get the object by its global ID */
+/** Get the page object by its global ID */
 id?: (Scalars['ID'] | null),
 /** Get the page by its database ID */
 pageId?: (Scalars['Int'] | null),
@@ -21209,7 +24001,7 @@ post: ((args: {
 id: Scalars['ID'],
 /** Type of unique identifier to fetch by. Default is Global ID */
 idType?: (PostIdType | null),
-/** Whether to return the node as a preview instance */
+/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
 asPreview?: (Scalars['Boolean'] | null)}) => PostObservableChain & {get: <R extends PostRequest>(request: R, defaultValue?: (FieldsSelection<Post, R> | undefined)) => Observable<(FieldsSelection<Post, R> | undefined)>}),
     
 /**
@@ -21217,7 +24009,7 @@ asPreview?: (Scalars['Boolean'] | null)}) => PostObservableChain & {get: <R exte
  * A post object
  */
 postBy: ((args?: {
-/** Get the object by its global ID */
+/** Get the post object by its global ID */
 id?: (Scalars['ID'] | null),
 /** Get the post by its database ID */
 postId?: (Scalars['Int'] | null),
@@ -21544,6 +24336,20 @@ export interface ArquivoAssessoriaPromiseChain{
  */
 arquivoAssessoriaId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>}),
     
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * The ancestors of the content node.
+ */
+ancestors: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null)}) => ArquivoAssessoriaToArquivoAssessoriaConnectionPromiseChain & {get: <R extends ArquivoAssessoriaToArquivoAssessoriaConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ArquivoAssessoriaToArquivoAssessoriaConnection, R> | undefined)) => Promise<(FieldsSelection<ArquivoAssessoriaToArquivoAssessoriaConnection, R> | undefined)>})&(ArquivoAssessoriaToArquivoAssessoriaConnectionPromiseChain & {get: <R extends ArquivoAssessoriaToArquivoAssessoriaConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ArquivoAssessoriaToArquivoAssessoriaConnection, R> | undefined)) => Promise<(FieldsSelection<ArquivoAssessoriaToArquivoAssessoriaConnection, R> | undefined)>}),
+    
 /** Connection between the ContentNode type and the ContentType type */
 contentType: (ContentNodeToContentTypeConnectionEdgePromiseChain & {get: <R extends ContentNodeToContentTypeConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToContentTypeConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToContentTypeConnectionEdge, R> | undefined)>}),
     
@@ -21596,11 +24402,23 @@ before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedStylesheetConnecti
 /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
+/** Whether the arq_assessoria object is password protected. */
+hasPassword: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
+    
 /** The globally unique identifier of the arq_assessoria object. */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
     
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
     
 /** Whether the object is a node in the preview state */
 isPreview: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
@@ -21622,6 +24440,15 @@ modified: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | 
     
 /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
 modifiedGmt: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have a parent
+ * The parent of the content node.
+ */
+parent: (ArquivoAssessoriaToParentConnectionEdgePromiseChain & {get: <R extends ArquivoAssessoriaToParentConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<ArquivoAssessoriaToParentConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<ArquivoAssessoriaToParentConnectionEdge, R> | undefined)>}),
+    
+/** The password for the arq_assessoria object. */
+password: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** Connection between the ArquivoAssessoria type and the ArquivoAssessoria type */
 preview: (ArquivoAssessoriaToPreviewConnectionEdgePromiseChain & {get: <R extends ArquivoAssessoriaToPreviewConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<ArquivoAssessoriaToPreviewConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<ArquivoAssessoriaToPreviewConnectionEdge, R> | undefined)>}),
@@ -21659,6 +24486,20 @@ export interface ArquivoAssessoriaObservableChain{
  * The id field matches the WP_Post-&gt;ID field.
  */
 arquivoAssessoriaId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * The ancestors of the content node.
+ */
+ancestors: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null)}) => ArquivoAssessoriaToArquivoAssessoriaConnectionObservableChain & {get: <R extends ArquivoAssessoriaToArquivoAssessoriaConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ArquivoAssessoriaToArquivoAssessoriaConnection, R> | undefined)) => Observable<(FieldsSelection<ArquivoAssessoriaToArquivoAssessoriaConnection, R> | undefined)>})&(ArquivoAssessoriaToArquivoAssessoriaConnectionObservableChain & {get: <R extends ArquivoAssessoriaToArquivoAssessoriaConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ArquivoAssessoriaToArquivoAssessoriaConnection, R> | undefined)) => Observable<(FieldsSelection<ArquivoAssessoriaToArquivoAssessoriaConnection, R> | undefined)>}),
     
 /** Connection between the ContentNode type and the ContentType type */
 contentType: (ContentNodeToContentTypeConnectionEdgeObservableChain & {get: <R extends ContentNodeToContentTypeConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToContentTypeConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToContentTypeConnectionEdge, R> | undefined)>}),
@@ -21712,11 +24553,23 @@ before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedStylesheetConnecti
 /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
+/** Whether the arq_assessoria object is password protected. */
+hasPassword: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
+    
 /** The globally unique identifier of the arq_assessoria object. */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
     
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
     
 /** Whether the object is a node in the preview state */
 isPreview: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
@@ -21738,6 +24591,15 @@ modified: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | 
     
 /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
 modifiedGmt: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have a parent
+ * The parent of the content node.
+ */
+parent: (ArquivoAssessoriaToParentConnectionEdgeObservableChain & {get: <R extends ArquivoAssessoriaToParentConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<ArquivoAssessoriaToParentConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<ArquivoAssessoriaToParentConnectionEdge, R> | undefined)>}),
+    
+/** The password for the arq_assessoria object. */
+password: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** Connection between the ArquivoAssessoria type and the ArquivoAssessoria type */
 preview: (ArquivoAssessoriaToPreviewConnectionEdgeObservableChain & {get: <R extends ArquivoAssessoriaToPreviewConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<ArquivoAssessoriaToPreviewConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<ArquivoAssessoriaToPreviewConnectionEdge, R> | undefined)>}),
@@ -21835,11 +24697,20 @@ before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedStylesheetConnecti
 /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** The unique resource identifier path */
+/** The globally unique ID for the object */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
+    
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
     
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
     
 /** Whether the object is a node in the preview state */
 isPreview: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
@@ -21934,11 +24805,20 @@ before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedStylesheetConnecti
 /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** The unique resource identifier path */
+/** The globally unique ID for the object */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
+    
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
     
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
     
 /** Whether the object is a node in the preview state */
 isPreview: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
@@ -21984,11 +24864,20 @@ uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undef
 /** Any node that has a URI */
 export interface UniformResourceIdentifiablePromiseChain{
     
-/** The unique resource identifier path */
+/** The globally unique ID for the object */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
+    
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
     
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
     
 /** Whether the node is a Term */
 isTermNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
@@ -22001,11 +24890,20 @@ uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undef
 /** Any node that has a URI */
 export interface UniformResourceIdentifiableObservableChain{
     
-/** The unique resource identifier path */
+/** The globally unique ID for the object */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
+    
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
     
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
     
 /** Whether the node is a Term */
 isTermNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
@@ -22157,6 +25055,9 @@ hierarchical: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean
 /** The globally unique identifier of the post-type object. */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
     
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
     
@@ -22275,6 +25176,9 @@ hierarchical: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean
     
 /** The globally unique identifier of the post-type object. */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
+    
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
     
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
@@ -22495,6 +25399,17 @@ after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
 before?: (Scalars['String'] | null)}) => TaxonomyToContentTypeConnectionPromiseChain & {get: <R extends TaxonomyToContentTypeConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TaxonomyToContentTypeConnection, R> | undefined)) => Promise<(FieldsSelection<TaxonomyToContentTypeConnection, R> | undefined)>})&(TaxonomyToContentTypeConnectionPromiseChain & {get: <R extends TaxonomyToContentTypeConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TaxonomyToContentTypeConnection, R> | undefined)) => Promise<(FieldsSelection<TaxonomyToContentTypeConnection, R> | undefined)>}),
     
+/** List of Term Nodes associated with the Taxonomy */
+connectedTerms: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null)}) => TaxonomyToTermNodeConnectionPromiseChain & {get: <R extends TaxonomyToTermNodeConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TaxonomyToTermNodeConnection, R> | undefined)) => Promise<(FieldsSelection<TaxonomyToTermNodeConnection, R> | undefined)>})&(TaxonomyToTermNodeConnectionPromiseChain & {get: <R extends TaxonomyToTermNodeConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TaxonomyToTermNodeConnection, R> | undefined)) => Promise<(FieldsSelection<TaxonomyToTermNodeConnection, R> | undefined)>}),
+    
 /** Description of the taxonomy. This field is equivalent to WP_Taxonomy-&gt;description */
 description: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
@@ -22522,7 +25437,7 @@ name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | unde
 /** Whether the taxonomy is publicly queryable */
 public: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
     
-/** Name of content type to diplay in REST API &quot;wp/v2&quot; namespace. */
+/** Name of content type to display in REST API &quot;wp/v2&quot; namespace. */
 restBase: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** The REST Controller class assigned to handling this content type. */
@@ -22568,6 +25483,17 @@ after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
 before?: (Scalars['String'] | null)}) => TaxonomyToContentTypeConnectionObservableChain & {get: <R extends TaxonomyToContentTypeConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TaxonomyToContentTypeConnection, R> | undefined)) => Observable<(FieldsSelection<TaxonomyToContentTypeConnection, R> | undefined)>})&(TaxonomyToContentTypeConnectionObservableChain & {get: <R extends TaxonomyToContentTypeConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TaxonomyToContentTypeConnection, R> | undefined)) => Observable<(FieldsSelection<TaxonomyToContentTypeConnection, R> | undefined)>}),
     
+/** List of Term Nodes associated with the Taxonomy */
+connectedTerms: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null)}) => TaxonomyToTermNodeConnectionObservableChain & {get: <R extends TaxonomyToTermNodeConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TaxonomyToTermNodeConnection, R> | undefined)) => Observable<(FieldsSelection<TaxonomyToTermNodeConnection, R> | undefined)>})&(TaxonomyToTermNodeConnectionObservableChain & {get: <R extends TaxonomyToTermNodeConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TaxonomyToTermNodeConnection, R> | undefined)) => Observable<(FieldsSelection<TaxonomyToTermNodeConnection, R> | undefined)>}),
+    
 /** Description of the taxonomy. This field is equivalent to WP_Taxonomy-&gt;description */
 description: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
@@ -22595,7 +25521,7 @@ name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | unde
 /** Whether the taxonomy is publicly queryable */
 public: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
     
-/** Name of content type to diplay in REST API &quot;wp/v2&quot; namespace. */
+/** Name of content type to display in REST API &quot;wp/v2&quot; namespace. */
 restBase: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** The REST Controller class assigned to handling this content type. */
@@ -22792,6 +25718,984 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 
 /** Page Info on the &quot;TaxonomyToContentTypeConnection&quot; */
 export interface TaxonomyToContentTypeConnectionPageInfoObservableChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Connection between the Taxonomy type and the TermNode type */
+export interface TaxonomyToTermNodeConnectionPromiseChain{
+    
+/** Edges for the TaxonomyToTermNodeConnection connection */
+edges: ({get: <R extends TaxonomyToTermNodeConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<TaxonomyToTermNodeConnectionEdge, R>[]) => Promise<FieldsSelection<TaxonomyToTermNodeConnectionEdge, R>[]>}),
+    
+/** The nodes of the connection, without the edges */
+nodes: ({get: <R extends TermNodeRequest>(request: R, defaultValue?: FieldsSelection<TermNode, R>[]) => Promise<FieldsSelection<TermNode, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (TaxonomyToTermNodeConnectionPageInfoPromiseChain & {get: <R extends TaxonomyToTermNodeConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<TaxonomyToTermNodeConnectionPageInfo, R>) => Promise<FieldsSelection<TaxonomyToTermNodeConnectionPageInfo, R>>})
+}
+
+
+/** Connection between the Taxonomy type and the TermNode type */
+export interface TaxonomyToTermNodeConnectionObservableChain{
+    
+/** Edges for the TaxonomyToTermNodeConnection connection */
+edges: ({get: <R extends TaxonomyToTermNodeConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<TaxonomyToTermNodeConnectionEdge, R>[]) => Observable<FieldsSelection<TaxonomyToTermNodeConnectionEdge, R>[]>}),
+    
+/** The nodes of the connection, without the edges */
+nodes: ({get: <R extends TermNodeRequest>(request: R, defaultValue?: FieldsSelection<TermNode, R>[]) => Observable<FieldsSelection<TermNode, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (TaxonomyToTermNodeConnectionPageInfoObservableChain & {get: <R extends TaxonomyToTermNodeConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<TaxonomyToTermNodeConnectionPageInfo, R>) => Observable<FieldsSelection<TaxonomyToTermNodeConnectionPageInfo, R>>})
+}
+
+
+/** Connection to TermNode Nodes */
+export interface TermNodeConnectionPromiseChain{
+    
+/** A list of edges (relational context) between RootQuery and connected TermNode Nodes */
+edges: ({get: <R extends TermNodeConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<TermNodeConnectionEdge, R>[]) => Promise<FieldsSelection<TermNodeConnectionEdge, R>[]>}),
+    
+/** A list of connected TermNode Nodes */
+nodes: ({get: <R extends TermNodeRequest>(request: R, defaultValue?: FieldsSelection<TermNode, R>[]) => Promise<FieldsSelection<TermNode, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (TermNodeConnectionPageInfoPromiseChain & {get: <R extends TermNodeConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<TermNodeConnectionPageInfo, R>) => Promise<FieldsSelection<TermNodeConnectionPageInfo, R>>})
+}
+
+
+/** Connection to TermNode Nodes */
+export interface TermNodeConnectionObservableChain{
+    
+/** A list of edges (relational context) between RootQuery and connected TermNode Nodes */
+edges: ({get: <R extends TermNodeConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<TermNodeConnectionEdge, R>[]) => Observable<FieldsSelection<TermNodeConnectionEdge, R>[]>}),
+    
+/** A list of connected TermNode Nodes */
+nodes: ({get: <R extends TermNodeRequest>(request: R, defaultValue?: FieldsSelection<TermNode, R>[]) => Observable<FieldsSelection<TermNode, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (TermNodeConnectionPageInfoObservableChain & {get: <R extends TermNodeConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<TermNodeConnectionPageInfo, R>) => Observable<FieldsSelection<TermNodeConnectionPageInfo, R>>})
+}
+
+
+/** Edge between a Node and a connected TermNode */
+export interface TermNodeConnectionEdgePromiseChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The connected TermNode Node */
+node: (TermNodePromiseChain & {get: <R extends TermNodeRequest>(request: R, defaultValue?: FieldsSelection<TermNode, R>) => Promise<FieldsSelection<TermNode, R>>})
+}
+
+
+/** Edge between a Node and a connected TermNode */
+export interface TermNodeConnectionEdgeObservableChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The connected TermNode Node */
+node: (TermNodeObservableChain & {get: <R extends TermNodeRequest>(request: R, defaultValue?: FieldsSelection<TermNode, R>) => Observable<FieldsSelection<TermNode, R>>})
+}
+
+
+/** Terms are nodes within a Taxonomy, used to group and relate other nodes. */
+export interface TermNodePromiseChain{
+    
+/** The number of objects connected to the object */
+count: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
+    
+/** Identifies the primary key from the database. */
+databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>}),
+    
+/** The description of the object */
+description: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** Connection between the TermNode type and the EnqueuedScript type */
+enqueuedScripts: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>})&(TermNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>}),
+    
+/** Connection between the TermNode type and the EnqueuedStylesheet type */
+enqueuedStylesheets: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+    
+/** The globally unique ID for the object */
+id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
+    
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether the node is a Content Node */
+isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether the object is restricted from the current viewer */
+isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
+    
+/** Whether the node is a Term */
+isTermNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** The link to the term */
+link: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The human friendly name of the object. */
+name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** An alphanumeric identifier for the object unique to its type. */
+slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The name of the taxonomy that the object is associated with */
+taxonomyName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The ID of the term group that this term object belongs to */
+termGroupId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
+    
+/** The taxonomy ID that the object is associated with */
+termTaxonomyId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
+    
+/** The unique resource identifier path */
+uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Terms are nodes within a Taxonomy, used to group and relate other nodes. */
+export interface TermNodeObservableChain{
+    
+/** The number of objects connected to the object */
+count: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
+    
+/** Identifies the primary key from the database. */
+databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>}),
+    
+/** The description of the object */
+description: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** Connection between the TermNode type and the EnqueuedScript type */
+enqueuedScripts: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>})&(TermNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>}),
+    
+/** Connection between the TermNode type and the EnqueuedStylesheet type */
+enqueuedStylesheets: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+    
+/** The globally unique ID for the object */
+id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
+    
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether the node is a Content Node */
+isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether the object is restricted from the current viewer */
+isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
+    
+/** Whether the node is a Term */
+isTermNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** The link to the term */
+link: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The human friendly name of the object. */
+name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** An alphanumeric identifier for the object unique to its type. */
+slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The name of the taxonomy that the object is associated with */
+taxonomyName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The ID of the term group that this term object belongs to */
+termGroupId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
+    
+/** The taxonomy ID that the object is associated with */
+termTaxonomyId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
+    
+/** The unique resource identifier path */
+uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Connection between the TermNode type and the EnqueuedScript type */
+export interface TermNodeToEnqueuedScriptConnectionPromiseChain{
+    
+/** Edges for the TermNodeToEnqueuedScriptConnection connection */
+edges: ({get: <R extends TermNodeToEnqueuedScriptConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<TermNodeToEnqueuedScriptConnectionEdge, R>[]) => Promise<FieldsSelection<TermNodeToEnqueuedScriptConnectionEdge, R>[]>}),
+    
+/** The nodes of the connection, without the edges */
+nodes: ({get: <R extends EnqueuedScriptRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedScript, R>[]) => Promise<FieldsSelection<EnqueuedScript, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (TermNodeToEnqueuedScriptConnectionPageInfoPromiseChain & {get: <R extends TermNodeToEnqueuedScriptConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<TermNodeToEnqueuedScriptConnectionPageInfo, R>) => Promise<FieldsSelection<TermNodeToEnqueuedScriptConnectionPageInfo, R>>})
+}
+
+
+/** Connection between the TermNode type and the EnqueuedScript type */
+export interface TermNodeToEnqueuedScriptConnectionObservableChain{
+    
+/** Edges for the TermNodeToEnqueuedScriptConnection connection */
+edges: ({get: <R extends TermNodeToEnqueuedScriptConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<TermNodeToEnqueuedScriptConnectionEdge, R>[]) => Observable<FieldsSelection<TermNodeToEnqueuedScriptConnectionEdge, R>[]>}),
+    
+/** The nodes of the connection, without the edges */
+nodes: ({get: <R extends EnqueuedScriptRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedScript, R>[]) => Observable<FieldsSelection<EnqueuedScript, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (TermNodeToEnqueuedScriptConnectionPageInfoObservableChain & {get: <R extends TermNodeToEnqueuedScriptConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<TermNodeToEnqueuedScriptConnectionPageInfo, R>) => Observable<FieldsSelection<TermNodeToEnqueuedScriptConnectionPageInfo, R>>})
+}
+
+
+/** Connection to EnqueuedScript Nodes */
+export interface EnqueuedScriptConnectionPromiseChain{
+    
+/** A list of edges (relational context) between ContentNode and connected EnqueuedScript Nodes */
+edges: ({get: <R extends EnqueuedScriptConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedScriptConnectionEdge, R>[]) => Promise<FieldsSelection<EnqueuedScriptConnectionEdge, R>[]>}),
+    
+/** A list of connected EnqueuedScript Nodes */
+nodes: ({get: <R extends EnqueuedScriptRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedScript, R>[]) => Promise<FieldsSelection<EnqueuedScript, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (EnqueuedScriptConnectionPageInfoPromiseChain & {get: <R extends EnqueuedScriptConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedScriptConnectionPageInfo, R>) => Promise<FieldsSelection<EnqueuedScriptConnectionPageInfo, R>>})
+}
+
+
+/** Connection to EnqueuedScript Nodes */
+export interface EnqueuedScriptConnectionObservableChain{
+    
+/** A list of edges (relational context) between ContentNode and connected EnqueuedScript Nodes */
+edges: ({get: <R extends EnqueuedScriptConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedScriptConnectionEdge, R>[]) => Observable<FieldsSelection<EnqueuedScriptConnectionEdge, R>[]>}),
+    
+/** A list of connected EnqueuedScript Nodes */
+nodes: ({get: <R extends EnqueuedScriptRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedScript, R>[]) => Observable<FieldsSelection<EnqueuedScript, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (EnqueuedScriptConnectionPageInfoObservableChain & {get: <R extends EnqueuedScriptConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedScriptConnectionPageInfo, R>) => Observable<FieldsSelection<EnqueuedScriptConnectionPageInfo, R>>})
+}
+
+
+/** Edge between a Node and a connected EnqueuedScript */
+export interface EnqueuedScriptConnectionEdgePromiseChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The connected EnqueuedScript Node */
+node: (EnqueuedScriptPromiseChain & {get: <R extends EnqueuedScriptRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedScript, R>) => Promise<FieldsSelection<EnqueuedScript, R>>})
+}
+
+
+/** Edge between a Node and a connected EnqueuedScript */
+export interface EnqueuedScriptConnectionEdgeObservableChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The connected EnqueuedScript Node */
+node: (EnqueuedScriptObservableChain & {get: <R extends EnqueuedScriptRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedScript, R>) => Observable<FieldsSelection<EnqueuedScript, R>>})
+}
+
+
+/** Script enqueued by the CMS */
+export interface EnqueuedScriptPromiseChain{
+    
+/** The inline code to be run after the asset is loaded. */
+after: ({get: (request?: boolean|number, defaultValue?: ((Scalars['String'] | undefined)[] | undefined)) => Promise<((Scalars['String'] | undefined)[] | undefined)>}),
+    
+/**
+ * @deprecated Use `EnqueuedAsset.media` instead.
+ * Deprecated
+ */
+args: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
+    
+/** The inline code to be run before the asset is loaded. */
+before: ({get: (request?: boolean|number, defaultValue?: ((Scalars['String'] | undefined)[] | undefined)) => Promise<((Scalars['String'] | undefined)[] | undefined)>}),
+    
+/** The HTML conditional comment for the enqueued asset. E.g. IE 6, lte IE 7, etc */
+conditional: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** Dependencies needed to use this asset */
+dependencies: ({get: <R extends EnqueuedScriptRequest>(request: R, defaultValue?: ((FieldsSelection<EnqueuedScript, R> | undefined)[] | undefined)) => Promise<((FieldsSelection<EnqueuedScript, R> | undefined)[] | undefined)>}),
+    
+/**
+ * @deprecated Use `EnqueuedScript.extraData` instead.
+ * Extra information needed for the script
+ */
+extra: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** Extra data supplied to the enqueued script */
+extraData: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The loading group to which this asset belongs. */
+group: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
+    
+/** The location where this script should be loaded */
+groupLocation: ({get: (request?: boolean|number, defaultValue?: (ScriptLoadingGroupLocationEnum | undefined)) => Promise<(ScriptLoadingGroupLocationEnum | undefined)>}),
+    
+/** The handle of the enqueued asset */
+handle: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The global ID of the enqueued script */
+id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
+    
+/** The source of the asset */
+src: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The loading strategy to use on the script tag */
+strategy: ({get: (request?: boolean|number, defaultValue?: (ScriptLoadingStrategyEnum | undefined)) => Promise<(ScriptLoadingStrategyEnum | undefined)>}),
+    
+/** The version of the enqueued script */
+version: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Script enqueued by the CMS */
+export interface EnqueuedScriptObservableChain{
+    
+/** The inline code to be run after the asset is loaded. */
+after: ({get: (request?: boolean|number, defaultValue?: ((Scalars['String'] | undefined)[] | undefined)) => Observable<((Scalars['String'] | undefined)[] | undefined)>}),
+    
+/**
+ * @deprecated Use `EnqueuedAsset.media` instead.
+ * Deprecated
+ */
+args: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
+    
+/** The inline code to be run before the asset is loaded. */
+before: ({get: (request?: boolean|number, defaultValue?: ((Scalars['String'] | undefined)[] | undefined)) => Observable<((Scalars['String'] | undefined)[] | undefined)>}),
+    
+/** The HTML conditional comment for the enqueued asset. E.g. IE 6, lte IE 7, etc */
+conditional: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** Dependencies needed to use this asset */
+dependencies: ({get: <R extends EnqueuedScriptRequest>(request: R, defaultValue?: ((FieldsSelection<EnqueuedScript, R> | undefined)[] | undefined)) => Observable<((FieldsSelection<EnqueuedScript, R> | undefined)[] | undefined)>}),
+    
+/**
+ * @deprecated Use `EnqueuedScript.extraData` instead.
+ * Extra information needed for the script
+ */
+extra: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** Extra data supplied to the enqueued script */
+extraData: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The loading group to which this asset belongs. */
+group: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
+    
+/** The location where this script should be loaded */
+groupLocation: ({get: (request?: boolean|number, defaultValue?: (ScriptLoadingGroupLocationEnum | undefined)) => Observable<(ScriptLoadingGroupLocationEnum | undefined)>}),
+    
+/** The handle of the enqueued asset */
+handle: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The global ID of the enqueued script */
+id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
+    
+/** The source of the asset */
+src: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The loading strategy to use on the script tag */
+strategy: ({get: (request?: boolean|number, defaultValue?: (ScriptLoadingStrategyEnum | undefined)) => Observable<(ScriptLoadingStrategyEnum | undefined)>}),
+    
+/** The version of the enqueued script */
+version: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Asset enqueued by the CMS */
+export interface EnqueuedAssetPromiseChain{
+    
+/** The inline code to be run after the asset is loaded. */
+after: ({get: (request?: boolean|number, defaultValue?: ((Scalars['String'] | undefined)[] | undefined)) => Promise<((Scalars['String'] | undefined)[] | undefined)>}),
+    
+/**
+ * @deprecated Use `EnqueuedAsset.media` instead.
+ * Deprecated
+ */
+args: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
+    
+/** The inline code to be run before the asset is loaded. */
+before: ({get: (request?: boolean|number, defaultValue?: ((Scalars['String'] | undefined)[] | undefined)) => Promise<((Scalars['String'] | undefined)[] | undefined)>}),
+    
+/** The HTML conditional comment for the enqueued asset. E.g. IE 6, lte IE 7, etc */
+conditional: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** Dependencies needed to use this asset */
+dependencies: ({get: <R extends EnqueuedAssetRequest>(request: R, defaultValue?: ((FieldsSelection<EnqueuedAsset, R> | undefined)[] | undefined)) => Promise<((FieldsSelection<EnqueuedAsset, R> | undefined)[] | undefined)>}),
+    
+/**
+ * @deprecated Use `EnqueuedScript.extraData` instead.
+ * Extra information needed for the script
+ */
+extra: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The loading group to which this asset belongs. */
+group: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
+    
+/** The handle of the enqueued asset */
+handle: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The ID of the enqueued asset */
+id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
+    
+/** The source of the asset */
+src: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The version of the enqueued asset */
+version: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Asset enqueued by the CMS */
+export interface EnqueuedAssetObservableChain{
+    
+/** The inline code to be run after the asset is loaded. */
+after: ({get: (request?: boolean|number, defaultValue?: ((Scalars['String'] | undefined)[] | undefined)) => Observable<((Scalars['String'] | undefined)[] | undefined)>}),
+    
+/**
+ * @deprecated Use `EnqueuedAsset.media` instead.
+ * Deprecated
+ */
+args: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
+    
+/** The inline code to be run before the asset is loaded. */
+before: ({get: (request?: boolean|number, defaultValue?: ((Scalars['String'] | undefined)[] | undefined)) => Observable<((Scalars['String'] | undefined)[] | undefined)>}),
+    
+/** The HTML conditional comment for the enqueued asset. E.g. IE 6, lte IE 7, etc */
+conditional: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** Dependencies needed to use this asset */
+dependencies: ({get: <R extends EnqueuedAssetRequest>(request: R, defaultValue?: ((FieldsSelection<EnqueuedAsset, R> | undefined)[] | undefined)) => Observable<((FieldsSelection<EnqueuedAsset, R> | undefined)[] | undefined)>}),
+    
+/**
+ * @deprecated Use `EnqueuedScript.extraData` instead.
+ * Extra information needed for the script
+ */
+extra: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The loading group to which this asset belongs. */
+group: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
+    
+/** The handle of the enqueued asset */
+handle: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The ID of the enqueued asset */
+id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
+    
+/** The source of the asset */
+src: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The version of the enqueued asset */
+version: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Page Info on the connected EnqueuedScriptConnectionEdge */
+export interface EnqueuedScriptConnectionPageInfoPromiseChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Page Info on the connected EnqueuedScriptConnectionEdge */
+export interface EnqueuedScriptConnectionPageInfoObservableChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** An edge in a connection */
+export interface TermNodeToEnqueuedScriptConnectionEdgePromiseChain{
+    
+/** A cursor for use in pagination */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The item at the end of the edge */
+node: (EnqueuedScriptPromiseChain & {get: <R extends EnqueuedScriptRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedScript, R>) => Promise<FieldsSelection<EnqueuedScript, R>>})
+}
+
+
+/** An edge in a connection */
+export interface TermNodeToEnqueuedScriptConnectionEdgeObservableChain{
+    
+/** A cursor for use in pagination */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The item at the end of the edge */
+node: (EnqueuedScriptObservableChain & {get: <R extends EnqueuedScriptRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedScript, R>) => Observable<FieldsSelection<EnqueuedScript, R>>})
+}
+
+
+/** Page Info on the &quot;TermNodeToEnqueuedScriptConnection&quot; */
+export interface TermNodeToEnqueuedScriptConnectionPageInfoPromiseChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Page Info on the &quot;TermNodeToEnqueuedScriptConnection&quot; */
+export interface TermNodeToEnqueuedScriptConnectionPageInfoObservableChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Connection between the TermNode type and the EnqueuedStylesheet type */
+export interface TermNodeToEnqueuedStylesheetConnectionPromiseChain{
+    
+/** Edges for the TermNodeToEnqueuedStylesheetConnection connection */
+edges: ({get: <R extends TermNodeToEnqueuedStylesheetConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<TermNodeToEnqueuedStylesheetConnectionEdge, R>[]) => Promise<FieldsSelection<TermNodeToEnqueuedStylesheetConnectionEdge, R>[]>}),
+    
+/** The nodes of the connection, without the edges */
+nodes: ({get: <R extends EnqueuedStylesheetRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedStylesheet, R>[]) => Promise<FieldsSelection<EnqueuedStylesheet, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (TermNodeToEnqueuedStylesheetConnectionPageInfoPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<TermNodeToEnqueuedStylesheetConnectionPageInfo, R>) => Promise<FieldsSelection<TermNodeToEnqueuedStylesheetConnectionPageInfo, R>>})
+}
+
+
+/** Connection between the TermNode type and the EnqueuedStylesheet type */
+export interface TermNodeToEnqueuedStylesheetConnectionObservableChain{
+    
+/** Edges for the TermNodeToEnqueuedStylesheetConnection connection */
+edges: ({get: <R extends TermNodeToEnqueuedStylesheetConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<TermNodeToEnqueuedStylesheetConnectionEdge, R>[]) => Observable<FieldsSelection<TermNodeToEnqueuedStylesheetConnectionEdge, R>[]>}),
+    
+/** The nodes of the connection, without the edges */
+nodes: ({get: <R extends EnqueuedStylesheetRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedStylesheet, R>[]) => Observable<FieldsSelection<EnqueuedStylesheet, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (TermNodeToEnqueuedStylesheetConnectionPageInfoObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<TermNodeToEnqueuedStylesheetConnectionPageInfo, R>) => Observable<FieldsSelection<TermNodeToEnqueuedStylesheetConnectionPageInfo, R>>})
+}
+
+
+/** Connection to EnqueuedStylesheet Nodes */
+export interface EnqueuedStylesheetConnectionPromiseChain{
+    
+/** A list of edges (relational context) between ContentNode and connected EnqueuedStylesheet Nodes */
+edges: ({get: <R extends EnqueuedStylesheetConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedStylesheetConnectionEdge, R>[]) => Promise<FieldsSelection<EnqueuedStylesheetConnectionEdge, R>[]>}),
+    
+/** A list of connected EnqueuedStylesheet Nodes */
+nodes: ({get: <R extends EnqueuedStylesheetRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedStylesheet, R>[]) => Promise<FieldsSelection<EnqueuedStylesheet, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (EnqueuedStylesheetConnectionPageInfoPromiseChain & {get: <R extends EnqueuedStylesheetConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedStylesheetConnectionPageInfo, R>) => Promise<FieldsSelection<EnqueuedStylesheetConnectionPageInfo, R>>})
+}
+
+
+/** Connection to EnqueuedStylesheet Nodes */
+export interface EnqueuedStylesheetConnectionObservableChain{
+    
+/** A list of edges (relational context) between ContentNode and connected EnqueuedStylesheet Nodes */
+edges: ({get: <R extends EnqueuedStylesheetConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedStylesheetConnectionEdge, R>[]) => Observable<FieldsSelection<EnqueuedStylesheetConnectionEdge, R>[]>}),
+    
+/** A list of connected EnqueuedStylesheet Nodes */
+nodes: ({get: <R extends EnqueuedStylesheetRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedStylesheet, R>[]) => Observable<FieldsSelection<EnqueuedStylesheet, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (EnqueuedStylesheetConnectionPageInfoObservableChain & {get: <R extends EnqueuedStylesheetConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedStylesheetConnectionPageInfo, R>) => Observable<FieldsSelection<EnqueuedStylesheetConnectionPageInfo, R>>})
+}
+
+
+/** Edge between a Node and a connected EnqueuedStylesheet */
+export interface EnqueuedStylesheetConnectionEdgePromiseChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The connected EnqueuedStylesheet Node */
+node: (EnqueuedStylesheetPromiseChain & {get: <R extends EnqueuedStylesheetRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedStylesheet, R>) => Promise<FieldsSelection<EnqueuedStylesheet, R>>})
+}
+
+
+/** Edge between a Node and a connected EnqueuedStylesheet */
+export interface EnqueuedStylesheetConnectionEdgeObservableChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The connected EnqueuedStylesheet Node */
+node: (EnqueuedStylesheetObservableChain & {get: <R extends EnqueuedStylesheetRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedStylesheet, R>) => Observable<FieldsSelection<EnqueuedStylesheet, R>>})
+}
+
+
+/** Stylesheet enqueued by the CMS */
+export interface EnqueuedStylesheetPromiseChain{
+    
+/** The inline code to be run after the asset is loaded. */
+after: ({get: (request?: boolean|number, defaultValue?: ((Scalars['String'] | undefined)[] | undefined)) => Promise<((Scalars['String'] | undefined)[] | undefined)>}),
+    
+/**
+ * @deprecated Use `EnqueuedAsset.media` instead.
+ * Deprecated
+ */
+args: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
+    
+/** The inline code to be run before the asset is loaded. */
+before: ({get: (request?: boolean|number, defaultValue?: ((Scalars['String'] | undefined)[] | undefined)) => Promise<((Scalars['String'] | undefined)[] | undefined)>}),
+    
+/** The HTML conditional comment for the enqueued asset. E.g. IE 6, lte IE 7, etc */
+conditional: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** Dependencies needed to use this asset */
+dependencies: ({get: <R extends EnqueuedStylesheetRequest>(request: R, defaultValue?: ((FieldsSelection<EnqueuedStylesheet, R> | undefined)[] | undefined)) => Promise<((FieldsSelection<EnqueuedStylesheet, R> | undefined)[] | undefined)>}),
+    
+/**
+ * @deprecated Use `EnqueuedScript.extraData` instead.
+ * Extra information needed for the script
+ */
+extra: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The loading group to which this asset belongs. */
+group: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
+    
+/** The handle of the enqueued asset */
+handle: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The global ID of the enqueued stylesheet */
+id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
+    
+/** Whether the enqueued style is RTL or not */
+isRtl: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
+    
+/** The media attribute to use for the link */
+media: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The absolute path to the enqueued style. Set when the stylesheet is meant to load inline. */
+path: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The `rel` attribute to use for the link */
+rel: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The source of the asset */
+src: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** Optional suffix, used in combination with RTL */
+suffix: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The title of the enqueued style. Used for preferred/alternate stylesheets. */
+title: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The version of the enqueued style */
+version: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Stylesheet enqueued by the CMS */
+export interface EnqueuedStylesheetObservableChain{
+    
+/** The inline code to be run after the asset is loaded. */
+after: ({get: (request?: boolean|number, defaultValue?: ((Scalars['String'] | undefined)[] | undefined)) => Observable<((Scalars['String'] | undefined)[] | undefined)>}),
+    
+/**
+ * @deprecated Use `EnqueuedAsset.media` instead.
+ * Deprecated
+ */
+args: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
+    
+/** The inline code to be run before the asset is loaded. */
+before: ({get: (request?: boolean|number, defaultValue?: ((Scalars['String'] | undefined)[] | undefined)) => Observable<((Scalars['String'] | undefined)[] | undefined)>}),
+    
+/** The HTML conditional comment for the enqueued asset. E.g. IE 6, lte IE 7, etc */
+conditional: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** Dependencies needed to use this asset */
+dependencies: ({get: <R extends EnqueuedStylesheetRequest>(request: R, defaultValue?: ((FieldsSelection<EnqueuedStylesheet, R> | undefined)[] | undefined)) => Observable<((FieldsSelection<EnqueuedStylesheet, R> | undefined)[] | undefined)>}),
+    
+/**
+ * @deprecated Use `EnqueuedScript.extraData` instead.
+ * Extra information needed for the script
+ */
+extra: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The loading group to which this asset belongs. */
+group: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
+    
+/** The handle of the enqueued asset */
+handle: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The global ID of the enqueued stylesheet */
+id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
+    
+/** Whether the enqueued style is RTL or not */
+isRtl: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
+    
+/** The media attribute to use for the link */
+media: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The absolute path to the enqueued style. Set when the stylesheet is meant to load inline. */
+path: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The `rel` attribute to use for the link */
+rel: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The source of the asset */
+src: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** Optional suffix, used in combination with RTL */
+suffix: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The title of the enqueued style. Used for preferred/alternate stylesheets. */
+title: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The version of the enqueued style */
+version: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Page Info on the connected EnqueuedStylesheetConnectionEdge */
+export interface EnqueuedStylesheetConnectionPageInfoPromiseChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Page Info on the connected EnqueuedStylesheetConnectionEdge */
+export interface EnqueuedStylesheetConnectionPageInfoObservableChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** An edge in a connection */
+export interface TermNodeToEnqueuedStylesheetConnectionEdgePromiseChain{
+    
+/** A cursor for use in pagination */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The item at the end of the edge */
+node: (EnqueuedStylesheetPromiseChain & {get: <R extends EnqueuedStylesheetRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedStylesheet, R>) => Promise<FieldsSelection<EnqueuedStylesheet, R>>})
+}
+
+
+/** An edge in a connection */
+export interface TermNodeToEnqueuedStylesheetConnectionEdgeObservableChain{
+    
+/** A cursor for use in pagination */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The item at the end of the edge */
+node: (EnqueuedStylesheetObservableChain & {get: <R extends EnqueuedStylesheetRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedStylesheet, R>) => Observable<FieldsSelection<EnqueuedStylesheet, R>>})
+}
+
+
+/** Page Info on the &quot;TermNodeToEnqueuedStylesheetConnection&quot; */
+export interface TermNodeToEnqueuedStylesheetConnectionPageInfoPromiseChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Page Info on the &quot;TermNodeToEnqueuedStylesheetConnection&quot; */
+export interface TermNodeToEnqueuedStylesheetConnectionPageInfoObservableChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Page Info on the connected TermNodeConnectionEdge */
+export interface TermNodeConnectionPageInfoPromiseChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Page Info on the connected TermNodeConnectionEdge */
+export interface TermNodeConnectionPageInfoObservableChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** An edge in a connection */
+export interface TaxonomyToTermNodeConnectionEdgePromiseChain{
+    
+/** A cursor for use in pagination */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The item at the end of the edge */
+node: (TermNodePromiseChain & {get: <R extends TermNodeRequest>(request: R, defaultValue?: FieldsSelection<TermNode, R>) => Promise<FieldsSelection<TermNode, R>>})
+}
+
+
+/** An edge in a connection */
+export interface TaxonomyToTermNodeConnectionEdgeObservableChain{
+    
+/** A cursor for use in pagination */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The item at the end of the edge */
+node: (TermNodeObservableChain & {get: <R extends TermNodeRequest>(request: R, defaultValue?: FieldsSelection<TermNode, R>) => Observable<FieldsSelection<TermNode, R>>})
+}
+
+
+/** Page Info on the &quot;TaxonomyToTermNodeConnection&quot; */
+export interface TaxonomyToTermNodeConnectionPageInfoPromiseChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Page Info on the &quot;TaxonomyToTermNodeConnection&quot; */
+export interface TaxonomyToTermNodeConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
 endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
@@ -23346,8 +27250,17 @@ firstName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] |
 /** The globally unique identifier for the user object. */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
     
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
     
 /** Whether the object is restricted from the current viewer */
 isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
@@ -23374,7 +27287,7 @@ before?: (Scalars['String'] | null),
 /** Arguments for filtering the connection */
 where?: (UserToMediaItemConnectionWhereArgs | null)}) => UserToMediaItemConnectionPromiseChain & {get: <R extends UserToMediaItemConnectionRequest>(request: R, defaultValue?: (FieldsSelection<UserToMediaItemConnection, R> | undefined)) => Promise<(FieldsSelection<UserToMediaItemConnection, R> | undefined)>})&(UserToMediaItemConnectionPromiseChain & {get: <R extends UserToMediaItemConnectionRequest>(request: R, defaultValue?: (FieldsSelection<UserToMediaItemConnection, R> | undefined)) => Promise<(FieldsSelection<UserToMediaItemConnection, R> | undefined)>}),
     
-/** Display name of the user. This is equivalent to the WP_User-&gt;dispaly_name property. */
+/** Display name of the user. This is equivalent to the WP_User-&gt;display_name property. */
 name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** The nicename for the user. This field is equivalent to WP_User-&gt;user_nicename */
@@ -23530,8 +27443,17 @@ firstName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] |
 /** The globally unique identifier for the user object. */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
     
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
     
 /** Whether the object is restricted from the current viewer */
 isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
@@ -23558,7 +27480,7 @@ before?: (Scalars['String'] | null),
 /** Arguments for filtering the connection */
 where?: (UserToMediaItemConnectionWhereArgs | null)}) => UserToMediaItemConnectionObservableChain & {get: <R extends UserToMediaItemConnectionRequest>(request: R, defaultValue?: (FieldsSelection<UserToMediaItemConnection, R> | undefined)) => Observable<(FieldsSelection<UserToMediaItemConnection, R> | undefined)>})&(UserToMediaItemConnectionObservableChain & {get: <R extends UserToMediaItemConnectionRequest>(request: R, defaultValue?: (FieldsSelection<UserToMediaItemConnection, R> | undefined)) => Observable<(FieldsSelection<UserToMediaItemConnection, R> | undefined)>}),
     
-/** Display name of the user. This is equivalent to the WP_User-&gt;dispaly_name property. */
+/** Display name of the user. This is equivalent to the WP_User-&gt;display_name property. */
 name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** The nicename for the user. This field is equivalent to WP_User-&gt;user_nicename */
@@ -23880,7 +27802,10 @@ approved: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] |
 /** The author of the comment */
 author: (CommentToCommenterConnectionEdgePromiseChain & {get: <R extends CommentToCommenterConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<CommentToCommenterConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<CommentToCommenterConnectionEdge, R> | undefined)>}),
     
-/** IP address for the author. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL. */
+/**
+ * @deprecated Use the ipAddress field on the edge between the comment and author
+ * IP address for the author at the time of commenting. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL.
+ */
 authorIp: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /**
@@ -23909,11 +27834,29 @@ dateGmt: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | u
 /** The globally unique identifier for the comment object */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
     
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether the node is a Content Node */
+isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
 /** Whether the object is restricted from the current viewer */
 isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
     
+/** Whether the node is a Term */
+isTermNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
 /** Karma value for the comment. This field is equivalent to WP_Comment-&gt;comment_karma and the value matching the &quot;comment_karma&quot; column in SQL. */
 karma: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
+    
+/** The permalink of the comment */
+link: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** Connection between the Comment type and the Comment type */
 parent: ((args?: {
@@ -23943,7 +27886,10 @@ where?: (CommentToCommentConnectionWhereArgs | null)}) => CommentToCommentConnec
 status: ({get: (request?: boolean|number, defaultValue?: (CommentStatusEnum | undefined)) => Promise<(CommentStatusEnum | undefined)>}),
     
 /** Type of comment. This field is equivalent to WP_Comment-&gt;comment_type and the value matching the &quot;comment_type&quot; column in SQL. */
-type: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+type: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The unique resource identifier path */
+uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
 }
 
 
@@ -23962,7 +27908,10 @@ approved: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] |
 /** The author of the comment */
 author: (CommentToCommenterConnectionEdgeObservableChain & {get: <R extends CommentToCommenterConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<CommentToCommenterConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<CommentToCommenterConnectionEdge, R> | undefined)>}),
     
-/** IP address for the author. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL. */
+/**
+ * @deprecated Use the ipAddress field on the edge between the comment and author
+ * IP address for the author at the time of commenting. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL.
+ */
 authorIp: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /**
@@ -23991,11 +27940,29 @@ dateGmt: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | u
 /** The globally unique identifier for the comment object */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
     
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether the node is a Content Node */
+isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
 /** Whether the object is restricted from the current viewer */
 isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
     
+/** Whether the node is a Term */
+isTermNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
 /** Karma value for the comment. This field is equivalent to WP_Comment-&gt;comment_karma and the value matching the &quot;comment_karma&quot; column in SQL. */
 karma: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
+    
+/** The permalink of the comment */
+link: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** Connection between the Comment type and the Comment type */
 parent: ((args?: {
@@ -24025,7 +27992,10 @@ where?: (CommentToCommentConnectionWhereArgs | null)}) => CommentToCommentConnec
 status: ({get: (request?: boolean|number, defaultValue?: (CommentStatusEnum | undefined)) => Observable<(CommentStatusEnum | undefined)>}),
     
 /** Type of comment. This field is equivalent to WP_Comment-&gt;comment_type and the value matching the &quot;comment_type&quot; column in SQL. */
-type: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+type: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The unique resource identifier path */
+uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
 }
 
 
@@ -24035,8 +28005,20 @@ export interface CommentToCommenterConnectionEdgePromiseChain{
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
 cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
+/** The email address representing the author for this particular comment */
+email: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** IP address of the author at the time of making this comment. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL. */
+ipAddress: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The display name of the comment author for this particular comment */
+name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
 /** The node of the connection, without the edges */
-node: (CommenterPromiseChain & {get: <R extends CommenterRequest>(request: R, defaultValue?: FieldsSelection<Commenter, R>) => Promise<FieldsSelection<Commenter, R>>})
+node: (CommenterPromiseChain & {get: <R extends CommenterRequest>(request: R, defaultValue?: FieldsSelection<Commenter, R>) => Promise<FieldsSelection<Commenter, R>>}),
+    
+/** The url entered for the comment author on this particular comment */
+url: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
 }
 
 
@@ -24046,8 +28028,20 @@ export interface CommentToCommenterConnectionEdgeObservableChain{
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
 cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
+/** The email address representing the author for this particular comment */
+email: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** IP address of the author at the time of making this comment. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL. */
+ipAddress: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The display name of the comment author for this particular comment */
+name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
 /** The node of the connection, without the edges */
-node: (CommenterObservableChain & {get: <R extends CommenterRequest>(request: R, defaultValue?: FieldsSelection<Commenter, R>) => Observable<FieldsSelection<Commenter, R>>})
+node: (CommenterObservableChain & {get: <R extends CommenterRequest>(request: R, defaultValue?: FieldsSelection<Commenter, R>) => Observable<FieldsSelection<Commenter, R>>}),
+    
+/** The url entered for the comment author on this particular comment */
+url: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
 }
 
 
@@ -24319,194 +28313,6 @@ pageInfo: (UserToEnqueuedScriptConnectionPageInfoObservableChain & {get: <R exte
 }
 
 
-/** Connection to EnqueuedScript Nodes */
-export interface EnqueuedScriptConnectionPromiseChain{
-    
-/** A list of edges (relational context) between ContentNode and connected EnqueuedScript Nodes */
-edges: ({get: <R extends EnqueuedScriptConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedScriptConnectionEdge, R>[]) => Promise<FieldsSelection<EnqueuedScriptConnectionEdge, R>[]>}),
-    
-/** A list of connected EnqueuedScript Nodes */
-nodes: ({get: <R extends EnqueuedScriptRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedScript, R>[]) => Promise<FieldsSelection<EnqueuedScript, R>[]>}),
-    
-/** Information about pagination in a connection. */
-pageInfo: (EnqueuedScriptConnectionPageInfoPromiseChain & {get: <R extends EnqueuedScriptConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedScriptConnectionPageInfo, R>) => Promise<FieldsSelection<EnqueuedScriptConnectionPageInfo, R>>})
-}
-
-
-/** Connection to EnqueuedScript Nodes */
-export interface EnqueuedScriptConnectionObservableChain{
-    
-/** A list of edges (relational context) between ContentNode and connected EnqueuedScript Nodes */
-edges: ({get: <R extends EnqueuedScriptConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedScriptConnectionEdge, R>[]) => Observable<FieldsSelection<EnqueuedScriptConnectionEdge, R>[]>}),
-    
-/** A list of connected EnqueuedScript Nodes */
-nodes: ({get: <R extends EnqueuedScriptRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedScript, R>[]) => Observable<FieldsSelection<EnqueuedScript, R>[]>}),
-    
-/** Information about pagination in a connection. */
-pageInfo: (EnqueuedScriptConnectionPageInfoObservableChain & {get: <R extends EnqueuedScriptConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedScriptConnectionPageInfo, R>) => Observable<FieldsSelection<EnqueuedScriptConnectionPageInfo, R>>})
-}
-
-
-/** Edge between a Node and a connected EnqueuedScript */
-export interface EnqueuedScriptConnectionEdgePromiseChain{
-    
-/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** The connected EnqueuedScript Node */
-node: (EnqueuedScriptPromiseChain & {get: <R extends EnqueuedScriptRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedScript, R>) => Promise<FieldsSelection<EnqueuedScript, R>>})
-}
-
-
-/** Edge between a Node and a connected EnqueuedScript */
-export interface EnqueuedScriptConnectionEdgeObservableChain{
-    
-/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** The connected EnqueuedScript Node */
-node: (EnqueuedScriptObservableChain & {get: <R extends EnqueuedScriptRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedScript, R>) => Observable<FieldsSelection<EnqueuedScript, R>>})
-}
-
-
-/** Script enqueued by the CMS */
-export interface EnqueuedScriptPromiseChain{
-    
-/** @todo */
-args: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
-    
-/** Dependencies needed to use this asset */
-dependencies: ({get: <R extends EnqueuedScriptRequest>(request: R, defaultValue?: ((FieldsSelection<EnqueuedScript, R> | undefined)[] | undefined)) => Promise<((FieldsSelection<EnqueuedScript, R> | undefined)[] | undefined)>}),
-    
-/** Extra information needed for the script */
-extra: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** The handle of the enqueued asset */
-handle: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** The ID of the enqueued asset */
-id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
-    
-/** The source of the asset */
-src: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** The version of the enqueued asset */
-version: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
-}
-
-
-/** Script enqueued by the CMS */
-export interface EnqueuedScriptObservableChain{
-    
-/** @todo */
-args: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
-    
-/** Dependencies needed to use this asset */
-dependencies: ({get: <R extends EnqueuedScriptRequest>(request: R, defaultValue?: ((FieldsSelection<EnqueuedScript, R> | undefined)[] | undefined)) => Observable<((FieldsSelection<EnqueuedScript, R> | undefined)[] | undefined)>}),
-    
-/** Extra information needed for the script */
-extra: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** The handle of the enqueued asset */
-handle: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** The ID of the enqueued asset */
-id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
-    
-/** The source of the asset */
-src: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** The version of the enqueued asset */
-version: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
-}
-
-
-/** Asset enqueued by the CMS */
-export interface EnqueuedAssetPromiseChain{
-    
-/** @todo */
-args: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
-    
-/** Dependencies needed to use this asset */
-dependencies: ({get: <R extends EnqueuedScriptRequest>(request: R, defaultValue?: ((FieldsSelection<EnqueuedScript, R> | undefined)[] | undefined)) => Promise<((FieldsSelection<EnqueuedScript, R> | undefined)[] | undefined)>}),
-    
-/** Extra information needed for the script */
-extra: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** The handle of the enqueued asset */
-handle: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** The ID of the enqueued asset */
-id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
-    
-/** The source of the asset */
-src: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** The version of the enqueued asset */
-version: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
-}
-
-
-/** Asset enqueued by the CMS */
-export interface EnqueuedAssetObservableChain{
-    
-/** @todo */
-args: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
-    
-/** Dependencies needed to use this asset */
-dependencies: ({get: <R extends EnqueuedScriptRequest>(request: R, defaultValue?: ((FieldsSelection<EnqueuedScript, R> | undefined)[] | undefined)) => Observable<((FieldsSelection<EnqueuedScript, R> | undefined)[] | undefined)>}),
-    
-/** Extra information needed for the script */
-extra: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** The handle of the enqueued asset */
-handle: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** The ID of the enqueued asset */
-id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
-    
-/** The source of the asset */
-src: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** The version of the enqueued asset */
-version: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
-}
-
-
-/** Page Info on the connected EnqueuedScriptConnectionEdge */
-export interface EnqueuedScriptConnectionPageInfoPromiseChain{
-    
-/** When paginating forwards, the cursor to continue. */
-endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** When paginating forwards, are there more items? */
-hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
-    
-/** When paginating backwards, are there more items? */
-hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
-    
-/** When paginating backwards, the cursor to continue. */
-startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
-}
-
-
-/** Page Info on the connected EnqueuedScriptConnectionEdge */
-export interface EnqueuedScriptConnectionPageInfoObservableChain{
-    
-/** When paginating forwards, the cursor to continue. */
-endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** When paginating forwards, are there more items? */
-hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
-    
-/** When paginating backwards, are there more items? */
-hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
-    
-/** When paginating backwards, the cursor to continue. */
-startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
-}
-
-
 /** An edge in a connection */
 export interface UserToEnqueuedScriptConnectionEdgePromiseChain{
     
@@ -24588,142 +28394,6 @@ nodes: ({get: <R extends EnqueuedStylesheetRequest>(request: R, defaultValue?: F
     
 /** Information about pagination in a connection. */
 pageInfo: (UserToEnqueuedStylesheetConnectionPageInfoObservableChain & {get: <R extends UserToEnqueuedStylesheetConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<UserToEnqueuedStylesheetConnectionPageInfo, R>) => Observable<FieldsSelection<UserToEnqueuedStylesheetConnectionPageInfo, R>>})
-}
-
-
-/** Connection to EnqueuedStylesheet Nodes */
-export interface EnqueuedStylesheetConnectionPromiseChain{
-    
-/** A list of edges (relational context) between ContentNode and connected EnqueuedStylesheet Nodes */
-edges: ({get: <R extends EnqueuedStylesheetConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedStylesheetConnectionEdge, R>[]) => Promise<FieldsSelection<EnqueuedStylesheetConnectionEdge, R>[]>}),
-    
-/** A list of connected EnqueuedStylesheet Nodes */
-nodes: ({get: <R extends EnqueuedStylesheetRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedStylesheet, R>[]) => Promise<FieldsSelection<EnqueuedStylesheet, R>[]>}),
-    
-/** Information about pagination in a connection. */
-pageInfo: (EnqueuedStylesheetConnectionPageInfoPromiseChain & {get: <R extends EnqueuedStylesheetConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedStylesheetConnectionPageInfo, R>) => Promise<FieldsSelection<EnqueuedStylesheetConnectionPageInfo, R>>})
-}
-
-
-/** Connection to EnqueuedStylesheet Nodes */
-export interface EnqueuedStylesheetConnectionObservableChain{
-    
-/** A list of edges (relational context) between ContentNode and connected EnqueuedStylesheet Nodes */
-edges: ({get: <R extends EnqueuedStylesheetConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedStylesheetConnectionEdge, R>[]) => Observable<FieldsSelection<EnqueuedStylesheetConnectionEdge, R>[]>}),
-    
-/** A list of connected EnqueuedStylesheet Nodes */
-nodes: ({get: <R extends EnqueuedStylesheetRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedStylesheet, R>[]) => Observable<FieldsSelection<EnqueuedStylesheet, R>[]>}),
-    
-/** Information about pagination in a connection. */
-pageInfo: (EnqueuedStylesheetConnectionPageInfoObservableChain & {get: <R extends EnqueuedStylesheetConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedStylesheetConnectionPageInfo, R>) => Observable<FieldsSelection<EnqueuedStylesheetConnectionPageInfo, R>>})
-}
-
-
-/** Edge between a Node and a connected EnqueuedStylesheet */
-export interface EnqueuedStylesheetConnectionEdgePromiseChain{
-    
-/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** The connected EnqueuedStylesheet Node */
-node: (EnqueuedStylesheetPromiseChain & {get: <R extends EnqueuedStylesheetRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedStylesheet, R>) => Promise<FieldsSelection<EnqueuedStylesheet, R>>})
-}
-
-
-/** Edge between a Node and a connected EnqueuedStylesheet */
-export interface EnqueuedStylesheetConnectionEdgeObservableChain{
-    
-/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** The connected EnqueuedStylesheet Node */
-node: (EnqueuedStylesheetObservableChain & {get: <R extends EnqueuedStylesheetRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedStylesheet, R>) => Observable<FieldsSelection<EnqueuedStylesheet, R>>})
-}
-
-
-/** Stylesheet enqueued by the CMS */
-export interface EnqueuedStylesheetPromiseChain{
-    
-/** @todo */
-args: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
-    
-/** Dependencies needed to use this asset */
-dependencies: ({get: <R extends EnqueuedScriptRequest>(request: R, defaultValue?: ((FieldsSelection<EnqueuedScript, R> | undefined)[] | undefined)) => Promise<((FieldsSelection<EnqueuedScript, R> | undefined)[] | undefined)>}),
-    
-/** Extra information needed for the script */
-extra: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** The handle of the enqueued asset */
-handle: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** The ID of the enqueued asset */
-id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
-    
-/** The source of the asset */
-src: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** The version of the enqueued asset */
-version: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
-}
-
-
-/** Stylesheet enqueued by the CMS */
-export interface EnqueuedStylesheetObservableChain{
-    
-/** @todo */
-args: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
-    
-/** Dependencies needed to use this asset */
-dependencies: ({get: <R extends EnqueuedScriptRequest>(request: R, defaultValue?: ((FieldsSelection<EnqueuedScript, R> | undefined)[] | undefined)) => Observable<((FieldsSelection<EnqueuedScript, R> | undefined)[] | undefined)>}),
-    
-/** Extra information needed for the script */
-extra: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** The handle of the enqueued asset */
-handle: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** The ID of the enqueued asset */
-id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
-    
-/** The source of the asset */
-src: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** The version of the enqueued asset */
-version: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
-}
-
-
-/** Page Info on the connected EnqueuedStylesheetConnectionEdge */
-export interface EnqueuedStylesheetConnectionPageInfoPromiseChain{
-    
-/** When paginating forwards, the cursor to continue. */
-endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** When paginating forwards, are there more items? */
-hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
-    
-/** When paginating backwards, are there more items? */
-hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
-    
-/** When paginating backwards, the cursor to continue. */
-startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
-}
-
-
-/** Page Info on the connected EnqueuedStylesheetConnectionEdge */
-export interface EnqueuedStylesheetConnectionPageInfoObservableChain{
-    
-/** When paginating forwards, the cursor to continue. */
-endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** When paginating forwards, are there more items? */
-hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
-    
-/** When paginating backwards, are there more items? */
-hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
-    
-/** When paginating backwards, the cursor to continue. */
-startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
 }
 
 
@@ -24977,6 +28647,16 @@ after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
 before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
+/** The filename of the mediaItem for the specified size (default size is full) */
+file: ((args?: {
+/** Size of the MediaItem to return */
+size?: (MediaItemSizeEnum | null)}) => {get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})&({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The path to the original file relative to the uploads directory */
+filePath: ((args?: {
+/** Size of the MediaItem to return */
+size?: (MediaItemSizeEnum | null)}) => {get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})&({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
 /** The filesize in bytes of the resource */
 fileSize: ((args?: {
 /** Size of the MediaItem to return */
@@ -24985,11 +28665,23 @@ size?: (MediaItemSizeEnum | null)}) => {get: (request?: boolean|number, defaultV
 /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
+/** Whether the attachment object is password protected. */
+hasPassword: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
+    
 /** The globally unique identifier of the attachment object. */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
     
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
     
 /** Whether the object is a node in the preview state */
 isPreview: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
@@ -25038,6 +28730,9 @@ parentDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int
     
 /** The globally unique identifier of the parent node. */
 parentId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Promise<(Scalars['ID'] | undefined)>}),
+    
+/** The password for the attachment object. */
+password: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** The database id of the preview node */
 previewRevisionDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
@@ -25195,6 +28890,16 @@ after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
 before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
+/** The filename of the mediaItem for the specified size (default size is full) */
+file: ((args?: {
+/** Size of the MediaItem to return */
+size?: (MediaItemSizeEnum | null)}) => {get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})&({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The path to the original file relative to the uploads directory */
+filePath: ((args?: {
+/** Size of the MediaItem to return */
+size?: (MediaItemSizeEnum | null)}) => {get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})&({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
 /** The filesize in bytes of the resource */
 fileSize: ((args?: {
 /** Size of the MediaItem to return */
@@ -25203,11 +28908,23 @@ size?: (MediaItemSizeEnum | null)}) => {get: (request?: boolean|number, defaultV
 /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
+/** Whether the attachment object is password protected. */
+hasPassword: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
+    
 /** The globally unique identifier of the attachment object. */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
     
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
     
 /** Whether the object is a node in the preview state */
 isPreview: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
@@ -25256,6 +28973,9 @@ parentDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int
     
 /** The globally unique identifier of the parent node. */
 parentId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Observable<(Scalars['ID'] | undefined)>}),
+    
+/** The password for the attachment object. */
+password: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** The database id of the preview node */
 previewRevisionDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
@@ -25526,8 +29246,17 @@ guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | unde
 /** The globally unique ID for the object */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
     
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
     
 /** Whether the object is a node in the preview state */
 isPreview: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
@@ -25660,8 +29389,17 @@ guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | unde
 /** The globally unique ID for the object */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
     
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
     
 /** Whether the object is a node in the preview state */
 isPreview: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
@@ -26217,6 +29955,9 @@ export interface MediaDetailsPromiseChain{
 /** The filename of the mediaItem */
 file: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
+/** The path to the mediaItem relative to the uploads directory */
+filePath: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
 /** The height of the mediaItem */
 height: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
     
@@ -26240,6 +29981,9 @@ export interface MediaDetailsObservableChain{
     
 /** The filename of the mediaItem */
 file: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The path to the mediaItem relative to the uploads directory */
+filePath: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** The height of the mediaItem */
 height: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
@@ -26347,6 +30091,9 @@ export interface MediaSizePromiseChain{
 /** The filename of the referenced size */
 file: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
+/** The path of the file for the referenced size (default size is full) */
+filePath: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
 /** The filesize of the resource */
 fileSize: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
     
@@ -26372,6 +30119,9 @@ export interface MediaSizeObservableChain{
     
 /** The filename of the referenced size */
 file: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The path of the file for the referenced size (default size is full) */
+filePath: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** The filesize of the resource */
 fileSize: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
@@ -26577,7 +30327,7 @@ before?: (Scalars['String'] | null),
 /** Arguments for filtering the connection */
 where?: (HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgs | null)}) => HierarchicalContentNodeToContentNodeAncestorsConnectionPromiseChain & {get: <R extends HierarchicalContentNodeToContentNodeAncestorsConnectionRequest>(request: R, defaultValue?: (FieldsSelection<HierarchicalContentNodeToContentNodeAncestorsConnection, R> | undefined)) => Promise<(FieldsSelection<HierarchicalContentNodeToContentNodeAncestorsConnection, R> | undefined)>})&(HierarchicalContentNodeToContentNodeAncestorsConnectionPromiseChain & {get: <R extends HierarchicalContentNodeToContentNodeAncestorsConnectionRequest>(request: R, defaultValue?: (FieldsSelection<HierarchicalContentNodeToContentNodeAncestorsConnection, R> | undefined)) => Promise<(FieldsSelection<HierarchicalContentNodeToContentNodeAncestorsConnection, R> | undefined)>}),
     
-/** Added to the GraphQL Schema because the ACF Field Group &quot;Assessoria&quot; was set to Show in GraphQL. */
+/** Added to the GraphQL Schema because the ACF Field Group &quot;Acessória&quot; was set to Show in GraphQL. */
 assessoria: (Page_AssessoriaPromiseChain & {get: <R extends Page_AssessoriaRequest>(request: R, defaultValue?: (FieldsSelection<Page_Assessoria, R> | undefined)) => Promise<(FieldsSelection<Page_Assessoria, R> | undefined)>}),
     
 /** Connection between the NodeWithAuthor type and the User type */
@@ -26687,11 +30437,17 @@ featuredImageId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID']
 /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
+/** Whether the page object is password protected. */
+hasPassword: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
+    
 /** The globally unique identifier of the page object. */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
     
 /** Added to the GraphQL Schema because the ACF Field Group &quot;Informações de contato&quot; was set to Show in GraphQL. */
 informacoesDeContato: (Page_InformacoesdecontatoPromiseChain & {get: <R extends Page_InformacoesdecontatoRequest>(request: R, defaultValue?: (FieldsSelection<Page_Informacoesdecontato, R> | undefined)) => Promise<(FieldsSelection<Page_Informacoesdecontato, R> | undefined)>}),
+    
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
     
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
@@ -26746,6 +30502,9 @@ parentDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int
     
 /** The globally unique identifier of the parent node. */
 parentId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Promise<(Scalars['ID'] | undefined)>}),
+    
+/** The password for the page object. */
+password: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** Connection between the Page type and the page type */
 preview: (PageToPreviewConnectionEdgePromiseChain & {get: <R extends PageToPreviewConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<PageToPreviewConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<PageToPreviewConnectionEdge, R> | undefined)>}),
@@ -26807,7 +30566,7 @@ before?: (Scalars['String'] | null),
 /** Arguments for filtering the connection */
 where?: (HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgs | null)}) => HierarchicalContentNodeToContentNodeAncestorsConnectionObservableChain & {get: <R extends HierarchicalContentNodeToContentNodeAncestorsConnectionRequest>(request: R, defaultValue?: (FieldsSelection<HierarchicalContentNodeToContentNodeAncestorsConnection, R> | undefined)) => Observable<(FieldsSelection<HierarchicalContentNodeToContentNodeAncestorsConnection, R> | undefined)>})&(HierarchicalContentNodeToContentNodeAncestorsConnectionObservableChain & {get: <R extends HierarchicalContentNodeToContentNodeAncestorsConnectionRequest>(request: R, defaultValue?: (FieldsSelection<HierarchicalContentNodeToContentNodeAncestorsConnection, R> | undefined)) => Observable<(FieldsSelection<HierarchicalContentNodeToContentNodeAncestorsConnection, R> | undefined)>}),
     
-/** Added to the GraphQL Schema because the ACF Field Group &quot;Assessoria&quot; was set to Show in GraphQL. */
+/** Added to the GraphQL Schema because the ACF Field Group &quot;Acessória&quot; was set to Show in GraphQL. */
 assessoria: (Page_AssessoriaObservableChain & {get: <R extends Page_AssessoriaRequest>(request: R, defaultValue?: (FieldsSelection<Page_Assessoria, R> | undefined)) => Observable<(FieldsSelection<Page_Assessoria, R> | undefined)>}),
     
 /** Connection between the NodeWithAuthor type and the User type */
@@ -26917,11 +30676,17 @@ featuredImageId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID']
 /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
+/** Whether the page object is password protected. */
+hasPassword: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
+    
 /** The globally unique identifier of the page object. */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
     
 /** Added to the GraphQL Schema because the ACF Field Group &quot;Informações de contato&quot; was set to Show in GraphQL. */
 informacoesDeContato: (Page_InformacoesdecontatoObservableChain & {get: <R extends Page_InformacoesdecontatoRequest>(request: R, defaultValue?: (FieldsSelection<Page_Informacoesdecontato, R> | undefined)) => Observable<(FieldsSelection<Page_Informacoesdecontato, R> | undefined)>}),
+    
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
     
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
@@ -26976,6 +30741,9 @@ parentDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int
     
 /** The globally unique identifier of the parent node. */
 parentId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Observable<(Scalars['ID'] | undefined)>}),
+    
+/** The password for the page object. */
+password: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** Connection between the Page type and the page type */
 preview: (PageToPreviewConnectionEdgeObservableChain & {get: <R extends PageToPreviewConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<PageToPreviewConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<PageToPreviewConnectionEdge, R> | undefined)>}),
@@ -27209,11 +30977,20 @@ export interface MenuItemLinkablePromiseChain{
 /** The unique identifier stored in the database */
 databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>}),
     
-/** The unique resource identifier path */
+/** The globally unique ID for the object */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
+    
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
     
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
     
 /** Whether the node is a Term */
 isTermNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
@@ -27229,11 +31006,20 @@ export interface MenuItemLinkableObservableChain{
 /** The unique identifier stored in the database */
 databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>}),
     
-/** The unique resource identifier path */
+/** The globally unique ID for the object */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
+    
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
     
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
     
 /** Whether the node is a Term */
 isTermNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
@@ -27740,6 +31526,20 @@ node: (PostObservableChain & {get: <R extends PostRequest>(request: R, defaultVa
 /** The post type */
 export interface PostPromiseChain{
     
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * The ancestors of the content node.
+ */
+ancestors: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null)}) => PostToPostConnectionPromiseChain & {get: <R extends PostToPostConnectionRequest>(request: R, defaultValue?: (FieldsSelection<PostToPostConnection, R> | undefined)) => Promise<(FieldsSelection<PostToPostConnection, R> | undefined)>})&(PostToPostConnectionPromiseChain & {get: <R extends PostToPostConnectionRequest>(request: R, defaultValue?: (FieldsSelection<PostToPostConnection, R> | undefined)) => Promise<(FieldsSelection<PostToPostConnection, R> | undefined)>}),
+    
 /** Connection between the NodeWithAuthor type and the User type */
 author: (NodeWithAuthorToUserConnectionEdgePromiseChain & {get: <R extends NodeWithAuthorToUserConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<NodeWithAuthorToUserConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<NodeWithAuthorToUserConnectionEdge, R> | undefined)>}),
     
@@ -27849,11 +31649,23 @@ featuredImageId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID']
 /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
+/** Whether the post object is password protected. */
+hasPassword: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
+    
 /** The globally unique identifier of the post object. */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
     
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
     
 /** Whether the object is a node in the preview state */
 isPreview: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
@@ -27881,6 +31693,15 @@ modified: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | 
     
 /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
 modifiedGmt: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have a parent
+ * The parent of the content node.
+ */
+parent: (PostToParentConnectionEdgePromiseChain & {get: <R extends PostToParentConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<PostToParentConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<PostToParentConnectionEdge, R> | undefined)>}),
+    
+/** The password for the post object. */
+password: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** Whether the pings are open or closed for this particular post. */
 pingStatus: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
@@ -27982,6 +31803,20 @@ uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undef
 
 /** The post type */
 export interface PostObservableChain{
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * The ancestors of the content node.
+ */
+ancestors: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null)}) => PostToPostConnectionObservableChain & {get: <R extends PostToPostConnectionRequest>(request: R, defaultValue?: (FieldsSelection<PostToPostConnection, R> | undefined)) => Observable<(FieldsSelection<PostToPostConnection, R> | undefined)>})&(PostToPostConnectionObservableChain & {get: <R extends PostToPostConnectionRequest>(request: R, defaultValue?: (FieldsSelection<PostToPostConnection, R> | undefined)) => Observable<(FieldsSelection<PostToPostConnection, R> | undefined)>}),
     
 /** Connection between the NodeWithAuthor type and the User type */
 author: (NodeWithAuthorToUserConnectionEdgeObservableChain & {get: <R extends NodeWithAuthorToUserConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<NodeWithAuthorToUserConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<NodeWithAuthorToUserConnectionEdge, R> | undefined)>}),
@@ -28092,11 +31927,23 @@ featuredImageId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID']
 /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
+/** Whether the post object is password protected. */
+hasPassword: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
+    
 /** The globally unique identifier of the post object. */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
     
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
     
 /** Whether the object is a node in the preview state */
 isPreview: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
@@ -28124,6 +31971,15 @@ modified: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | 
     
 /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
 modifiedGmt: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have a parent
+ * The parent of the content node.
+ */
+parent: (PostToParentConnectionEdgeObservableChain & {get: <R extends PostToParentConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<PostToParentConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<PostToParentConnectionEdge, R> | undefined)>}),
+    
+/** The password for the post object. */
+password: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** Whether the pings are open or closed for this particular post. */
 pingStatus: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
@@ -28283,6 +32139,136 @@ toPing: ({get: (request?: boolean|number, defaultValue?: ((Scalars['String'] | u
 }
 
 
+/** Connection between the Post type and the post type */
+export interface PostToPostConnectionPromiseChain{
+    
+/** Edges for the PostToPostConnection connection */
+edges: ({get: <R extends PostToPostConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<PostToPostConnectionEdge, R>[]) => Promise<FieldsSelection<PostToPostConnectionEdge, R>[]>}),
+    
+/** The nodes of the connection, without the edges */
+nodes: ({get: <R extends PostRequest>(request: R, defaultValue?: FieldsSelection<Post, R>[]) => Promise<FieldsSelection<Post, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (PostToPostConnectionPageInfoPromiseChain & {get: <R extends PostToPostConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<PostToPostConnectionPageInfo, R>) => Promise<FieldsSelection<PostToPostConnectionPageInfo, R>>})
+}
+
+
+/** Connection between the Post type and the post type */
+export interface PostToPostConnectionObservableChain{
+    
+/** Edges for the PostToPostConnection connection */
+edges: ({get: <R extends PostToPostConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<PostToPostConnectionEdge, R>[]) => Observable<FieldsSelection<PostToPostConnectionEdge, R>[]>}),
+    
+/** The nodes of the connection, without the edges */
+nodes: ({get: <R extends PostRequest>(request: R, defaultValue?: FieldsSelection<Post, R>[]) => Observable<FieldsSelection<Post, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (PostToPostConnectionPageInfoObservableChain & {get: <R extends PostToPostConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<PostToPostConnectionPageInfo, R>) => Observable<FieldsSelection<PostToPostConnectionPageInfo, R>>})
+}
+
+
+/** An edge in a connection */
+export interface PostToPostConnectionEdgePromiseChain{
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * A cursor for use in pagination
+ */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * The item at the end of the edge
+ */
+node: (PostPromiseChain & {get: <R extends PostRequest>(request: R, defaultValue?: FieldsSelection<Post, R>) => Promise<FieldsSelection<Post, R>>})
+}
+
+
+/** An edge in a connection */
+export interface PostToPostConnectionEdgeObservableChain{
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * A cursor for use in pagination
+ */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * The item at the end of the edge
+ */
+node: (PostObservableChain & {get: <R extends PostRequest>(request: R, defaultValue?: FieldsSelection<Post, R>) => Observable<FieldsSelection<Post, R>>})
+}
+
+
+/** Page Info on the &quot;PostToPostConnection&quot; */
+export interface PostToPostConnectionPageInfoPromiseChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Page Info on the &quot;PostToPostConnection&quot; */
+export interface PostToPostConnectionPageInfoObservableChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Page Info on the connected PostConnectionEdge */
+export interface PostConnectionPageInfoPromiseChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Page Info on the connected PostConnectionEdge */
+export interface PostConnectionPageInfoObservableChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
 /** Connection between the Post type and the category type */
 export interface PostToCategoryConnectionPromiseChain{
     
@@ -28381,6 +32367,19 @@ before?: (Scalars['String'] | null)}) => CategoryToAncestorsCategoryConnectionPr
  */
 categoryId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
     
+/** Connection between the Category type and the CentraldeDecorado type */
+centraldeDecorados: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (CategoryToCentraldeDecoradoConnectionWhereArgs | null)}) => CategoryToCentraldeDecoradoConnectionPromiseChain & {get: <R extends CategoryToCentraldeDecoradoConnectionRequest>(request: R, defaultValue?: (FieldsSelection<CategoryToCentraldeDecoradoConnection, R> | undefined)) => Promise<(FieldsSelection<CategoryToCentraldeDecoradoConnection, R> | undefined)>})&(CategoryToCentraldeDecoradoConnectionPromiseChain & {get: <R extends CategoryToCentraldeDecoradoConnectionRequest>(request: R, defaultValue?: (FieldsSelection<CategoryToCentraldeDecoradoConnection, R> | undefined)) => Promise<(FieldsSelection<CategoryToCentraldeDecoradoConnection, R> | undefined)>}),
+    
 /** Connection between the category type and its children categories. */
 children: ((args?: {
 /** The number of items to return after the referenced "after" cursor */
@@ -28451,11 +32450,20 @@ after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
 before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
-/** The unique resource identifier path */
+/** The globally unique ID for the object */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
+    
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
     
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
     
 /** Whether the object is restricted from the current viewer */
 isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
@@ -28531,6 +32539,19 @@ before?: (Scalars['String'] | null)}) => CategoryToAncestorsCategoryConnectionOb
  */
 categoryId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
     
+/** Connection between the Category type and the CentraldeDecorado type */
+centraldeDecorados: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (CategoryToCentraldeDecoradoConnectionWhereArgs | null)}) => CategoryToCentraldeDecoradoConnectionObservableChain & {get: <R extends CategoryToCentraldeDecoradoConnectionRequest>(request: R, defaultValue?: (FieldsSelection<CategoryToCentraldeDecoradoConnection, R> | undefined)) => Observable<(FieldsSelection<CategoryToCentraldeDecoradoConnection, R> | undefined)>})&(CategoryToCentraldeDecoradoConnectionObservableChain & {get: <R extends CategoryToCentraldeDecoradoConnectionRequest>(request: R, defaultValue?: (FieldsSelection<CategoryToCentraldeDecoradoConnection, R> | undefined)) => Observable<(FieldsSelection<CategoryToCentraldeDecoradoConnection, R> | undefined)>}),
+    
 /** Connection between the category type and its children categories. */
 children: ((args?: {
 /** The number of items to return after the referenced "after" cursor */
@@ -28601,11 +32622,20 @@ after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
 before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
-/** The unique resource identifier path */
+/** The globally unique ID for the object */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
+    
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
     
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
     
 /** Whether the object is restricted from the current viewer */
 isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
@@ -28661,312 +32691,6 @@ uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undef
 }
 
 
-/** Terms are nodes within a Taxonomy, used to group and relate other nodes. */
-export interface TermNodePromiseChain{
-    
-/** The number of objects connected to the object */
-count: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
-    
-/** Identifies the primary key from the database. */
-databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>}),
-    
-/** The description of the object */
-description: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** Connection between the TermNode type and the EnqueuedScript type */
-enqueuedScripts: ((args?: {
-/** The number of items to return after the referenced "after" cursor */
-first?: (Scalars['Int'] | null),
-/** The number of items to return before the referenced "before" cursor */
-last?: (Scalars['Int'] | null),
-/** Cursor used along with the "first" argument to reference where in the dataset to get data */
-after?: (Scalars['String'] | null),
-/** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>})&(TermNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>}),
-    
-/** Connection between the TermNode type and the EnqueuedStylesheet type */
-enqueuedStylesheets: ((args?: {
-/** The number of items to return after the referenced "after" cursor */
-first?: (Scalars['Int'] | null),
-/** The number of items to return before the referenced "before" cursor */
-last?: (Scalars['Int'] | null),
-/** Cursor used along with the "first" argument to reference where in the dataset to get data */
-after?: (Scalars['String'] | null),
-/** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
-    
-/** The unique resource identifier path */
-id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
-    
-/** Whether the node is a Content Node */
-isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
-    
-/** Whether the object is restricted from the current viewer */
-isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
-    
-/** Whether the node is a Term */
-isTermNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
-    
-/** The link to the term */
-link: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** The human friendly name of the object. */
-name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** An alphanumeric identifier for the object unique to its type. */
-slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** The name of the taxonomy that the object is associated with */
-taxonomyName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** The ID of the term group that this term object belongs to */
-termGroupId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
-    
-/** The taxonomy ID that the object is associated with */
-termTaxonomyId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
-    
-/** The unique resource identifier path */
-uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
-}
-
-
-/** Terms are nodes within a Taxonomy, used to group and relate other nodes. */
-export interface TermNodeObservableChain{
-    
-/** The number of objects connected to the object */
-count: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
-    
-/** Identifies the primary key from the database. */
-databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>}),
-    
-/** The description of the object */
-description: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** Connection between the TermNode type and the EnqueuedScript type */
-enqueuedScripts: ((args?: {
-/** The number of items to return after the referenced "after" cursor */
-first?: (Scalars['Int'] | null),
-/** The number of items to return before the referenced "before" cursor */
-last?: (Scalars['Int'] | null),
-/** Cursor used along with the "first" argument to reference where in the dataset to get data */
-after?: (Scalars['String'] | null),
-/** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>})&(TermNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>}),
-    
-/** Connection between the TermNode type and the EnqueuedStylesheet type */
-enqueuedStylesheets: ((args?: {
-/** The number of items to return after the referenced "after" cursor */
-first?: (Scalars['Int'] | null),
-/** The number of items to return before the referenced "before" cursor */
-last?: (Scalars['Int'] | null),
-/** Cursor used along with the "first" argument to reference where in the dataset to get data */
-after?: (Scalars['String'] | null),
-/** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
-    
-/** The unique resource identifier path */
-id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
-    
-/** Whether the node is a Content Node */
-isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
-    
-/** Whether the object is restricted from the current viewer */
-isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
-    
-/** Whether the node is a Term */
-isTermNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
-    
-/** The link to the term */
-link: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** The human friendly name of the object. */
-name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** An alphanumeric identifier for the object unique to its type. */
-slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** The name of the taxonomy that the object is associated with */
-taxonomyName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** The ID of the term group that this term object belongs to */
-termGroupId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
-    
-/** The taxonomy ID that the object is associated with */
-termTaxonomyId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
-    
-/** The unique resource identifier path */
-uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
-}
-
-
-/** Connection between the TermNode type and the EnqueuedScript type */
-export interface TermNodeToEnqueuedScriptConnectionPromiseChain{
-    
-/** Edges for the TermNodeToEnqueuedScriptConnection connection */
-edges: ({get: <R extends TermNodeToEnqueuedScriptConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<TermNodeToEnqueuedScriptConnectionEdge, R>[]) => Promise<FieldsSelection<TermNodeToEnqueuedScriptConnectionEdge, R>[]>}),
-    
-/** The nodes of the connection, without the edges */
-nodes: ({get: <R extends EnqueuedScriptRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedScript, R>[]) => Promise<FieldsSelection<EnqueuedScript, R>[]>}),
-    
-/** Information about pagination in a connection. */
-pageInfo: (TermNodeToEnqueuedScriptConnectionPageInfoPromiseChain & {get: <R extends TermNodeToEnqueuedScriptConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<TermNodeToEnqueuedScriptConnectionPageInfo, R>) => Promise<FieldsSelection<TermNodeToEnqueuedScriptConnectionPageInfo, R>>})
-}
-
-
-/** Connection between the TermNode type and the EnqueuedScript type */
-export interface TermNodeToEnqueuedScriptConnectionObservableChain{
-    
-/** Edges for the TermNodeToEnqueuedScriptConnection connection */
-edges: ({get: <R extends TermNodeToEnqueuedScriptConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<TermNodeToEnqueuedScriptConnectionEdge, R>[]) => Observable<FieldsSelection<TermNodeToEnqueuedScriptConnectionEdge, R>[]>}),
-    
-/** The nodes of the connection, without the edges */
-nodes: ({get: <R extends EnqueuedScriptRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedScript, R>[]) => Observable<FieldsSelection<EnqueuedScript, R>[]>}),
-    
-/** Information about pagination in a connection. */
-pageInfo: (TermNodeToEnqueuedScriptConnectionPageInfoObservableChain & {get: <R extends TermNodeToEnqueuedScriptConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<TermNodeToEnqueuedScriptConnectionPageInfo, R>) => Observable<FieldsSelection<TermNodeToEnqueuedScriptConnectionPageInfo, R>>})
-}
-
-
-/** An edge in a connection */
-export interface TermNodeToEnqueuedScriptConnectionEdgePromiseChain{
-    
-/** A cursor for use in pagination */
-cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** The item at the end of the edge */
-node: (EnqueuedScriptPromiseChain & {get: <R extends EnqueuedScriptRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedScript, R>) => Promise<FieldsSelection<EnqueuedScript, R>>})
-}
-
-
-/** An edge in a connection */
-export interface TermNodeToEnqueuedScriptConnectionEdgeObservableChain{
-    
-/** A cursor for use in pagination */
-cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** The item at the end of the edge */
-node: (EnqueuedScriptObservableChain & {get: <R extends EnqueuedScriptRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedScript, R>) => Observable<FieldsSelection<EnqueuedScript, R>>})
-}
-
-
-/** Page Info on the &quot;TermNodeToEnqueuedScriptConnection&quot; */
-export interface TermNodeToEnqueuedScriptConnectionPageInfoPromiseChain{
-    
-/** When paginating forwards, the cursor to continue. */
-endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** When paginating forwards, are there more items? */
-hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
-    
-/** When paginating backwards, are there more items? */
-hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
-    
-/** When paginating backwards, the cursor to continue. */
-startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
-}
-
-
-/** Page Info on the &quot;TermNodeToEnqueuedScriptConnection&quot; */
-export interface TermNodeToEnqueuedScriptConnectionPageInfoObservableChain{
-    
-/** When paginating forwards, the cursor to continue. */
-endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** When paginating forwards, are there more items? */
-hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
-    
-/** When paginating backwards, are there more items? */
-hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
-    
-/** When paginating backwards, the cursor to continue. */
-startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
-}
-
-
-/** Connection between the TermNode type and the EnqueuedStylesheet type */
-export interface TermNodeToEnqueuedStylesheetConnectionPromiseChain{
-    
-/** Edges for the TermNodeToEnqueuedStylesheetConnection connection */
-edges: ({get: <R extends TermNodeToEnqueuedStylesheetConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<TermNodeToEnqueuedStylesheetConnectionEdge, R>[]) => Promise<FieldsSelection<TermNodeToEnqueuedStylesheetConnectionEdge, R>[]>}),
-    
-/** The nodes of the connection, without the edges */
-nodes: ({get: <R extends EnqueuedStylesheetRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedStylesheet, R>[]) => Promise<FieldsSelection<EnqueuedStylesheet, R>[]>}),
-    
-/** Information about pagination in a connection. */
-pageInfo: (TermNodeToEnqueuedStylesheetConnectionPageInfoPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<TermNodeToEnqueuedStylesheetConnectionPageInfo, R>) => Promise<FieldsSelection<TermNodeToEnqueuedStylesheetConnectionPageInfo, R>>})
-}
-
-
-/** Connection between the TermNode type and the EnqueuedStylesheet type */
-export interface TermNodeToEnqueuedStylesheetConnectionObservableChain{
-    
-/** Edges for the TermNodeToEnqueuedStylesheetConnection connection */
-edges: ({get: <R extends TermNodeToEnqueuedStylesheetConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<TermNodeToEnqueuedStylesheetConnectionEdge, R>[]) => Observable<FieldsSelection<TermNodeToEnqueuedStylesheetConnectionEdge, R>[]>}),
-    
-/** The nodes of the connection, without the edges */
-nodes: ({get: <R extends EnqueuedStylesheetRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedStylesheet, R>[]) => Observable<FieldsSelection<EnqueuedStylesheet, R>[]>}),
-    
-/** Information about pagination in a connection. */
-pageInfo: (TermNodeToEnqueuedStylesheetConnectionPageInfoObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<TermNodeToEnqueuedStylesheetConnectionPageInfo, R>) => Observable<FieldsSelection<TermNodeToEnqueuedStylesheetConnectionPageInfo, R>>})
-}
-
-
-/** An edge in a connection */
-export interface TermNodeToEnqueuedStylesheetConnectionEdgePromiseChain{
-    
-/** A cursor for use in pagination */
-cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** The item at the end of the edge */
-node: (EnqueuedStylesheetPromiseChain & {get: <R extends EnqueuedStylesheetRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedStylesheet, R>) => Promise<FieldsSelection<EnqueuedStylesheet, R>>})
-}
-
-
-/** An edge in a connection */
-export interface TermNodeToEnqueuedStylesheetConnectionEdgeObservableChain{
-    
-/** A cursor for use in pagination */
-cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** The item at the end of the edge */
-node: (EnqueuedStylesheetObservableChain & {get: <R extends EnqueuedStylesheetRequest>(request: R, defaultValue?: FieldsSelection<EnqueuedStylesheet, R>) => Observable<FieldsSelection<EnqueuedStylesheet, R>>})
-}
-
-
-/** Page Info on the &quot;TermNodeToEnqueuedStylesheetConnection&quot; */
-export interface TermNodeToEnqueuedStylesheetConnectionPageInfoPromiseChain{
-    
-/** When paginating forwards, the cursor to continue. */
-endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** When paginating forwards, are there more items? */
-hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
-    
-/** When paginating backwards, are there more items? */
-hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
-    
-/** When paginating backwards, the cursor to continue. */
-startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
-}
-
-
-/** Page Info on the &quot;TermNodeToEnqueuedStylesheetConnection&quot; */
-export interface TermNodeToEnqueuedStylesheetConnectionPageInfoObservableChain{
-    
-/** When paginating forwards, the cursor to continue. */
-endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** When paginating forwards, are there more items? */
-hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
-    
-/** When paginating backwards, are there more items? */
-hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
-    
-/** When paginating backwards, the cursor to continue. */
-startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
-}
-
-
 /** Term node with hierarchical (parent/child) relationships */
 export interface HierarchicalTermNodePromiseChain{
     
@@ -29004,8 +32728,17 @@ before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedStylesheetConnectionP
 /** The globally unique ID for the object */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
     
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
     
 /** Whether the object is restricted from the current viewer */
 isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
@@ -29079,8 +32812,17 @@ before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedStylesheetConnectionO
 /** The globally unique ID for the object */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
     
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
     
 /** Whether the object is restricted from the current viewer */
 isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
@@ -29220,6 +32962,902 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 
 /** Page Info on the connected CategoryConnectionEdge */
 export interface CategoryConnectionPageInfoObservableChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Connection between the Category type and the CentraldeDecorado type */
+export interface CategoryToCentraldeDecoradoConnectionPromiseChain{
+    
+/** Edges for the CategoryToCentraldeDecoradoConnection connection */
+edges: ({get: <R extends CategoryToCentraldeDecoradoConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<CategoryToCentraldeDecoradoConnectionEdge, R>[]) => Promise<FieldsSelection<CategoryToCentraldeDecoradoConnectionEdge, R>[]>}),
+    
+/** The nodes of the connection, without the edges */
+nodes: ({get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecorado, R>[]) => Promise<FieldsSelection<CentraldeDecorado, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (CategoryToCentraldeDecoradoConnectionPageInfoPromiseChain & {get: <R extends CategoryToCentraldeDecoradoConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<CategoryToCentraldeDecoradoConnectionPageInfo, R>) => Promise<FieldsSelection<CategoryToCentraldeDecoradoConnectionPageInfo, R>>})
+}
+
+
+/** Connection between the Category type and the CentraldeDecorado type */
+export interface CategoryToCentraldeDecoradoConnectionObservableChain{
+    
+/** Edges for the CategoryToCentraldeDecoradoConnection connection */
+edges: ({get: <R extends CategoryToCentraldeDecoradoConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<CategoryToCentraldeDecoradoConnectionEdge, R>[]) => Observable<FieldsSelection<CategoryToCentraldeDecoradoConnectionEdge, R>[]>}),
+    
+/** The nodes of the connection, without the edges */
+nodes: ({get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecorado, R>[]) => Observable<FieldsSelection<CentraldeDecorado, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (CategoryToCentraldeDecoradoConnectionPageInfoObservableChain & {get: <R extends CategoryToCentraldeDecoradoConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<CategoryToCentraldeDecoradoConnectionPageInfo, R>) => Observable<FieldsSelection<CategoryToCentraldeDecoradoConnectionPageInfo, R>>})
+}
+
+
+/** Connection to CentraldeDecorado Nodes */
+export interface CentraldeDecoradoConnectionPromiseChain{
+    
+/** A list of edges (relational context) between RootQuery and connected CentraldeDecorado Nodes */
+edges: ({get: <R extends CentraldeDecoradoConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecoradoConnectionEdge, R>[]) => Promise<FieldsSelection<CentraldeDecoradoConnectionEdge, R>[]>}),
+    
+/** A list of connected CentraldeDecorado Nodes */
+nodes: ({get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecorado, R>[]) => Promise<FieldsSelection<CentraldeDecorado, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (CentraldeDecoradoConnectionPageInfoPromiseChain & {get: <R extends CentraldeDecoradoConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecoradoConnectionPageInfo, R>) => Promise<FieldsSelection<CentraldeDecoradoConnectionPageInfo, R>>})
+}
+
+
+/** Connection to CentraldeDecorado Nodes */
+export interface CentraldeDecoradoConnectionObservableChain{
+    
+/** A list of edges (relational context) between RootQuery and connected CentraldeDecorado Nodes */
+edges: ({get: <R extends CentraldeDecoradoConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecoradoConnectionEdge, R>[]) => Observable<FieldsSelection<CentraldeDecoradoConnectionEdge, R>[]>}),
+    
+/** A list of connected CentraldeDecorado Nodes */
+nodes: ({get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecorado, R>[]) => Observable<FieldsSelection<CentraldeDecorado, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (CentraldeDecoradoConnectionPageInfoObservableChain & {get: <R extends CentraldeDecoradoConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecoradoConnectionPageInfo, R>) => Observable<FieldsSelection<CentraldeDecoradoConnectionPageInfo, R>>})
+}
+
+
+/** Edge between a Node and a connected CentraldeDecorado */
+export interface CentraldeDecoradoConnectionEdgePromiseChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The connected CentraldeDecorado Node */
+node: (CentraldeDecoradoPromiseChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecorado, R>) => Promise<FieldsSelection<CentraldeDecorado, R>>})
+}
+
+
+/** Edge between a Node and a connected CentraldeDecorado */
+export interface CentraldeDecoradoConnectionEdgeObservableChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The connected CentraldeDecorado Node */
+node: (CentraldeDecoradoObservableChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecorado, R>) => Observable<FieldsSelection<CentraldeDecorado, R>>})
+}
+
+
+/** The CentraldeDecorado type */
+export interface CentraldeDecoradoPromiseChain{
+    
+/**
+ * @deprecated Deprecated in favor of the databaseId field
+ * The id field matches the WP_Post-&gt;ID field.
+ */
+centraldeDecoradoId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * The ancestors of the content node.
+ */
+ancestors: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null)}) => CentraldeDecoradoToCentraldeDecoradoConnectionPromiseChain & {get: <R extends CentraldeDecoradoToCentraldeDecoradoConnectionRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecoradoToCentraldeDecoradoConnection, R> | undefined)) => Promise<(FieldsSelection<CentraldeDecoradoToCentraldeDecoradoConnection, R> | undefined)>})&(CentraldeDecoradoToCentraldeDecoradoConnectionPromiseChain & {get: <R extends CentraldeDecoradoToCentraldeDecoradoConnectionRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecoradoToCentraldeDecoradoConnection, R> | undefined)) => Promise<(FieldsSelection<CentraldeDecoradoToCentraldeDecoradoConnection, R> | undefined)>}),
+    
+/** Connection between the CentraldeDecorado type and the category type */
+categories: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (CentraldeDecoradoToCategoryConnectionWhereArgs | null)}) => CentraldeDecoradoToCategoryConnectionPromiseChain & {get: <R extends CentraldeDecoradoToCategoryConnectionRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecoradoToCategoryConnection, R> | undefined)) => Promise<(FieldsSelection<CentraldeDecoradoToCategoryConnection, R> | undefined)>})&(CentraldeDecoradoToCategoryConnectionPromiseChain & {get: <R extends CentraldeDecoradoToCategoryConnectionRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecoradoToCategoryConnection, R> | undefined)) => Promise<(FieldsSelection<CentraldeDecoradoToCategoryConnection, R> | undefined)>}),
+    
+/** Added to the GraphQL Schema because the ACF Field Group &quot;Central de decorados&quot; was set to Show in GraphQL. */
+centralDeDecorados: (CentraldeDecorado_CentraldedecoradosPromiseChain & {get: <R extends CentraldeDecorado_CentraldedecoradosRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecorado_Centraldedecorados, R> | undefined)) => Promise<(FieldsSelection<CentraldeDecorado_Centraldedecorados, R> | undefined)>}),
+    
+/** Connection between the ContentNode type and the ContentType type */
+contentType: (ContentNodeToContentTypeConnectionEdgePromiseChain & {get: <R extends ContentNodeToContentTypeConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToContentTypeConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToContentTypeConnectionEdge, R> | undefined)>}),
+    
+/** The name of the Content Type the node belongs to */
+contentTypeName: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
+    
+/** The unique identifier stored in the database */
+databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>}),
+    
+/** Post publishing date. */
+date: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The publishing date set in GMT. */
+dateGmt: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The desired slug of the post */
+desiredSlug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
+editingLockedBy: (ContentNodeToEditLockConnectionEdgePromiseChain & {get: <R extends ContentNodeToEditLockConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEditLockConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEditLockConnectionEdge, R> | undefined)>}),
+    
+/** The RSS enclosure for the object */
+enclosure: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** Connection between the ContentNode type and the EnqueuedScript type */
+enqueuedScripts: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
+    
+/** Connection between the ContentNode type and the EnqueuedStylesheet type */
+enqueuedStylesheets: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+    
+/** Connection between the NodeWithFeaturedImage type and the MediaItem type */
+featuredImage: (NodeWithFeaturedImageToMediaItemConnectionEdgePromiseChain & {get: <R extends NodeWithFeaturedImageToMediaItemConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<NodeWithFeaturedImageToMediaItemConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<NodeWithFeaturedImageToMediaItemConnectionEdge, R> | undefined)>}),
+    
+/** The database identifier for the featured image node assigned to the content node */
+featuredImageDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
+    
+/** Globally unique ID of the featured image assigned to the node */
+featuredImageId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Promise<(Scalars['ID'] | undefined)>}),
+    
+/** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** Whether the centraldecorado object is password protected. */
+hasPassword: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
+    
+/** The globally unique identifier of the centraldecorado object. */
+id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
+    
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether the node is a Content Node */
+isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether the object is a node in the preview state */
+isPreview: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
+    
+/** Whether the object is restricted from the current viewer */
+isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
+    
+/** Whether the node is a Term */
+isTermNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** The user that most recently edited the node */
+lastEditedBy: (ContentNodeToEditLastConnectionEdgePromiseChain & {get: <R extends ContentNodeToEditLastConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEditLastConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEditLastConnectionEdge, R> | undefined)>}),
+    
+/** The permalink of the post */
+link: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
+modified: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
+modifiedGmt: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have a parent
+ * The parent of the content node.
+ */
+parent: (CentraldeDecoradoToParentConnectionEdgePromiseChain & {get: <R extends CentraldeDecoradoToParentConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecoradoToParentConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<CentraldeDecoradoToParentConnectionEdge, R> | undefined)>}),
+    
+/** The password for the centraldecorado object. */
+password: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** Connection between the CentraldeDecorado type and the CentraldeDecorado type */
+preview: (CentraldeDecoradoToPreviewConnectionEdgePromiseChain & {get: <R extends CentraldeDecoradoToPreviewConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecoradoToPreviewConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<CentraldeDecoradoToPreviewConnectionEdge, R> | undefined)>}),
+    
+/** The database id of the preview node */
+previewRevisionDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
+    
+/** Whether the object is a node in the preview state */
+previewRevisionId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Promise<(Scalars['ID'] | undefined)>}),
+    
+/** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The current status of the object */
+status: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The template assigned to the node */
+template: (ContentTemplatePromiseChain & {get: <R extends ContentTemplateRequest>(request: R, defaultValue?: (FieldsSelection<ContentTemplate, R> | undefined)) => Promise<(FieldsSelection<ContentTemplate, R> | undefined)>}),
+    
+/** Connection between the CentraldeDecorado type and the TermNode type */
+terms: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (CentraldeDecoradoToTermNodeConnectionWhereArgs | null)}) => CentraldeDecoradoToTermNodeConnectionPromiseChain & {get: <R extends CentraldeDecoradoToTermNodeConnectionRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecoradoToTermNodeConnection, R> | undefined)) => Promise<(FieldsSelection<CentraldeDecoradoToTermNodeConnection, R> | undefined)>})&(CentraldeDecoradoToTermNodeConnectionPromiseChain & {get: <R extends CentraldeDecoradoToTermNodeConnectionRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecoradoToTermNodeConnection, R> | undefined)) => Promise<(FieldsSelection<CentraldeDecoradoToTermNodeConnection, R> | undefined)>}),
+    
+/** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
+title: ((args?: {
+/** Format of the field output */
+format?: (PostObjectFieldFormatEnum | null)}) => {get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})&({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The unique resource identifier path */
+uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** The CentraldeDecorado type */
+export interface CentraldeDecoradoObservableChain{
+    
+/**
+ * @deprecated Deprecated in favor of the databaseId field
+ * The id field matches the WP_Post-&gt;ID field.
+ */
+centraldeDecoradoId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * The ancestors of the content node.
+ */
+ancestors: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null)}) => CentraldeDecoradoToCentraldeDecoradoConnectionObservableChain & {get: <R extends CentraldeDecoradoToCentraldeDecoradoConnectionRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecoradoToCentraldeDecoradoConnection, R> | undefined)) => Observable<(FieldsSelection<CentraldeDecoradoToCentraldeDecoradoConnection, R> | undefined)>})&(CentraldeDecoradoToCentraldeDecoradoConnectionObservableChain & {get: <R extends CentraldeDecoradoToCentraldeDecoradoConnectionRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecoradoToCentraldeDecoradoConnection, R> | undefined)) => Observable<(FieldsSelection<CentraldeDecoradoToCentraldeDecoradoConnection, R> | undefined)>}),
+    
+/** Connection between the CentraldeDecorado type and the category type */
+categories: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (CentraldeDecoradoToCategoryConnectionWhereArgs | null)}) => CentraldeDecoradoToCategoryConnectionObservableChain & {get: <R extends CentraldeDecoradoToCategoryConnectionRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecoradoToCategoryConnection, R> | undefined)) => Observable<(FieldsSelection<CentraldeDecoradoToCategoryConnection, R> | undefined)>})&(CentraldeDecoradoToCategoryConnectionObservableChain & {get: <R extends CentraldeDecoradoToCategoryConnectionRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecoradoToCategoryConnection, R> | undefined)) => Observable<(FieldsSelection<CentraldeDecoradoToCategoryConnection, R> | undefined)>}),
+    
+/** Added to the GraphQL Schema because the ACF Field Group &quot;Central de decorados&quot; was set to Show in GraphQL. */
+centralDeDecorados: (CentraldeDecorado_CentraldedecoradosObservableChain & {get: <R extends CentraldeDecorado_CentraldedecoradosRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecorado_Centraldedecorados, R> | undefined)) => Observable<(FieldsSelection<CentraldeDecorado_Centraldedecorados, R> | undefined)>}),
+    
+/** Connection between the ContentNode type and the ContentType type */
+contentType: (ContentNodeToContentTypeConnectionEdgeObservableChain & {get: <R extends ContentNodeToContentTypeConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToContentTypeConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToContentTypeConnectionEdge, R> | undefined)>}),
+    
+/** The name of the Content Type the node belongs to */
+contentTypeName: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
+    
+/** The unique identifier stored in the database */
+databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>}),
+    
+/** Post publishing date. */
+date: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The publishing date set in GMT. */
+dateGmt: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The desired slug of the post */
+desiredSlug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
+editingLockedBy: (ContentNodeToEditLockConnectionEdgeObservableChain & {get: <R extends ContentNodeToEditLockConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEditLockConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEditLockConnectionEdge, R> | undefined)>}),
+    
+/** The RSS enclosure for the object */
+enclosure: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** Connection between the ContentNode type and the EnqueuedScript type */
+enqueuedScripts: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
+    
+/** Connection between the ContentNode type and the EnqueuedStylesheet type */
+enqueuedStylesheets: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+    
+/** Connection between the NodeWithFeaturedImage type and the MediaItem type */
+featuredImage: (NodeWithFeaturedImageToMediaItemConnectionEdgeObservableChain & {get: <R extends NodeWithFeaturedImageToMediaItemConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<NodeWithFeaturedImageToMediaItemConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<NodeWithFeaturedImageToMediaItemConnectionEdge, R> | undefined)>}),
+    
+/** The database identifier for the featured image node assigned to the content node */
+featuredImageDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
+    
+/** Globally unique ID of the featured image assigned to the node */
+featuredImageId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Observable<(Scalars['ID'] | undefined)>}),
+    
+/** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** Whether the centraldecorado object is password protected. */
+hasPassword: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
+    
+/** The globally unique identifier of the centraldecorado object. */
+id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
+    
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether the node is a Content Node */
+isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether the object is a node in the preview state */
+isPreview: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
+    
+/** Whether the object is restricted from the current viewer */
+isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
+    
+/** Whether the node is a Term */
+isTermNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** The user that most recently edited the node */
+lastEditedBy: (ContentNodeToEditLastConnectionEdgeObservableChain & {get: <R extends ContentNodeToEditLastConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEditLastConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEditLastConnectionEdge, R> | undefined)>}),
+    
+/** The permalink of the post */
+link: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
+modified: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
+modifiedGmt: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have a parent
+ * The parent of the content node.
+ */
+parent: (CentraldeDecoradoToParentConnectionEdgeObservableChain & {get: <R extends CentraldeDecoradoToParentConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecoradoToParentConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<CentraldeDecoradoToParentConnectionEdge, R> | undefined)>}),
+    
+/** The password for the centraldecorado object. */
+password: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** Connection between the CentraldeDecorado type and the CentraldeDecorado type */
+preview: (CentraldeDecoradoToPreviewConnectionEdgeObservableChain & {get: <R extends CentraldeDecoradoToPreviewConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecoradoToPreviewConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<CentraldeDecoradoToPreviewConnectionEdge, R> | undefined)>}),
+    
+/** The database id of the preview node */
+previewRevisionDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
+    
+/** Whether the object is a node in the preview state */
+previewRevisionId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Observable<(Scalars['ID'] | undefined)>}),
+    
+/** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The current status of the object */
+status: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The template assigned to the node */
+template: (ContentTemplateObservableChain & {get: <R extends ContentTemplateRequest>(request: R, defaultValue?: (FieldsSelection<ContentTemplate, R> | undefined)) => Observable<(FieldsSelection<ContentTemplate, R> | undefined)>}),
+    
+/** Connection between the CentraldeDecorado type and the TermNode type */
+terms: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (CentraldeDecoradoToTermNodeConnectionWhereArgs | null)}) => CentraldeDecoradoToTermNodeConnectionObservableChain & {get: <R extends CentraldeDecoradoToTermNodeConnectionRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecoradoToTermNodeConnection, R> | undefined)) => Observable<(FieldsSelection<CentraldeDecoradoToTermNodeConnection, R> | undefined)>})&(CentraldeDecoradoToTermNodeConnectionObservableChain & {get: <R extends CentraldeDecoradoToTermNodeConnectionRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecoradoToTermNodeConnection, R> | undefined)) => Observable<(FieldsSelection<CentraldeDecoradoToTermNodeConnection, R> | undefined)>}),
+    
+/** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
+title: ((args?: {
+/** Format of the field output */
+format?: (PostObjectFieldFormatEnum | null)}) => {get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})&({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The unique resource identifier path */
+uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Connection between the CentraldeDecorado type and the CentraldeDecorado type */
+export interface CentraldeDecoradoToCentraldeDecoradoConnectionPromiseChain{
+    
+/** Edges for the CentraldeDecoradoToCentraldeDecoradoConnection connection */
+edges: ({get: <R extends CentraldeDecoradoToCentraldeDecoradoConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecoradoToCentraldeDecoradoConnectionEdge, R>[]) => Promise<FieldsSelection<CentraldeDecoradoToCentraldeDecoradoConnectionEdge, R>[]>}),
+    
+/** The nodes of the connection, without the edges */
+nodes: ({get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecorado, R>[]) => Promise<FieldsSelection<CentraldeDecorado, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (CentraldeDecoradoToCentraldeDecoradoConnectionPageInfoPromiseChain & {get: <R extends CentraldeDecoradoToCentraldeDecoradoConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo, R>) => Promise<FieldsSelection<CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo, R>>})
+}
+
+
+/** Connection between the CentraldeDecorado type and the CentraldeDecorado type */
+export interface CentraldeDecoradoToCentraldeDecoradoConnectionObservableChain{
+    
+/** Edges for the CentraldeDecoradoToCentraldeDecoradoConnection connection */
+edges: ({get: <R extends CentraldeDecoradoToCentraldeDecoradoConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecoradoToCentraldeDecoradoConnectionEdge, R>[]) => Observable<FieldsSelection<CentraldeDecoradoToCentraldeDecoradoConnectionEdge, R>[]>}),
+    
+/** The nodes of the connection, without the edges */
+nodes: ({get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecorado, R>[]) => Observable<FieldsSelection<CentraldeDecorado, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (CentraldeDecoradoToCentraldeDecoradoConnectionPageInfoObservableChain & {get: <R extends CentraldeDecoradoToCentraldeDecoradoConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo, R>) => Observable<FieldsSelection<CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo, R>>})
+}
+
+
+/** An edge in a connection */
+export interface CentraldeDecoradoToCentraldeDecoradoConnectionEdgePromiseChain{
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * A cursor for use in pagination
+ */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * The item at the end of the edge
+ */
+node: (CentraldeDecoradoPromiseChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecorado, R>) => Promise<FieldsSelection<CentraldeDecorado, R>>})
+}
+
+
+/** An edge in a connection */
+export interface CentraldeDecoradoToCentraldeDecoradoConnectionEdgeObservableChain{
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * A cursor for use in pagination
+ */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * The item at the end of the edge
+ */
+node: (CentraldeDecoradoObservableChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecorado, R>) => Observable<FieldsSelection<CentraldeDecorado, R>>})
+}
+
+
+/** Page Info on the &quot;CentraldeDecoradoToCentraldeDecoradoConnection&quot; */
+export interface CentraldeDecoradoToCentraldeDecoradoConnectionPageInfoPromiseChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Page Info on the &quot;CentraldeDecoradoToCentraldeDecoradoConnection&quot; */
+export interface CentraldeDecoradoToCentraldeDecoradoConnectionPageInfoObservableChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Page Info on the connected CentraldeDecoradoConnectionEdge */
+export interface CentraldeDecoradoConnectionPageInfoPromiseChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Page Info on the connected CentraldeDecoradoConnectionEdge */
+export interface CentraldeDecoradoConnectionPageInfoObservableChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Connection between the CentraldeDecorado type and the category type */
+export interface CentraldeDecoradoToCategoryConnectionPromiseChain{
+    
+/** Edges for the CentraldeDecoradoToCategoryConnection connection */
+edges: ({get: <R extends CentraldeDecoradoToCategoryConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecoradoToCategoryConnectionEdge, R>[]) => Promise<FieldsSelection<CentraldeDecoradoToCategoryConnectionEdge, R>[]>}),
+    
+/** The nodes of the connection, without the edges */
+nodes: ({get: <R extends CategoryRequest>(request: R, defaultValue?: FieldsSelection<Category, R>[]) => Promise<FieldsSelection<Category, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (CentraldeDecoradoToCategoryConnectionPageInfoPromiseChain & {get: <R extends CentraldeDecoradoToCategoryConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecoradoToCategoryConnectionPageInfo, R>) => Promise<FieldsSelection<CentraldeDecoradoToCategoryConnectionPageInfo, R>>})
+}
+
+
+/** Connection between the CentraldeDecorado type and the category type */
+export interface CentraldeDecoradoToCategoryConnectionObservableChain{
+    
+/** Edges for the CentraldeDecoradoToCategoryConnection connection */
+edges: ({get: <R extends CentraldeDecoradoToCategoryConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecoradoToCategoryConnectionEdge, R>[]) => Observable<FieldsSelection<CentraldeDecoradoToCategoryConnectionEdge, R>[]>}),
+    
+/** The nodes of the connection, without the edges */
+nodes: ({get: <R extends CategoryRequest>(request: R, defaultValue?: FieldsSelection<Category, R>[]) => Observable<FieldsSelection<Category, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (CentraldeDecoradoToCategoryConnectionPageInfoObservableChain & {get: <R extends CentraldeDecoradoToCategoryConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecoradoToCategoryConnectionPageInfo, R>) => Observable<FieldsSelection<CentraldeDecoradoToCategoryConnectionPageInfo, R>>})
+}
+
+
+/** An edge in a connection */
+export interface CentraldeDecoradoToCategoryConnectionEdgePromiseChain{
+    
+/** A cursor for use in pagination */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The item at the end of the edge */
+node: (CategoryPromiseChain & {get: <R extends CategoryRequest>(request: R, defaultValue?: FieldsSelection<Category, R>) => Promise<FieldsSelection<Category, R>>})
+}
+
+
+/** An edge in a connection */
+export interface CentraldeDecoradoToCategoryConnectionEdgeObservableChain{
+    
+/** A cursor for use in pagination */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The item at the end of the edge */
+node: (CategoryObservableChain & {get: <R extends CategoryRequest>(request: R, defaultValue?: FieldsSelection<Category, R>) => Observable<FieldsSelection<Category, R>>})
+}
+
+
+/** Page Info on the &quot;CentraldeDecoradoToCategoryConnection&quot; */
+export interface CentraldeDecoradoToCategoryConnectionPageInfoPromiseChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Page Info on the &quot;CentraldeDecoradoToCategoryConnection&quot; */
+export interface CentraldeDecoradoToCategoryConnectionPageInfoObservableChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface CentraldeDecorado_CentraldedecoradosPromiseChain{
+    atendimentoDomingo: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    atendimentoFeriado: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    atendimentoSabado: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    atendimentoSemana: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    enderecoBairro: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    enderecoCidade: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    enderecoNumero: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    enderecoRua: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** Resolução recomendada: 1920 x 1080px. */
+imagemPrincipal: (MediaItemPromiseChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Promise<(FieldsSelection<MediaItem, R> | undefined)>}),
+    telefone: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    whatsapp: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface CentraldeDecorado_CentraldedecoradosObservableChain{
+    atendimentoDomingo: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    atendimentoFeriado: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    atendimentoSabado: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    atendimentoSemana: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    enderecoBairro: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    enderecoCidade: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    enderecoNumero: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    enderecoRua: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** Resolução recomendada: 1920 x 1080px. */
+imagemPrincipal: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Observable<(FieldsSelection<MediaItem, R> | undefined)>}),
+    telefone: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    whatsapp: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Connection between the CentraldeDecorado type and the CentraldeDecorado type */
+export interface CentraldeDecoradoToParentConnectionEdgePromiseChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have a parent
+ * The node of the connection, without the edges
+ */
+node: (CentraldeDecoradoPromiseChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecorado, R>) => Promise<FieldsSelection<CentraldeDecorado, R>>})
+}
+
+
+/** Connection between the CentraldeDecorado type and the CentraldeDecorado type */
+export interface CentraldeDecoradoToParentConnectionEdgeObservableChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have a parent
+ * The node of the connection, without the edges
+ */
+node: (CentraldeDecoradoObservableChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecorado, R>) => Observable<FieldsSelection<CentraldeDecorado, R>>})
+}
+
+
+/** Connection between the CentraldeDecorado type and the CentraldeDecorado type */
+export interface CentraldeDecoradoToPreviewConnectionEdgePromiseChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The node of the connection, without the edges */
+node: (CentraldeDecoradoPromiseChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecorado, R>) => Promise<FieldsSelection<CentraldeDecorado, R>>})
+}
+
+
+/** Connection between the CentraldeDecorado type and the CentraldeDecorado type */
+export interface CentraldeDecoradoToPreviewConnectionEdgeObservableChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The node of the connection, without the edges */
+node: (CentraldeDecoradoObservableChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecorado, R>) => Observable<FieldsSelection<CentraldeDecorado, R>>})
+}
+
+
+/** Connection between the CentraldeDecorado type and the TermNode type */
+export interface CentraldeDecoradoToTermNodeConnectionPromiseChain{
+    
+/** Edges for the CentraldeDecoradoToTermNodeConnection connection */
+edges: ({get: <R extends CentraldeDecoradoToTermNodeConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecoradoToTermNodeConnectionEdge, R>[]) => Promise<FieldsSelection<CentraldeDecoradoToTermNodeConnectionEdge, R>[]>}),
+    
+/** The nodes of the connection, without the edges */
+nodes: ({get: <R extends TermNodeRequest>(request: R, defaultValue?: FieldsSelection<TermNode, R>[]) => Promise<FieldsSelection<TermNode, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (CentraldeDecoradoToTermNodeConnectionPageInfoPromiseChain & {get: <R extends CentraldeDecoradoToTermNodeConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecoradoToTermNodeConnectionPageInfo, R>) => Promise<FieldsSelection<CentraldeDecoradoToTermNodeConnectionPageInfo, R>>})
+}
+
+
+/** Connection between the CentraldeDecorado type and the TermNode type */
+export interface CentraldeDecoradoToTermNodeConnectionObservableChain{
+    
+/** Edges for the CentraldeDecoradoToTermNodeConnection connection */
+edges: ({get: <R extends CentraldeDecoradoToTermNodeConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecoradoToTermNodeConnectionEdge, R>[]) => Observable<FieldsSelection<CentraldeDecoradoToTermNodeConnectionEdge, R>[]>}),
+    
+/** The nodes of the connection, without the edges */
+nodes: ({get: <R extends TermNodeRequest>(request: R, defaultValue?: FieldsSelection<TermNode, R>[]) => Observable<FieldsSelection<TermNode, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (CentraldeDecoradoToTermNodeConnectionPageInfoObservableChain & {get: <R extends CentraldeDecoradoToTermNodeConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecoradoToTermNodeConnectionPageInfo, R>) => Observable<FieldsSelection<CentraldeDecoradoToTermNodeConnectionPageInfo, R>>})
+}
+
+
+/** An edge in a connection */
+export interface CentraldeDecoradoToTermNodeConnectionEdgePromiseChain{
+    
+/** A cursor for use in pagination */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The item at the end of the edge */
+node: (TermNodePromiseChain & {get: <R extends TermNodeRequest>(request: R, defaultValue?: FieldsSelection<TermNode, R>) => Promise<FieldsSelection<TermNode, R>>})
+}
+
+
+/** An edge in a connection */
+export interface CentraldeDecoradoToTermNodeConnectionEdgeObservableChain{
+    
+/** A cursor for use in pagination */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The item at the end of the edge */
+node: (TermNodeObservableChain & {get: <R extends TermNodeRequest>(request: R, defaultValue?: FieldsSelection<TermNode, R>) => Observable<FieldsSelection<TermNode, R>>})
+}
+
+
+/** Page Info on the &quot;CentraldeDecoradoToTermNodeConnection&quot; */
+export interface CentraldeDecoradoToTermNodeConnectionPageInfoPromiseChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Page Info on the &quot;CentraldeDecoradoToTermNodeConnection&quot; */
+export interface CentraldeDecoradoToTermNodeConnectionPageInfoObservableChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** An edge in a connection */
+export interface CategoryToCentraldeDecoradoConnectionEdgePromiseChain{
+    
+/** A cursor for use in pagination */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The item at the end of the edge */
+node: (CentraldeDecoradoPromiseChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecorado, R>) => Promise<FieldsSelection<CentraldeDecorado, R>>})
+}
+
+
+/** An edge in a connection */
+export interface CategoryToCentraldeDecoradoConnectionEdgeObservableChain{
+    
+/** A cursor for use in pagination */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The item at the end of the edge */
+node: (CentraldeDecoradoObservableChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecorado, R>) => Observable<FieldsSelection<CentraldeDecorado, R>>})
+}
+
+
+/** Page Info on the &quot;CategoryToCentraldeDecoradoConnection&quot; */
+export interface CategoryToCentraldeDecoradoConnectionPageInfoPromiseChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Page Info on the &quot;CategoryToCentraldeDecoradoConnection&quot; */
+export interface CategoryToCentraldeDecoradoConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
 endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
@@ -29490,6 +34128,20 @@ export interface EmpreendimentoPromiseChain{
  */
 empreendimentoId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>}),
     
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * The ancestors of the content node.
+ */
+ancestors: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null)}) => EmpreendimentoToEmpreendimentoConnectionPromiseChain & {get: <R extends EmpreendimentoToEmpreendimentoConnectionRequest>(request: R, defaultValue?: (FieldsSelection<EmpreendimentoToEmpreendimentoConnection, R> | undefined)) => Promise<(FieldsSelection<EmpreendimentoToEmpreendimentoConnection, R> | undefined)>})&(EmpreendimentoToEmpreendimentoConnectionPromiseChain & {get: <R extends EmpreendimentoToEmpreendimentoConnectionRequest>(request: R, defaultValue?: (FieldsSelection<EmpreendimentoToEmpreendimentoConnection, R> | undefined)) => Promise<(FieldsSelection<EmpreendimentoToEmpreendimentoConnection, R> | undefined)>}),
+    
 /** Connection between the Empreendimento type and the category type */
 categories: ((args?: {
 /** The number of items to return after the referenced "after" cursor */
@@ -29564,14 +34216,26 @@ featuredImageId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID']
 /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
+/** Whether the empreendimentos object is password protected. */
+hasPassword: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
+    
 /** Added to the GraphQL Schema because the ACF Field Group &quot;Housi - Verso&quot; was set to Show in GraphQL. */
 housiVerso: (Empreendimento_HousiversoPromiseChain & {get: <R extends Empreendimento_HousiversoRequest>(request: R, defaultValue?: (FieldsSelection<Empreendimento_Housiverso, R> | undefined)) => Promise<(FieldsSelection<Empreendimento_Housiverso, R> | undefined)>}),
     
 /** The globally unique identifier of the empreendimentos object. */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
     
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
     
 /** Whether the object is a node in the preview state */
 isPreview: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
@@ -29593,6 +34257,15 @@ modified: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | 
     
 /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
 modifiedGmt: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have a parent
+ * The parent of the content node.
+ */
+parent: (EmpreendimentoToParentConnectionEdgePromiseChain & {get: <R extends EmpreendimentoToParentConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<EmpreendimentoToParentConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<EmpreendimentoToParentConnectionEdge, R> | undefined)>}),
+    
+/** The password for the empreendimentos object. */
+password: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** Connection between the Empreendimento type and the Empreendimento type */
 preview: (EmpreendimentoToPreviewConnectionEdgePromiseChain & {get: <R extends EmpreendimentoToPreviewConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<EmpreendimentoToPreviewConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<EmpreendimentoToPreviewConnectionEdge, R> | undefined)>}),
@@ -29643,6 +34316,20 @@ export interface EmpreendimentoObservableChain{
  * The id field matches the WP_Post-&gt;ID field.
  */
 empreendimentoId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * The ancestors of the content node.
+ */
+ancestors: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null)}) => EmpreendimentoToEmpreendimentoConnectionObservableChain & {get: <R extends EmpreendimentoToEmpreendimentoConnectionRequest>(request: R, defaultValue?: (FieldsSelection<EmpreendimentoToEmpreendimentoConnection, R> | undefined)) => Observable<(FieldsSelection<EmpreendimentoToEmpreendimentoConnection, R> | undefined)>})&(EmpreendimentoToEmpreendimentoConnectionObservableChain & {get: <R extends EmpreendimentoToEmpreendimentoConnectionRequest>(request: R, defaultValue?: (FieldsSelection<EmpreendimentoToEmpreendimentoConnection, R> | undefined)) => Observable<(FieldsSelection<EmpreendimentoToEmpreendimentoConnection, R> | undefined)>}),
     
 /** Connection between the Empreendimento type and the category type */
 categories: ((args?: {
@@ -29718,14 +34405,26 @@ featuredImageId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID']
 /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
+/** Whether the empreendimentos object is password protected. */
+hasPassword: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
+    
 /** Added to the GraphQL Schema because the ACF Field Group &quot;Housi - Verso&quot; was set to Show in GraphQL. */
 housiVerso: (Empreendimento_HousiversoObservableChain & {get: <R extends Empreendimento_HousiversoRequest>(request: R, defaultValue?: (FieldsSelection<Empreendimento_Housiverso, R> | undefined)) => Observable<(FieldsSelection<Empreendimento_Housiverso, R> | undefined)>}),
     
 /** The globally unique identifier of the empreendimentos object. */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
     
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
     
 /** Whether the object is a node in the preview state */
 isPreview: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
@@ -29747,6 +34446,15 @@ modified: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | 
     
 /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
 modifiedGmt: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have a parent
+ * The parent of the content node.
+ */
+parent: (EmpreendimentoToParentConnectionEdgeObservableChain & {get: <R extends EmpreendimentoToParentConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<EmpreendimentoToParentConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<EmpreendimentoToParentConnectionEdge, R> | undefined)>}),
+    
+/** The password for the empreendimentos object. */
+password: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** Connection between the Empreendimento type and the Empreendimento type */
 preview: (EmpreendimentoToPreviewConnectionEdgeObservableChain & {get: <R extends EmpreendimentoToPreviewConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<EmpreendimentoToPreviewConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<EmpreendimentoToPreviewConnectionEdge, R> | undefined)>}),
@@ -29786,6 +34494,136 @@ format?: (PostObjectFieldFormatEnum | null)}) => {get: (request?: boolean|number
     
 /** The unique resource identifier path */
 uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Connection between the Empreendimento type and the Empreendimento type */
+export interface EmpreendimentoToEmpreendimentoConnectionPromiseChain{
+    
+/** Edges for the EmpreendimentoToEmpreendimentoConnection connection */
+edges: ({get: <R extends EmpreendimentoToEmpreendimentoConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<EmpreendimentoToEmpreendimentoConnectionEdge, R>[]) => Promise<FieldsSelection<EmpreendimentoToEmpreendimentoConnectionEdge, R>[]>}),
+    
+/** The nodes of the connection, without the edges */
+nodes: ({get: <R extends EmpreendimentoRequest>(request: R, defaultValue?: FieldsSelection<Empreendimento, R>[]) => Promise<FieldsSelection<Empreendimento, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (EmpreendimentoToEmpreendimentoConnectionPageInfoPromiseChain & {get: <R extends EmpreendimentoToEmpreendimentoConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<EmpreendimentoToEmpreendimentoConnectionPageInfo, R>) => Promise<FieldsSelection<EmpreendimentoToEmpreendimentoConnectionPageInfo, R>>})
+}
+
+
+/** Connection between the Empreendimento type and the Empreendimento type */
+export interface EmpreendimentoToEmpreendimentoConnectionObservableChain{
+    
+/** Edges for the EmpreendimentoToEmpreendimentoConnection connection */
+edges: ({get: <R extends EmpreendimentoToEmpreendimentoConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<EmpreendimentoToEmpreendimentoConnectionEdge, R>[]) => Observable<FieldsSelection<EmpreendimentoToEmpreendimentoConnectionEdge, R>[]>}),
+    
+/** The nodes of the connection, without the edges */
+nodes: ({get: <R extends EmpreendimentoRequest>(request: R, defaultValue?: FieldsSelection<Empreendimento, R>[]) => Observable<FieldsSelection<Empreendimento, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (EmpreendimentoToEmpreendimentoConnectionPageInfoObservableChain & {get: <R extends EmpreendimentoToEmpreendimentoConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<EmpreendimentoToEmpreendimentoConnectionPageInfo, R>) => Observable<FieldsSelection<EmpreendimentoToEmpreendimentoConnectionPageInfo, R>>})
+}
+
+
+/** An edge in a connection */
+export interface EmpreendimentoToEmpreendimentoConnectionEdgePromiseChain{
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * A cursor for use in pagination
+ */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * The item at the end of the edge
+ */
+node: (EmpreendimentoPromiseChain & {get: <R extends EmpreendimentoRequest>(request: R, defaultValue?: FieldsSelection<Empreendimento, R>) => Promise<FieldsSelection<Empreendimento, R>>})
+}
+
+
+/** An edge in a connection */
+export interface EmpreendimentoToEmpreendimentoConnectionEdgeObservableChain{
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * A cursor for use in pagination
+ */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * The item at the end of the edge
+ */
+node: (EmpreendimentoObservableChain & {get: <R extends EmpreendimentoRequest>(request: R, defaultValue?: FieldsSelection<Empreendimento, R>) => Observable<FieldsSelection<Empreendimento, R>>})
+}
+
+
+/** Page Info on the &quot;EmpreendimentoToEmpreendimentoConnection&quot; */
+export interface EmpreendimentoToEmpreendimentoConnectionPageInfoPromiseChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Page Info on the &quot;EmpreendimentoToEmpreendimentoConnection&quot; */
+export interface EmpreendimentoToEmpreendimentoConnectionPageInfoObservableChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Page Info on the connected EmpreendimentoConnectionEdge */
+export interface EmpreendimentoConnectionPageInfoPromiseChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Page Info on the connected EmpreendimentoConnectionEdge */
+export interface EmpreendimentoConnectionPageInfoObservableChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
 }
 
 
@@ -30112,6 +34950,34 @@ fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['Strin
 
 
 /** Connection between the Empreendimento type and the Empreendimento type */
+export interface EmpreendimentoToParentConnectionEdgePromiseChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have a parent
+ * The node of the connection, without the edges
+ */
+node: (EmpreendimentoPromiseChain & {get: <R extends EmpreendimentoRequest>(request: R, defaultValue?: FieldsSelection<Empreendimento, R>) => Promise<FieldsSelection<Empreendimento, R>>})
+}
+
+
+/** Connection between the Empreendimento type and the Empreendimento type */
+export interface EmpreendimentoToParentConnectionEdgeObservableChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have a parent
+ * The node of the connection, without the edges
+ */
+node: (EmpreendimentoObservableChain & {get: <R extends EmpreendimentoRequest>(request: R, defaultValue?: FieldsSelection<Empreendimento, R>) => Observable<FieldsSelection<Empreendimento, R>>})
+}
+
+
+/** Connection between the Empreendimento type and the Empreendimento type */
 export interface EmpreendimentoToPreviewConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -30161,90 +35027,6 @@ pageInfo: (EmpreendimentoToTermNodeConnectionPageInfoObservableChain & {get: <R 
 }
 
 
-/** Connection to TermNode Nodes */
-export interface TermNodeConnectionPromiseChain{
-    
-/** A list of edges (relational context) between RootQuery and connected TermNode Nodes */
-edges: ({get: <R extends TermNodeConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<TermNodeConnectionEdge, R>[]) => Promise<FieldsSelection<TermNodeConnectionEdge, R>[]>}),
-    
-/** A list of connected TermNode Nodes */
-nodes: ({get: <R extends TermNodeRequest>(request: R, defaultValue?: FieldsSelection<TermNode, R>[]) => Promise<FieldsSelection<TermNode, R>[]>}),
-    
-/** Information about pagination in a connection. */
-pageInfo: (TermNodeConnectionPageInfoPromiseChain & {get: <R extends TermNodeConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<TermNodeConnectionPageInfo, R>) => Promise<FieldsSelection<TermNodeConnectionPageInfo, R>>})
-}
-
-
-/** Connection to TermNode Nodes */
-export interface TermNodeConnectionObservableChain{
-    
-/** A list of edges (relational context) between RootQuery and connected TermNode Nodes */
-edges: ({get: <R extends TermNodeConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<TermNodeConnectionEdge, R>[]) => Observable<FieldsSelection<TermNodeConnectionEdge, R>[]>}),
-    
-/** A list of connected TermNode Nodes */
-nodes: ({get: <R extends TermNodeRequest>(request: R, defaultValue?: FieldsSelection<TermNode, R>[]) => Observable<FieldsSelection<TermNode, R>[]>}),
-    
-/** Information about pagination in a connection. */
-pageInfo: (TermNodeConnectionPageInfoObservableChain & {get: <R extends TermNodeConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<TermNodeConnectionPageInfo, R>) => Observable<FieldsSelection<TermNodeConnectionPageInfo, R>>})
-}
-
-
-/** Edge between a Node and a connected TermNode */
-export interface TermNodeConnectionEdgePromiseChain{
-    
-/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** The connected TermNode Node */
-node: (TermNodePromiseChain & {get: <R extends TermNodeRequest>(request: R, defaultValue?: FieldsSelection<TermNode, R>) => Promise<FieldsSelection<TermNode, R>>})
-}
-
-
-/** Edge between a Node and a connected TermNode */
-export interface TermNodeConnectionEdgeObservableChain{
-    
-/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** The connected TermNode Node */
-node: (TermNodeObservableChain & {get: <R extends TermNodeRequest>(request: R, defaultValue?: FieldsSelection<TermNode, R>) => Observable<FieldsSelection<TermNode, R>>})
-}
-
-
-/** Page Info on the connected TermNodeConnectionEdge */
-export interface TermNodeConnectionPageInfoPromiseChain{
-    
-/** When paginating forwards, the cursor to continue. */
-endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** When paginating forwards, are there more items? */
-hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
-    
-/** When paginating backwards, are there more items? */
-hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
-    
-/** When paginating backwards, the cursor to continue. */
-startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
-}
-
-
-/** Page Info on the connected TermNodeConnectionEdge */
-export interface TermNodeConnectionPageInfoObservableChain{
-    
-/** When paginating forwards, the cursor to continue. */
-endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** When paginating forwards, are there more items? */
-hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
-    
-/** When paginating backwards, are there more items? */
-hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
-    
-/** When paginating backwards, the cursor to continue. */
-startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
-}
-
-
 /** An edge in a connection */
 export interface EmpreendimentoToTermNodeConnectionEdgePromiseChain{
     
@@ -30286,40 +35068,6 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 
 /** Page Info on the &quot;EmpreendimentoToTermNodeConnection&quot; */
 export interface EmpreendimentoToTermNodeConnectionPageInfoObservableChain{
-    
-/** When paginating forwards, the cursor to continue. */
-endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** When paginating forwards, are there more items? */
-hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
-    
-/** When paginating backwards, are there more items? */
-hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
-    
-/** When paginating backwards, the cursor to continue. */
-startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
-}
-
-
-/** Page Info on the connected EmpreendimentoConnectionEdge */
-export interface EmpreendimentoConnectionPageInfoPromiseChain{
-    
-/** When paginating forwards, the cursor to continue. */
-endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** When paginating forwards, are there more items? */
-hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
-    
-/** When paginating backwards, are there more items? */
-hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
-    
-/** When paginating backwards, the cursor to continue. */
-startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
-}
-
-
-/** Page Info on the connected EmpreendimentoConnectionEdge */
-export interface EmpreendimentoConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
 endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
@@ -30497,40 +35245,6 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected PostConnectionEdge */
-export interface PostConnectionPageInfoPromiseChain{
-    
-/** When paginating forwards, the cursor to continue. */
-endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** When paginating forwards, are there more items? */
-hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
-    
-/** When paginating backwards, are there more items? */
-hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
-    
-/** When paginating backwards, the cursor to continue. */
-startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
-}
-
-
-/** Page Info on the connected PostConnectionEdge */
-export interface PostConnectionPageInfoObservableChain{
-    
-/** When paginating forwards, the cursor to continue. */
-endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** When paginating forwards, are there more items? */
-hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
-    
-/** When paginating backwards, are there more items? */
-hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
-    
-/** When paginating backwards, the cursor to continue. */
-startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
-}
-
-
 /** Connection between the Category type and the Taxonomy type */
 export interface CategoryToTaxonomyConnectionEdgePromiseChain{
     
@@ -30693,6 +35407,34 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
+/** Connection between the Post type and the post type */
+export interface PostToParentConnectionEdgePromiseChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have a parent
+ * The node of the connection, without the edges
+ */
+node: (PostPromiseChain & {get: <R extends PostRequest>(request: R, defaultValue?: FieldsSelection<Post, R>) => Promise<FieldsSelection<Post, R>>})
+}
+
+
+/** Connection between the Post type and the post type */
+export interface PostToParentConnectionEdgeObservableChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have a parent
+ * The node of the connection, without the edges
+ */
+node: (PostObservableChain & {get: <R extends PostRequest>(request: R, defaultValue?: FieldsSelection<Post, R>) => Observable<FieldsSelection<Post, R>>})
+}
+
+
 /** Connection between the Post type and the postFormat type */
 export interface PostToPostFormatConnectionPromiseChain{
     
@@ -30818,11 +35560,20 @@ after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
 before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
-/** The unique resource identifier path */
+/** The globally unique ID for the object */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
+    
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
     
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
     
 /** Whether the object is restricted from the current viewer */
 isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
@@ -30922,11 +35673,20 @@ after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
 before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
-/** The unique resource identifier path */
+/** The globally unique ID for the object */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
+    
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
     
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
     
 /** Whether the object is restricted from the current viewer */
 isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
@@ -31490,11 +36250,20 @@ after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
 before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
-/** The unique resource identifier path */
+/** The globally unique ID for the object */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
+    
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
     
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
     
 /** Whether the object is restricted from the current viewer */
 isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
@@ -31594,11 +36363,20 @@ after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
 before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
-/** The unique resource identifier path */
+/** The globally unique ID for the object */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
+    
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
     
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
     
 /** Whether the object is restricted from the current viewer */
 isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
@@ -32363,103 +37141,31 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Field Group */
-export interface ArquivoAssessoria_DownAssessoriaPromiseChain{
-    downDescricao: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** Não obrigatório. */
-downImagem: (MediaItemPromiseChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Promise<(FieldsSelection<MediaItem, R> | undefined)>}),
-    downTitulo: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** The name of the ACF Field Group */
-fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    linkDaMateria: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
-}
-
-
-/** Field Group */
-export interface ArquivoAssessoria_DownAssessoriaObservableChain{
-    downDescricao: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** Não obrigatório. */
-downImagem: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Observable<(FieldsSelection<MediaItem, R> | undefined)>}),
-    downTitulo: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** The name of the ACF Field Group */
-fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    linkDaMateria: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
-}
-
-
 /** Connection between the ArquivoAssessoria type and the ArquivoAssessoria type */
-export interface ArquivoAssessoriaToPreviewConnectionEdgePromiseChain{
+export interface ArquivoAssessoriaToArquivoAssessoriaConnectionPromiseChain{
     
-/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** The node of the connection, without the edges */
-node: (ArquivoAssessoriaPromiseChain & {get: <R extends ArquivoAssessoriaRequest>(request: R, defaultValue?: FieldsSelection<ArquivoAssessoria, R>) => Promise<FieldsSelection<ArquivoAssessoria, R>>})
-}
-
-
-/** Connection between the ArquivoAssessoria type and the ArquivoAssessoria type */
-export interface ArquivoAssessoriaToPreviewConnectionEdgeObservableChain{
-    
-/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** The node of the connection, without the edges */
-node: (ArquivoAssessoriaObservableChain & {get: <R extends ArquivoAssessoriaRequest>(request: R, defaultValue?: FieldsSelection<ArquivoAssessoria, R>) => Observable<FieldsSelection<ArquivoAssessoria, R>>})
-}
-
-
-/** Edge between a Node and a connected ArquivoAssessoria */
-export interface ArquivoAssessoriaConnectionEdgePromiseChain{
-    
-/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** The connected ArquivoAssessoria Node */
-node: (ArquivoAssessoriaPromiseChain & {get: <R extends ArquivoAssessoriaRequest>(request: R, defaultValue?: FieldsSelection<ArquivoAssessoria, R>) => Promise<FieldsSelection<ArquivoAssessoria, R>>})
-}
-
-
-/** Edge between a Node and a connected ArquivoAssessoria */
-export interface ArquivoAssessoriaConnectionEdgeObservableChain{
-    
-/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** The connected ArquivoAssessoria Node */
-node: (ArquivoAssessoriaObservableChain & {get: <R extends ArquivoAssessoriaRequest>(request: R, defaultValue?: FieldsSelection<ArquivoAssessoria, R>) => Observable<FieldsSelection<ArquivoAssessoria, R>>})
-}
-
-
-/** Connection between the RootQuery type and the ArquivoAssessoria type */
-export interface RootQueryToArquivoAssessoriaConnectionPromiseChain{
-    
-/** Edges for the RootQueryToArquivoAssessoriaConnection connection */
-edges: ({get: <R extends RootQueryToArquivoAssessoriaConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<RootQueryToArquivoAssessoriaConnectionEdge, R>[]) => Promise<FieldsSelection<RootQueryToArquivoAssessoriaConnectionEdge, R>[]>}),
+/** Edges for the ArquivoAssessoriaToArquivoAssessoriaConnection connection */
+edges: ({get: <R extends ArquivoAssessoriaToArquivoAssessoriaConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<ArquivoAssessoriaToArquivoAssessoriaConnectionEdge, R>[]) => Promise<FieldsSelection<ArquivoAssessoriaToArquivoAssessoriaConnectionEdge, R>[]>}),
     
 /** The nodes of the connection, without the edges */
 nodes: ({get: <R extends ArquivoAssessoriaRequest>(request: R, defaultValue?: FieldsSelection<ArquivoAssessoria, R>[]) => Promise<FieldsSelection<ArquivoAssessoria, R>[]>}),
     
 /** Information about pagination in a connection. */
-pageInfo: (RootQueryToArquivoAssessoriaConnectionPageInfoPromiseChain & {get: <R extends RootQueryToArquivoAssessoriaConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<RootQueryToArquivoAssessoriaConnectionPageInfo, R>) => Promise<FieldsSelection<RootQueryToArquivoAssessoriaConnectionPageInfo, R>>})
+pageInfo: (ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfoPromiseChain & {get: <R extends ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo, R>) => Promise<FieldsSelection<ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo, R>>})
 }
 
 
-/** Connection between the RootQuery type and the ArquivoAssessoria type */
-export interface RootQueryToArquivoAssessoriaConnectionObservableChain{
+/** Connection between the ArquivoAssessoria type and the ArquivoAssessoria type */
+export interface ArquivoAssessoriaToArquivoAssessoriaConnectionObservableChain{
     
-/** Edges for the RootQueryToArquivoAssessoriaConnection connection */
-edges: ({get: <R extends RootQueryToArquivoAssessoriaConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<RootQueryToArquivoAssessoriaConnectionEdge, R>[]) => Observable<FieldsSelection<RootQueryToArquivoAssessoriaConnectionEdge, R>[]>}),
+/** Edges for the ArquivoAssessoriaToArquivoAssessoriaConnection connection */
+edges: ({get: <R extends ArquivoAssessoriaToArquivoAssessoriaConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<ArquivoAssessoriaToArquivoAssessoriaConnectionEdge, R>[]) => Observable<FieldsSelection<ArquivoAssessoriaToArquivoAssessoriaConnectionEdge, R>[]>}),
     
 /** The nodes of the connection, without the edges */
 nodes: ({get: <R extends ArquivoAssessoriaRequest>(request: R, defaultValue?: FieldsSelection<ArquivoAssessoria, R>[]) => Observable<FieldsSelection<ArquivoAssessoria, R>[]>}),
     
 /** Information about pagination in a connection. */
-pageInfo: (RootQueryToArquivoAssessoriaConnectionPageInfoObservableChain & {get: <R extends RootQueryToArquivoAssessoriaConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<RootQueryToArquivoAssessoriaConnectionPageInfo, R>) => Observable<FieldsSelection<RootQueryToArquivoAssessoriaConnectionPageInfo, R>>})
+pageInfo: (ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfoObservableChain & {get: <R extends ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo, R>) => Observable<FieldsSelection<ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo, R>>})
 }
 
 
@@ -32488,6 +37194,28 @@ nodes: ({get: <R extends ArquivoAssessoriaRequest>(request: R, defaultValue?: Fi
     
 /** Information about pagination in a connection. */
 pageInfo: (ArquivoAssessoriaConnectionPageInfoObservableChain & {get: <R extends ArquivoAssessoriaConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<ArquivoAssessoriaConnectionPageInfo, R>) => Observable<FieldsSelection<ArquivoAssessoriaConnectionPageInfo, R>>})
+}
+
+
+/** Edge between a Node and a connected ArquivoAssessoria */
+export interface ArquivoAssessoriaConnectionEdgePromiseChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The connected ArquivoAssessoria Node */
+node: (ArquivoAssessoriaPromiseChain & {get: <R extends ArquivoAssessoriaRequest>(request: R, defaultValue?: FieldsSelection<ArquivoAssessoria, R>) => Promise<FieldsSelection<ArquivoAssessoria, R>>})
+}
+
+
+/** Edge between a Node and a connected ArquivoAssessoria */
+export interface ArquivoAssessoriaConnectionEdgeObservableChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The connected ArquivoAssessoria Node */
+node: (ArquivoAssessoriaObservableChain & {get: <R extends ArquivoAssessoriaRequest>(request: R, defaultValue?: FieldsSelection<ArquivoAssessoria, R>) => Observable<FieldsSelection<ArquivoAssessoria, R>>})
 }
 
 
@@ -32522,6 +37250,180 @@ hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boole
     
 /** When paginating backwards, the cursor to continue. */
 startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** An edge in a connection */
+export interface ArquivoAssessoriaToArquivoAssessoriaConnectionEdgePromiseChain{
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * A cursor for use in pagination
+ */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * The item at the end of the edge
+ */
+node: (ArquivoAssessoriaPromiseChain & {get: <R extends ArquivoAssessoriaRequest>(request: R, defaultValue?: FieldsSelection<ArquivoAssessoria, R>) => Promise<FieldsSelection<ArquivoAssessoria, R>>})
+}
+
+
+/** An edge in a connection */
+export interface ArquivoAssessoriaToArquivoAssessoriaConnectionEdgeObservableChain{
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * A cursor for use in pagination
+ */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * The item at the end of the edge
+ */
+node: (ArquivoAssessoriaObservableChain & {get: <R extends ArquivoAssessoriaRequest>(request: R, defaultValue?: FieldsSelection<ArquivoAssessoria, R>) => Observable<FieldsSelection<ArquivoAssessoria, R>>})
+}
+
+
+/** Page Info on the &quot;ArquivoAssessoriaToArquivoAssessoriaConnection&quot; */
+export interface ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfoPromiseChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Page Info on the &quot;ArquivoAssessoriaToArquivoAssessoriaConnection&quot; */
+export interface ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfoObservableChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface ArquivoAssessoria_DownAssessoriaPromiseChain{
+    downDescricao: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** Não obrigatório. */
+downImagem: (MediaItemPromiseChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Promise<(FieldsSelection<MediaItem, R> | undefined)>}),
+    downTitulo: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    linkDaMateria: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface ArquivoAssessoria_DownAssessoriaObservableChain{
+    downDescricao: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** Não obrigatório. */
+downImagem: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Observable<(FieldsSelection<MediaItem, R> | undefined)>}),
+    downTitulo: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    linkDaMateria: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Connection between the ArquivoAssessoria type and the ArquivoAssessoria type */
+export interface ArquivoAssessoriaToParentConnectionEdgePromiseChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have a parent
+ * The node of the connection, without the edges
+ */
+node: (ArquivoAssessoriaPromiseChain & {get: <R extends ArquivoAssessoriaRequest>(request: R, defaultValue?: FieldsSelection<ArquivoAssessoria, R>) => Promise<FieldsSelection<ArquivoAssessoria, R>>})
+}
+
+
+/** Connection between the ArquivoAssessoria type and the ArquivoAssessoria type */
+export interface ArquivoAssessoriaToParentConnectionEdgeObservableChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have a parent
+ * The node of the connection, without the edges
+ */
+node: (ArquivoAssessoriaObservableChain & {get: <R extends ArquivoAssessoriaRequest>(request: R, defaultValue?: FieldsSelection<ArquivoAssessoria, R>) => Observable<FieldsSelection<ArquivoAssessoria, R>>})
+}
+
+
+/** Connection between the ArquivoAssessoria type and the ArquivoAssessoria type */
+export interface ArquivoAssessoriaToPreviewConnectionEdgePromiseChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The node of the connection, without the edges */
+node: (ArquivoAssessoriaPromiseChain & {get: <R extends ArquivoAssessoriaRequest>(request: R, defaultValue?: FieldsSelection<ArquivoAssessoria, R>) => Promise<FieldsSelection<ArquivoAssessoria, R>>})
+}
+
+
+/** Connection between the ArquivoAssessoria type and the ArquivoAssessoria type */
+export interface ArquivoAssessoriaToPreviewConnectionEdgeObservableChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The node of the connection, without the edges */
+node: (ArquivoAssessoriaObservableChain & {get: <R extends ArquivoAssessoriaRequest>(request: R, defaultValue?: FieldsSelection<ArquivoAssessoria, R>) => Observable<FieldsSelection<ArquivoAssessoria, R>>})
+}
+
+
+/** Connection between the RootQuery type and the ArquivoAssessoria type */
+export interface RootQueryToArquivoAssessoriaConnectionPromiseChain{
+    
+/** Edges for the RootQueryToArquivoAssessoriaConnection connection */
+edges: ({get: <R extends RootQueryToArquivoAssessoriaConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<RootQueryToArquivoAssessoriaConnectionEdge, R>[]) => Promise<FieldsSelection<RootQueryToArquivoAssessoriaConnectionEdge, R>[]>}),
+    
+/** The nodes of the connection, without the edges */
+nodes: ({get: <R extends ArquivoAssessoriaRequest>(request: R, defaultValue?: FieldsSelection<ArquivoAssessoria, R>[]) => Promise<FieldsSelection<ArquivoAssessoria, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (RootQueryToArquivoAssessoriaConnectionPageInfoPromiseChain & {get: <R extends RootQueryToArquivoAssessoriaConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<RootQueryToArquivoAssessoriaConnectionPageInfo, R>) => Promise<FieldsSelection<RootQueryToArquivoAssessoriaConnectionPageInfo, R>>})
+}
+
+
+/** Connection between the RootQuery type and the ArquivoAssessoria type */
+export interface RootQueryToArquivoAssessoriaConnectionObservableChain{
+    
+/** Edges for the RootQueryToArquivoAssessoriaConnection connection */
+edges: ({get: <R extends RootQueryToArquivoAssessoriaConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<RootQueryToArquivoAssessoriaConnectionEdge, R>[]) => Observable<FieldsSelection<RootQueryToArquivoAssessoriaConnectionEdge, R>[]>}),
+    
+/** The nodes of the connection, without the edges */
+nodes: ({get: <R extends ArquivoAssessoriaRequest>(request: R, defaultValue?: FieldsSelection<ArquivoAssessoria, R>[]) => Observable<FieldsSelection<ArquivoAssessoria, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (RootQueryToArquivoAssessoriaConnectionPageInfoObservableChain & {get: <R extends RootQueryToArquivoAssessoriaConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<RootQueryToArquivoAssessoriaConnectionPageInfo, R>) => Observable<FieldsSelection<RootQueryToArquivoAssessoriaConnectionPageInfo, R>>})
 }
 
 
@@ -32590,6 +37492,20 @@ export interface BannerPromiseChain{
  */
 bannerId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>}),
     
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * The ancestors of the content node.
+ */
+ancestors: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null)}) => BannerToBannerConnectionPromiseChain & {get: <R extends BannerToBannerConnectionRequest>(request: R, defaultValue?: (FieldsSelection<BannerToBannerConnection, R> | undefined)) => Promise<(FieldsSelection<BannerToBannerConnection, R> | undefined)>})&(BannerToBannerConnectionPromiseChain & {get: <R extends BannerToBannerConnectionRequest>(request: R, defaultValue?: (FieldsSelection<BannerToBannerConnection, R> | undefined)) => Promise<(FieldsSelection<BannerToBannerConnection, R> | undefined)>}),
+    
 /** Added to the GraphQL Schema because the ACF Field Group &quot;Banner_home&quot; was set to Show in GraphQL. */
 banner_home: (Banner_BannerHomePromiseChain & {get: <R extends Banner_BannerHomeRequest>(request: R, defaultValue?: (FieldsSelection<Banner_BannerHome, R> | undefined)) => Promise<(FieldsSelection<Banner_BannerHome, R> | undefined)>}),
     
@@ -32642,11 +37558,23 @@ before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedStylesheetConnecti
 /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
+/** Whether the banner_home object is password protected. */
+hasPassword: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
+    
 /** The globally unique identifier of the banner_home object. */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
     
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
     
 /** Whether the object is a node in the preview state */
 isPreview: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
@@ -32668,6 +37596,15 @@ modified: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | 
     
 /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
 modifiedGmt: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have a parent
+ * The parent of the content node.
+ */
+parent: (BannerToParentConnectionEdgePromiseChain & {get: <R extends BannerToParentConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<BannerToParentConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<BannerToParentConnectionEdge, R> | undefined)>}),
+    
+/** The password for the banner_home object. */
+password: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** Connection between the Banner type and the Banner type */
 preview: (BannerToPreviewConnectionEdgePromiseChain & {get: <R extends BannerToPreviewConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<BannerToPreviewConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<BannerToPreviewConnectionEdge, R> | undefined)>}),
@@ -32705,6 +37642,20 @@ export interface BannerObservableChain{
  * The id field matches the WP_Post-&gt;ID field.
  */
 bannerId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * The ancestors of the content node.
+ */
+ancestors: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null)}) => BannerToBannerConnectionObservableChain & {get: <R extends BannerToBannerConnectionRequest>(request: R, defaultValue?: (FieldsSelection<BannerToBannerConnection, R> | undefined)) => Observable<(FieldsSelection<BannerToBannerConnection, R> | undefined)>})&(BannerToBannerConnectionObservableChain & {get: <R extends BannerToBannerConnectionRequest>(request: R, defaultValue?: (FieldsSelection<BannerToBannerConnection, R> | undefined)) => Observable<(FieldsSelection<BannerToBannerConnection, R> | undefined)>}),
     
 /** Added to the GraphQL Schema because the ACF Field Group &quot;Banner_home&quot; was set to Show in GraphQL. */
 banner_home: (Banner_BannerHomeObservableChain & {get: <R extends Banner_BannerHomeRequest>(request: R, defaultValue?: (FieldsSelection<Banner_BannerHome, R> | undefined)) => Observable<(FieldsSelection<Banner_BannerHome, R> | undefined)>}),
@@ -32758,11 +37709,23 @@ before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedStylesheetConnecti
 /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
+/** Whether the banner_home object is password protected. */
+hasPassword: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
+    
 /** The globally unique identifier of the banner_home object. */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
     
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
 /** Whether the node is a Content Node */
 isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
     
 /** Whether the object is a node in the preview state */
 isPreview: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
@@ -32784,6 +37747,15 @@ modified: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | 
     
 /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
 modifiedGmt: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have a parent
+ * The parent of the content node.
+ */
+parent: (BannerToParentConnectionEdgeObservableChain & {get: <R extends BannerToParentConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<BannerToParentConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<BannerToParentConnectionEdge, R> | undefined)>}),
+    
+/** The password for the banner_home object. */
+password: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** Connection between the Banner type and the Banner type */
 preview: (BannerToPreviewConnectionEdgeObservableChain & {get: <R extends BannerToPreviewConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<BannerToPreviewConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<BannerToPreviewConnectionEdge, R> | undefined)>}),
@@ -32810,6 +37782,186 @@ format?: (PostObjectFieldFormatEnum | null)}) => {get: (request?: boolean|number
     
 /** The unique resource identifier path */
 uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Connection between the Banner type and the Banner type */
+export interface BannerToBannerConnectionPromiseChain{
+    
+/** Edges for the BannerToBannerConnection connection */
+edges: ({get: <R extends BannerToBannerConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<BannerToBannerConnectionEdge, R>[]) => Promise<FieldsSelection<BannerToBannerConnectionEdge, R>[]>}),
+    
+/** The nodes of the connection, without the edges */
+nodes: ({get: <R extends BannerRequest>(request: R, defaultValue?: FieldsSelection<Banner, R>[]) => Promise<FieldsSelection<Banner, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (BannerToBannerConnectionPageInfoPromiseChain & {get: <R extends BannerToBannerConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<BannerToBannerConnectionPageInfo, R>) => Promise<FieldsSelection<BannerToBannerConnectionPageInfo, R>>})
+}
+
+
+/** Connection between the Banner type and the Banner type */
+export interface BannerToBannerConnectionObservableChain{
+    
+/** Edges for the BannerToBannerConnection connection */
+edges: ({get: <R extends BannerToBannerConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<BannerToBannerConnectionEdge, R>[]) => Observable<FieldsSelection<BannerToBannerConnectionEdge, R>[]>}),
+    
+/** The nodes of the connection, without the edges */
+nodes: ({get: <R extends BannerRequest>(request: R, defaultValue?: FieldsSelection<Banner, R>[]) => Observable<FieldsSelection<Banner, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (BannerToBannerConnectionPageInfoObservableChain & {get: <R extends BannerToBannerConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<BannerToBannerConnectionPageInfo, R>) => Observable<FieldsSelection<BannerToBannerConnectionPageInfo, R>>})
+}
+
+
+/** Connection to Banner Nodes */
+export interface BannerConnectionPromiseChain{
+    
+/** A list of edges (relational context) between RootQuery and connected Banner Nodes */
+edges: ({get: <R extends BannerConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<BannerConnectionEdge, R>[]) => Promise<FieldsSelection<BannerConnectionEdge, R>[]>}),
+    
+/** A list of connected Banner Nodes */
+nodes: ({get: <R extends BannerRequest>(request: R, defaultValue?: FieldsSelection<Banner, R>[]) => Promise<FieldsSelection<Banner, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (BannerConnectionPageInfoPromiseChain & {get: <R extends BannerConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<BannerConnectionPageInfo, R>) => Promise<FieldsSelection<BannerConnectionPageInfo, R>>})
+}
+
+
+/** Connection to Banner Nodes */
+export interface BannerConnectionObservableChain{
+    
+/** A list of edges (relational context) between RootQuery and connected Banner Nodes */
+edges: ({get: <R extends BannerConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<BannerConnectionEdge, R>[]) => Observable<FieldsSelection<BannerConnectionEdge, R>[]>}),
+    
+/** A list of connected Banner Nodes */
+nodes: ({get: <R extends BannerRequest>(request: R, defaultValue?: FieldsSelection<Banner, R>[]) => Observable<FieldsSelection<Banner, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (BannerConnectionPageInfoObservableChain & {get: <R extends BannerConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<BannerConnectionPageInfo, R>) => Observable<FieldsSelection<BannerConnectionPageInfo, R>>})
+}
+
+
+/** Edge between a Node and a connected Banner */
+export interface BannerConnectionEdgePromiseChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The connected Banner Node */
+node: (BannerPromiseChain & {get: <R extends BannerRequest>(request: R, defaultValue?: FieldsSelection<Banner, R>) => Promise<FieldsSelection<Banner, R>>})
+}
+
+
+/** Edge between a Node and a connected Banner */
+export interface BannerConnectionEdgeObservableChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The connected Banner Node */
+node: (BannerObservableChain & {get: <R extends BannerRequest>(request: R, defaultValue?: FieldsSelection<Banner, R>) => Observable<FieldsSelection<Banner, R>>})
+}
+
+
+/** Page Info on the connected BannerConnectionEdge */
+export interface BannerConnectionPageInfoPromiseChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Page Info on the connected BannerConnectionEdge */
+export interface BannerConnectionPageInfoObservableChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** An edge in a connection */
+export interface BannerToBannerConnectionEdgePromiseChain{
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * A cursor for use in pagination
+ */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * The item at the end of the edge
+ */
+node: (BannerPromiseChain & {get: <R extends BannerRequest>(request: R, defaultValue?: FieldsSelection<Banner, R>) => Promise<FieldsSelection<Banner, R>>})
+}
+
+
+/** An edge in a connection */
+export interface BannerToBannerConnectionEdgeObservableChain{
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * A cursor for use in pagination
+ */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * The item at the end of the edge
+ */
+node: (BannerObservableChain & {get: <R extends BannerRequest>(request: R, defaultValue?: FieldsSelection<Banner, R>) => Observable<FieldsSelection<Banner, R>>})
+}
+
+
+/** Page Info on the &quot;BannerToBannerConnection&quot; */
+export interface BannerToBannerConnectionPageInfoPromiseChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Page Info on the &quot;BannerToBannerConnection&quot; */
+export interface BannerToBannerConnectionPageInfoObservableChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
 }
 
 
@@ -32920,6 +38072,34 @@ imagemMobileP: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(re
 
 
 /** Connection between the Banner type and the Banner type */
+export interface BannerToParentConnectionEdgePromiseChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have a parent
+ * The node of the connection, without the edges
+ */
+node: (BannerPromiseChain & {get: <R extends BannerRequest>(request: R, defaultValue?: FieldsSelection<Banner, R>) => Promise<FieldsSelection<Banner, R>>})
+}
+
+
+/** Connection between the Banner type and the Banner type */
+export interface BannerToParentConnectionEdgeObservableChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have a parent
+ * The node of the connection, without the edges
+ */
+node: (BannerObservableChain & {get: <R extends BannerRequest>(request: R, defaultValue?: FieldsSelection<Banner, R>) => Observable<FieldsSelection<Banner, R>>})
+}
+
+
+/** Connection between the Banner type and the Banner type */
 export interface BannerToPreviewConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -32937,28 +38117,6 @@ export interface BannerToPreviewConnectionEdgeObservableChain{
 cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** The node of the connection, without the edges */
-node: (BannerObservableChain & {get: <R extends BannerRequest>(request: R, defaultValue?: FieldsSelection<Banner, R>) => Observable<FieldsSelection<Banner, R>>})
-}
-
-
-/** Edge between a Node and a connected Banner */
-export interface BannerConnectionEdgePromiseChain{
-    
-/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** The connected Banner Node */
-node: (BannerPromiseChain & {get: <R extends BannerRequest>(request: R, defaultValue?: FieldsSelection<Banner, R>) => Promise<FieldsSelection<Banner, R>>})
-}
-
-
-/** Edge between a Node and a connected Banner */
-export interface BannerConnectionEdgeObservableChain{
-    
-/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** The connected Banner Node */
 node: (BannerObservableChain & {get: <R extends BannerRequest>(request: R, defaultValue?: FieldsSelection<Banner, R>) => Observable<FieldsSelection<Banner, R>>})
 }
 
@@ -32988,68 +38146,6 @@ nodes: ({get: <R extends BannerRequest>(request: R, defaultValue?: FieldsSelecti
     
 /** Information about pagination in a connection. */
 pageInfo: (RootQueryToBannerConnectionPageInfoObservableChain & {get: <R extends RootQueryToBannerConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<RootQueryToBannerConnectionPageInfo, R>) => Observable<FieldsSelection<RootQueryToBannerConnectionPageInfo, R>>})
-}
-
-
-/** Connection to Banner Nodes */
-export interface BannerConnectionPromiseChain{
-    
-/** A list of edges (relational context) between RootQuery and connected Banner Nodes */
-edges: ({get: <R extends BannerConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<BannerConnectionEdge, R>[]) => Promise<FieldsSelection<BannerConnectionEdge, R>[]>}),
-    
-/** A list of connected Banner Nodes */
-nodes: ({get: <R extends BannerRequest>(request: R, defaultValue?: FieldsSelection<Banner, R>[]) => Promise<FieldsSelection<Banner, R>[]>}),
-    
-/** Information about pagination in a connection. */
-pageInfo: (BannerConnectionPageInfoPromiseChain & {get: <R extends BannerConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<BannerConnectionPageInfo, R>) => Promise<FieldsSelection<BannerConnectionPageInfo, R>>})
-}
-
-
-/** Connection to Banner Nodes */
-export interface BannerConnectionObservableChain{
-    
-/** A list of edges (relational context) between RootQuery and connected Banner Nodes */
-edges: ({get: <R extends BannerConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<BannerConnectionEdge, R>[]) => Observable<FieldsSelection<BannerConnectionEdge, R>[]>}),
-    
-/** A list of connected Banner Nodes */
-nodes: ({get: <R extends BannerRequest>(request: R, defaultValue?: FieldsSelection<Banner, R>[]) => Observable<FieldsSelection<Banner, R>[]>}),
-    
-/** Information about pagination in a connection. */
-pageInfo: (BannerConnectionPageInfoObservableChain & {get: <R extends BannerConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<BannerConnectionPageInfo, R>) => Observable<FieldsSelection<BannerConnectionPageInfo, R>>})
-}
-
-
-/** Page Info on the connected BannerConnectionEdge */
-export interface BannerConnectionPageInfoPromiseChain{
-    
-/** When paginating forwards, the cursor to continue. */
-endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** When paginating forwards, are there more items? */
-hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
-    
-/** When paginating backwards, are there more items? */
-hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
-    
-/** When paginating backwards, the cursor to continue. */
-startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
-}
-
-
-/** Page Info on the connected BannerConnectionEdge */
-export interface BannerConnectionPageInfoObservableChain{
-    
-/** When paginating forwards, the cursor to continue. */
-endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** When paginating forwards, are there more items? */
-hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
-    
-/** When paginating backwards, are there more items? */
-hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
-    
-/** When paginating backwards, the cursor to continue. */
-startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
 }
 
 
@@ -33178,6 +38274,90 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 
 /** Page Info on the &quot;RootQueryToCategoryConnection&quot; */
 export interface RootQueryToCategoryConnectionPageInfoObservableChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Connection between the RootQuery type and the CentraldeDecorado type */
+export interface RootQueryToCentraldeDecoradoConnectionPromiseChain{
+    
+/** Edges for the RootQueryToCentraldeDecoradoConnection connection */
+edges: ({get: <R extends RootQueryToCentraldeDecoradoConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<RootQueryToCentraldeDecoradoConnectionEdge, R>[]) => Promise<FieldsSelection<RootQueryToCentraldeDecoradoConnectionEdge, R>[]>}),
+    
+/** The nodes of the connection, without the edges */
+nodes: ({get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecorado, R>[]) => Promise<FieldsSelection<CentraldeDecorado, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (RootQueryToCentraldeDecoradoConnectionPageInfoPromiseChain & {get: <R extends RootQueryToCentraldeDecoradoConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<RootQueryToCentraldeDecoradoConnectionPageInfo, R>) => Promise<FieldsSelection<RootQueryToCentraldeDecoradoConnectionPageInfo, R>>})
+}
+
+
+/** Connection between the RootQuery type and the CentraldeDecorado type */
+export interface RootQueryToCentraldeDecoradoConnectionObservableChain{
+    
+/** Edges for the RootQueryToCentraldeDecoradoConnection connection */
+edges: ({get: <R extends RootQueryToCentraldeDecoradoConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<RootQueryToCentraldeDecoradoConnectionEdge, R>[]) => Observable<FieldsSelection<RootQueryToCentraldeDecoradoConnectionEdge, R>[]>}),
+    
+/** The nodes of the connection, without the edges */
+nodes: ({get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecorado, R>[]) => Observable<FieldsSelection<CentraldeDecorado, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (RootQueryToCentraldeDecoradoConnectionPageInfoObservableChain & {get: <R extends RootQueryToCentraldeDecoradoConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<RootQueryToCentraldeDecoradoConnectionPageInfo, R>) => Observable<FieldsSelection<RootQueryToCentraldeDecoradoConnectionPageInfo, R>>})
+}
+
+
+/** An edge in a connection */
+export interface RootQueryToCentraldeDecoradoConnectionEdgePromiseChain{
+    
+/** A cursor for use in pagination */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The item at the end of the edge */
+node: (CentraldeDecoradoPromiseChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecorado, R>) => Promise<FieldsSelection<CentraldeDecorado, R>>})
+}
+
+
+/** An edge in a connection */
+export interface RootQueryToCentraldeDecoradoConnectionEdgeObservableChain{
+    
+/** A cursor for use in pagination */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The item at the end of the edge */
+node: (CentraldeDecoradoObservableChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecorado, R>) => Observable<FieldsSelection<CentraldeDecorado, R>>})
+}
+
+
+/** Page Info on the &quot;RootQueryToCentraldeDecoradoConnection&quot; */
+export interface RootQueryToCentraldeDecoradoConnectionPageInfoPromiseChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Page Info on the &quot;RootQueryToCentraldeDecoradoConnection&quot; */
+export interface RootQueryToCentraldeDecoradoConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
 endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
@@ -36069,6 +41249,11 @@ createCategory: ((args: {
 /** Input for the createCategory mutation */
 input: CreateCategoryInput}) => CreateCategoryPayloadPromiseChain & {get: <R extends CreateCategoryPayloadRequest>(request: R, defaultValue?: (FieldsSelection<CreateCategoryPayload, R> | undefined)) => Promise<(FieldsSelection<CreateCategoryPayload, R> | undefined)>}),
     
+/** The createCentraldeDecorado mutation */
+createCentraldeDecorado: ((args: {
+/** Input for the createCentraldeDecorado mutation */
+input: CreateCentraldeDecoradoInput}) => CreateCentraldeDecoradoPayloadPromiseChain & {get: <R extends CreateCentraldeDecoradoPayloadRequest>(request: R, defaultValue?: (FieldsSelection<CreateCentraldeDecoradoPayload, R> | undefined)) => Promise<(FieldsSelection<CreateCentraldeDecoradoPayload, R> | undefined)>}),
+    
 /** The createComment mutation */
 createComment: ((args: {
 /** Input for the createComment mutation */
@@ -36123,6 +41308,11 @@ input: DeleteBannerInput}) => DeleteBannerPayloadPromiseChain & {get: <R extends
 deleteCategory: ((args: {
 /** Input for the deleteCategory mutation */
 input: DeleteCategoryInput}) => DeleteCategoryPayloadPromiseChain & {get: <R extends DeleteCategoryPayloadRequest>(request: R, defaultValue?: (FieldsSelection<DeleteCategoryPayload, R> | undefined)) => Promise<(FieldsSelection<DeleteCategoryPayload, R> | undefined)>}),
+    
+/** The deleteCentraldeDecorado mutation */
+deleteCentraldeDecorado: ((args: {
+/** Input for the deleteCentraldeDecorado mutation */
+input: DeleteCentraldeDecoradoInput}) => DeleteCentraldeDecoradoPayloadPromiseChain & {get: <R extends DeleteCentraldeDecoradoPayloadRequest>(request: R, defaultValue?: (FieldsSelection<DeleteCentraldeDecoradoPayload, R> | undefined)) => Promise<(FieldsSelection<DeleteCentraldeDecoradoPayload, R> | undefined)>}),
     
 /** The deleteComment mutation */
 deleteComment: ((args: {
@@ -36204,6 +41394,11 @@ updateCategory: ((args: {
 /** Input for the updateCategory mutation */
 input: UpdateCategoryInput}) => UpdateCategoryPayloadPromiseChain & {get: <R extends UpdateCategoryPayloadRequest>(request: R, defaultValue?: (FieldsSelection<UpdateCategoryPayload, R> | undefined)) => Promise<(FieldsSelection<UpdateCategoryPayload, R> | undefined)>}),
     
+/** The updateCentraldeDecorado mutation */
+updateCentraldeDecorado: ((args: {
+/** Input for the updateCentraldeDecorado mutation */
+input: UpdateCentraldeDecoradoInput}) => UpdateCentraldeDecoradoPayloadPromiseChain & {get: <R extends UpdateCentraldeDecoradoPayloadRequest>(request: R, defaultValue?: (FieldsSelection<UpdateCentraldeDecoradoPayload, R> | undefined)) => Promise<(FieldsSelection<UpdateCentraldeDecoradoPayload, R> | undefined)>}),
+    
 /** The updateComment mutation */
 updateComment: ((args: {
 /** Input for the updateComment mutation */
@@ -36269,6 +41464,11 @@ createCategory: ((args: {
 /** Input for the createCategory mutation */
 input: CreateCategoryInput}) => CreateCategoryPayloadObservableChain & {get: <R extends CreateCategoryPayloadRequest>(request: R, defaultValue?: (FieldsSelection<CreateCategoryPayload, R> | undefined)) => Observable<(FieldsSelection<CreateCategoryPayload, R> | undefined)>}),
     
+/** The createCentraldeDecorado mutation */
+createCentraldeDecorado: ((args: {
+/** Input for the createCentraldeDecorado mutation */
+input: CreateCentraldeDecoradoInput}) => CreateCentraldeDecoradoPayloadObservableChain & {get: <R extends CreateCentraldeDecoradoPayloadRequest>(request: R, defaultValue?: (FieldsSelection<CreateCentraldeDecoradoPayload, R> | undefined)) => Observable<(FieldsSelection<CreateCentraldeDecoradoPayload, R> | undefined)>}),
+    
 /** The createComment mutation */
 createComment: ((args: {
 /** Input for the createComment mutation */
@@ -36323,6 +41523,11 @@ input: DeleteBannerInput}) => DeleteBannerPayloadObservableChain & {get: <R exte
 deleteCategory: ((args: {
 /** Input for the deleteCategory mutation */
 input: DeleteCategoryInput}) => DeleteCategoryPayloadObservableChain & {get: <R extends DeleteCategoryPayloadRequest>(request: R, defaultValue?: (FieldsSelection<DeleteCategoryPayload, R> | undefined)) => Observable<(FieldsSelection<DeleteCategoryPayload, R> | undefined)>}),
+    
+/** The deleteCentraldeDecorado mutation */
+deleteCentraldeDecorado: ((args: {
+/** Input for the deleteCentraldeDecorado mutation */
+input: DeleteCentraldeDecoradoInput}) => DeleteCentraldeDecoradoPayloadObservableChain & {get: <R extends DeleteCentraldeDecoradoPayloadRequest>(request: R, defaultValue?: (FieldsSelection<DeleteCentraldeDecoradoPayload, R> | undefined)) => Observable<(FieldsSelection<DeleteCentraldeDecoradoPayload, R> | undefined)>}),
     
 /** The deleteComment mutation */
 deleteComment: ((args: {
@@ -36403,6 +41608,11 @@ input: UpdateBannerInput}) => UpdateBannerPayloadObservableChain & {get: <R exte
 updateCategory: ((args: {
 /** Input for the updateCategory mutation */
 input: UpdateCategoryInput}) => UpdateCategoryPayloadObservableChain & {get: <R extends UpdateCategoryPayloadRequest>(request: R, defaultValue?: (FieldsSelection<UpdateCategoryPayload, R> | undefined)) => Observable<(FieldsSelection<UpdateCategoryPayload, R> | undefined)>}),
+    
+/** The updateCentraldeDecorado mutation */
+updateCentraldeDecorado: ((args: {
+/** Input for the updateCentraldeDecorado mutation */
+input: UpdateCentraldeDecoradoInput}) => UpdateCentraldeDecoradoPayloadObservableChain & {get: <R extends UpdateCentraldeDecoradoPayloadRequest>(request: R, defaultValue?: (FieldsSelection<UpdateCentraldeDecoradoPayload, R> | undefined)) => Observable<(FieldsSelection<UpdateCentraldeDecoradoPayload, R> | undefined)>}),
     
 /** The updateComment mutation */
 updateComment: ((args: {
@@ -36511,6 +41721,28 @@ export interface CreateCategoryPayloadObservableChain{
     
 /** The created category */
 category: (CategoryObservableChain & {get: <R extends CategoryRequest>(request: R, defaultValue?: (FieldsSelection<Category, R> | undefined)) => Observable<(FieldsSelection<Category, R> | undefined)>}),
+    
+/** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+clientMutationId: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** The payload for the createCentraldeDecorado mutation. */
+export interface CreateCentraldeDecoradoPayloadPromiseChain{
+    
+/** The Post object mutation type. */
+centraldeDecorado: (CentraldeDecoradoPromiseChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecorado, R> | undefined)) => Promise<(FieldsSelection<CentraldeDecorado, R> | undefined)>}),
+    
+/** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+clientMutationId: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** The payload for the createCentraldeDecorado mutation. */
+export interface CreateCentraldeDecoradoPayloadObservableChain{
+    
+/** The Post object mutation type. */
+centraldeDecorado: (CentraldeDecoradoObservableChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecorado, R> | undefined)) => Observable<(FieldsSelection<CentraldeDecorado, R> | undefined)>}),
     
 /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
 clientMutationId: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
@@ -36758,7 +41990,7 @@ deletedId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | und
 /** The payload for the deleteCategory mutation. */
 export interface DeleteCategoryPayloadPromiseChain{
     
-/** The deteted term object */
+/** The deleted term object */
 category: (CategoryPromiseChain & {get: <R extends CategoryRequest>(request: R, defaultValue?: (FieldsSelection<Category, R> | undefined)) => Promise<(FieldsSelection<Category, R> | undefined)>}),
     
 /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
@@ -36772,8 +42004,36 @@ deletedId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | und
 /** The payload for the deleteCategory mutation. */
 export interface DeleteCategoryPayloadObservableChain{
     
-/** The deteted term object */
+/** The deleted term object */
 category: (CategoryObservableChain & {get: <R extends CategoryRequest>(request: R, defaultValue?: (FieldsSelection<Category, R> | undefined)) => Observable<(FieldsSelection<Category, R> | undefined)>}),
+    
+/** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+clientMutationId: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The ID of the deleted object */
+deletedId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Observable<(Scalars['ID'] | undefined)>})
+}
+
+
+/** The payload for the deleteCentraldeDecorado mutation. */
+export interface DeleteCentraldeDecoradoPayloadPromiseChain{
+    
+/** The object before it was deleted */
+centraldeDecorado: (CentraldeDecoradoPromiseChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecorado, R> | undefined)) => Promise<(FieldsSelection<CentraldeDecorado, R> | undefined)>}),
+    
+/** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+clientMutationId: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The ID of the deleted object */
+deletedId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Promise<(Scalars['ID'] | undefined)>})
+}
+
+
+/** The payload for the deleteCentraldeDecorado mutation. */
+export interface DeleteCentraldeDecoradoPayloadObservableChain{
+    
+/** The object before it was deleted */
+centraldeDecorado: (CentraldeDecoradoObservableChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecorado, R> | undefined)) => Observable<(FieldsSelection<CentraldeDecorado, R> | undefined)>}),
     
 /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
 clientMutationId: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
@@ -36932,7 +42192,7 @@ clientMutationId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Str
 /** The ID of the deleted object */
 deletedId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Promise<(Scalars['ID'] | undefined)>}),
     
-/** The deteted term object */
+/** The deleted term object */
 postFormat: (PostFormatPromiseChain & {get: <R extends PostFormatRequest>(request: R, defaultValue?: (FieldsSelection<PostFormat, R> | undefined)) => Promise<(FieldsSelection<PostFormat, R> | undefined)>})
 }
 
@@ -36946,7 +42206,7 @@ clientMutationId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Str
 /** The ID of the deleted object */
 deletedId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Observable<(Scalars['ID'] | undefined)>}),
     
-/** The deteted term object */
+/** The deleted term object */
 postFormat: (PostFormatObservableChain & {get: <R extends PostFormatRequest>(request: R, defaultValue?: (FieldsSelection<PostFormat, R> | undefined)) => Observable<(FieldsSelection<PostFormat, R> | undefined)>})
 }
 
@@ -36960,7 +42220,7 @@ clientMutationId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Str
 /** The ID of the deleted object */
 deletedId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Promise<(Scalars['ID'] | undefined)>}),
     
-/** The deteted term object */
+/** The deleted term object */
 tag: (TagPromiseChain & {get: <R extends TagRequest>(request: R, defaultValue?: (FieldsSelection<Tag, R> | undefined)) => Promise<(FieldsSelection<Tag, R> | undefined)>})
 }
 
@@ -36974,7 +42234,7 @@ clientMutationId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Str
 /** The ID of the deleted object */
 deletedId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Observable<(Scalars['ID'] | undefined)>}),
     
-/** The deteted term object */
+/** The deleted term object */
 tag: (TagObservableChain & {get: <R extends TagRequest>(request: R, defaultValue?: (FieldsSelection<Tag, R> | undefined)) => Observable<(FieldsSelection<Tag, R> | undefined)>})
 }
 
@@ -37173,6 +42433,28 @@ export interface UpdateCategoryPayloadObservableChain{
     
 /** The created category */
 category: (CategoryObservableChain & {get: <R extends CategoryRequest>(request: R, defaultValue?: (FieldsSelection<Category, R> | undefined)) => Observable<(FieldsSelection<Category, R> | undefined)>}),
+    
+/** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+clientMutationId: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** The payload for the updateCentraldeDecorado mutation. */
+export interface UpdateCentraldeDecoradoPayloadPromiseChain{
+    
+/** The Post object mutation type. */
+centraldeDecorado: (CentraldeDecoradoPromiseChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecorado, R> | undefined)) => Promise<(FieldsSelection<CentraldeDecorado, R> | undefined)>}),
+    
+/** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+clientMutationId: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** The payload for the updateCentraldeDecorado mutation. */
+export interface UpdateCentraldeDecoradoPayloadObservableChain{
+    
+/** The Post object mutation type. */
+centraldeDecorado: (CentraldeDecoradoObservableChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecorado, R> | undefined)) => Observable<(FieldsSelection<CentraldeDecorado, R> | undefined)>}),
     
 /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
 clientMutationId: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})

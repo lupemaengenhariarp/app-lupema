@@ -32,10 +32,21 @@ module.exports.enumArquivoAssessoriaIdType = {
   URI: 'URI',
 }
 
+module.exports.enumScriptLoadingGroupLocationEnum = {
+  FOOTER: 'FOOTER',
+  HEADER: 'HEADER',
+}
+
+module.exports.enumScriptLoadingStrategyEnum = {
+  ASYNC: 'ASYNC',
+  DEFER: 'DEFER',
+}
+
 module.exports.enumContentTypeEnum = {
   ARQ_ASSESSORIA: 'ARQ_ASSESSORIA',
   ATTACHMENT: 'ATTACHMENT',
   BANNER_HOME: 'BANNER_HOME',
+  CENTRALDECORADO: 'CENTRALDECORADO',
   EMPREENDIMENTOS: 'EMPREENDIMENTOS',
   PAGE: 'PAGE',
   POST: 'POST',
@@ -166,9 +177,13 @@ module.exports.enumMimeTypeEnum = {
   AUDIO_X_MS_WAX: 'AUDIO_X_MS_WAX',
   AUDIO_X_MS_WMA: 'AUDIO_X_MS_WMA',
   AUDIO_X_REALAUDIO: 'AUDIO_X_REALAUDIO',
+  IMAGE_AVIF: 'IMAGE_AVIF',
   IMAGE_BMP: 'IMAGE_BMP',
   IMAGE_GIF: 'IMAGE_GIF',
   IMAGE_HEIC: 'IMAGE_HEIC',
+  IMAGE_HEIC_SEQUENCE: 'IMAGE_HEIC_SEQUENCE',
+  IMAGE_HEIF: 'IMAGE_HEIF',
+  IMAGE_HEIF_SEQUENCE: 'IMAGE_HEIF_SEQUENCE',
   IMAGE_JPEG: 'IMAGE_JPEG',
   IMAGE_PNG: 'IMAGE_PNG',
   IMAGE_SVG_XML: 'IMAGE_SVG_XML',
@@ -280,16 +295,16 @@ module.exports.enumCommentsConnectionOrderbyEnum = {
   USER_ID: 'USER_ID',
 }
 
-module.exports.enumPostObjectFieldFormatEnum = {
-  RAW: 'RAW',
-  RENDERED: 'RENDERED',
-}
-
 module.exports.enumCommentStatusEnum = {
   APPROVE: 'APPROVE',
   HOLD: 'HOLD',
   SPAM: 'SPAM',
   TRASH: 'TRASH',
+}
+
+module.exports.enumPostObjectFieldFormatEnum = {
+  RAW: 'RAW',
+  RENDERED: 'RENDERED',
 }
 
 module.exports.enumUserToMediaItemConnectionWhereArgsMetaCompareEnum = {
@@ -485,7 +500,37 @@ module.exports.enumTermObjectsConnectionOrderbyEnum = {
   TERM_ORDER: 'TERM_ORDER',
 }
 
+module.exports.enumCategoryToCentraldeDecoradoConnectionWhereArgsMetaCompareEnum = {
+  BETWEEN: 'BETWEEN',
+  EQUAL_TO: 'EQUAL_TO',
+  EXISTS: 'EXISTS',
+  GREATER_THAN: 'GREATER_THAN',
+  GREATER_THAN_OR_EQUAL_TO: 'GREATER_THAN_OR_EQUAL_TO',
+  IN: 'IN',
+  LESS_THAN: 'LESS_THAN',
+  LESS_THAN_OR_EQUAL_TO: 'LESS_THAN_OR_EQUAL_TO',
+  LIKE: 'LIKE',
+  NOT_BETWEEN: 'NOT_BETWEEN',
+  NOT_EQUAL_TO: 'NOT_EQUAL_TO',
+  NOT_EXISTS: 'NOT_EXISTS',
+  NOT_IN: 'NOT_IN',
+  NOT_LIKE: 'NOT_LIKE',
+}
+
+module.exports.enumCategoryToCentraldeDecoradoConnectionWhereArgsMetaTypeEnum = {
+  BINARY: 'BINARY',
+  CHAR: 'CHAR',
+  DATE: 'DATE',
+  DATETIME: 'DATETIME',
+  DECIMAL: 'DECIMAL',
+  NUMERIC: 'NUMERIC',
+  SIGNED: 'SIGNED',
+  TIME: 'TIME',
+  UNSIGNED: 'UNSIGNED',
+}
+
 module.exports.enumContentTypesOfCategoryEnum = {
+  CENTRALDECORADO: 'CENTRALDECORADO',
   EMPREENDIMENTOS: 'EMPREENDIMENTOS',
   POST: 'POST',
 }
@@ -832,6 +877,42 @@ module.exports.enumCategoryIdType = {
   URI: 'URI',
 }
 
+module.exports.enumCentraldeDecoradoIdType = {
+  DATABASE_ID: 'DATABASE_ID',
+  ID: 'ID',
+  SLUG: 'SLUG',
+  URI: 'URI',
+}
+
+module.exports.enumRootQueryToCentraldeDecoradoConnectionWhereArgsMetaCompareEnum = {
+  BETWEEN: 'BETWEEN',
+  EQUAL_TO: 'EQUAL_TO',
+  EXISTS: 'EXISTS',
+  GREATER_THAN: 'GREATER_THAN',
+  GREATER_THAN_OR_EQUAL_TO: 'GREATER_THAN_OR_EQUAL_TO',
+  IN: 'IN',
+  LESS_THAN: 'LESS_THAN',
+  LESS_THAN_OR_EQUAL_TO: 'LESS_THAN_OR_EQUAL_TO',
+  LIKE: 'LIKE',
+  NOT_BETWEEN: 'NOT_BETWEEN',
+  NOT_EQUAL_TO: 'NOT_EQUAL_TO',
+  NOT_EXISTS: 'NOT_EXISTS',
+  NOT_IN: 'NOT_IN',
+  NOT_LIKE: 'NOT_LIKE',
+}
+
+module.exports.enumRootQueryToCentraldeDecoradoConnectionWhereArgsMetaTypeEnum = {
+  BINARY: 'BINARY',
+  CHAR: 'CHAR',
+  DATE: 'DATE',
+  DATETIME: 'DATETIME',
+  DECIMAL: 'DECIMAL',
+  NUMERIC: 'NUMERIC',
+  SIGNED: 'SIGNED',
+  TIME: 'TIME',
+  UNSIGNED: 'UNSIGNED',
+}
+
 module.exports.enumCommentNodeIdTypeEnum = {
   DATABASE_ID: 'DATABASE_ID',
   ID: 'ID',
@@ -1131,6 +1212,8 @@ module.exports.enumUserRoleEnum = {
   AUTHOR: 'AUTHOR',
   CONTRIBUTOR: 'CONTRIBUTOR',
   EDITOR: 'EDITOR',
+  SEO_EDITOR: 'SEO_EDITOR',
+  SEO_MANAGER: 'SEO_MANAGER',
   SUBSCRIBER: 'SUBSCRIBER',
 }
 

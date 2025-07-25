@@ -59,10 +59,21 @@ export declare const enumArquivoAssessoriaIdType: {
   readonly URI: 'URI'
 }
 
+export declare const enumScriptLoadingGroupLocationEnum: {
+  readonly FOOTER: 'FOOTER'
+  readonly HEADER: 'HEADER'
+}
+
+export declare const enumScriptLoadingStrategyEnum: {
+  readonly ASYNC: 'ASYNC'
+  readonly DEFER: 'DEFER'
+}
+
 export declare const enumContentTypeEnum: {
   readonly ARQ_ASSESSORIA: 'ARQ_ASSESSORIA'
   readonly ATTACHMENT: 'ATTACHMENT'
   readonly BANNER_HOME: 'BANNER_HOME'
+  readonly CENTRALDECORADO: 'CENTRALDECORADO'
   readonly EMPREENDIMENTOS: 'EMPREENDIMENTOS'
   readonly PAGE: 'PAGE'
   readonly POST: 'POST'
@@ -167,9 +178,13 @@ export declare const enumMimeTypeEnum: {
   readonly AUDIO_X_MS_WAX: 'AUDIO_X_MS_WAX'
   readonly AUDIO_X_MS_WMA: 'AUDIO_X_MS_WMA'
   readonly AUDIO_X_REALAUDIO: 'AUDIO_X_REALAUDIO'
+  readonly IMAGE_AVIF: 'IMAGE_AVIF'
   readonly IMAGE_BMP: 'IMAGE_BMP'
   readonly IMAGE_GIF: 'IMAGE_GIF'
   readonly IMAGE_HEIC: 'IMAGE_HEIC'
+  readonly IMAGE_HEIC_SEQUENCE: 'IMAGE_HEIC_SEQUENCE'
+  readonly IMAGE_HEIF: 'IMAGE_HEIF'
+  readonly IMAGE_HEIF_SEQUENCE: 'IMAGE_HEIF_SEQUENCE'
   readonly IMAGE_JPEG: 'IMAGE_JPEG'
   readonly IMAGE_PNG: 'IMAGE_PNG'
   readonly IMAGE_SVG_XML: 'IMAGE_SVG_XML'
@@ -281,16 +296,16 @@ export declare const enumCommentsConnectionOrderbyEnum: {
   readonly USER_ID: 'USER_ID'
 }
 
-export declare const enumPostObjectFieldFormatEnum: {
-  readonly RAW: 'RAW'
-  readonly RENDERED: 'RENDERED'
-}
-
 export declare const enumCommentStatusEnum: {
   readonly APPROVE: 'APPROVE'
   readonly HOLD: 'HOLD'
   readonly SPAM: 'SPAM'
   readonly TRASH: 'TRASH'
+}
+
+export declare const enumPostObjectFieldFormatEnum: {
+  readonly RAW: 'RAW'
+  readonly RENDERED: 'RENDERED'
 }
 
 export declare const enumUserToMediaItemConnectionWhereArgsMetaCompareEnum: {
@@ -486,7 +501,37 @@ export declare const enumTermObjectsConnectionOrderbyEnum: {
   readonly TERM_ORDER: 'TERM_ORDER'
 }
 
+export declare const enumCategoryToCentraldeDecoradoConnectionWhereArgsMetaCompareEnum: {
+  readonly BETWEEN: 'BETWEEN'
+  readonly EQUAL_TO: 'EQUAL_TO'
+  readonly EXISTS: 'EXISTS'
+  readonly GREATER_THAN: 'GREATER_THAN'
+  readonly GREATER_THAN_OR_EQUAL_TO: 'GREATER_THAN_OR_EQUAL_TO'
+  readonly IN: 'IN'
+  readonly LESS_THAN: 'LESS_THAN'
+  readonly LESS_THAN_OR_EQUAL_TO: 'LESS_THAN_OR_EQUAL_TO'
+  readonly LIKE: 'LIKE'
+  readonly NOT_BETWEEN: 'NOT_BETWEEN'
+  readonly NOT_EQUAL_TO: 'NOT_EQUAL_TO'
+  readonly NOT_EXISTS: 'NOT_EXISTS'
+  readonly NOT_IN: 'NOT_IN'
+  readonly NOT_LIKE: 'NOT_LIKE'
+}
+
+export declare const enumCategoryToCentraldeDecoradoConnectionWhereArgsMetaTypeEnum: {
+  readonly BINARY: 'BINARY'
+  readonly CHAR: 'CHAR'
+  readonly DATE: 'DATE'
+  readonly DATETIME: 'DATETIME'
+  readonly DECIMAL: 'DECIMAL'
+  readonly NUMERIC: 'NUMERIC'
+  readonly SIGNED: 'SIGNED'
+  readonly TIME: 'TIME'
+  readonly UNSIGNED: 'UNSIGNED'
+}
+
 export declare const enumContentTypesOfCategoryEnum: {
+  readonly CENTRALDECORADO: 'CENTRALDECORADO'
   readonly EMPREENDIMENTOS: 'EMPREENDIMENTOS'
   readonly POST: 'POST'
 }
@@ -833,6 +878,42 @@ export declare const enumCategoryIdType: {
   readonly URI: 'URI'
 }
 
+export declare const enumCentraldeDecoradoIdType: {
+  readonly DATABASE_ID: 'DATABASE_ID'
+  readonly ID: 'ID'
+  readonly SLUG: 'SLUG'
+  readonly URI: 'URI'
+}
+
+export declare const enumRootQueryToCentraldeDecoradoConnectionWhereArgsMetaCompareEnum: {
+  readonly BETWEEN: 'BETWEEN'
+  readonly EQUAL_TO: 'EQUAL_TO'
+  readonly EXISTS: 'EXISTS'
+  readonly GREATER_THAN: 'GREATER_THAN'
+  readonly GREATER_THAN_OR_EQUAL_TO: 'GREATER_THAN_OR_EQUAL_TO'
+  readonly IN: 'IN'
+  readonly LESS_THAN: 'LESS_THAN'
+  readonly LESS_THAN_OR_EQUAL_TO: 'LESS_THAN_OR_EQUAL_TO'
+  readonly LIKE: 'LIKE'
+  readonly NOT_BETWEEN: 'NOT_BETWEEN'
+  readonly NOT_EQUAL_TO: 'NOT_EQUAL_TO'
+  readonly NOT_EXISTS: 'NOT_EXISTS'
+  readonly NOT_IN: 'NOT_IN'
+  readonly NOT_LIKE: 'NOT_LIKE'
+}
+
+export declare const enumRootQueryToCentraldeDecoradoConnectionWhereArgsMetaTypeEnum: {
+  readonly BINARY: 'BINARY'
+  readonly CHAR: 'CHAR'
+  readonly DATE: 'DATE'
+  readonly DATETIME: 'DATETIME'
+  readonly DECIMAL: 'DECIMAL'
+  readonly NUMERIC: 'NUMERIC'
+  readonly SIGNED: 'SIGNED'
+  readonly TIME: 'TIME'
+  readonly UNSIGNED: 'UNSIGNED'
+}
+
 export declare const enumCommentNodeIdTypeEnum: {
   readonly DATABASE_ID: 'DATABASE_ID'
   readonly ID: 'ID'
@@ -1132,6 +1213,8 @@ export declare const enumUserRoleEnum: {
   readonly AUTHOR: 'AUTHOR'
   readonly CONTRIBUTOR: 'CONTRIBUTOR'
   readonly EDITOR: 'EDITOR'
+  readonly SEO_EDITOR: 'SEO_EDITOR'
+  readonly SEO_MANAGER: 'SEO_MANAGER'
   readonly SUBSCRIBER: 'SUBSCRIBER'
 }
 
