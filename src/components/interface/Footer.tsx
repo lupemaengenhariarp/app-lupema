@@ -86,6 +86,12 @@ const FooterApp = ({ data }: Props) => {
           >
             Pronto para Morar
           </Link>
+          <Link
+            href="/centraldecorado/stand-jk/"
+            className="block hover:text-green"
+          >
+            Stands Lupema
+          </Link>
         </div>
         <div className="space-y-3">
           <Link
