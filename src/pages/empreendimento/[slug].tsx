@@ -314,7 +314,6 @@ const EmpreendimentoApp: NextPage<Props> = ({ data }) => {
                 <li className="text-green text-xl leading-[2rem] sm:leading-[3rem] font-semibold flex items-center">
                   <BiBed size={22} />
                   <span className="mx-2">{data.emp?.empDormitorios}</span>
-                  dormitórios
                 </li>
                 <li className="text-green text-xl leading-[2rem] sm:leading-[3rem] font-semibold flex items-center">
                   <TbCar size={22} />
