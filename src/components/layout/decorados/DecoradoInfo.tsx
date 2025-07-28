@@ -47,7 +47,7 @@ const DecoradoInfo = ({ content }: Content) => {
                             {/* Título */}
                             <div className='sm:container'>
                                 <h1 className="title decoradoTitle">
-                                    Central de decorados
+                                    Nossa central
                                 </h1>
                                 <div className="w-12 h-0.5 bg-green-700 mx-auto mb-6"></div>
 

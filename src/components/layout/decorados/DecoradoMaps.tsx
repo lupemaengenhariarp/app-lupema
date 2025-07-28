@@ -38,7 +38,7 @@ const DecoradoMaps = ({ content }: Content) => {
     return (
         <div className="bg-black">
             <h2 className="title text-center decoradoTitleMap">
-                Venha visitar a nossa central
+                Venha visitar a nossa loja
             </h2>
 
             <div className='sm:container iframeDecorado'>

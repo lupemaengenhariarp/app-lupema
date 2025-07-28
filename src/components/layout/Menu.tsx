@@ -71,7 +71,7 @@ const MenuApp = ({ data }: Props) => {
             <LinkPath path="/contato#ofereca-sua-area" label="Ofereça sua área" />
           </div>
           <div className="flex flex-col mt-16 space-y-3 md:space-y-4 text-xl">
-            <LinkPath path="/centraldecorado/stand-jk" label="Central de Decorados" />
+            <LinkPath path="/centraldecorado/stand-jk" label="Nossas lojas" />
             <a className="text-green" href="/area-do-cliente">
               Área do cliente
             </a>

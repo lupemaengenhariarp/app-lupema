@@ -23,7 +23,7 @@ const DecoradoMenu = ({ content }: Props) => {
     return (
         <div className="bg-green py-16">
             <h2 className="text-2xl lg:text-4xl text-white text-center py-10 title-800">
-                Conheça a central de decorados
+                Conheça nossas lojas
             </h2>
 
             <div className="max-w-6xl mx-auto flex flex-wrap justify-center gap-4">
