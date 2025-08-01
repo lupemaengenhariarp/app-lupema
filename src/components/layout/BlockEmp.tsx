@@ -63,7 +63,7 @@ const BlockEmp = ({ content, main = true }: Props) => {
                 <span className="ml-2">
                   {content.empreendimento?.empDormitorios}
                 </span>
-                <p className="ml-1">dorms</p>
+                {/* <p className="ml-1">dorms</p> */}
               </div>
               <div className="flex">
                 <TbCar size={22} />
