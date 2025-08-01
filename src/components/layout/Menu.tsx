@@ -61,6 +61,7 @@ const MenuApp = ({ data }: Props) => {
           >
             Blog
           </Link>
+          <LinkPath path="/centraldecorado/central-de-decorados-lstore" label="Nossas lojas" />
         </div>
         <div className="flex flex-col">
           <div className="flex flex-col space-y-3 md:space-y-4 text-xl">
@@ -71,7 +72,6 @@ const MenuApp = ({ data }: Props) => {
             <LinkPath path="/contato#ofereca-sua-area" label="Ofereça sua área" />
           </div>
           <div className="flex flex-col mt-16 space-y-3 md:space-y-4 text-xl">
-            <LinkPath path="/centraldecorado/stand-jk" label="Nossas lojas" />
             <a className="text-green" href="/area-do-cliente">
               Área do cliente
             </a>
