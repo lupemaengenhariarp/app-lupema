@@ -156,7 +156,7 @@ export const getStaticProps = async () => {
         materias: arquivosAssessoria,
         social: pageBy?.informacoesDeContato,
       },
-      revalidate: 30,
     },
+    revalidate: 30, // tempo em segundos para regenerar a página no background
   };
 };
