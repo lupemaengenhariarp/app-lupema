@@ -101,6 +101,12 @@ const FooterApp = ({ data }: Props) => {
             Política de privacidade
           </Link>
           <Link
+            href="/politica-de-qualidade"
+            className="block hover:text-green"
+          >
+            Política de qualidade
+          </Link>
+          <Link
             href="/politica-de-privacidade"
             className="block hover:text-green"
           >
