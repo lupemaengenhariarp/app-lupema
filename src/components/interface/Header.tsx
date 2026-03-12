@@ -73,7 +73,7 @@ const HeaderApp = ({ data }: Props) => {
           className="mb-1 mr-4 inline-block border border-white py-2 w-[100px] text-white text-center cursor-pointer hover:bg-zinc-300 hover:text-black transition"
         >LOJAS</a>
         <a
-          href={`https://lupema.cvcrm.com.br/cliente`}
+          href={`https://lupema.cvcrm.com.br/cliente/`}
           className="mb-1 mr-4 inline-block border border-white py-2 w-[100px] text-white text-center cursor-pointer hover:bg-zinc-300 hover:text-black transition"
         >PORTAL</a>
         <a
