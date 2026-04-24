@@ -44,8 +44,8 @@ interface mediaItem {
 
 interface PropsGallery {
   videosOutos:
-  | (Empreendimento_Empreendimento_videosOutos | undefined)[]
-  | undefined;
+    | (Empreendimento_Empreendimento_videosOutos | undefined)[]
+    | undefined;
   imagensOutros: (MediaItem | undefined)[] | undefined;
 }
 
@@ -90,9 +90,9 @@ const EmpreendimentoApp: NextPage<Props> = ({ data }) => {
     return (
       <>
         <div className="my-6 gallery grid gap-4 grid-cols-2 sm:grid-cols-4">
-          {images?.slice(0, displayedImages + 8).map((imgs) => (
+          {images?.slice(0, displayedImages + 8).map((imgs, index) => (
             <a
-              key={imgs?.id}
+              key={index}
               href={imgs?.sourceUrl}
               data-fancybox="gallery"
               className="group relative h-[110px] sm:h-[160px] lg:h-[200px] 2xl:lg:h-[240px] w-full"
@@ -148,7 +148,7 @@ const EmpreendimentoApp: NextPage<Props> = ({ data }) => {
     // SEM RANDOM E FOR -- PARA MOSTRAR OS VÍDEOS DE FORMA DECRESCENTE COM ARRAY REVERSE PARA INVERTER O ARRAY
     function shuffleArray(array: any[]) {
       for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor((i - 1));
+        const j = Math.floor(i - 1);
         [array[j], array[i]] = [array[j], array[i]];
       }
       // console.log(array.reverse());
@@ -246,16 +246,22 @@ const EmpreendimentoApp: NextPage<Props> = ({ data }) => {
         item.banner_home?.qualEOEmpreendimento?.slug === rounter.query.slug
     );
 
-    if (filteredBanners?.length) {
-      setCheckBanner(false);
-    } else {
-      setCheckBanner(true);
-    }
+    useEffect(() => {
+      if (filteredBanners?.length) {
+        setCheckBanner(false);
+      } else {
+        setCheckBanner(true);
+      }
+    }, [filteredBanners]);
 
     return (
       <>
-        {filteredBanners?.map((item) => (
-          <BannerCustom content={item.banner_home?.bhConteudo} link={false} />
+        {filteredBanners?.map((item, index) => (
+          <BannerCustom
+            key={index}
+            content={item.banner_home?.bhConteudo}
+            link={false}
+          />
         ))}
       </>
     );
@@ -327,23 +333,23 @@ const EmpreendimentoApp: NextPage<Props> = ({ data }) => {
                   type="success"
                 />
               )}
-              <div className="inline-block mt-4">
+              <div className="flex items-center flex-wrap gap-3 mt-4">
                 <button
                   onClick={() => setValue('open')}
-                  className="mb-4 mr-4 inline-block border border-green py-2 w-[150px] text-green text-center cursor-pointer hover:bg-zinc-300 hover:text-black transition"
+                  className="border border-green py-2 w-[150px] text-green text-center cursor-pointer hover:bg-zinc-300 hover:text-black transition"
                 >
                   Baixar apresentação
                 </button>
                 <a
                   href="#form"
-                  className="mb-4 xl:mr-4 inline-block border border-green bg-green py-2 w-[150px] text-black text-center cursor-pointer hover:bg-zinc-300 hover:text-black transition font-bold"
+                  className="border border-green bg-green py-2 w-[150px] text-black text-center cursor-pointer hover:bg-zinc-300 hover:text-black transition font-bold"
                 >
                   Faça uma simulação
                 </a>
                 {data.emp?.linkDoTourVirtual && (
                   <a
                     href={data.emp?.linkDoTourVirtual}
-                    className="mb-4 mr-4 inline-block border border-green py-2 w-[150px] text-green text-center cursor-pointer hover:bg-zinc-300 hover:text-black transition"
+                    className="border border-green py-2 w-[150px] text-green text-center cursor-pointer hover:bg-zinc-300 hover:text-black transition"
                   >
                     Tour virtual
                   </a>
@@ -351,7 +357,7 @@ const EmpreendimentoApp: NextPage<Props> = ({ data }) => {
                 {data.emp.linkDoTourVirtual2 && (
                   <a
                     href={data.emp.linkDoTourVirtual2}
-                    className="mb-4 mr-4 inline-block border border-green py-2 w-[150px] text-green text-center cursor-pointer hover:bg-zinc-300 hover:text-black transition"
+                    className="border border-green py-2 w-[150px] text-green text-center cursor-pointer hover:bg-zinc-300 hover:text-black transition"
                   >
                     Tour virtual 2
                   </a>
@@ -359,14 +365,14 @@ const EmpreendimentoApp: NextPage<Props> = ({ data }) => {
                 {check === 4 && (
                   <button
                     onClick={() => setValueStage('open')}
-                    className="mb-4 mr-4 inline-block border border-green bg-green py-2 w-[150px] text-black text-center cursor-pointer hover:bg-zinc-300 hover:text-black transition font-bold"
+                    className="border border-green bg-green py-2 w-[150px] text-black text-center cursor-pointer hover:bg-zinc-300 hover:text-black transition font-bold"
                   >
                     Andamento da obra
                   </button>
                 )}
                 <button
                   onClick={() => setModalShare('open')}
-                  className="mb-4 inline-block border border-green text-green py-2 w-[150px] text-center cursor-pointer hover:bg-zinc-300 hover:text-black transition font-bold"
+                  className="border border-green text-green py-2 w-[150px] text-center cursor-pointer hover:bg-zinc-300 hover:text-black transition font-bold"
                 >
                   <BiShareAlt size={20} className="inline-block" />
                   <span className="ml-2 inline-block">Compartilhar</span>

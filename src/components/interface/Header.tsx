@@ -112,7 +112,7 @@ const HeaderApp = ({ data }: Props) => {
       </div>
 
       <div
-        className={`fixed top-0 left-0 right-0 w-full h-full overflow-auto bg-bgi bg-repeat ${status ? 'block' : 'hidden'
+        className={`fixed top-0 left-0 right-0 w-full h-full overflow-auto bg-bgi bg-repeat ease-out duration-300 ${status ? 'opacity-100 visible translate-x-0' : 'opacity-0 invisible -translate-x-full'
           }`}
       >
         <MenuApp data={data} />

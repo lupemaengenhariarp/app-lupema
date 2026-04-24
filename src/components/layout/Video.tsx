@@ -6,7 +6,19 @@ interface Props {
 }
 
 const VideoApp = ({ embedLink }: Props) => {
-  const EmbedID = embedLink?.split('?v=');
+  let EmbedID = null;
+
+  try {
+    const url = new URL(embedLink || '');
+
+    if (url.hostname.includes('youtu.be')) {
+      EmbedID = url.pathname.slice(1);
+    } else {
+      EmbedID = url.searchParams.get('v');
+    }
+  } catch (e) {
+    EmbedID = null;
+  }
 
   const opts = {
     height: '100%',
@@ -24,7 +36,7 @@ const VideoApp = ({ embedLink }: Props) => {
   return (
     <div className="relative">
       <YouTube
-        videoId={`${EmbedID?.[1]}`}
+        videoId={`${EmbedID}`}
         opts={opts}
         className="aspect-square p-4"
         onReady={onPlayerReady}

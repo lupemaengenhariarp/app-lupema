@@ -8,12 +8,18 @@ interface Props {
 }
 
 const HeroApp = ({ banners }: Props) => {
-  const items = banners?.nodes?.map((item) => {
+  const items = banners?.nodes?.map((item, index) => {
     if (item.banner_home?.bannerPronto === true) {
-      return <BannerArt content={item.banner_home.imagensProntas} />;
+      return (
+        <BannerArt key={index} content={item.banner_home.imagensProntas} />
+      );
     } else {
       return (
-        <BannerCustom content={item.banner_home?.bhConteudo} link={true} />
+        <BannerCustom
+          key={index}
+          content={item.banner_home?.bhConteudo}
+          link={true}
+        />
       );
     }
   });

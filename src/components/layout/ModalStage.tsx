@@ -31,7 +31,7 @@ const ModalStage = ({ setValueStage, data }: Props) => {
           outerRadius={50}
           dataKey="value"
           stroke="#28292e" // contorno do gráfico igual ao fundo (clean)
-          strokeWidth={2}
+          strokeWidth={0}
         >
           {pieData.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -100,7 +100,7 @@ const ModalStage = ({ setValueStage, data }: Props) => {
                     outerRadius={60}
                     dataKey="value"
                     stroke="#28292e"
-                    strokeWidth={2}
+                    strokeWidth={0}
                   >
                     <Cell fill="#729f2d" />
                     <Cell fill="#3d403f" />
