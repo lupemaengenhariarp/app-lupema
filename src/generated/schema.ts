@@ -1900,6 +1900,10 @@ export interface Page {
     contentTypeName: Scalars['String']
     /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo sobre&quot; was set to Show in GraphQL. */
     conteuSobre?: Page_Conteusobre
+    /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo Indique e Ganhe&quot; was set to Show in GraphQL. */
+    conteudoIndiqueEGanhe?: Page_Conteudoindiqueeganhe
+    /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo L.Store&quot; was set to Show in GraphQL. */
+    conteudoLStore?: Page_Conteudolstore
     /** The unique identifier stored in the database */
     databaseId: Scalars['Int']
     /** Post publishing date. */
@@ -2052,7 +2056,7 @@ export interface Page_Assessoria {
 
 
 /** A Field Group registered by ACF */
-export type AcfFieldGroup = (Page_Assessoria | Page_Conteusobre | Page_Conteusobre_item | Page_Informacoesdecontato | CentraldeDecorado_Centraldedecorados | Empreendimento_Empreendimento | Empreendimento_Empreendimento_andamentoDaObra | Empreendimento_Empreendimento_diferenciaisItems | Empreendimento_Empreendimento_itemsPlantas | Empreendimento_Empreendimento_itensAreacomuns | Empreendimento_Empreendimento_pontosDeReferencia | Empreendimento_Empreendimento_videosOutos | Empreendimento_Housiverso | Empreendimento_Housiverso_diferencial | ArquivoAssessoria_DownAssessoria | Banner_BannerHome | Banner_BannerHome_BhConteudo | Banner_BannerHome_ImagensProntas) & { __isUnion?: true }
+export type AcfFieldGroup = (Page_Assessoria | Page_Conteusobre | Page_Conteusobre_item | Page_Conteudoindiqueeganhe | Page_Conteudoindiqueeganhe_EmObra | Page_Conteudoindiqueeganhe_Entregue | Page_Conteudolstore | Page_Informacoesdecontato | CentraldeDecorado_Centraldedecorados | Empreendimento_Empreendimento | Empreendimento_Empreendimento_andamentoDaObra | Empreendimento_Empreendimento_diferenciaisItems | Empreendimento_Empreendimento_itemsPlantas | Empreendimento_Empreendimento_itensAreacomuns | Empreendimento_Empreendimento_pontosDeReferencia | Empreendimento_Empreendimento_videosOutos | Empreendimento_Housiverso | Empreendimento_Housiverso_diferencial | ArquivoAssessoria_DownAssessoria | Banner_BannerHome | Banner_BannerHome_BhConteudo | Banner_BannerHome_ImagensProntas) & { __isUnion?: true }
 
 
 /** Connection between the Page type and the Comment type */
@@ -2121,6 +2125,78 @@ export interface Page_Conteusobre_item {
     fieldGroupName?: Scalars['String']
     nomeDoEmpreendimento?: Scalars['String']
     __typename: 'Page_Conteusobre_item'
+}
+
+
+/** Field Group */
+export interface Page_Conteudoindiqueeganhe {
+    descricaoIg?: Scalars['String']
+    descricaoPasso1Ig?: Scalars['String']
+    descricaoPasso2Ig?: Scalars['String']
+    descricaoPasso3Ig?: Scalars['String']
+    emObra?: Page_Conteudoindiqueeganhe_EmObra
+    entregue?: Page_Conteudoindiqueeganhe_Entregue
+    /** The name of the ACF Field Group */
+    fieldGroupName?: Scalars['String']
+    imagemIg?: MediaItem
+    regulamentoIndiqueGanhe?: MediaItem
+    tituloPasso1Ig?: Scalars['String']
+    tituloPasso2Ig?: Scalars['String']
+    tituloPasso3Ig?: Scalars['String']
+    __typename: 'Page_Conteudoindiqueeganhe'
+}
+
+
+/** Field Group */
+export interface Page_Conteudoindiqueeganhe_EmObra {
+    beneficioEmobraIg?: Scalars['String']
+    /** The name of the ACF Field Group */
+    fieldGroupName?: Scalars['String']
+    observacaoEmobraIg?: Scalars['String']
+    __typename: 'Page_Conteudoindiqueeganhe_EmObra'
+}
+
+
+/** Field Group */
+export interface Page_Conteudoindiqueeganhe_Entregue {
+    beneficioEntregueIg?: Scalars['String']
+    /** The name of the ACF Field Group */
+    fieldGroupName?: Scalars['String']
+    observacaoEntregueIg?: Scalars['String']
+    __typename: 'Page_Conteudoindiqueeganhe_Entregue'
+}
+
+
+/** Field Group */
+export interface Page_Conteudolstore {
+    descicaoBannerLstore?: Scalars['String']
+    descricaoGaleriaLstore?: Scalars['String']
+    descricaoPasso1Lstore?: Scalars['String']
+    descricaoPasso2Lstore?: Scalars['String']
+    descricaoPasso3Lstore?: Scalars['String']
+    descricaoPassoLstore?: Scalars['String']
+    descricaoSalaLstore?: Scalars['String']
+    descricaoSobreLstore?: Scalars['String']
+    descricaoUltimoLstore?: Scalars['String']
+    /** The name of the ACF Field Group */
+    fieldGroupName?: Scalars['String']
+    fraseBannerLstore?: Scalars['String']
+    imagem1?: MediaItem
+    imagem2?: MediaItem
+    imagemSobreLstore?: MediaItem
+    imagensGaleriaLstore?: (MediaItem | undefined)[]
+    imagensSalaLstore?: (MediaItem | undefined)[]
+    numeroParaAgendamentoLstore?: Scalars['String']
+    textoAuxiliarSobreLstore?: Scalars['String']
+    tituloBannerLstore?: Scalars['String']
+    tituloGaleriaLstore?: Scalars['String']
+    tituloPasso1Lstore?: Scalars['String']
+    tituloPasso2Lstore?: Scalars['String']
+    tituloPasso3Lstore?: Scalars['String']
+    tituloPassoLstore?: Scalars['String']
+    tituloSalaLstore?: Scalars['String']
+    tituloUltimoLstore?: Scalars['String']
+    __typename: 'Page_Conteudolstore'
 }
 
 
@@ -10635,6 +10711,10 @@ export interface PageRequest{
     contentTypeName?: boolean | number
     /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo sobre&quot; was set to Show in GraphQL. */
     conteuSobre?: Page_ConteusobreRequest
+    /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo Indique e Ganhe&quot; was set to Show in GraphQL. */
+    conteudoIndiqueEGanhe?: Page_ConteudoindiqueeganheRequest
+    /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo L.Store&quot; was set to Show in GraphQL. */
+    conteudoLStore?: Page_ConteudolstoreRequest
     /** The unique identifier stored in the database */
     databaseId?: boolean | number
     /** Post publishing date. */
@@ -10912,6 +10992,10 @@ export interface AcfFieldGroupRequest{
     on_Page_Assessoria?: Page_AssessoriaRequest
     on_Page_Conteusobre?: Page_ConteusobreRequest
     on_Page_Conteusobre_item?: Page_Conteusobre_itemRequest
+    on_Page_Conteudoindiqueeganhe?: Page_ConteudoindiqueeganheRequest
+    on_Page_Conteudoindiqueeganhe_EmObra?: Page_Conteudoindiqueeganhe_EmObraRequest
+    on_Page_Conteudoindiqueeganhe_Entregue?: Page_Conteudoindiqueeganhe_EntregueRequest
+    on_Page_Conteudolstore?: Page_ConteudolstoreRequest
     on_Page_Informacoesdecontato?: Page_InformacoesdecontatoRequest
     on_CentraldeDecorado_Centraldedecorados?: CentraldeDecorado_CentraldedecoradosRequest
     on_Empreendimento_Empreendimento?: Empreendimento_EmpreendimentoRequest
@@ -11065,6 +11149,82 @@ export interface Page_Conteusobre_itemRequest{
     /** The name of the ACF Field Group */
     fieldGroupName?: boolean | number
     nomeDoEmpreendimento?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Field Group */
+export interface Page_ConteudoindiqueeganheRequest{
+    descricaoIg?: boolean | number
+    descricaoPasso1Ig?: boolean | number
+    descricaoPasso2Ig?: boolean | number
+    descricaoPasso3Ig?: boolean | number
+    emObra?: Page_Conteudoindiqueeganhe_EmObraRequest
+    entregue?: Page_Conteudoindiqueeganhe_EntregueRequest
+    /** The name of the ACF Field Group */
+    fieldGroupName?: boolean | number
+    imagemIg?: MediaItemRequest
+    regulamentoIndiqueGanhe?: MediaItemRequest
+    tituloPasso1Ig?: boolean | number
+    tituloPasso2Ig?: boolean | number
+    tituloPasso3Ig?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Field Group */
+export interface Page_Conteudoindiqueeganhe_EmObraRequest{
+    beneficioEmobraIg?: boolean | number
+    /** The name of the ACF Field Group */
+    fieldGroupName?: boolean | number
+    observacaoEmobraIg?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Field Group */
+export interface Page_Conteudoindiqueeganhe_EntregueRequest{
+    beneficioEntregueIg?: boolean | number
+    /** The name of the ACF Field Group */
+    fieldGroupName?: boolean | number
+    observacaoEntregueIg?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Field Group */
+export interface Page_ConteudolstoreRequest{
+    descicaoBannerLstore?: boolean | number
+    descricaoGaleriaLstore?: boolean | number
+    descricaoPasso1Lstore?: boolean | number
+    descricaoPasso2Lstore?: boolean | number
+    descricaoPasso3Lstore?: boolean | number
+    descricaoPassoLstore?: boolean | number
+    descricaoSalaLstore?: boolean | number
+    descricaoSobreLstore?: boolean | number
+    descricaoUltimoLstore?: boolean | number
+    /** The name of the ACF Field Group */
+    fieldGroupName?: boolean | number
+    fraseBannerLstore?: boolean | number
+    imagem1?: MediaItemRequest
+    imagem2?: MediaItemRequest
+    imagemSobreLstore?: MediaItemRequest
+    imagensGaleriaLstore?: MediaItemRequest
+    imagensSalaLstore?: MediaItemRequest
+    numeroParaAgendamentoLstore?: boolean | number
+    textoAuxiliarSobreLstore?: boolean | number
+    tituloBannerLstore?: boolean | number
+    tituloGaleriaLstore?: boolean | number
+    tituloPasso1Lstore?: boolean | number
+    tituloPasso2Lstore?: boolean | number
+    tituloPasso3Lstore?: boolean | number
+    tituloPassoLstore?: boolean | number
+    tituloSalaLstore?: boolean | number
+    tituloUltimoLstore?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -20525,7 +20685,7 @@ export const isPage_Assessoria = (obj?: { __typename?: any } | null): obj is Pag
 
 
 
-const AcfFieldGroup_possibleTypes: string[] = ['Page_Assessoria','Page_Conteusobre','Page_Conteusobre_item','Page_Informacoesdecontato','CentraldeDecorado_Centraldedecorados','Empreendimento_Empreendimento','Empreendimento_Empreendimento_andamentoDaObra','Empreendimento_Empreendimento_diferenciaisItems','Empreendimento_Empreendimento_itemsPlantas','Empreendimento_Empreendimento_itensAreacomuns','Empreendimento_Empreendimento_pontosDeReferencia','Empreendimento_Empreendimento_videosOutos','Empreendimento_Housiverso','Empreendimento_Housiverso_diferencial','ArquivoAssessoria_DownAssessoria','Banner_BannerHome','Banner_BannerHome_BhConteudo','Banner_BannerHome_ImagensProntas']
+const AcfFieldGroup_possibleTypes: string[] = ['Page_Assessoria','Page_Conteusobre','Page_Conteusobre_item','Page_Conteudoindiqueeganhe','Page_Conteudoindiqueeganhe_EmObra','Page_Conteudoindiqueeganhe_Entregue','Page_Conteudolstore','Page_Informacoesdecontato','CentraldeDecorado_Centraldedecorados','Empreendimento_Empreendimento','Empreendimento_Empreendimento_andamentoDaObra','Empreendimento_Empreendimento_diferenciaisItems','Empreendimento_Empreendimento_itemsPlantas','Empreendimento_Empreendimento_itensAreacomuns','Empreendimento_Empreendimento_pontosDeReferencia','Empreendimento_Empreendimento_videosOutos','Empreendimento_Housiverso','Empreendimento_Housiverso_diferencial','ArquivoAssessoria_DownAssessoria','Banner_BannerHome','Banner_BannerHome_BhConteudo','Banner_BannerHome_ImagensProntas']
 export const isAcfFieldGroup = (obj?: { __typename?: any } | null): obj is AcfFieldGroup => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isAcfFieldGroup"')
   return AcfFieldGroup_possibleTypes.includes(obj.__typename)
@@ -20569,6 +20729,38 @@ const Page_Conteusobre_item_possibleTypes: string[] = ['Page_Conteusobre_item']
 export const isPage_Conteusobre_item = (obj?: { __typename?: any } | null): obj is Page_Conteusobre_item => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isPage_Conteusobre_item"')
   return Page_Conteusobre_item_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const Page_Conteudoindiqueeganhe_possibleTypes: string[] = ['Page_Conteudoindiqueeganhe']
+export const isPage_Conteudoindiqueeganhe = (obj?: { __typename?: any } | null): obj is Page_Conteudoindiqueeganhe => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isPage_Conteudoindiqueeganhe"')
+  return Page_Conteudoindiqueeganhe_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const Page_Conteudoindiqueeganhe_EmObra_possibleTypes: string[] = ['Page_Conteudoindiqueeganhe_EmObra']
+export const isPage_Conteudoindiqueeganhe_EmObra = (obj?: { __typename?: any } | null): obj is Page_Conteudoindiqueeganhe_EmObra => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isPage_Conteudoindiqueeganhe_EmObra"')
+  return Page_Conteudoindiqueeganhe_EmObra_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const Page_Conteudoindiqueeganhe_Entregue_possibleTypes: string[] = ['Page_Conteudoindiqueeganhe_Entregue']
+export const isPage_Conteudoindiqueeganhe_Entregue = (obj?: { __typename?: any } | null): obj is Page_Conteudoindiqueeganhe_Entregue => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isPage_Conteudoindiqueeganhe_Entregue"')
+  return Page_Conteudoindiqueeganhe_Entregue_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const Page_Conteudolstore_possibleTypes: string[] = ['Page_Conteudolstore']
+export const isPage_Conteudolstore = (obj?: { __typename?: any } | null): obj is Page_Conteudolstore => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isPage_Conteudolstore"')
+  return Page_Conteudolstore_possibleTypes.includes(obj.__typename)
 }
 
 
@@ -30385,6 +30577,12 @@ contentTypeName: ({get: (request?: boolean|number, defaultValue?: Scalars['Strin
 /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo sobre&quot; was set to Show in GraphQL. */
 conteuSobre: (Page_ConteusobrePromiseChain & {get: <R extends Page_ConteusobreRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteusobre, R> | undefined)) => Promise<(FieldsSelection<Page_Conteusobre, R> | undefined)>}),
     
+/** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo Indique e Ganhe&quot; was set to Show in GraphQL. */
+conteudoIndiqueEGanhe: (Page_ConteudoindiqueeganhePromiseChain & {get: <R extends Page_ConteudoindiqueeganheRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteudoindiqueeganhe, R> | undefined)) => Promise<(FieldsSelection<Page_Conteudoindiqueeganhe, R> | undefined)>}),
+    
+/** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo L.Store&quot; was set to Show in GraphQL. */
+conteudoLStore: (Page_ConteudolstorePromiseChain & {get: <R extends Page_ConteudolstoreRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteudolstore, R> | undefined)) => Promise<(FieldsSelection<Page_Conteudolstore, R> | undefined)>}),
+    
 /** The unique identifier stored in the database */
 databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>}),
     
@@ -30623,6 +30821,12 @@ contentTypeName: ({get: (request?: boolean|number, defaultValue?: Scalars['Strin
     
 /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo sobre&quot; was set to Show in GraphQL. */
 conteuSobre: (Page_ConteusobreObservableChain & {get: <R extends Page_ConteusobreRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteusobre, R> | undefined)) => Observable<(FieldsSelection<Page_Conteusobre, R> | undefined)>}),
+    
+/** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo Indique e Ganhe&quot; was set to Show in GraphQL. */
+conteudoIndiqueEGanhe: (Page_ConteudoindiqueeganheObservableChain & {get: <R extends Page_ConteudoindiqueeganheRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteudoindiqueeganhe, R> | undefined)) => Observable<(FieldsSelection<Page_Conteudoindiqueeganhe, R> | undefined)>}),
+    
+/** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo L.Store&quot; was set to Show in GraphQL. */
+conteudoLStore: (Page_ConteudolstoreObservableChain & {get: <R extends Page_ConteudolstoreRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteudolstore, R> | undefined)) => Observable<(FieldsSelection<Page_Conteudolstore, R> | undefined)>}),
     
 /** The unique identifier stored in the database */
 databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>}),
@@ -31216,6 +31420,150 @@ export interface Page_Conteusobre_itemObservableChain{
 /** The name of the ACF Field Group */
 fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     nomeDoEmpreendimento: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface Page_ConteudoindiqueeganhePromiseChain{
+    descricaoIg: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    descricaoPasso1Ig: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    descricaoPasso2Ig: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    descricaoPasso3Ig: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    emObra: (Page_Conteudoindiqueeganhe_EmObraPromiseChain & {get: <R extends Page_Conteudoindiqueeganhe_EmObraRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteudoindiqueeganhe_EmObra, R> | undefined)) => Promise<(FieldsSelection<Page_Conteudoindiqueeganhe_EmObra, R> | undefined)>}),
+    entregue: (Page_Conteudoindiqueeganhe_EntreguePromiseChain & {get: <R extends Page_Conteudoindiqueeganhe_EntregueRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteudoindiqueeganhe_Entregue, R> | undefined)) => Promise<(FieldsSelection<Page_Conteudoindiqueeganhe_Entregue, R> | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    imagemIg: (MediaItemPromiseChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Promise<(FieldsSelection<MediaItem, R> | undefined)>}),
+    regulamentoIndiqueGanhe: (MediaItemPromiseChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Promise<(FieldsSelection<MediaItem, R> | undefined)>}),
+    tituloPasso1Ig: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    tituloPasso2Ig: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    tituloPasso3Ig: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface Page_ConteudoindiqueeganheObservableChain{
+    descricaoIg: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    descricaoPasso1Ig: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    descricaoPasso2Ig: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    descricaoPasso3Ig: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    emObra: (Page_Conteudoindiqueeganhe_EmObraObservableChain & {get: <R extends Page_Conteudoindiqueeganhe_EmObraRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteudoindiqueeganhe_EmObra, R> | undefined)) => Observable<(FieldsSelection<Page_Conteudoindiqueeganhe_EmObra, R> | undefined)>}),
+    entregue: (Page_Conteudoindiqueeganhe_EntregueObservableChain & {get: <R extends Page_Conteudoindiqueeganhe_EntregueRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteudoindiqueeganhe_Entregue, R> | undefined)) => Observable<(FieldsSelection<Page_Conteudoindiqueeganhe_Entregue, R> | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    imagemIg: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Observable<(FieldsSelection<MediaItem, R> | undefined)>}),
+    regulamentoIndiqueGanhe: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Observable<(FieldsSelection<MediaItem, R> | undefined)>}),
+    tituloPasso1Ig: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    tituloPasso2Ig: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    tituloPasso3Ig: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface Page_Conteudoindiqueeganhe_EmObraPromiseChain{
+    beneficioEmobraIg: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    observacaoEmobraIg: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface Page_Conteudoindiqueeganhe_EmObraObservableChain{
+    beneficioEmobraIg: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    observacaoEmobraIg: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface Page_Conteudoindiqueeganhe_EntreguePromiseChain{
+    beneficioEntregueIg: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    observacaoEntregueIg: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface Page_Conteudoindiqueeganhe_EntregueObservableChain{
+    beneficioEntregueIg: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    observacaoEntregueIg: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface Page_ConteudolstorePromiseChain{
+    descicaoBannerLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    descricaoGaleriaLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    descricaoPasso1Lstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    descricaoPasso2Lstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    descricaoPasso3Lstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    descricaoPassoLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    descricaoSalaLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    descricaoSobreLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    descricaoUltimoLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    fraseBannerLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    imagem1: (MediaItemPromiseChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Promise<(FieldsSelection<MediaItem, R> | undefined)>}),
+    imagem2: (MediaItemPromiseChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Promise<(FieldsSelection<MediaItem, R> | undefined)>}),
+    imagemSobreLstore: (MediaItemPromiseChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Promise<(FieldsSelection<MediaItem, R> | undefined)>}),
+    imagensGaleriaLstore: ({get: <R extends MediaItemRequest>(request: R, defaultValue?: ((FieldsSelection<MediaItem, R> | undefined)[] | undefined)) => Promise<((FieldsSelection<MediaItem, R> | undefined)[] | undefined)>}),
+    imagensSalaLstore: ({get: <R extends MediaItemRequest>(request: R, defaultValue?: ((FieldsSelection<MediaItem, R> | undefined)[] | undefined)) => Promise<((FieldsSelection<MediaItem, R> | undefined)[] | undefined)>}),
+    numeroParaAgendamentoLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    textoAuxiliarSobreLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    tituloBannerLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    tituloGaleriaLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    tituloPasso1Lstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    tituloPasso2Lstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    tituloPasso3Lstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    tituloPassoLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    tituloSalaLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    tituloUltimoLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface Page_ConteudolstoreObservableChain{
+    descicaoBannerLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    descricaoGaleriaLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    descricaoPasso1Lstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    descricaoPasso2Lstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    descricaoPasso3Lstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    descricaoPassoLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    descricaoSalaLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    descricaoSobreLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    descricaoUltimoLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    fraseBannerLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    imagem1: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Observable<(FieldsSelection<MediaItem, R> | undefined)>}),
+    imagem2: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Observable<(FieldsSelection<MediaItem, R> | undefined)>}),
+    imagemSobreLstore: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Observable<(FieldsSelection<MediaItem, R> | undefined)>}),
+    imagensGaleriaLstore: ({get: <R extends MediaItemRequest>(request: R, defaultValue?: ((FieldsSelection<MediaItem, R> | undefined)[] | undefined)) => Observable<((FieldsSelection<MediaItem, R> | undefined)[] | undefined)>}),
+    imagensSalaLstore: ({get: <R extends MediaItemRequest>(request: R, defaultValue?: ((FieldsSelection<MediaItem, R> | undefined)[] | undefined)) => Observable<((FieldsSelection<MediaItem, R> | undefined)[] | undefined)>}),
+    numeroParaAgendamentoLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    textoAuxiliarSobreLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    tituloBannerLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    tituloGaleriaLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    tituloPasso1Lstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    tituloPasso2Lstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    tituloPasso3Lstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    tituloPassoLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    tituloSalaLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    tituloUltimoLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
 }
 
 

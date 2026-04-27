@@ -1031,7 +1031,7 @@ module.exports.isPage_Assessoria = function(obj) {
 
 
 
-var AcfFieldGroup_possibleTypes = ['Page_Assessoria','Page_Conteusobre','Page_Conteusobre_item','Page_Informacoesdecontato','CentraldeDecorado_Centraldedecorados','Empreendimento_Empreendimento','Empreendimento_Empreendimento_andamentoDaObra','Empreendimento_Empreendimento_diferenciaisItems','Empreendimento_Empreendimento_itemsPlantas','Empreendimento_Empreendimento_itensAreacomuns','Empreendimento_Empreendimento_pontosDeReferencia','Empreendimento_Empreendimento_videosOutos','Empreendimento_Housiverso','Empreendimento_Housiverso_diferencial','ArquivoAssessoria_DownAssessoria','Banner_BannerHome','Banner_BannerHome_BhConteudo','Banner_BannerHome_ImagensProntas']
+var AcfFieldGroup_possibleTypes = ['Page_Assessoria','Page_Conteusobre','Page_Conteusobre_item','Page_Conteudoindiqueeganhe','Page_Conteudoindiqueeganhe_EmObra','Page_Conteudoindiqueeganhe_Entregue','Page_Conteudolstore','Page_Informacoesdecontato','CentraldeDecorado_Centraldedecorados','Empreendimento_Empreendimento','Empreendimento_Empreendimento_andamentoDaObra','Empreendimento_Empreendimento_diferenciaisItems','Empreendimento_Empreendimento_itemsPlantas','Empreendimento_Empreendimento_itensAreacomuns','Empreendimento_Empreendimento_pontosDeReferencia','Empreendimento_Empreendimento_videosOutos','Empreendimento_Housiverso','Empreendimento_Housiverso_diferencial','ArquivoAssessoria_DownAssessoria','Banner_BannerHome','Banner_BannerHome_BhConteudo','Banner_BannerHome_ImagensProntas']
 module.exports.isAcfFieldGroup = function(obj) {
   if (!obj || !obj.__typename) throw new Error('__typename is missing in "isAcfFieldGroup"')
   return AcfFieldGroup_possibleTypes.includes(obj.__typename)
@@ -1075,6 +1075,38 @@ var Page_Conteusobre_item_possibleTypes = ['Page_Conteusobre_item']
 module.exports.isPage_Conteusobre_item = function(obj) {
   if (!obj || !obj.__typename) throw new Error('__typename is missing in "isPage_Conteusobre_item"')
   return Page_Conteusobre_item_possibleTypes.includes(obj.__typename)
+}
+
+
+
+var Page_Conteudoindiqueeganhe_possibleTypes = ['Page_Conteudoindiqueeganhe']
+module.exports.isPage_Conteudoindiqueeganhe = function(obj) {
+  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isPage_Conteudoindiqueeganhe"')
+  return Page_Conteudoindiqueeganhe_possibleTypes.includes(obj.__typename)
+}
+
+
+
+var Page_Conteudoindiqueeganhe_EmObra_possibleTypes = ['Page_Conteudoindiqueeganhe_EmObra']
+module.exports.isPage_Conteudoindiqueeganhe_EmObra = function(obj) {
+  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isPage_Conteudoindiqueeganhe_EmObra"')
+  return Page_Conteudoindiqueeganhe_EmObra_possibleTypes.includes(obj.__typename)
+}
+
+
+
+var Page_Conteudoindiqueeganhe_Entregue_possibleTypes = ['Page_Conteudoindiqueeganhe_Entregue']
+module.exports.isPage_Conteudoindiqueeganhe_Entregue = function(obj) {
+  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isPage_Conteudoindiqueeganhe_Entregue"')
+  return Page_Conteudoindiqueeganhe_Entregue_possibleTypes.includes(obj.__typename)
+}
+
+
+
+var Page_Conteudolstore_possibleTypes = ['Page_Conteudolstore']
+module.exports.isPage_Conteudolstore = function(obj) {
+  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isPage_Conteudolstore"')
+  return Page_Conteudolstore_possibleTypes.includes(obj.__typename)
 }
 
 

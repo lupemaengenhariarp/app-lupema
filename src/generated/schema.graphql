@@ -6014,6 +6014,16 @@ type Page implements Node & ContentNode & UniformResourceIdentifiable & Database
   """
   conteuSobre: Page_Conteusobre
 
+  """
+  Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo Indique e Ganhe&quot; was set to Show in GraphQL.
+  """
+  conteudoIndiqueEGanhe: Page_Conteudoindiqueeganhe
+
+  """
+  Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo L.Store&quot; was set to Show in GraphQL.
+  """
+  conteudoLStore: Page_Conteudolstore
+
   """The unique identifier stored in the database"""
   databaseId: Int!
 
@@ -6566,6 +6576,150 @@ type Page_Conteusobre_item implements AcfFieldGroup {
 
   """"""
   nomeDoEmpreendimento: String
+}
+
+"""Field Group"""
+type Page_Conteudoindiqueeganhe implements AcfFieldGroup {
+  """"""
+  descricaoIg: String
+
+  """"""
+  descricaoPasso1Ig: String
+
+  """"""
+  descricaoPasso2Ig: String
+
+  """"""
+  descricaoPasso3Ig: String
+
+  """"""
+  emObra: Page_Conteudoindiqueeganhe_EmObra
+
+  """"""
+  entregue: Page_Conteudoindiqueeganhe_Entregue
+
+  """The name of the ACF Field Group"""
+  fieldGroupName: String
+
+  """"""
+  imagemIg: MediaItem
+
+  """"""
+  regulamentoIndiqueGanhe: MediaItem
+
+  """"""
+  tituloPasso1Ig: String
+
+  """"""
+  tituloPasso2Ig: String
+
+  """"""
+  tituloPasso3Ig: String
+}
+
+"""Field Group"""
+type Page_Conteudoindiqueeganhe_EmObra implements AcfFieldGroup {
+  """"""
+  beneficioEmobraIg: String
+
+  """The name of the ACF Field Group"""
+  fieldGroupName: String
+
+  """"""
+  observacaoEmobraIg: String
+}
+
+"""Field Group"""
+type Page_Conteudoindiqueeganhe_Entregue implements AcfFieldGroup {
+  """"""
+  beneficioEntregueIg: String
+
+  """The name of the ACF Field Group"""
+  fieldGroupName: String
+
+  """"""
+  observacaoEntregueIg: String
+}
+
+"""Field Group"""
+type Page_Conteudolstore implements AcfFieldGroup {
+  """"""
+  descicaoBannerLstore: String
+
+  """"""
+  descricaoGaleriaLstore: String
+
+  """"""
+  descricaoPasso1Lstore: String
+
+  """"""
+  descricaoPasso2Lstore: String
+
+  """"""
+  descricaoPasso3Lstore: String
+
+  """"""
+  descricaoPassoLstore: String
+
+  """"""
+  descricaoSalaLstore: String
+
+  """"""
+  descricaoSobreLstore: String
+
+  """"""
+  descricaoUltimoLstore: String
+
+  """The name of the ACF Field Group"""
+  fieldGroupName: String
+
+  """"""
+  fraseBannerLstore: String
+
+  """"""
+  imagem1: MediaItem
+
+  """"""
+  imagem2: MediaItem
+
+  """"""
+  imagemSobreLstore: MediaItem
+
+  """"""
+  imagensGaleriaLstore: [MediaItem]
+
+  """"""
+  imagensSalaLstore: [MediaItem]
+
+  """"""
+  numeroParaAgendamentoLstore: String
+
+  """"""
+  textoAuxiliarSobreLstore: String
+
+  """"""
+  tituloBannerLstore: String
+
+  """"""
+  tituloGaleriaLstore: String
+
+  """"""
+  tituloPasso1Lstore: String
+
+  """"""
+  tituloPasso2Lstore: String
+
+  """"""
+  tituloPasso3Lstore: String
+
+  """"""
+  tituloPassoLstore: String
+
+  """"""
+  tituloSalaLstore: String
+
+  """"""
+  tituloUltimoLstore: String
 }
 
 """Field Group"""
