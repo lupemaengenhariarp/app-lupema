@@ -86,6 +86,7 @@ const FooterApp = ({ data }: Props) => {
           >
             Pronto para Morar
           </Link>
+          <Link href="/l-store" className="block hover:text-green">L.Store</Link>
           <Link
             href="/centraldecorado/central-de-decorados-lstore"
             className="block hover:text-green"
@@ -140,6 +141,7 @@ const FooterApp = ({ data }: Props) => {
           >
             Ofereça sua área
           </Link>
+          <Link href="/indique-e-ganhe" className="block hover:text-green">Indique e Ganhe</Link>
           <Link href="/assessoria" className="block hover:text-green">
             Imprensa
           </Link>

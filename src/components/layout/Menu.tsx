@@ -53,6 +53,7 @@ const MenuApp = ({ data }: Props) => {
         <div className="flex flex-col space-y-3 md:space-y-4 text-xl">
           <LinkPath path="/a-lupema" label="A Lupema" />
           <LinkPath path="/empreendimentos/todos" label="Empreendimentos" />
+          <LinkPath path="/l-store" label="L.Store" />
           <LinkPath path="/noticias" label="Notícias" />
           <LinkPath path="/assessoria" label="Imprensa" />
           <Link
@@ -62,6 +63,7 @@ const MenuApp = ({ data }: Props) => {
             Blog
           </Link>
           <LinkPath path="/centraldecorado/central-de-decorados-lstore" label="Nossas lojas" />
+
         </div>
         <div className="flex flex-col">
           <div className="flex flex-col space-y-3 md:space-y-4 text-xl">
@@ -70,6 +72,7 @@ const MenuApp = ({ data }: Props) => {
             <LinkPath path="https://lupemaengenharia.vagas.solides.com.br" label="Trabalhe Conosco" />
             <LinkPath path="/contato#seja-nosso-fornecedor" label="Seja nosso fornecedor" />
             <LinkPath path="/contato#ofereca-sua-area" label="Ofereça sua área" />
+            <LinkPath path="/indique-e-ganhe" label="Indique e Ganhe" />
           </div>
           <div className="flex flex-col mt-16 space-y-3 md:space-y-4 text-xl">
             <a className="text-green" href="/area-do-cliente">
