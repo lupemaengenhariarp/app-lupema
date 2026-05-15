@@ -26,7 +26,7 @@ const LStore: NextPage<Props> = ({ data }) => {
     setDisplayedImages(displayedImages + 8);
   }
   const scrollToForm = () => {
-    const element = document.getElementById('form-indique');
+    const element = document.getElementById('form');
 
     if (!element) return;
 
@@ -65,21 +65,21 @@ const LStore: NextPage<Props> = ({ data }) => {
         <div className="absolute top-0 left-0 right-0 w-full bg-[#000000]/90 sm:bg-[#000000]/80 h-full"></div>
         <div className="w-full h-full absolute top-0 left-0 right-0 z-20">
           <div className="flex items-center w-full h-full z-10 relative">
-            <div className="max-w-[516px] text-white ml-[25px] 2xl:ml-[100px] flex flex-col gap-8 sm:gap-10">
-              <h1 className="text-3xl sm:text-4xl font-light leading-[130%] uppercase tracking-[7px] pr-0 sm:pr-12">
+            <div className="max-w-[700px] text-white ml-[25px] 2xl:ml-[100px] flex flex-col gap-8 sm:gap-10">
+              <h1 className="text-3xl sm:text-4xl lg:text-6xl font-light uppercase tracking-[7px] pr-0 sm:pr-12">
                 {content?.tituloBannerLstore}
               </h1>
-              <p className="text-sm sm:text-base">
+              <p className="text-sm sm:text-base lg:text-lg xl:text-2xl">
                 {content?.descicaoBannerLstore}
               </p>
 
               <button
                 onClick={scrollToForm}
-                className="text-xs uppercase border border-white py-3 px-8 w-max cursor-pointer"
+                className="text-xs sm:text-base lg:text-lg xl:text-2xl uppercase border border-white py-3 px-8 w-max cursor-pointer"
               >
                 agende uma visita
               </button>
-              <strong className="text-sm sm:text-base tracking-[5px] sm:tracking-[10px] uppercase mt-4 sm:mt-6">
+              <strong className="text-sm sm:text-base lg:text-lg xl:text-2xl tracking-[5px] sm:tracking-[10px] uppercase mt-4 sm:mt-6">
                 {content?.fraseBannerLstore}
               </strong>
             </div>
@@ -352,7 +352,7 @@ const LStore: NextPage<Props> = ({ data }) => {
         </div>
       </section>
 
-      <section className="py-10 sm:py-16 container">
+      <section id="form" className="py-10 sm:py-16 container">
         <h1 className="title tracking-[2px]">
           Seu próximo endereço começa aqui.
         </h1>
