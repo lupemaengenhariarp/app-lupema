@@ -198,7 +198,7 @@ export interface Settings {
 }
 
 
-/** The Type of Identifier used to fetch a single resource. Default is ID. */
+/** Identifier types for retrieving a specific ArquivoAssessoria. Specifies which unique attribute is used to find an exact ArquivoAssessoria. */
 export type ArquivoAssessoriaIdType = 'DATABASE_ID' | 'ID' | 'SLUG' | 'URI'
 
 
@@ -291,15 +291,11 @@ export interface ArquivoAssessoria {
 }
 
 
-/** An object with an ID */
-export type Node = (ArquivoAssessoria | ContentType | Taxonomy | EnqueuedScript | EnqueuedStylesheet | User | Comment | MediaItem | Page | Post | Category | CentraldeDecorado | Empreendimento | PostFormat | Tag | UserRole | Banner | Menu | MenuItem | Plugin | Theme | CommentAuthor) & { __isUnion?: true }
-
-
-/** Nodes used to manage content */
+/** Base interface for content objects like posts, pages, and media items. Provides common fields available across these content types. */
 export type ContentNode = (ArquivoAssessoria | MediaItem | Page | Post | CentraldeDecorado | Empreendimento | Banner) & { __isUnion?: true }
 
 
-/** Any node that has a URI */
+/** An interface for content that can be accessed via a unique URI/URL path. Implemented by content types that have their own permalinks. */
 export type UniformResourceIdentifiable = (ArquivoAssessoria | ContentType | User | Comment | MediaItem | Page | Post | Category | CentraldeDecorado | Empreendimento | PostFormat | Tag | Banner) & { __isUnion?: true }
 
 
@@ -313,15 +309,15 @@ export interface ContentNodeToContentTypeConnectionEdge {
 }
 
 
-/** A singular connection from one Node to another, with support for relational data on the &quot;edge&quot; of the connection. */
-export type OneToOneConnection = (ContentNodeToContentTypeConnectionEdge | ContentNodeToEditLockConnectionEdge | CommentToCommenterConnectionEdge | CommentToContentNodeConnectionEdge | CommentToParentCommentConnectionEdge | NodeWithAuthorToUserConnectionEdge | ContentNodeToEditLastConnectionEdge | HierarchicalContentNodeToParentContentNodeConnectionEdge | NodeWithFeaturedImageToMediaItemConnectionEdge | NodeWithRevisionsToContentNodeConnectionEdge | PageToPreviewConnectionEdge | CentraldeDecoradoToParentConnectionEdge | CentraldeDecoradoToPreviewConnectionEdge | EmpreendimentoToParentConnectionEdge | EmpreendimentoToPreviewConnectionEdge | CategoryToParentCategoryConnectionEdge | CategoryToTaxonomyConnectionEdge | PostToParentConnectionEdge | PostFormatToTaxonomyConnectionEdge | PostToPreviewConnectionEdge | TagToTaxonomyConnectionEdge | ArquivoAssessoriaToParentConnectionEdge | ArquivoAssessoriaToPreviewConnectionEdge | BannerToParentConnectionEdge | BannerToPreviewConnectionEdge | MenuItemToMenuItemLinkableConnectionEdge | MenuItemToMenuConnectionEdge) & { __isUnion?: true }
+/** A direct one-to-one relationship between objects. Unlike plural connections, this represents a single related object rather than a collection. */
+export type OneToOneConnection = (ContentNodeToContentTypeConnectionEdge | ContentNodeToEditLockConnectionEdge | CommentToCommenterConnectionEdge | CommentToContentNodeConnectionEdge | CommentToParentCommentConnectionEdge | NodeWithAuthorToUserConnectionEdge | ContentNodeToEditLastConnectionEdge | HierarchicalContentNodeToParentContentNodeConnectionEdge | NodeWithFeaturedImageToMediaItemConnectionEdge | NodeWithRevisionsToContentNodeConnectionEdge | PageToPreviewConnectionEdge | CentraldeDecoradoToParentConnectionEdge | CentraldeDecoradoToPreviewConnectionEdge | EmpreendimentoToParentConnectionEdge | EmpreendimentoToPreviewConnectionEdge | CategoryToParentCategoryConnectionEdge | CategoryToTaxonomyConnectionEdge | PostToParentConnectionEdge | PostFormatToTaxonomyConnectionEdge | PostToPreviewConnectionEdge | TagToTaxonomyConnectionEdge | ArquivoAssessoriaToParentConnectionEdge | ArquivoAssessoriaToPreviewConnectionEdge | BannerToParentConnectionEdge | BannerToPreviewConnectionEdge | GeneralSettingsToMediaItemConnectionEdge | MenuItemToMenuItemLinkableConnectionEdge | MenuItemToMenuConnectionEdge) & { __isUnion?: true }
 
 
-/** Relational context between connected nodes */
-export type Edge = (ContentNodeToContentTypeConnectionEdge | TaxonomyToContentTypeConnectionEdge | TermNodeToEnqueuedScriptConnectionEdge | TermNodeToEnqueuedStylesheetConnectionEdge | TaxonomyToTermNodeConnectionEdge | ContentTypeToTaxonomyConnectionEdge | ContentTypeToContentNodeConnectionEdge | ContentNodeToEditLockConnectionEdge | CommentToCommenterConnectionEdge | CommentToContentNodeConnectionEdge | CommentToParentCommentConnectionEdge | CommentToCommentConnectionEdge | UserToCommentConnectionEdge | UserToEnqueuedScriptConnectionEdge | UserToEnqueuedStylesheetConnectionEdge | NodeWithAuthorToUserConnectionEdge | HierarchicalContentNodeToContentNodeAncestorsConnectionEdge | HierarchicalContentNodeToContentNodeChildrenConnectionEdge | ContentNodeToEnqueuedScriptConnectionEdge | ContentNodeToEnqueuedStylesheetConnectionEdge | ContentNodeToEditLastConnectionEdge | HierarchicalContentNodeToParentContentNodeConnectionEdge | MediaItemToCommentConnectionEdge | UserToMediaItemConnectionEdge | NodeWithFeaturedImageToMediaItemConnectionEdge | NodeWithRevisionsToContentNodeConnectionEdge | PageToCommentConnectionEdge | PageToPreviewConnectionEdge | PageToRevisionConnectionEdge | UserToPageConnectionEdge | PostToPostConnectionEdge | CategoryToAncestorsCategoryConnectionEdge | CentraldeDecoradoToCentraldeDecoradoConnectionEdge | CentraldeDecoradoToCategoryConnectionEdge | CentraldeDecoradoToParentConnectionEdge | CentraldeDecoradoToPreviewConnectionEdge | CentraldeDecoradoToTermNodeConnectionEdge | CategoryToCentraldeDecoradoConnectionEdge | CategoryToCategoryConnectionEdge | CategoryToContentNodeConnectionEdge | EmpreendimentoToEmpreendimentoConnectionEdge | EmpreendimentoToCategoryConnectionEdge | EmpreendimentoToParentConnectionEdge | EmpreendimentoToPreviewConnectionEdge | EmpreendimentoToTermNodeConnectionEdge | CategoryToEmpreendimentoConnectionEdge | CategoryToParentCategoryConnectionEdge | CategoryToPostConnectionEdge | CategoryToTaxonomyConnectionEdge | PostToCategoryConnectionEdge | PostToCommentConnectionEdge | PostToParentConnectionEdge | PostFormatToContentNodeConnectionEdge | PostFormatToPostConnectionEdge | PostFormatToTaxonomyConnectionEdge | PostToPostFormatConnectionEdge | PostToPreviewConnectionEdge | PostToRevisionConnectionEdge | TagToContentNodeConnectionEdge | TagToPostConnectionEdge | TagToTaxonomyConnectionEdge | PostToTagConnectionEdge | PostToTermNodeConnectionEdge | UserToPostConnectionEdge | UserToRevisionsConnectionEdge | UserToUserRoleConnectionEdge | ArquivoAssessoriaToArquivoAssessoriaConnectionEdge | ArquivoAssessoriaToParentConnectionEdge | ArquivoAssessoriaToPreviewConnectionEdge | RootQueryToArquivoAssessoriaConnectionEdge | BannerToBannerConnectionEdge | BannerToParentConnectionEdge | BannerToPreviewConnectionEdge | RootQueryToBannerConnectionEdge | RootQueryToCategoryConnectionEdge | RootQueryToCentraldeDecoradoConnectionEdge | RootQueryToCommentConnectionEdge | RootQueryToContentNodeConnectionEdge | RootQueryToContentTypeConnectionEdge | RootQueryToEmpreendimentoConnectionEdge | RootQueryToMediaItemConnectionEdge | MenuItemToMenuItemConnectionEdge | MenuItemToMenuItemLinkableConnectionEdge | MenuItemToMenuConnectionEdge | MenuToMenuItemConnectionEdge | RootQueryToMenuItemConnectionEdge | RootQueryToMenuConnectionEdge | RootQueryToPageConnectionEdge | RootQueryToPluginConnectionEdge | RootQueryToPostFormatConnectionEdge | RootQueryToPostConnectionEdge | RootQueryToEnqueuedScriptConnectionEdge | RootQueryToEnqueuedStylesheetConnectionEdge | RootQueryToRevisionsConnectionEdge | RootQueryToTagConnectionEdge | RootQueryToTaxonomyConnectionEdge | RootQueryToTermNodeConnectionEdge | RootQueryToThemeConnectionEdge | RootQueryToUserRoleConnectionEdge | RootQueryToUserConnectionEdge) & { __isUnion?: true }
+/** Represents a connection between two objects. Contains both the related object (node) and metadata about the relationship (cursor). */
+export type Edge = (ContentNodeToContentTypeConnectionEdge | TaxonomyToContentTypeConnectionEdge | TermNodeToEnqueuedScriptConnectionEdge | TermNodeToEnqueuedStylesheetConnectionEdge | TaxonomyToTermNodeConnectionEdge | ContentTypeToTaxonomyConnectionEdge | ContentTypeToContentNodeConnectionEdge | ContentNodeToEditLockConnectionEdge | CommentToCommenterConnectionEdge | CommentToContentNodeConnectionEdge | CommentToParentCommentConnectionEdge | CommentToCommentConnectionEdge | UserToCommentConnectionEdge | UserToEnqueuedScriptConnectionEdge | UserToEnqueuedStylesheetConnectionEdge | NodeWithAuthorToUserConnectionEdge | HierarchicalContentNodeToContentNodeAncestorsConnectionEdge | HierarchicalContentNodeToContentNodeChildrenConnectionEdge | ContentNodeToEnqueuedScriptConnectionEdge | ContentNodeToEnqueuedStylesheetConnectionEdge | ContentNodeToEditLastConnectionEdge | HierarchicalContentNodeToParentContentNodeConnectionEdge | MediaItemToCommentConnectionEdge | UserToMediaItemConnectionEdge | NodeWithFeaturedImageToMediaItemConnectionEdge | NodeWithRevisionsToContentNodeConnectionEdge | PageToCommentConnectionEdge | PageToPreviewConnectionEdge | PageToRevisionConnectionEdge | UserToPageConnectionEdge | PostToPostConnectionEdge | CategoryToAncestorsCategoryConnectionEdge | CentraldeDecoradoToCentraldeDecoradoConnectionEdge | CentraldeDecoradoToCategoryConnectionEdge | CentraldeDecoradoToParentConnectionEdge | CentraldeDecoradoToPreviewConnectionEdge | CentraldeDecoradoToTermNodeConnectionEdge | CategoryToCentraldeDecoradoConnectionEdge | CategoryToCategoryConnectionEdge | CategoryToContentNodeConnectionEdge | EmpreendimentoToEmpreendimentoConnectionEdge | EmpreendimentoToCategoryConnectionEdge | EmpreendimentoToParentConnectionEdge | EmpreendimentoToPreviewConnectionEdge | EmpreendimentoToTermNodeConnectionEdge | CategoryToEmpreendimentoConnectionEdge | CategoryToParentCategoryConnectionEdge | CategoryToPostConnectionEdge | CategoryToTaxonomyConnectionEdge | PostToCategoryConnectionEdge | PostToCommentConnectionEdge | PostToParentConnectionEdge | PostFormatToContentNodeConnectionEdge | PostFormatToPostConnectionEdge | PostFormatToTaxonomyConnectionEdge | PostToPostFormatConnectionEdge | PostToPreviewConnectionEdge | PostToRevisionConnectionEdge | TagToContentNodeConnectionEdge | TagToPostConnectionEdge | TagToTaxonomyConnectionEdge | PostToTagConnectionEdge | PostToTermNodeConnectionEdge | UserToPostConnectionEdge | UserToRevisionsConnectionEdge | UserToUserRoleConnectionEdge | ArquivoAssessoriaToArquivoAssessoriaConnectionEdge | ArquivoAssessoriaToParentConnectionEdge | ArquivoAssessoriaToPreviewConnectionEdge | RootQueryToArquivoAssessoriaConnectionEdge | BannerToBannerConnectionEdge | BannerToParentConnectionEdge | BannerToPreviewConnectionEdge | RootQueryToBannerConnectionEdge | RootQueryToCategoryConnectionEdge | RootQueryToCentraldeDecoradoConnectionEdge | RootQueryToCommentConnectionEdge | RootQueryToContentNodeConnectionEdge | RootQueryToContentTypeConnectionEdge | RootQueryToEmpreendimentoConnectionEdge | GeneralSettingsToMediaItemConnectionEdge | RootQueryToMediaItemConnectionEdge | MenuItemToMenuItemConnectionEdge | MenuItemToMenuItemLinkableConnectionEdge | MenuItemToMenuConnectionEdge | MenuToMenuItemConnectionEdge | RootQueryToMenuItemConnectionEdge | RootQueryToMenuConnectionEdge | RootQueryToPageConnectionEdge | RootQueryToPluginConnectionEdge | RootQueryToPostFormatConnectionEdge | RootQueryToPostConnectionEdge | RootQueryToEnqueuedScriptConnectionEdge | RootQueryToEnqueuedStylesheetConnectionEdge | RootQueryToRevisionsConnectionEdge | RootQueryToTagConnectionEdge | RootQueryToTaxonomyConnectionEdge | RootQueryToTermNodeConnectionEdge | RootQueryToThemeConnectionEdge | RootQueryToUserRoleConnectionEdge | RootQueryToUserConnectionEdge) & { __isUnion?: true }
 
 
-/** Edge between a Node and a connected ContentType */
+/** Represents a connection to a ContentType. Contains both the ContentType Node and metadata about the relationship. */
 export type ContentTypeConnectionEdge = (ContentNodeToContentTypeConnectionEdge | TaxonomyToContentTypeConnectionEdge | RootQueryToContentTypeConnectionEdge) & { __isUnion?: true }
 
 
@@ -409,19 +405,19 @@ export interface ContentTypeToTaxonomyConnection {
 }
 
 
-/** Connection to Taxonomy Nodes */
+/** A paginated collection of Taxonomy Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of Taxonomy Nodes */
 export type TaxonomyConnection = (ContentTypeToTaxonomyConnection | RootQueryToTaxonomyConnection) & { __isUnion?: true }
 
 
-/** A plural connection from one Node Type in the Graph to another Node Type, with support for relational data via &quot;edges&quot;. */
+/** A paginated relationship between objects. Supports cursor-based pagination with edges containing relationship metadata and nodes containing the related objects. */
 export type Connection = (ContentTypeToTaxonomyConnection | TaxonomyToContentTypeConnection | TaxonomyToTermNodeConnection | TermNodeToEnqueuedScriptConnection | TermNodeToEnqueuedStylesheetConnection | ContentTypeToContentNodeConnection | UserToCommentConnection | CommentToCommentConnection | UserToEnqueuedScriptConnection | UserToEnqueuedStylesheetConnection | UserToMediaItemConnection | HierarchicalContentNodeToContentNodeAncestorsConnection | HierarchicalContentNodeToContentNodeChildrenConnection | ContentNodeToEnqueuedScriptConnection | ContentNodeToEnqueuedStylesheetConnection | MediaItemToCommentConnection | UserToPageConnection | PageToCommentConnection | PageToRevisionConnection | UserToPostConnection | PostToPostConnection | PostToCategoryConnection | CategoryToAncestorsCategoryConnection | CategoryToCentraldeDecoradoConnection | CentraldeDecoradoToCentraldeDecoradoConnection | CentraldeDecoradoToCategoryConnection | CentraldeDecoradoToTermNodeConnection | CategoryToCategoryConnection | CategoryToContentNodeConnection | CategoryToEmpreendimentoConnection | EmpreendimentoToEmpreendimentoConnection | EmpreendimentoToCategoryConnection | EmpreendimentoToTermNodeConnection | CategoryToPostConnection | PostToCommentConnection | PostToPostFormatConnection | PostFormatToContentNodeConnection | PostFormatToPostConnection | PostToRevisionConnection | PostToTagConnection | TagToContentNodeConnection | TagToPostConnection | PostToTermNodeConnection | UserToRevisionsConnection | UserToUserRoleConnection | ArquivoAssessoriaToArquivoAssessoriaConnection | RootQueryToArquivoAssessoriaConnection | BannerToBannerConnection | RootQueryToBannerConnection | RootQueryToCategoryConnection | RootQueryToCentraldeDecoradoConnection | RootQueryToCommentConnection | RootQueryToContentNodeConnection | RootQueryToContentTypeConnection | RootQueryToEmpreendimentoConnection | RootQueryToMediaItemConnection | MenuToMenuItemConnection | MenuItemToMenuItemConnection | RootQueryToMenuItemConnection | RootQueryToMenuConnection | RootQueryToPageConnection | RootQueryToPluginConnection | RootQueryToPostFormatConnection | RootQueryToPostConnection | RootQueryToEnqueuedScriptConnection | RootQueryToEnqueuedStylesheetConnection | RootQueryToRevisionsConnection | RootQueryToTagConnection | RootQueryToTaxonomyConnection | RootQueryToTermNodeConnection | RootQueryToThemeConnection | RootQueryToUserRoleConnection | RootQueryToUserConnection) & { __isUnion?: true }
 
 
-/** Information about pagination in a connection. */
+/** Metadata for cursor-based pagination. Provides cursors for continuing pagination and boolean flags indicating if more items exist in either direction. */
 export type PageInfo = (TaxonomyToContentTypeConnectionPageInfo | TermNodeToEnqueuedScriptConnectionPageInfo | TermNodeToEnqueuedStylesheetConnectionPageInfo | TaxonomyToTermNodeConnectionPageInfo | ContentTypeToTaxonomyConnectionPageInfo | ContentTypeToContentNodeConnectionPageInfo | CommentToCommentConnectionPageInfo | UserToCommentConnectionPageInfo | UserToEnqueuedScriptConnectionPageInfo | UserToEnqueuedStylesheetConnectionPageInfo | HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo | HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo | ContentNodeToEnqueuedScriptConnectionPageInfo | ContentNodeToEnqueuedStylesheetConnectionPageInfo | MediaItemToCommentConnectionPageInfo | UserToMediaItemConnectionPageInfo | PageToCommentConnectionPageInfo | PageToRevisionConnectionPageInfo | UserToPageConnectionPageInfo | PostToPostConnectionPageInfo | CategoryToAncestorsCategoryConnectionPageInfo | CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo | CentraldeDecoradoToCategoryConnectionPageInfo | CentraldeDecoradoToTermNodeConnectionPageInfo | CategoryToCentraldeDecoradoConnectionPageInfo | CategoryToCategoryConnectionPageInfo | CategoryToContentNodeConnectionPageInfo | EmpreendimentoToEmpreendimentoConnectionPageInfo | EmpreendimentoToCategoryConnectionPageInfo | EmpreendimentoToTermNodeConnectionPageInfo | CategoryToEmpreendimentoConnectionPageInfo | CategoryToPostConnectionPageInfo | PostToCategoryConnectionPageInfo | PostToCommentConnectionPageInfo | PostFormatToContentNodeConnectionPageInfo | PostFormatToPostConnectionPageInfo | PostToPostFormatConnectionPageInfo | PostToRevisionConnectionPageInfo | TagToContentNodeConnectionPageInfo | TagToPostConnectionPageInfo | PostToTagConnectionPageInfo | PostToTermNodeConnectionPageInfo | UserToPostConnectionPageInfo | UserToRevisionsConnectionPageInfo | UserToUserRoleConnectionPageInfo | ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo | RootQueryToArquivoAssessoriaConnectionPageInfo | BannerToBannerConnectionPageInfo | RootQueryToBannerConnectionPageInfo | RootQueryToCategoryConnectionPageInfo | RootQueryToCentraldeDecoradoConnectionPageInfo | RootQueryToCommentConnectionPageInfo | RootQueryToContentNodeConnectionPageInfo | RootQueryToContentTypeConnectionPageInfo | RootQueryToEmpreendimentoConnectionPageInfo | RootQueryToMediaItemConnectionPageInfo | MenuItemToMenuItemConnectionPageInfo | MenuToMenuItemConnectionPageInfo | RootQueryToMenuItemConnectionPageInfo | RootQueryToMenuConnectionPageInfo | RootQueryToPageConnectionPageInfo | RootQueryToPluginConnectionPageInfo | RootQueryToPostFormatConnectionPageInfo | RootQueryToPostConnectionPageInfo | RootQueryToEnqueuedScriptConnectionPageInfo | RootQueryToEnqueuedStylesheetConnectionPageInfo | RootQueryToRevisionsConnectionPageInfo | RootQueryToTagConnectionPageInfo | RootQueryToTaxonomyConnectionPageInfo | RootQueryToTermNodeConnectionPageInfo | RootQueryToThemeConnectionPageInfo | RootQueryToUserRoleConnectionPageInfo | RootQueryToUserConnectionPageInfo) & { __isUnion?: true }
 
 
-/** Edge between a Node and a connected Taxonomy */
+/** Represents a connection to a Taxonomy. Contains both the Taxonomy Node and metadata about the relationship. */
 export type TaxonomyConnectionEdge = (ContentTypeToTaxonomyConnectionEdge | CategoryToTaxonomyConnectionEdge | PostFormatToTaxonomyConnectionEdge | TagToTaxonomyConnectionEdge | RootQueryToTaxonomyConnectionEdge) & { __isUnion?: true }
 
 
@@ -485,15 +481,15 @@ export interface TaxonomyToContentTypeConnection {
 }
 
 
-/** Connection to ContentType Nodes */
+/** A paginated collection of ContentType Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of ContentType Nodes */
 export type ContentTypeConnection = (TaxonomyToContentTypeConnection | RootQueryToContentTypeConnection) & { __isUnion?: true }
 
 
-/** Page Info on the connected ContentTypeConnectionEdge */
+/** Pagination metadata specific to &quot;ContentTypeConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;ContentTypeConnectionEdge&quot; Nodes. */
 export type ContentTypeConnectionPageInfo = (TaxonomyToContentTypeConnectionPageInfo | RootQueryToContentTypeConnectionPageInfo) & { __isUnion?: true }
 
 
-/** Information about pagination in a connection. */
+/** Metadata for cursor-based pagination. Provides cursors for continuing pagination and boolean flags indicating if more items exist in either direction. */
 export type WPPageInfo = (TaxonomyToContentTypeConnectionPageInfo | TermNodeToEnqueuedScriptConnectionPageInfo | TermNodeToEnqueuedStylesheetConnectionPageInfo | TaxonomyToTermNodeConnectionPageInfo | ContentTypeToTaxonomyConnectionPageInfo | ContentTypeToContentNodeConnectionPageInfo | CommentToCommentConnectionPageInfo | UserToCommentConnectionPageInfo | UserToEnqueuedScriptConnectionPageInfo | UserToEnqueuedStylesheetConnectionPageInfo | HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo | HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo | ContentNodeToEnqueuedScriptConnectionPageInfo | ContentNodeToEnqueuedStylesheetConnectionPageInfo | MediaItemToCommentConnectionPageInfo | UserToMediaItemConnectionPageInfo | PageToCommentConnectionPageInfo | PageToRevisionConnectionPageInfo | UserToPageConnectionPageInfo | PostToPostConnectionPageInfo | CategoryToAncestorsCategoryConnectionPageInfo | CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo | CentraldeDecoradoToCategoryConnectionPageInfo | CentraldeDecoradoToTermNodeConnectionPageInfo | CategoryToCentraldeDecoradoConnectionPageInfo | CategoryToCategoryConnectionPageInfo | CategoryToContentNodeConnectionPageInfo | EmpreendimentoToEmpreendimentoConnectionPageInfo | EmpreendimentoToCategoryConnectionPageInfo | EmpreendimentoToTermNodeConnectionPageInfo | CategoryToEmpreendimentoConnectionPageInfo | CategoryToPostConnectionPageInfo | PostToCategoryConnectionPageInfo | PostToCommentConnectionPageInfo | PostFormatToContentNodeConnectionPageInfo | PostFormatToPostConnectionPageInfo | PostToPostFormatConnectionPageInfo | PostToRevisionConnectionPageInfo | TagToContentNodeConnectionPageInfo | TagToPostConnectionPageInfo | PostToTagConnectionPageInfo | PostToTermNodeConnectionPageInfo | UserToPostConnectionPageInfo | UserToRevisionsConnectionPageInfo | UserToUserRoleConnectionPageInfo | ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo | RootQueryToArquivoAssessoriaConnectionPageInfo | BannerToBannerConnectionPageInfo | RootQueryToBannerConnectionPageInfo | RootQueryToCategoryConnectionPageInfo | RootQueryToCentraldeDecoradoConnectionPageInfo | RootQueryToCommentConnectionPageInfo | RootQueryToContentNodeConnectionPageInfo | RootQueryToContentTypeConnectionPageInfo | RootQueryToEmpreendimentoConnectionPageInfo | RootQueryToMediaItemConnectionPageInfo | MenuItemToMenuItemConnectionPageInfo | MenuToMenuItemConnectionPageInfo | RootQueryToMenuItemConnectionPageInfo | RootQueryToMenuConnectionPageInfo | RootQueryToPageConnectionPageInfo | RootQueryToPluginConnectionPageInfo | RootQueryToPostFormatConnectionPageInfo | RootQueryToPostConnectionPageInfo | RootQueryToEnqueuedScriptConnectionPageInfo | RootQueryToEnqueuedStylesheetConnectionPageInfo | RootQueryToRevisionsConnectionPageInfo | RootQueryToTagConnectionPageInfo | RootQueryToTaxonomyConnectionPageInfo | RootQueryToTermNodeConnectionPageInfo | RootQueryToThemeConnectionPageInfo | RootQueryToUserRoleConnectionPageInfo | RootQueryToUserConnectionPageInfo) & { __isUnion?: true }
 
 
@@ -507,7 +503,7 @@ export interface TaxonomyToContentTypeConnectionEdge {
 }
 
 
-/** Page Info on the &quot;TaxonomyToContentTypeConnection&quot; */
+/** Pagination metadata specific to &quot;TaxonomyToContentTypeConnection&quot; collections. Provides cursors and flags for navigating through sets of TaxonomyToContentTypeConnection Nodes. */
 export interface TaxonomyToContentTypeConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -533,15 +529,15 @@ export interface TaxonomyToTermNodeConnection {
 }
 
 
-/** Connection to TermNode Nodes */
+/** A paginated collection of TermNode Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of TermNode Nodes */
 export type TermNodeConnection = (TaxonomyToTermNodeConnection | CentraldeDecoradoToTermNodeConnection | EmpreendimentoToTermNodeConnection | PostToTermNodeConnection | RootQueryToTermNodeConnection) & { __isUnion?: true }
 
 
-/** Edge between a Node and a connected TermNode */
+/** Represents a connection to a TermNode. Contains both the TermNode Node and metadata about the relationship. */
 export type TermNodeConnectionEdge = (TaxonomyToTermNodeConnectionEdge | CentraldeDecoradoToTermNodeConnectionEdge | EmpreendimentoToTermNodeConnectionEdge | PostToTermNodeConnectionEdge | RootQueryToTermNodeConnectionEdge) & { __isUnion?: true }
 
 
-/** Terms are nodes within a Taxonomy, used to group and relate other nodes. */
+/** Base interface for taxonomy terms such as categories and tags. Terms are used to organize and classify content. */
 export type TermNode = (Category | PostFormat | Tag) & { __isUnion?: true }
 
 
@@ -557,11 +553,11 @@ export interface TermNodeToEnqueuedScriptConnection {
 }
 
 
-/** Connection to EnqueuedScript Nodes */
+/** A paginated collection of EnqueuedScript Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of EnqueuedScript Nodes */
 export type EnqueuedScriptConnection = (TermNodeToEnqueuedScriptConnection | UserToEnqueuedScriptConnection | ContentNodeToEnqueuedScriptConnection | RootQueryToEnqueuedScriptConnection) & { __isUnion?: true }
 
 
-/** Edge between a Node and a connected EnqueuedScript */
+/** Represents a connection to a EnqueuedScript. Contains both the EnqueuedScript Node and metadata about the relationship. */
 export type EnqueuedScriptConnectionEdge = (TermNodeToEnqueuedScriptConnectionEdge | UserToEnqueuedScriptConnectionEdge | ContentNodeToEnqueuedScriptConnectionEdge | RootQueryToEnqueuedScriptConnectionEdge) & { __isUnion?: true }
 
 
@@ -605,19 +601,19 @@ export interface EnqueuedScript {
 }
 
 
-/** Asset enqueued by the CMS */
+/** A script or stylesheet resource that should be loaded by the client. Contains information about the resource&#039;s location, dependencies, and loading behavior. */
 export type EnqueuedAsset = (EnqueuedScript | EnqueuedStylesheet) & { __isUnion?: true }
 
 
-/** Location in the document where the script to be loaded */
+/** Script insertion positions in the document structure. Determines whether scripts are placed in the document head or before the closing body tag. */
 export type ScriptLoadingGroupLocationEnum = 'FOOTER' | 'HEADER'
 
 
-/** The strategy to use when loading the script */
+/** Script loading optimization attributes. Controls browser behavior for script loading to improve page performance (async or defer). */
 export type ScriptLoadingStrategyEnum = 'ASYNC' | 'DEFER'
 
 
-/** Page Info on the connected EnqueuedScriptConnectionEdge */
+/** Pagination metadata specific to &quot;EnqueuedScriptConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;EnqueuedScriptConnectionEdge&quot; Nodes. */
 export type EnqueuedScriptConnectionPageInfo = (TermNodeToEnqueuedScriptConnectionPageInfo | UserToEnqueuedScriptConnectionPageInfo | ContentNodeToEnqueuedScriptConnectionPageInfo | RootQueryToEnqueuedScriptConnectionPageInfo) & { __isUnion?: true }
 
 
@@ -631,7 +627,7 @@ export interface TermNodeToEnqueuedScriptConnectionEdge {
 }
 
 
-/** Page Info on the &quot;TermNodeToEnqueuedScriptConnection&quot; */
+/** Pagination metadata specific to &quot;TermNodeToEnqueuedScriptConnection&quot; collections. Provides cursors and flags for navigating through sets of TermNodeToEnqueuedScriptConnection Nodes. */
 export interface TermNodeToEnqueuedScriptConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -657,11 +653,11 @@ export interface TermNodeToEnqueuedStylesheetConnection {
 }
 
 
-/** Connection to EnqueuedStylesheet Nodes */
+/** A paginated collection of EnqueuedStylesheet Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of EnqueuedStylesheet Nodes */
 export type EnqueuedStylesheetConnection = (TermNodeToEnqueuedStylesheetConnection | UserToEnqueuedStylesheetConnection | ContentNodeToEnqueuedStylesheetConnection | RootQueryToEnqueuedStylesheetConnection) & { __isUnion?: true }
 
 
-/** Edge between a Node and a connected EnqueuedStylesheet */
+/** Represents a connection to a EnqueuedStylesheet. Contains both the EnqueuedStylesheet Node and metadata about the relationship. */
 export type EnqueuedStylesheetConnectionEdge = (TermNodeToEnqueuedStylesheetConnectionEdge | UserToEnqueuedStylesheetConnectionEdge | ContentNodeToEnqueuedStylesheetConnectionEdge | RootQueryToEnqueuedStylesheetConnectionEdge) & { __isUnion?: true }
 
 
@@ -711,7 +707,7 @@ export interface EnqueuedStylesheet {
 }
 
 
-/** Page Info on the connected EnqueuedStylesheetConnectionEdge */
+/** Pagination metadata specific to &quot;EnqueuedStylesheetConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;EnqueuedStylesheetConnectionEdge&quot; Nodes. */
 export type EnqueuedStylesheetConnectionPageInfo = (TermNodeToEnqueuedStylesheetConnectionPageInfo | UserToEnqueuedStylesheetConnectionPageInfo | ContentNodeToEnqueuedStylesheetConnectionPageInfo | RootQueryToEnqueuedStylesheetConnectionPageInfo) & { __isUnion?: true }
 
 
@@ -725,7 +721,7 @@ export interface TermNodeToEnqueuedStylesheetConnectionEdge {
 }
 
 
-/** Page Info on the &quot;TermNodeToEnqueuedStylesheetConnection&quot; */
+/** Pagination metadata specific to &quot;TermNodeToEnqueuedStylesheetConnection&quot; collections. Provides cursors and flags for navigating through sets of TermNodeToEnqueuedStylesheetConnection Nodes. */
 export interface TermNodeToEnqueuedStylesheetConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -739,7 +735,7 @@ export interface TermNodeToEnqueuedStylesheetConnectionPageInfo {
 }
 
 
-/** Page Info on the connected TermNodeConnectionEdge */
+/** Pagination metadata specific to &quot;TermNodeConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;TermNodeConnectionEdge&quot; Nodes. */
 export type TermNodeConnectionPageInfo = (TaxonomyToTermNodeConnectionPageInfo | CentraldeDecoradoToTermNodeConnectionPageInfo | EmpreendimentoToTermNodeConnectionPageInfo | PostToTermNodeConnectionPageInfo | RootQueryToTermNodeConnectionPageInfo) & { __isUnion?: true }
 
 
@@ -753,7 +749,7 @@ export interface TaxonomyToTermNodeConnectionEdge {
 }
 
 
-/** Page Info on the &quot;TaxonomyToTermNodeConnection&quot; */
+/** Pagination metadata specific to &quot;TaxonomyToTermNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of TaxonomyToTermNodeConnection Nodes. */
 export interface TaxonomyToTermNodeConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -767,7 +763,7 @@ export interface TaxonomyToTermNodeConnectionPageInfo {
 }
 
 
-/** Page Info on the connected TaxonomyConnectionEdge */
+/** Pagination metadata specific to &quot;TaxonomyConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;TaxonomyConnectionEdge&quot; Nodes. */
 export type TaxonomyConnectionPageInfo = (ContentTypeToTaxonomyConnectionPageInfo | RootQueryToTaxonomyConnectionPageInfo) & { __isUnion?: true }
 
 
@@ -781,7 +777,7 @@ export interface ContentTypeToTaxonomyConnectionEdge {
 }
 
 
-/** Page Info on the &quot;ContentTypeToTaxonomyConnection&quot; */
+/** Pagination metadata specific to &quot;ContentTypeToTaxonomyConnection&quot; collections. Provides cursors and flags for navigating through sets of ContentTypeToTaxonomyConnection Nodes. */
 export interface ContentTypeToTaxonomyConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -795,15 +791,15 @@ export interface ContentTypeToTaxonomyConnectionPageInfo {
 }
 
 
-/** Allowed Content Types */
+/** Available content entity types that can be queried or filtered. Identifies the primary content structures available in the system. */
 export type ContentTypeEnum = 'ARQ_ASSESSORIA' | 'ATTACHMENT' | 'BANNER_HOME' | 'CENTRALDECORADO' | 'EMPREENDIMENTOS' | 'PAGE' | 'POST'
 
 
-/** The column to use when filtering by date */
+/** Date field selectors for content filtering. Specifies which date attribute (creation date, modification date) should be used for date-based queries. */
 export type PostObjectsConnectionDateColumnEnum = 'DATE' | 'MODIFIED'
 
 
-/** The logical relation between each item in the array when there are more than one. */
+/** Logical operators for filter conditions. Determines whether multiple filtering criteria should be combined with AND (all must match) or OR (any can match). */
 export type RelationEnum = 'AND' | 'OR'
 
 export type ContentTypeToContentNodeConnectionWhereArgsMetaCompareEnum = 'BETWEEN' | 'EQUAL_TO' | 'EXISTS' | 'GREATER_THAN' | 'GREATER_THAN_OR_EQUAL_TO' | 'IN' | 'LESS_THAN' | 'LESS_THAN_OR_EQUAL_TO' | 'LIKE' | 'NOT_BETWEEN' | 'NOT_EQUAL_TO' | 'NOT_EXISTS' | 'NOT_IN' | 'NOT_LIKE'
@@ -811,19 +807,19 @@ export type ContentTypeToContentNodeConnectionWhereArgsMetaCompareEnum = 'BETWEE
 export type ContentTypeToContentNodeConnectionWhereArgsMetaTypeEnum = 'BINARY' | 'CHAR' | 'DATE' | 'DATETIME' | 'DECIMAL' | 'NUMERIC' | 'SIGNED' | 'TIME' | 'UNSIGNED'
 
 
-/** The MimeType of the object */
+/** Media file type classification based on MIME standards. Used to identify and filter media items by their format and content type. */
 export type MimeTypeEnum = 'APPLICATION_JAVA' | 'APPLICATION_MSWORD' | 'APPLICATION_OCTET_STREAM' | 'APPLICATION_ONENOTE' | 'APPLICATION_OXPS' | 'APPLICATION_PDF' | 'APPLICATION_RAR' | 'APPLICATION_RTF' | 'APPLICATION_TTAF_XML' | 'APPLICATION_VND_APPLE_KEYNOTE' | 'APPLICATION_VND_APPLE_NUMBERS' | 'APPLICATION_VND_APPLE_PAGES' | 'APPLICATION_VND_MS_ACCESS' | 'APPLICATION_VND_MS_EXCEL' | 'APPLICATION_VND_MS_EXCEL_ADDIN_MACROENABLED_12' | 'APPLICATION_VND_MS_EXCEL_SHEET_BINARY_MACROENABLED_12' | 'APPLICATION_VND_MS_EXCEL_SHEET_MACROENABLED_12' | 'APPLICATION_VND_MS_EXCEL_TEMPLATE_MACROENABLED_12' | 'APPLICATION_VND_MS_POWERPOINT' | 'APPLICATION_VND_MS_POWERPOINT_ADDIN_MACROENABLED_12' | 'APPLICATION_VND_MS_POWERPOINT_PRESENTATION_MACROENABLED_12' | 'APPLICATION_VND_MS_POWERPOINT_SLIDESHOW_MACROENABLED_12' | 'APPLICATION_VND_MS_POWERPOINT_SLIDE_MACROENABLED_12' | 'APPLICATION_VND_MS_POWERPOINT_TEMPLATE_MACROENABLED_12' | 'APPLICATION_VND_MS_PROJECT' | 'APPLICATION_VND_MS_WORD_DOCUMENT_MACROENABLED_12' | 'APPLICATION_VND_MS_WORD_TEMPLATE_MACROENABLED_12' | 'APPLICATION_VND_MS_WRITE' | 'APPLICATION_VND_MS_XPSDOCUMENT' | 'APPLICATION_VND_OASIS_OPENDOCUMENT_CHART' | 'APPLICATION_VND_OASIS_OPENDOCUMENT_DATABASE' | 'APPLICATION_VND_OASIS_OPENDOCUMENT_FORMULA' | 'APPLICATION_VND_OASIS_OPENDOCUMENT_GRAPHICS' | 'APPLICATION_VND_OASIS_OPENDOCUMENT_PRESENTATION' | 'APPLICATION_VND_OASIS_OPENDOCUMENT_SPREADSHEET' | 'APPLICATION_VND_OASIS_OPENDOCUMENT_TEXT' | 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_PRESENTATION' | 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_SLIDE' | 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_SLIDESHOW' | 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_TEMPLATE' | 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_SHEET' | 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_TEMPLATE' | 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_DOCUMENT' | 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_TEMPLATE' | 'APPLICATION_WORDPERFECT' | 'APPLICATION_X_7Z_COMPRESSED' | 'APPLICATION_X_GZIP' | 'APPLICATION_X_TAR' | 'APPLICATION_ZIP' | 'AUDIO_AAC' | 'AUDIO_FLAC' | 'AUDIO_MIDI' | 'AUDIO_MPEG' | 'AUDIO_OGG' | 'AUDIO_WAV' | 'AUDIO_X_MATROSKA' | 'AUDIO_X_MS_WAX' | 'AUDIO_X_MS_WMA' | 'AUDIO_X_REALAUDIO' | 'IMAGE_AVIF' | 'IMAGE_BMP' | 'IMAGE_GIF' | 'IMAGE_HEIC' | 'IMAGE_HEIC_SEQUENCE' | 'IMAGE_HEIF' | 'IMAGE_HEIF_SEQUENCE' | 'IMAGE_JPEG' | 'IMAGE_PNG' | 'IMAGE_SVG_XML' | 'IMAGE_TIFF' | 'IMAGE_WEBP' | 'IMAGE_X_ICON' | 'TEXT_CALENDAR' | 'TEXT_CSS' | 'TEXT_CSV' | 'TEXT_PLAIN' | 'TEXT_RICHTEXT' | 'TEXT_TAB_SEPARATED_VALUES' | 'TEXT_VTT' | 'VIDEO_3GPP' | 'VIDEO_3GPP2' | 'VIDEO_AVI' | 'VIDEO_DIVX' | 'VIDEO_MP4' | 'VIDEO_MPEG' | 'VIDEO_OGG' | 'VIDEO_QUICKTIME' | 'VIDEO_WEBM' | 'VIDEO_X_FLV' | 'VIDEO_X_MATROSKA' | 'VIDEO_X_MS_ASF' | 'VIDEO_X_MS_WM' | 'VIDEO_X_MS_WMV' | 'VIDEO_X_MS_WMX'
 
 
-/** Field to order the connection by */
+/** Content sorting attributes for post-type objects. Identifies which content property should be used to determine result order. */
 export type PostObjectsConnectionOrderbyEnum = 'AUTHOR' | 'COMMENT_COUNT' | 'DATE' | 'IN' | 'MENU_ORDER' | 'MODIFIED' | 'NAME_IN' | 'PARENT' | 'SLUG' | 'TITLE'
 
 
-/** The cardinality of the connection order */
+/** Sort direction for ordered results. Determines whether items are returned in ascending or descending order. */
 export type OrderEnum = 'ASC' | 'DESC'
 
 
-/** The status of the object. */
+/** Publishing status that controls the visibility and editorial state of content. Determines whether content is published, pending review, in draft state, or private. */
 export type PostStatusEnum = 'ACF_DISABLED' | 'AUTO_DRAFT' | 'DRAFT' | 'FUTURE' | 'INHERIT' | 'PENDING' | 'PRIVATE' | 'PUBLISH' | 'REQUEST_COMPLETED' | 'REQUEST_CONFIRMED' | 'REQUEST_FAILED' | 'REQUEST_PENDING' | 'TRASH'
 
 
@@ -833,7 +829,7 @@ export type TaxQueryField = 'ID' | 'NAME' | 'SLUG' | 'TAXONOMY_ID'
 export type TaxQueryOperator = 'AND' | 'EXISTS' | 'IN' | 'NOT_EXISTS' | 'NOT_IN'
 
 
-/** Allowed taxonomies */
+/** Available classification systems for organizing content. Identifies the different taxonomy types that can be used for content categorization. */
 export type TaxonomyEnum = 'CATEGORY' | 'POSTFORMAT' | 'TAG'
 
 
@@ -849,15 +845,15 @@ export interface ContentTypeToContentNodeConnection {
 }
 
 
-/** Connection to ContentNode Nodes */
+/** A paginated collection of ContentNode Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of ContentNode Nodes */
 export type ContentNodeConnection = (ContentTypeToContentNodeConnection | HierarchicalContentNodeToContentNodeAncestorsConnection | HierarchicalContentNodeToContentNodeChildrenConnection | CategoryToContentNodeConnection | PostFormatToContentNodeConnection | TagToContentNodeConnection | UserToRevisionsConnection | RootQueryToContentNodeConnection | RootQueryToRevisionsConnection) & { __isUnion?: true }
 
 
-/** Edge between a Node and a connected ContentNode */
+/** Represents a connection to a ContentNode. Contains both the ContentNode Node and metadata about the relationship. */
 export type ContentNodeConnectionEdge = (ContentTypeToContentNodeConnectionEdge | CommentToContentNodeConnectionEdge | HierarchicalContentNodeToContentNodeAncestorsConnectionEdge | HierarchicalContentNodeToContentNodeChildrenConnectionEdge | HierarchicalContentNodeToParentContentNodeConnectionEdge | NodeWithRevisionsToContentNodeConnectionEdge | CategoryToContentNodeConnectionEdge | PostFormatToContentNodeConnectionEdge | TagToContentNodeConnectionEdge | UserToRevisionsConnectionEdge | RootQueryToContentNodeConnectionEdge | RootQueryToRevisionsConnectionEdge) & { __isUnion?: true }
 
 
-/** Page Info on the connected ContentNodeConnectionEdge */
+/** Pagination metadata specific to &quot;ContentNodeConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;ContentNodeConnectionEdge&quot; Nodes. */
 export type ContentNodeConnectionPageInfo = (ContentTypeToContentNodeConnectionPageInfo | HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo | HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo | CategoryToContentNodeConnectionPageInfo | PostFormatToContentNodeConnectionPageInfo | TagToContentNodeConnectionPageInfo | UserToRevisionsConnectionPageInfo | RootQueryToContentNodeConnectionPageInfo | RootQueryToRevisionsConnectionPageInfo) & { __isUnion?: true }
 
 
@@ -871,7 +867,7 @@ export interface ContentTypeToContentNodeConnectionEdge {
 }
 
 
-/** Page Info on the &quot;ContentTypeToContentNodeConnection&quot; */
+/** Pagination metadata specific to &quot;ContentTypeToContentNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of ContentTypeToContentNodeConnection Nodes. */
 export interface ContentTypeToContentNodeConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -953,12 +949,14 @@ export interface ContentNodeToEditLockConnectionEdge {
 }
 
 
-/** Edge between a Node and a connected User */
+/** Represents a connection to a User. Contains both the User Node and metadata about the relationship. */
 export type UserConnectionEdge = (ContentNodeToEditLockConnectionEdge | NodeWithAuthorToUserConnectionEdge | ContentNodeToEditLastConnectionEdge | RootQueryToUserConnectionEdge) & { __isUnion?: true }
 
 
-/** A User object */
+/** A registered user account. Users can be assigned roles, author content, and have various capabilities within the site. */
 export interface User {
+    /** The admin color scheme preference for the user. Possible values include &quot;fresh&quot;, &quot;light&quot;, &quot;blue&quot;, &quot;coffee&quot;, &quot;ectoplasm&quot;, &quot;midnight&quot;, &quot;ocean&quot;, &quot;sunrise&quot;. Default is &quot;fresh&quot;. */
+    adminColor?: Scalars['String']
     /** Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument. */
     avatar?: Avatar
     /** User metadata option name. Usually it will be &quot;wp_capabilities&quot;. */
@@ -981,6 +979,12 @@ export interface User {
     extraCapabilities?: (Scalars['String'] | undefined)[]
     /** First name of the user. This is equivalent to the WP_User-&gt;user_first_name property. */
     firstName?: Scalars['String']
+    /** Whether the user has enabled keyboard shortcuts for comment moderation. Defaults to false. */
+    hasCommentShortcutsEnabled?: Scalars['Boolean']
+    /** Whether the user has enabled the visual editor. When enabled, the WYSIWYG editor is used for content editing. Defaults to true. */
+    hasRichEditingEnabled?: Scalars['Boolean']
+    /** Whether the user has enabled syntax highlighting when editing code within the post editor. Defaults to true. */
+    hasSyntaxHighlightingEnabled?: Scalars['Boolean']
     /** The globally unique identifier for the user object. */
     id: Scalars['ID']
     /** Whether the node is a Comment */
@@ -1036,17 +1040,9 @@ export interface User {
 }
 
 
-/** The author of a comment */
-export type Commenter = (User | CommentAuthor) & { __isUnion?: true }
-
-
-/** Object that can be identified with a Database ID */
-export type DatabaseIdentifier = (ArquivoAssessoria | User | Comment | MediaItem | Page | Post | Category | CentraldeDecorado | Empreendimento | PostFormat | Tag | Banner | Menu | MenuItem | CommentAuthor) & { __isUnion?: true }
-
-
 /** Avatars are profile images for users. WordPress by default uses the Gravatar service to host and fetch avatars from. */
 export interface Avatar {
-    /** URL for the default image or a default type. Accepts &#039;404&#039; (return a 404 instead of a default image), &#039;retro&#039; (8bit), &#039;monsterid&#039; (monster), &#039;wavatar&#039; (cartoon face), &#039;indenticon&#039; (the &#039;quilt&#039;), &#039;mystery&#039;, &#039;mm&#039;, or &#039;mysteryman&#039; (The Oyster Man), &#039;blank&#039; (transparent GIF), or &#039;gravatar_default&#039; (the Gravatar logo). */
+    /** TEST: URL for the default image or a default type. Accepts &#039;404&#039; (return a 404 instead of a default image), &#039;retro&#039; (8bit), &#039;monsterid&#039; (monster), &#039;wavatar&#039; (cartoon face), &#039;indenticon&#039; (the &#039;quilt&#039;), &#039;mystery&#039;, &#039;mm&#039;, or &#039;mysteryman&#039; (The Oyster Man), &#039;blank&#039; (transparent GIF), or &#039;gravatar_default&#039; (the Gravatar logo). */
     default?: Scalars['String']
     /** HTML attributes to insert in the IMG element. Is not sanitized. */
     extraAttr?: Scalars['String']
@@ -1072,15 +1068,15 @@ export interface Avatar {
 }
 
 
-/** What rating to display avatars up to. Accepts 'G', 'PG', 'R', 'X', and are judged in that order. Default is the value of the 'avatar_rating' option */
+/** Content rating filter for user avatars. Determines the maximum maturity level of avatars to display, following standard content rating classifications (G, PG, R, X). */
 export type AvatarRatingEnum = 'G' | 'PG' | 'R' | 'X'
 
 
-/** Options for ordering the connection */
+/** Sorting attributes for comment collections. Specifies which comment property determines the order of results. */
 export type CommentsConnectionOrderbyEnum = 'COMMENT_AGENT' | 'COMMENT_APPROVED' | 'COMMENT_AUTHOR' | 'COMMENT_AUTHOR_EMAIL' | 'COMMENT_AUTHOR_IP' | 'COMMENT_AUTHOR_URL' | 'COMMENT_CONTENT' | 'COMMENT_DATE' | 'COMMENT_DATE_GMT' | 'COMMENT_ID' | 'COMMENT_IN' | 'COMMENT_KARMA' | 'COMMENT_PARENT' | 'COMMENT_POST_ID' | 'COMMENT_TYPE' | 'USER_ID'
 
 
-/** The status of the comment object. */
+/** Moderation state for user comments. Determines whether comments are publicly visible, pending approval, or marked as spam. */
 export type CommentStatusEnum = 'APPROVE' | 'HOLD' | 'SPAM' | 'TRASH'
 
 
@@ -1096,15 +1092,15 @@ export interface UserToCommentConnection {
 }
 
 
-/** Connection to Comment Nodes */
+/** A paginated collection of Comment Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of Comment Nodes */
 export type CommentConnection = (UserToCommentConnection | CommentToCommentConnection | MediaItemToCommentConnection | PageToCommentConnection | PostToCommentConnection | RootQueryToCommentConnection) & { __isUnion?: true }
 
 
-/** Edge between a Node and a connected Comment */
+/** Represents a connection to a Comment. Contains both the Comment Node and metadata about the relationship. */
 export type CommentConnectionEdge = (CommentToParentCommentConnectionEdge | CommentToCommentConnectionEdge | UserToCommentConnectionEdge | MediaItemToCommentConnectionEdge | PageToCommentConnectionEdge | PostToCommentConnectionEdge | RootQueryToCommentConnectionEdge) & { __isUnion?: true }
 
 
-/** A Comment object */
+/** A response or reaction to content submitted by users. Comments are typically associated with a specific content entry. */
 export interface Comment {
     /** User agent used to post the comment. This field is equivalent to WP_Comment-&gt;comment_agent and the value matching the &quot;comment_agent&quot; column in SQL. */
     agent?: Scalars['String']
@@ -1175,7 +1171,7 @@ export interface Comment {
 export interface CommentToCommenterConnectionEdge {
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: Scalars['String']
-    /** The email address representing the author for this particular comment */
+    /** Email address representing the author for this particular comment */
     email?: Scalars['String']
     /** IP address of the author at the time of making this comment. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL. */
     ipAddress?: Scalars['String']
@@ -1189,7 +1185,7 @@ export interface CommentToCommenterConnectionEdge {
 }
 
 
-/** Edge between a Node and a connected Commenter */
+/** Represents a connection to a Commenter. Contains both the Commenter Node and metadata about the relationship. */
 export type CommenterConnectionEdge = (CommentToCommenterConnectionEdge) & { __isUnion?: true }
 
 
@@ -1203,7 +1199,7 @@ export interface CommentToContentNodeConnectionEdge {
 }
 
 
-/** The format of post field data. */
+/** Content field rendering options. Determines whether content fields are returned as raw data or with applied formatting and transformations. Default is RENDERED. */
 export type PostObjectFieldFormatEnum = 'RAW' | 'RENDERED'
 
 
@@ -1239,7 +1235,7 @@ export interface CommentToCommentConnectionEdge {
 }
 
 
-/** Page Info on the &quot;CommentToCommentConnection&quot; */
+/** Pagination metadata specific to &quot;CommentToCommentConnection&quot; collections. Provides cursors and flags for navigating through sets of CommentToCommentConnection Nodes. */
 export interface CommentToCommentConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -1253,7 +1249,7 @@ export interface CommentToCommentConnectionPageInfo {
 }
 
 
-/** Page Info on the connected CommentConnectionEdge */
+/** Pagination metadata specific to &quot;CommentConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;CommentConnectionEdge&quot; Nodes. */
 export type CommentConnectionPageInfo = (CommentToCommentConnectionPageInfo | UserToCommentConnectionPageInfo | MediaItemToCommentConnectionPageInfo | PageToCommentConnectionPageInfo | PostToCommentConnectionPageInfo | RootQueryToCommentConnectionPageInfo) & { __isUnion?: true }
 
 
@@ -1267,7 +1263,7 @@ export interface UserToCommentConnectionEdge {
 }
 
 
-/** Page Info on the &quot;UserToCommentConnection&quot; */
+/** Pagination metadata specific to &quot;UserToCommentConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToCommentConnection Nodes. */
 export interface UserToCommentConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -1303,7 +1299,7 @@ export interface UserToEnqueuedScriptConnectionEdge {
 }
 
 
-/** Page Info on the &quot;UserToEnqueuedScriptConnection&quot; */
+/** Pagination metadata specific to &quot;UserToEnqueuedScriptConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToEnqueuedScriptConnection Nodes. */
 export interface UserToEnqueuedScriptConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -1339,7 +1335,7 @@ export interface UserToEnqueuedStylesheetConnectionEdge {
 }
 
 
-/** Page Info on the &quot;UserToEnqueuedStylesheetConnection&quot; */
+/** Pagination metadata specific to &quot;UserToEnqueuedStylesheetConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToEnqueuedStylesheetConnection Nodes. */
 export interface UserToEnqueuedStylesheetConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -1369,15 +1365,15 @@ export interface UserToMediaItemConnection {
 }
 
 
-/** Connection to mediaItem Nodes */
+/** A paginated collection of mediaItem Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of mediaItem Nodes */
 export type MediaItemConnection = (UserToMediaItemConnection | RootQueryToMediaItemConnection) & { __isUnion?: true }
 
 
-/** Edge between a Node and a connected mediaItem */
-export type MediaItemConnectionEdge = (UserToMediaItemConnectionEdge | NodeWithFeaturedImageToMediaItemConnectionEdge | RootQueryToMediaItemConnectionEdge) & { __isUnion?: true }
+/** Represents a connection to a mediaItem. Contains both the mediaItem Node and metadata about the relationship. */
+export type MediaItemConnectionEdge = (UserToMediaItemConnectionEdge | NodeWithFeaturedImageToMediaItemConnectionEdge | GeneralSettingsToMediaItemConnectionEdge | RootQueryToMediaItemConnectionEdge) & { __isUnion?: true }
 
 
-/** The mediaItem type */
+/** Represents uploaded media, including images, videos, documents, and audio files. */
 export interface MediaItem {
     /** Alternative text to display when resource is not displayed */
     altText?: Scalars['String']
@@ -1500,19 +1496,15 @@ export interface MediaItem {
 }
 
 
-/** A node that can have a template associated with it */
+/** Content that provides template metadata. The template can help inform how the content is might be structured, styled, and presented to the user. */
 export type NodeWithTemplate = (ArquivoAssessoria | MediaItem | Page | Post | CentraldeDecorado | Empreendimento | Banner) & { __isUnion?: true }
 
 
-/** The template assigned to a node of content */
-export type ContentTemplate = (DefaultTemplate) & { __isUnion?: true }
-
-
-/** A node that NodeWith a title */
+/** Content with a dedicated title field. The title typically serves as the main heading and identifier for the content. */
 export type NodeWithTitle = (ArquivoAssessoria | MediaItem | Page | Post | CentraldeDecorado | Empreendimento | Banner) & { __isUnion?: true }
 
 
-/** A node that can have an author assigned to it */
+/** Content that can be attributed to a specific user. Provides fields for accessing the author&#039;s information and establishing content ownership. */
 export type NodeWithAuthor = (MediaItem | Page | Post) & { __isUnion?: true }
 
 
@@ -1526,15 +1518,15 @@ export interface NodeWithAuthorToUserConnectionEdge {
 }
 
 
-/** A node that can have comments associated with it */
+/** Content that can receive and display user-submitted comments. Provides fields for accessing comment counts and managing comment status. */
 export type NodeWithComments = (MediaItem | Page | Post) & { __isUnion?: true }
 
 
-/** Content node with hierarchical (parent/child) relationships */
+/** Content that can be organized in a parent-child structure. Provides fields for navigating up and down the hierarchy and maintaining structured relationships. */
 export type HierarchicalContentNode = (MediaItem | Page) & { __isUnion?: true }
 
 
-/** Node with hierarchical (parent/child) relationships */
+/** Content that can exist in a parent-child structure. Provides fields for navigating up (parent) and down (children) through the hierarchy. */
 export type HierarchicalNode = (MediaItem | Page | Category) & { __isUnion?: true }
 
 export type HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgsMetaCompareEnum = 'BETWEEN' | 'EQUAL_TO' | 'EXISTS' | 'GREATER_THAN' | 'GREATER_THAN_OR_EQUAL_TO' | 'IN' | 'LESS_THAN' | 'LESS_THAN_OR_EQUAL_TO' | 'LIKE' | 'NOT_BETWEEN' | 'NOT_EQUAL_TO' | 'NOT_EXISTS' | 'NOT_IN' | 'NOT_LIKE'
@@ -1564,7 +1556,7 @@ export interface HierarchicalContentNodeToContentNodeAncestorsConnectionEdge {
 }
 
 
-/** Page Info on the &quot;HierarchicalContentNodeToContentNodeAncestorsConnection&quot; */
+/** Pagination metadata specific to &quot;HierarchicalContentNodeToContentNodeAncestorsConnection&quot; collections. Provides cursors and flags for navigating through sets of HierarchicalContentNodeToContentNodeAncestorsConnection Nodes. */
 export interface HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -1604,7 +1596,7 @@ export interface HierarchicalContentNodeToContentNodeChildrenConnectionEdge {
 }
 
 
-/** Page Info on the &quot;HierarchicalContentNodeToContentNodeChildrenConnection&quot; */
+/** Pagination metadata specific to &quot;HierarchicalContentNodeToContentNodeChildrenConnection&quot; collections. Provides cursors and flags for navigating through sets of HierarchicalContentNodeToContentNodeChildrenConnection Nodes. */
 export interface HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -1640,7 +1632,7 @@ export interface ContentNodeToEnqueuedScriptConnectionEdge {
 }
 
 
-/** Page Info on the &quot;ContentNodeToEnqueuedScriptConnection&quot; */
+/** Pagination metadata specific to &quot;ContentNodeToEnqueuedScriptConnection&quot; collections. Provides cursors and flags for navigating through sets of ContentNodeToEnqueuedScriptConnection Nodes. */
 export interface ContentNodeToEnqueuedScriptConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -1676,7 +1668,7 @@ export interface ContentNodeToEnqueuedStylesheetConnectionEdge {
 }
 
 
-/** Page Info on the &quot;ContentNodeToEnqueuedStylesheetConnection&quot; */
+/** Pagination metadata specific to &quot;ContentNodeToEnqueuedStylesheetConnection&quot; collections. Provides cursors and flags for navigating through sets of ContentNodeToEnqueuedStylesheetConnection Nodes. */
 export interface ContentNodeToEnqueuedStylesheetConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -1732,7 +1724,7 @@ export interface MediaItemToCommentConnectionEdge {
 }
 
 
-/** Page Info on the &quot;MediaItemToCommentConnection&quot; */
+/** Pagination metadata specific to &quot;MediaItemToCommentConnection&quot; collections. Provides cursors and flags for navigating through sets of MediaItemToCommentConnection Nodes. */
 export interface MediaItemToCommentConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -1746,7 +1738,7 @@ export interface MediaItemToCommentConnectionPageInfo {
 }
 
 
-/** The size of the media item object. */
+/** Predefined image size variations. Represents the standard image dimensions available for media assets. */
 export type MediaItemSizeEnum = 'LARGE' | 'MEDIUM' | 'MEDIUM_LARGE' | 'THUMBNAIL' | '_1536X1536' | '_2048X2048'
 
 
@@ -1820,7 +1812,7 @@ export interface MediaSize {
 }
 
 
-/** Page Info on the connected MediaItemConnectionEdge */
+/** Pagination metadata specific to &quot;MediaItemConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;MediaItemConnectionEdge&quot; Nodes. */
 export type MediaItemConnectionPageInfo = (UserToMediaItemConnectionPageInfo | RootQueryToMediaItemConnectionPageInfo) & { __isUnion?: true }
 
 
@@ -1834,7 +1826,7 @@ export interface UserToMediaItemConnectionEdge {
 }
 
 
-/** Page Info on the &quot;UserToMediaItemConnection&quot; */
+/** Pagination metadata specific to &quot;UserToMediaItemConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToMediaItemConnection Nodes. */
 export interface UserToMediaItemConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -1864,15 +1856,15 @@ export interface UserToPageConnection {
 }
 
 
-/** Connection to page Nodes */
+/** A paginated collection of page Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of page Nodes */
 export type PageConnection = (UserToPageConnection | PageToRevisionConnection | RootQueryToPageConnection) & { __isUnion?: true }
 
 
-/** Edge between a Node and a connected page */
+/** Represents a connection to a page. Contains both the page Node and metadata about the relationship. */
 export type PageConnectionEdge = (PageToPreviewConnectionEdge | PageToRevisionConnectionEdge | UserToPageConnectionEdge | RootQueryToPageConnectionEdge) & { __isUnion?: true }
 
 
-/** The page type */
+/** A standalone content entry generally used for static, non-chronological content such as &quot;About Us&quot; or &quot;Contact&quot; pages. */
 export interface Page {
     /** Returns ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
     ancestors?: HierarchicalContentNodeToContentNodeAncestorsConnection
@@ -1900,6 +1892,12 @@ export interface Page {
     contentTypeName: Scalars['String']
     /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo sobre&quot; was set to Show in GraphQL. */
     conteuSobre?: Page_Conteusobre
+    /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo Indique e Ganhe&quot; was set to Show in GraphQL. */
+    conteudoIndiqueEGanhe?: Page_Conteudoindiqueeganhe
+    /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo L.Store&quot; was set to Show in GraphQL. */
+    conteudoLStore?: Page_Conteudolstore
+    /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo política de qualidade&quot; was set to Show in GraphQL. */
+    conteudoPoliticaDeQualidade?: Page_Conteudopoliticadequalidade
     /** The unique identifier stored in the database */
     databaseId: Scalars['Int']
     /** Post publishing date. */
@@ -1971,7 +1969,7 @@ export interface Page {
     parentId?: Scalars['ID']
     /** The password for the page object. */
     password?: Scalars['String']
-    /** Connection between the Page type and the page type */
+    /** Connection between the page type and the page type */
     preview?: PageToPreviewConnectionEdge
     /** The database id of the preview node */
     previewRevisionDatabaseId?: Scalars['Int']
@@ -1995,15 +1993,15 @@ export interface Page {
 }
 
 
-/** Nodes that can be seen in a preview (unpublished) state. */
+/** Content that supports a draft preview mode. Allows viewing unpublished changes before they are made publicly available. Previewing unpublished changes requires appropriate permissions. */
 export type Previewable = (ArquivoAssessoria | Page | Post | CentraldeDecorado | Empreendimento | Banner) & { __isUnion?: true }
 
 
-/** A node that supports the content editor */
+/** Content that has a main body field which can contain formatted text and media. Provides access to both raw (with appropriate permissions) and rendered versions of the content. */
 export type NodeWithContentEditor = (Page | Post) & { __isUnion?: true }
 
 
-/** A node that can have a featured image set */
+/** Content that can have a primary image attached. This image is typically used for thumbnails, social sharing, and prominent display in the presentation layer. */
 export type NodeWithFeaturedImage = (Page | Post | CentraldeDecorado | Empreendimento) & { __isUnion?: true }
 
 
@@ -2017,7 +2015,7 @@ export interface NodeWithFeaturedImageToMediaItemConnectionEdge {
 }
 
 
-/** A node that can have revisions */
+/** Content that maintains a history of changes. Provides access to previous versions of the content and the ability to restore earlier revisions. */
 export type NodeWithRevisions = (Page | Post) & { __isUnion?: true }
 
 
@@ -2031,11 +2029,11 @@ export interface NodeWithRevisionsToContentNodeConnectionEdge {
 }
 
 
-/** A node that can have page attributes */
+/** Content that supports ordering metadata. Includes a menu order field which can be used for custom sorting in navigation menus and other ordered collections. */
 export type NodeWithPageAttributes = (Page) & { __isUnion?: true }
 
 
-/** Nodes that can be linked to as Menu Items */
+/** Content that can be referenced by navigation menu items. Provides the essential fields needed to create links within navigation structures. */
 export type MenuItemLinkable = (ArquivoAssessoria | Page | Post | Category | CentraldeDecorado | Empreendimento | Tag | Banner) & { __isUnion?: true }
 
 
@@ -2052,7 +2050,7 @@ export interface Page_Assessoria {
 
 
 /** A Field Group registered by ACF */
-export type AcfFieldGroup = (Page_Assessoria | Page_Conteusobre | Page_Conteusobre_item | Page_Informacoesdecontato | CentraldeDecorado_Centraldedecorados | Empreendimento_Empreendimento | Empreendimento_Empreendimento_andamentoDaObra | Empreendimento_Empreendimento_diferenciaisItems | Empreendimento_Empreendimento_itemsPlantas | Empreendimento_Empreendimento_itensAreacomuns | Empreendimento_Empreendimento_pontosDeReferencia | Empreendimento_Empreendimento_videosOutos | Empreendimento_Housiverso | Empreendimento_Housiverso_diferencial | ArquivoAssessoria_DownAssessoria | Banner_BannerHome | Banner_BannerHome_BhConteudo | Banner_BannerHome_ImagensProntas) & { __isUnion?: true }
+export type AcfFieldGroup = (Page_Assessoria | Page_Conteusobre | Page_Conteusobre_item | Page_Conteudoindiqueeganhe | Page_Conteudoindiqueeganhe_EmObra | Page_Conteudoindiqueeganhe_Entregue | Page_Conteudolstore | Page_Conteudopoliticadequalidade | Page_Conteudopoliticadequalidade_certificacaoPq | Page_Conteudopoliticadequalidade_praticaItensPq | Page_Informacoesdecontato | CentraldeDecorado_Centraldedecorados | Empreendimento_Empreendimento | Empreendimento_Empreendimento_andamentoDaObra | Empreendimento_Empreendimento_diferenciaisItems | Empreendimento_Empreendimento_itemsPlantas | Empreendimento_Empreendimento_itensAreacomuns | Empreendimento_Empreendimento_pontosDeReferencia | Empreendimento_Empreendimento_videosOutos | Empreendimento_Housiverso | Empreendimento_Housiverso_diferencial | ArquivoAssessoria_DownAssessoria | Banner_BannerHome | Banner_BannerHome_BhConteudo | Banner_BannerHome_ImagensProntas) & { __isUnion?: true }
 
 
 /** Connection between the Page type and the Comment type */
@@ -2077,7 +2075,7 @@ export interface PageToCommentConnectionEdge {
 }
 
 
-/** Page Info on the &quot;PageToCommentConnection&quot; */
+/** Pagination metadata specific to &quot;PageToCommentConnection&quot; collections. Provides cursors and flags for navigating through sets of PageToCommentConnection Nodes. */
 export interface PageToCommentConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -2125,6 +2123,110 @@ export interface Page_Conteusobre_item {
 
 
 /** Field Group */
+export interface Page_Conteudoindiqueeganhe {
+    descricaoIg?: Scalars['String']
+    descricaoPasso1Ig?: Scalars['String']
+    descricaoPasso2Ig?: Scalars['String']
+    descricaoPasso3Ig?: Scalars['String']
+    emObra?: Page_Conteudoindiqueeganhe_EmObra
+    entregue?: Page_Conteudoindiqueeganhe_Entregue
+    /** The name of the ACF Field Group */
+    fieldGroupName?: Scalars['String']
+    imagemIg?: MediaItem
+    regulamentoIndiqueGanhe?: MediaItem
+    tituloPasso1Ig?: Scalars['String']
+    tituloPasso2Ig?: Scalars['String']
+    tituloPasso3Ig?: Scalars['String']
+    __typename: 'Page_Conteudoindiqueeganhe'
+}
+
+
+/** Field Group */
+export interface Page_Conteudoindiqueeganhe_EmObra {
+    beneficioEmobraIg?: Scalars['String']
+    /** The name of the ACF Field Group */
+    fieldGroupName?: Scalars['String']
+    observacaoEmobraIg?: Scalars['String']
+    __typename: 'Page_Conteudoindiqueeganhe_EmObra'
+}
+
+
+/** Field Group */
+export interface Page_Conteudoindiqueeganhe_Entregue {
+    beneficioEntregueIg?: Scalars['String']
+    /** The name of the ACF Field Group */
+    fieldGroupName?: Scalars['String']
+    observacaoEntregueIg?: Scalars['String']
+    __typename: 'Page_Conteudoindiqueeganhe_Entregue'
+}
+
+
+/** Field Group */
+export interface Page_Conteudolstore {
+    descicaoBannerLstore?: Scalars['String']
+    descricaoGaleriaLstore?: Scalars['String']
+    descricaoPasso1Lstore?: Scalars['String']
+    descricaoPasso2Lstore?: Scalars['String']
+    descricaoPasso3Lstore?: Scalars['String']
+    descricaoPassoLstore?: Scalars['String']
+    descricaoSalaLstore?: Scalars['String']
+    descricaoSobreLstore?: Scalars['String']
+    descricaoUltimoLstore?: Scalars['String']
+    /** The name of the ACF Field Group */
+    fieldGroupName?: Scalars['String']
+    fraseBannerLstore?: Scalars['String']
+    imagem1?: MediaItem
+    imagem2?: MediaItem
+    imagemSobreLstore?: MediaItem
+    imagensGaleriaLstore?: (MediaItem | undefined)[]
+    imagensSalaLstore?: (MediaItem | undefined)[]
+    numeroParaAgendamentoLstore?: Scalars['String']
+    textoAuxiliarSobreLstore?: Scalars['String']
+    tituloBannerLstore?: Scalars['String']
+    tituloGaleriaLstore?: Scalars['String']
+    tituloPasso1Lstore?: Scalars['String']
+    tituloPasso2Lstore?: Scalars['String']
+    tituloPasso3Lstore?: Scalars['String']
+    tituloPassoLstore?: Scalars['String']
+    tituloSalaLstore?: Scalars['String']
+    tituloUltimoLstore?: Scalars['String']
+    __typename: 'Page_Conteudolstore'
+}
+
+
+/** Field Group */
+export interface Page_Conteudopoliticadequalidade {
+    certificacaoPq?: (Page_Conteudopoliticadequalidade_certificacaoPq | undefined)[]
+    /** The name of the ACF Field Group */
+    fieldGroupName?: Scalars['String']
+    praticaItensPq?: (Page_Conteudopoliticadequalidade_praticaItensPq | undefined)[]
+    __typename: 'Page_Conteudopoliticadequalidade'
+}
+
+
+/** Field Group */
+export interface Page_Conteudopoliticadequalidade_certificacaoPq {
+    descricaoCertPq?: Scalars['String']
+    /** The name of the ACF Field Group */
+    fieldGroupName?: Scalars['String']
+    imagemCertPq?: MediaItem
+    tituloCertPq?: Scalars['String']
+    __typename: 'Page_Conteudopoliticadequalidade_certificacaoPq'
+}
+
+
+/** Field Group */
+export interface Page_Conteudopoliticadequalidade_praticaItensPq {
+    descricaoCertPq?: Scalars['String']
+    /** The name of the ACF Field Group */
+    fieldGroupName?: Scalars['String']
+    imagemCertPq?: MediaItem
+    tituloCertPq?: Scalars['String']
+    __typename: 'Page_Conteudopoliticadequalidade_praticaItensPq'
+}
+
+
+/** Field Group */
 export interface Page_Informacoesdecontato {
     coEmail?: Scalars['String']
     coEndereco?: Scalars['String']
@@ -2139,7 +2241,7 @@ export interface Page_Informacoesdecontato {
 }
 
 
-/** Connection between the Page type and the page type */
+/** Connection between the page type and the page type */
 export interface PageToPreviewConnectionEdge {
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: Scalars['String']
@@ -2175,7 +2277,7 @@ export interface PageToRevisionConnectionEdge {
 }
 
 
-/** Page Info on the &quot;PageToRevisionConnection&quot; */
+/** Pagination metadata specific to &quot;PageToRevisionConnection&quot; collections. Provides cursors and flags for navigating through sets of PageToRevisionConnection Nodes. */
 export interface PageToRevisionConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -2189,7 +2291,7 @@ export interface PageToRevisionConnectionPageInfo {
 }
 
 
-/** Page Info on the connected PageConnectionEdge */
+/** Pagination metadata specific to &quot;PageConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;PageConnectionEdge&quot; Nodes. */
 export type PageConnectionPageInfo = (PageToRevisionConnectionPageInfo | UserToPageConnectionPageInfo | RootQueryToPageConnectionPageInfo) & { __isUnion?: true }
 
 
@@ -2203,7 +2305,7 @@ export interface UserToPageConnectionEdge {
 }
 
 
-/** Page Info on the &quot;UserToPageConnection&quot; */
+/** Pagination metadata specific to &quot;UserToPageConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToPageConnection Nodes. */
 export interface UserToPageConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -2233,15 +2335,15 @@ export interface UserToPostConnection {
 }
 
 
-/** Connection to post Nodes */
+/** A paginated collection of post Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of post Nodes */
 export type PostConnection = (UserToPostConnection | PostToPostConnection | CategoryToPostConnection | PostFormatToPostConnection | PostToRevisionConnection | TagToPostConnection | RootQueryToPostConnection) & { __isUnion?: true }
 
 
-/** Edge between a Node and a connected post */
+/** Represents a connection to a post. Contains both the post Node and metadata about the relationship. */
 export type PostConnectionEdge = (PostToPostConnectionEdge | CategoryToPostConnectionEdge | PostToParentConnectionEdge | PostFormatToPostConnectionEdge | PostToPreviewConnectionEdge | PostToRevisionConnectionEdge | TagToPostConnectionEdge | UserToPostConnectionEdge | RootQueryToPostConnectionEdge) & { __isUnion?: true }
 
 
-/** The post type */
+/** A chronological content entry typically used for blog posts, news articles, or similar date-based content. */
 export interface Post {
     /**
      * @deprecated This content type is not hierarchical and typically will not have ancestors
@@ -2342,7 +2444,7 @@ export interface Post {
      * The id field matches the WP_Post-&gt;ID field.
      */
     postId: Scalars['Int']
-    /** Connection between the Post type and the post type */
+    /** Connection between the post type and the post type */
     preview?: PostToPreviewConnectionEdge
     /** The database id of the preview node */
     previewRevisionDatabaseId?: Scalars['Int']
@@ -2372,15 +2474,15 @@ export interface Post {
 }
 
 
-/** A node that can have an excerpt */
+/** A node which provides an excerpt field, which is a condensed summary of the main content. Excerpts can be manually created or automatically generated and are often used in content listings and search results. */
 export type NodeWithExcerpt = (Post) & { __isUnion?: true }
 
 
-/** A node that can have trackbacks and pingbacks */
+/** Content that supports cross-site notifications when linked to by other sites. Includes fields for pingback status and linked URLs. */
 export type NodeWithTrackbacks = (Post) & { __isUnion?: true }
 
 
-/** Connection between the Post type and the post type */
+/** Connection between the post type and the post type */
 export interface PostToPostConnection {
     /** Edges for the PostToPostConnection connection */
     edges: PostToPostConnectionEdge[]
@@ -2408,7 +2510,7 @@ export interface PostToPostConnectionEdge {
 }
 
 
-/** Page Info on the &quot;PostToPostConnection&quot; */
+/** Pagination metadata specific to &quot;PostToPostConnection&quot; collections. Provides cursors and flags for navigating through sets of PostToPostConnection Nodes. */
 export interface PostToPostConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -2422,11 +2524,11 @@ export interface PostToPostConnectionPageInfo {
 }
 
 
-/** Page Info on the connected PostConnectionEdge */
+/** Pagination metadata specific to &quot;PostConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;PostConnectionEdge&quot; Nodes. */
 export type PostConnectionPageInfo = (PostToPostConnectionPageInfo | CategoryToPostConnectionPageInfo | PostFormatToPostConnectionPageInfo | PostToRevisionConnectionPageInfo | TagToPostConnectionPageInfo | UserToPostConnectionPageInfo | RootQueryToPostConnectionPageInfo) & { __isUnion?: true }
 
 
-/** Options for ordering the connection by */
+/** Sorting attributes for taxonomy term collections. Determines which property of taxonomy terms is used for ordering results. */
 export type TermObjectsConnectionOrderbyEnum = 'COUNT' | 'DESCRIPTION' | 'NAME' | 'SLUG' | 'TERM_GROUP' | 'TERM_ID' | 'TERM_ORDER'
 
 
@@ -2442,15 +2544,15 @@ export interface PostToCategoryConnection {
 }
 
 
-/** Connection to category Nodes */
+/** A paginated collection of category Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of category Nodes */
 export type CategoryConnection = (PostToCategoryConnection | CategoryToAncestorsCategoryConnection | CentraldeDecoradoToCategoryConnection | CategoryToCategoryConnection | EmpreendimentoToCategoryConnection | RootQueryToCategoryConnection) & { __isUnion?: true }
 
 
-/** Edge between a Node and a connected category */
+/** Represents a connection to a category. Contains both the category Node and metadata about the relationship. */
 export type CategoryConnectionEdge = (CategoryToAncestorsCategoryConnectionEdge | CentraldeDecoradoToCategoryConnectionEdge | CategoryToCategoryConnectionEdge | EmpreendimentoToCategoryConnectionEdge | CategoryToParentCategoryConnectionEdge | PostToCategoryConnectionEdge | RootQueryToCategoryConnectionEdge) & { __isUnion?: true }
 
 
-/** The category type */
+/** A taxonomy term that classifies content. Categories support hierarchy and can be used to create a nested structure. */
 export interface Category {
     /** The ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
     ancestors?: CategoryToAncestorsCategoryConnection
@@ -2545,7 +2647,7 @@ export interface CategoryToAncestorsCategoryConnectionEdge {
 }
 
 
-/** Page Info on the &quot;CategoryToAncestorsCategoryConnection&quot; */
+/** Pagination metadata specific to &quot;CategoryToAncestorsCategoryConnection&quot; collections. Provides cursors and flags for navigating through sets of CategoryToAncestorsCategoryConnection Nodes. */
 export interface CategoryToAncestorsCategoryConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -2559,7 +2661,7 @@ export interface CategoryToAncestorsCategoryConnectionPageInfo {
 }
 
 
-/** Page Info on the connected CategoryConnectionEdge */
+/** Pagination metadata specific to &quot;CategoryConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;CategoryConnectionEdge&quot; Nodes. */
 export type CategoryConnectionPageInfo = (CategoryToAncestorsCategoryConnectionPageInfo | CentraldeDecoradoToCategoryConnectionPageInfo | CategoryToCategoryConnectionPageInfo | EmpreendimentoToCategoryConnectionPageInfo | PostToCategoryConnectionPageInfo | RootQueryToCategoryConnectionPageInfo) & { __isUnion?: true }
 
 export type CategoryToCentraldeDecoradoConnectionWhereArgsMetaCompareEnum = 'BETWEEN' | 'EQUAL_TO' | 'EXISTS' | 'GREATER_THAN' | 'GREATER_THAN_OR_EQUAL_TO' | 'IN' | 'LESS_THAN' | 'LESS_THAN_OR_EQUAL_TO' | 'LIKE' | 'NOT_BETWEEN' | 'NOT_EQUAL_TO' | 'NOT_EXISTS' | 'NOT_IN' | 'NOT_LIKE'
@@ -2579,11 +2681,11 @@ export interface CategoryToCentraldeDecoradoConnection {
 }
 
 
-/** Connection to CentraldeDecorado Nodes */
+/** A paginated collection of CentraldeDecorado Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of CentraldeDecorado Nodes */
 export type CentraldeDecoradoConnection = (CategoryToCentraldeDecoradoConnection | CentraldeDecoradoToCentraldeDecoradoConnection | RootQueryToCentraldeDecoradoConnection) & { __isUnion?: true }
 
 
-/** Edge between a Node and a connected CentraldeDecorado */
+/** Represents a connection to a CentraldeDecorado. Contains both the CentraldeDecorado Node and metadata about the relationship. */
 export type CentraldeDecoradoConnectionEdge = (CentraldeDecoradoToCentraldeDecoradoConnectionEdge | CentraldeDecoradoToParentConnectionEdge | CentraldeDecoradoToPreviewConnectionEdge | CategoryToCentraldeDecoradoConnectionEdge | RootQueryToCentraldeDecoradoConnectionEdge) & { __isUnion?: true }
 
 
@@ -2714,7 +2816,7 @@ export interface CentraldeDecoradoToCentraldeDecoradoConnectionEdge {
 }
 
 
-/** Page Info on the &quot;CentraldeDecoradoToCentraldeDecoradoConnection&quot; */
+/** Pagination metadata specific to &quot;CentraldeDecoradoToCentraldeDecoradoConnection&quot; collections. Provides cursors and flags for navigating through sets of CentraldeDecoradoToCentraldeDecoradoConnection Nodes. */
 export interface CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -2728,7 +2830,7 @@ export interface CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo {
 }
 
 
-/** Page Info on the connected CentraldeDecoradoConnectionEdge */
+/** Pagination metadata specific to &quot;CentraldeDecoradoConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;CentraldeDecoradoConnectionEdge&quot; Nodes. */
 export type CentraldeDecoradoConnectionPageInfo = (CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo | CategoryToCentraldeDecoradoConnectionPageInfo | RootQueryToCentraldeDecoradoConnectionPageInfo) & { __isUnion?: true }
 
 
@@ -2754,7 +2856,7 @@ export interface CentraldeDecoradoToCategoryConnectionEdge {
 }
 
 
-/** Page Info on the &quot;CentraldeDecoradoToCategoryConnection&quot; */
+/** Pagination metadata specific to &quot;CentraldeDecoradoToCategoryConnection&quot; collections. Provides cursors and flags for navigating through sets of CentraldeDecoradoToCategoryConnection Nodes. */
 export interface CentraldeDecoradoToCategoryConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -2833,7 +2935,7 @@ export interface CentraldeDecoradoToTermNodeConnectionEdge {
 }
 
 
-/** Page Info on the &quot;CentraldeDecoradoToTermNodeConnection&quot; */
+/** Pagination metadata specific to &quot;CentraldeDecoradoToTermNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of CentraldeDecoradoToTermNodeConnection Nodes. */
 export interface CentraldeDecoradoToTermNodeConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -2857,7 +2959,7 @@ export interface CategoryToCentraldeDecoradoConnectionEdge {
 }
 
 
-/** Page Info on the &quot;CategoryToCentraldeDecoradoConnection&quot; */
+/** Pagination metadata specific to &quot;CategoryToCentraldeDecoradoConnection&quot; collections. Provides cursors and flags for navigating through sets of CategoryToCentraldeDecoradoConnection Nodes. */
 export interface CategoryToCentraldeDecoradoConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -2893,7 +2995,7 @@ export interface CategoryToCategoryConnectionEdge {
 }
 
 
-/** Page Info on the &quot;CategoryToCategoryConnection&quot; */
+/** Pagination metadata specific to &quot;CategoryToCategoryConnection&quot; collections. Provides cursors and flags for navigating through sets of CategoryToCategoryConnection Nodes. */
 export interface CategoryToCategoryConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -2937,7 +3039,7 @@ export interface CategoryToContentNodeConnectionEdge {
 }
 
 
-/** Page Info on the &quot;CategoryToContentNodeConnection&quot; */
+/** Pagination metadata specific to &quot;CategoryToContentNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of CategoryToContentNodeConnection Nodes. */
 export interface CategoryToContentNodeConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -2967,11 +3069,11 @@ export interface CategoryToEmpreendimentoConnection {
 }
 
 
-/** Connection to Empreendimento Nodes */
+/** A paginated collection of Empreendimento Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of Empreendimento Nodes */
 export type EmpreendimentoConnection = (CategoryToEmpreendimentoConnection | EmpreendimentoToEmpreendimentoConnection | RootQueryToEmpreendimentoConnection) & { __isUnion?: true }
 
 
-/** Edge between a Node and a connected Empreendimento */
+/** Represents a connection to a Empreendimento. Contains both the Empreendimento Node and metadata about the relationship. */
 export type EmpreendimentoConnectionEdge = (EmpreendimentoToEmpreendimentoConnectionEdge | EmpreendimentoToParentConnectionEdge | EmpreendimentoToPreviewConnectionEdge | CategoryToEmpreendimentoConnectionEdge | RootQueryToEmpreendimentoConnectionEdge) & { __isUnion?: true }
 
 
@@ -3104,7 +3206,7 @@ export interface EmpreendimentoToEmpreendimentoConnectionEdge {
 }
 
 
-/** Page Info on the &quot;EmpreendimentoToEmpreendimentoConnection&quot; */
+/** Pagination metadata specific to &quot;EmpreendimentoToEmpreendimentoConnection&quot; collections. Provides cursors and flags for navigating through sets of EmpreendimentoToEmpreendimentoConnection Nodes. */
 export interface EmpreendimentoToEmpreendimentoConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -3118,7 +3220,7 @@ export interface EmpreendimentoToEmpreendimentoConnectionPageInfo {
 }
 
 
-/** Page Info on the connected EmpreendimentoConnectionEdge */
+/** Pagination metadata specific to &quot;EmpreendimentoConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;EmpreendimentoConnectionEdge&quot; Nodes. */
 export type EmpreendimentoConnectionPageInfo = (EmpreendimentoToEmpreendimentoConnectionPageInfo | CategoryToEmpreendimentoConnectionPageInfo | RootQueryToEmpreendimentoConnectionPageInfo) & { __isUnion?: true }
 
 
@@ -3144,7 +3246,7 @@ export interface EmpreendimentoToCategoryConnectionEdge {
 }
 
 
-/** Page Info on the &quot;EmpreendimentoToCategoryConnection&quot; */
+/** Pagination metadata specific to &quot;EmpreendimentoToCategoryConnection&quot; collections. Provides cursors and flags for navigating through sets of EmpreendimentoToCategoryConnection Nodes. */
 export interface EmpreendimentoToCategoryConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -3321,7 +3423,7 @@ export interface EmpreendimentoToTermNodeConnectionEdge {
 }
 
 
-/** Page Info on the &quot;EmpreendimentoToTermNodeConnection&quot; */
+/** Pagination metadata specific to &quot;EmpreendimentoToTermNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of EmpreendimentoToTermNodeConnection Nodes. */
 export interface EmpreendimentoToTermNodeConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -3345,7 +3447,7 @@ export interface CategoryToEmpreendimentoConnectionEdge {
 }
 
 
-/** Page Info on the &quot;CategoryToEmpreendimentoConnection&quot; */
+/** Pagination metadata specific to &quot;CategoryToEmpreendimentoConnection&quot; collections. Provides cursors and flags for navigating through sets of CategoryToEmpreendimentoConnection Nodes. */
 export interface CategoryToEmpreendimentoConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -3395,7 +3497,7 @@ export interface CategoryToPostConnectionEdge {
 }
 
 
-/** Page Info on the &quot;CategoryToPostConnection&quot; */
+/** Pagination metadata specific to &quot;CategoryToPostConnection&quot; collections. Provides cursors and flags for navigating through sets of CategoryToPostConnection Nodes. */
 export interface CategoryToPostConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -3429,7 +3531,7 @@ export interface PostToCategoryConnectionEdge {
 }
 
 
-/** Page Info on the &quot;PostToCategoryConnection&quot; */
+/** Pagination metadata specific to &quot;PostToCategoryConnection&quot; collections. Provides cursors and flags for navigating through sets of PostToCategoryConnection Nodes. */
 export interface PostToCategoryConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -3465,7 +3567,7 @@ export interface PostToCommentConnectionEdge {
 }
 
 
-/** Page Info on the &quot;PostToCommentConnection&quot; */
+/** Pagination metadata specific to &quot;PostToCommentConnection&quot; collections. Provides cursors and flags for navigating through sets of PostToCommentConnection Nodes. */
 export interface PostToCommentConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -3479,7 +3581,7 @@ export interface PostToCommentConnectionPageInfo {
 }
 
 
-/** Connection between the Post type and the post type */
+/** Connection between the post type and the post type */
 export interface PostToParentConnectionEdge {
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: Scalars['String']
@@ -3504,15 +3606,15 @@ export interface PostToPostFormatConnection {
 }
 
 
-/** Connection to postFormat Nodes */
+/** A paginated collection of postFormat Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of postFormat Nodes */
 export type PostFormatConnection = (PostToPostFormatConnection | RootQueryToPostFormatConnection) & { __isUnion?: true }
 
 
-/** Edge between a Node and a connected postFormat */
+/** Represents a connection to a postFormat. Contains both the postFormat Node and metadata about the relationship. */
 export type PostFormatConnectionEdge = (PostToPostFormatConnectionEdge | RootQueryToPostFormatConnectionEdge) & { __isUnion?: true }
 
 
-/** The postFormat type */
+/** A standardized classification system for content presentation styles. These formats can be used to display content differently based on type, such as &quot;standard&quot;, &quot;gallery&quot;, &quot;video&quot;, etc. */
 export interface PostFormat {
     /** Connection between the PostFormat type and the ContentNode type */
     contentNodes?: PostFormatToContentNodeConnection
@@ -3597,7 +3699,7 @@ export interface PostFormatToContentNodeConnectionEdge {
 }
 
 
-/** Page Info on the &quot;PostFormatToContentNodeConnection&quot; */
+/** Pagination metadata specific to &quot;PostFormatToContentNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of PostFormatToContentNodeConnection Nodes. */
 export interface PostFormatToContentNodeConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -3637,7 +3739,7 @@ export interface PostFormatToPostConnectionEdge {
 }
 
 
-/** Page Info on the &quot;PostFormatToPostConnection&quot; */
+/** Pagination metadata specific to &quot;PostFormatToPostConnection&quot; collections. Provides cursors and flags for navigating through sets of PostFormatToPostConnection Nodes. */
 export interface PostFormatToPostConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -3661,7 +3763,7 @@ export interface PostFormatToTaxonomyConnectionEdge {
 }
 
 
-/** Page Info on the connected PostFormatConnectionEdge */
+/** Pagination metadata specific to &quot;PostFormatConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;PostFormatConnectionEdge&quot; Nodes. */
 export type PostFormatConnectionPageInfo = (PostToPostFormatConnectionPageInfo | RootQueryToPostFormatConnectionPageInfo) & { __isUnion?: true }
 
 
@@ -3675,7 +3777,7 @@ export interface PostToPostFormatConnectionEdge {
 }
 
 
-/** Page Info on the &quot;PostToPostFormatConnection&quot; */
+/** Pagination metadata specific to &quot;PostToPostFormatConnection&quot; collections. Provides cursors and flags for navigating through sets of PostToPostFormatConnection Nodes. */
 export interface PostToPostFormatConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -3689,7 +3791,7 @@ export interface PostToPostFormatConnectionPageInfo {
 }
 
 
-/** Connection between the Post type and the post type */
+/** Connection between the post type and the post type */
 export interface PostToPreviewConnectionEdge {
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: Scalars['String']
@@ -3725,7 +3827,7 @@ export interface PostToRevisionConnectionEdge {
 }
 
 
-/** Page Info on the &quot;PostToRevisionConnection&quot; */
+/** Pagination metadata specific to &quot;PostToRevisionConnection&quot; collections. Provides cursors and flags for navigating through sets of PostToRevisionConnection Nodes. */
 export interface PostToRevisionConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -3751,15 +3853,15 @@ export interface PostToTagConnection {
 }
 
 
-/** Connection to tag Nodes */
+/** A paginated collection of tag Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of tag Nodes */
 export type TagConnection = (PostToTagConnection | RootQueryToTagConnection) & { __isUnion?: true }
 
 
-/** Edge between a Node and a connected tag */
+/** Represents a connection to a tag. Contains both the tag Node and metadata about the relationship. */
 export type TagConnectionEdge = (PostToTagConnectionEdge | RootQueryToTagConnectionEdge) & { __isUnion?: true }
 
 
-/** The tag type */
+/** A taxonomy term used to organize and classify content. Tags do not have a hierarchy and are generally used for more specific classifications. */
 export interface Tag {
     /** Connection between the Tag type and the ContentNode type */
     contentNodes?: TagToContentNodeConnection
@@ -3844,7 +3946,7 @@ export interface TagToContentNodeConnectionEdge {
 }
 
 
-/** Page Info on the &quot;TagToContentNodeConnection&quot; */
+/** Pagination metadata specific to &quot;TagToContentNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of TagToContentNodeConnection Nodes. */
 export interface TagToContentNodeConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -3884,7 +3986,7 @@ export interface TagToPostConnectionEdge {
 }
 
 
-/** Page Info on the &quot;TagToPostConnection&quot; */
+/** Pagination metadata specific to &quot;TagToPostConnection&quot; collections. Provides cursors and flags for navigating through sets of TagToPostConnection Nodes. */
 export interface TagToPostConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -3908,7 +4010,7 @@ export interface TagToTaxonomyConnectionEdge {
 }
 
 
-/** Page Info on the connected TagConnectionEdge */
+/** Pagination metadata specific to &quot;TagConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;TagConnectionEdge&quot; Nodes. */
 export type TagConnectionPageInfo = (PostToTagConnectionPageInfo | RootQueryToTagConnectionPageInfo) & { __isUnion?: true }
 
 
@@ -3922,7 +4024,7 @@ export interface PostToTagConnectionEdge {
 }
 
 
-/** Page Info on the &quot;PostToTagConnection&quot; */
+/** Pagination metadata specific to &quot;PostToTagConnection&quot; collections. Provides cursors and flags for navigating through sets of PostToTagConnection Nodes. */
 export interface PostToTagConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -3958,7 +4060,7 @@ export interface PostToTermNodeConnectionEdge {
 }
 
 
-/** Page Info on the &quot;PostToTermNodeConnection&quot; */
+/** Pagination metadata specific to &quot;PostToTermNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of PostToTermNodeConnection Nodes. */
 export interface PostToTermNodeConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -3982,7 +4084,7 @@ export interface UserToPostConnectionEdge {
 }
 
 
-/** Page Info on the &quot;UserToPostConnection&quot; */
+/** Pagination metadata specific to &quot;UserToPostConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToPostConnection Nodes. */
 export interface UserToPostConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -4022,7 +4124,7 @@ export interface UserToRevisionsConnectionEdge {
 }
 
 
-/** Page Info on the &quot;UserToRevisionsConnection&quot; */
+/** Pagination metadata specific to &quot;UserToRevisionsConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToRevisionsConnection Nodes. */
 export interface UserToRevisionsConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -4048,11 +4150,11 @@ export interface UserToUserRoleConnection {
 }
 
 
-/** Connection to UserRole Nodes */
+/** A paginated collection of UserRole Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of UserRole Nodes */
 export type UserRoleConnection = (UserToUserRoleConnection | RootQueryToUserRoleConnection) & { __isUnion?: true }
 
 
-/** Edge between a Node and a connected UserRole */
+/** Represents a connection to a UserRole. Contains both the UserRole Node and metadata about the relationship. */
 export type UserRoleConnectionEdge = (UserToUserRoleConnectionEdge | RootQueryToUserRoleConnectionEdge) & { __isUnion?: true }
 
 
@@ -4072,7 +4174,7 @@ export interface UserRole {
 }
 
 
-/** Page Info on the connected UserRoleConnectionEdge */
+/** Pagination metadata specific to &quot;UserRoleConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;UserRoleConnectionEdge&quot; Nodes. */
 export type UserRoleConnectionPageInfo = (UserToUserRoleConnectionPageInfo | RootQueryToUserRoleConnectionPageInfo) & { __isUnion?: true }
 
 
@@ -4086,7 +4188,7 @@ export interface UserToUserRoleConnectionEdge {
 }
 
 
-/** Page Info on the &quot;UserToUserRoleConnection&quot; */
+/** Pagination metadata specific to &quot;UserToUserRoleConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToUserRoleConnection Nodes. */
 export interface UserToUserRoleConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -4112,15 +4214,15 @@ export interface ArquivoAssessoriaToArquivoAssessoriaConnection {
 }
 
 
-/** Connection to ArquivoAssessoria Nodes */
+/** A paginated collection of ArquivoAssessoria Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of ArquivoAssessoria Nodes */
 export type ArquivoAssessoriaConnection = (ArquivoAssessoriaToArquivoAssessoriaConnection | RootQueryToArquivoAssessoriaConnection) & { __isUnion?: true }
 
 
-/** Edge between a Node and a connected ArquivoAssessoria */
+/** Represents a connection to a ArquivoAssessoria. Contains both the ArquivoAssessoria Node and metadata about the relationship. */
 export type ArquivoAssessoriaConnectionEdge = (ArquivoAssessoriaToArquivoAssessoriaConnectionEdge | ArquivoAssessoriaToParentConnectionEdge | ArquivoAssessoriaToPreviewConnectionEdge | RootQueryToArquivoAssessoriaConnectionEdge) & { __isUnion?: true }
 
 
-/** Page Info on the connected ArquivoAssessoriaConnectionEdge */
+/** Pagination metadata specific to &quot;ArquivoAssessoriaConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;ArquivoAssessoriaConnectionEdge&quot; Nodes. */
 export type ArquivoAssessoriaConnectionPageInfo = (ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo | RootQueryToArquivoAssessoriaConnectionPageInfo) & { __isUnion?: true }
 
 
@@ -4140,7 +4242,7 @@ export interface ArquivoAssessoriaToArquivoAssessoriaConnectionEdge {
 }
 
 
-/** Page Info on the &quot;ArquivoAssessoriaToArquivoAssessoriaConnection&quot; */
+/** Pagination metadata specific to &quot;ArquivoAssessoriaToArquivoAssessoriaConnection&quot; collections. Provides cursors and flags for navigating through sets of ArquivoAssessoriaToArquivoAssessoriaConnection Nodes. */
 export interface ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -4216,7 +4318,7 @@ export interface RootQueryToArquivoAssessoriaConnectionEdge {
 }
 
 
-/** Page Info on the &quot;RootQueryToArquivoAssessoriaConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToArquivoAssessoriaConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToArquivoAssessoriaConnection Nodes. */
 export interface RootQueryToArquivoAssessoriaConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -4230,7 +4332,7 @@ export interface RootQueryToArquivoAssessoriaConnectionPageInfo {
 }
 
 
-/** The Type of Identifier used to fetch a single resource. Default is ID. */
+/** Identifier types for retrieving a specific Banner. Specifies which unique attribute is used to find an exact Banner. */
 export type BannerIdType = 'DATABASE_ID' | 'ID' | 'SLUG' | 'URI'
 
 
@@ -4335,15 +4437,15 @@ export interface BannerToBannerConnection {
 }
 
 
-/** Connection to Banner Nodes */
+/** A paginated collection of Banner Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of Banner Nodes */
 export type BannerConnection = (BannerToBannerConnection | RootQueryToBannerConnection) & { __isUnion?: true }
 
 
-/** Edge between a Node and a connected Banner */
+/** Represents a connection to a Banner. Contains both the Banner Node and metadata about the relationship. */
 export type BannerConnectionEdge = (BannerToBannerConnectionEdge | BannerToParentConnectionEdge | BannerToPreviewConnectionEdge | RootQueryToBannerConnectionEdge) & { __isUnion?: true }
 
 
-/** Page Info on the connected BannerConnectionEdge */
+/** Pagination metadata specific to &quot;BannerConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;BannerConnectionEdge&quot; Nodes. */
 export type BannerConnectionPageInfo = (BannerToBannerConnectionPageInfo | RootQueryToBannerConnectionPageInfo) & { __isUnion?: true }
 
 
@@ -4363,7 +4465,7 @@ export interface BannerToBannerConnectionEdge {
 }
 
 
-/** Page Info on the &quot;BannerToBannerConnection&quot; */
+/** Pagination metadata specific to &quot;BannerToBannerConnection&quot; collections. Provides cursors and flags for navigating through sets of BannerToBannerConnection Nodes. */
 export interface BannerToBannerConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -4475,7 +4577,7 @@ export interface RootQueryToBannerConnectionEdge {
 }
 
 
-/** Page Info on the &quot;RootQueryToBannerConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToBannerConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToBannerConnection Nodes. */
 export interface RootQueryToBannerConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -4511,7 +4613,7 @@ export interface RootQueryToCategoryConnectionEdge {
 }
 
 
-/** Page Info on the &quot;RootQueryToCategoryConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToCategoryConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToCategoryConnection Nodes. */
 export interface RootQueryToCategoryConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -4525,11 +4627,11 @@ export interface RootQueryToCategoryConnectionPageInfo {
 }
 
 
-/** The Type of Identifier used to fetch a single resource. Default is ID. */
+/** Identifier types for retrieving a specific Category. Determines which unique property (global ID, database ID, slug, etc.) is used to locate the Category. */
 export type CategoryIdType = 'DATABASE_ID' | 'ID' | 'NAME' | 'SLUG' | 'URI'
 
 
-/** The Type of Identifier used to fetch a single resource. Default is ID. */
+/** Identifier types for retrieving a specific CentraldeDecorado. Specifies which unique attribute is used to find an exact CentraldeDecorado. */
 export type CentraldeDecoradoIdType = 'DATABASE_ID' | 'ID' | 'SLUG' | 'URI'
 
 export type RootQueryToCentraldeDecoradoConnectionWhereArgsMetaCompareEnum = 'BETWEEN' | 'EQUAL_TO' | 'EXISTS' | 'GREATER_THAN' | 'GREATER_THAN_OR_EQUAL_TO' | 'IN' | 'LESS_THAN' | 'LESS_THAN_OR_EQUAL_TO' | 'LIKE' | 'NOT_BETWEEN' | 'NOT_EQUAL_TO' | 'NOT_EXISTS' | 'NOT_IN' | 'NOT_LIKE'
@@ -4559,7 +4661,7 @@ export interface RootQueryToCentraldeDecoradoConnectionEdge {
 }
 
 
-/** Page Info on the &quot;RootQueryToCentraldeDecoradoConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToCentraldeDecoradoConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToCentraldeDecoradoConnection Nodes. */
 export interface RootQueryToCentraldeDecoradoConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -4573,7 +4675,7 @@ export interface RootQueryToCentraldeDecoradoConnectionPageInfo {
 }
 
 
-/** The Type of Identifier used to fetch a single comment node. Default is "ID". To be used along with the "id" field. */
+/** Identifier types for retrieving a specific comment. Specifies which unique attribute is used to find a particular comment. */
 export type CommentNodeIdTypeEnum = 'DATABASE_ID' | 'ID'
 
 
@@ -4599,7 +4701,7 @@ export interface RootQueryToCommentConnectionEdge {
 }
 
 
-/** Page Info on the &quot;RootQueryToCommentConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToCommentConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToCommentConnection Nodes. */
 export interface RootQueryToCommentConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -4613,7 +4715,7 @@ export interface RootQueryToCommentConnectionPageInfo {
 }
 
 
-/** The Type of Identifier used to fetch a single resource. Default is ID. */
+/** Identifier types for retrieving specific content. Determines which property (global ID, database ID, URI) is used to locate content objects. */
 export type ContentNodeIdTypeEnum = 'DATABASE_ID' | 'ID' | 'URI'
 
 export type RootQueryToContentNodeConnectionWhereArgsMetaCompareEnum = 'BETWEEN' | 'EQUAL_TO' | 'EXISTS' | 'GREATER_THAN' | 'GREATER_THAN_OR_EQUAL_TO' | 'IN' | 'LESS_THAN' | 'LESS_THAN_OR_EQUAL_TO' | 'LIKE' | 'NOT_BETWEEN' | 'NOT_EQUAL_TO' | 'NOT_EXISTS' | 'NOT_IN' | 'NOT_LIKE'
@@ -4643,7 +4745,7 @@ export interface RootQueryToContentNodeConnectionEdge {
 }
 
 
-/** Page Info on the &quot;RootQueryToContentNodeConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToContentNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToContentNodeConnection Nodes. */
 export interface RootQueryToContentNodeConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -4657,7 +4759,7 @@ export interface RootQueryToContentNodeConnectionPageInfo {
 }
 
 
-/** The Type of Identifier used to fetch a single Content Type node. To be used along with the "id" field. Default is "ID". */
+/** Identifier types for retrieving a specific content type definition. Determines whether to look up content types by ID or name. */
 export type ContentTypeIdTypeEnum = 'ID' | 'NAME'
 
 
@@ -4683,7 +4785,7 @@ export interface RootQueryToContentTypeConnectionEdge {
 }
 
 
-/** Page Info on the &quot;RootQueryToContentTypeConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToContentTypeConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToContentTypeConnection Nodes. */
 export interface RootQueryToContentTypeConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -4707,7 +4809,7 @@ export interface DiscussionSettings {
 }
 
 
-/** The Type of Identifier used to fetch a single resource. Default is ID. */
+/** Identifier types for retrieving a specific Empreendimento. Specifies which unique attribute is used to find an exact Empreendimento. */
 export type EmpreendimentoIdType = 'DATABASE_ID' | 'ID' | 'SLUG' | 'URI'
 
 export type RootQueryToEmpreendimentoConnectionWhereArgsMetaCompareEnum = 'BETWEEN' | 'EQUAL_TO' | 'EXISTS' | 'GREATER_THAN' | 'GREATER_THAN_OR_EQUAL_TO' | 'IN' | 'LESS_THAN' | 'LESS_THAN_OR_EQUAL_TO' | 'LIKE' | 'NOT_BETWEEN' | 'NOT_EQUAL_TO' | 'NOT_EXISTS' | 'NOT_IN' | 'NOT_LIKE'
@@ -4737,7 +4839,7 @@ export interface RootQueryToEmpreendimentoConnectionEdge {
 }
 
 
-/** Page Info on the &quot;RootQueryToEmpreendimentoConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToEmpreendimentoConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToEmpreendimentoConnection Nodes. */
 export interface RootQueryToEmpreendimentoConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -4761,6 +4863,10 @@ export interface GeneralSettings {
     email?: Scalars['String']
     /** Código de localização do WordPress. */
     language?: Scalars['String']
+    /** The media item representing the site icon configured in site settings, used as the site&#039;s favicon and app icon. */
+    siteIcon?: GeneralSettingsToMediaItemConnectionEdge
+    /** Site icon URL configured in site settings, used as the site&#039;s favicon and app icon. */
+    siteIconUrl?: Scalars['String']
     /** Número do dia da semana em que a semana deve iniciar. */
     startOfWeek?: Scalars['Int']
     /** Um formato de hora para todos os textos. */
@@ -4775,7 +4881,17 @@ export interface GeneralSettings {
 }
 
 
-/** The Type of Identifier used to fetch a single resource. Default is ID. */
+/** Connection between the GeneralSettings type and the MediaItem type */
+export interface GeneralSettingsToMediaItemConnectionEdge {
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: Scalars['String']
+    /** The node of the connection, without the edges */
+    node: MediaItem
+    __typename: 'GeneralSettingsToMediaItemConnectionEdge'
+}
+
+
+/** Identifier types for retrieving a specific MediaItem. Specifies which unique attribute is used to find an exact MediaItem. */
 export type MediaItemIdType = 'DATABASE_ID' | 'ID' | 'SLUG' | 'SOURCE_URL' | 'URI'
 
 export type RootQueryToMediaItemConnectionWhereArgsMetaCompareEnum = 'BETWEEN' | 'EQUAL_TO' | 'EXISTS' | 'GREATER_THAN' | 'GREATER_THAN_OR_EQUAL_TO' | 'IN' | 'LESS_THAN' | 'LESS_THAN_OR_EQUAL_TO' | 'LIKE' | 'NOT_BETWEEN' | 'NOT_EQUAL_TO' | 'NOT_EXISTS' | 'NOT_IN' | 'NOT_LIKE'
@@ -4805,7 +4921,7 @@ export interface RootQueryToMediaItemConnectionEdge {
 }
 
 
-/** Page Info on the &quot;RootQueryToMediaItemConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToMediaItemConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToMediaItemConnection Nodes. */
 export interface RootQueryToMediaItemConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -4819,11 +4935,11 @@ export interface RootQueryToMediaItemConnectionPageInfo {
 }
 
 
-/** The Type of Identifier used to fetch a single node. Default is "ID". To be used along with the "id" field. */
+/** Identifier types for retrieving a specific navigation menu. Specifies which property (ID, name, location) is used to locate a particular menu. */
 export type MenuNodeIdTypeEnum = 'DATABASE_ID' | 'ID' | 'LOCATION' | 'NAME' | 'SLUG'
 
 
-/** Menus are the containers for navigation items. Menus can be assigned to menu locations, which are typically registered by the active theme. */
+/** Collections of navigation links. Menus can be assigned to designated locations and used to build site navigation structures. */
 export interface Menu {
     /** The number of items in the menu */
     count?: Scalars['Int']
@@ -4850,7 +4966,7 @@ export interface Menu {
 }
 
 
-/** Registered menu locations */
+/** Designated areas where navigation menus can be displayed. Represents the named regions in the interface where menus can be assigned. */
 export type MenuLocationEnum = 'EMPTY'
 
 
@@ -4866,11 +4982,11 @@ export interface MenuToMenuItemConnection {
 }
 
 
-/** Connection to MenuItem Nodes */
+/** A paginated collection of MenuItem Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of MenuItem Nodes */
 export type MenuItemConnection = (MenuToMenuItemConnection | MenuItemToMenuItemConnection | RootQueryToMenuItemConnection) & { __isUnion?: true }
 
 
-/** Edge between a Node and a connected MenuItem */
+/** Represents a connection to a MenuItem. Contains both the MenuItem Node and metadata about the relationship. */
 export type MenuItemConnectionEdge = (MenuItemToMenuItemConnectionEdge | MenuToMenuItemConnectionEdge | RootQueryToMenuItemConnectionEdge) & { __isUnion?: true }
 
 
@@ -4950,7 +5066,7 @@ export interface MenuItemToMenuItemConnectionEdge {
 }
 
 
-/** Page Info on the &quot;MenuItemToMenuItemConnection&quot; */
+/** Pagination metadata specific to &quot;MenuItemToMenuItemConnection&quot; collections. Provides cursors and flags for navigating through sets of MenuItemToMenuItemConnection Nodes. */
 export interface MenuItemToMenuItemConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -4964,7 +5080,7 @@ export interface MenuItemToMenuItemConnectionPageInfo {
 }
 
 
-/** Page Info on the connected MenuItemConnectionEdge */
+/** Pagination metadata specific to &quot;MenuItemConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;MenuItemConnectionEdge&quot; Nodes. */
 export type MenuItemConnectionPageInfo = (MenuItemToMenuItemConnectionPageInfo | MenuToMenuItemConnectionPageInfo | RootQueryToMenuItemConnectionPageInfo) & { __isUnion?: true }
 
 
@@ -4978,11 +5094,11 @@ export interface MenuItemToMenuItemLinkableConnectionEdge {
 }
 
 
-/** Edge between a Node and a connected MenuItemLinkable */
+/** Represents a connection to a MenuItemLinkable. Contains both the MenuItemLinkable Node and metadata about the relationship. */
 export type MenuItemLinkableConnectionEdge = (MenuItemToMenuItemLinkableConnectionEdge) & { __isUnion?: true }
 
 
-/** Deprecated in favor of MenuItemLinkeable Interface */
+/** Deprecated in favor of MenuItemLinkable Interface */
 export type MenuItemObjectUnion = (Post | Page | Banner | ArquivoAssessoria | Empreendimento | CentraldeDecorado | Category | Tag) & { __isUnion?: true }
 
 
@@ -4996,7 +5112,7 @@ export interface MenuItemToMenuConnectionEdge {
 }
 
 
-/** Edge between a Node and a connected Menu */
+/** Represents a connection to a Menu. Contains both the Menu Node and metadata about the relationship. */
 export type MenuConnectionEdge = (MenuItemToMenuConnectionEdge | RootQueryToMenuConnectionEdge) & { __isUnion?: true }
 
 
@@ -5010,7 +5126,7 @@ export interface MenuToMenuItemConnectionEdge {
 }
 
 
-/** Page Info on the &quot;MenuToMenuItemConnection&quot; */
+/** Pagination metadata specific to &quot;MenuToMenuItemConnection&quot; collections. Provides cursors and flags for navigating through sets of MenuToMenuItemConnection Nodes. */
 export interface MenuToMenuItemConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -5024,7 +5140,7 @@ export interface MenuToMenuItemConnectionPageInfo {
 }
 
 
-/** The Type of Identifier used to fetch a single node. Default is "ID". To be used along with the "id" field. */
+/** Identifier types for retrieving a specific menu item. Determines whether to look up menu items by global ID or database ID. */
 export type MenuItemNodeIdTypeEnum = 'DATABASE_ID' | 'ID'
 
 
@@ -5050,7 +5166,7 @@ export interface RootQueryToMenuItemConnectionEdge {
 }
 
 
-/** Page Info on the &quot;RootQueryToMenuItemConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToMenuItemConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToMenuItemConnection Nodes. */
 export interface RootQueryToMenuItemConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -5076,11 +5192,11 @@ export interface RootQueryToMenuConnection {
 }
 
 
-/** Connection to Menu Nodes */
+/** A paginated collection of Menu Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of Menu Nodes */
 export type MenuConnection = (RootQueryToMenuConnection) & { __isUnion?: true }
 
 
-/** Page Info on the connected MenuConnectionEdge */
+/** Pagination metadata specific to &quot;MenuConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;MenuConnectionEdge&quot; Nodes. */
 export type MenuConnectionPageInfo = (RootQueryToMenuConnectionPageInfo) & { __isUnion?: true }
 
 
@@ -5094,7 +5210,7 @@ export interface RootQueryToMenuConnectionEdge {
 }
 
 
-/** Page Info on the &quot;RootQueryToMenuConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToMenuConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToMenuConnection Nodes. */
 export interface RootQueryToMenuConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -5108,7 +5224,7 @@ export interface RootQueryToMenuConnectionPageInfo {
 }
 
 
-/** The Type of Identifier used to fetch a single resource. Default is ID. */
+/** Identifier types for retrieving a specific Page. Specifies which unique attribute is used to find an exact Page. */
 export type PageIdType = 'DATABASE_ID' | 'ID' | 'URI'
 
 export type RootQueryToPageConnectionWhereArgsMetaCompareEnum = 'BETWEEN' | 'EQUAL_TO' | 'EXISTS' | 'GREATER_THAN' | 'GREATER_THAN_OR_EQUAL_TO' | 'IN' | 'LESS_THAN' | 'LESS_THAN_OR_EQUAL_TO' | 'LIKE' | 'NOT_BETWEEN' | 'NOT_EQUAL_TO' | 'NOT_EXISTS' | 'NOT_IN' | 'NOT_LIKE'
@@ -5138,7 +5254,7 @@ export interface RootQueryToPageConnectionEdge {
 }
 
 
-/** Page Info on the &quot;RootQueryToPageConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToPageConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToPageConnection Nodes. */
 export interface RootQueryToPageConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -5176,7 +5292,7 @@ export interface Plugin {
 }
 
 
-/** The status of the WordPress plugin. */
+/** Operational status of a plugin. Indicates whether a plugin is active, inactive, or in another state that affects its functionality. */
 export type PluginStatusEnum = 'ACTIVE' | 'DROP_IN' | 'INACTIVE' | 'MUST_USE' | 'PAUSED' | 'RECENTLY_ACTIVE' | 'UPGRADE'
 
 
@@ -5192,15 +5308,15 @@ export interface RootQueryToPluginConnection {
 }
 
 
-/** Connection to Plugin Nodes */
+/** A paginated collection of Plugin Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of Plugin Nodes */
 export type PluginConnection = (RootQueryToPluginConnection) & { __isUnion?: true }
 
 
-/** Edge between a Node and a connected Plugin */
+/** Represents a connection to a Plugin. Contains both the Plugin Node and metadata about the relationship. */
 export type PluginConnectionEdge = (RootQueryToPluginConnectionEdge) & { __isUnion?: true }
 
 
-/** Page Info on the connected PluginConnectionEdge */
+/** Pagination metadata specific to &quot;PluginConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;PluginConnectionEdge&quot; Nodes. */
 export type PluginConnectionPageInfo = (RootQueryToPluginConnectionPageInfo) & { __isUnion?: true }
 
 
@@ -5214,7 +5330,7 @@ export interface RootQueryToPluginConnectionEdge {
 }
 
 
-/** Page Info on the &quot;RootQueryToPluginConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToPluginConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToPluginConnection Nodes. */
 export interface RootQueryToPluginConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -5228,11 +5344,11 @@ export interface RootQueryToPluginConnectionPageInfo {
 }
 
 
-/** The Type of Identifier used to fetch a single resource. Default is ID. */
+/** Identifier types for retrieving a specific Post. Specifies which unique attribute is used to find an exact Post. */
 export type PostIdType = 'DATABASE_ID' | 'ID' | 'SLUG' | 'URI'
 
 
-/** The Type of Identifier used to fetch a single resource. Default is ID. */
+/** Identifier types for retrieving a specific PostFormat. Determines which unique property (global ID, database ID, slug, etc.) is used to locate the PostFormat. */
 export type PostFormatIdType = 'DATABASE_ID' | 'ID' | 'NAME' | 'SLUG' | 'URI'
 
 
@@ -5258,7 +5374,7 @@ export interface RootQueryToPostFormatConnectionEdge {
 }
 
 
-/** Page Info on the &quot;RootQueryToPostFormatConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToPostFormatConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToPostFormatConnection Nodes. */
 export interface RootQueryToPostFormatConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -5298,7 +5414,7 @@ export interface RootQueryToPostConnectionEdge {
 }
 
 
-/** Page Info on the &quot;RootQueryToPostConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToPostConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToPostConnection Nodes. */
 export interface RootQueryToPostConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -5348,7 +5464,7 @@ export interface RootQueryToEnqueuedScriptConnectionEdge {
 }
 
 
-/** Page Info on the &quot;RootQueryToEnqueuedScriptConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToEnqueuedScriptConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToEnqueuedScriptConnection Nodes. */
 export interface RootQueryToEnqueuedScriptConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -5384,7 +5500,7 @@ export interface RootQueryToEnqueuedStylesheetConnectionEdge {
 }
 
 
-/** Page Info on the &quot;RootQueryToEnqueuedStylesheetConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToEnqueuedStylesheetConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToEnqueuedStylesheetConnection Nodes. */
 export interface RootQueryToEnqueuedStylesheetConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -5424,7 +5540,7 @@ export interface RootQueryToRevisionsConnectionEdge {
 }
 
 
-/** Page Info on the &quot;RootQueryToRevisionsConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToRevisionsConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToRevisionsConnection Nodes. */
 export interface RootQueryToRevisionsConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -5438,7 +5554,7 @@ export interface RootQueryToRevisionsConnectionPageInfo {
 }
 
 
-/** The Type of Identifier used to fetch a single resource. Default is ID. */
+/** Identifier types for retrieving a specific Tag. Determines which unique property (global ID, database ID, slug, etc.) is used to locate the Tag. */
 export type TagIdType = 'DATABASE_ID' | 'ID' | 'NAME' | 'SLUG' | 'URI'
 
 
@@ -5464,7 +5580,7 @@ export interface RootQueryToTagConnectionEdge {
 }
 
 
-/** Page Info on the &quot;RootQueryToTagConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToTagConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToTagConnection Nodes. */
 export interface RootQueryToTagConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -5500,7 +5616,7 @@ export interface RootQueryToTaxonomyConnectionEdge {
 }
 
 
-/** Page Info on the &quot;RootQueryToTaxonomyConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToTaxonomyConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToTaxonomyConnection Nodes. */
 export interface RootQueryToTaxonomyConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -5514,7 +5630,7 @@ export interface RootQueryToTaxonomyConnectionPageInfo {
 }
 
 
-/** The Type of Identifier used to fetch a single Taxonomy node. To be used along with the "id" field. Default is "ID". */
+/** Identifier types for retrieving a taxonomy definition. Determines whether to look up taxonomies by ID or name. */
 export type TaxonomyIdTypeEnum = 'ID' | 'NAME'
 
 
@@ -5544,7 +5660,7 @@ export interface RootQueryToTermNodeConnectionEdge {
 }
 
 
-/** Page Info on the &quot;RootQueryToTermNodeConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToTermNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToTermNodeConnection Nodes. */
 export interface RootQueryToTermNodeConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -5598,15 +5714,15 @@ export interface RootQueryToThemeConnection {
 }
 
 
-/** Connection to Theme Nodes */
+/** A paginated collection of Theme Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of Theme Nodes */
 export type ThemeConnection = (RootQueryToThemeConnection) & { __isUnion?: true }
 
 
-/** Edge between a Node and a connected Theme */
+/** Represents a connection to a Theme. Contains both the Theme Node and metadata about the relationship. */
 export type ThemeConnectionEdge = (RootQueryToThemeConnectionEdge) & { __isUnion?: true }
 
 
-/** Page Info on the connected ThemeConnectionEdge */
+/** Pagination metadata specific to &quot;ThemeConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;ThemeConnectionEdge&quot; Nodes. */
 export type ThemeConnectionPageInfo = (RootQueryToThemeConnectionPageInfo) & { __isUnion?: true }
 
 
@@ -5620,7 +5736,7 @@ export interface RootQueryToThemeConnectionEdge {
 }
 
 
-/** Page Info on the &quot;RootQueryToThemeConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToThemeConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToThemeConnection Nodes. */
 export interface RootQueryToThemeConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -5634,7 +5750,7 @@ export interface RootQueryToThemeConnectionPageInfo {
 }
 
 
-/** The Type of Identifier used to fetch a single User node. To be used along with the "id" field. Default is "ID". */
+/** Identifier types for retrieving a specific user. Determines whether to look up users by ID, email, username, or other unique properties. */
 export type UserNodeIdTypeEnum = 'DATABASE_ID' | 'EMAIL' | 'ID' | 'SLUG' | 'URI' | 'USERNAME'
 
 
@@ -5660,7 +5776,7 @@ export interface RootQueryToUserRoleConnectionEdge {
 }
 
 
-/** Page Info on the &quot;RootQueryToUserRoleConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToUserRoleConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToUserRoleConnection Nodes. */
 export interface RootQueryToUserRoleConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -5674,15 +5790,15 @@ export interface RootQueryToUserRoleConnectionPageInfo {
 }
 
 
-/** Field to order the connection by */
+/** User attribute sorting options. Determines which property of user accounts is used for ordering user listings. */
 export type UsersConnectionOrderbyEnum = 'DISPLAY_NAME' | 'EMAIL' | 'LOGIN' | 'LOGIN_IN' | 'NICE_NAME' | 'NICE_NAME_IN' | 'REGISTERED' | 'URL'
 
 
-/** Names of available user roles */
+/** Permission levels for user accounts. Defines the standard access levels that control what actions users can perform within the system. */
 export type UserRoleEnum = 'ADMINISTRATOR' | 'AUTHOR' | 'CONTRIBUTOR' | 'EDITOR' | 'SEO_EDITOR' | 'SEO_MANAGER' | 'SUBSCRIBER'
 
 
-/** Column used for searching for users. */
+/** User properties that can be targeted in search operations. Defines which user attributes can be searched when looking for specific users. */
 export type UsersConnectionSearchColumnEnum = 'EMAIL' | 'ID' | 'LOGIN' | 'NICENAME' | 'URL'
 
 
@@ -5698,11 +5814,11 @@ export interface RootQueryToUserConnection {
 }
 
 
-/** Connection to User Nodes */
+/** A paginated collection of User Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of User Nodes */
 export type UserConnection = (RootQueryToUserConnection) & { __isUnion?: true }
 
 
-/** Page Info on the connected UserConnectionEdge */
+/** Pagination metadata specific to &quot;UserConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;UserConnectionEdge&quot; Nodes. */
 export type UserConnectionPageInfo = (RootQueryToUserConnectionPageInfo) & { __isUnion?: true }
 
 
@@ -5716,7 +5832,7 @@ export interface RootQueryToUserConnectionEdge {
 }
 
 
-/** Page Info on the &quot;RootQueryToUserConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToUserConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToUserConnection Nodes. */
 export interface RootQueryToUserConnectionPageInfo {
     /** When paginating forwards, the cursor to continue. */
     endCursor?: Scalars['String']
@@ -5739,6 +5855,50 @@ export interface WritingSettings {
     /** Converter emoticons como :-) e :-P em gráficos ao exibí-los. */
     useSmilies?: Scalars['Boolean']
     __typename: 'WritingSettings'
+}
+
+
+/** An object with a globally unique identifier. All objects that can be identified by a unique ID implement this interface. */
+export type Node = (ArquivoAssessoria | ContentType | Taxonomy | EnqueuedScript | EnqueuedStylesheet | User | Comment | MediaItem | Page | Post | Category | CentraldeDecorado | Empreendimento | PostFormat | Tag | UserRole | Banner | Menu | MenuItem | Plugin | Theme | CommentAuthor) & { __isUnion?: true }
+
+
+/** An object that has a unique numeric identifier in the database. Provides consistent access to the database ID across different object types. */
+export type DatabaseIdentifier = (ArquivoAssessoria | User | Comment | MediaItem | Page | Post | Category | CentraldeDecorado | Empreendimento | PostFormat | Tag | Banner | Menu | MenuItem | CommentAuthor) & { __isUnion?: true }
+
+
+/** A user or guest who has submitted a comment. Provides identification and contact information for the comment author. */
+export type Commenter = (User | CommentAuthor) & { __isUnion?: true }
+
+
+/** A Comment Author object */
+export interface CommentAuthor {
+    /** Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument. */
+    avatar?: Avatar
+    /** The unique identifier stored in the database */
+    databaseId: Scalars['Int']
+    /** The email for the comment author. */
+    email?: Scalars['String']
+    /** The globally unique identifier for the comment author object */
+    id: Scalars['ID']
+    /** Whether the object is restricted from the current viewer */
+    isRestricted?: Scalars['Boolean']
+    /** The name for the comment author. */
+    name?: Scalars['String']
+    /** The url the comment author. */
+    url?: Scalars['String']
+    __typename: 'CommentAuthor'
+}
+
+
+/** A layout pattern that can help inform how content might be structured and displayed. Templates can define specialized layouts for different types of content. */
+export type ContentTemplate = (DefaultTemplate) & { __isUnion?: true }
+
+
+/** The template assigned to the node */
+export interface DefaultTemplate {
+    /** The name of the template */
+    templateName?: Scalars['String']
+    __typename: 'DefaultTemplate'
 }
 
 
@@ -5894,7 +6054,7 @@ export interface CreateEmpreendimentoPayload {
 }
 
 
-/** The status of the media item object. */
+/** Publication status for media items. Controls whether media is publicly accessible, private, or in another state. */
 export type MediaItemStatusEnum = 'AUTO_DRAFT' | 'INHERIT' | 'PRIVATE' | 'TRASH'
 
 
@@ -6286,34 +6446,6 @@ export interface UpdateUserPayload {
     /** The User object mutation type. */
     user?: User
     __typename: 'UpdateUserPayload'
-}
-
-
-/** A Comment Author object */
-export interface CommentAuthor {
-    /** Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument. */
-    avatar?: Avatar
-    /** The unique identifier stored in the database */
-    databaseId: Scalars['Int']
-    /** The email for the comment author */
-    email?: Scalars['String']
-    /** The globally unique identifier for the comment author object */
-    id: Scalars['ID']
-    /** Whether the object is restricted from the current viewer */
-    isRestricted?: Scalars['Boolean']
-    /** The name for the comment author. */
-    name?: Scalars['String']
-    /** The url the comment author. */
-    url?: Scalars['String']
-    __typename: 'CommentAuthor'
-}
-
-
-/** The template assigned to the node */
-export interface DefaultTemplate {
-    /** The name of the template */
-    templateName?: Scalars['String']
-    __typename: 'DefaultTemplate'
 }
 
 export type Query = RootQuery
@@ -7011,38 +7143,7 @@ export interface ArquivoAssessoriaRequest{
 }
 
 
-/** An object with an ID */
-export interface NodeRequest{
-    /** The globally unique ID for the object */
-    id?: boolean | number
-    on_ArquivoAssessoria?: ArquivoAssessoriaRequest
-    on_ContentType?: ContentTypeRequest
-    on_Taxonomy?: TaxonomyRequest
-    on_EnqueuedScript?: EnqueuedScriptRequest
-    on_EnqueuedStylesheet?: EnqueuedStylesheetRequest
-    on_User?: UserRequest
-    on_Comment?: CommentRequest
-    on_MediaItem?: MediaItemRequest
-    on_Page?: PageRequest
-    on_Post?: PostRequest
-    on_Category?: CategoryRequest
-    on_CentraldeDecorado?: CentraldeDecoradoRequest
-    on_Empreendimento?: EmpreendimentoRequest
-    on_PostFormat?: PostFormatRequest
-    on_Tag?: TagRequest
-    on_UserRole?: UserRoleRequest
-    on_Banner?: BannerRequest
-    on_Menu?: MenuRequest
-    on_MenuItem?: MenuItemRequest
-    on_Plugin?: PluginRequest
-    on_Theme?: ThemeRequest
-    on_CommentAuthor?: CommentAuthorRequest
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** Nodes used to manage content */
+/** Base interface for content objects like posts, pages, and media items. Provides common fields available across these content types. */
 export interface ContentNodeRequest{
     /** Connection between the ContentNode type and the ContentType type */
     contentType?: ContentNodeToContentTypeConnectionEdgeRequest
@@ -7130,7 +7231,7 @@ export interface ContentNodeRequest{
 }
 
 
-/** Any node that has a URI */
+/** An interface for content that can be accessed via a unique URI/URL path. Implemented by content types that have their own permalinks. */
 export interface UniformResourceIdentifiableRequest{
     /** The globally unique ID for the object */
     id?: boolean | number
@@ -7175,7 +7276,7 @@ export interface ContentNodeToContentTypeConnectionEdgeRequest{
 }
 
 
-/** A singular connection from one Node to another, with support for relational data on the &quot;edge&quot; of the connection. */
+/** A direct one-to-one relationship between objects. Unlike plural connections, this represents a single related object rather than a collection. */
 export interface OneToOneConnectionRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -7206,6 +7307,7 @@ export interface OneToOneConnectionRequest{
     on_ArquivoAssessoriaToPreviewConnectionEdge?: ArquivoAssessoriaToPreviewConnectionEdgeRequest
     on_BannerToParentConnectionEdge?: BannerToParentConnectionEdgeRequest
     on_BannerToPreviewConnectionEdge?: BannerToPreviewConnectionEdgeRequest
+    on_GeneralSettingsToMediaItemConnectionEdge?: GeneralSettingsToMediaItemConnectionEdgeRequest
     on_MenuItemToMenuItemLinkableConnectionEdge?: MenuItemToMenuItemLinkableConnectionEdgeRequest
     on_MenuItemToMenuConnectionEdge?: MenuItemToMenuConnectionEdgeRequest
     __typename?: boolean | number
@@ -7213,7 +7315,7 @@ export interface OneToOneConnectionRequest{
 }
 
 
-/** Relational context between connected nodes */
+/** Represents a connection between two objects. Contains both the related object (node) and metadata about the relationship (cursor). */
 export interface EdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -7299,6 +7401,7 @@ export interface EdgeRequest{
     on_RootQueryToContentNodeConnectionEdge?: RootQueryToContentNodeConnectionEdgeRequest
     on_RootQueryToContentTypeConnectionEdge?: RootQueryToContentTypeConnectionEdgeRequest
     on_RootQueryToEmpreendimentoConnectionEdge?: RootQueryToEmpreendimentoConnectionEdgeRequest
+    on_GeneralSettingsToMediaItemConnectionEdge?: GeneralSettingsToMediaItemConnectionEdgeRequest
     on_RootQueryToMediaItemConnectionEdge?: RootQueryToMediaItemConnectionEdgeRequest
     on_MenuItemToMenuItemConnectionEdge?: MenuItemToMenuItemConnectionEdgeRequest
     on_MenuItemToMenuItemLinkableConnectionEdge?: MenuItemToMenuItemLinkableConnectionEdgeRequest
@@ -7324,7 +7427,7 @@ export interface EdgeRequest{
 }
 
 
-/** Edge between a Node and a connected ContentType */
+/** Represents a connection to a ContentType. Contains both the ContentType Node and metadata about the relationship. */
 export interface ContentTypeConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -7442,7 +7545,7 @@ export interface ContentTypeToTaxonomyConnectionRequest{
 }
 
 
-/** Connection to Taxonomy Nodes */
+/** A paginated collection of Taxonomy Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of Taxonomy Nodes */
 export interface TaxonomyConnectionRequest{
     /** A list of edges (relational context) between RootQuery and connected Taxonomy Nodes */
     edges?: TaxonomyConnectionEdgeRequest
@@ -7457,7 +7560,7 @@ export interface TaxonomyConnectionRequest{
 }
 
 
-/** A plural connection from one Node Type in the Graph to another Node Type, with support for relational data via &quot;edges&quot;. */
+/** A paginated relationship between objects. Supports cursor-based pagination with edges containing relationship metadata and nodes containing the related objects. */
 export interface ConnectionRequest{
     /** A list of edges (relational context) between connected nodes */
     edges?: EdgeRequest
@@ -7543,7 +7646,7 @@ export interface ConnectionRequest{
 }
 
 
-/** Information about pagination in a connection. */
+/** Metadata for cursor-based pagination. Provides cursors for continuing pagination and boolean flags indicating if more items exist in either direction. */
 export interface PageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -7631,7 +7734,7 @@ export interface PageInfoRequest{
 }
 
 
-/** Edge between a Node and a connected Taxonomy */
+/** Represents a connection to a Taxonomy. Contains both the Taxonomy Node and metadata about the relationship. */
 export interface TaxonomyConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -7725,7 +7828,7 @@ export interface TaxonomyToContentTypeConnectionRequest{
 }
 
 
-/** Connection to ContentType Nodes */
+/** A paginated collection of ContentType Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of ContentType Nodes */
 export interface ContentTypeConnectionRequest{
     /** A list of edges (relational context) between RootQuery and connected ContentType Nodes */
     edges?: ContentTypeConnectionEdgeRequest
@@ -7740,7 +7843,7 @@ export interface ContentTypeConnectionRequest{
 }
 
 
-/** Page Info on the connected ContentTypeConnectionEdge */
+/** Pagination metadata specific to &quot;ContentTypeConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;ContentTypeConnectionEdge&quot; Nodes. */
 export interface ContentTypeConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -7757,7 +7860,7 @@ export interface ContentTypeConnectionPageInfoRequest{
 }
 
 
-/** Information about pagination in a connection. */
+/** Metadata for cursor-based pagination. Provides cursors for continuing pagination and boolean flags indicating if more items exist in either direction. */
 export interface WPPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -7856,7 +7959,7 @@ export interface TaxonomyToContentTypeConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;TaxonomyToContentTypeConnection&quot; */
+/** Pagination metadata specific to &quot;TaxonomyToContentTypeConnection&quot; collections. Provides cursors and flags for navigating through sets of TaxonomyToContentTypeConnection Nodes. */
 export interface TaxonomyToContentTypeConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -7884,7 +7987,7 @@ export interface TaxonomyToTermNodeConnectionRequest{
 }
 
 
-/** Connection to TermNode Nodes */
+/** A paginated collection of TermNode Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of TermNode Nodes */
 export interface TermNodeConnectionRequest{
     /** A list of edges (relational context) between RootQuery and connected TermNode Nodes */
     edges?: TermNodeConnectionEdgeRequest
@@ -7902,7 +8005,7 @@ export interface TermNodeConnectionRequest{
 }
 
 
-/** Edge between a Node and a connected TermNode */
+/** Represents a connection to a TermNode. Contains both the TermNode Node and metadata about the relationship. */
 export interface TermNodeConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -7918,7 +8021,7 @@ export interface TermNodeConnectionEdgeRequest{
 }
 
 
-/** Terms are nodes within a Taxonomy, used to group and relate other nodes. */
+/** Base interface for taxonomy terms such as categories and tags. Terms are used to organize and classify content. */
 export interface TermNodeRequest{
     /** The number of objects connected to the object */
     count?: boolean | number
@@ -7995,7 +8098,7 @@ export interface TermNodeToEnqueuedScriptConnectionRequest{
 }
 
 
-/** Connection to EnqueuedScript Nodes */
+/** A paginated collection of EnqueuedScript Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of EnqueuedScript Nodes */
 export interface EnqueuedScriptConnectionRequest{
     /** A list of edges (relational context) between ContentNode and connected EnqueuedScript Nodes */
     edges?: EnqueuedScriptConnectionEdgeRequest
@@ -8012,7 +8115,7 @@ export interface EnqueuedScriptConnectionRequest{
 }
 
 
-/** Edge between a Node and a connected EnqueuedScript */
+/** Represents a connection to a EnqueuedScript. Contains both the EnqueuedScript Node and metadata about the relationship. */
 export interface EnqueuedScriptConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -8068,7 +8171,7 @@ export interface EnqueuedScriptRequest{
 }
 
 
-/** Asset enqueued by the CMS */
+/** A script or stylesheet resource that should be loaded by the client. Contains information about the resource&#039;s location, dependencies, and loading behavior. */
 export interface EnqueuedAssetRequest{
     /** The inline code to be run after the asset is loaded. */
     after?: boolean | number
@@ -8105,7 +8208,7 @@ export interface EnqueuedAssetRequest{
 }
 
 
-/** Page Info on the connected EnqueuedScriptConnectionEdge */
+/** Pagination metadata specific to &quot;EnqueuedScriptConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;EnqueuedScriptConnectionEdge&quot; Nodes. */
 export interface EnqueuedScriptConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -8135,7 +8238,7 @@ export interface TermNodeToEnqueuedScriptConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;TermNodeToEnqueuedScriptConnection&quot; */
+/** Pagination metadata specific to &quot;TermNodeToEnqueuedScriptConnection&quot; collections. Provides cursors and flags for navigating through sets of TermNodeToEnqueuedScriptConnection Nodes. */
 export interface TermNodeToEnqueuedScriptConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -8163,7 +8266,7 @@ export interface TermNodeToEnqueuedStylesheetConnectionRequest{
 }
 
 
-/** Connection to EnqueuedStylesheet Nodes */
+/** A paginated collection of EnqueuedStylesheet Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of EnqueuedStylesheet Nodes */
 export interface EnqueuedStylesheetConnectionRequest{
     /** A list of edges (relational context) between ContentNode and connected EnqueuedStylesheet Nodes */
     edges?: EnqueuedStylesheetConnectionEdgeRequest
@@ -8180,7 +8283,7 @@ export interface EnqueuedStylesheetConnectionRequest{
 }
 
 
-/** Edge between a Node and a connected EnqueuedStylesheet */
+/** Represents a connection to a EnqueuedStylesheet. Contains both the EnqueuedStylesheet Node and metadata about the relationship. */
 export interface EnqueuedStylesheetConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -8242,7 +8345,7 @@ export interface EnqueuedStylesheetRequest{
 }
 
 
-/** Page Info on the connected EnqueuedStylesheetConnectionEdge */
+/** Pagination metadata specific to &quot;EnqueuedStylesheetConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;EnqueuedStylesheetConnectionEdge&quot; Nodes. */
 export interface EnqueuedStylesheetConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -8272,7 +8375,7 @@ export interface TermNodeToEnqueuedStylesheetConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;TermNodeToEnqueuedStylesheetConnection&quot; */
+/** Pagination metadata specific to &quot;TermNodeToEnqueuedStylesheetConnection&quot; collections. Provides cursors and flags for navigating through sets of TermNodeToEnqueuedStylesheetConnection Nodes. */
 export interface TermNodeToEnqueuedStylesheetConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -8287,7 +8390,7 @@ export interface TermNodeToEnqueuedStylesheetConnectionPageInfoRequest{
 }
 
 
-/** Page Info on the connected TermNodeConnectionEdge */
+/** Pagination metadata specific to &quot;TermNodeConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;TermNodeConnectionEdge&quot; Nodes. */
 export interface TermNodeConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -8318,7 +8421,7 @@ export interface TaxonomyToTermNodeConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;TaxonomyToTermNodeConnection&quot; */
+/** Pagination metadata specific to &quot;TaxonomyToTermNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of TaxonomyToTermNodeConnection Nodes. */
 export interface TaxonomyToTermNodeConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -8333,7 +8436,7 @@ export interface TaxonomyToTermNodeConnectionPageInfoRequest{
 }
 
 
-/** Page Info on the connected TaxonomyConnectionEdge */
+/** Pagination metadata specific to &quot;TaxonomyConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;TaxonomyConnectionEdge&quot; Nodes. */
 export interface TaxonomyConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -8361,7 +8464,7 @@ export interface ContentTypeToTaxonomyConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;ContentTypeToTaxonomyConnection&quot; */
+/** Pagination metadata specific to &quot;ContentTypeToTaxonomyConnection&quot; collections. Provides cursors and flags for navigating through sets of ContentTypeToTaxonomyConnection Nodes. */
 export interface ContentTypeToTaxonomyConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -8499,7 +8602,7 @@ export interface ContentTypeToContentNodeConnectionRequest{
 }
 
 
-/** Connection to ContentNode Nodes */
+/** A paginated collection of ContentNode Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of ContentNode Nodes */
 export interface ContentNodeConnectionRequest{
     /** A list of edges (relational context) between ContentType and connected ContentNode Nodes */
     edges?: ContentNodeConnectionEdgeRequest
@@ -8521,7 +8624,7 @@ export interface ContentNodeConnectionRequest{
 }
 
 
-/** Edge between a Node and a connected ContentNode */
+/** Represents a connection to a ContentNode. Contains both the ContentNode Node and metadata about the relationship. */
 export interface ContentNodeConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -8544,7 +8647,7 @@ export interface ContentNodeConnectionEdgeRequest{
 }
 
 
-/** Page Info on the connected ContentNodeConnectionEdge */
+/** Pagination metadata specific to &quot;ContentNodeConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;ContentNodeConnectionEdge&quot; Nodes. */
 export interface ContentNodeConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -8579,7 +8682,7 @@ export interface ContentTypeToContentNodeConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;ContentTypeToContentNodeConnection&quot; */
+/** Pagination metadata specific to &quot;ContentTypeToContentNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of ContentTypeToContentNodeConnection Nodes. */
 export interface ContentTypeToContentNodeConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -8664,7 +8767,7 @@ export interface ContentNodeToEditLockConnectionEdgeRequest{
 }
 
 
-/** Edge between a Node and a connected User */
+/** Represents a connection to a User. Contains both the User Node and metadata about the relationship. */
 export interface UserConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -8679,8 +8782,10 @@ export interface UserConnectionEdgeRequest{
 }
 
 
-/** A User object */
+/** A registered user account. Users can be assigned roles, author content, and have various capabilities within the site. */
 export interface UserRequest{
+    /** The admin color scheme preference for the user. Possible values include &quot;fresh&quot;, &quot;light&quot;, &quot;blue&quot;, &quot;coffee&quot;, &quot;ectoplasm&quot;, &quot;midnight&quot;, &quot;ocean&quot;, &quot;sunrise&quot;. Default is &quot;fresh&quot;. */
+    adminColor?: boolean | number
     /** Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument. */
     avatar?: [{
     /** The size attribute of the avatar field can be used to fetch avatars of different sizes. The value corresponds to the dimension in pixels to fetch. The default is 96 pixels. */
@@ -8735,6 +8840,12 @@ export interface UserRequest{
     extraCapabilities?: boolean | number
     /** First name of the user. This is equivalent to the WP_User-&gt;user_first_name property. */
     firstName?: boolean | number
+    /** Whether the user has enabled keyboard shortcuts for comment moderation. Defaults to false. */
+    hasCommentShortcutsEnabled?: boolean | number
+    /** Whether the user has enabled the visual editor. When enabled, the WYSIWYG editor is used for content editing. Defaults to true. */
+    hasRichEditingEnabled?: boolean | number
+    /** Whether the user has enabled syntax highlighting when editing code within the post editor. Defaults to true. */
+    hasSyntaxHighlightingEnabled?: boolean | number
     /** The globally unique identifier for the user object. */
     id?: boolean | number
     /** Whether the node is a Comment */
@@ -8839,56 +8950,9 @@ export interface UserRequest{
 }
 
 
-/** The author of a comment */
-export interface CommenterRequest{
-    /** Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument. */
-    avatar?: AvatarRequest
-    /** Identifies the primary key from the database. */
-    databaseId?: boolean | number
-    /** The email address of the author of a comment. */
-    email?: boolean | number
-    /** The globally unique identifier for the comment author. */
-    id?: boolean | number
-    /** Whether the author information is considered restricted. (not fully public) */
-    isRestricted?: boolean | number
-    /** The name of the author of a comment. */
-    name?: boolean | number
-    /** The url of the author of a comment. */
-    url?: boolean | number
-    on_User?: UserRequest
-    on_CommentAuthor?: CommentAuthorRequest
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** Object that can be identified with a Database ID */
-export interface DatabaseIdentifierRequest{
-    /** The unique identifier stored in the database */
-    databaseId?: boolean | number
-    on_ArquivoAssessoria?: ArquivoAssessoriaRequest
-    on_User?: UserRequest
-    on_Comment?: CommentRequest
-    on_MediaItem?: MediaItemRequest
-    on_Page?: PageRequest
-    on_Post?: PostRequest
-    on_Category?: CategoryRequest
-    on_CentraldeDecorado?: CentraldeDecoradoRequest
-    on_Empreendimento?: EmpreendimentoRequest
-    on_PostFormat?: PostFormatRequest
-    on_Tag?: TagRequest
-    on_Banner?: BannerRequest
-    on_Menu?: MenuRequest
-    on_MenuItem?: MenuItemRequest
-    on_CommentAuthor?: CommentAuthorRequest
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
 /** Avatars are profile images for users. WordPress by default uses the Gravatar service to host and fetch avatars from. */
 export interface AvatarRequest{
-    /** URL for the default image or a default type. Accepts &#039;404&#039; (return a 404 instead of a default image), &#039;retro&#039; (8bit), &#039;monsterid&#039; (monster), &#039;wavatar&#039; (cartoon face), &#039;indenticon&#039; (the &#039;quilt&#039;), &#039;mystery&#039;, &#039;mm&#039;, or &#039;mysteryman&#039; (The Oyster Man), &#039;blank&#039; (transparent GIF), or &#039;gravatar_default&#039; (the Gravatar logo). */
+    /** TEST: URL for the default image or a default type. Accepts &#039;404&#039; (return a 404 instead of a default image), &#039;retro&#039; (8bit), &#039;monsterid&#039; (monster), &#039;wavatar&#039; (cartoon face), &#039;indenticon&#039; (the &#039;quilt&#039;), &#039;mystery&#039;, &#039;mm&#039;, or &#039;mysteryman&#039; (The Oyster Man), &#039;blank&#039; (transparent GIF), or &#039;gravatar_default&#039; (the Gravatar logo). */
     default?: boolean | number
     /** HTML attributes to insert in the IMG element. Is not sanitized. */
     extraAttr?: boolean | number
@@ -8971,8 +9035,6 @@ parentIn?: ((Scalars['ID'] | null)[] | null),
 parentNotIn?: ((Scalars['ID'] | null)[] | null),
 /** Search term(s) to retrieve matching comments for. */
 search?: (Scalars['String'] | null),
-/** Comment status to limit results by. */
-status?: (Scalars['String'] | null),
 /** One or more Comment Statuses to limit results by */
 statusIn?: ((CommentStatusEnum | null)[] | null),
 /** Include comments for a specific user ID. */
@@ -8992,7 +9054,7 @@ export interface UserToCommentConnectionRequest{
 }
 
 
-/** Connection to Comment Nodes */
+/** A paginated collection of Comment Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of Comment Nodes */
 export interface CommentConnectionRequest{
     /** A list of edges (relational context) between RootQuery and connected Comment Nodes */
     edges?: CommentConnectionEdgeRequest
@@ -9011,7 +9073,7 @@ export interface CommentConnectionRequest{
 }
 
 
-/** Edge between a Node and a connected Comment */
+/** Represents a connection to a Comment. Contains both the Comment Node and metadata about the relationship. */
 export interface CommentConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -9029,7 +9091,7 @@ export interface CommentConnectionEdgeRequest{
 }
 
 
-/** A Comment object */
+/** A response or reaction to content submitted by users. Comments are typically associated with a specific content entry. */
 export interface CommentRequest{
     /** User agent used to post the comment. This field is equivalent to WP_Comment-&gt;comment_agent and the value matching the &quot;comment_agent&quot; column in SQL. */
     agent?: boolean | number
@@ -9115,7 +9177,7 @@ export interface CommentRequest{
 export interface CommentToCommenterConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
-    /** The email address representing the author for this particular comment */
+    /** Email address representing the author for this particular comment */
     email?: boolean | number
     /** IP address of the author at the time of making this comment. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL. */
     ipAddress?: boolean | number
@@ -9130,7 +9192,7 @@ export interface CommentToCommenterConnectionEdgeRequest{
 }
 
 
-/** Edge between a Node and a connected Commenter */
+/** Represents a connection to a Commenter. Contains both the Commenter Node and metadata about the relationship. */
 export interface CommenterConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -9209,8 +9271,6 @@ parentIn?: ((Scalars['ID'] | null)[] | null),
 parentNotIn?: ((Scalars['ID'] | null)[] | null),
 /** Search term(s) to retrieve matching comments for. */
 search?: (Scalars['String'] | null),
-/** Comment status to limit results by. */
-status?: (Scalars['String'] | null),
 /** One or more Comment Statuses to limit results by */
 statusIn?: ((CommentStatusEnum | null)[] | null),
 /** Include comments for a specific user ID. */
@@ -9284,8 +9344,6 @@ parentIn?: ((Scalars['ID'] | null)[] | null),
 parentNotIn?: ((Scalars['ID'] | null)[] | null),
 /** Search term(s) to retrieve matching comments for. */
 search?: (Scalars['String'] | null),
-/** Comment status to limit results by. */
-status?: (Scalars['String'] | null),
 /** One or more Comment Statuses to limit results by */
 statusIn?: ((CommentStatusEnum | null)[] | null),
 /** Include comments for a specific user ID. */
@@ -9316,7 +9374,7 @@ export interface CommentToCommentConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;CommentToCommentConnection&quot; */
+/** Pagination metadata specific to &quot;CommentToCommentConnection&quot; collections. Provides cursors and flags for navigating through sets of CommentToCommentConnection Nodes. */
 export interface CommentToCommentConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -9331,7 +9389,7 @@ export interface CommentToCommentConnectionPageInfoRequest{
 }
 
 
-/** Page Info on the connected CommentConnectionEdge */
+/** Pagination metadata specific to &quot;CommentConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;CommentConnectionEdge&quot; Nodes. */
 export interface CommentConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -9363,7 +9421,7 @@ export interface UserToCommentConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;UserToCommentConnection&quot; */
+/** Pagination metadata specific to &quot;UserToCommentConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToCommentConnection Nodes. */
 export interface UserToCommentConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -9402,7 +9460,7 @@ export interface UserToEnqueuedScriptConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;UserToEnqueuedScriptConnection&quot; */
+/** Pagination metadata specific to &quot;UserToEnqueuedScriptConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToEnqueuedScriptConnection Nodes. */
 export interface UserToEnqueuedScriptConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -9441,7 +9499,7 @@ export interface UserToEnqueuedStylesheetConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;UserToEnqueuedStylesheetConnection&quot; */
+/** Pagination metadata specific to &quot;UserToEnqueuedStylesheetConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToEnqueuedStylesheetConnection Nodes. */
 export interface UserToEnqueuedStylesheetConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -9527,7 +9585,7 @@ export interface UserToMediaItemConnectionRequest{
 }
 
 
-/** Connection to mediaItem Nodes */
+/** A paginated collection of mediaItem Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of mediaItem Nodes */
 export interface MediaItemConnectionRequest{
     /** A list of edges (relational context) between RootQuery and connected mediaItem Nodes */
     edges?: MediaItemConnectionEdgeRequest
@@ -9542,7 +9600,7 @@ export interface MediaItemConnectionRequest{
 }
 
 
-/** Edge between a Node and a connected mediaItem */
+/** Represents a connection to a mediaItem. Contains both the mediaItem Node and metadata about the relationship. */
 export interface MediaItemConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -9550,13 +9608,14 @@ export interface MediaItemConnectionEdgeRequest{
     node?: MediaItemRequest
     on_UserToMediaItemConnectionEdge?: UserToMediaItemConnectionEdgeRequest
     on_NodeWithFeaturedImageToMediaItemConnectionEdge?: NodeWithFeaturedImageToMediaItemConnectionEdgeRequest
+    on_GeneralSettingsToMediaItemConnectionEdge?: GeneralSettingsToMediaItemConnectionEdgeRequest
     on_RootQueryToMediaItemConnectionEdge?: RootQueryToMediaItemConnectionEdgeRequest
     __typename?: boolean | number
     __scalar?: boolean | number
 }
 
 
-/** The mediaItem type */
+/** Represents uploaded media, including images, videos, documents, and audio files. */
 export interface MediaItemRequest{
     /** Alternative text to display when resource is not displayed */
     altText?: boolean | number
@@ -9744,7 +9803,7 @@ export interface MediaItemRequest{
 }
 
 
-/** A node that can have a template associated with it */
+/** Content that provides template metadata. The template can help inform how the content is might be structured, styled, and presented to the user. */
 export interface NodeWithTemplateRequest{
     /** The globally unique ID for the object */
     id?: boolean | number
@@ -9762,17 +9821,7 @@ export interface NodeWithTemplateRequest{
 }
 
 
-/** The template assigned to a node of content */
-export interface ContentTemplateRequest{
-    /** The name of the template */
-    templateName?: boolean | number
-    on_DefaultTemplate?: DefaultTemplateRequest
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** A node that NodeWith a title */
+/** Content with a dedicated title field. The title typically serves as the main heading and identifier for the content. */
 export interface NodeWithTitleRequest{
     /** The globally unique ID for the object */
     id?: boolean | number
@@ -9792,7 +9841,7 @@ export interface NodeWithTitleRequest{
 }
 
 
-/** A node that can have an author assigned to it */
+/** Content that can be attributed to a specific user. Provides fields for accessing the author&#039;s information and establishing content ownership. */
 export interface NodeWithAuthorRequest{
     /** Connection between the NodeWithAuthor type and the User type */
     author?: NodeWithAuthorToUserConnectionEdgeRequest
@@ -9821,7 +9870,7 @@ export interface NodeWithAuthorToUserConnectionEdgeRequest{
 }
 
 
-/** A node that can have comments associated with it */
+/** Content that can receive and display user-submitted comments. Provides fields for accessing comment counts and managing comment status. */
 export interface NodeWithCommentsRequest{
     /** The number of comments. Even though WPGraphQL denotes this field as an integer, in WordPress this field should be saved as a numeric string for compatibility. */
     commentCount?: boolean | number
@@ -9837,7 +9886,7 @@ export interface NodeWithCommentsRequest{
 }
 
 
-/** Content node with hierarchical (parent/child) relationships */
+/** Content that can be organized in a parent-child structure. Provides fields for navigating up and down the hierarchy and maintaining structured relationships. */
 export interface HierarchicalContentNodeRequest{
     /** Returns ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
     ancestors?: [{
@@ -9950,7 +9999,7 @@ export interface HierarchicalContentNodeRequest{
 }
 
 
-/** Node with hierarchical (parent/child) relationships */
+/** Content that can exist in a parent-child structure. Provides fields for navigating up (parent) and down (children) through the hierarchy. */
 export interface HierarchicalNodeRequest{
     /** The unique identifier stored in the database */
     databaseId?: boolean | number
@@ -10044,7 +10093,7 @@ export interface HierarchicalContentNodeToContentNodeAncestorsConnectionEdgeRequ
 }
 
 
-/** Page Info on the &quot;HierarchicalContentNodeToContentNodeAncestorsConnection&quot; */
+/** Pagination metadata specific to &quot;HierarchicalContentNodeToContentNodeAncestorsConnection&quot; collections. Provides cursors and flags for navigating through sets of HierarchicalContentNodeToContentNodeAncestorsConnection Nodes. */
 export interface HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -10135,7 +10184,7 @@ export interface HierarchicalContentNodeToContentNodeChildrenConnectionEdgeReque
 }
 
 
-/** Page Info on the &quot;HierarchicalContentNodeToContentNodeChildrenConnection&quot; */
+/** Pagination metadata specific to &quot;HierarchicalContentNodeToContentNodeChildrenConnection&quot; collections. Provides cursors and flags for navigating through sets of HierarchicalContentNodeToContentNodeChildrenConnection Nodes. */
 export interface HierarchicalContentNodeToContentNodeChildrenConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -10174,7 +10223,7 @@ export interface ContentNodeToEnqueuedScriptConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;ContentNodeToEnqueuedScriptConnection&quot; */
+/** Pagination metadata specific to &quot;ContentNodeToEnqueuedScriptConnection&quot; collections. Provides cursors and flags for navigating through sets of ContentNodeToEnqueuedScriptConnection Nodes. */
 export interface ContentNodeToEnqueuedScriptConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -10213,7 +10262,7 @@ export interface ContentNodeToEnqueuedStylesheetConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;ContentNodeToEnqueuedStylesheetConnection&quot; */
+/** Pagination metadata specific to &quot;ContentNodeToEnqueuedStylesheetConnection&quot; collections. Provides cursors and flags for navigating through sets of ContentNodeToEnqueuedStylesheetConnection Nodes. */
 export interface ContentNodeToEnqueuedStylesheetConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -10306,8 +10355,6 @@ parentIn?: ((Scalars['ID'] | null)[] | null),
 parentNotIn?: ((Scalars['ID'] | null)[] | null),
 /** Search term(s) to retrieve matching comments for. */
 search?: (Scalars['String'] | null),
-/** Comment status to limit results by. */
-status?: (Scalars['String'] | null),
 /** One or more Comment Statuses to limit results by */
 statusIn?: ((CommentStatusEnum | null)[] | null),
 /** Include comments for a specific user ID. */
@@ -10338,7 +10385,7 @@ export interface MediaItemToCommentConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;MediaItemToCommentConnection&quot; */
+/** Pagination metadata specific to &quot;MediaItemToCommentConnection&quot; collections. Provides cursors and flags for navigating through sets of MediaItemToCommentConnection Nodes. */
 export interface MediaItemToCommentConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -10430,7 +10477,7 @@ export interface MediaSizeRequest{
 }
 
 
-/** Page Info on the connected MediaItemConnectionEdge */
+/** Pagination metadata specific to &quot;MediaItemConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;MediaItemConnectionEdge&quot; Nodes. */
 export interface MediaItemConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -10458,7 +10505,7 @@ export interface UserToMediaItemConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;UserToMediaItemConnection&quot; */
+/** Pagination metadata specific to &quot;UserToMediaItemConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToMediaItemConnection Nodes. */
 export interface UserToMediaItemConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -10544,7 +10591,7 @@ export interface UserToPageConnectionRequest{
 }
 
 
-/** Connection to page Nodes */
+/** A paginated collection of page Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of page Nodes */
 export interface PageConnectionRequest{
     /** A list of edges (relational context) between RootQuery and connected page Nodes */
     edges?: PageConnectionEdgeRequest
@@ -10560,7 +10607,7 @@ export interface PageConnectionRequest{
 }
 
 
-/** Edge between a Node and a connected page */
+/** Represents a connection to a page. Contains both the page Node and metadata about the relationship. */
 export interface PageConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -10575,7 +10622,7 @@ export interface PageConnectionEdgeRequest{
 }
 
 
-/** The page type */
+/** A standalone content entry generally used for static, non-chronological content such as &quot;About Us&quot; or &quot;Contact&quot; pages. */
 export interface PageRequest{
     /** Returns ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
     ancestors?: [{
@@ -10635,6 +10682,12 @@ export interface PageRequest{
     contentTypeName?: boolean | number
     /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo sobre&quot; was set to Show in GraphQL. */
     conteuSobre?: Page_ConteusobreRequest
+    /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo Indique e Ganhe&quot; was set to Show in GraphQL. */
+    conteudoIndiqueEGanhe?: Page_ConteudoindiqueeganheRequest
+    /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo L.Store&quot; was set to Show in GraphQL. */
+    conteudoLStore?: Page_ConteudolstoreRequest
+    /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo política de qualidade&quot; was set to Show in GraphQL. */
+    conteudoPoliticaDeQualidade?: Page_ConteudopoliticadequalidadeRequest
     /** The unique identifier stored in the database */
     databaseId?: boolean | number
     /** Post publishing date. */
@@ -10722,7 +10775,7 @@ export interface PageRequest{
     parentId?: boolean | number
     /** The password for the page object. */
     password?: boolean | number
-    /** Connection between the Page type and the page type */
+    /** Connection between the page type and the page type */
     preview?: PageToPreviewConnectionEdgeRequest
     /** The database id of the preview node */
     previewRevisionDatabaseId?: boolean | number
@@ -10759,7 +10812,7 @@ export interface PageRequest{
 }
 
 
-/** Nodes that can be seen in a preview (unpublished) state. */
+/** Content that supports a draft preview mode. Allows viewing unpublished changes before they are made publicly available. Previewing unpublished changes requires appropriate permissions. */
 export interface PreviewableRequest{
     /** Whether the object is a node in the preview state */
     isPreview?: boolean | number
@@ -10778,7 +10831,7 @@ export interface PreviewableRequest{
 }
 
 
-/** A node that supports the content editor */
+/** Content that has a main body field which can contain formatted text and media. Provides access to both raw (with appropriate permissions) and rendered versions of the content. */
 export interface NodeWithContentEditorRequest{
     /** The content of the post. */
     content?: [{
@@ -10793,7 +10846,7 @@ export interface NodeWithContentEditorRequest{
 }
 
 
-/** A node that can have a featured image set */
+/** Content that can have a primary image attached. This image is typically used for thumbnails, social sharing, and prominent display in the presentation layer. */
 export interface NodeWithFeaturedImageRequest{
     /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
     featuredImage?: NodeWithFeaturedImageToMediaItemConnectionEdgeRequest
@@ -10823,7 +10876,7 @@ export interface NodeWithFeaturedImageToMediaItemConnectionEdgeRequest{
 }
 
 
-/** A node that can have revisions */
+/** Content that maintains a history of changes. Provides access to previous versions of the content and the ability to restore earlier revisions. */
 export interface NodeWithRevisionsRequest{
     /** The globally unique ID for the object */
     id?: boolean | number
@@ -10849,7 +10902,7 @@ export interface NodeWithRevisionsToContentNodeConnectionEdgeRequest{
 }
 
 
-/** A node that can have page attributes */
+/** Content that supports ordering metadata. Includes a menu order field which can be used for custom sorting in navigation menus and other ordered collections. */
 export interface NodeWithPageAttributesRequest{
     /** The globally unique ID for the object */
     id?: boolean | number
@@ -10861,7 +10914,7 @@ export interface NodeWithPageAttributesRequest{
 }
 
 
-/** Nodes that can be linked to as Menu Items */
+/** Content that can be referenced by navigation menu items. Provides the essential fields needed to create links within navigation structures. */
 export interface MenuItemLinkableRequest{
     /** The unique identifier stored in the database */
     databaseId?: boolean | number
@@ -10912,6 +10965,13 @@ export interface AcfFieldGroupRequest{
     on_Page_Assessoria?: Page_AssessoriaRequest
     on_Page_Conteusobre?: Page_ConteusobreRequest
     on_Page_Conteusobre_item?: Page_Conteusobre_itemRequest
+    on_Page_Conteudoindiqueeganhe?: Page_ConteudoindiqueeganheRequest
+    on_Page_Conteudoindiqueeganhe_EmObra?: Page_Conteudoindiqueeganhe_EmObraRequest
+    on_Page_Conteudoindiqueeganhe_Entregue?: Page_Conteudoindiqueeganhe_EntregueRequest
+    on_Page_Conteudolstore?: Page_ConteudolstoreRequest
+    on_Page_Conteudopoliticadequalidade?: Page_ConteudopoliticadequalidadeRequest
+    on_Page_Conteudopoliticadequalidade_certificacaoPq?: Page_Conteudopoliticadequalidade_certificacaoPqRequest
+    on_Page_Conteudopoliticadequalidade_praticaItensPq?: Page_Conteudopoliticadequalidade_praticaItensPqRequest
     on_Page_Informacoesdecontato?: Page_InformacoesdecontatoRequest
     on_CentraldeDecorado_Centraldedecorados?: CentraldeDecorado_CentraldedecoradosRequest
     on_Empreendimento_Empreendimento?: Empreendimento_EmpreendimentoRequest
@@ -10988,8 +11048,6 @@ parentIn?: ((Scalars['ID'] | null)[] | null),
 parentNotIn?: ((Scalars['ID'] | null)[] | null),
 /** Search term(s) to retrieve matching comments for. */
 search?: (Scalars['String'] | null),
-/** Comment status to limit results by. */
-status?: (Scalars['String'] | null),
 /** One or more Comment Statuses to limit results by */
 statusIn?: ((CommentStatusEnum | null)[] | null),
 /** Include comments for a specific user ID. */
@@ -11020,7 +11078,7 @@ export interface PageToCommentConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;PageToCommentConnection&quot; */
+/** Pagination metadata specific to &quot;PageToCommentConnection&quot; collections. Provides cursors and flags for navigating through sets of PageToCommentConnection Nodes. */
 export interface PageToCommentConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -11071,6 +11129,117 @@ export interface Page_Conteusobre_itemRequest{
 
 
 /** Field Group */
+export interface Page_ConteudoindiqueeganheRequest{
+    descricaoIg?: boolean | number
+    descricaoPasso1Ig?: boolean | number
+    descricaoPasso2Ig?: boolean | number
+    descricaoPasso3Ig?: boolean | number
+    emObra?: Page_Conteudoindiqueeganhe_EmObraRequest
+    entregue?: Page_Conteudoindiqueeganhe_EntregueRequest
+    /** The name of the ACF Field Group */
+    fieldGroupName?: boolean | number
+    imagemIg?: MediaItemRequest
+    regulamentoIndiqueGanhe?: MediaItemRequest
+    tituloPasso1Ig?: boolean | number
+    tituloPasso2Ig?: boolean | number
+    tituloPasso3Ig?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Field Group */
+export interface Page_Conteudoindiqueeganhe_EmObraRequest{
+    beneficioEmobraIg?: boolean | number
+    /** The name of the ACF Field Group */
+    fieldGroupName?: boolean | number
+    observacaoEmobraIg?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Field Group */
+export interface Page_Conteudoindiqueeganhe_EntregueRequest{
+    beneficioEntregueIg?: boolean | number
+    /** The name of the ACF Field Group */
+    fieldGroupName?: boolean | number
+    observacaoEntregueIg?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Field Group */
+export interface Page_ConteudolstoreRequest{
+    descicaoBannerLstore?: boolean | number
+    descricaoGaleriaLstore?: boolean | number
+    descricaoPasso1Lstore?: boolean | number
+    descricaoPasso2Lstore?: boolean | number
+    descricaoPasso3Lstore?: boolean | number
+    descricaoPassoLstore?: boolean | number
+    descricaoSalaLstore?: boolean | number
+    descricaoSobreLstore?: boolean | number
+    descricaoUltimoLstore?: boolean | number
+    /** The name of the ACF Field Group */
+    fieldGroupName?: boolean | number
+    fraseBannerLstore?: boolean | number
+    imagem1?: MediaItemRequest
+    imagem2?: MediaItemRequest
+    imagemSobreLstore?: MediaItemRequest
+    imagensGaleriaLstore?: MediaItemRequest
+    imagensSalaLstore?: MediaItemRequest
+    numeroParaAgendamentoLstore?: boolean | number
+    textoAuxiliarSobreLstore?: boolean | number
+    tituloBannerLstore?: boolean | number
+    tituloGaleriaLstore?: boolean | number
+    tituloPasso1Lstore?: boolean | number
+    tituloPasso2Lstore?: boolean | number
+    tituloPasso3Lstore?: boolean | number
+    tituloPassoLstore?: boolean | number
+    tituloSalaLstore?: boolean | number
+    tituloUltimoLstore?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Field Group */
+export interface Page_ConteudopoliticadequalidadeRequest{
+    certificacaoPq?: Page_Conteudopoliticadequalidade_certificacaoPqRequest
+    /** The name of the ACF Field Group */
+    fieldGroupName?: boolean | number
+    praticaItensPq?: Page_Conteudopoliticadequalidade_praticaItensPqRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Field Group */
+export interface Page_Conteudopoliticadequalidade_certificacaoPqRequest{
+    descricaoCertPq?: boolean | number
+    /** The name of the ACF Field Group */
+    fieldGroupName?: boolean | number
+    imagemCertPq?: MediaItemRequest
+    tituloCertPq?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Field Group */
+export interface Page_Conteudopoliticadequalidade_praticaItensPqRequest{
+    descricaoCertPq?: boolean | number
+    /** The name of the ACF Field Group */
+    fieldGroupName?: boolean | number
+    imagemCertPq?: MediaItemRequest
+    tituloCertPq?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Field Group */
 export interface Page_InformacoesdecontatoRequest{
     coEmail?: boolean | number
     coEndereco?: boolean | number
@@ -11086,7 +11255,7 @@ export interface Page_InformacoesdecontatoRequest{
 }
 
 
-/** Connection between the Page type and the page type */
+/** Connection between the page type and the page type */
 export interface PageToPreviewConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -11179,7 +11348,7 @@ export interface PageToRevisionConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;PageToRevisionConnection&quot; */
+/** Pagination metadata specific to &quot;PageToRevisionConnection&quot; collections. Provides cursors and flags for navigating through sets of PageToRevisionConnection Nodes. */
 export interface PageToRevisionConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -11194,7 +11363,7 @@ export interface PageToRevisionConnectionPageInfoRequest{
 }
 
 
-/** Page Info on the connected PageConnectionEdge */
+/** Pagination metadata specific to &quot;PageConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;PageConnectionEdge&quot; Nodes. */
 export interface PageConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -11223,7 +11392,7 @@ export interface UserToPageConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;UserToPageConnection&quot; */
+/** Pagination metadata specific to &quot;UserToPageConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToPageConnection Nodes. */
 export interface UserToPageConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -11329,7 +11498,7 @@ export interface UserToPostConnectionRequest{
 }
 
 
-/** Connection to post Nodes */
+/** A paginated collection of post Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of post Nodes */
 export interface PostConnectionRequest{
     /** A list of edges (relational context) between RootQuery and connected post Nodes */
     edges?: PostConnectionEdgeRequest
@@ -11349,7 +11518,7 @@ export interface PostConnectionRequest{
 }
 
 
-/** Edge between a Node and a connected post */
+/** Represents a connection to a post. Contains both the post Node and metadata about the relationship. */
 export interface PostConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -11369,7 +11538,7 @@ export interface PostConnectionEdgeRequest{
 }
 
 
-/** The post type */
+/** A chronological content entry typically used for blog posts, news articles, or similar date-based content. */
 export interface PostRequest{
     /**
      * @deprecated This content type is not hierarchical and typically will not have ancestors
@@ -11528,7 +11697,7 @@ export interface PostRequest{
      * The id field matches the WP_Post-&gt;ID field.
      */
     postId?: boolean | number
-    /** Connection between the Post type and the post type */
+    /** Connection between the post type and the post type */
     preview?: PostToPreviewConnectionEdgeRequest
     /** The database id of the preview node */
     previewRevisionDatabaseId?: boolean | number
@@ -11591,7 +11760,7 @@ export interface PostRequest{
 }
 
 
-/** A node that can have an excerpt */
+/** A node which provides an excerpt field, which is a condensed summary of the main content. Excerpts can be manually created or automatically generated and are often used in content listings and search results. */
 export interface NodeWithExcerptRequest{
     /** The excerpt of the post. */
     excerpt?: [{
@@ -11605,7 +11774,7 @@ export interface NodeWithExcerptRequest{
 }
 
 
-/** A node that can have trackbacks and pingbacks */
+/** Content that supports cross-site notifications when linked to by other sites. Includes fields for pingback status and linked URLs. */
 export interface NodeWithTrackbacksRequest{
     /** The globally unique ID for the object */
     id?: boolean | number
@@ -11621,7 +11790,7 @@ export interface NodeWithTrackbacksRequest{
 }
 
 
-/** Connection between the Post type and the post type */
+/** Connection between the post type and the post type */
 export interface PostToPostConnectionRequest{
     /** Edges for the PostToPostConnection connection */
     edges?: PostToPostConnectionEdgeRequest
@@ -11651,7 +11820,7 @@ export interface PostToPostConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;PostToPostConnection&quot; */
+/** Pagination metadata specific to &quot;PostToPostConnection&quot; collections. Provides cursors and flags for navigating through sets of PostToPostConnection Nodes. */
 export interface PostToPostConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -11666,7 +11835,7 @@ export interface PostToPostConnectionPageInfoRequest{
 }
 
 
-/** Page Info on the connected PostConnectionEdge */
+/** Pagination metadata specific to &quot;PostConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;PostConnectionEdge&quot; Nodes. */
 export interface PostConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -11727,8 +11896,6 @@ search?: (Scalars['String'] | null),
 /** Array of slugs to return term(s) for. Default empty. */
 slug?: ((Scalars['String'] | null)[] | null),
 /** Array of term taxonomy IDs, to match when querying terms. */
-termTaxonomId?: ((Scalars['ID'] | null)[] | null),
-/** Array of term taxonomy IDs, to match when querying terms. */
 termTaxonomyId?: ((Scalars['ID'] | null)[] | null),
 /** Whether to prime meta caches for matched terms. Default true. */
 updateTermMetaCache?: (Scalars['Boolean'] | null)}
@@ -11747,7 +11914,7 @@ export interface PostToCategoryConnectionRequest{
 }
 
 
-/** Connection to category Nodes */
+/** A paginated collection of category Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of category Nodes */
 export interface CategoryConnectionRequest{
     /** A list of edges (relational context) between RootQuery and connected category Nodes */
     edges?: CategoryConnectionEdgeRequest
@@ -11766,7 +11933,7 @@ export interface CategoryConnectionRequest{
 }
 
 
-/** Edge between a Node and a connected category */
+/** Represents a connection to a category. Contains both the category Node and metadata about the relationship. */
 export interface CategoryConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -11784,7 +11951,7 @@ export interface CategoryConnectionEdgeRequest{
 }
 
 
-/** The category type */
+/** A taxonomy term that classifies content. Categories support hierarchy and can be used to create a nested structure. */
 export interface CategoryRequest{
     /** The ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
     ancestors?: [{
@@ -12018,7 +12185,7 @@ export interface CategoryToAncestorsCategoryConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;CategoryToAncestorsCategoryConnection&quot; */
+/** Pagination metadata specific to &quot;CategoryToAncestorsCategoryConnection&quot; collections. Provides cursors and flags for navigating through sets of CategoryToAncestorsCategoryConnection Nodes. */
 export interface CategoryToAncestorsCategoryConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -12033,7 +12200,7 @@ export interface CategoryToAncestorsCategoryConnectionPageInfoRequest{
 }
 
 
-/** Page Info on the connected CategoryConnectionEdge */
+/** Pagination metadata specific to &quot;CategoryConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;CategoryConnectionEdge&quot; Nodes. */
 export interface CategoryConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -12125,7 +12292,7 @@ export interface CategoryToCentraldeDecoradoConnectionRequest{
 }
 
 
-/** Connection to CentraldeDecorado Nodes */
+/** A paginated collection of CentraldeDecorado Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of CentraldeDecorado Nodes */
 export interface CentraldeDecoradoConnectionRequest{
     /** A list of edges (relational context) between RootQuery and connected CentraldeDecorado Nodes */
     edges?: CentraldeDecoradoConnectionEdgeRequest
@@ -12141,7 +12308,7 @@ export interface CentraldeDecoradoConnectionRequest{
 }
 
 
-/** Edge between a Node and a connected CentraldeDecorado */
+/** Represents a connection to a CentraldeDecorado. Contains both the CentraldeDecorado Node and metadata about the relationship. */
 export interface CentraldeDecoradoConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -12333,7 +12500,7 @@ export interface CentraldeDecoradoToCentraldeDecoradoConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;CentraldeDecoradoToCentraldeDecoradoConnection&quot; */
+/** Pagination metadata specific to &quot;CentraldeDecoradoToCentraldeDecoradoConnection&quot; collections. Provides cursors and flags for navigating through sets of CentraldeDecoradoToCentraldeDecoradoConnection Nodes. */
 export interface CentraldeDecoradoToCentraldeDecoradoConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -12348,7 +12515,7 @@ export interface CentraldeDecoradoToCentraldeDecoradoConnectionPageInfoRequest{
 }
 
 
-/** Page Info on the connected CentraldeDecoradoConnectionEdge */
+/** Pagination metadata specific to &quot;CentraldeDecoradoConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;CentraldeDecoradoConnectionEdge&quot; Nodes. */
 export interface CentraldeDecoradoConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -12405,8 +12572,6 @@ search?: (Scalars['String'] | null),
 /** Array of slugs to return term(s) for. Default empty. */
 slug?: ((Scalars['String'] | null)[] | null),
 /** Array of term taxonomy IDs, to match when querying terms. */
-termTaxonomId?: ((Scalars['ID'] | null)[] | null),
-/** Array of term taxonomy IDs, to match when querying terms. */
 termTaxonomyId?: ((Scalars['ID'] | null)[] | null),
 /** Whether to prime meta caches for matched terms. Default true. */
 updateTermMetaCache?: (Scalars['Boolean'] | null)}
@@ -12436,7 +12601,7 @@ export interface CentraldeDecoradoToCategoryConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;CentraldeDecoradoToCategoryConnection&quot; */
+/** Pagination metadata specific to &quot;CentraldeDecoradoToCategoryConnection&quot; collections. Provides cursors and flags for navigating through sets of CentraldeDecoradoToCategoryConnection Nodes. */
 export interface CentraldeDecoradoToCategoryConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -12538,8 +12703,6 @@ slug?: ((Scalars['String'] | null)[] | null),
 /** The Taxonomy to filter terms by */
 taxonomies?: ((TaxonomyEnum | null)[] | null),
 /** Array of term taxonomy IDs, to match when querying terms. */
-termTaxonomId?: ((Scalars['ID'] | null)[] | null),
-/** Array of term taxonomy IDs, to match when querying terms. */
 termTaxonomyId?: ((Scalars['ID'] | null)[] | null),
 /** Whether to prime meta caches for matched terms. Default true. */
 updateTermMetaCache?: (Scalars['Boolean'] | null)}
@@ -12569,7 +12732,7 @@ export interface CentraldeDecoradoToTermNodeConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;CentraldeDecoradoToTermNodeConnection&quot; */
+/** Pagination metadata specific to &quot;CentraldeDecoradoToTermNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of CentraldeDecoradoToTermNodeConnection Nodes. */
 export interface CentraldeDecoradoToTermNodeConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -12595,7 +12758,7 @@ export interface CategoryToCentraldeDecoradoConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;CategoryToCentraldeDecoradoConnection&quot; */
+/** Pagination metadata specific to &quot;CategoryToCentraldeDecoradoConnection&quot; collections. Provides cursors and flags for navigating through sets of CategoryToCentraldeDecoradoConnection Nodes. */
 export interface CategoryToCentraldeDecoradoConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -12649,8 +12812,6 @@ search?: (Scalars['String'] | null),
 /** Array of slugs to return term(s) for. Default empty. */
 slug?: ((Scalars['String'] | null)[] | null),
 /** Array of term taxonomy IDs, to match when querying terms. */
-termTaxonomId?: ((Scalars['ID'] | null)[] | null),
-/** Array of term taxonomy IDs, to match when querying terms. */
 termTaxonomyId?: ((Scalars['ID'] | null)[] | null),
 /** Whether to prime meta caches for matched terms. Default true. */
 updateTermMetaCache?: (Scalars['Boolean'] | null)}
@@ -12680,7 +12841,7 @@ export interface CategoryToCategoryConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;CategoryToCategoryConnection&quot; */
+/** Pagination metadata specific to &quot;CategoryToCategoryConnection&quot; collections. Provides cursors and flags for navigating through sets of CategoryToCategoryConnection Nodes. */
 export interface CategoryToCategoryConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -12771,7 +12932,7 @@ export interface CategoryToContentNodeConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;CategoryToContentNodeConnection&quot; */
+/** Pagination metadata specific to &quot;CategoryToContentNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of CategoryToContentNodeConnection Nodes. */
 export interface CategoryToContentNodeConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -12857,7 +13018,7 @@ export interface CategoryToEmpreendimentoConnectionRequest{
 }
 
 
-/** Connection to Empreendimento Nodes */
+/** A paginated collection of Empreendimento Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of Empreendimento Nodes */
 export interface EmpreendimentoConnectionRequest{
     /** A list of edges (relational context) between RootQuery and connected Empreendimento Nodes */
     edges?: EmpreendimentoConnectionEdgeRequest
@@ -12873,7 +13034,7 @@ export interface EmpreendimentoConnectionRequest{
 }
 
 
-/** Edge between a Node and a connected Empreendimento */
+/** Represents a connection to a Empreendimento. Contains both the Empreendimento Node and metadata about the relationship. */
 export interface EmpreendimentoConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -13067,7 +13228,7 @@ export interface EmpreendimentoToEmpreendimentoConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;EmpreendimentoToEmpreendimentoConnection&quot; */
+/** Pagination metadata specific to &quot;EmpreendimentoToEmpreendimentoConnection&quot; collections. Provides cursors and flags for navigating through sets of EmpreendimentoToEmpreendimentoConnection Nodes. */
 export interface EmpreendimentoToEmpreendimentoConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -13082,7 +13243,7 @@ export interface EmpreendimentoToEmpreendimentoConnectionPageInfoRequest{
 }
 
 
-/** Page Info on the connected EmpreendimentoConnectionEdge */
+/** Pagination metadata specific to &quot;EmpreendimentoConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;EmpreendimentoConnectionEdge&quot; Nodes. */
 export interface EmpreendimentoConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -13139,8 +13300,6 @@ search?: (Scalars['String'] | null),
 /** Array of slugs to return term(s) for. Default empty. */
 slug?: ((Scalars['String'] | null)[] | null),
 /** Array of term taxonomy IDs, to match when querying terms. */
-termTaxonomId?: ((Scalars['ID'] | null)[] | null),
-/** Array of term taxonomy IDs, to match when querying terms. */
 termTaxonomyId?: ((Scalars['ID'] | null)[] | null),
 /** Whether to prime meta caches for matched terms. Default true. */
 updateTermMetaCache?: (Scalars['Boolean'] | null)}
@@ -13170,7 +13329,7 @@ export interface EmpreendimentoToCategoryConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;EmpreendimentoToCategoryConnection&quot; */
+/** Pagination metadata specific to &quot;EmpreendimentoToCategoryConnection&quot; collections. Provides cursors and flags for navigating through sets of EmpreendimentoToCategoryConnection Nodes. */
 export interface EmpreendimentoToCategoryConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -13378,8 +13537,6 @@ slug?: ((Scalars['String'] | null)[] | null),
 /** The Taxonomy to filter terms by */
 taxonomies?: ((TaxonomyEnum | null)[] | null),
 /** Array of term taxonomy IDs, to match when querying terms. */
-termTaxonomId?: ((Scalars['ID'] | null)[] | null),
-/** Array of term taxonomy IDs, to match when querying terms. */
 termTaxonomyId?: ((Scalars['ID'] | null)[] | null),
 /** Whether to prime meta caches for matched terms. Default true. */
 updateTermMetaCache?: (Scalars['Boolean'] | null)}
@@ -13409,7 +13566,7 @@ export interface EmpreendimentoToTermNodeConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;EmpreendimentoToTermNodeConnection&quot; */
+/** Pagination metadata specific to &quot;EmpreendimentoToTermNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of EmpreendimentoToTermNodeConnection Nodes. */
 export interface EmpreendimentoToTermNodeConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -13435,7 +13592,7 @@ export interface CategoryToEmpreendimentoConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;CategoryToEmpreendimentoConnection&quot; */
+/** Pagination metadata specific to &quot;CategoryToEmpreendimentoConnection&quot; collections. Provides cursors and flags for navigating through sets of CategoryToEmpreendimentoConnection Nodes. */
 export interface CategoryToEmpreendimentoConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -13563,7 +13720,7 @@ export interface CategoryToPostConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;CategoryToPostConnection&quot; */
+/** Pagination metadata specific to &quot;CategoryToPostConnection&quot; collections. Provides cursors and flags for navigating through sets of CategoryToPostConnection Nodes. */
 export interface CategoryToPostConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -13600,7 +13757,7 @@ export interface PostToCategoryConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;PostToCategoryConnection&quot; */
+/** Pagination metadata specific to &quot;PostToCategoryConnection&quot; collections. Provides cursors and flags for navigating through sets of PostToCategoryConnection Nodes. */
 export interface PostToCategoryConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -13671,8 +13828,6 @@ parentIn?: ((Scalars['ID'] | null)[] | null),
 parentNotIn?: ((Scalars['ID'] | null)[] | null),
 /** Search term(s) to retrieve matching comments for. */
 search?: (Scalars['String'] | null),
-/** Comment status to limit results by. */
-status?: (Scalars['String'] | null),
 /** One or more Comment Statuses to limit results by */
 statusIn?: ((CommentStatusEnum | null)[] | null),
 /** Include comments for a specific user ID. */
@@ -13703,7 +13858,7 @@ export interface PostToCommentConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;PostToCommentConnection&quot; */
+/** Pagination metadata specific to &quot;PostToCommentConnection&quot; collections. Provides cursors and flags for navigating through sets of PostToCommentConnection Nodes. */
 export interface PostToCommentConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -13718,7 +13873,7 @@ export interface PostToCommentConnectionPageInfoRequest{
 }
 
 
-/** Connection between the Post type and the post type */
+/** Connection between the post type and the post type */
 export interface PostToParentConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -13771,8 +13926,6 @@ search?: (Scalars['String'] | null),
 /** Array of slugs to return term(s) for. Default empty. */
 slug?: ((Scalars['String'] | null)[] | null),
 /** Array of term taxonomy IDs, to match when querying terms. */
-termTaxonomId?: ((Scalars['ID'] | null)[] | null),
-/** Array of term taxonomy IDs, to match when querying terms. */
 termTaxonomyId?: ((Scalars['ID'] | null)[] | null),
 /** Whether to prime meta caches for matched terms. Default true. */
 updateTermMetaCache?: (Scalars['Boolean'] | null)}
@@ -13791,7 +13944,7 @@ export interface PostToPostFormatConnectionRequest{
 }
 
 
-/** Connection to postFormat Nodes */
+/** A paginated collection of postFormat Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of postFormat Nodes */
 export interface PostFormatConnectionRequest{
     /** A list of edges (relational context) between RootQuery and connected postFormat Nodes */
     edges?: PostFormatConnectionEdgeRequest
@@ -13806,7 +13959,7 @@ export interface PostFormatConnectionRequest{
 }
 
 
-/** Edge between a Node and a connected postFormat */
+/** Represents a connection to a postFormat. Contains both the postFormat Node and metadata about the relationship. */
 export interface PostFormatConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -13819,7 +13972,7 @@ export interface PostFormatConnectionEdgeRequest{
 }
 
 
-/** The postFormat type */
+/** A standardized classification system for content presentation styles. These formats can be used to display content differently based on type, such as &quot;standard&quot;, &quot;gallery&quot;, &quot;video&quot;, etc. */
 export interface PostFormatRequest{
     /** Connection between the PostFormat type and the ContentNode type */
     contentNodes?: [{
@@ -13987,7 +14140,7 @@ export interface PostFormatToContentNodeConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;PostFormatToContentNodeConnection&quot; */
+/** Pagination metadata specific to &quot;PostFormatToContentNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of PostFormatToContentNodeConnection Nodes. */
 export interface PostFormatToContentNodeConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -14104,7 +14257,7 @@ export interface PostFormatToPostConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;PostFormatToPostConnection&quot; */
+/** Pagination metadata specific to &quot;PostFormatToPostConnection&quot; collections. Provides cursors and flags for navigating through sets of PostFormatToPostConnection Nodes. */
 export interface PostFormatToPostConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -14130,7 +14283,7 @@ export interface PostFormatToTaxonomyConnectionEdgeRequest{
 }
 
 
-/** Page Info on the connected PostFormatConnectionEdge */
+/** Pagination metadata specific to &quot;PostFormatConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;PostFormatConnectionEdge&quot; Nodes. */
 export interface PostFormatConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -14158,7 +14311,7 @@ export interface PostToPostFormatConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;PostToPostFormatConnection&quot; */
+/** Pagination metadata specific to &quot;PostToPostFormatConnection&quot; collections. Provides cursors and flags for navigating through sets of PostToPostFormatConnection Nodes. */
 export interface PostToPostFormatConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -14173,7 +14326,7 @@ export interface PostToPostFormatConnectionPageInfoRequest{
 }
 
 
-/** Connection between the Post type and the post type */
+/** Connection between the post type and the post type */
 export interface PostToPreviewConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -14286,7 +14439,7 @@ export interface PostToRevisionConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;PostToRevisionConnection&quot; */
+/** Pagination metadata specific to &quot;PostToRevisionConnection&quot; collections. Provides cursors and flags for navigating through sets of PostToRevisionConnection Nodes. */
 export interface PostToRevisionConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -14340,8 +14493,6 @@ search?: (Scalars['String'] | null),
 /** Array of slugs to return term(s) for. Default empty. */
 slug?: ((Scalars['String'] | null)[] | null),
 /** Array of term taxonomy IDs, to match when querying terms. */
-termTaxonomId?: ((Scalars['ID'] | null)[] | null),
-/** Array of term taxonomy IDs, to match when querying terms. */
 termTaxonomyId?: ((Scalars['ID'] | null)[] | null),
 /** Whether to prime meta caches for matched terms. Default true. */
 updateTermMetaCache?: (Scalars['Boolean'] | null)}
@@ -14360,7 +14511,7 @@ export interface PostToTagConnectionRequest{
 }
 
 
-/** Connection to tag Nodes */
+/** A paginated collection of tag Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of tag Nodes */
 export interface TagConnectionRequest{
     /** A list of edges (relational context) between RootQuery and connected tag Nodes */
     edges?: TagConnectionEdgeRequest
@@ -14375,7 +14526,7 @@ export interface TagConnectionRequest{
 }
 
 
-/** Edge between a Node and a connected tag */
+/** Represents a connection to a tag. Contains both the tag Node and metadata about the relationship. */
 export interface TagConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -14388,7 +14539,7 @@ export interface TagConnectionEdgeRequest{
 }
 
 
-/** The tag type */
+/** A taxonomy term used to organize and classify content. Tags do not have a hierarchy and are generally used for more specific classifications. */
 export interface TagRequest{
     /** Connection between the Tag type and the ContentNode type */
     contentNodes?: [{
@@ -14556,7 +14707,7 @@ export interface TagToContentNodeConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;TagToContentNodeConnection&quot; */
+/** Pagination metadata specific to &quot;TagToContentNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of TagToContentNodeConnection Nodes. */
 export interface TagToContentNodeConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -14673,7 +14824,7 @@ export interface TagToPostConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;TagToPostConnection&quot; */
+/** Pagination metadata specific to &quot;TagToPostConnection&quot; collections. Provides cursors and flags for navigating through sets of TagToPostConnection Nodes. */
 export interface TagToPostConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -14699,7 +14850,7 @@ export interface TagToTaxonomyConnectionEdgeRequest{
 }
 
 
-/** Page Info on the connected TagConnectionEdge */
+/** Pagination metadata specific to &quot;TagConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;TagConnectionEdge&quot; Nodes. */
 export interface TagConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -14727,7 +14878,7 @@ export interface PostToTagConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;PostToTagConnection&quot; */
+/** Pagination metadata specific to &quot;PostToTagConnection&quot; collections. Provides cursors and flags for navigating through sets of PostToTagConnection Nodes. */
 export interface PostToTagConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -14783,8 +14934,6 @@ slug?: ((Scalars['String'] | null)[] | null),
 /** The Taxonomy to filter terms by */
 taxonomies?: ((TaxonomyEnum | null)[] | null),
 /** Array of term taxonomy IDs, to match when querying terms. */
-termTaxonomId?: ((Scalars['ID'] | null)[] | null),
-/** Array of term taxonomy IDs, to match when querying terms. */
 termTaxonomyId?: ((Scalars['ID'] | null)[] | null),
 /** Whether to prime meta caches for matched terms. Default true. */
 updateTermMetaCache?: (Scalars['Boolean'] | null)}
@@ -14814,7 +14963,7 @@ export interface PostToTermNodeConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;PostToTermNodeConnection&quot; */
+/** Pagination metadata specific to &quot;PostToTermNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of PostToTermNodeConnection Nodes. */
 export interface PostToTermNodeConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -14840,7 +14989,7 @@ export interface UserToPostConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;UserToPostConnection&quot; */
+/** Pagination metadata specific to &quot;UserToPostConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToPostConnection Nodes. */
 export interface UserToPostConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -14931,7 +15080,7 @@ export interface UserToRevisionsConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;UserToRevisionsConnection&quot; */
+/** Pagination metadata specific to &quot;UserToRevisionsConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToRevisionsConnection Nodes. */
 export interface UserToRevisionsConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -14959,7 +15108,7 @@ export interface UserToUserRoleConnectionRequest{
 }
 
 
-/** Connection to UserRole Nodes */
+/** A paginated collection of UserRole Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of UserRole Nodes */
 export interface UserRoleConnectionRequest{
     /** A list of edges (relational context) between RootQuery and connected UserRole Nodes */
     edges?: UserRoleConnectionEdgeRequest
@@ -14974,7 +15123,7 @@ export interface UserRoleConnectionRequest{
 }
 
 
-/** Edge between a Node and a connected UserRole */
+/** Represents a connection to a UserRole. Contains both the UserRole Node and metadata about the relationship. */
 export interface UserRoleConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -15004,7 +15153,7 @@ export interface UserRoleRequest{
 }
 
 
-/** Page Info on the connected UserRoleConnectionEdge */
+/** Pagination metadata specific to &quot;UserRoleConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;UserRoleConnectionEdge&quot; Nodes. */
 export interface UserRoleConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -15032,7 +15181,7 @@ export interface UserToUserRoleConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;UserToUserRoleConnection&quot; */
+/** Pagination metadata specific to &quot;UserToUserRoleConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToUserRoleConnection Nodes. */
 export interface UserToUserRoleConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -15060,7 +15209,7 @@ export interface ArquivoAssessoriaToArquivoAssessoriaConnectionRequest{
 }
 
 
-/** Connection to ArquivoAssessoria Nodes */
+/** A paginated collection of ArquivoAssessoria Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of ArquivoAssessoria Nodes */
 export interface ArquivoAssessoriaConnectionRequest{
     /** A list of edges (relational context) between RootQuery and connected ArquivoAssessoria Nodes */
     edges?: ArquivoAssessoriaConnectionEdgeRequest
@@ -15075,7 +15224,7 @@ export interface ArquivoAssessoriaConnectionRequest{
 }
 
 
-/** Edge between a Node and a connected ArquivoAssessoria */
+/** Represents a connection to a ArquivoAssessoria. Contains both the ArquivoAssessoria Node and metadata about the relationship. */
 export interface ArquivoAssessoriaConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -15090,7 +15239,7 @@ export interface ArquivoAssessoriaConnectionEdgeRequest{
 }
 
 
-/** Page Info on the connected ArquivoAssessoriaConnectionEdge */
+/** Pagination metadata specific to &quot;ArquivoAssessoriaConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;ArquivoAssessoriaConnectionEdge&quot; Nodes. */
 export interface ArquivoAssessoriaConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -15124,7 +15273,7 @@ export interface ArquivoAssessoriaToArquivoAssessoriaConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;ArquivoAssessoriaToArquivoAssessoriaConnection&quot; */
+/** Pagination metadata specific to &quot;ArquivoAssessoriaToArquivoAssessoriaConnection&quot; collections. Provides cursors and flags for navigating through sets of ArquivoAssessoriaToArquivoAssessoriaConnection Nodes. */
 export interface ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -15252,7 +15401,7 @@ export interface RootQueryToArquivoAssessoriaConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;RootQueryToArquivoAssessoriaConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToArquivoAssessoriaConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToArquivoAssessoriaConnection Nodes. */
 export interface RootQueryToArquivoAssessoriaConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -15396,7 +15545,7 @@ export interface BannerToBannerConnectionRequest{
 }
 
 
-/** Connection to Banner Nodes */
+/** A paginated collection of Banner Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of Banner Nodes */
 export interface BannerConnectionRequest{
     /** A list of edges (relational context) between RootQuery and connected Banner Nodes */
     edges?: BannerConnectionEdgeRequest
@@ -15411,7 +15560,7 @@ export interface BannerConnectionRequest{
 }
 
 
-/** Edge between a Node and a connected Banner */
+/** Represents a connection to a Banner. Contains both the Banner Node and metadata about the relationship. */
 export interface BannerConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -15426,7 +15575,7 @@ export interface BannerConnectionEdgeRequest{
 }
 
 
-/** Page Info on the connected BannerConnectionEdge */
+/** Pagination metadata specific to &quot;BannerConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;BannerConnectionEdge&quot; Nodes. */
 export interface BannerConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -15460,7 +15609,7 @@ export interface BannerToBannerConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;BannerToBannerConnection&quot; */
+/** Pagination metadata specific to &quot;BannerToBannerConnection&quot; collections. Provides cursors and flags for navigating through sets of BannerToBannerConnection Nodes. */
 export interface BannerToBannerConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -15638,7 +15787,7 @@ export interface RootQueryToBannerConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;RootQueryToBannerConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToBannerConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToBannerConnection Nodes. */
 export interface RootQueryToBannerConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -15692,8 +15841,6 @@ search?: (Scalars['String'] | null),
 /** Array of slugs to return term(s) for. Default empty. */
 slug?: ((Scalars['String'] | null)[] | null),
 /** Array of term taxonomy IDs, to match when querying terms. */
-termTaxonomId?: ((Scalars['ID'] | null)[] | null),
-/** Array of term taxonomy IDs, to match when querying terms. */
 termTaxonomyId?: ((Scalars['ID'] | null)[] | null),
 /** Whether to prime meta caches for matched terms. Default true. */
 updateTermMetaCache?: (Scalars['Boolean'] | null)}
@@ -15723,7 +15870,7 @@ export interface RootQueryToCategoryConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;RootQueryToCategoryConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToCategoryConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToCategoryConnection Nodes. */
 export interface RootQueryToCategoryConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -15820,7 +15967,7 @@ export interface RootQueryToCentraldeDecoradoConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;RootQueryToCentraldeDecoradoConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToCentraldeDecoradoConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToCentraldeDecoradoConnection Nodes. */
 export interface RootQueryToCentraldeDecoradoConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -15891,8 +16038,6 @@ parentIn?: ((Scalars['ID'] | null)[] | null),
 parentNotIn?: ((Scalars['ID'] | null)[] | null),
 /** Search term(s) to retrieve matching comments for. */
 search?: (Scalars['String'] | null),
-/** Comment status to limit results by. */
-status?: (Scalars['String'] | null),
 /** One or more Comment Statuses to limit results by */
 statusIn?: ((CommentStatusEnum | null)[] | null),
 /** Include comments for a specific user ID. */
@@ -15923,7 +16068,7 @@ export interface RootQueryToCommentConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;RootQueryToCommentConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToCommentConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToCommentConnection Nodes. */
 export interface RootQueryToCommentConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -16014,7 +16159,7 @@ export interface RootQueryToContentNodeConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;RootQueryToContentNodeConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToContentNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToContentNodeConnection Nodes. */
 export interface RootQueryToContentNodeConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -16053,7 +16198,7 @@ export interface RootQueryToContentTypeConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;RootQueryToContentTypeConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToContentTypeConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToContentTypeConnection Nodes. */
 export interface RootQueryToContentTypeConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -16161,7 +16306,7 @@ export interface RootQueryToEmpreendimentoConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;RootQueryToEmpreendimentoConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToEmpreendimentoConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToEmpreendimentoConnection Nodes. */
 export interface RootQueryToEmpreendimentoConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -16186,6 +16331,12 @@ export interface GeneralSettingsRequest{
     email?: boolean | number
     /** Código de localização do WordPress. */
     language?: boolean | number
+    /** The media item representing the site icon configured in site settings, used as the site&#039;s favicon and app icon. */
+    siteIcon?: GeneralSettingsToMediaItemConnectionEdgeRequest
+    /** Site icon URL configured in site settings, used as the site&#039;s favicon and app icon. */
+    siteIconUrl?: [{
+    /** Size of the site icon in pixels. Defaults to 512. Max 512. */
+    size?: (Scalars['Int'] | null)}] | boolean | number
     /** Número do dia da semana em que a semana deve iniciar. */
     startOfWeek?: boolean | number
     /** Um formato de hora para todos os textos. */
@@ -16196,6 +16347,17 @@ export interface GeneralSettingsRequest{
     title?: boolean | number
     /** URL do site. */
     url?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Connection between the GeneralSettings type and the MediaItem type */
+export interface GeneralSettingsToMediaItemConnectionEdgeRequest{
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: boolean | number
+    /** The node of the connection, without the edges */
+    node?: MediaItemRequest
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -16283,7 +16445,7 @@ export interface RootQueryToMediaItemConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;RootQueryToMediaItemConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToMediaItemConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToMediaItemConnection Nodes. */
 export interface RootQueryToMediaItemConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -16298,7 +16460,7 @@ export interface RootQueryToMediaItemConnectionPageInfoRequest{
 }
 
 
-/** Menus are the containers for navigation items. Menus can be assigned to menu locations, which are typically registered by the active theme. */
+/** Collections of navigation links. Menus can be assigned to designated locations and used to build site navigation structures. */
 export interface MenuRequest{
     /** The number of items in the menu */
     count?: boolean | number
@@ -16361,7 +16523,7 @@ export interface MenuToMenuItemConnectionRequest{
 }
 
 
-/** Connection to MenuItem Nodes */
+/** A paginated collection of MenuItem Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of MenuItem Nodes */
 export interface MenuItemConnectionRequest{
     /** A list of edges (relational context) between RootQuery and connected MenuItem Nodes */
     edges?: MenuItemConnectionEdgeRequest
@@ -16377,7 +16539,7 @@ export interface MenuItemConnectionRequest{
 }
 
 
-/** Edge between a Node and a connected MenuItem */
+/** Represents a connection to a MenuItem. Contains both the MenuItem Node and metadata about the relationship. */
 export interface MenuItemConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -16492,7 +16654,7 @@ export interface MenuItemToMenuItemConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;MenuItemToMenuItemConnection&quot; */
+/** Pagination metadata specific to &quot;MenuItemToMenuItemConnection&quot; collections. Provides cursors and flags for navigating through sets of MenuItemToMenuItemConnection Nodes. */
 export interface MenuItemToMenuItemConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -16507,7 +16669,7 @@ export interface MenuItemToMenuItemConnectionPageInfoRequest{
 }
 
 
-/** Page Info on the connected MenuItemConnectionEdge */
+/** Pagination metadata specific to &quot;MenuItemConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;MenuItemConnectionEdge&quot; Nodes. */
 export interface MenuItemConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -16536,7 +16698,7 @@ export interface MenuItemToMenuItemLinkableConnectionEdgeRequest{
 }
 
 
-/** Edge between a Node and a connected MenuItemLinkable */
+/** Represents a connection to a MenuItemLinkable. Contains both the MenuItemLinkable Node and metadata about the relationship. */
 export interface MenuItemLinkableConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -16548,7 +16710,7 @@ export interface MenuItemLinkableConnectionEdgeRequest{
 }
 
 
-/** Deprecated in favor of MenuItemLinkeable Interface */
+/** Deprecated in favor of MenuItemLinkable Interface */
 export interface MenuItemObjectUnionRequest{
     on_Post?:PostRequest,
     on_Page?:PageRequest,
@@ -16593,7 +16755,7 @@ export interface MenuItemToMenuConnectionEdgeRequest{
 }
 
 
-/** Edge between a Node and a connected Menu */
+/** Represents a connection to a Menu. Contains both the Menu Node and metadata about the relationship. */
 export interface MenuConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -16617,7 +16779,7 @@ export interface MenuToMenuItemConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;MenuToMenuItemConnection&quot; */
+/** Pagination metadata specific to &quot;MenuToMenuItemConnection&quot; collections. Provides cursors and flags for navigating through sets of MenuToMenuItemConnection Nodes. */
 export interface MenuToMenuItemConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -16668,7 +16830,7 @@ export interface RootQueryToMenuItemConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;RootQueryToMenuItemConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToMenuItemConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToMenuItemConnection Nodes. */
 export interface RootQueryToMenuItemConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -16706,7 +16868,7 @@ export interface RootQueryToMenuConnectionRequest{
 }
 
 
-/** Connection to Menu Nodes */
+/** A paginated collection of Menu Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of Menu Nodes */
 export interface MenuConnectionRequest{
     /** A list of edges (relational context) between RootQuery and connected Menu Nodes */
     edges?: MenuConnectionEdgeRequest
@@ -16720,7 +16882,7 @@ export interface MenuConnectionRequest{
 }
 
 
-/** Page Info on the connected MenuConnectionEdge */
+/** Pagination metadata specific to &quot;MenuConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;MenuConnectionEdge&quot; Nodes. */
 export interface MenuConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -16747,7 +16909,7 @@ export interface RootQueryToMenuConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;RootQueryToMenuConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToMenuConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToMenuConnection Nodes. */
 export interface RootQueryToMenuConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -16844,7 +17006,7 @@ export interface RootQueryToPageConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;RootQueryToPageConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToPageConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToPageConnection Nodes. */
 export interface RootQueryToPageConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -16907,7 +17069,7 @@ export interface RootQueryToPluginConnectionRequest{
 }
 
 
-/** Connection to Plugin Nodes */
+/** A paginated collection of Plugin Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of Plugin Nodes */
 export interface PluginConnectionRequest{
     /** A list of edges (relational context) between RootQuery and connected Plugin Nodes */
     edges?: PluginConnectionEdgeRequest
@@ -16921,7 +17083,7 @@ export interface PluginConnectionRequest{
 }
 
 
-/** Edge between a Node and a connected Plugin */
+/** Represents a connection to a Plugin. Contains both the Plugin Node and metadata about the relationship. */
 export interface PluginConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -16933,7 +17095,7 @@ export interface PluginConnectionEdgeRequest{
 }
 
 
-/** Page Info on the connected PluginConnectionEdge */
+/** Pagination metadata specific to &quot;PluginConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;PluginConnectionEdge&quot; Nodes. */
 export interface PluginConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -16960,7 +17122,7 @@ export interface RootQueryToPluginConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;RootQueryToPluginConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToPluginConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToPluginConnection Nodes. */
 export interface RootQueryToPluginConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -17014,8 +17176,6 @@ search?: (Scalars['String'] | null),
 /** Array of slugs to return term(s) for. Default empty. */
 slug?: ((Scalars['String'] | null)[] | null),
 /** Array of term taxonomy IDs, to match when querying terms. */
-termTaxonomId?: ((Scalars['ID'] | null)[] | null),
-/** Array of term taxonomy IDs, to match when querying terms. */
 termTaxonomyId?: ((Scalars['ID'] | null)[] | null),
 /** Whether to prime meta caches for matched terms. Default true. */
 updateTermMetaCache?: (Scalars['Boolean'] | null)}
@@ -17045,7 +17205,7 @@ export interface RootQueryToPostFormatConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;RootQueryToPostFormatConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToPostFormatConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToPostFormatConnection Nodes. */
 export interface RootQueryToPostFormatConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -17162,7 +17322,7 @@ export interface RootQueryToPostConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;RootQueryToPostConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToPostConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToPostConnection Nodes. */
 export interface RootQueryToPostConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -17216,7 +17376,7 @@ export interface RootQueryToEnqueuedScriptConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;RootQueryToEnqueuedScriptConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToEnqueuedScriptConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToEnqueuedScriptConnection Nodes. */
 export interface RootQueryToEnqueuedScriptConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -17255,7 +17415,7 @@ export interface RootQueryToEnqueuedStylesheetConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;RootQueryToEnqueuedStylesheetConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToEnqueuedStylesheetConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToEnqueuedStylesheetConnection Nodes. */
 export interface RootQueryToEnqueuedStylesheetConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -17346,7 +17506,7 @@ export interface RootQueryToRevisionsConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;RootQueryToRevisionsConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToRevisionsConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToRevisionsConnection Nodes. */
 export interface RootQueryToRevisionsConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -17400,8 +17560,6 @@ search?: (Scalars['String'] | null),
 /** Array of slugs to return term(s) for. Default empty. */
 slug?: ((Scalars['String'] | null)[] | null),
 /** Array of term taxonomy IDs, to match when querying terms. */
-termTaxonomId?: ((Scalars['ID'] | null)[] | null),
-/** Array of term taxonomy IDs, to match when querying terms. */
 termTaxonomyId?: ((Scalars['ID'] | null)[] | null),
 /** Whether to prime meta caches for matched terms. Default true. */
 updateTermMetaCache?: (Scalars['Boolean'] | null)}
@@ -17431,7 +17589,7 @@ export interface RootQueryToTagConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;RootQueryToTagConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToTagConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToTagConnection Nodes. */
 export interface RootQueryToTagConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -17470,7 +17628,7 @@ export interface RootQueryToTaxonomyConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;RootQueryToTaxonomyConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToTaxonomyConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToTaxonomyConnection Nodes. */
 export interface RootQueryToTaxonomyConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -17526,8 +17684,6 @@ slug?: ((Scalars['String'] | null)[] | null),
 /** The Taxonomy to filter terms by */
 taxonomies?: ((TaxonomyEnum | null)[] | null),
 /** Array of term taxonomy IDs, to match when querying terms. */
-termTaxonomId?: ((Scalars['ID'] | null)[] | null),
-/** Array of term taxonomy IDs, to match when querying terms. */
 termTaxonomyId?: ((Scalars['ID'] | null)[] | null),
 /** Whether to prime meta caches for matched terms. Default true. */
 updateTermMetaCache?: (Scalars['Boolean'] | null)}
@@ -17557,7 +17713,7 @@ export interface RootQueryToTermNodeConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;RootQueryToTermNodeConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToTermNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToTermNodeConnection Nodes. */
 export interface RootQueryToTermNodeConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -17614,7 +17770,7 @@ export interface RootQueryToThemeConnectionRequest{
 }
 
 
-/** Connection to Theme Nodes */
+/** A paginated collection of Theme Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of Theme Nodes */
 export interface ThemeConnectionRequest{
     /** A list of edges (relational context) between RootQuery and connected Theme Nodes */
     edges?: ThemeConnectionEdgeRequest
@@ -17628,7 +17784,7 @@ export interface ThemeConnectionRequest{
 }
 
 
-/** Edge between a Node and a connected Theme */
+/** Represents a connection to a Theme. Contains both the Theme Node and metadata about the relationship. */
 export interface ThemeConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
@@ -17640,7 +17796,7 @@ export interface ThemeConnectionEdgeRequest{
 }
 
 
-/** Page Info on the connected ThemeConnectionEdge */
+/** Pagination metadata specific to &quot;ThemeConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;ThemeConnectionEdge&quot; Nodes. */
 export interface ThemeConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -17667,7 +17823,7 @@ export interface RootQueryToThemeConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;RootQueryToThemeConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToThemeConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToThemeConnection Nodes. */
 export interface RootQueryToThemeConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -17706,7 +17862,7 @@ export interface RootQueryToUserRoleConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;RootQueryToUserRoleConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToUserRoleConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToUserRoleConnection Nodes. */
 export interface RootQueryToUserRoleConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -17776,7 +17932,7 @@ export interface RootQueryToUserConnectionRequest{
 }
 
 
-/** Connection to User Nodes */
+/** A paginated collection of User Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of User Nodes */
 export interface UserConnectionRequest{
     /** A list of edges (relational context) between RootQuery and connected User Nodes */
     edges?: UserConnectionEdgeRequest
@@ -17790,7 +17946,7 @@ export interface UserConnectionRequest{
 }
 
 
-/** Page Info on the connected UserConnectionEdge */
+/** Pagination metadata specific to &quot;UserConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;UserConnectionEdge&quot; Nodes. */
 export interface UserConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -17817,7 +17973,7 @@ export interface RootQueryToUserConnectionEdgeRequest{
 }
 
 
-/** Page Info on the &quot;RootQueryToUserConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToUserConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToUserConnection Nodes. */
 export interface RootQueryToUserConnectionPageInfoRequest{
     /** When paginating forwards, the cursor to continue. */
     endCursor?: boolean | number
@@ -17840,6 +17996,130 @@ export interface WritingSettingsRequest{
     defaultPostFormat?: boolean | number
     /** Converter emoticons como :-) e :-P em gráficos ao exibí-los. */
     useSmilies?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** An object with a globally unique identifier. All objects that can be identified by a unique ID implement this interface. */
+export interface NodeRequest{
+    /** The globally unique ID for the object */
+    id?: boolean | number
+    on_ArquivoAssessoria?: ArquivoAssessoriaRequest
+    on_ContentType?: ContentTypeRequest
+    on_Taxonomy?: TaxonomyRequest
+    on_EnqueuedScript?: EnqueuedScriptRequest
+    on_EnqueuedStylesheet?: EnqueuedStylesheetRequest
+    on_User?: UserRequest
+    on_Comment?: CommentRequest
+    on_MediaItem?: MediaItemRequest
+    on_Page?: PageRequest
+    on_Post?: PostRequest
+    on_Category?: CategoryRequest
+    on_CentraldeDecorado?: CentraldeDecoradoRequest
+    on_Empreendimento?: EmpreendimentoRequest
+    on_PostFormat?: PostFormatRequest
+    on_Tag?: TagRequest
+    on_UserRole?: UserRoleRequest
+    on_Banner?: BannerRequest
+    on_Menu?: MenuRequest
+    on_MenuItem?: MenuItemRequest
+    on_Plugin?: PluginRequest
+    on_Theme?: ThemeRequest
+    on_CommentAuthor?: CommentAuthorRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** An object that has a unique numeric identifier in the database. Provides consistent access to the database ID across different object types. */
+export interface DatabaseIdentifierRequest{
+    /** The unique identifier stored in the database */
+    databaseId?: boolean | number
+    on_ArquivoAssessoria?: ArquivoAssessoriaRequest
+    on_User?: UserRequest
+    on_Comment?: CommentRequest
+    on_MediaItem?: MediaItemRequest
+    on_Page?: PageRequest
+    on_Post?: PostRequest
+    on_Category?: CategoryRequest
+    on_CentraldeDecorado?: CentraldeDecoradoRequest
+    on_Empreendimento?: EmpreendimentoRequest
+    on_PostFormat?: PostFormatRequest
+    on_Tag?: TagRequest
+    on_Banner?: BannerRequest
+    on_Menu?: MenuRequest
+    on_MenuItem?: MenuItemRequest
+    on_CommentAuthor?: CommentAuthorRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** A user or guest who has submitted a comment. Provides identification and contact information for the comment author. */
+export interface CommenterRequest{
+    /** Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument. */
+    avatar?: AvatarRequest
+    /** Identifies the primary key from the database. */
+    databaseId?: boolean | number
+    /** The email address of the author of a comment. */
+    email?: boolean | number
+    /** The globally unique identifier for the comment author. */
+    id?: boolean | number
+    /** Whether the author information is considered restricted. (not fully public) */
+    isRestricted?: boolean | number
+    /** The name of the author of a comment. */
+    name?: boolean | number
+    /** The url of the author of a comment. */
+    url?: boolean | number
+    on_User?: UserRequest
+    on_CommentAuthor?: CommentAuthorRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** A Comment Author object */
+export interface CommentAuthorRequest{
+    /** Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument. */
+    avatar?: [{
+    /** The size attribute of the avatar field can be used to fetch avatars of different sizes. The value corresponds to the dimension in pixels to fetch. The default is 96 pixels. */
+    size?: (Scalars['Int'] | null),
+    /** Whether to always show the default image, never the Gravatar. Default false */
+    forceDefault?: (Scalars['Boolean'] | null),
+    /** The rating level of the avatar. */
+    rating?: (AvatarRatingEnum | null)},AvatarRequest] | AvatarRequest
+    /** The unique identifier stored in the database */
+    databaseId?: boolean | number
+    /** The email for the comment author. */
+    email?: boolean | number
+    /** The globally unique identifier for the comment author object */
+    id?: boolean | number
+    /** Whether the object is restricted from the current viewer */
+    isRestricted?: boolean | number
+    /** The name for the comment author. */
+    name?: boolean | number
+    /** The url the comment author. */
+    url?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** A layout pattern that can help inform how content might be structured and displayed. Templates can define specialized layouts for different types of content. */
+export interface ContentTemplateRequest{
+    /** The name of the template */
+    templateName?: boolean | number
+    on_DefaultTemplate?: DefaultTemplateRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** The template assigned to the node */
+export interface DefaultTemplateRequest{
+    /** The name of the template */
+    templateName?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -18160,8 +18440,6 @@ export interface CreateCentraldeDecoradoPayloadRequest{
 
 /** Input for the createComment mutation. */
 export interface CreateCommentInput {
-/** The approval status of the comment. */
-approved?: (Scalars['String'] | null),
 /** The name of the comment's author. */
 author?: (Scalars['String'] | null),
 /** The email of the comment's author. */
@@ -18501,7 +18779,7 @@ description?: (Scalars['String'] | null),
 displayName?: (Scalars['String'] | null),
 /** A string containing the user's email address. */
 email?: (Scalars['String'] | null),
-/** 	The user's first name. */
+/** The user's first name. */
 firstName?: (Scalars['String'] | null),
 /** User's Jabber account. */
 jabber?: (Scalars['String'] | null),
@@ -18834,7 +19112,7 @@ description?: (Scalars['String'] | null),
 displayName?: (Scalars['String'] | null),
 /** A string containing the user's email address. */
 email?: (Scalars['String'] | null),
-/** 	The user's first name. */
+/** The user's first name. */
 firstName?: (Scalars['String'] | null),
 /** User's Jabber account. */
 jabber?: (Scalars['String'] | null),
@@ -19073,8 +19351,6 @@ export interface UpdateCentraldeDecoradoPayloadRequest{
 
 /** Input for the updateComment mutation. */
 export interface UpdateCommentInput {
-/** The approval status of the comment. */
-approved?: (Scalars['String'] | null),
 /** The name of the comment's author. */
 author?: (Scalars['String'] | null),
 /** The email of the comment's author. */
@@ -19415,7 +19691,7 @@ description?: (Scalars['String'] | null),
 displayName?: (Scalars['String'] | null),
 /** A string containing the user's email address. */
 email?: (Scalars['String'] | null),
-/** 	The user's first name. */
+/** The user's first name. */
 firstName?: (Scalars['String'] | null),
 /** The ID of the user */
 id: Scalars['ID'],
@@ -19453,42 +19729,6 @@ export interface UpdateUserPayloadRequest{
     __scalar?: boolean | number
 }
 
-
-/** A Comment Author object */
-export interface CommentAuthorRequest{
-    /** Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument. */
-    avatar?: [{
-    /** The size attribute of the avatar field can be used to fetch avatars of different sizes. The value corresponds to the dimension in pixels to fetch. The default is 96 pixels. */
-    size?: (Scalars['Int'] | null),
-    /** Whether to always show the default image, never the Gravatar. Default false */
-    forceDefault?: (Scalars['Boolean'] | null),
-    /** The rating level of the avatar. */
-    rating?: (AvatarRatingEnum | null)},AvatarRequest] | AvatarRequest
-    /** The unique identifier stored in the database */
-    databaseId?: boolean | number
-    /** The email for the comment author */
-    email?: boolean | number
-    /** The globally unique identifier for the comment author object */
-    id?: boolean | number
-    /** Whether the object is restricted from the current viewer */
-    isRestricted?: boolean | number
-    /** The name for the comment author. */
-    name?: boolean | number
-    /** The url the comment author. */
-    url?: boolean | number
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
-
-/** The template assigned to the node */
-export interface DefaultTemplateRequest{
-    /** The name of the template */
-    templateName?: boolean | number
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
-
 export type QueryRequest = RootQueryRequest
 export type MutationRequest = RootMutationRequest
 
@@ -19517,14 +19757,6 @@ export const isArquivoAssessoria = (obj?: { __typename?: any } | null): obj is A
 
 
 
-const Node_possibleTypes: string[] = ['ArquivoAssessoria','ContentType','Taxonomy','EnqueuedScript','EnqueuedStylesheet','User','Comment','MediaItem','Page','Post','Category','CentraldeDecorado','Empreendimento','PostFormat','Tag','UserRole','Banner','Menu','MenuItem','Plugin','Theme','CommentAuthor']
-export const isNode = (obj?: { __typename?: any } | null): obj is Node => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isNode"')
-  return Node_possibleTypes.includes(obj.__typename)
-}
-
-
-
 const ContentNode_possibleTypes: string[] = ['ArquivoAssessoria','MediaItem','Page','Post','CentraldeDecorado','Empreendimento','Banner']
 export const isContentNode = (obj?: { __typename?: any } | null): obj is ContentNode => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isContentNode"')
@@ -19549,7 +19781,7 @@ export const isContentNodeToContentTypeConnectionEdge = (obj?: { __typename?: an
 
 
 
-const OneToOneConnection_possibleTypes: string[] = ['ContentNodeToContentTypeConnectionEdge','ContentNodeToEditLockConnectionEdge','CommentToCommenterConnectionEdge','CommentToContentNodeConnectionEdge','CommentToParentCommentConnectionEdge','NodeWithAuthorToUserConnectionEdge','ContentNodeToEditLastConnectionEdge','HierarchicalContentNodeToParentContentNodeConnectionEdge','NodeWithFeaturedImageToMediaItemConnectionEdge','NodeWithRevisionsToContentNodeConnectionEdge','PageToPreviewConnectionEdge','CentraldeDecoradoToParentConnectionEdge','CentraldeDecoradoToPreviewConnectionEdge','EmpreendimentoToParentConnectionEdge','EmpreendimentoToPreviewConnectionEdge','CategoryToParentCategoryConnectionEdge','CategoryToTaxonomyConnectionEdge','PostToParentConnectionEdge','PostFormatToTaxonomyConnectionEdge','PostToPreviewConnectionEdge','TagToTaxonomyConnectionEdge','ArquivoAssessoriaToParentConnectionEdge','ArquivoAssessoriaToPreviewConnectionEdge','BannerToParentConnectionEdge','BannerToPreviewConnectionEdge','MenuItemToMenuItemLinkableConnectionEdge','MenuItemToMenuConnectionEdge']
+const OneToOneConnection_possibleTypes: string[] = ['ContentNodeToContentTypeConnectionEdge','ContentNodeToEditLockConnectionEdge','CommentToCommenterConnectionEdge','CommentToContentNodeConnectionEdge','CommentToParentCommentConnectionEdge','NodeWithAuthorToUserConnectionEdge','ContentNodeToEditLastConnectionEdge','HierarchicalContentNodeToParentContentNodeConnectionEdge','NodeWithFeaturedImageToMediaItemConnectionEdge','NodeWithRevisionsToContentNodeConnectionEdge','PageToPreviewConnectionEdge','CentraldeDecoradoToParentConnectionEdge','CentraldeDecoradoToPreviewConnectionEdge','EmpreendimentoToParentConnectionEdge','EmpreendimentoToPreviewConnectionEdge','CategoryToParentCategoryConnectionEdge','CategoryToTaxonomyConnectionEdge','PostToParentConnectionEdge','PostFormatToTaxonomyConnectionEdge','PostToPreviewConnectionEdge','TagToTaxonomyConnectionEdge','ArquivoAssessoriaToParentConnectionEdge','ArquivoAssessoriaToPreviewConnectionEdge','BannerToParentConnectionEdge','BannerToPreviewConnectionEdge','GeneralSettingsToMediaItemConnectionEdge','MenuItemToMenuItemLinkableConnectionEdge','MenuItemToMenuConnectionEdge']
 export const isOneToOneConnection = (obj?: { __typename?: any } | null): obj is OneToOneConnection => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isOneToOneConnection"')
   return OneToOneConnection_possibleTypes.includes(obj.__typename)
@@ -19557,7 +19789,7 @@ export const isOneToOneConnection = (obj?: { __typename?: any } | null): obj is 
 
 
 
-const Edge_possibleTypes: string[] = ['ContentNodeToContentTypeConnectionEdge','TaxonomyToContentTypeConnectionEdge','TermNodeToEnqueuedScriptConnectionEdge','TermNodeToEnqueuedStylesheetConnectionEdge','TaxonomyToTermNodeConnectionEdge','ContentTypeToTaxonomyConnectionEdge','ContentTypeToContentNodeConnectionEdge','ContentNodeToEditLockConnectionEdge','CommentToCommenterConnectionEdge','CommentToContentNodeConnectionEdge','CommentToParentCommentConnectionEdge','CommentToCommentConnectionEdge','UserToCommentConnectionEdge','UserToEnqueuedScriptConnectionEdge','UserToEnqueuedStylesheetConnectionEdge','NodeWithAuthorToUserConnectionEdge','HierarchicalContentNodeToContentNodeAncestorsConnectionEdge','HierarchicalContentNodeToContentNodeChildrenConnectionEdge','ContentNodeToEnqueuedScriptConnectionEdge','ContentNodeToEnqueuedStylesheetConnectionEdge','ContentNodeToEditLastConnectionEdge','HierarchicalContentNodeToParentContentNodeConnectionEdge','MediaItemToCommentConnectionEdge','UserToMediaItemConnectionEdge','NodeWithFeaturedImageToMediaItemConnectionEdge','NodeWithRevisionsToContentNodeConnectionEdge','PageToCommentConnectionEdge','PageToPreviewConnectionEdge','PageToRevisionConnectionEdge','UserToPageConnectionEdge','PostToPostConnectionEdge','CategoryToAncestorsCategoryConnectionEdge','CentraldeDecoradoToCentraldeDecoradoConnectionEdge','CentraldeDecoradoToCategoryConnectionEdge','CentraldeDecoradoToParentConnectionEdge','CentraldeDecoradoToPreviewConnectionEdge','CentraldeDecoradoToTermNodeConnectionEdge','CategoryToCentraldeDecoradoConnectionEdge','CategoryToCategoryConnectionEdge','CategoryToContentNodeConnectionEdge','EmpreendimentoToEmpreendimentoConnectionEdge','EmpreendimentoToCategoryConnectionEdge','EmpreendimentoToParentConnectionEdge','EmpreendimentoToPreviewConnectionEdge','EmpreendimentoToTermNodeConnectionEdge','CategoryToEmpreendimentoConnectionEdge','CategoryToParentCategoryConnectionEdge','CategoryToPostConnectionEdge','CategoryToTaxonomyConnectionEdge','PostToCategoryConnectionEdge','PostToCommentConnectionEdge','PostToParentConnectionEdge','PostFormatToContentNodeConnectionEdge','PostFormatToPostConnectionEdge','PostFormatToTaxonomyConnectionEdge','PostToPostFormatConnectionEdge','PostToPreviewConnectionEdge','PostToRevisionConnectionEdge','TagToContentNodeConnectionEdge','TagToPostConnectionEdge','TagToTaxonomyConnectionEdge','PostToTagConnectionEdge','PostToTermNodeConnectionEdge','UserToPostConnectionEdge','UserToRevisionsConnectionEdge','UserToUserRoleConnectionEdge','ArquivoAssessoriaToArquivoAssessoriaConnectionEdge','ArquivoAssessoriaToParentConnectionEdge','ArquivoAssessoriaToPreviewConnectionEdge','RootQueryToArquivoAssessoriaConnectionEdge','BannerToBannerConnectionEdge','BannerToParentConnectionEdge','BannerToPreviewConnectionEdge','RootQueryToBannerConnectionEdge','RootQueryToCategoryConnectionEdge','RootQueryToCentraldeDecoradoConnectionEdge','RootQueryToCommentConnectionEdge','RootQueryToContentNodeConnectionEdge','RootQueryToContentTypeConnectionEdge','RootQueryToEmpreendimentoConnectionEdge','RootQueryToMediaItemConnectionEdge','MenuItemToMenuItemConnectionEdge','MenuItemToMenuItemLinkableConnectionEdge','MenuItemToMenuConnectionEdge','MenuToMenuItemConnectionEdge','RootQueryToMenuItemConnectionEdge','RootQueryToMenuConnectionEdge','RootQueryToPageConnectionEdge','RootQueryToPluginConnectionEdge','RootQueryToPostFormatConnectionEdge','RootQueryToPostConnectionEdge','RootQueryToEnqueuedScriptConnectionEdge','RootQueryToEnqueuedStylesheetConnectionEdge','RootQueryToRevisionsConnectionEdge','RootQueryToTagConnectionEdge','RootQueryToTaxonomyConnectionEdge','RootQueryToTermNodeConnectionEdge','RootQueryToThemeConnectionEdge','RootQueryToUserRoleConnectionEdge','RootQueryToUserConnectionEdge']
+const Edge_possibleTypes: string[] = ['ContentNodeToContentTypeConnectionEdge','TaxonomyToContentTypeConnectionEdge','TermNodeToEnqueuedScriptConnectionEdge','TermNodeToEnqueuedStylesheetConnectionEdge','TaxonomyToTermNodeConnectionEdge','ContentTypeToTaxonomyConnectionEdge','ContentTypeToContentNodeConnectionEdge','ContentNodeToEditLockConnectionEdge','CommentToCommenterConnectionEdge','CommentToContentNodeConnectionEdge','CommentToParentCommentConnectionEdge','CommentToCommentConnectionEdge','UserToCommentConnectionEdge','UserToEnqueuedScriptConnectionEdge','UserToEnqueuedStylesheetConnectionEdge','NodeWithAuthorToUserConnectionEdge','HierarchicalContentNodeToContentNodeAncestorsConnectionEdge','HierarchicalContentNodeToContentNodeChildrenConnectionEdge','ContentNodeToEnqueuedScriptConnectionEdge','ContentNodeToEnqueuedStylesheetConnectionEdge','ContentNodeToEditLastConnectionEdge','HierarchicalContentNodeToParentContentNodeConnectionEdge','MediaItemToCommentConnectionEdge','UserToMediaItemConnectionEdge','NodeWithFeaturedImageToMediaItemConnectionEdge','NodeWithRevisionsToContentNodeConnectionEdge','PageToCommentConnectionEdge','PageToPreviewConnectionEdge','PageToRevisionConnectionEdge','UserToPageConnectionEdge','PostToPostConnectionEdge','CategoryToAncestorsCategoryConnectionEdge','CentraldeDecoradoToCentraldeDecoradoConnectionEdge','CentraldeDecoradoToCategoryConnectionEdge','CentraldeDecoradoToParentConnectionEdge','CentraldeDecoradoToPreviewConnectionEdge','CentraldeDecoradoToTermNodeConnectionEdge','CategoryToCentraldeDecoradoConnectionEdge','CategoryToCategoryConnectionEdge','CategoryToContentNodeConnectionEdge','EmpreendimentoToEmpreendimentoConnectionEdge','EmpreendimentoToCategoryConnectionEdge','EmpreendimentoToParentConnectionEdge','EmpreendimentoToPreviewConnectionEdge','EmpreendimentoToTermNodeConnectionEdge','CategoryToEmpreendimentoConnectionEdge','CategoryToParentCategoryConnectionEdge','CategoryToPostConnectionEdge','CategoryToTaxonomyConnectionEdge','PostToCategoryConnectionEdge','PostToCommentConnectionEdge','PostToParentConnectionEdge','PostFormatToContentNodeConnectionEdge','PostFormatToPostConnectionEdge','PostFormatToTaxonomyConnectionEdge','PostToPostFormatConnectionEdge','PostToPreviewConnectionEdge','PostToRevisionConnectionEdge','TagToContentNodeConnectionEdge','TagToPostConnectionEdge','TagToTaxonomyConnectionEdge','PostToTagConnectionEdge','PostToTermNodeConnectionEdge','UserToPostConnectionEdge','UserToRevisionsConnectionEdge','UserToUserRoleConnectionEdge','ArquivoAssessoriaToArquivoAssessoriaConnectionEdge','ArquivoAssessoriaToParentConnectionEdge','ArquivoAssessoriaToPreviewConnectionEdge','RootQueryToArquivoAssessoriaConnectionEdge','BannerToBannerConnectionEdge','BannerToParentConnectionEdge','BannerToPreviewConnectionEdge','RootQueryToBannerConnectionEdge','RootQueryToCategoryConnectionEdge','RootQueryToCentraldeDecoradoConnectionEdge','RootQueryToCommentConnectionEdge','RootQueryToContentNodeConnectionEdge','RootQueryToContentTypeConnectionEdge','RootQueryToEmpreendimentoConnectionEdge','GeneralSettingsToMediaItemConnectionEdge','RootQueryToMediaItemConnectionEdge','MenuItemToMenuItemConnectionEdge','MenuItemToMenuItemLinkableConnectionEdge','MenuItemToMenuConnectionEdge','MenuToMenuItemConnectionEdge','RootQueryToMenuItemConnectionEdge','RootQueryToMenuConnectionEdge','RootQueryToPageConnectionEdge','RootQueryToPluginConnectionEdge','RootQueryToPostFormatConnectionEdge','RootQueryToPostConnectionEdge','RootQueryToEnqueuedScriptConnectionEdge','RootQueryToEnqueuedStylesheetConnectionEdge','RootQueryToRevisionsConnectionEdge','RootQueryToTagConnectionEdge','RootQueryToTaxonomyConnectionEdge','RootQueryToTermNodeConnectionEdge','RootQueryToThemeConnectionEdge','RootQueryToUserRoleConnectionEdge','RootQueryToUserConnectionEdge']
 export const isEdge = (obj?: { __typename?: any } | null): obj is Edge => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isEdge"')
   return Edge_possibleTypes.includes(obj.__typename)
@@ -19957,22 +20189,6 @@ export const isUser = (obj?: { __typename?: any } | null): obj is User => {
 
 
 
-const Commenter_possibleTypes: string[] = ['User','CommentAuthor']
-export const isCommenter = (obj?: { __typename?: any } | null): obj is Commenter => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isCommenter"')
-  return Commenter_possibleTypes.includes(obj.__typename)
-}
-
-
-
-const DatabaseIdentifier_possibleTypes: string[] = ['ArquivoAssessoria','User','Comment','MediaItem','Page','Post','Category','CentraldeDecorado','Empreendimento','PostFormat','Tag','Banner','Menu','MenuItem','CommentAuthor']
-export const isDatabaseIdentifier = (obj?: { __typename?: any } | null): obj is DatabaseIdentifier => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isDatabaseIdentifier"')
-  return DatabaseIdentifier_possibleTypes.includes(obj.__typename)
-}
-
-
-
 const Avatar_possibleTypes: string[] = ['Avatar']
 export const isAvatar = (obj?: { __typename?: any } | null): obj is Avatar => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isAvatar"')
@@ -20157,7 +20373,7 @@ export const isMediaItemConnection = (obj?: { __typename?: any } | null): obj is
 
 
 
-const MediaItemConnectionEdge_possibleTypes: string[] = ['UserToMediaItemConnectionEdge','NodeWithFeaturedImageToMediaItemConnectionEdge','RootQueryToMediaItemConnectionEdge']
+const MediaItemConnectionEdge_possibleTypes: string[] = ['UserToMediaItemConnectionEdge','NodeWithFeaturedImageToMediaItemConnectionEdge','GeneralSettingsToMediaItemConnectionEdge','RootQueryToMediaItemConnectionEdge']
 export const isMediaItemConnectionEdge = (obj?: { __typename?: any } | null): obj is MediaItemConnectionEdge => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isMediaItemConnectionEdge"')
   return MediaItemConnectionEdge_possibleTypes.includes(obj.__typename)
@@ -20177,14 +20393,6 @@ const NodeWithTemplate_possibleTypes: string[] = ['ArquivoAssessoria','MediaItem
 export const isNodeWithTemplate = (obj?: { __typename?: any } | null): obj is NodeWithTemplate => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isNodeWithTemplate"')
   return NodeWithTemplate_possibleTypes.includes(obj.__typename)
-}
-
-
-
-const ContentTemplate_possibleTypes: string[] = ['DefaultTemplate']
-export const isContentTemplate = (obj?: { __typename?: any } | null): obj is ContentTemplate => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isContentTemplate"')
-  return ContentTemplate_possibleTypes.includes(obj.__typename)
 }
 
 
@@ -20525,7 +20733,7 @@ export const isPage_Assessoria = (obj?: { __typename?: any } | null): obj is Pag
 
 
 
-const AcfFieldGroup_possibleTypes: string[] = ['Page_Assessoria','Page_Conteusobre','Page_Conteusobre_item','Page_Informacoesdecontato','CentraldeDecorado_Centraldedecorados','Empreendimento_Empreendimento','Empreendimento_Empreendimento_andamentoDaObra','Empreendimento_Empreendimento_diferenciaisItems','Empreendimento_Empreendimento_itemsPlantas','Empreendimento_Empreendimento_itensAreacomuns','Empreendimento_Empreendimento_pontosDeReferencia','Empreendimento_Empreendimento_videosOutos','Empreendimento_Housiverso','Empreendimento_Housiverso_diferencial','ArquivoAssessoria_DownAssessoria','Banner_BannerHome','Banner_BannerHome_BhConteudo','Banner_BannerHome_ImagensProntas']
+const AcfFieldGroup_possibleTypes: string[] = ['Page_Assessoria','Page_Conteusobre','Page_Conteusobre_item','Page_Conteudoindiqueeganhe','Page_Conteudoindiqueeganhe_EmObra','Page_Conteudoindiqueeganhe_Entregue','Page_Conteudolstore','Page_Conteudopoliticadequalidade','Page_Conteudopoliticadequalidade_certificacaoPq','Page_Conteudopoliticadequalidade_praticaItensPq','Page_Informacoesdecontato','CentraldeDecorado_Centraldedecorados','Empreendimento_Empreendimento','Empreendimento_Empreendimento_andamentoDaObra','Empreendimento_Empreendimento_diferenciaisItems','Empreendimento_Empreendimento_itemsPlantas','Empreendimento_Empreendimento_itensAreacomuns','Empreendimento_Empreendimento_pontosDeReferencia','Empreendimento_Empreendimento_videosOutos','Empreendimento_Housiverso','Empreendimento_Housiverso_diferencial','ArquivoAssessoria_DownAssessoria','Banner_BannerHome','Banner_BannerHome_BhConteudo','Banner_BannerHome_ImagensProntas']
 export const isAcfFieldGroup = (obj?: { __typename?: any } | null): obj is AcfFieldGroup => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isAcfFieldGroup"')
   return AcfFieldGroup_possibleTypes.includes(obj.__typename)
@@ -20569,6 +20777,62 @@ const Page_Conteusobre_item_possibleTypes: string[] = ['Page_Conteusobre_item']
 export const isPage_Conteusobre_item = (obj?: { __typename?: any } | null): obj is Page_Conteusobre_item => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isPage_Conteusobre_item"')
   return Page_Conteusobre_item_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const Page_Conteudoindiqueeganhe_possibleTypes: string[] = ['Page_Conteudoindiqueeganhe']
+export const isPage_Conteudoindiqueeganhe = (obj?: { __typename?: any } | null): obj is Page_Conteudoindiqueeganhe => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isPage_Conteudoindiqueeganhe"')
+  return Page_Conteudoindiqueeganhe_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const Page_Conteudoindiqueeganhe_EmObra_possibleTypes: string[] = ['Page_Conteudoindiqueeganhe_EmObra']
+export const isPage_Conteudoindiqueeganhe_EmObra = (obj?: { __typename?: any } | null): obj is Page_Conteudoindiqueeganhe_EmObra => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isPage_Conteudoindiqueeganhe_EmObra"')
+  return Page_Conteudoindiqueeganhe_EmObra_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const Page_Conteudoindiqueeganhe_Entregue_possibleTypes: string[] = ['Page_Conteudoindiqueeganhe_Entregue']
+export const isPage_Conteudoindiqueeganhe_Entregue = (obj?: { __typename?: any } | null): obj is Page_Conteudoindiqueeganhe_Entregue => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isPage_Conteudoindiqueeganhe_Entregue"')
+  return Page_Conteudoindiqueeganhe_Entregue_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const Page_Conteudolstore_possibleTypes: string[] = ['Page_Conteudolstore']
+export const isPage_Conteudolstore = (obj?: { __typename?: any } | null): obj is Page_Conteudolstore => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isPage_Conteudolstore"')
+  return Page_Conteudolstore_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const Page_Conteudopoliticadequalidade_possibleTypes: string[] = ['Page_Conteudopoliticadequalidade']
+export const isPage_Conteudopoliticadequalidade = (obj?: { __typename?: any } | null): obj is Page_Conteudopoliticadequalidade => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isPage_Conteudopoliticadequalidade"')
+  return Page_Conteudopoliticadequalidade_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const Page_Conteudopoliticadequalidade_certificacaoPq_possibleTypes: string[] = ['Page_Conteudopoliticadequalidade_certificacaoPq']
+export const isPage_Conteudopoliticadequalidade_certificacaoPq = (obj?: { __typename?: any } | null): obj is Page_Conteudopoliticadequalidade_certificacaoPq => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isPage_Conteudopoliticadequalidade_certificacaoPq"')
+  return Page_Conteudopoliticadequalidade_certificacaoPq_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const Page_Conteudopoliticadequalidade_praticaItensPq_possibleTypes: string[] = ['Page_Conteudopoliticadequalidade_praticaItensPq']
+export const isPage_Conteudopoliticadequalidade_praticaItensPq = (obj?: { __typename?: any } | null): obj is Page_Conteudopoliticadequalidade_praticaItensPq => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isPage_Conteudopoliticadequalidade_praticaItensPq"')
+  return Page_Conteudopoliticadequalidade_praticaItensPq_possibleTypes.includes(obj.__typename)
 }
 
 
@@ -22053,6 +22317,14 @@ export const isGeneralSettings = (obj?: { __typename?: any } | null): obj is Gen
 
 
 
+const GeneralSettingsToMediaItemConnectionEdge_possibleTypes: string[] = ['GeneralSettingsToMediaItemConnectionEdge']
+export const isGeneralSettingsToMediaItemConnectionEdge = (obj?: { __typename?: any } | null): obj is GeneralSettingsToMediaItemConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isGeneralSettingsToMediaItemConnectionEdge"')
+  return GeneralSettingsToMediaItemConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
 const RootQueryToMediaItemConnection_possibleTypes: string[] = ['RootQueryToMediaItemConnection']
 export const isRootQueryToMediaItemConnection = (obj?: { __typename?: any } | null): obj is RootQueryToMediaItemConnection => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isRootQueryToMediaItemConnection"')
@@ -22677,6 +22949,54 @@ export const isWritingSettings = (obj?: { __typename?: any } | null): obj is Wri
 
 
 
+const Node_possibleTypes: string[] = ['ArquivoAssessoria','ContentType','Taxonomy','EnqueuedScript','EnqueuedStylesheet','User','Comment','MediaItem','Page','Post','Category','CentraldeDecorado','Empreendimento','PostFormat','Tag','UserRole','Banner','Menu','MenuItem','Plugin','Theme','CommentAuthor']
+export const isNode = (obj?: { __typename?: any } | null): obj is Node => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isNode"')
+  return Node_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const DatabaseIdentifier_possibleTypes: string[] = ['ArquivoAssessoria','User','Comment','MediaItem','Page','Post','Category','CentraldeDecorado','Empreendimento','PostFormat','Tag','Banner','Menu','MenuItem','CommentAuthor']
+export const isDatabaseIdentifier = (obj?: { __typename?: any } | null): obj is DatabaseIdentifier => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isDatabaseIdentifier"')
+  return DatabaseIdentifier_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const Commenter_possibleTypes: string[] = ['User','CommentAuthor']
+export const isCommenter = (obj?: { __typename?: any } | null): obj is Commenter => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isCommenter"')
+  return Commenter_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const CommentAuthor_possibleTypes: string[] = ['CommentAuthor']
+export const isCommentAuthor = (obj?: { __typename?: any } | null): obj is CommentAuthor => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isCommentAuthor"')
+  return CommentAuthor_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const ContentTemplate_possibleTypes: string[] = ['DefaultTemplate']
+export const isContentTemplate = (obj?: { __typename?: any } | null): obj is ContentTemplate => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isContentTemplate"')
+  return ContentTemplate_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const DefaultTemplate_possibleTypes: string[] = ['DefaultTemplate']
+export const isDefaultTemplate = (obj?: { __typename?: any } | null): obj is DefaultTemplate => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isDefaultTemplate"')
+  return DefaultTemplate_possibleTypes.includes(obj.__typename)
+}
+
+
+
 const RootMutation_possibleTypes: string[] = ['RootMutation']
 export const isRootMutation = (obj?: { __typename?: any } | null): obj is RootMutation => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isRootMutation"')
@@ -23009,22 +23329,6 @@ const UpdateUserPayload_possibleTypes: string[] = ['UpdateUserPayload']
 export const isUpdateUserPayload = (obj?: { __typename?: any } | null): obj is UpdateUserPayload => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isUpdateUserPayload"')
   return UpdateUserPayload_possibleTypes.includes(obj.__typename)
-}
-
-
-
-const CommentAuthor_possibleTypes: string[] = ['CommentAuthor']
-export const isCommentAuthor = (obj?: { __typename?: any } | null): obj is CommentAuthor => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isCommentAuthor"')
-  return CommentAuthor_possibleTypes.includes(obj.__typename)
-}
-
-
-
-const DefaultTemplate_possibleTypes: string[] = ['DefaultTemplate']
-export const isDefaultTemplate = (obj?: { __typename?: any } | null): obj is DefaultTemplate => {
-  if (!obj?.__typename) throw new Error('__typename is missing in "isDefaultTemplate"')
-  return DefaultTemplate_possibleTypes.includes(obj.__typename)
 }
 
 
@@ -24629,23 +24933,7 @@ uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undef
 }
 
 
-/** An object with an ID */
-export interface NodePromiseChain{
-    
-/** The globally unique ID for the object */
-id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>})
-}
-
-
-/** An object with an ID */
-export interface NodeObservableChain{
-    
-/** The globally unique ID for the object */
-id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>})
-}
-
-
-/** Nodes used to manage content */
+/** Base interface for content objects like posts, pages, and media items. Provides common fields available across these content types. */
 export interface ContentNodePromiseChain{
     
 /** Connection between the ContentNode type and the ContentType type */
@@ -24753,7 +25041,7 @@ uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undef
 }
 
 
-/** Nodes used to manage content */
+/** Base interface for content objects like posts, pages, and media items. Provides common fields available across these content types. */
 export interface ContentNodeObservableChain{
     
 /** Connection between the ContentNode type and the ContentType type */
@@ -24861,7 +25149,7 @@ uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undef
 }
 
 
-/** Any node that has a URI */
+/** An interface for content that can be accessed via a unique URI/URL path. Implemented by content types that have their own permalinks. */
 export interface UniformResourceIdentifiablePromiseChain{
     
 /** The globally unique ID for the object */
@@ -24887,7 +25175,7 @@ uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undef
 }
 
 
-/** Any node that has a URI */
+/** An interface for content that can be accessed via a unique URI/URL path. Implemented by content types that have their own permalinks. */
 export interface UniformResourceIdentifiableObservableChain{
     
 /** The globally unique ID for the object */
@@ -24935,7 +25223,7 @@ node: (ContentTypeObservableChain & {get: <R extends ContentTypeRequest>(request
 }
 
 
-/** A singular connection from one Node to another, with support for relational data on the &quot;edge&quot; of the connection. */
+/** A direct one-to-one relationship between objects. Unlike plural connections, this represents a single related object rather than a collection. */
 export interface OneToOneConnectionPromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -24946,7 +25234,7 @@ node: (NodePromiseChain & {get: <R extends NodeRequest>(request: R, defaultValue
 }
 
 
-/** A singular connection from one Node to another, with support for relational data on the &quot;edge&quot; of the connection. */
+/** A direct one-to-one relationship between objects. Unlike plural connections, this represents a single related object rather than a collection. */
 export interface OneToOneConnectionObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -24957,7 +25245,7 @@ node: (NodeObservableChain & {get: <R extends NodeRequest>(request: R, defaultVa
 }
 
 
-/** Relational context between connected nodes */
+/** Represents a connection between two objects. Contains both the related object (node) and metadata about the relationship (cursor). */
 export interface EdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -24968,7 +25256,7 @@ node: (NodePromiseChain & {get: <R extends NodeRequest>(request: R, defaultValue
 }
 
 
-/** Relational context between connected nodes */
+/** Represents a connection between two objects. Contains both the related object (node) and metadata about the relationship (cursor). */
 export interface EdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -24979,7 +25267,7 @@ node: (NodeObservableChain & {get: <R extends NodeRequest>(request: R, defaultVa
 }
 
 
-/** Edge between a Node and a connected ContentType */
+/** Represents a connection to a ContentType. Contains both the ContentType Node and metadata about the relationship. */
 export interface ContentTypeConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -24990,7 +25278,7 @@ node: (ContentTypePromiseChain & {get: <R extends ContentTypeRequest>(request: R
 }
 
 
-/** Edge between a Node and a connected ContentType */
+/** Represents a connection to a ContentType. Contains both the ContentType Node and metadata about the relationship. */
 export interface ContentTypeConnectionEdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -25273,7 +25561,7 @@ pageInfo: (ContentTypeToTaxonomyConnectionPageInfoObservableChain & {get: <R ext
 }
 
 
-/** Connection to Taxonomy Nodes */
+/** A paginated collection of Taxonomy Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of Taxonomy Nodes */
 export interface TaxonomyConnectionPromiseChain{
     
 /** A list of edges (relational context) between RootQuery and connected Taxonomy Nodes */
@@ -25287,7 +25575,7 @@ pageInfo: (TaxonomyConnectionPageInfoPromiseChain & {get: <R extends TaxonomyCon
 }
 
 
-/** Connection to Taxonomy Nodes */
+/** A paginated collection of Taxonomy Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of Taxonomy Nodes */
 export interface TaxonomyConnectionObservableChain{
     
 /** A list of edges (relational context) between RootQuery and connected Taxonomy Nodes */
@@ -25301,7 +25589,7 @@ pageInfo: (TaxonomyConnectionPageInfoObservableChain & {get: <R extends Taxonomy
 }
 
 
-/** A plural connection from one Node Type in the Graph to another Node Type, with support for relational data via &quot;edges&quot;. */
+/** A paginated relationship between objects. Supports cursor-based pagination with edges containing relationship metadata and nodes containing the related objects. */
 export interface ConnectionPromiseChain{
     
 /** A list of edges (relational context) between connected nodes */
@@ -25315,7 +25603,7 @@ pageInfo: (PageInfoPromiseChain & {get: <R extends PageInfoRequest>(request: R, 
 }
 
 
-/** A plural connection from one Node Type in the Graph to another Node Type, with support for relational data via &quot;edges&quot;. */
+/** A paginated relationship between objects. Supports cursor-based pagination with edges containing relationship metadata and nodes containing the related objects. */
 export interface ConnectionObservableChain{
     
 /** A list of edges (relational context) between connected nodes */
@@ -25329,7 +25617,7 @@ pageInfo: (PageInfoObservableChain & {get: <R extends PageInfoRequest>(request: 
 }
 
 
-/** Information about pagination in a connection. */
+/** Metadata for cursor-based pagination. Provides cursors for continuing pagination and boolean flags indicating if more items exist in either direction. */
 export interface PageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -25346,7 +25634,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Information about pagination in a connection. */
+/** Metadata for cursor-based pagination. Provides cursors for continuing pagination and boolean flags indicating if more items exist in either direction. */
 export interface PageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -25363,7 +25651,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Edge between a Node and a connected Taxonomy */
+/** Represents a connection to a Taxonomy. Contains both the Taxonomy Node and metadata about the relationship. */
 export interface TaxonomyConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -25374,7 +25662,7 @@ node: (TaxonomyPromiseChain & {get: <R extends TaxonomyRequest>(request: R, defa
 }
 
 
-/** Edge between a Node and a connected Taxonomy */
+/** Represents a connection to a Taxonomy. Contains both the Taxonomy Node and metadata about the relationship. */
 export interface TaxonomyConnectionEdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -25581,7 +25869,7 @@ pageInfo: (TaxonomyToContentTypeConnectionPageInfoObservableChain & {get: <R ext
 }
 
 
-/** Connection to ContentType Nodes */
+/** A paginated collection of ContentType Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of ContentType Nodes */
 export interface ContentTypeConnectionPromiseChain{
     
 /** A list of edges (relational context) between RootQuery and connected ContentType Nodes */
@@ -25595,7 +25883,7 @@ pageInfo: (ContentTypeConnectionPageInfoPromiseChain & {get: <R extends ContentT
 }
 
 
-/** Connection to ContentType Nodes */
+/** A paginated collection of ContentType Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of ContentType Nodes */
 export interface ContentTypeConnectionObservableChain{
     
 /** A list of edges (relational context) between RootQuery and connected ContentType Nodes */
@@ -25609,7 +25897,7 @@ pageInfo: (ContentTypeConnectionPageInfoObservableChain & {get: <R extends Conte
 }
 
 
-/** Page Info on the connected ContentTypeConnectionEdge */
+/** Pagination metadata specific to &quot;ContentTypeConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;ContentTypeConnectionEdge&quot; Nodes. */
 export interface ContentTypeConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -25626,7 +25914,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected ContentTypeConnectionEdge */
+/** Pagination metadata specific to &quot;ContentTypeConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;ContentTypeConnectionEdge&quot; Nodes. */
 export interface ContentTypeConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -25643,7 +25931,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Information about pagination in a connection. */
+/** Metadata for cursor-based pagination. Provides cursors for continuing pagination and boolean flags indicating if more items exist in either direction. */
 export interface WPPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -25660,7 +25948,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Information about pagination in a connection. */
+/** Metadata for cursor-based pagination. Provides cursors for continuing pagination and boolean flags indicating if more items exist in either direction. */
 export interface WPPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -25699,7 +25987,7 @@ node: (ContentTypeObservableChain & {get: <R extends ContentTypeRequest>(request
 }
 
 
-/** Page Info on the &quot;TaxonomyToContentTypeConnection&quot; */
+/** Pagination metadata specific to &quot;TaxonomyToContentTypeConnection&quot; collections. Provides cursors and flags for navigating through sets of TaxonomyToContentTypeConnection Nodes. */
 export interface TaxonomyToContentTypeConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -25716,7 +26004,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;TaxonomyToContentTypeConnection&quot; */
+/** Pagination metadata specific to &quot;TaxonomyToContentTypeConnection&quot; collections. Provides cursors and flags for navigating through sets of TaxonomyToContentTypeConnection Nodes. */
 export interface TaxonomyToContentTypeConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -25761,7 +26049,7 @@ pageInfo: (TaxonomyToTermNodeConnectionPageInfoObservableChain & {get: <R extend
 }
 
 
-/** Connection to TermNode Nodes */
+/** A paginated collection of TermNode Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of TermNode Nodes */
 export interface TermNodeConnectionPromiseChain{
     
 /** A list of edges (relational context) between RootQuery and connected TermNode Nodes */
@@ -25775,7 +26063,7 @@ pageInfo: (TermNodeConnectionPageInfoPromiseChain & {get: <R extends TermNodeCon
 }
 
 
-/** Connection to TermNode Nodes */
+/** A paginated collection of TermNode Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of TermNode Nodes */
 export interface TermNodeConnectionObservableChain{
     
 /** A list of edges (relational context) between RootQuery and connected TermNode Nodes */
@@ -25789,7 +26077,7 @@ pageInfo: (TermNodeConnectionPageInfoObservableChain & {get: <R extends TermNode
 }
 
 
-/** Edge between a Node and a connected TermNode */
+/** Represents a connection to a TermNode. Contains both the TermNode Node and metadata about the relationship. */
 export interface TermNodeConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -25800,7 +26088,7 @@ node: (TermNodePromiseChain & {get: <R extends TermNodeRequest>(request: R, defa
 }
 
 
-/** Edge between a Node and a connected TermNode */
+/** Represents a connection to a TermNode. Contains both the TermNode Node and metadata about the relationship. */
 export interface TermNodeConnectionEdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -25811,7 +26099,7 @@ node: (TermNodeObservableChain & {get: <R extends TermNodeRequest>(request: R, d
 }
 
 
-/** Terms are nodes within a Taxonomy, used to group and relate other nodes. */
+/** Base interface for taxonomy terms such as categories and tags. Terms are used to organize and classify content. */
 export interface TermNodePromiseChain{
     
 /** The number of objects connected to the object */
@@ -25889,7 +26177,7 @@ uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undef
 }
 
 
-/** Terms are nodes within a Taxonomy, used to group and relate other nodes. */
+/** Base interface for taxonomy terms such as categories and tags. Terms are used to organize and classify content. */
 export interface TermNodeObservableChain{
     
 /** The number of objects connected to the object */
@@ -25995,7 +26283,7 @@ pageInfo: (TermNodeToEnqueuedScriptConnectionPageInfoObservableChain & {get: <R 
 }
 
 
-/** Connection to EnqueuedScript Nodes */
+/** A paginated collection of EnqueuedScript Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of EnqueuedScript Nodes */
 export interface EnqueuedScriptConnectionPromiseChain{
     
 /** A list of edges (relational context) between ContentNode and connected EnqueuedScript Nodes */
@@ -26009,7 +26297,7 @@ pageInfo: (EnqueuedScriptConnectionPageInfoPromiseChain & {get: <R extends Enque
 }
 
 
-/** Connection to EnqueuedScript Nodes */
+/** A paginated collection of EnqueuedScript Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of EnqueuedScript Nodes */
 export interface EnqueuedScriptConnectionObservableChain{
     
 /** A list of edges (relational context) between ContentNode and connected EnqueuedScript Nodes */
@@ -26023,7 +26311,7 @@ pageInfo: (EnqueuedScriptConnectionPageInfoObservableChain & {get: <R extends En
 }
 
 
-/** Edge between a Node and a connected EnqueuedScript */
+/** Represents a connection to a EnqueuedScript. Contains both the EnqueuedScript Node and metadata about the relationship. */
 export interface EnqueuedScriptConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -26034,7 +26322,7 @@ node: (EnqueuedScriptPromiseChain & {get: <R extends EnqueuedScriptRequest>(requ
 }
 
 
-/** Edge between a Node and a connected EnqueuedScript */
+/** Represents a connection to a EnqueuedScript. Contains both the EnqueuedScript Node and metadata about the relationship. */
 export interface EnqueuedScriptConnectionEdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -26151,7 +26439,7 @@ version: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | u
 }
 
 
-/** Asset enqueued by the CMS */
+/** A script or stylesheet resource that should be loaded by the client. Contains information about the resource&#039;s location, dependencies, and loading behavior. */
 export interface EnqueuedAssetPromiseChain{
     
 /** The inline code to be run after the asset is loaded. */
@@ -26195,7 +26483,7 @@ version: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | u
 }
 
 
-/** Asset enqueued by the CMS */
+/** A script or stylesheet resource that should be loaded by the client. Contains information about the resource&#039;s location, dependencies, and loading behavior. */
 export interface EnqueuedAssetObservableChain{
     
 /** The inline code to be run after the asset is loaded. */
@@ -26239,7 +26527,7 @@ version: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | u
 }
 
 
-/** Page Info on the connected EnqueuedScriptConnectionEdge */
+/** Pagination metadata specific to &quot;EnqueuedScriptConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;EnqueuedScriptConnectionEdge&quot; Nodes. */
 export interface EnqueuedScriptConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -26256,7 +26544,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected EnqueuedScriptConnectionEdge */
+/** Pagination metadata specific to &quot;EnqueuedScriptConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;EnqueuedScriptConnectionEdge&quot; Nodes. */
 export interface EnqueuedScriptConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -26295,7 +26583,7 @@ node: (EnqueuedScriptObservableChain & {get: <R extends EnqueuedScriptRequest>(r
 }
 
 
-/** Page Info on the &quot;TermNodeToEnqueuedScriptConnection&quot; */
+/** Pagination metadata specific to &quot;TermNodeToEnqueuedScriptConnection&quot; collections. Provides cursors and flags for navigating through sets of TermNodeToEnqueuedScriptConnection Nodes. */
 export interface TermNodeToEnqueuedScriptConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -26312,7 +26600,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;TermNodeToEnqueuedScriptConnection&quot; */
+/** Pagination metadata specific to &quot;TermNodeToEnqueuedScriptConnection&quot; collections. Provides cursors and flags for navigating through sets of TermNodeToEnqueuedScriptConnection Nodes. */
 export interface TermNodeToEnqueuedScriptConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -26357,7 +26645,7 @@ pageInfo: (TermNodeToEnqueuedStylesheetConnectionPageInfoObservableChain & {get:
 }
 
 
-/** Connection to EnqueuedStylesheet Nodes */
+/** A paginated collection of EnqueuedStylesheet Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of EnqueuedStylesheet Nodes */
 export interface EnqueuedStylesheetConnectionPromiseChain{
     
 /** A list of edges (relational context) between ContentNode and connected EnqueuedStylesheet Nodes */
@@ -26371,7 +26659,7 @@ pageInfo: (EnqueuedStylesheetConnectionPageInfoPromiseChain & {get: <R extends E
 }
 
 
-/** Connection to EnqueuedStylesheet Nodes */
+/** A paginated collection of EnqueuedStylesheet Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of EnqueuedStylesheet Nodes */
 export interface EnqueuedStylesheetConnectionObservableChain{
     
 /** A list of edges (relational context) between ContentNode and connected EnqueuedStylesheet Nodes */
@@ -26385,7 +26673,7 @@ pageInfo: (EnqueuedStylesheetConnectionPageInfoObservableChain & {get: <R extend
 }
 
 
-/** Edge between a Node and a connected EnqueuedStylesheet */
+/** Represents a connection to a EnqueuedStylesheet. Contains both the EnqueuedStylesheet Node and metadata about the relationship. */
 export interface EnqueuedStylesheetConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -26396,7 +26684,7 @@ node: (EnqueuedStylesheetPromiseChain & {get: <R extends EnqueuedStylesheetReque
 }
 
 
-/** Edge between a Node and a connected EnqueuedStylesheet */
+/** Represents a connection to a EnqueuedStylesheet. Contains both the EnqueuedStylesheet Node and metadata about the relationship. */
 export interface EnqueuedStylesheetConnectionEdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -26531,7 +26819,7 @@ version: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | u
 }
 
 
-/** Page Info on the connected EnqueuedStylesheetConnectionEdge */
+/** Pagination metadata specific to &quot;EnqueuedStylesheetConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;EnqueuedStylesheetConnectionEdge&quot; Nodes. */
 export interface EnqueuedStylesheetConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -26548,7 +26836,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected EnqueuedStylesheetConnectionEdge */
+/** Pagination metadata specific to &quot;EnqueuedStylesheetConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;EnqueuedStylesheetConnectionEdge&quot; Nodes. */
 export interface EnqueuedStylesheetConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -26587,7 +26875,7 @@ node: (EnqueuedStylesheetObservableChain & {get: <R extends EnqueuedStylesheetRe
 }
 
 
-/** Page Info on the &quot;TermNodeToEnqueuedStylesheetConnection&quot; */
+/** Pagination metadata specific to &quot;TermNodeToEnqueuedStylesheetConnection&quot; collections. Provides cursors and flags for navigating through sets of TermNodeToEnqueuedStylesheetConnection Nodes. */
 export interface TermNodeToEnqueuedStylesheetConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -26604,7 +26892,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;TermNodeToEnqueuedStylesheetConnection&quot; */
+/** Pagination metadata specific to &quot;TermNodeToEnqueuedStylesheetConnection&quot; collections. Provides cursors and flags for navigating through sets of TermNodeToEnqueuedStylesheetConnection Nodes. */
 export interface TermNodeToEnqueuedStylesheetConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -26621,7 +26909,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected TermNodeConnectionEdge */
+/** Pagination metadata specific to &quot;TermNodeConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;TermNodeConnectionEdge&quot; Nodes. */
 export interface TermNodeConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -26638,7 +26926,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected TermNodeConnectionEdge */
+/** Pagination metadata specific to &quot;TermNodeConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;TermNodeConnectionEdge&quot; Nodes. */
 export interface TermNodeConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -26677,7 +26965,7 @@ node: (TermNodeObservableChain & {get: <R extends TermNodeRequest>(request: R, d
 }
 
 
-/** Page Info on the &quot;TaxonomyToTermNodeConnection&quot; */
+/** Pagination metadata specific to &quot;TaxonomyToTermNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of TaxonomyToTermNodeConnection Nodes. */
 export interface TaxonomyToTermNodeConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -26694,7 +26982,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;TaxonomyToTermNodeConnection&quot; */
+/** Pagination metadata specific to &quot;TaxonomyToTermNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of TaxonomyToTermNodeConnection Nodes. */
 export interface TaxonomyToTermNodeConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -26711,7 +26999,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected TaxonomyConnectionEdge */
+/** Pagination metadata specific to &quot;TaxonomyConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;TaxonomyConnectionEdge&quot; Nodes. */
 export interface TaxonomyConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -26728,7 +27016,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected TaxonomyConnectionEdge */
+/** Pagination metadata specific to &quot;TaxonomyConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;TaxonomyConnectionEdge&quot; Nodes. */
 export interface TaxonomyConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -26767,7 +27055,7 @@ node: (TaxonomyObservableChain & {get: <R extends TaxonomyRequest>(request: R, d
 }
 
 
-/** Page Info on the &quot;ContentTypeToTaxonomyConnection&quot; */
+/** Pagination metadata specific to &quot;ContentTypeToTaxonomyConnection&quot; collections. Provides cursors and flags for navigating through sets of ContentTypeToTaxonomyConnection Nodes. */
 export interface ContentTypeToTaxonomyConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -26784,7 +27072,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;ContentTypeToTaxonomyConnection&quot; */
+/** Pagination metadata specific to &quot;ContentTypeToTaxonomyConnection&quot; collections. Provides cursors and flags for navigating through sets of ContentTypeToTaxonomyConnection Nodes. */
 export interface ContentTypeToTaxonomyConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -26829,7 +27117,7 @@ pageInfo: (ContentTypeToContentNodeConnectionPageInfoObservableChain & {get: <R 
 }
 
 
-/** Connection to ContentNode Nodes */
+/** A paginated collection of ContentNode Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of ContentNode Nodes */
 export interface ContentNodeConnectionPromiseChain{
     
 /** A list of edges (relational context) between ContentType and connected ContentNode Nodes */
@@ -26843,7 +27131,7 @@ pageInfo: (ContentNodeConnectionPageInfoPromiseChain & {get: <R extends ContentN
 }
 
 
-/** Connection to ContentNode Nodes */
+/** A paginated collection of ContentNode Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of ContentNode Nodes */
 export interface ContentNodeConnectionObservableChain{
     
 /** A list of edges (relational context) between ContentType and connected ContentNode Nodes */
@@ -26857,7 +27145,7 @@ pageInfo: (ContentNodeConnectionPageInfoObservableChain & {get: <R extends Conte
 }
 
 
-/** Edge between a Node and a connected ContentNode */
+/** Represents a connection to a ContentNode. Contains both the ContentNode Node and metadata about the relationship. */
 export interface ContentNodeConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -26868,7 +27156,7 @@ node: (ContentNodePromiseChain & {get: <R extends ContentNodeRequest>(request: R
 }
 
 
-/** Edge between a Node and a connected ContentNode */
+/** Represents a connection to a ContentNode. Contains both the ContentNode Node and metadata about the relationship. */
 export interface ContentNodeConnectionEdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -26879,7 +27167,7 @@ node: (ContentNodeObservableChain & {get: <R extends ContentNodeRequest>(request
 }
 
 
-/** Page Info on the connected ContentNodeConnectionEdge */
+/** Pagination metadata specific to &quot;ContentNodeConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;ContentNodeConnectionEdge&quot; Nodes. */
 export interface ContentNodeConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -26896,7 +27184,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected ContentNodeConnectionEdge */
+/** Pagination metadata specific to &quot;ContentNodeConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;ContentNodeConnectionEdge&quot; Nodes. */
 export interface ContentNodeConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -26935,7 +27223,7 @@ node: (ContentNodeObservableChain & {get: <R extends ContentNodeRequest>(request
 }
 
 
-/** Page Info on the &quot;ContentTypeToContentNodeConnection&quot; */
+/** Pagination metadata specific to &quot;ContentTypeToContentNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of ContentTypeToContentNodeConnection Nodes. */
 export interface ContentTypeToContentNodeConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -26952,7 +27240,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;ContentTypeToContentNodeConnection&quot; */
+/** Pagination metadata specific to &quot;ContentTypeToContentNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of ContentTypeToContentNodeConnection Nodes. */
 export interface ContentTypeToContentNodeConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -27157,7 +27445,7 @@ node: (UserObservableChain & {get: <R extends UserRequest>(request: R, defaultVa
 }
 
 
-/** Edge between a Node and a connected User */
+/** Represents a connection to a User. Contains both the User Node and metadata about the relationship. */
 export interface UserConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -27168,7 +27456,7 @@ node: (UserPromiseChain & {get: <R extends UserRequest>(request: R, defaultValue
 }
 
 
-/** Edge between a Node and a connected User */
+/** Represents a connection to a User. Contains both the User Node and metadata about the relationship. */
 export interface UserConnectionEdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -27179,8 +27467,11 @@ node: (UserObservableChain & {get: <R extends UserRequest>(request: R, defaultVa
 }
 
 
-/** A User object */
+/** A registered user account. Users can be assigned roles, author content, and have various capabilities within the site. */
 export interface UserPromiseChain{
+    
+/** The admin color scheme preference for the user. Possible values include &quot;fresh&quot;, &quot;light&quot;, &quot;blue&quot;, &quot;coffee&quot;, &quot;ectoplasm&quot;, &quot;midnight&quot;, &quot;ocean&quot;, &quot;sunrise&quot;. Default is &quot;fresh&quot;. */
+adminColor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument. */
 avatar: ((args?: {
@@ -27246,6 +27537,15 @@ extraCapabilities: ({get: (request?: boolean|number, defaultValue?: ((Scalars['S
     
 /** First name of the user. This is equivalent to the WP_User-&gt;user_first_name property. */
 firstName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** Whether the user has enabled keyboard shortcuts for comment moderation. Defaults to false. */
+hasCommentShortcutsEnabled: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
+    
+/** Whether the user has enabled the visual editor. When enabled, the WYSIWYG editor is used for content editing. Defaults to true. */
+hasRichEditingEnabled: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
+    
+/** Whether the user has enabled syntax highlighting when editing code within the post editor. Defaults to true. */
+hasSyntaxHighlightingEnabled: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
     
 /** The globally unique identifier for the user object. */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
@@ -27372,8 +27672,11 @@ username: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | 
 }
 
 
-/** A User object */
+/** A registered user account. Users can be assigned roles, author content, and have various capabilities within the site. */
 export interface UserObservableChain{
+    
+/** The admin color scheme preference for the user. Possible values include &quot;fresh&quot;, &quot;light&quot;, &quot;blue&quot;, &quot;coffee&quot;, &quot;ectoplasm&quot;, &quot;midnight&quot;, &quot;ocean&quot;, &quot;sunrise&quot;. Default is &quot;fresh&quot;. */
+adminColor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument. */
 avatar: ((args?: {
@@ -27439,6 +27742,15 @@ extraCapabilities: ({get: (request?: boolean|number, defaultValue?: ((Scalars['S
     
 /** First name of the user. This is equivalent to the WP_User-&gt;user_first_name property. */
 firstName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** Whether the user has enabled keyboard shortcuts for comment moderation. Defaults to false. */
+hasCommentShortcutsEnabled: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
+    
+/** Whether the user has enabled the visual editor. When enabled, the WYSIWYG editor is used for content editing. Defaults to true. */
+hasRichEditingEnabled: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
+    
+/** Whether the user has enabled syntax highlighting when editing code within the post editor. Defaults to true. */
+hasSyntaxHighlightingEnabled: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
     
 /** The globally unique identifier for the user object. */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
@@ -27565,78 +27877,10 @@ username: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | 
 }
 
 
-/** The author of a comment */
-export interface CommenterPromiseChain{
-    
-/** Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument. */
-avatar: (AvatarPromiseChain & {get: <R extends AvatarRequest>(request: R, defaultValue?: (FieldsSelection<Avatar, R> | undefined)) => Promise<(FieldsSelection<Avatar, R> | undefined)>}),
-    
-/** Identifies the primary key from the database. */
-databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>}),
-    
-/** The email address of the author of a comment. */
-email: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** The globally unique identifier for the comment author. */
-id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
-    
-/** Whether the author information is considered restricted. (not fully public) */
-isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
-    
-/** The name of the author of a comment. */
-name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** The url of the author of a comment. */
-url: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
-}
-
-
-/** The author of a comment */
-export interface CommenterObservableChain{
-    
-/** Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument. */
-avatar: (AvatarObservableChain & {get: <R extends AvatarRequest>(request: R, defaultValue?: (FieldsSelection<Avatar, R> | undefined)) => Observable<(FieldsSelection<Avatar, R> | undefined)>}),
-    
-/** Identifies the primary key from the database. */
-databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>}),
-    
-/** The email address of the author of a comment. */
-email: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** The globally unique identifier for the comment author. */
-id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
-    
-/** Whether the author information is considered restricted. (not fully public) */
-isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
-    
-/** The name of the author of a comment. */
-name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** The url of the author of a comment. */
-url: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
-}
-
-
-/** Object that can be identified with a Database ID */
-export interface DatabaseIdentifierPromiseChain{
-    
-/** The unique identifier stored in the database */
-databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>})
-}
-
-
-/** Object that can be identified with a Database ID */
-export interface DatabaseIdentifierObservableChain{
-    
-/** The unique identifier stored in the database */
-databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>})
-}
-
-
 /** Avatars are profile images for users. WordPress by default uses the Gravatar service to host and fetch avatars from. */
 export interface AvatarPromiseChain{
     
-/** URL for the default image or a default type. Accepts &#039;404&#039; (return a 404 instead of a default image), &#039;retro&#039; (8bit), &#039;monsterid&#039; (monster), &#039;wavatar&#039; (cartoon face), &#039;indenticon&#039; (the &#039;quilt&#039;), &#039;mystery&#039;, &#039;mm&#039;, or &#039;mysteryman&#039; (The Oyster Man), &#039;blank&#039; (transparent GIF), or &#039;gravatar_default&#039; (the Gravatar logo). */
+/** TEST: URL for the default image or a default type. Accepts &#039;404&#039; (return a 404 instead of a default image), &#039;retro&#039; (8bit), &#039;monsterid&#039; (monster), &#039;wavatar&#039; (cartoon face), &#039;indenticon&#039; (the &#039;quilt&#039;), &#039;mystery&#039;, &#039;mm&#039;, or &#039;mysteryman&#039; (The Oyster Man), &#039;blank&#039; (transparent GIF), or &#039;gravatar_default&#039; (the Gravatar logo). */
 default: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** HTML attributes to insert in the IMG element. Is not sanitized. */
@@ -27674,7 +27918,7 @@ width: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefi
 /** Avatars are profile images for users. WordPress by default uses the Gravatar service to host and fetch avatars from. */
 export interface AvatarObservableChain{
     
-/** URL for the default image or a default type. Accepts &#039;404&#039; (return a 404 instead of a default image), &#039;retro&#039; (8bit), &#039;monsterid&#039; (monster), &#039;wavatar&#039; (cartoon face), &#039;indenticon&#039; (the &#039;quilt&#039;), &#039;mystery&#039;, &#039;mm&#039;, or &#039;mysteryman&#039; (The Oyster Man), &#039;blank&#039; (transparent GIF), or &#039;gravatar_default&#039; (the Gravatar logo). */
+/** TEST: URL for the default image or a default type. Accepts &#039;404&#039; (return a 404 instead of a default image), &#039;retro&#039; (8bit), &#039;monsterid&#039; (monster), &#039;wavatar&#039; (cartoon face), &#039;indenticon&#039; (the &#039;quilt&#039;), &#039;mystery&#039;, &#039;mm&#039;, or &#039;mysteryman&#039; (The Oyster Man), &#039;blank&#039; (transparent GIF), or &#039;gravatar_default&#039; (the Gravatar logo). */
 default: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** HTML attributes to insert in the IMG element. Is not sanitized. */
@@ -27737,7 +27981,7 @@ pageInfo: (UserToCommentConnectionPageInfoObservableChain & {get: <R extends Use
 }
 
 
-/** Connection to Comment Nodes */
+/** A paginated collection of Comment Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of Comment Nodes */
 export interface CommentConnectionPromiseChain{
     
 /** A list of edges (relational context) between RootQuery and connected Comment Nodes */
@@ -27751,7 +27995,7 @@ pageInfo: (CommentConnectionPageInfoPromiseChain & {get: <R extends CommentConne
 }
 
 
-/** Connection to Comment Nodes */
+/** A paginated collection of Comment Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of Comment Nodes */
 export interface CommentConnectionObservableChain{
     
 /** A list of edges (relational context) between RootQuery and connected Comment Nodes */
@@ -27765,7 +28009,7 @@ pageInfo: (CommentConnectionPageInfoObservableChain & {get: <R extends CommentCo
 }
 
 
-/** Edge between a Node and a connected Comment */
+/** Represents a connection to a Comment. Contains both the Comment Node and metadata about the relationship. */
 export interface CommentConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -27776,7 +28020,7 @@ node: (CommentPromiseChain & {get: <R extends CommentRequest>(request: R, defaul
 }
 
 
-/** Edge between a Node and a connected Comment */
+/** Represents a connection to a Comment. Contains both the Comment Node and metadata about the relationship. */
 export interface CommentConnectionEdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -27787,7 +28031,7 @@ node: (CommentObservableChain & {get: <R extends CommentRequest>(request: R, def
 }
 
 
-/** A Comment object */
+/** A response or reaction to content submitted by users. Comments are typically associated with a specific content entry. */
 export interface CommentPromiseChain{
     
 /** User agent used to post the comment. This field is equivalent to WP_Comment-&gt;comment_agent and the value matching the &quot;comment_agent&quot; column in SQL. */
@@ -27893,7 +28137,7 @@ uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undef
 }
 
 
-/** A Comment object */
+/** A response or reaction to content submitted by users. Comments are typically associated with a specific content entry. */
 export interface CommentObservableChain{
     
 /** User agent used to post the comment. This field is equivalent to WP_Comment-&gt;comment_agent and the value matching the &quot;comment_agent&quot; column in SQL. */
@@ -28005,7 +28249,7 @@ export interface CommentToCommenterConnectionEdgePromiseChain{
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
 cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** The email address representing the author for this particular comment */
+/** Email address representing the author for this particular comment */
 email: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** IP address of the author at the time of making this comment. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL. */
@@ -28028,7 +28272,7 @@ export interface CommentToCommenterConnectionEdgeObservableChain{
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
 cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** The email address representing the author for this particular comment */
+/** Email address representing the author for this particular comment */
 email: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** IP address of the author at the time of making this comment. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL. */
@@ -28045,7 +28289,7 @@ url: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undef
 }
 
 
-/** Edge between a Node and a connected Commenter */
+/** Represents a connection to a Commenter. Contains both the Commenter Node and metadata about the relationship. */
 export interface CommenterConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -28056,7 +28300,7 @@ node: (CommenterPromiseChain & {get: <R extends CommenterRequest>(request: R, de
 }
 
 
-/** Edge between a Node and a connected Commenter */
+/** Represents a connection to a Commenter. Contains both the Commenter Node and metadata about the relationship. */
 export interface CommenterConnectionEdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -28161,7 +28405,7 @@ node: (CommentObservableChain & {get: <R extends CommentRequest>(request: R, def
 }
 
 
-/** Page Info on the &quot;CommentToCommentConnection&quot; */
+/** Pagination metadata specific to &quot;CommentToCommentConnection&quot; collections. Provides cursors and flags for navigating through sets of CommentToCommentConnection Nodes. */
 export interface CommentToCommentConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -28178,7 +28422,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;CommentToCommentConnection&quot; */
+/** Pagination metadata specific to &quot;CommentToCommentConnection&quot; collections. Provides cursors and flags for navigating through sets of CommentToCommentConnection Nodes. */
 export interface CommentToCommentConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -28195,7 +28439,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected CommentConnectionEdge */
+/** Pagination metadata specific to &quot;CommentConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;CommentConnectionEdge&quot; Nodes. */
 export interface CommentConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -28212,7 +28456,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected CommentConnectionEdge */
+/** Pagination metadata specific to &quot;CommentConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;CommentConnectionEdge&quot; Nodes. */
 export interface CommentConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -28251,7 +28495,7 @@ node: (CommentObservableChain & {get: <R extends CommentRequest>(request: R, def
 }
 
 
-/** Page Info on the &quot;UserToCommentConnection&quot; */
+/** Pagination metadata specific to &quot;UserToCommentConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToCommentConnection Nodes. */
 export interface UserToCommentConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -28268,7 +28512,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;UserToCommentConnection&quot; */
+/** Pagination metadata specific to &quot;UserToCommentConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToCommentConnection Nodes. */
 export interface UserToCommentConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -28335,7 +28579,7 @@ node: (EnqueuedScriptObservableChain & {get: <R extends EnqueuedScriptRequest>(r
 }
 
 
-/** Page Info on the &quot;UserToEnqueuedScriptConnection&quot; */
+/** Pagination metadata specific to &quot;UserToEnqueuedScriptConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToEnqueuedScriptConnection Nodes. */
 export interface UserToEnqueuedScriptConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -28352,7 +28596,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;UserToEnqueuedScriptConnection&quot; */
+/** Pagination metadata specific to &quot;UserToEnqueuedScriptConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToEnqueuedScriptConnection Nodes. */
 export interface UserToEnqueuedScriptConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -28419,7 +28663,7 @@ node: (EnqueuedStylesheetObservableChain & {get: <R extends EnqueuedStylesheetRe
 }
 
 
-/** Page Info on the &quot;UserToEnqueuedStylesheetConnection&quot; */
+/** Pagination metadata specific to &quot;UserToEnqueuedStylesheetConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToEnqueuedStylesheetConnection Nodes. */
 export interface UserToEnqueuedStylesheetConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -28436,7 +28680,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;UserToEnqueuedStylesheetConnection&quot; */
+/** Pagination metadata specific to &quot;UserToEnqueuedStylesheetConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToEnqueuedStylesheetConnection Nodes. */
 export interface UserToEnqueuedStylesheetConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -28481,7 +28725,7 @@ pageInfo: (UserToMediaItemConnectionPageInfoObservableChain & {get: <R extends U
 }
 
 
-/** Connection to mediaItem Nodes */
+/** A paginated collection of mediaItem Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of mediaItem Nodes */
 export interface MediaItemConnectionPromiseChain{
     
 /** A list of edges (relational context) between RootQuery and connected mediaItem Nodes */
@@ -28495,7 +28739,7 @@ pageInfo: (MediaItemConnectionPageInfoPromiseChain & {get: <R extends MediaItemC
 }
 
 
-/** Connection to mediaItem Nodes */
+/** A paginated collection of mediaItem Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of mediaItem Nodes */
 export interface MediaItemConnectionObservableChain{
     
 /** A list of edges (relational context) between RootQuery and connected mediaItem Nodes */
@@ -28509,7 +28753,7 @@ pageInfo: (MediaItemConnectionPageInfoObservableChain & {get: <R extends MediaIt
 }
 
 
-/** Edge between a Node and a connected mediaItem */
+/** Represents a connection to a mediaItem. Contains both the mediaItem Node and metadata about the relationship. */
 export interface MediaItemConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -28520,7 +28764,7 @@ node: (MediaItemPromiseChain & {get: <R extends MediaItemRequest>(request: R, de
 }
 
 
-/** Edge between a Node and a connected mediaItem */
+/** Represents a connection to a mediaItem. Contains both the mediaItem Node and metadata about the relationship. */
 export interface MediaItemConnectionEdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -28531,7 +28775,7 @@ node: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R,
 }
 
 
-/** The mediaItem type */
+/** Represents uploaded media, including images, videos, documents, and audio files. */
 export interface MediaItemPromiseChain{
     
 /** Alternative text to display when resource is not displayed */
@@ -28774,7 +29018,7 @@ uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undef
 }
 
 
-/** The mediaItem type */
+/** Represents uploaded media, including images, videos, documents, and audio files. */
 export interface MediaItemObservableChain{
     
 /** Alternative text to display when resource is not displayed */
@@ -29017,7 +29261,7 @@ uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undef
 }
 
 
-/** A node that can have a template associated with it */
+/** Content that provides template metadata. The template can help inform how the content is might be structured, styled, and presented to the user. */
 export interface NodeWithTemplatePromiseChain{
     
 /** The globally unique ID for the object */
@@ -29028,7 +29272,7 @@ template: (ContentTemplatePromiseChain & {get: <R extends ContentTemplateRequest
 }
 
 
-/** A node that can have a template associated with it */
+/** Content that provides template metadata. The template can help inform how the content is might be structured, styled, and presented to the user. */
 export interface NodeWithTemplateObservableChain{
     
 /** The globally unique ID for the object */
@@ -29039,23 +29283,7 @@ template: (ContentTemplateObservableChain & {get: <R extends ContentTemplateRequ
 }
 
 
-/** The template assigned to a node of content */
-export interface ContentTemplatePromiseChain{
-    
-/** The name of the template */
-templateName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
-}
-
-
-/** The template assigned to a node of content */
-export interface ContentTemplateObservableChain{
-    
-/** The name of the template */
-templateName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
-}
-
-
-/** A node that NodeWith a title */
+/** Content with a dedicated title field. The title typically serves as the main heading and identifier for the content. */
 export interface NodeWithTitlePromiseChain{
     
 /** The globally unique ID for the object */
@@ -29068,7 +29296,7 @@ format?: (PostObjectFieldFormatEnum | null)}) => {get: (request?: boolean|number
 }
 
 
-/** A node that NodeWith a title */
+/** Content with a dedicated title field. The title typically serves as the main heading and identifier for the content. */
 export interface NodeWithTitleObservableChain{
     
 /** The globally unique ID for the object */
@@ -29081,7 +29309,7 @@ format?: (PostObjectFieldFormatEnum | null)}) => {get: (request?: boolean|number
 }
 
 
-/** A node that can have an author assigned to it */
+/** Content that can be attributed to a specific user. Provides fields for accessing the author&#039;s information and establishing content ownership. */
 export interface NodeWithAuthorPromiseChain{
     
 /** Connection between the NodeWithAuthor type and the User type */
@@ -29098,7 +29326,7 @@ id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<S
 }
 
 
-/** A node that can have an author assigned to it */
+/** Content that can be attributed to a specific user. Provides fields for accessing the author&#039;s information and establishing content ownership. */
 export interface NodeWithAuthorObservableChain{
     
 /** Connection between the NodeWithAuthor type and the User type */
@@ -29137,7 +29365,7 @@ node: (UserObservableChain & {get: <R extends UserRequest>(request: R, defaultVa
 }
 
 
-/** A node that can have comments associated with it */
+/** Content that can receive and display user-submitted comments. Provides fields for accessing comment counts and managing comment status. */
 export interface NodeWithCommentsPromiseChain{
     
 /** The number of comments. Even though WPGraphQL denotes this field as an integer, in WordPress this field should be saved as a numeric string for compatibility. */
@@ -29151,7 +29379,7 @@ id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<S
 }
 
 
-/** A node that can have comments associated with it */
+/** Content that can receive and display user-submitted comments. Provides fields for accessing comment counts and managing comment status. */
 export interface NodeWithCommentsObservableChain{
     
 /** The number of comments. Even though WPGraphQL denotes this field as an integer, in WordPress this field should be saved as a numeric string for compatibility. */
@@ -29165,7 +29393,7 @@ id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observabl
 }
 
 
-/** Content node with hierarchical (parent/child) relationships */
+/** Content that can be organized in a parent-child structure. Provides fields for navigating up and down the hierarchy and maintaining structured relationships. */
 export interface HierarchicalContentNodePromiseChain{
     
 /** Returns ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
@@ -29308,7 +29536,7 @@ uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undef
 }
 
 
-/** Content node with hierarchical (parent/child) relationships */
+/** Content that can be organized in a parent-child structure. Provides fields for navigating up and down the hierarchy and maintaining structured relationships. */
 export interface HierarchicalContentNodeObservableChain{
     
 /** Returns ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
@@ -29451,7 +29679,7 @@ uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undef
 }
 
 
-/** Node with hierarchical (parent/child) relationships */
+/** Content that can exist in a parent-child structure. Provides fields for navigating up (parent) and down (children) through the hierarchy. */
 export interface HierarchicalNodePromiseChain{
     
 /** The unique identifier stored in the database */
@@ -29468,7 +29696,7 @@ parentId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | unde
 }
 
 
-/** Node with hierarchical (parent/child) relationships */
+/** Content that can exist in a parent-child structure. Provides fields for navigating up (parent) and down (children) through the hierarchy. */
 export interface HierarchicalNodeObservableChain{
     
 /** The unique identifier stored in the database */
@@ -29535,7 +29763,7 @@ node: (ContentNodeObservableChain & {get: <R extends ContentNodeRequest>(request
 }
 
 
-/** Page Info on the &quot;HierarchicalContentNodeToContentNodeAncestorsConnection&quot; */
+/** Pagination metadata specific to &quot;HierarchicalContentNodeToContentNodeAncestorsConnection&quot; collections. Provides cursors and flags for navigating through sets of HierarchicalContentNodeToContentNodeAncestorsConnection Nodes. */
 export interface HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -29552,7 +29780,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;HierarchicalContentNodeToContentNodeAncestorsConnection&quot; */
+/** Pagination metadata specific to &quot;HierarchicalContentNodeToContentNodeAncestorsConnection&quot; collections. Provides cursors and flags for navigating through sets of HierarchicalContentNodeToContentNodeAncestorsConnection Nodes. */
 export interface HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -29619,7 +29847,7 @@ node: (ContentNodeObservableChain & {get: <R extends ContentNodeRequest>(request
 }
 
 
-/** Page Info on the &quot;HierarchicalContentNodeToContentNodeChildrenConnection&quot; */
+/** Pagination metadata specific to &quot;HierarchicalContentNodeToContentNodeChildrenConnection&quot; collections. Provides cursors and flags for navigating through sets of HierarchicalContentNodeToContentNodeChildrenConnection Nodes. */
 export interface HierarchicalContentNodeToContentNodeChildrenConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -29636,7 +29864,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;HierarchicalContentNodeToContentNodeChildrenConnection&quot; */
+/** Pagination metadata specific to &quot;HierarchicalContentNodeToContentNodeChildrenConnection&quot; collections. Provides cursors and flags for navigating through sets of HierarchicalContentNodeToContentNodeChildrenConnection Nodes. */
 export interface HierarchicalContentNodeToContentNodeChildrenConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -29703,7 +29931,7 @@ node: (EnqueuedScriptObservableChain & {get: <R extends EnqueuedScriptRequest>(r
 }
 
 
-/** Page Info on the &quot;ContentNodeToEnqueuedScriptConnection&quot; */
+/** Pagination metadata specific to &quot;ContentNodeToEnqueuedScriptConnection&quot; collections. Provides cursors and flags for navigating through sets of ContentNodeToEnqueuedScriptConnection Nodes. */
 export interface ContentNodeToEnqueuedScriptConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -29720,7 +29948,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;ContentNodeToEnqueuedScriptConnection&quot; */
+/** Pagination metadata specific to &quot;ContentNodeToEnqueuedScriptConnection&quot; collections. Provides cursors and flags for navigating through sets of ContentNodeToEnqueuedScriptConnection Nodes. */
 export interface ContentNodeToEnqueuedScriptConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -29787,7 +30015,7 @@ node: (EnqueuedStylesheetObservableChain & {get: <R extends EnqueuedStylesheetRe
 }
 
 
-/** Page Info on the &quot;ContentNodeToEnqueuedStylesheetConnection&quot; */
+/** Pagination metadata specific to &quot;ContentNodeToEnqueuedStylesheetConnection&quot; collections. Provides cursors and flags for navigating through sets of ContentNodeToEnqueuedStylesheetConnection Nodes. */
 export interface ContentNodeToEnqueuedStylesheetConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -29804,7 +30032,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;ContentNodeToEnqueuedStylesheetConnection&quot; */
+/** Pagination metadata specific to &quot;ContentNodeToEnqueuedStylesheetConnection&quot; collections. Provides cursors and flags for navigating through sets of ContentNodeToEnqueuedStylesheetConnection Nodes. */
 export interface ContentNodeToEnqueuedStylesheetConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -29915,7 +30143,7 @@ node: (CommentObservableChain & {get: <R extends CommentRequest>(request: R, def
 }
 
 
-/** Page Info on the &quot;MediaItemToCommentConnection&quot; */
+/** Pagination metadata specific to &quot;MediaItemToCommentConnection&quot; collections. Provides cursors and flags for navigating through sets of MediaItemToCommentConnection Nodes. */
 export interface MediaItemToCommentConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -29932,7 +30160,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;MediaItemToCommentConnection&quot; */
+/** Pagination metadata specific to &quot;MediaItemToCommentConnection&quot; collections. Provides cursors and flags for navigating through sets of MediaItemToCommentConnection Nodes. */
 export interface MediaItemToCommentConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -30143,7 +30371,7 @@ width: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | und
 }
 
 
-/** Page Info on the connected MediaItemConnectionEdge */
+/** Pagination metadata specific to &quot;MediaItemConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;MediaItemConnectionEdge&quot; Nodes. */
 export interface MediaItemConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -30160,7 +30388,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected MediaItemConnectionEdge */
+/** Pagination metadata specific to &quot;MediaItemConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;MediaItemConnectionEdge&quot; Nodes. */
 export interface MediaItemConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -30199,7 +30427,7 @@ node: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R,
 }
 
 
-/** Page Info on the &quot;UserToMediaItemConnection&quot; */
+/** Pagination metadata specific to &quot;UserToMediaItemConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToMediaItemConnection Nodes. */
 export interface UserToMediaItemConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -30216,7 +30444,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;UserToMediaItemConnection&quot; */
+/** Pagination metadata specific to &quot;UserToMediaItemConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToMediaItemConnection Nodes. */
 export interface UserToMediaItemConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -30261,7 +30489,7 @@ pageInfo: (UserToPageConnectionPageInfoObservableChain & {get: <R extends UserTo
 }
 
 
-/** Connection to page Nodes */
+/** A paginated collection of page Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of page Nodes */
 export interface PageConnectionPromiseChain{
     
 /** A list of edges (relational context) between RootQuery and connected page Nodes */
@@ -30275,7 +30503,7 @@ pageInfo: (PageConnectionPageInfoPromiseChain & {get: <R extends PageConnectionP
 }
 
 
-/** Connection to page Nodes */
+/** A paginated collection of page Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of page Nodes */
 export interface PageConnectionObservableChain{
     
 /** A list of edges (relational context) between RootQuery and connected page Nodes */
@@ -30289,7 +30517,7 @@ pageInfo: (PageConnectionPageInfoObservableChain & {get: <R extends PageConnecti
 }
 
 
-/** Edge between a Node and a connected page */
+/** Represents a connection to a page. Contains both the page Node and metadata about the relationship. */
 export interface PageConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -30300,7 +30528,7 @@ node: (PagePromiseChain & {get: <R extends PageRequest>(request: R, defaultValue
 }
 
 
-/** Edge between a Node and a connected page */
+/** Represents a connection to a page. Contains both the page Node and metadata about the relationship. */
 export interface PageConnectionEdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -30311,7 +30539,7 @@ node: (PageObservableChain & {get: <R extends PageRequest>(request: R, defaultVa
 }
 
 
-/** The page type */
+/** A standalone content entry generally used for static, non-chronological content such as &quot;About Us&quot; or &quot;Contact&quot; pages. */
 export interface PagePromiseChain{
     
 /** Returns ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
@@ -30384,6 +30612,15 @@ contentTypeName: ({get: (request?: boolean|number, defaultValue?: Scalars['Strin
     
 /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo sobre&quot; was set to Show in GraphQL. */
 conteuSobre: (Page_ConteusobrePromiseChain & {get: <R extends Page_ConteusobreRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteusobre, R> | undefined)) => Promise<(FieldsSelection<Page_Conteusobre, R> | undefined)>}),
+    
+/** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo Indique e Ganhe&quot; was set to Show in GraphQL. */
+conteudoIndiqueEGanhe: (Page_ConteudoindiqueeganhePromiseChain & {get: <R extends Page_ConteudoindiqueeganheRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteudoindiqueeganhe, R> | undefined)) => Promise<(FieldsSelection<Page_Conteudoindiqueeganhe, R> | undefined)>}),
+    
+/** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo L.Store&quot; was set to Show in GraphQL. */
+conteudoLStore: (Page_ConteudolstorePromiseChain & {get: <R extends Page_ConteudolstoreRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteudolstore, R> | undefined)) => Promise<(FieldsSelection<Page_Conteudolstore, R> | undefined)>}),
+    
+/** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo política de qualidade&quot; was set to Show in GraphQL. */
+conteudoPoliticaDeQualidade: (Page_ConteudopoliticadequalidadePromiseChain & {get: <R extends Page_ConteudopoliticadequalidadeRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteudopoliticadequalidade, R> | undefined)) => Promise<(FieldsSelection<Page_Conteudopoliticadequalidade, R> | undefined)>}),
     
 /** The unique identifier stored in the database */
 databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>}),
@@ -30506,7 +30743,7 @@ parentId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | unde
 /** The password for the page object. */
 password: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** Connection between the Page type and the page type */
+/** Connection between the page type and the page type */
 preview: (PageToPreviewConnectionEdgePromiseChain & {get: <R extends PageToPreviewConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<PageToPreviewConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<PageToPreviewConnectionEdge, R> | undefined)>}),
     
 /** The database id of the preview node */
@@ -30550,7 +30787,7 @@ uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undef
 }
 
 
-/** The page type */
+/** A standalone content entry generally used for static, non-chronological content such as &quot;About Us&quot; or &quot;Contact&quot; pages. */
 export interface PageObservableChain{
     
 /** Returns ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
@@ -30623,6 +30860,15 @@ contentTypeName: ({get: (request?: boolean|number, defaultValue?: Scalars['Strin
     
 /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo sobre&quot; was set to Show in GraphQL. */
 conteuSobre: (Page_ConteusobreObservableChain & {get: <R extends Page_ConteusobreRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteusobre, R> | undefined)) => Observable<(FieldsSelection<Page_Conteusobre, R> | undefined)>}),
+    
+/** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo Indique e Ganhe&quot; was set to Show in GraphQL. */
+conteudoIndiqueEGanhe: (Page_ConteudoindiqueeganheObservableChain & {get: <R extends Page_ConteudoindiqueeganheRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteudoindiqueeganhe, R> | undefined)) => Observable<(FieldsSelection<Page_Conteudoindiqueeganhe, R> | undefined)>}),
+    
+/** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo L.Store&quot; was set to Show in GraphQL. */
+conteudoLStore: (Page_ConteudolstoreObservableChain & {get: <R extends Page_ConteudolstoreRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteudolstore, R> | undefined)) => Observable<(FieldsSelection<Page_Conteudolstore, R> | undefined)>}),
+    
+/** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo política de qualidade&quot; was set to Show in GraphQL. */
+conteudoPoliticaDeQualidade: (Page_ConteudopoliticadequalidadeObservableChain & {get: <R extends Page_ConteudopoliticadequalidadeRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteudopoliticadequalidade, R> | undefined)) => Observable<(FieldsSelection<Page_Conteudopoliticadequalidade, R> | undefined)>}),
     
 /** The unique identifier stored in the database */
 databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>}),
@@ -30745,7 +30991,7 @@ parentId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | unde
 /** The password for the page object. */
 password: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** Connection between the Page type and the page type */
+/** Connection between the page type and the page type */
 preview: (PageToPreviewConnectionEdgeObservableChain & {get: <R extends PageToPreviewConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<PageToPreviewConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<PageToPreviewConnectionEdge, R> | undefined)>}),
     
 /** The database id of the preview node */
@@ -30789,7 +31035,7 @@ uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undef
 }
 
 
-/** Nodes that can be seen in a preview (unpublished) state. */
+/** Content that supports a draft preview mode. Allows viewing unpublished changes before they are made publicly available. Previewing unpublished changes requires appropriate permissions. */
 export interface PreviewablePromiseChain{
     
 /** Whether the object is a node in the preview state */
@@ -30803,7 +31049,7 @@ previewRevisionId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID
 }
 
 
-/** Nodes that can be seen in a preview (unpublished) state. */
+/** Content that supports a draft preview mode. Allows viewing unpublished changes before they are made publicly available. Previewing unpublished changes requires appropriate permissions. */
 export interface PreviewableObservableChain{
     
 /** Whether the object is a node in the preview state */
@@ -30817,7 +31063,7 @@ previewRevisionId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID
 }
 
 
-/** A node that supports the content editor */
+/** Content that has a main body field which can contain formatted text and media. Provides access to both raw (with appropriate permissions) and rendered versions of the content. */
 export interface NodeWithContentEditorPromiseChain{
     
 /** The content of the post. */
@@ -30830,7 +31076,7 @@ id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<S
 }
 
 
-/** A node that supports the content editor */
+/** Content that has a main body field which can contain formatted text and media. Provides access to both raw (with appropriate permissions) and rendered versions of the content. */
 export interface NodeWithContentEditorObservableChain{
     
 /** The content of the post. */
@@ -30843,7 +31089,7 @@ id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observabl
 }
 
 
-/** A node that can have a featured image set */
+/** Content that can have a primary image attached. This image is typically used for thumbnails, social sharing, and prominent display in the presentation layer. */
 export interface NodeWithFeaturedImagePromiseChain{
     
 /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
@@ -30860,7 +31106,7 @@ id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<S
 }
 
 
-/** A node that can have a featured image set */
+/** Content that can have a primary image attached. This image is typically used for thumbnails, social sharing, and prominent display in the presentation layer. */
 export interface NodeWithFeaturedImageObservableChain{
     
 /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
@@ -30899,7 +31145,7 @@ node: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R,
 }
 
 
-/** A node that can have revisions */
+/** Content that maintains a history of changes. Provides access to previous versions of the content and the ability to restore earlier revisions. */
 export interface NodeWithRevisionsPromiseChain{
     
 /** The globally unique ID for the object */
@@ -30913,7 +31159,7 @@ revisionOf: (NodeWithRevisionsToContentNodeConnectionEdgePromiseChain & {get: <R
 }
 
 
-/** A node that can have revisions */
+/** Content that maintains a history of changes. Provides access to previous versions of the content and the ability to restore earlier revisions. */
 export interface NodeWithRevisionsObservableChain{
     
 /** The globally unique ID for the object */
@@ -30949,7 +31195,7 @@ node: (ContentNodeObservableChain & {get: <R extends ContentNodeRequest>(request
 }
 
 
-/** A node that can have page attributes */
+/** Content that supports ordering metadata. Includes a menu order field which can be used for custom sorting in navigation menus and other ordered collections. */
 export interface NodeWithPageAttributesPromiseChain{
     
 /** The globally unique ID for the object */
@@ -30960,7 +31206,7 @@ menuOrder: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | un
 }
 
 
-/** A node that can have page attributes */
+/** Content that supports ordering metadata. Includes a menu order field which can be used for custom sorting in navigation menus and other ordered collections. */
 export interface NodeWithPageAttributesObservableChain{
     
 /** The globally unique ID for the object */
@@ -30971,7 +31217,7 @@ menuOrder: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | un
 }
 
 
-/** Nodes that can be linked to as Menu Items */
+/** Content that can be referenced by navigation menu items. Provides the essential fields needed to create links within navigation structures. */
 export interface MenuItemLinkablePromiseChain{
     
 /** The unique identifier stored in the database */
@@ -31000,7 +31246,7 @@ uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undef
 }
 
 
-/** Nodes that can be linked to as Menu Items */
+/** Content that can be referenced by navigation menu items. Provides the essential fields needed to create links within navigation structures. */
 export interface MenuItemLinkableObservableChain{
     
 /** The unique identifier stored in the database */
@@ -31119,7 +31365,7 @@ node: (CommentObservableChain & {get: <R extends CommentRequest>(request: R, def
 }
 
 
-/** Page Info on the &quot;PageToCommentConnection&quot; */
+/** Pagination metadata specific to &quot;PageToCommentConnection&quot; collections. Provides cursors and flags for navigating through sets of PageToCommentConnection Nodes. */
 export interface PageToCommentConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -31136,7 +31382,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;PageToCommentConnection&quot; */
+/** Pagination metadata specific to &quot;PageToCommentConnection&quot; collections. Provides cursors and flags for navigating through sets of PageToCommentConnection Nodes. */
 export interface PageToCommentConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -31220,6 +31466,214 @@ fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['Strin
 
 
 /** Field Group */
+export interface Page_ConteudoindiqueeganhePromiseChain{
+    descricaoIg: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    descricaoPasso1Ig: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    descricaoPasso2Ig: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    descricaoPasso3Ig: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    emObra: (Page_Conteudoindiqueeganhe_EmObraPromiseChain & {get: <R extends Page_Conteudoindiqueeganhe_EmObraRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteudoindiqueeganhe_EmObra, R> | undefined)) => Promise<(FieldsSelection<Page_Conteudoindiqueeganhe_EmObra, R> | undefined)>}),
+    entregue: (Page_Conteudoindiqueeganhe_EntreguePromiseChain & {get: <R extends Page_Conteudoindiqueeganhe_EntregueRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteudoindiqueeganhe_Entregue, R> | undefined)) => Promise<(FieldsSelection<Page_Conteudoindiqueeganhe_Entregue, R> | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    imagemIg: (MediaItemPromiseChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Promise<(FieldsSelection<MediaItem, R> | undefined)>}),
+    regulamentoIndiqueGanhe: (MediaItemPromiseChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Promise<(FieldsSelection<MediaItem, R> | undefined)>}),
+    tituloPasso1Ig: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    tituloPasso2Ig: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    tituloPasso3Ig: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface Page_ConteudoindiqueeganheObservableChain{
+    descricaoIg: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    descricaoPasso1Ig: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    descricaoPasso2Ig: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    descricaoPasso3Ig: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    emObra: (Page_Conteudoindiqueeganhe_EmObraObservableChain & {get: <R extends Page_Conteudoindiqueeganhe_EmObraRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteudoindiqueeganhe_EmObra, R> | undefined)) => Observable<(FieldsSelection<Page_Conteudoindiqueeganhe_EmObra, R> | undefined)>}),
+    entregue: (Page_Conteudoindiqueeganhe_EntregueObservableChain & {get: <R extends Page_Conteudoindiqueeganhe_EntregueRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteudoindiqueeganhe_Entregue, R> | undefined)) => Observable<(FieldsSelection<Page_Conteudoindiqueeganhe_Entregue, R> | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    imagemIg: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Observable<(FieldsSelection<MediaItem, R> | undefined)>}),
+    regulamentoIndiqueGanhe: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Observable<(FieldsSelection<MediaItem, R> | undefined)>}),
+    tituloPasso1Ig: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    tituloPasso2Ig: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    tituloPasso3Ig: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface Page_Conteudoindiqueeganhe_EmObraPromiseChain{
+    beneficioEmobraIg: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    observacaoEmobraIg: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface Page_Conteudoindiqueeganhe_EmObraObservableChain{
+    beneficioEmobraIg: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    observacaoEmobraIg: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface Page_Conteudoindiqueeganhe_EntreguePromiseChain{
+    beneficioEntregueIg: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    observacaoEntregueIg: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface Page_Conteudoindiqueeganhe_EntregueObservableChain{
+    beneficioEntregueIg: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    observacaoEntregueIg: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface Page_ConteudolstorePromiseChain{
+    descicaoBannerLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    descricaoGaleriaLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    descricaoPasso1Lstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    descricaoPasso2Lstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    descricaoPasso3Lstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    descricaoPassoLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    descricaoSalaLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    descricaoSobreLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    descricaoUltimoLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    fraseBannerLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    imagem1: (MediaItemPromiseChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Promise<(FieldsSelection<MediaItem, R> | undefined)>}),
+    imagem2: (MediaItemPromiseChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Promise<(FieldsSelection<MediaItem, R> | undefined)>}),
+    imagemSobreLstore: (MediaItemPromiseChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Promise<(FieldsSelection<MediaItem, R> | undefined)>}),
+    imagensGaleriaLstore: ({get: <R extends MediaItemRequest>(request: R, defaultValue?: ((FieldsSelection<MediaItem, R> | undefined)[] | undefined)) => Promise<((FieldsSelection<MediaItem, R> | undefined)[] | undefined)>}),
+    imagensSalaLstore: ({get: <R extends MediaItemRequest>(request: R, defaultValue?: ((FieldsSelection<MediaItem, R> | undefined)[] | undefined)) => Promise<((FieldsSelection<MediaItem, R> | undefined)[] | undefined)>}),
+    numeroParaAgendamentoLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    textoAuxiliarSobreLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    tituloBannerLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    tituloGaleriaLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    tituloPasso1Lstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    tituloPasso2Lstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    tituloPasso3Lstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    tituloPassoLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    tituloSalaLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    tituloUltimoLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface Page_ConteudolstoreObservableChain{
+    descicaoBannerLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    descricaoGaleriaLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    descricaoPasso1Lstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    descricaoPasso2Lstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    descricaoPasso3Lstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    descricaoPassoLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    descricaoSalaLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    descricaoSobreLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    descricaoUltimoLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    fraseBannerLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    imagem1: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Observable<(FieldsSelection<MediaItem, R> | undefined)>}),
+    imagem2: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Observable<(FieldsSelection<MediaItem, R> | undefined)>}),
+    imagemSobreLstore: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Observable<(FieldsSelection<MediaItem, R> | undefined)>}),
+    imagensGaleriaLstore: ({get: <R extends MediaItemRequest>(request: R, defaultValue?: ((FieldsSelection<MediaItem, R> | undefined)[] | undefined)) => Observable<((FieldsSelection<MediaItem, R> | undefined)[] | undefined)>}),
+    imagensSalaLstore: ({get: <R extends MediaItemRequest>(request: R, defaultValue?: ((FieldsSelection<MediaItem, R> | undefined)[] | undefined)) => Observable<((FieldsSelection<MediaItem, R> | undefined)[] | undefined)>}),
+    numeroParaAgendamentoLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    textoAuxiliarSobreLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    tituloBannerLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    tituloGaleriaLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    tituloPasso1Lstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    tituloPasso2Lstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    tituloPasso3Lstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    tituloPassoLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    tituloSalaLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    tituloUltimoLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface Page_ConteudopoliticadequalidadePromiseChain{
+    certificacaoPq: ({get: <R extends Page_Conteudopoliticadequalidade_certificacaoPqRequest>(request: R, defaultValue?: ((FieldsSelection<Page_Conteudopoliticadequalidade_certificacaoPq, R> | undefined)[] | undefined)) => Promise<((FieldsSelection<Page_Conteudopoliticadequalidade_certificacaoPq, R> | undefined)[] | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    praticaItensPq: ({get: <R extends Page_Conteudopoliticadequalidade_praticaItensPqRequest>(request: R, defaultValue?: ((FieldsSelection<Page_Conteudopoliticadequalidade_praticaItensPq, R> | undefined)[] | undefined)) => Promise<((FieldsSelection<Page_Conteudopoliticadequalidade_praticaItensPq, R> | undefined)[] | undefined)>})
+}
+
+
+/** Field Group */
+export interface Page_ConteudopoliticadequalidadeObservableChain{
+    certificacaoPq: ({get: <R extends Page_Conteudopoliticadequalidade_certificacaoPqRequest>(request: R, defaultValue?: ((FieldsSelection<Page_Conteudopoliticadequalidade_certificacaoPq, R> | undefined)[] | undefined)) => Observable<((FieldsSelection<Page_Conteudopoliticadequalidade_certificacaoPq, R> | undefined)[] | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    praticaItensPq: ({get: <R extends Page_Conteudopoliticadequalidade_praticaItensPqRequest>(request: R, defaultValue?: ((FieldsSelection<Page_Conteudopoliticadequalidade_praticaItensPq, R> | undefined)[] | undefined)) => Observable<((FieldsSelection<Page_Conteudopoliticadequalidade_praticaItensPq, R> | undefined)[] | undefined)>})
+}
+
+
+/** Field Group */
+export interface Page_Conteudopoliticadequalidade_certificacaoPqPromiseChain{
+    descricaoCertPq: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    imagemCertPq: (MediaItemPromiseChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Promise<(FieldsSelection<MediaItem, R> | undefined)>}),
+    tituloCertPq: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface Page_Conteudopoliticadequalidade_certificacaoPqObservableChain{
+    descricaoCertPq: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    imagemCertPq: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Observable<(FieldsSelection<MediaItem, R> | undefined)>}),
+    tituloCertPq: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface Page_Conteudopoliticadequalidade_praticaItensPqPromiseChain{
+    descricaoCertPq: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    imagemCertPq: (MediaItemPromiseChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Promise<(FieldsSelection<MediaItem, R> | undefined)>}),
+    tituloCertPq: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface Page_Conteudopoliticadequalidade_praticaItensPqObservableChain{
+    descricaoCertPq: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    imagemCertPq: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Observable<(FieldsSelection<MediaItem, R> | undefined)>}),
+    tituloCertPq: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
 export interface Page_InformacoesdecontatoPromiseChain{
     coEmail: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     coEndereco: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
@@ -31249,7 +31703,7 @@ fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['Strin
 }
 
 
-/** Connection between the Page type and the page type */
+/** Connection between the page type and the page type */
 export interface PageToPreviewConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -31260,7 +31714,7 @@ node: (PagePromiseChain & {get: <R extends PageRequest>(request: R, defaultValue
 }
 
 
-/** Connection between the Page type and the page type */
+/** Connection between the page type and the page type */
 export interface PageToPreviewConnectionEdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -31321,7 +31775,7 @@ node: (PageObservableChain & {get: <R extends PageRequest>(request: R, defaultVa
 }
 
 
-/** Page Info on the &quot;PageToRevisionConnection&quot; */
+/** Pagination metadata specific to &quot;PageToRevisionConnection&quot; collections. Provides cursors and flags for navigating through sets of PageToRevisionConnection Nodes. */
 export interface PageToRevisionConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -31338,7 +31792,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;PageToRevisionConnection&quot; */
+/** Pagination metadata specific to &quot;PageToRevisionConnection&quot; collections. Provides cursors and flags for navigating through sets of PageToRevisionConnection Nodes. */
 export interface PageToRevisionConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -31355,7 +31809,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected PageConnectionEdge */
+/** Pagination metadata specific to &quot;PageConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;PageConnectionEdge&quot; Nodes. */
 export interface PageConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -31372,7 +31826,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected PageConnectionEdge */
+/** Pagination metadata specific to &quot;PageConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;PageConnectionEdge&quot; Nodes. */
 export interface PageConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -31411,7 +31865,7 @@ node: (PageObservableChain & {get: <R extends PageRequest>(request: R, defaultVa
 }
 
 
-/** Page Info on the &quot;UserToPageConnection&quot; */
+/** Pagination metadata specific to &quot;UserToPageConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToPageConnection Nodes. */
 export interface UserToPageConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -31428,7 +31882,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;UserToPageConnection&quot; */
+/** Pagination metadata specific to &quot;UserToPageConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToPageConnection Nodes. */
 export interface UserToPageConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -31473,7 +31927,7 @@ pageInfo: (UserToPostConnectionPageInfoObservableChain & {get: <R extends UserTo
 }
 
 
-/** Connection to post Nodes */
+/** A paginated collection of post Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of post Nodes */
 export interface PostConnectionPromiseChain{
     
 /** A list of edges (relational context) between RootQuery and connected post Nodes */
@@ -31487,7 +31941,7 @@ pageInfo: (PostConnectionPageInfoPromiseChain & {get: <R extends PostConnectionP
 }
 
 
-/** Connection to post Nodes */
+/** A paginated collection of post Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of post Nodes */
 export interface PostConnectionObservableChain{
     
 /** A list of edges (relational context) between RootQuery and connected post Nodes */
@@ -31501,7 +31955,7 @@ pageInfo: (PostConnectionPageInfoObservableChain & {get: <R extends PostConnecti
 }
 
 
-/** Edge between a Node and a connected post */
+/** Represents a connection to a post. Contains both the post Node and metadata about the relationship. */
 export interface PostConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -31512,7 +31966,7 @@ node: (PostPromiseChain & {get: <R extends PostRequest>(request: R, defaultValue
 }
 
 
-/** Edge between a Node and a connected post */
+/** Represents a connection to a post. Contains both the post Node and metadata about the relationship. */
 export interface PostConnectionEdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -31523,7 +31977,7 @@ node: (PostObservableChain & {get: <R extends PostRequest>(request: R, defaultVa
 }
 
 
-/** The post type */
+/** A chronological content entry typically used for blog posts, news articles, or similar date-based content. */
 export interface PostPromiseChain{
     
 /**
@@ -31728,7 +32182,7 @@ where?: (PostToPostFormatConnectionWhereArgs | null)}) => PostToPostFormatConnec
  */
 postId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>}),
     
-/** Connection between the Post type and the post type */
+/** Connection between the post type and the post type */
 preview: (PostToPreviewConnectionEdgePromiseChain & {get: <R extends PostToPreviewConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<PostToPreviewConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<PostToPreviewConnectionEdge, R> | undefined)>}),
     
 /** The database id of the preview node */
@@ -31801,7 +32255,7 @@ uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undef
 }
 
 
-/** The post type */
+/** A chronological content entry typically used for blog posts, news articles, or similar date-based content. */
 export interface PostObservableChain{
     
 /**
@@ -32006,7 +32460,7 @@ where?: (PostToPostFormatConnectionWhereArgs | null)}) => PostToPostFormatConnec
  */
 postId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>}),
     
-/** Connection between the Post type and the post type */
+/** Connection between the post type and the post type */
 preview: (PostToPreviewConnectionEdgeObservableChain & {get: <R extends PostToPreviewConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<PostToPreviewConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<PostToPreviewConnectionEdge, R> | undefined)>}),
     
 /** The database id of the preview node */
@@ -32079,7 +32533,7 @@ uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undef
 }
 
 
-/** A node that can have an excerpt */
+/** A node which provides an excerpt field, which is a condensed summary of the main content. Excerpts can be manually created or automatically generated and are often used in content listings and search results. */
 export interface NodeWithExcerptPromiseChain{
     
 /** The excerpt of the post. */
@@ -32092,7 +32546,7 @@ id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<S
 }
 
 
-/** A node that can have an excerpt */
+/** A node which provides an excerpt field, which is a condensed summary of the main content. Excerpts can be manually created or automatically generated and are often used in content listings and search results. */
 export interface NodeWithExcerptObservableChain{
     
 /** The excerpt of the post. */
@@ -32105,7 +32559,7 @@ id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observabl
 }
 
 
-/** A node that can have trackbacks and pingbacks */
+/** Content that supports cross-site notifications when linked to by other sites. Includes fields for pingback status and linked URLs. */
 export interface NodeWithTrackbacksPromiseChain{
     
 /** The globally unique ID for the object */
@@ -32122,7 +32576,7 @@ toPing: ({get: (request?: boolean|number, defaultValue?: ((Scalars['String'] | u
 }
 
 
-/** A node that can have trackbacks and pingbacks */
+/** Content that supports cross-site notifications when linked to by other sites. Includes fields for pingback status and linked URLs. */
 export interface NodeWithTrackbacksObservableChain{
     
 /** The globally unique ID for the object */
@@ -32139,7 +32593,7 @@ toPing: ({get: (request?: boolean|number, defaultValue?: ((Scalars['String'] | u
 }
 
 
-/** Connection between the Post type and the post type */
+/** Connection between the post type and the post type */
 export interface PostToPostConnectionPromiseChain{
     
 /** Edges for the PostToPostConnection connection */
@@ -32153,7 +32607,7 @@ pageInfo: (PostToPostConnectionPageInfoPromiseChain & {get: <R extends PostToPos
 }
 
 
-/** Connection between the Post type and the post type */
+/** Connection between the post type and the post type */
 export interface PostToPostConnectionObservableChain{
     
 /** Edges for the PostToPostConnection connection */
@@ -32201,7 +32655,7 @@ node: (PostObservableChain & {get: <R extends PostRequest>(request: R, defaultVa
 }
 
 
-/** Page Info on the &quot;PostToPostConnection&quot; */
+/** Pagination metadata specific to &quot;PostToPostConnection&quot; collections. Provides cursors and flags for navigating through sets of PostToPostConnection Nodes. */
 export interface PostToPostConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -32218,7 +32672,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;PostToPostConnection&quot; */
+/** Pagination metadata specific to &quot;PostToPostConnection&quot; collections. Provides cursors and flags for navigating through sets of PostToPostConnection Nodes. */
 export interface PostToPostConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -32235,7 +32689,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected PostConnectionEdge */
+/** Pagination metadata specific to &quot;PostConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;PostConnectionEdge&quot; Nodes. */
 export interface PostConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -32252,7 +32706,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected PostConnectionEdge */
+/** Pagination metadata specific to &quot;PostConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;PostConnectionEdge&quot; Nodes. */
 export interface PostConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -32297,7 +32751,7 @@ pageInfo: (PostToCategoryConnectionPageInfoObservableChain & {get: <R extends Po
 }
 
 
-/** Connection to category Nodes */
+/** A paginated collection of category Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of category Nodes */
 export interface CategoryConnectionPromiseChain{
     
 /** A list of edges (relational context) between RootQuery and connected category Nodes */
@@ -32311,7 +32765,7 @@ pageInfo: (CategoryConnectionPageInfoPromiseChain & {get: <R extends CategoryCon
 }
 
 
-/** Connection to category Nodes */
+/** A paginated collection of category Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of category Nodes */
 export interface CategoryConnectionObservableChain{
     
 /** A list of edges (relational context) between RootQuery and connected category Nodes */
@@ -32325,7 +32779,7 @@ pageInfo: (CategoryConnectionPageInfoObservableChain & {get: <R extends Category
 }
 
 
-/** Edge between a Node and a connected category */
+/** Represents a connection to a category. Contains both the category Node and metadata about the relationship. */
 export interface CategoryConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -32336,7 +32790,7 @@ node: (CategoryPromiseChain & {get: <R extends CategoryRequest>(request: R, defa
 }
 
 
-/** Edge between a Node and a connected category */
+/** Represents a connection to a category. Contains both the category Node and metadata about the relationship. */
 export interface CategoryConnectionEdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -32347,7 +32801,7 @@ node: (CategoryObservableChain & {get: <R extends CategoryRequest>(request: R, d
 }
 
 
-/** The category type */
+/** A taxonomy term that classifies content. Categories support hierarchy and can be used to create a nested structure. */
 export interface CategoryPromiseChain{
     
 /** The ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
@@ -32519,7 +32973,7 @@ uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undef
 }
 
 
-/** The category type */
+/** A taxonomy term that classifies content. Categories support hierarchy and can be used to create a nested structure. */
 export interface CategoryObservableChain{
     
 /** The ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
@@ -32909,7 +33363,7 @@ node: (CategoryObservableChain & {get: <R extends CategoryRequest>(request: R, d
 }
 
 
-/** Page Info on the &quot;CategoryToAncestorsCategoryConnection&quot; */
+/** Pagination metadata specific to &quot;CategoryToAncestorsCategoryConnection&quot; collections. Provides cursors and flags for navigating through sets of CategoryToAncestorsCategoryConnection Nodes. */
 export interface CategoryToAncestorsCategoryConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -32926,7 +33380,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;CategoryToAncestorsCategoryConnection&quot; */
+/** Pagination metadata specific to &quot;CategoryToAncestorsCategoryConnection&quot; collections. Provides cursors and flags for navigating through sets of CategoryToAncestorsCategoryConnection Nodes. */
 export interface CategoryToAncestorsCategoryConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -32943,7 +33397,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected CategoryConnectionEdge */
+/** Pagination metadata specific to &quot;CategoryConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;CategoryConnectionEdge&quot; Nodes. */
 export interface CategoryConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -32960,7 +33414,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected CategoryConnectionEdge */
+/** Pagination metadata specific to &quot;CategoryConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;CategoryConnectionEdge&quot; Nodes. */
 export interface CategoryConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -33005,7 +33459,7 @@ pageInfo: (CategoryToCentraldeDecoradoConnectionPageInfoObservableChain & {get: 
 }
 
 
-/** Connection to CentraldeDecorado Nodes */
+/** A paginated collection of CentraldeDecorado Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of CentraldeDecorado Nodes */
 export interface CentraldeDecoradoConnectionPromiseChain{
     
 /** A list of edges (relational context) between RootQuery and connected CentraldeDecorado Nodes */
@@ -33019,7 +33473,7 @@ pageInfo: (CentraldeDecoradoConnectionPageInfoPromiseChain & {get: <R extends Ce
 }
 
 
-/** Connection to CentraldeDecorado Nodes */
+/** A paginated collection of CentraldeDecorado Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of CentraldeDecorado Nodes */
 export interface CentraldeDecoradoConnectionObservableChain{
     
 /** A list of edges (relational context) between RootQuery and connected CentraldeDecorado Nodes */
@@ -33033,7 +33487,7 @@ pageInfo: (CentraldeDecoradoConnectionPageInfoObservableChain & {get: <R extends
 }
 
 
-/** Edge between a Node and a connected CentraldeDecorado */
+/** Represents a connection to a CentraldeDecorado. Contains both the CentraldeDecorado Node and metadata about the relationship. */
 export interface CentraldeDecoradoConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -33044,7 +33498,7 @@ node: (CentraldeDecoradoPromiseChain & {get: <R extends CentraldeDecoradoRequest
 }
 
 
-/** Edge between a Node and a connected CentraldeDecorado */
+/** Represents a connection to a CentraldeDecorado. Contains both the CentraldeDecorado Node and metadata about the relationship. */
 export interface CentraldeDecoradoConnectionEdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -33489,7 +33943,7 @@ node: (CentraldeDecoradoObservableChain & {get: <R extends CentraldeDecoradoRequ
 }
 
 
-/** Page Info on the &quot;CentraldeDecoradoToCentraldeDecoradoConnection&quot; */
+/** Pagination metadata specific to &quot;CentraldeDecoradoToCentraldeDecoradoConnection&quot; collections. Provides cursors and flags for navigating through sets of CentraldeDecoradoToCentraldeDecoradoConnection Nodes. */
 export interface CentraldeDecoradoToCentraldeDecoradoConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -33506,7 +33960,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;CentraldeDecoradoToCentraldeDecoradoConnection&quot; */
+/** Pagination metadata specific to &quot;CentraldeDecoradoToCentraldeDecoradoConnection&quot; collections. Provides cursors and flags for navigating through sets of CentraldeDecoradoToCentraldeDecoradoConnection Nodes. */
 export interface CentraldeDecoradoToCentraldeDecoradoConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -33523,7 +33977,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected CentraldeDecoradoConnectionEdge */
+/** Pagination metadata specific to &quot;CentraldeDecoradoConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;CentraldeDecoradoConnectionEdge&quot; Nodes. */
 export interface CentraldeDecoradoConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -33540,7 +33994,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected CentraldeDecoradoConnectionEdge */
+/** Pagination metadata specific to &quot;CentraldeDecoradoConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;CentraldeDecoradoConnectionEdge&quot; Nodes. */
 export interface CentraldeDecoradoConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -33607,7 +34061,7 @@ node: (CategoryObservableChain & {get: <R extends CategoryRequest>(request: R, d
 }
 
 
-/** Page Info on the &quot;CentraldeDecoradoToCategoryConnection&quot; */
+/** Pagination metadata specific to &quot;CentraldeDecoradoToCategoryConnection&quot; collections. Provides cursors and flags for navigating through sets of CentraldeDecoradoToCategoryConnection Nodes. */
 export interface CentraldeDecoradoToCategoryConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -33624,7 +34078,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;CentraldeDecoradoToCategoryConnection&quot; */
+/** Pagination metadata specific to &quot;CentraldeDecoradoToCategoryConnection&quot; collections. Provides cursors and flags for navigating through sets of CentraldeDecoradoToCategoryConnection Nodes. */
 export interface CentraldeDecoradoToCategoryConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -33783,7 +34237,7 @@ node: (TermNodeObservableChain & {get: <R extends TermNodeRequest>(request: R, d
 }
 
 
-/** Page Info on the &quot;CentraldeDecoradoToTermNodeConnection&quot; */
+/** Pagination metadata specific to &quot;CentraldeDecoradoToTermNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of CentraldeDecoradoToTermNodeConnection Nodes. */
 export interface CentraldeDecoradoToTermNodeConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -33800,7 +34254,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;CentraldeDecoradoToTermNodeConnection&quot; */
+/** Pagination metadata specific to &quot;CentraldeDecoradoToTermNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of CentraldeDecoradoToTermNodeConnection Nodes. */
 export interface CentraldeDecoradoToTermNodeConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -33839,7 +34293,7 @@ node: (CentraldeDecoradoObservableChain & {get: <R extends CentraldeDecoradoRequ
 }
 
 
-/** Page Info on the &quot;CategoryToCentraldeDecoradoConnection&quot; */
+/** Pagination metadata specific to &quot;CategoryToCentraldeDecoradoConnection&quot; collections. Provides cursors and flags for navigating through sets of CategoryToCentraldeDecoradoConnection Nodes. */
 export interface CategoryToCentraldeDecoradoConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -33856,7 +34310,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;CategoryToCentraldeDecoradoConnection&quot; */
+/** Pagination metadata specific to &quot;CategoryToCentraldeDecoradoConnection&quot; collections. Provides cursors and flags for navigating through sets of CategoryToCentraldeDecoradoConnection Nodes. */
 export interface CategoryToCentraldeDecoradoConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -33923,7 +34377,7 @@ node: (CategoryObservableChain & {get: <R extends CategoryRequest>(request: R, d
 }
 
 
-/** Page Info on the &quot;CategoryToCategoryConnection&quot; */
+/** Pagination metadata specific to &quot;CategoryToCategoryConnection&quot; collections. Provides cursors and flags for navigating through sets of CategoryToCategoryConnection Nodes. */
 export interface CategoryToCategoryConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -33940,7 +34394,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;CategoryToCategoryConnection&quot; */
+/** Pagination metadata specific to &quot;CategoryToCategoryConnection&quot; collections. Provides cursors and flags for navigating through sets of CategoryToCategoryConnection Nodes. */
 export interface CategoryToCategoryConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -34007,7 +34461,7 @@ node: (ContentNodeObservableChain & {get: <R extends ContentNodeRequest>(request
 }
 
 
-/** Page Info on the &quot;CategoryToContentNodeConnection&quot; */
+/** Pagination metadata specific to &quot;CategoryToContentNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of CategoryToContentNodeConnection Nodes. */
 export interface CategoryToContentNodeConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -34024,7 +34478,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;CategoryToContentNodeConnection&quot; */
+/** Pagination metadata specific to &quot;CategoryToContentNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of CategoryToContentNodeConnection Nodes. */
 export interface CategoryToContentNodeConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -34069,7 +34523,7 @@ pageInfo: (CategoryToEmpreendimentoConnectionPageInfoObservableChain & {get: <R 
 }
 
 
-/** Connection to Empreendimento Nodes */
+/** A paginated collection of Empreendimento Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of Empreendimento Nodes */
 export interface EmpreendimentoConnectionPromiseChain{
     
 /** A list of edges (relational context) between RootQuery and connected Empreendimento Nodes */
@@ -34083,7 +34537,7 @@ pageInfo: (EmpreendimentoConnectionPageInfoPromiseChain & {get: <R extends Empre
 }
 
 
-/** Connection to Empreendimento Nodes */
+/** A paginated collection of Empreendimento Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of Empreendimento Nodes */
 export interface EmpreendimentoConnectionObservableChain{
     
 /** A list of edges (relational context) between RootQuery and connected Empreendimento Nodes */
@@ -34097,7 +34551,7 @@ pageInfo: (EmpreendimentoConnectionPageInfoObservableChain & {get: <R extends Em
 }
 
 
-/** Edge between a Node and a connected Empreendimento */
+/** Represents a connection to a Empreendimento. Contains both the Empreendimento Node and metadata about the relationship. */
 export interface EmpreendimentoConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -34108,7 +34562,7 @@ node: (EmpreendimentoPromiseChain & {get: <R extends EmpreendimentoRequest>(requ
 }
 
 
-/** Edge between a Node and a connected Empreendimento */
+/** Represents a connection to a Empreendimento. Contains both the Empreendimento Node and metadata about the relationship. */
 export interface EmpreendimentoConnectionEdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -34559,7 +35013,7 @@ node: (EmpreendimentoObservableChain & {get: <R extends EmpreendimentoRequest>(r
 }
 
 
-/** Page Info on the &quot;EmpreendimentoToEmpreendimentoConnection&quot; */
+/** Pagination metadata specific to &quot;EmpreendimentoToEmpreendimentoConnection&quot; collections. Provides cursors and flags for navigating through sets of EmpreendimentoToEmpreendimentoConnection Nodes. */
 export interface EmpreendimentoToEmpreendimentoConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -34576,7 +35030,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;EmpreendimentoToEmpreendimentoConnection&quot; */
+/** Pagination metadata specific to &quot;EmpreendimentoToEmpreendimentoConnection&quot; collections. Provides cursors and flags for navigating through sets of EmpreendimentoToEmpreendimentoConnection Nodes. */
 export interface EmpreendimentoToEmpreendimentoConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -34593,7 +35047,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected EmpreendimentoConnectionEdge */
+/** Pagination metadata specific to &quot;EmpreendimentoConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;EmpreendimentoConnectionEdge&quot; Nodes. */
 export interface EmpreendimentoConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -34610,7 +35064,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected EmpreendimentoConnectionEdge */
+/** Pagination metadata specific to &quot;EmpreendimentoConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;EmpreendimentoConnectionEdge&quot; Nodes. */
 export interface EmpreendimentoConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -34677,7 +35131,7 @@ node: (CategoryObservableChain & {get: <R extends CategoryRequest>(request: R, d
 }
 
 
-/** Page Info on the &quot;EmpreendimentoToCategoryConnection&quot; */
+/** Pagination metadata specific to &quot;EmpreendimentoToCategoryConnection&quot; collections. Provides cursors and flags for navigating through sets of EmpreendimentoToCategoryConnection Nodes. */
 export interface EmpreendimentoToCategoryConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -34694,7 +35148,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;EmpreendimentoToCategoryConnection&quot; */
+/** Pagination metadata specific to &quot;EmpreendimentoToCategoryConnection&quot; collections. Provides cursors and flags for navigating through sets of EmpreendimentoToCategoryConnection Nodes. */
 export interface EmpreendimentoToCategoryConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -35049,7 +35503,7 @@ node: (TermNodeObservableChain & {get: <R extends TermNodeRequest>(request: R, d
 }
 
 
-/** Page Info on the &quot;EmpreendimentoToTermNodeConnection&quot; */
+/** Pagination metadata specific to &quot;EmpreendimentoToTermNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of EmpreendimentoToTermNodeConnection Nodes. */
 export interface EmpreendimentoToTermNodeConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -35066,7 +35520,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;EmpreendimentoToTermNodeConnection&quot; */
+/** Pagination metadata specific to &quot;EmpreendimentoToTermNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of EmpreendimentoToTermNodeConnection Nodes. */
 export interface EmpreendimentoToTermNodeConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -35105,7 +35559,7 @@ node: (EmpreendimentoObservableChain & {get: <R extends EmpreendimentoRequest>(r
 }
 
 
-/** Page Info on the &quot;CategoryToEmpreendimentoConnection&quot; */
+/** Pagination metadata specific to &quot;CategoryToEmpreendimentoConnection&quot; collections. Provides cursors and flags for navigating through sets of CategoryToEmpreendimentoConnection Nodes. */
 export interface CategoryToEmpreendimentoConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -35122,7 +35576,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;CategoryToEmpreendimentoConnection&quot; */
+/** Pagination metadata specific to &quot;CategoryToEmpreendimentoConnection&quot; collections. Provides cursors and flags for navigating through sets of CategoryToEmpreendimentoConnection Nodes. */
 export interface CategoryToEmpreendimentoConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -35211,7 +35665,7 @@ node: (PostObservableChain & {get: <R extends PostRequest>(request: R, defaultVa
 }
 
 
-/** Page Info on the &quot;CategoryToPostConnection&quot; */
+/** Pagination metadata specific to &quot;CategoryToPostConnection&quot; collections. Provides cursors and flags for navigating through sets of CategoryToPostConnection Nodes. */
 export interface CategoryToPostConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -35228,7 +35682,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;CategoryToPostConnection&quot; */
+/** Pagination metadata specific to &quot;CategoryToPostConnection&quot; collections. Provides cursors and flags for navigating through sets of CategoryToPostConnection Nodes. */
 export interface CategoryToPostConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -35289,7 +35743,7 @@ node: (CategoryObservableChain & {get: <R extends CategoryRequest>(request: R, d
 }
 
 
-/** Page Info on the &quot;PostToCategoryConnection&quot; */
+/** Pagination metadata specific to &quot;PostToCategoryConnection&quot; collections. Provides cursors and flags for navigating through sets of PostToCategoryConnection Nodes. */
 export interface PostToCategoryConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -35306,7 +35760,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;PostToCategoryConnection&quot; */
+/** Pagination metadata specific to &quot;PostToCategoryConnection&quot; collections. Provides cursors and flags for navigating through sets of PostToCategoryConnection Nodes. */
 export interface PostToCategoryConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -35373,7 +35827,7 @@ node: (CommentObservableChain & {get: <R extends CommentRequest>(request: R, def
 }
 
 
-/** Page Info on the &quot;PostToCommentConnection&quot; */
+/** Pagination metadata specific to &quot;PostToCommentConnection&quot; collections. Provides cursors and flags for navigating through sets of PostToCommentConnection Nodes. */
 export interface PostToCommentConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -35390,7 +35844,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;PostToCommentConnection&quot; */
+/** Pagination metadata specific to &quot;PostToCommentConnection&quot; collections. Provides cursors and flags for navigating through sets of PostToCommentConnection Nodes. */
 export interface PostToCommentConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -35407,7 +35861,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Connection between the Post type and the post type */
+/** Connection between the post type and the post type */
 export interface PostToParentConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -35421,7 +35875,7 @@ node: (PostPromiseChain & {get: <R extends PostRequest>(request: R, defaultValue
 }
 
 
-/** Connection between the Post type and the post type */
+/** Connection between the post type and the post type */
 export interface PostToParentConnectionEdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -35463,7 +35917,7 @@ pageInfo: (PostToPostFormatConnectionPageInfoObservableChain & {get: <R extends 
 }
 
 
-/** Connection to postFormat Nodes */
+/** A paginated collection of postFormat Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of postFormat Nodes */
 export interface PostFormatConnectionPromiseChain{
     
 /** A list of edges (relational context) between RootQuery and connected postFormat Nodes */
@@ -35477,7 +35931,7 @@ pageInfo: (PostFormatConnectionPageInfoPromiseChain & {get: <R extends PostForma
 }
 
 
-/** Connection to postFormat Nodes */
+/** A paginated collection of postFormat Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of postFormat Nodes */
 export interface PostFormatConnectionObservableChain{
     
 /** A list of edges (relational context) between RootQuery and connected postFormat Nodes */
@@ -35491,7 +35945,7 @@ pageInfo: (PostFormatConnectionPageInfoObservableChain & {get: <R extends PostFo
 }
 
 
-/** Edge between a Node and a connected postFormat */
+/** Represents a connection to a postFormat. Contains both the postFormat Node and metadata about the relationship. */
 export interface PostFormatConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -35502,7 +35956,7 @@ node: (PostFormatPromiseChain & {get: <R extends PostFormatRequest>(request: R, 
 }
 
 
-/** Edge between a Node and a connected postFormat */
+/** Represents a connection to a postFormat. Contains both the postFormat Node and metadata about the relationship. */
 export interface PostFormatConnectionEdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -35513,7 +35967,7 @@ node: (PostFormatObservableChain & {get: <R extends PostFormatRequest>(request: 
 }
 
 
-/** The postFormat type */
+/** A standardized classification system for content presentation styles. These formats can be used to display content differently based on type, such as &quot;standard&quot;, &quot;gallery&quot;, &quot;video&quot;, etc. */
 export interface PostFormatPromiseChain{
     
 /** Connection between the PostFormat type and the ContentNode type */
@@ -35626,7 +36080,7 @@ uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undef
 }
 
 
-/** The postFormat type */
+/** A standardized classification system for content presentation styles. These formats can be used to display content differently based on type, such as &quot;standard&quot;, &quot;gallery&quot;, &quot;video&quot;, etc. */
 export interface PostFormatObservableChain{
     
 /** Connection between the PostFormat type and the ContentNode type */
@@ -35789,7 +36243,7 @@ node: (ContentNodeObservableChain & {get: <R extends ContentNodeRequest>(request
 }
 
 
-/** Page Info on the &quot;PostFormatToContentNodeConnection&quot; */
+/** Pagination metadata specific to &quot;PostFormatToContentNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of PostFormatToContentNodeConnection Nodes. */
 export interface PostFormatToContentNodeConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -35806,7 +36260,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;PostFormatToContentNodeConnection&quot; */
+/** Pagination metadata specific to &quot;PostFormatToContentNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of PostFormatToContentNodeConnection Nodes. */
 export interface PostFormatToContentNodeConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -35873,7 +36327,7 @@ node: (PostObservableChain & {get: <R extends PostRequest>(request: R, defaultVa
 }
 
 
-/** Page Info on the &quot;PostFormatToPostConnection&quot; */
+/** Pagination metadata specific to &quot;PostFormatToPostConnection&quot; collections. Provides cursors and flags for navigating through sets of PostFormatToPostConnection Nodes. */
 export interface PostFormatToPostConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -35890,7 +36344,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;PostFormatToPostConnection&quot; */
+/** Pagination metadata specific to &quot;PostFormatToPostConnection&quot; collections. Provides cursors and flags for navigating through sets of PostFormatToPostConnection Nodes. */
 export interface PostFormatToPostConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -35929,7 +36383,7 @@ node: (TaxonomyObservableChain & {get: <R extends TaxonomyRequest>(request: R, d
 }
 
 
-/** Page Info on the connected PostFormatConnectionEdge */
+/** Pagination metadata specific to &quot;PostFormatConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;PostFormatConnectionEdge&quot; Nodes. */
 export interface PostFormatConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -35946,7 +36400,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected PostFormatConnectionEdge */
+/** Pagination metadata specific to &quot;PostFormatConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;PostFormatConnectionEdge&quot; Nodes. */
 export interface PostFormatConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -35985,7 +36439,7 @@ node: (PostFormatObservableChain & {get: <R extends PostFormatRequest>(request: 
 }
 
 
-/** Page Info on the &quot;PostToPostFormatConnection&quot; */
+/** Pagination metadata specific to &quot;PostToPostFormatConnection&quot; collections. Provides cursors and flags for navigating through sets of PostToPostFormatConnection Nodes. */
 export interface PostToPostFormatConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -36002,7 +36456,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;PostToPostFormatConnection&quot; */
+/** Pagination metadata specific to &quot;PostToPostFormatConnection&quot; collections. Provides cursors and flags for navigating through sets of PostToPostFormatConnection Nodes. */
 export interface PostToPostFormatConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -36019,7 +36473,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Connection between the Post type and the post type */
+/** Connection between the post type and the post type */
 export interface PostToPreviewConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -36030,7 +36484,7 @@ node: (PostPromiseChain & {get: <R extends PostRequest>(request: R, defaultValue
 }
 
 
-/** Connection between the Post type and the post type */
+/** Connection between the post type and the post type */
 export interface PostToPreviewConnectionEdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -36091,7 +36545,7 @@ node: (PostObservableChain & {get: <R extends PostRequest>(request: R, defaultVa
 }
 
 
-/** Page Info on the &quot;PostToRevisionConnection&quot; */
+/** Pagination metadata specific to &quot;PostToRevisionConnection&quot; collections. Provides cursors and flags for navigating through sets of PostToRevisionConnection Nodes. */
 export interface PostToRevisionConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -36108,7 +36562,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;PostToRevisionConnection&quot; */
+/** Pagination metadata specific to &quot;PostToRevisionConnection&quot; collections. Provides cursors and flags for navigating through sets of PostToRevisionConnection Nodes. */
 export interface PostToRevisionConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -36153,7 +36607,7 @@ pageInfo: (PostToTagConnectionPageInfoObservableChain & {get: <R extends PostToT
 }
 
 
-/** Connection to tag Nodes */
+/** A paginated collection of tag Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of tag Nodes */
 export interface TagConnectionPromiseChain{
     
 /** A list of edges (relational context) between RootQuery and connected tag Nodes */
@@ -36167,7 +36621,7 @@ pageInfo: (TagConnectionPageInfoPromiseChain & {get: <R extends TagConnectionPag
 }
 
 
-/** Connection to tag Nodes */
+/** A paginated collection of tag Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of tag Nodes */
 export interface TagConnectionObservableChain{
     
 /** A list of edges (relational context) between RootQuery and connected tag Nodes */
@@ -36181,7 +36635,7 @@ pageInfo: (TagConnectionPageInfoObservableChain & {get: <R extends TagConnection
 }
 
 
-/** Edge between a Node and a connected tag */
+/** Represents a connection to a tag. Contains both the tag Node and metadata about the relationship. */
 export interface TagConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -36192,7 +36646,7 @@ node: (TagPromiseChain & {get: <R extends TagRequest>(request: R, defaultValue?:
 }
 
 
-/** Edge between a Node and a connected tag */
+/** Represents a connection to a tag. Contains both the tag Node and metadata about the relationship. */
 export interface TagConnectionEdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -36203,7 +36657,7 @@ node: (TagObservableChain & {get: <R extends TagRequest>(request: R, defaultValu
 }
 
 
-/** The tag type */
+/** A taxonomy term used to organize and classify content. Tags do not have a hierarchy and are generally used for more specific classifications. */
 export interface TagPromiseChain{
     
 /** Connection between the Tag type and the ContentNode type */
@@ -36316,7 +36770,7 @@ uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undef
 }
 
 
-/** The tag type */
+/** A taxonomy term used to organize and classify content. Tags do not have a hierarchy and are generally used for more specific classifications. */
 export interface TagObservableChain{
     
 /** Connection between the Tag type and the ContentNode type */
@@ -36479,7 +36933,7 @@ node: (ContentNodeObservableChain & {get: <R extends ContentNodeRequest>(request
 }
 
 
-/** Page Info on the &quot;TagToContentNodeConnection&quot; */
+/** Pagination metadata specific to &quot;TagToContentNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of TagToContentNodeConnection Nodes. */
 export interface TagToContentNodeConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -36496,7 +36950,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;TagToContentNodeConnection&quot; */
+/** Pagination metadata specific to &quot;TagToContentNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of TagToContentNodeConnection Nodes. */
 export interface TagToContentNodeConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -36563,7 +37017,7 @@ node: (PostObservableChain & {get: <R extends PostRequest>(request: R, defaultVa
 }
 
 
-/** Page Info on the &quot;TagToPostConnection&quot; */
+/** Pagination metadata specific to &quot;TagToPostConnection&quot; collections. Provides cursors and flags for navigating through sets of TagToPostConnection Nodes. */
 export interface TagToPostConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -36580,7 +37034,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;TagToPostConnection&quot; */
+/** Pagination metadata specific to &quot;TagToPostConnection&quot; collections. Provides cursors and flags for navigating through sets of TagToPostConnection Nodes. */
 export interface TagToPostConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -36619,7 +37073,7 @@ node: (TaxonomyObservableChain & {get: <R extends TaxonomyRequest>(request: R, d
 }
 
 
-/** Page Info on the connected TagConnectionEdge */
+/** Pagination metadata specific to &quot;TagConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;TagConnectionEdge&quot; Nodes. */
 export interface TagConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -36636,7 +37090,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected TagConnectionEdge */
+/** Pagination metadata specific to &quot;TagConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;TagConnectionEdge&quot; Nodes. */
 export interface TagConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -36675,7 +37129,7 @@ node: (TagObservableChain & {get: <R extends TagRequest>(request: R, defaultValu
 }
 
 
-/** Page Info on the &quot;PostToTagConnection&quot; */
+/** Pagination metadata specific to &quot;PostToTagConnection&quot; collections. Provides cursors and flags for navigating through sets of PostToTagConnection Nodes. */
 export interface PostToTagConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -36692,7 +37146,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;PostToTagConnection&quot; */
+/** Pagination metadata specific to &quot;PostToTagConnection&quot; collections. Provides cursors and flags for navigating through sets of PostToTagConnection Nodes. */
 export interface PostToTagConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -36759,7 +37213,7 @@ node: (TermNodeObservableChain & {get: <R extends TermNodeRequest>(request: R, d
 }
 
 
-/** Page Info on the &quot;PostToTermNodeConnection&quot; */
+/** Pagination metadata specific to &quot;PostToTermNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of PostToTermNodeConnection Nodes. */
 export interface PostToTermNodeConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -36776,7 +37230,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;PostToTermNodeConnection&quot; */
+/** Pagination metadata specific to &quot;PostToTermNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of PostToTermNodeConnection Nodes. */
 export interface PostToTermNodeConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -36815,7 +37269,7 @@ node: (PostObservableChain & {get: <R extends PostRequest>(request: R, defaultVa
 }
 
 
-/** Page Info on the &quot;UserToPostConnection&quot; */
+/** Pagination metadata specific to &quot;UserToPostConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToPostConnection Nodes. */
 export interface UserToPostConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -36832,7 +37286,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;UserToPostConnection&quot; */
+/** Pagination metadata specific to &quot;UserToPostConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToPostConnection Nodes. */
 export interface UserToPostConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -36899,7 +37353,7 @@ node: (ContentNodeObservableChain & {get: <R extends ContentNodeRequest>(request
 }
 
 
-/** Page Info on the &quot;UserToRevisionsConnection&quot; */
+/** Pagination metadata specific to &quot;UserToRevisionsConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToRevisionsConnection Nodes. */
 export interface UserToRevisionsConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -36916,7 +37370,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;UserToRevisionsConnection&quot; */
+/** Pagination metadata specific to &quot;UserToRevisionsConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToRevisionsConnection Nodes. */
 export interface UserToRevisionsConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -36961,7 +37415,7 @@ pageInfo: (UserToUserRoleConnectionPageInfoObservableChain & {get: <R extends Us
 }
 
 
-/** Connection to UserRole Nodes */
+/** A paginated collection of UserRole Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of UserRole Nodes */
 export interface UserRoleConnectionPromiseChain{
     
 /** A list of edges (relational context) between RootQuery and connected UserRole Nodes */
@@ -36975,7 +37429,7 @@ pageInfo: (UserRoleConnectionPageInfoPromiseChain & {get: <R extends UserRoleCon
 }
 
 
-/** Connection to UserRole Nodes */
+/** A paginated collection of UserRole Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of UserRole Nodes */
 export interface UserRoleConnectionObservableChain{
     
 /** A list of edges (relational context) between RootQuery and connected UserRole Nodes */
@@ -36989,7 +37443,7 @@ pageInfo: (UserRoleConnectionPageInfoObservableChain & {get: <R extends UserRole
 }
 
 
-/** Edge between a Node and a connected UserRole */
+/** Represents a connection to a UserRole. Contains both the UserRole Node and metadata about the relationship. */
 export interface UserRoleConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -37000,7 +37454,7 @@ node: (UserRolePromiseChain & {get: <R extends UserRoleRequest>(request: R, defa
 }
 
 
-/** Edge between a Node and a connected UserRole */
+/** Represents a connection to a UserRole. Contains both the UserRole Node and metadata about the relationship. */
 export interface UserRoleConnectionEdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -37051,7 +37505,7 @@ name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | unde
 }
 
 
-/** Page Info on the connected UserRoleConnectionEdge */
+/** Pagination metadata specific to &quot;UserRoleConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;UserRoleConnectionEdge&quot; Nodes. */
 export interface UserRoleConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -37068,7 +37522,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected UserRoleConnectionEdge */
+/** Pagination metadata specific to &quot;UserRoleConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;UserRoleConnectionEdge&quot; Nodes. */
 export interface UserRoleConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -37107,7 +37561,7 @@ node: (UserRoleObservableChain & {get: <R extends UserRoleRequest>(request: R, d
 }
 
 
-/** Page Info on the &quot;UserToUserRoleConnection&quot; */
+/** Pagination metadata specific to &quot;UserToUserRoleConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToUserRoleConnection Nodes. */
 export interface UserToUserRoleConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -37124,7 +37578,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;UserToUserRoleConnection&quot; */
+/** Pagination metadata specific to &quot;UserToUserRoleConnection&quot; collections. Provides cursors and flags for navigating through sets of UserToUserRoleConnection Nodes. */
 export interface UserToUserRoleConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -37169,7 +37623,7 @@ pageInfo: (ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfoObservableChain
 }
 
 
-/** Connection to ArquivoAssessoria Nodes */
+/** A paginated collection of ArquivoAssessoria Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of ArquivoAssessoria Nodes */
 export interface ArquivoAssessoriaConnectionPromiseChain{
     
 /** A list of edges (relational context) between RootQuery and connected ArquivoAssessoria Nodes */
@@ -37183,7 +37637,7 @@ pageInfo: (ArquivoAssessoriaConnectionPageInfoPromiseChain & {get: <R extends Ar
 }
 
 
-/** Connection to ArquivoAssessoria Nodes */
+/** A paginated collection of ArquivoAssessoria Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of ArquivoAssessoria Nodes */
 export interface ArquivoAssessoriaConnectionObservableChain{
     
 /** A list of edges (relational context) between RootQuery and connected ArquivoAssessoria Nodes */
@@ -37197,7 +37651,7 @@ pageInfo: (ArquivoAssessoriaConnectionPageInfoObservableChain & {get: <R extends
 }
 
 
-/** Edge between a Node and a connected ArquivoAssessoria */
+/** Represents a connection to a ArquivoAssessoria. Contains both the ArquivoAssessoria Node and metadata about the relationship. */
 export interface ArquivoAssessoriaConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -37208,7 +37662,7 @@ node: (ArquivoAssessoriaPromiseChain & {get: <R extends ArquivoAssessoriaRequest
 }
 
 
-/** Edge between a Node and a connected ArquivoAssessoria */
+/** Represents a connection to a ArquivoAssessoria. Contains both the ArquivoAssessoria Node and metadata about the relationship. */
 export interface ArquivoAssessoriaConnectionEdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -37219,7 +37673,7 @@ node: (ArquivoAssessoriaObservableChain & {get: <R extends ArquivoAssessoriaRequ
 }
 
 
-/** Page Info on the connected ArquivoAssessoriaConnectionEdge */
+/** Pagination metadata specific to &quot;ArquivoAssessoriaConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;ArquivoAssessoriaConnectionEdge&quot; Nodes. */
 export interface ArquivoAssessoriaConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -37236,7 +37690,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected ArquivoAssessoriaConnectionEdge */
+/** Pagination metadata specific to &quot;ArquivoAssessoriaConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;ArquivoAssessoriaConnectionEdge&quot; Nodes. */
 export interface ArquivoAssessoriaConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -37287,7 +37741,7 @@ node: (ArquivoAssessoriaObservableChain & {get: <R extends ArquivoAssessoriaRequ
 }
 
 
-/** Page Info on the &quot;ArquivoAssessoriaToArquivoAssessoriaConnection&quot; */
+/** Pagination metadata specific to &quot;ArquivoAssessoriaToArquivoAssessoriaConnection&quot; collections. Provides cursors and flags for navigating through sets of ArquivoAssessoriaToArquivoAssessoriaConnection Nodes. */
 export interface ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -37304,7 +37758,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;ArquivoAssessoriaToArquivoAssessoriaConnection&quot; */
+/** Pagination metadata specific to &quot;ArquivoAssessoriaToArquivoAssessoriaConnection&quot; collections. Provides cursors and flags for navigating through sets of ArquivoAssessoriaToArquivoAssessoriaConnection Nodes. */
 export interface ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -37449,7 +37903,7 @@ node: (ArquivoAssessoriaObservableChain & {get: <R extends ArquivoAssessoriaRequ
 }
 
 
-/** Page Info on the &quot;RootQueryToArquivoAssessoriaConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToArquivoAssessoriaConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToArquivoAssessoriaConnection Nodes. */
 export interface RootQueryToArquivoAssessoriaConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -37466,7 +37920,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;RootQueryToArquivoAssessoriaConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToArquivoAssessoriaConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToArquivoAssessoriaConnection Nodes. */
 export interface RootQueryToArquivoAssessoriaConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -37813,7 +38267,7 @@ pageInfo: (BannerToBannerConnectionPageInfoObservableChain & {get: <R extends Ba
 }
 
 
-/** Connection to Banner Nodes */
+/** A paginated collection of Banner Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of Banner Nodes */
 export interface BannerConnectionPromiseChain{
     
 /** A list of edges (relational context) between RootQuery and connected Banner Nodes */
@@ -37827,7 +38281,7 @@ pageInfo: (BannerConnectionPageInfoPromiseChain & {get: <R extends BannerConnect
 }
 
 
-/** Connection to Banner Nodes */
+/** A paginated collection of Banner Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of Banner Nodes */
 export interface BannerConnectionObservableChain{
     
 /** A list of edges (relational context) between RootQuery and connected Banner Nodes */
@@ -37841,7 +38295,7 @@ pageInfo: (BannerConnectionPageInfoObservableChain & {get: <R extends BannerConn
 }
 
 
-/** Edge between a Node and a connected Banner */
+/** Represents a connection to a Banner. Contains both the Banner Node and metadata about the relationship. */
 export interface BannerConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -37852,7 +38306,7 @@ node: (BannerPromiseChain & {get: <R extends BannerRequest>(request: R, defaultV
 }
 
 
-/** Edge between a Node and a connected Banner */
+/** Represents a connection to a Banner. Contains both the Banner Node and metadata about the relationship. */
 export interface BannerConnectionEdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -37863,7 +38317,7 @@ node: (BannerObservableChain & {get: <R extends BannerRequest>(request: R, defau
 }
 
 
-/** Page Info on the connected BannerConnectionEdge */
+/** Pagination metadata specific to &quot;BannerConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;BannerConnectionEdge&quot; Nodes. */
 export interface BannerConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -37880,7 +38334,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected BannerConnectionEdge */
+/** Pagination metadata specific to &quot;BannerConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;BannerConnectionEdge&quot; Nodes. */
 export interface BannerConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -37931,7 +38385,7 @@ node: (BannerObservableChain & {get: <R extends BannerRequest>(request: R, defau
 }
 
 
-/** Page Info on the &quot;BannerToBannerConnection&quot; */
+/** Pagination metadata specific to &quot;BannerToBannerConnection&quot; collections. Provides cursors and flags for navigating through sets of BannerToBannerConnection Nodes. */
 export interface BannerToBannerConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -37948,7 +38402,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;BannerToBannerConnection&quot; */
+/** Pagination metadata specific to &quot;BannerToBannerConnection&quot; collections. Provides cursors and flags for navigating through sets of BannerToBannerConnection Nodes. */
 export interface BannerToBannerConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -38171,7 +38625,7 @@ node: (BannerObservableChain & {get: <R extends BannerRequest>(request: R, defau
 }
 
 
-/** Page Info on the &quot;RootQueryToBannerConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToBannerConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToBannerConnection Nodes. */
 export interface RootQueryToBannerConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -38188,7 +38642,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;RootQueryToBannerConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToBannerConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToBannerConnection Nodes. */
 export interface RootQueryToBannerConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -38255,7 +38709,7 @@ node: (CategoryObservableChain & {get: <R extends CategoryRequest>(request: R, d
 }
 
 
-/** Page Info on the &quot;RootQueryToCategoryConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToCategoryConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToCategoryConnection Nodes. */
 export interface RootQueryToCategoryConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -38272,7 +38726,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;RootQueryToCategoryConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToCategoryConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToCategoryConnection Nodes. */
 export interface RootQueryToCategoryConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -38339,7 +38793,7 @@ node: (CentraldeDecoradoObservableChain & {get: <R extends CentraldeDecoradoRequ
 }
 
 
-/** Page Info on the &quot;RootQueryToCentraldeDecoradoConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToCentraldeDecoradoConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToCentraldeDecoradoConnection Nodes. */
 export interface RootQueryToCentraldeDecoradoConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -38356,7 +38810,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;RootQueryToCentraldeDecoradoConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToCentraldeDecoradoConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToCentraldeDecoradoConnection Nodes. */
 export interface RootQueryToCentraldeDecoradoConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -38423,7 +38877,7 @@ node: (CommentObservableChain & {get: <R extends CommentRequest>(request: R, def
 }
 
 
-/** Page Info on the &quot;RootQueryToCommentConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToCommentConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToCommentConnection Nodes. */
 export interface RootQueryToCommentConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -38440,7 +38894,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;RootQueryToCommentConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToCommentConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToCommentConnection Nodes. */
 export interface RootQueryToCommentConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -38507,7 +38961,7 @@ node: (ContentNodeObservableChain & {get: <R extends ContentNodeRequest>(request
 }
 
 
-/** Page Info on the &quot;RootQueryToContentNodeConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToContentNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToContentNodeConnection Nodes. */
 export interface RootQueryToContentNodeConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -38524,7 +38978,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;RootQueryToContentNodeConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToContentNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToContentNodeConnection Nodes. */
 export interface RootQueryToContentNodeConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -38591,7 +39045,7 @@ node: (ContentTypeObservableChain & {get: <R extends ContentTypeRequest>(request
 }
 
 
-/** Page Info on the &quot;RootQueryToContentTypeConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToContentTypeConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToContentTypeConnection Nodes. */
 export interface RootQueryToContentTypeConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -38608,7 +39062,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;RootQueryToContentTypeConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToContentTypeConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToContentTypeConnection Nodes. */
 export interface RootQueryToContentTypeConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -38697,7 +39151,7 @@ node: (EmpreendimentoObservableChain & {get: <R extends EmpreendimentoRequest>(r
 }
 
 
-/** Page Info on the &quot;RootQueryToEmpreendimentoConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToEmpreendimentoConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToEmpreendimentoConnection Nodes. */
 export interface RootQueryToEmpreendimentoConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -38714,7 +39168,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;RootQueryToEmpreendimentoConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToEmpreendimentoConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToEmpreendimentoConnection Nodes. */
 export interface RootQueryToEmpreendimentoConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -38745,6 +39199,14 @@ email: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | und
     
 /** Código de localização do WordPress. */
 language: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The media item representing the site icon configured in site settings, used as the site&#039;s favicon and app icon. */
+siteIcon: (GeneralSettingsToMediaItemConnectionEdgePromiseChain & {get: <R extends GeneralSettingsToMediaItemConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<GeneralSettingsToMediaItemConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<GeneralSettingsToMediaItemConnectionEdge, R> | undefined)>}),
+    
+/** Site icon URL configured in site settings, used as the site&#039;s favicon and app icon. */
+siteIconUrl: ((args?: {
+/** Size of the site icon in pixels. Defaults to 512. Max 512. */
+size?: (Scalars['Int'] | null)}) => {get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})&({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** Número do dia da semana em que a semana deve iniciar. */
 startOfWeek: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
@@ -38778,6 +39240,14 @@ email: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | und
 /** Código de localização do WordPress. */
 language: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
+/** The media item representing the site icon configured in site settings, used as the site&#039;s favicon and app icon. */
+siteIcon: (GeneralSettingsToMediaItemConnectionEdgeObservableChain & {get: <R extends GeneralSettingsToMediaItemConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<GeneralSettingsToMediaItemConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<GeneralSettingsToMediaItemConnectionEdge, R> | undefined)>}),
+    
+/** Site icon URL configured in site settings, used as the site&#039;s favicon and app icon. */
+siteIconUrl: ((args?: {
+/** Size of the site icon in pixels. Defaults to 512. Max 512. */
+size?: (Scalars['Int'] | null)}) => {get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})&({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
 /** Número do dia da semana em que a semana deve iniciar. */
 startOfWeek: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
     
@@ -38792,6 +39262,28 @@ title: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | und
     
 /** URL do site. */
 url: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Connection between the GeneralSettings type and the MediaItem type */
+export interface GeneralSettingsToMediaItemConnectionEdgePromiseChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The node of the connection, without the edges */
+node: (MediaItemPromiseChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: FieldsSelection<MediaItem, R>) => Promise<FieldsSelection<MediaItem, R>>})
+}
+
+
+/** Connection between the GeneralSettings type and the MediaItem type */
+export interface GeneralSettingsToMediaItemConnectionEdgeObservableChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The node of the connection, without the edges */
+node: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: FieldsSelection<MediaItem, R>) => Observable<FieldsSelection<MediaItem, R>>})
 }
 
 
@@ -38845,7 +39337,7 @@ node: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R,
 }
 
 
-/** Page Info on the &quot;RootQueryToMediaItemConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToMediaItemConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToMediaItemConnection Nodes. */
 export interface RootQueryToMediaItemConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -38862,7 +39354,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;RootQueryToMediaItemConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToMediaItemConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToMediaItemConnection Nodes. */
 export interface RootQueryToMediaItemConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -38879,7 +39371,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Menus are the containers for navigation items. Menus can be assigned to menu locations, which are typically registered by the active theme. */
+/** Collections of navigation links. Menus can be assigned to designated locations and used to build site navigation structures. */
 export interface MenuPromiseChain{
     
 /** The number of items in the menu */
@@ -38924,7 +39416,7 @@ slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | unde
 }
 
 
-/** Menus are the containers for navigation items. Menus can be assigned to menu locations, which are typically registered by the active theme. */
+/** Collections of navigation links. Menus can be assigned to designated locations and used to build site navigation structures. */
 export interface MenuObservableChain{
     
 /** The number of items in the menu */
@@ -38997,7 +39489,7 @@ pageInfo: (MenuToMenuItemConnectionPageInfoObservableChain & {get: <R extends Me
 }
 
 
-/** Connection to MenuItem Nodes */
+/** A paginated collection of MenuItem Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of MenuItem Nodes */
 export interface MenuItemConnectionPromiseChain{
     
 /** A list of edges (relational context) between RootQuery and connected MenuItem Nodes */
@@ -39011,7 +39503,7 @@ pageInfo: (MenuItemConnectionPageInfoPromiseChain & {get: <R extends MenuItemCon
 }
 
 
-/** Connection to MenuItem Nodes */
+/** A paginated collection of MenuItem Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of MenuItem Nodes */
 export interface MenuItemConnectionObservableChain{
     
 /** A list of edges (relational context) between RootQuery and connected MenuItem Nodes */
@@ -39025,7 +39517,7 @@ pageInfo: (MenuItemConnectionPageInfoObservableChain & {get: <R extends MenuItem
 }
 
 
-/** Edge between a Node and a connected MenuItem */
+/** Represents a connection to a MenuItem. Contains both the MenuItem Node and metadata about the relationship. */
 export interface MenuItemConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -39036,7 +39528,7 @@ node: (MenuItemPromiseChain & {get: <R extends MenuItemRequest>(request: R, defa
 }
 
 
-/** Edge between a Node and a connected MenuItem */
+/** Represents a connection to a MenuItem. Contains both the MenuItem Node and metadata about the relationship. */
 export interface MenuItemConnectionEdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -39265,7 +39757,7 @@ node: (MenuItemObservableChain & {get: <R extends MenuItemRequest>(request: R, d
 }
 
 
-/** Page Info on the &quot;MenuItemToMenuItemConnection&quot; */
+/** Pagination metadata specific to &quot;MenuItemToMenuItemConnection&quot; collections. Provides cursors and flags for navigating through sets of MenuItemToMenuItemConnection Nodes. */
 export interface MenuItemToMenuItemConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -39282,7 +39774,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;MenuItemToMenuItemConnection&quot; */
+/** Pagination metadata specific to &quot;MenuItemToMenuItemConnection&quot; collections. Provides cursors and flags for navigating through sets of MenuItemToMenuItemConnection Nodes. */
 export interface MenuItemToMenuItemConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -39299,7 +39791,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected MenuItemConnectionEdge */
+/** Pagination metadata specific to &quot;MenuItemConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;MenuItemConnectionEdge&quot; Nodes. */
 export interface MenuItemConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -39316,7 +39808,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected MenuItemConnectionEdge */
+/** Pagination metadata specific to &quot;MenuItemConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;MenuItemConnectionEdge&quot; Nodes. */
 export interface MenuItemConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -39355,7 +39847,7 @@ node: (MenuItemLinkableObservableChain & {get: <R extends MenuItemLinkableReques
 }
 
 
-/** Edge between a Node and a connected MenuItemLinkable */
+/** Represents a connection to a MenuItemLinkable. Contains both the MenuItemLinkable Node and metadata about the relationship. */
 export interface MenuItemLinkableConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -39366,7 +39858,7 @@ node: (MenuItemLinkablePromiseChain & {get: <R extends MenuItemLinkableRequest>(
 }
 
 
-/** Edge between a Node and a connected MenuItemLinkable */
+/** Represents a connection to a MenuItemLinkable. Contains both the MenuItemLinkable Node and metadata about the relationship. */
 export interface MenuItemLinkableConnectionEdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -39399,7 +39891,7 @@ node: (MenuObservableChain & {get: <R extends MenuRequest>(request: R, defaultVa
 }
 
 
-/** Edge between a Node and a connected Menu */
+/** Represents a connection to a Menu. Contains both the Menu Node and metadata about the relationship. */
 export interface MenuConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -39410,7 +39902,7 @@ node: (MenuPromiseChain & {get: <R extends MenuRequest>(request: R, defaultValue
 }
 
 
-/** Edge between a Node and a connected Menu */
+/** Represents a connection to a Menu. Contains both the Menu Node and metadata about the relationship. */
 export interface MenuConnectionEdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -39443,7 +39935,7 @@ node: (MenuItemObservableChain & {get: <R extends MenuItemRequest>(request: R, d
 }
 
 
-/** Page Info on the &quot;MenuToMenuItemConnection&quot; */
+/** Pagination metadata specific to &quot;MenuToMenuItemConnection&quot; collections. Provides cursors and flags for navigating through sets of MenuToMenuItemConnection Nodes. */
 export interface MenuToMenuItemConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -39460,7 +39952,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;MenuToMenuItemConnection&quot; */
+/** Pagination metadata specific to &quot;MenuToMenuItemConnection&quot; collections. Provides cursors and flags for navigating through sets of MenuToMenuItemConnection Nodes. */
 export interface MenuToMenuItemConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -39527,7 +40019,7 @@ node: (MenuItemObservableChain & {get: <R extends MenuItemRequest>(request: R, d
 }
 
 
-/** Page Info on the &quot;RootQueryToMenuItemConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToMenuItemConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToMenuItemConnection Nodes. */
 export interface RootQueryToMenuItemConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -39544,7 +40036,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;RootQueryToMenuItemConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToMenuItemConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToMenuItemConnection Nodes. */
 export interface RootQueryToMenuItemConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -39589,7 +40081,7 @@ pageInfo: (RootQueryToMenuConnectionPageInfoObservableChain & {get: <R extends R
 }
 
 
-/** Connection to Menu Nodes */
+/** A paginated collection of Menu Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of Menu Nodes */
 export interface MenuConnectionPromiseChain{
     
 /** A list of edges (relational context) between RootQuery and connected Menu Nodes */
@@ -39603,7 +40095,7 @@ pageInfo: (MenuConnectionPageInfoPromiseChain & {get: <R extends MenuConnectionP
 }
 
 
-/** Connection to Menu Nodes */
+/** A paginated collection of Menu Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of Menu Nodes */
 export interface MenuConnectionObservableChain{
     
 /** A list of edges (relational context) between RootQuery and connected Menu Nodes */
@@ -39617,7 +40109,7 @@ pageInfo: (MenuConnectionPageInfoObservableChain & {get: <R extends MenuConnecti
 }
 
 
-/** Page Info on the connected MenuConnectionEdge */
+/** Pagination metadata specific to &quot;MenuConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;MenuConnectionEdge&quot; Nodes. */
 export interface MenuConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -39634,7 +40126,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected MenuConnectionEdge */
+/** Pagination metadata specific to &quot;MenuConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;MenuConnectionEdge&quot; Nodes. */
 export interface MenuConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -39673,7 +40165,7 @@ node: (MenuObservableChain & {get: <R extends MenuRequest>(request: R, defaultVa
 }
 
 
-/** Page Info on the &quot;RootQueryToMenuConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToMenuConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToMenuConnection Nodes. */
 export interface RootQueryToMenuConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -39690,7 +40182,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;RootQueryToMenuConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToMenuConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToMenuConnection Nodes. */
 export interface RootQueryToMenuConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -39757,7 +40249,7 @@ node: (PageObservableChain & {get: <R extends PageRequest>(request: R, defaultVa
 }
 
 
-/** Page Info on the &quot;RootQueryToPageConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToPageConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToPageConnection Nodes. */
 export interface RootQueryToPageConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -39774,7 +40266,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;RootQueryToPageConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToPageConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToPageConnection Nodes. */
 export interface RootQueryToPageConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -39883,7 +40375,7 @@ pageInfo: (RootQueryToPluginConnectionPageInfoObservableChain & {get: <R extends
 }
 
 
-/** Connection to Plugin Nodes */
+/** A paginated collection of Plugin Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of Plugin Nodes */
 export interface PluginConnectionPromiseChain{
     
 /** A list of edges (relational context) between RootQuery and connected Plugin Nodes */
@@ -39897,7 +40389,7 @@ pageInfo: (PluginConnectionPageInfoPromiseChain & {get: <R extends PluginConnect
 }
 
 
-/** Connection to Plugin Nodes */
+/** A paginated collection of Plugin Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of Plugin Nodes */
 export interface PluginConnectionObservableChain{
     
 /** A list of edges (relational context) between RootQuery and connected Plugin Nodes */
@@ -39911,7 +40403,7 @@ pageInfo: (PluginConnectionPageInfoObservableChain & {get: <R extends PluginConn
 }
 
 
-/** Edge between a Node and a connected Plugin */
+/** Represents a connection to a Plugin. Contains both the Plugin Node and metadata about the relationship. */
 export interface PluginConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -39922,7 +40414,7 @@ node: (PluginPromiseChain & {get: <R extends PluginRequest>(request: R, defaultV
 }
 
 
-/** Edge between a Node and a connected Plugin */
+/** Represents a connection to a Plugin. Contains both the Plugin Node and metadata about the relationship. */
 export interface PluginConnectionEdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -39933,7 +40425,7 @@ node: (PluginObservableChain & {get: <R extends PluginRequest>(request: R, defau
 }
 
 
-/** Page Info on the connected PluginConnectionEdge */
+/** Pagination metadata specific to &quot;PluginConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;PluginConnectionEdge&quot; Nodes. */
 export interface PluginConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -39950,7 +40442,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected PluginConnectionEdge */
+/** Pagination metadata specific to &quot;PluginConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;PluginConnectionEdge&quot; Nodes. */
 export interface PluginConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -39989,7 +40481,7 @@ node: (PluginObservableChain & {get: <R extends PluginRequest>(request: R, defau
 }
 
 
-/** Page Info on the &quot;RootQueryToPluginConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToPluginConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToPluginConnection Nodes. */
 export interface RootQueryToPluginConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -40006,7 +40498,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;RootQueryToPluginConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToPluginConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToPluginConnection Nodes. */
 export interface RootQueryToPluginConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -40073,7 +40565,7 @@ node: (PostFormatObservableChain & {get: <R extends PostFormatRequest>(request: 
 }
 
 
-/** Page Info on the &quot;RootQueryToPostFormatConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToPostFormatConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToPostFormatConnection Nodes. */
 export interface RootQueryToPostFormatConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -40090,7 +40582,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;RootQueryToPostFormatConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToPostFormatConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToPostFormatConnection Nodes. */
 export interface RootQueryToPostFormatConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -40157,7 +40649,7 @@ node: (PostObservableChain & {get: <R extends PostRequest>(request: R, defaultVa
 }
 
 
-/** Page Info on the &quot;RootQueryToPostConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToPostConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToPostConnection Nodes. */
 export interface RootQueryToPostConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -40174,7 +40666,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;RootQueryToPostConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToPostConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToPostConnection Nodes. */
 export interface RootQueryToPostConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -40275,7 +40767,7 @@ node: (EnqueuedScriptObservableChain & {get: <R extends EnqueuedScriptRequest>(r
 }
 
 
-/** Page Info on the &quot;RootQueryToEnqueuedScriptConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToEnqueuedScriptConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToEnqueuedScriptConnection Nodes. */
 export interface RootQueryToEnqueuedScriptConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -40292,7 +40784,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;RootQueryToEnqueuedScriptConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToEnqueuedScriptConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToEnqueuedScriptConnection Nodes. */
 export interface RootQueryToEnqueuedScriptConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -40359,7 +40851,7 @@ node: (EnqueuedStylesheetObservableChain & {get: <R extends EnqueuedStylesheetRe
 }
 
 
-/** Page Info on the &quot;RootQueryToEnqueuedStylesheetConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToEnqueuedStylesheetConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToEnqueuedStylesheetConnection Nodes. */
 export interface RootQueryToEnqueuedStylesheetConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -40376,7 +40868,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;RootQueryToEnqueuedStylesheetConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToEnqueuedStylesheetConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToEnqueuedStylesheetConnection Nodes. */
 export interface RootQueryToEnqueuedStylesheetConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -40443,7 +40935,7 @@ node: (ContentNodeObservableChain & {get: <R extends ContentNodeRequest>(request
 }
 
 
-/** Page Info on the &quot;RootQueryToRevisionsConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToRevisionsConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToRevisionsConnection Nodes. */
 export interface RootQueryToRevisionsConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -40460,7 +40952,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;RootQueryToRevisionsConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToRevisionsConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToRevisionsConnection Nodes. */
 export interface RootQueryToRevisionsConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -40527,7 +41019,7 @@ node: (TagObservableChain & {get: <R extends TagRequest>(request: R, defaultValu
 }
 
 
-/** Page Info on the &quot;RootQueryToTagConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToTagConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToTagConnection Nodes. */
 export interface RootQueryToTagConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -40544,7 +41036,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;RootQueryToTagConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToTagConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToTagConnection Nodes. */
 export interface RootQueryToTagConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -40611,7 +41103,7 @@ node: (TaxonomyObservableChain & {get: <R extends TaxonomyRequest>(request: R, d
 }
 
 
-/** Page Info on the &quot;RootQueryToTaxonomyConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToTaxonomyConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToTaxonomyConnection Nodes. */
 export interface RootQueryToTaxonomyConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -40628,7 +41120,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;RootQueryToTaxonomyConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToTaxonomyConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToTaxonomyConnection Nodes. */
 export interface RootQueryToTaxonomyConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -40695,7 +41187,7 @@ node: (TermNodeObservableChain & {get: <R extends TermNodeRequest>(request: R, d
 }
 
 
-/** Page Info on the &quot;RootQueryToTermNodeConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToTermNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToTermNodeConnection Nodes. */
 export interface RootQueryToTermNodeConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -40712,7 +41204,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;RootQueryToTermNodeConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToTermNodeConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToTermNodeConnection Nodes. */
 export interface RootQueryToTermNodeConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -40833,7 +41325,7 @@ pageInfo: (RootQueryToThemeConnectionPageInfoObservableChain & {get: <R extends 
 }
 
 
-/** Connection to Theme Nodes */
+/** A paginated collection of Theme Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of Theme Nodes */
 export interface ThemeConnectionPromiseChain{
     
 /** A list of edges (relational context) between RootQuery and connected Theme Nodes */
@@ -40847,7 +41339,7 @@ pageInfo: (ThemeConnectionPageInfoPromiseChain & {get: <R extends ThemeConnectio
 }
 
 
-/** Connection to Theme Nodes */
+/** A paginated collection of Theme Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of Theme Nodes */
 export interface ThemeConnectionObservableChain{
     
 /** A list of edges (relational context) between RootQuery and connected Theme Nodes */
@@ -40861,7 +41353,7 @@ pageInfo: (ThemeConnectionPageInfoObservableChain & {get: <R extends ThemeConnec
 }
 
 
-/** Edge between a Node and a connected Theme */
+/** Represents a connection to a Theme. Contains both the Theme Node and metadata about the relationship. */
 export interface ThemeConnectionEdgePromiseChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -40872,7 +41364,7 @@ node: (ThemePromiseChain & {get: <R extends ThemeRequest>(request: R, defaultVal
 }
 
 
-/** Edge between a Node and a connected Theme */
+/** Represents a connection to a Theme. Contains both the Theme Node and metadata about the relationship. */
 export interface ThemeConnectionEdgeObservableChain{
     
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
@@ -40883,7 +41375,7 @@ node: (ThemeObservableChain & {get: <R extends ThemeRequest>(request: R, default
 }
 
 
-/** Page Info on the connected ThemeConnectionEdge */
+/** Pagination metadata specific to &quot;ThemeConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;ThemeConnectionEdge&quot; Nodes. */
 export interface ThemeConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -40900,7 +41392,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected ThemeConnectionEdge */
+/** Pagination metadata specific to &quot;ThemeConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;ThemeConnectionEdge&quot; Nodes. */
 export interface ThemeConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -40939,7 +41431,7 @@ node: (ThemeObservableChain & {get: <R extends ThemeRequest>(request: R, default
 }
 
 
-/** Page Info on the &quot;RootQueryToThemeConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToThemeConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToThemeConnection Nodes. */
 export interface RootQueryToThemeConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -40956,7 +41448,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;RootQueryToThemeConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToThemeConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToThemeConnection Nodes. */
 export interface RootQueryToThemeConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -41023,7 +41515,7 @@ node: (UserRoleObservableChain & {get: <R extends UserRoleRequest>(request: R, d
 }
 
 
-/** Page Info on the &quot;RootQueryToUserRoleConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToUserRoleConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToUserRoleConnection Nodes. */
 export interface RootQueryToUserRoleConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -41040,7 +41532,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;RootQueryToUserRoleConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToUserRoleConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToUserRoleConnection Nodes. */
 export interface RootQueryToUserRoleConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -41085,7 +41577,7 @@ pageInfo: (RootQueryToUserConnectionPageInfoObservableChain & {get: <R extends R
 }
 
 
-/** Connection to User Nodes */
+/** A paginated collection of User Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of User Nodes */
 export interface UserConnectionPromiseChain{
     
 /** A list of edges (relational context) between RootQuery and connected User Nodes */
@@ -41099,7 +41591,7 @@ pageInfo: (UserConnectionPageInfoPromiseChain & {get: <R extends UserConnectionP
 }
 
 
-/** Connection to User Nodes */
+/** A paginated collection of User Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of User Nodes */
 export interface UserConnectionObservableChain{
     
 /** A list of edges (relational context) between RootQuery and connected User Nodes */
@@ -41113,7 +41605,7 @@ pageInfo: (UserConnectionPageInfoObservableChain & {get: <R extends UserConnecti
 }
 
 
-/** Page Info on the connected UserConnectionEdge */
+/** Pagination metadata specific to &quot;UserConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;UserConnectionEdge&quot; Nodes. */
 export interface UserConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -41130,7 +41622,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the connected UserConnectionEdge */
+/** Pagination metadata specific to &quot;UserConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;UserConnectionEdge&quot; Nodes. */
 export interface UserConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -41169,7 +41661,7 @@ node: (UserObservableChain & {get: <R extends UserRequest>(request: R, defaultVa
 }
 
 
-/** Page Info on the &quot;RootQueryToUserConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToUserConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToUserConnection Nodes. */
 export interface RootQueryToUserConnectionPageInfoPromiseChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -41186,7 +41678,7 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
-/** Page Info on the &quot;RootQueryToUserConnection&quot; */
+/** Pagination metadata specific to &quot;RootQueryToUserConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToUserConnection Nodes. */
 export interface RootQueryToUserConnectionPageInfoObservableChain{
     
 /** When paginating forwards, the cursor to continue. */
@@ -41228,6 +41720,186 @@ defaultPostFormat: ({get: (request?: boolean|number, defaultValue?: (Scalars['St
     
 /** Converter emoticons como :-) e :-P em gráficos ao exibí-los. */
 useSmilies: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>})
+}
+
+
+/** An object with a globally unique identifier. All objects that can be identified by a unique ID implement this interface. */
+export interface NodePromiseChain{
+    
+/** The globally unique ID for the object */
+id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>})
+}
+
+
+/** An object with a globally unique identifier. All objects that can be identified by a unique ID implement this interface. */
+export interface NodeObservableChain{
+    
+/** The globally unique ID for the object */
+id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>})
+}
+
+
+/** An object that has a unique numeric identifier in the database. Provides consistent access to the database ID across different object types. */
+export interface DatabaseIdentifierPromiseChain{
+    
+/** The unique identifier stored in the database */
+databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>})
+}
+
+
+/** An object that has a unique numeric identifier in the database. Provides consistent access to the database ID across different object types. */
+export interface DatabaseIdentifierObservableChain{
+    
+/** The unique identifier stored in the database */
+databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>})
+}
+
+
+/** A user or guest who has submitted a comment. Provides identification and contact information for the comment author. */
+export interface CommenterPromiseChain{
+    
+/** Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument. */
+avatar: (AvatarPromiseChain & {get: <R extends AvatarRequest>(request: R, defaultValue?: (FieldsSelection<Avatar, R> | undefined)) => Promise<(FieldsSelection<Avatar, R> | undefined)>}),
+    
+/** Identifies the primary key from the database. */
+databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>}),
+    
+/** The email address of the author of a comment. */
+email: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The globally unique identifier for the comment author. */
+id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
+    
+/** Whether the author information is considered restricted. (not fully public) */
+isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
+    
+/** The name of the author of a comment. */
+name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The url of the author of a comment. */
+url: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** A user or guest who has submitted a comment. Provides identification and contact information for the comment author. */
+export interface CommenterObservableChain{
+    
+/** Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument. */
+avatar: (AvatarObservableChain & {get: <R extends AvatarRequest>(request: R, defaultValue?: (FieldsSelection<Avatar, R> | undefined)) => Observable<(FieldsSelection<Avatar, R> | undefined)>}),
+    
+/** Identifies the primary key from the database. */
+databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>}),
+    
+/** The email address of the author of a comment. */
+email: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The globally unique identifier for the comment author. */
+id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
+    
+/** Whether the author information is considered restricted. (not fully public) */
+isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
+    
+/** The name of the author of a comment. */
+name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The url of the author of a comment. */
+url: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** A Comment Author object */
+export interface CommentAuthorPromiseChain{
+    
+/** Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument. */
+avatar: ((args?: {
+/** The size attribute of the avatar field can be used to fetch avatars of different sizes. The value corresponds to the dimension in pixels to fetch. The default is 96 pixels. */
+size?: (Scalars['Int'] | null),
+/** Whether to always show the default image, never the Gravatar. Default false */
+forceDefault?: (Scalars['Boolean'] | null),
+/** The rating level of the avatar. */
+rating?: (AvatarRatingEnum | null)}) => AvatarPromiseChain & {get: <R extends AvatarRequest>(request: R, defaultValue?: (FieldsSelection<Avatar, R> | undefined)) => Promise<(FieldsSelection<Avatar, R> | undefined)>})&(AvatarPromiseChain & {get: <R extends AvatarRequest>(request: R, defaultValue?: (FieldsSelection<Avatar, R> | undefined)) => Promise<(FieldsSelection<Avatar, R> | undefined)>}),
+    
+/** The unique identifier stored in the database */
+databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>}),
+    
+/** The email for the comment author. */
+email: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The globally unique identifier for the comment author object */
+id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
+    
+/** Whether the object is restricted from the current viewer */
+isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
+    
+/** The name for the comment author. */
+name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The url the comment author. */
+url: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** A Comment Author object */
+export interface CommentAuthorObservableChain{
+    
+/** Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument. */
+avatar: ((args?: {
+/** The size attribute of the avatar field can be used to fetch avatars of different sizes. The value corresponds to the dimension in pixels to fetch. The default is 96 pixels. */
+size?: (Scalars['Int'] | null),
+/** Whether to always show the default image, never the Gravatar. Default false */
+forceDefault?: (Scalars['Boolean'] | null),
+/** The rating level of the avatar. */
+rating?: (AvatarRatingEnum | null)}) => AvatarObservableChain & {get: <R extends AvatarRequest>(request: R, defaultValue?: (FieldsSelection<Avatar, R> | undefined)) => Observable<(FieldsSelection<Avatar, R> | undefined)>})&(AvatarObservableChain & {get: <R extends AvatarRequest>(request: R, defaultValue?: (FieldsSelection<Avatar, R> | undefined)) => Observable<(FieldsSelection<Avatar, R> | undefined)>}),
+    
+/** The unique identifier stored in the database */
+databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>}),
+    
+/** The email for the comment author. */
+email: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The globally unique identifier for the comment author object */
+id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
+    
+/** Whether the object is restricted from the current viewer */
+isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
+    
+/** The name for the comment author. */
+name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The url the comment author. */
+url: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** A layout pattern that can help inform how content might be structured and displayed. Templates can define specialized layouts for different types of content. */
+export interface ContentTemplatePromiseChain{
+    
+/** The name of the template */
+templateName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** A layout pattern that can help inform how content might be structured and displayed. Templates can define specialized layouts for different types of content. */
+export interface ContentTemplateObservableChain{
+    
+/** The name of the template */
+templateName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** The template assigned to the node */
+export interface DefaultTemplatePromiseChain{
+    
+/** The name of the template */
+templateName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** The template assigned to the node */
+export interface DefaultTemplateObservableChain{
+    
+/** The name of the template */
+templateName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
 }
 
 
@@ -42686,84 +43358,4 @@ clientMutationId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Str
     
 /** The User object mutation type. */
 user: (UserObservableChain & {get: <R extends UserRequest>(request: R, defaultValue?: (FieldsSelection<User, R> | undefined)) => Observable<(FieldsSelection<User, R> | undefined)>})
-}
-
-
-/** A Comment Author object */
-export interface CommentAuthorPromiseChain{
-    
-/** Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument. */
-avatar: ((args?: {
-/** The size attribute of the avatar field can be used to fetch avatars of different sizes. The value corresponds to the dimension in pixels to fetch. The default is 96 pixels. */
-size?: (Scalars['Int'] | null),
-/** Whether to always show the default image, never the Gravatar. Default false */
-forceDefault?: (Scalars['Boolean'] | null),
-/** The rating level of the avatar. */
-rating?: (AvatarRatingEnum | null)}) => AvatarPromiseChain & {get: <R extends AvatarRequest>(request: R, defaultValue?: (FieldsSelection<Avatar, R> | undefined)) => Promise<(FieldsSelection<Avatar, R> | undefined)>})&(AvatarPromiseChain & {get: <R extends AvatarRequest>(request: R, defaultValue?: (FieldsSelection<Avatar, R> | undefined)) => Promise<(FieldsSelection<Avatar, R> | undefined)>}),
-    
-/** The unique identifier stored in the database */
-databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>}),
-    
-/** The email for the comment author */
-email: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** The globally unique identifier for the comment author object */
-id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
-    
-/** Whether the object is restricted from the current viewer */
-isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
-    
-/** The name for the comment author. */
-name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
-    
-/** The url the comment author. */
-url: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
-}
-
-
-/** A Comment Author object */
-export interface CommentAuthorObservableChain{
-    
-/** Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument. */
-avatar: ((args?: {
-/** The size attribute of the avatar field can be used to fetch avatars of different sizes. The value corresponds to the dimension in pixels to fetch. The default is 96 pixels. */
-size?: (Scalars['Int'] | null),
-/** Whether to always show the default image, never the Gravatar. Default false */
-forceDefault?: (Scalars['Boolean'] | null),
-/** The rating level of the avatar. */
-rating?: (AvatarRatingEnum | null)}) => AvatarObservableChain & {get: <R extends AvatarRequest>(request: R, defaultValue?: (FieldsSelection<Avatar, R> | undefined)) => Observable<(FieldsSelection<Avatar, R> | undefined)>})&(AvatarObservableChain & {get: <R extends AvatarRequest>(request: R, defaultValue?: (FieldsSelection<Avatar, R> | undefined)) => Observable<(FieldsSelection<Avatar, R> | undefined)>}),
-    
-/** The unique identifier stored in the database */
-databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>}),
-    
-/** The email for the comment author */
-email: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** The globally unique identifier for the comment author object */
-id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
-    
-/** Whether the object is restricted from the current viewer */
-isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
-    
-/** The name for the comment author. */
-name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
-    
-/** The url the comment author. */
-url: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
-}
-
-
-/** The template assigned to the node */
-export interface DefaultTemplatePromiseChain{
-    
-/** The name of the template */
-templateName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
-}
-
-
-/** The template assigned to the node */
-export interface DefaultTemplateObservableChain{
-    
-/** The name of the template */
-templateName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
 }

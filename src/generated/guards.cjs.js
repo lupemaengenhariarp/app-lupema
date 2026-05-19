@@ -23,14 +23,6 @@ module.exports.isArquivoAssessoria = function(obj) {
 
 
 
-var Node_possibleTypes = ['ArquivoAssessoria','ContentType','Taxonomy','EnqueuedScript','EnqueuedStylesheet','User','Comment','MediaItem','Page','Post','Category','CentraldeDecorado','Empreendimento','PostFormat','Tag','UserRole','Banner','Menu','MenuItem','Plugin','Theme','CommentAuthor']
-module.exports.isNode = function(obj) {
-  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isNode"')
-  return Node_possibleTypes.includes(obj.__typename)
-}
-
-
-
 var ContentNode_possibleTypes = ['ArquivoAssessoria','MediaItem','Page','Post','CentraldeDecorado','Empreendimento','Banner']
 module.exports.isContentNode = function(obj) {
   if (!obj || !obj.__typename) throw new Error('__typename is missing in "isContentNode"')
@@ -55,7 +47,7 @@ module.exports.isContentNodeToContentTypeConnectionEdge = function(obj) {
 
 
 
-var OneToOneConnection_possibleTypes = ['ContentNodeToContentTypeConnectionEdge','ContentNodeToEditLockConnectionEdge','CommentToCommenterConnectionEdge','CommentToContentNodeConnectionEdge','CommentToParentCommentConnectionEdge','NodeWithAuthorToUserConnectionEdge','ContentNodeToEditLastConnectionEdge','HierarchicalContentNodeToParentContentNodeConnectionEdge','NodeWithFeaturedImageToMediaItemConnectionEdge','NodeWithRevisionsToContentNodeConnectionEdge','PageToPreviewConnectionEdge','CentraldeDecoradoToParentConnectionEdge','CentraldeDecoradoToPreviewConnectionEdge','EmpreendimentoToParentConnectionEdge','EmpreendimentoToPreviewConnectionEdge','CategoryToParentCategoryConnectionEdge','CategoryToTaxonomyConnectionEdge','PostToParentConnectionEdge','PostFormatToTaxonomyConnectionEdge','PostToPreviewConnectionEdge','TagToTaxonomyConnectionEdge','ArquivoAssessoriaToParentConnectionEdge','ArquivoAssessoriaToPreviewConnectionEdge','BannerToParentConnectionEdge','BannerToPreviewConnectionEdge','MenuItemToMenuItemLinkableConnectionEdge','MenuItemToMenuConnectionEdge']
+var OneToOneConnection_possibleTypes = ['ContentNodeToContentTypeConnectionEdge','ContentNodeToEditLockConnectionEdge','CommentToCommenterConnectionEdge','CommentToContentNodeConnectionEdge','CommentToParentCommentConnectionEdge','NodeWithAuthorToUserConnectionEdge','ContentNodeToEditLastConnectionEdge','HierarchicalContentNodeToParentContentNodeConnectionEdge','NodeWithFeaturedImageToMediaItemConnectionEdge','NodeWithRevisionsToContentNodeConnectionEdge','PageToPreviewConnectionEdge','CentraldeDecoradoToParentConnectionEdge','CentraldeDecoradoToPreviewConnectionEdge','EmpreendimentoToParentConnectionEdge','EmpreendimentoToPreviewConnectionEdge','CategoryToParentCategoryConnectionEdge','CategoryToTaxonomyConnectionEdge','PostToParentConnectionEdge','PostFormatToTaxonomyConnectionEdge','PostToPreviewConnectionEdge','TagToTaxonomyConnectionEdge','ArquivoAssessoriaToParentConnectionEdge','ArquivoAssessoriaToPreviewConnectionEdge','BannerToParentConnectionEdge','BannerToPreviewConnectionEdge','GeneralSettingsToMediaItemConnectionEdge','MenuItemToMenuItemLinkableConnectionEdge','MenuItemToMenuConnectionEdge']
 module.exports.isOneToOneConnection = function(obj) {
   if (!obj || !obj.__typename) throw new Error('__typename is missing in "isOneToOneConnection"')
   return OneToOneConnection_possibleTypes.includes(obj.__typename)
@@ -63,7 +55,7 @@ module.exports.isOneToOneConnection = function(obj) {
 
 
 
-var Edge_possibleTypes = ['ContentNodeToContentTypeConnectionEdge','TaxonomyToContentTypeConnectionEdge','TermNodeToEnqueuedScriptConnectionEdge','TermNodeToEnqueuedStylesheetConnectionEdge','TaxonomyToTermNodeConnectionEdge','ContentTypeToTaxonomyConnectionEdge','ContentTypeToContentNodeConnectionEdge','ContentNodeToEditLockConnectionEdge','CommentToCommenterConnectionEdge','CommentToContentNodeConnectionEdge','CommentToParentCommentConnectionEdge','CommentToCommentConnectionEdge','UserToCommentConnectionEdge','UserToEnqueuedScriptConnectionEdge','UserToEnqueuedStylesheetConnectionEdge','NodeWithAuthorToUserConnectionEdge','HierarchicalContentNodeToContentNodeAncestorsConnectionEdge','HierarchicalContentNodeToContentNodeChildrenConnectionEdge','ContentNodeToEnqueuedScriptConnectionEdge','ContentNodeToEnqueuedStylesheetConnectionEdge','ContentNodeToEditLastConnectionEdge','HierarchicalContentNodeToParentContentNodeConnectionEdge','MediaItemToCommentConnectionEdge','UserToMediaItemConnectionEdge','NodeWithFeaturedImageToMediaItemConnectionEdge','NodeWithRevisionsToContentNodeConnectionEdge','PageToCommentConnectionEdge','PageToPreviewConnectionEdge','PageToRevisionConnectionEdge','UserToPageConnectionEdge','PostToPostConnectionEdge','CategoryToAncestorsCategoryConnectionEdge','CentraldeDecoradoToCentraldeDecoradoConnectionEdge','CentraldeDecoradoToCategoryConnectionEdge','CentraldeDecoradoToParentConnectionEdge','CentraldeDecoradoToPreviewConnectionEdge','CentraldeDecoradoToTermNodeConnectionEdge','CategoryToCentraldeDecoradoConnectionEdge','CategoryToCategoryConnectionEdge','CategoryToContentNodeConnectionEdge','EmpreendimentoToEmpreendimentoConnectionEdge','EmpreendimentoToCategoryConnectionEdge','EmpreendimentoToParentConnectionEdge','EmpreendimentoToPreviewConnectionEdge','EmpreendimentoToTermNodeConnectionEdge','CategoryToEmpreendimentoConnectionEdge','CategoryToParentCategoryConnectionEdge','CategoryToPostConnectionEdge','CategoryToTaxonomyConnectionEdge','PostToCategoryConnectionEdge','PostToCommentConnectionEdge','PostToParentConnectionEdge','PostFormatToContentNodeConnectionEdge','PostFormatToPostConnectionEdge','PostFormatToTaxonomyConnectionEdge','PostToPostFormatConnectionEdge','PostToPreviewConnectionEdge','PostToRevisionConnectionEdge','TagToContentNodeConnectionEdge','TagToPostConnectionEdge','TagToTaxonomyConnectionEdge','PostToTagConnectionEdge','PostToTermNodeConnectionEdge','UserToPostConnectionEdge','UserToRevisionsConnectionEdge','UserToUserRoleConnectionEdge','ArquivoAssessoriaToArquivoAssessoriaConnectionEdge','ArquivoAssessoriaToParentConnectionEdge','ArquivoAssessoriaToPreviewConnectionEdge','RootQueryToArquivoAssessoriaConnectionEdge','BannerToBannerConnectionEdge','BannerToParentConnectionEdge','BannerToPreviewConnectionEdge','RootQueryToBannerConnectionEdge','RootQueryToCategoryConnectionEdge','RootQueryToCentraldeDecoradoConnectionEdge','RootQueryToCommentConnectionEdge','RootQueryToContentNodeConnectionEdge','RootQueryToContentTypeConnectionEdge','RootQueryToEmpreendimentoConnectionEdge','RootQueryToMediaItemConnectionEdge','MenuItemToMenuItemConnectionEdge','MenuItemToMenuItemLinkableConnectionEdge','MenuItemToMenuConnectionEdge','MenuToMenuItemConnectionEdge','RootQueryToMenuItemConnectionEdge','RootQueryToMenuConnectionEdge','RootQueryToPageConnectionEdge','RootQueryToPluginConnectionEdge','RootQueryToPostFormatConnectionEdge','RootQueryToPostConnectionEdge','RootQueryToEnqueuedScriptConnectionEdge','RootQueryToEnqueuedStylesheetConnectionEdge','RootQueryToRevisionsConnectionEdge','RootQueryToTagConnectionEdge','RootQueryToTaxonomyConnectionEdge','RootQueryToTermNodeConnectionEdge','RootQueryToThemeConnectionEdge','RootQueryToUserRoleConnectionEdge','RootQueryToUserConnectionEdge']
+var Edge_possibleTypes = ['ContentNodeToContentTypeConnectionEdge','TaxonomyToContentTypeConnectionEdge','TermNodeToEnqueuedScriptConnectionEdge','TermNodeToEnqueuedStylesheetConnectionEdge','TaxonomyToTermNodeConnectionEdge','ContentTypeToTaxonomyConnectionEdge','ContentTypeToContentNodeConnectionEdge','ContentNodeToEditLockConnectionEdge','CommentToCommenterConnectionEdge','CommentToContentNodeConnectionEdge','CommentToParentCommentConnectionEdge','CommentToCommentConnectionEdge','UserToCommentConnectionEdge','UserToEnqueuedScriptConnectionEdge','UserToEnqueuedStylesheetConnectionEdge','NodeWithAuthorToUserConnectionEdge','HierarchicalContentNodeToContentNodeAncestorsConnectionEdge','HierarchicalContentNodeToContentNodeChildrenConnectionEdge','ContentNodeToEnqueuedScriptConnectionEdge','ContentNodeToEnqueuedStylesheetConnectionEdge','ContentNodeToEditLastConnectionEdge','HierarchicalContentNodeToParentContentNodeConnectionEdge','MediaItemToCommentConnectionEdge','UserToMediaItemConnectionEdge','NodeWithFeaturedImageToMediaItemConnectionEdge','NodeWithRevisionsToContentNodeConnectionEdge','PageToCommentConnectionEdge','PageToPreviewConnectionEdge','PageToRevisionConnectionEdge','UserToPageConnectionEdge','PostToPostConnectionEdge','CategoryToAncestorsCategoryConnectionEdge','CentraldeDecoradoToCentraldeDecoradoConnectionEdge','CentraldeDecoradoToCategoryConnectionEdge','CentraldeDecoradoToParentConnectionEdge','CentraldeDecoradoToPreviewConnectionEdge','CentraldeDecoradoToTermNodeConnectionEdge','CategoryToCentraldeDecoradoConnectionEdge','CategoryToCategoryConnectionEdge','CategoryToContentNodeConnectionEdge','EmpreendimentoToEmpreendimentoConnectionEdge','EmpreendimentoToCategoryConnectionEdge','EmpreendimentoToParentConnectionEdge','EmpreendimentoToPreviewConnectionEdge','EmpreendimentoToTermNodeConnectionEdge','CategoryToEmpreendimentoConnectionEdge','CategoryToParentCategoryConnectionEdge','CategoryToPostConnectionEdge','CategoryToTaxonomyConnectionEdge','PostToCategoryConnectionEdge','PostToCommentConnectionEdge','PostToParentConnectionEdge','PostFormatToContentNodeConnectionEdge','PostFormatToPostConnectionEdge','PostFormatToTaxonomyConnectionEdge','PostToPostFormatConnectionEdge','PostToPreviewConnectionEdge','PostToRevisionConnectionEdge','TagToContentNodeConnectionEdge','TagToPostConnectionEdge','TagToTaxonomyConnectionEdge','PostToTagConnectionEdge','PostToTermNodeConnectionEdge','UserToPostConnectionEdge','UserToRevisionsConnectionEdge','UserToUserRoleConnectionEdge','ArquivoAssessoriaToArquivoAssessoriaConnectionEdge','ArquivoAssessoriaToParentConnectionEdge','ArquivoAssessoriaToPreviewConnectionEdge','RootQueryToArquivoAssessoriaConnectionEdge','BannerToBannerConnectionEdge','BannerToParentConnectionEdge','BannerToPreviewConnectionEdge','RootQueryToBannerConnectionEdge','RootQueryToCategoryConnectionEdge','RootQueryToCentraldeDecoradoConnectionEdge','RootQueryToCommentConnectionEdge','RootQueryToContentNodeConnectionEdge','RootQueryToContentTypeConnectionEdge','RootQueryToEmpreendimentoConnectionEdge','GeneralSettingsToMediaItemConnectionEdge','RootQueryToMediaItemConnectionEdge','MenuItemToMenuItemConnectionEdge','MenuItemToMenuItemLinkableConnectionEdge','MenuItemToMenuConnectionEdge','MenuToMenuItemConnectionEdge','RootQueryToMenuItemConnectionEdge','RootQueryToMenuConnectionEdge','RootQueryToPageConnectionEdge','RootQueryToPluginConnectionEdge','RootQueryToPostFormatConnectionEdge','RootQueryToPostConnectionEdge','RootQueryToEnqueuedScriptConnectionEdge','RootQueryToEnqueuedStylesheetConnectionEdge','RootQueryToRevisionsConnectionEdge','RootQueryToTagConnectionEdge','RootQueryToTaxonomyConnectionEdge','RootQueryToTermNodeConnectionEdge','RootQueryToThemeConnectionEdge','RootQueryToUserRoleConnectionEdge','RootQueryToUserConnectionEdge']
 module.exports.isEdge = function(obj) {
   if (!obj || !obj.__typename) throw new Error('__typename is missing in "isEdge"')
   return Edge_possibleTypes.includes(obj.__typename)
@@ -463,22 +455,6 @@ module.exports.isUser = function(obj) {
 
 
 
-var Commenter_possibleTypes = ['User','CommentAuthor']
-module.exports.isCommenter = function(obj) {
-  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isCommenter"')
-  return Commenter_possibleTypes.includes(obj.__typename)
-}
-
-
-
-var DatabaseIdentifier_possibleTypes = ['ArquivoAssessoria','User','Comment','MediaItem','Page','Post','Category','CentraldeDecorado','Empreendimento','PostFormat','Tag','Banner','Menu','MenuItem','CommentAuthor']
-module.exports.isDatabaseIdentifier = function(obj) {
-  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isDatabaseIdentifier"')
-  return DatabaseIdentifier_possibleTypes.includes(obj.__typename)
-}
-
-
-
 var Avatar_possibleTypes = ['Avatar']
 module.exports.isAvatar = function(obj) {
   if (!obj || !obj.__typename) throw new Error('__typename is missing in "isAvatar"')
@@ -663,7 +639,7 @@ module.exports.isMediaItemConnection = function(obj) {
 
 
 
-var MediaItemConnectionEdge_possibleTypes = ['UserToMediaItemConnectionEdge','NodeWithFeaturedImageToMediaItemConnectionEdge','RootQueryToMediaItemConnectionEdge']
+var MediaItemConnectionEdge_possibleTypes = ['UserToMediaItemConnectionEdge','NodeWithFeaturedImageToMediaItemConnectionEdge','GeneralSettingsToMediaItemConnectionEdge','RootQueryToMediaItemConnectionEdge']
 module.exports.isMediaItemConnectionEdge = function(obj) {
   if (!obj || !obj.__typename) throw new Error('__typename is missing in "isMediaItemConnectionEdge"')
   return MediaItemConnectionEdge_possibleTypes.includes(obj.__typename)
@@ -683,14 +659,6 @@ var NodeWithTemplate_possibleTypes = ['ArquivoAssessoria','MediaItem','Page','Po
 module.exports.isNodeWithTemplate = function(obj) {
   if (!obj || !obj.__typename) throw new Error('__typename is missing in "isNodeWithTemplate"')
   return NodeWithTemplate_possibleTypes.includes(obj.__typename)
-}
-
-
-
-var ContentTemplate_possibleTypes = ['DefaultTemplate']
-module.exports.isContentTemplate = function(obj) {
-  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isContentTemplate"')
-  return ContentTemplate_possibleTypes.includes(obj.__typename)
 }
 
 
@@ -1031,7 +999,7 @@ module.exports.isPage_Assessoria = function(obj) {
 
 
 
-var AcfFieldGroup_possibleTypes = ['Page_Assessoria','Page_Conteusobre','Page_Conteusobre_item','Page_Informacoesdecontato','CentraldeDecorado_Centraldedecorados','Empreendimento_Empreendimento','Empreendimento_Empreendimento_andamentoDaObra','Empreendimento_Empreendimento_diferenciaisItems','Empreendimento_Empreendimento_itemsPlantas','Empreendimento_Empreendimento_itensAreacomuns','Empreendimento_Empreendimento_pontosDeReferencia','Empreendimento_Empreendimento_videosOutos','Empreendimento_Housiverso','Empreendimento_Housiverso_diferencial','ArquivoAssessoria_DownAssessoria','Banner_BannerHome','Banner_BannerHome_BhConteudo','Banner_BannerHome_ImagensProntas']
+var AcfFieldGroup_possibleTypes = ['Page_Assessoria','Page_Conteusobre','Page_Conteusobre_item','Page_Conteudoindiqueeganhe','Page_Conteudoindiqueeganhe_EmObra','Page_Conteudoindiqueeganhe_Entregue','Page_Conteudolstore','Page_Conteudopoliticadequalidade','Page_Conteudopoliticadequalidade_certificacaoPq','Page_Conteudopoliticadequalidade_praticaItensPq','Page_Informacoesdecontato','CentraldeDecorado_Centraldedecorados','Empreendimento_Empreendimento','Empreendimento_Empreendimento_andamentoDaObra','Empreendimento_Empreendimento_diferenciaisItems','Empreendimento_Empreendimento_itemsPlantas','Empreendimento_Empreendimento_itensAreacomuns','Empreendimento_Empreendimento_pontosDeReferencia','Empreendimento_Empreendimento_videosOutos','Empreendimento_Housiverso','Empreendimento_Housiverso_diferencial','ArquivoAssessoria_DownAssessoria','Banner_BannerHome','Banner_BannerHome_BhConteudo','Banner_BannerHome_ImagensProntas']
 module.exports.isAcfFieldGroup = function(obj) {
   if (!obj || !obj.__typename) throw new Error('__typename is missing in "isAcfFieldGroup"')
   return AcfFieldGroup_possibleTypes.includes(obj.__typename)
@@ -1075,6 +1043,62 @@ var Page_Conteusobre_item_possibleTypes = ['Page_Conteusobre_item']
 module.exports.isPage_Conteusobre_item = function(obj) {
   if (!obj || !obj.__typename) throw new Error('__typename is missing in "isPage_Conteusobre_item"')
   return Page_Conteusobre_item_possibleTypes.includes(obj.__typename)
+}
+
+
+
+var Page_Conteudoindiqueeganhe_possibleTypes = ['Page_Conteudoindiqueeganhe']
+module.exports.isPage_Conteudoindiqueeganhe = function(obj) {
+  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isPage_Conteudoindiqueeganhe"')
+  return Page_Conteudoindiqueeganhe_possibleTypes.includes(obj.__typename)
+}
+
+
+
+var Page_Conteudoindiqueeganhe_EmObra_possibleTypes = ['Page_Conteudoindiqueeganhe_EmObra']
+module.exports.isPage_Conteudoindiqueeganhe_EmObra = function(obj) {
+  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isPage_Conteudoindiqueeganhe_EmObra"')
+  return Page_Conteudoindiqueeganhe_EmObra_possibleTypes.includes(obj.__typename)
+}
+
+
+
+var Page_Conteudoindiqueeganhe_Entregue_possibleTypes = ['Page_Conteudoindiqueeganhe_Entregue']
+module.exports.isPage_Conteudoindiqueeganhe_Entregue = function(obj) {
+  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isPage_Conteudoindiqueeganhe_Entregue"')
+  return Page_Conteudoindiqueeganhe_Entregue_possibleTypes.includes(obj.__typename)
+}
+
+
+
+var Page_Conteudolstore_possibleTypes = ['Page_Conteudolstore']
+module.exports.isPage_Conteudolstore = function(obj) {
+  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isPage_Conteudolstore"')
+  return Page_Conteudolstore_possibleTypes.includes(obj.__typename)
+}
+
+
+
+var Page_Conteudopoliticadequalidade_possibleTypes = ['Page_Conteudopoliticadequalidade']
+module.exports.isPage_Conteudopoliticadequalidade = function(obj) {
+  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isPage_Conteudopoliticadequalidade"')
+  return Page_Conteudopoliticadequalidade_possibleTypes.includes(obj.__typename)
+}
+
+
+
+var Page_Conteudopoliticadequalidade_certificacaoPq_possibleTypes = ['Page_Conteudopoliticadequalidade_certificacaoPq']
+module.exports.isPage_Conteudopoliticadequalidade_certificacaoPq = function(obj) {
+  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isPage_Conteudopoliticadequalidade_certificacaoPq"')
+  return Page_Conteudopoliticadequalidade_certificacaoPq_possibleTypes.includes(obj.__typename)
+}
+
+
+
+var Page_Conteudopoliticadequalidade_praticaItensPq_possibleTypes = ['Page_Conteudopoliticadequalidade_praticaItensPq']
+module.exports.isPage_Conteudopoliticadequalidade_praticaItensPq = function(obj) {
+  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isPage_Conteudopoliticadequalidade_praticaItensPq"')
+  return Page_Conteudopoliticadequalidade_praticaItensPq_possibleTypes.includes(obj.__typename)
 }
 
 
@@ -2559,6 +2583,14 @@ module.exports.isGeneralSettings = function(obj) {
 
 
 
+var GeneralSettingsToMediaItemConnectionEdge_possibleTypes = ['GeneralSettingsToMediaItemConnectionEdge']
+module.exports.isGeneralSettingsToMediaItemConnectionEdge = function(obj) {
+  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isGeneralSettingsToMediaItemConnectionEdge"')
+  return GeneralSettingsToMediaItemConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
 var RootQueryToMediaItemConnection_possibleTypes = ['RootQueryToMediaItemConnection']
 module.exports.isRootQueryToMediaItemConnection = function(obj) {
   if (!obj || !obj.__typename) throw new Error('__typename is missing in "isRootQueryToMediaItemConnection"')
@@ -3183,6 +3215,54 @@ module.exports.isWritingSettings = function(obj) {
 
 
 
+var Node_possibleTypes = ['ArquivoAssessoria','ContentType','Taxonomy','EnqueuedScript','EnqueuedStylesheet','User','Comment','MediaItem','Page','Post','Category','CentraldeDecorado','Empreendimento','PostFormat','Tag','UserRole','Banner','Menu','MenuItem','Plugin','Theme','CommentAuthor']
+module.exports.isNode = function(obj) {
+  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isNode"')
+  return Node_possibleTypes.includes(obj.__typename)
+}
+
+
+
+var DatabaseIdentifier_possibleTypes = ['ArquivoAssessoria','User','Comment','MediaItem','Page','Post','Category','CentraldeDecorado','Empreendimento','PostFormat','Tag','Banner','Menu','MenuItem','CommentAuthor']
+module.exports.isDatabaseIdentifier = function(obj) {
+  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isDatabaseIdentifier"')
+  return DatabaseIdentifier_possibleTypes.includes(obj.__typename)
+}
+
+
+
+var Commenter_possibleTypes = ['User','CommentAuthor']
+module.exports.isCommenter = function(obj) {
+  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isCommenter"')
+  return Commenter_possibleTypes.includes(obj.__typename)
+}
+
+
+
+var CommentAuthor_possibleTypes = ['CommentAuthor']
+module.exports.isCommentAuthor = function(obj) {
+  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isCommentAuthor"')
+  return CommentAuthor_possibleTypes.includes(obj.__typename)
+}
+
+
+
+var ContentTemplate_possibleTypes = ['DefaultTemplate']
+module.exports.isContentTemplate = function(obj) {
+  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isContentTemplate"')
+  return ContentTemplate_possibleTypes.includes(obj.__typename)
+}
+
+
+
+var DefaultTemplate_possibleTypes = ['DefaultTemplate']
+module.exports.isDefaultTemplate = function(obj) {
+  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isDefaultTemplate"')
+  return DefaultTemplate_possibleTypes.includes(obj.__typename)
+}
+
+
+
 var RootMutation_possibleTypes = ['RootMutation']
 module.exports.isRootMutation = function(obj) {
   if (!obj || !obj.__typename) throw new Error('__typename is missing in "isRootMutation"')
@@ -3515,20 +3595,4 @@ var UpdateUserPayload_possibleTypes = ['UpdateUserPayload']
 module.exports.isUpdateUserPayload = function(obj) {
   if (!obj || !obj.__typename) throw new Error('__typename is missing in "isUpdateUserPayload"')
   return UpdateUserPayload_possibleTypes.includes(obj.__typename)
-}
-
-
-
-var CommentAuthor_possibleTypes = ['CommentAuthor']
-module.exports.isCommentAuthor = function(obj) {
-  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isCommentAuthor"')
-  return CommentAuthor_possibleTypes.includes(obj.__typename)
-}
-
-
-
-var DefaultTemplate_possibleTypes = ['DefaultTemplate']
-module.exports.isDefaultTemplate = function(obj) {
-  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isDefaultTemplate"')
-  return DefaultTemplate_possibleTypes.includes(obj.__typename)
 }
