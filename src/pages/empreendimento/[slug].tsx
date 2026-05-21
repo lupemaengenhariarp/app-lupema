@@ -133,61 +133,50 @@ const EmpreendimentoApp: NextPage<Props> = ({ data }) => {
     videosOutos,
     imagensOutros,
   }: PropsGallery) => {
-    const videos = videosOutos;
-    const imagens = imagensOutros;
+    const combinedArray = [...(imagensOutros ?? []), ...(videosOutos ?? [])];
 
-    // COM RANDOM PARA MOSTRAR VÍDEOS DE FORMA ALEATÓRIA
-    // function shuffleArray(array: any[]) {
-    //   for (let i = array.length - 1; i > 0; i--) {
-    //     const j = Math.floor(Math.random() * (i + 1));
-    //     [array[i], array[j]] = [array[j], array[i]];
-    //   }
-    //   return array;
-    // }
-
-    // SEM RANDOM E FOR -- PARA MOSTRAR OS VÍDEOS DE FORMA DECRESCENTE COM ARRAY REVERSE PARA INVERTER O ARRAY
-    function shuffleArray(array: any[]) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(i - 1);
-        [array[j], array[i]] = [array[j], array[i]];
-      }
-      // console.log(array.reverse());
-      const arrayReverse = array.reverse();
-      // console.log(arrayReverse);
-      return arrayReverse;
-    }
-
-    if (imagens && Array.isArray(imagens) && videos && Array.isArray(videos)) {
-      const combinedArray = [...imagens, ...videos];
-      const newArrayGallery = shuffleArray(combinedArray);
-      return newArrayGallery;
-    }
+    return shuffleArray(combinedArray);
   };
 
-  const galleryProgress = CombineArrayGallery({
-    videosOutos: data?.emp?.videosOutos ?? [],
-    imagensOutros: data?.emp?.imagensOutros ?? [],
-  })?.map((item, index) => {
-    if (item?.linkDoVideo) {
-      return (
-        <div key={index} className="relative w-full aspect-square">
-          <VideoApp embedLink={item?.linkDoVideo} />
-        </div>
-      );
+  function shuffleArray(array: any[]) {
+    const newArray = [...array];
+
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
     }
-    if (item?.sourceUrl) {
-      return (
-        <div key={index} className="relative w-full aspect-square">
-          <Image
-            src={item?.sourceUrl || ''}
-            fill
-            className="object-cover p-4"
-            alt="imagens e videos da obra"
-          />
-        </div>
-      );
-    }
-  });
+
+    return newArray;
+  }
+
+  const galleryProgress =
+    CombineArrayGallery({
+      videosOutos: data?.emp?.videosOutos ?? [],
+      imagensOutros: data?.emp?.imagensOutros ?? [],
+    })?.map((item, index) => {
+      if (item?.linkDoVideo) {
+        return (
+          <div key={index} className="relative w-full aspect-square">
+            <VideoApp embedLink={item?.linkDoVideo} />
+          </div>
+        );
+      }
+      if (item?.sourceUrl) {
+        return (
+          <div key={index} className="relative w-full aspect-square">
+            <Image
+              src={item?.sourceUrl || ''}
+              fill
+              className="object-cover p-4"
+              alt="imagens da obra"
+            />
+          </div>
+        );
+      }
+
+      return null;
+    }) ?? [];
 
   const responsiveGallery = {
     0: { items: 1 },
@@ -274,6 +263,10 @@ const EmpreendimentoApp: NextPage<Props> = ({ data }) => {
       check = 4;
     }
   });
+
+  const hasGallery =
+    (data.emp?.imagensOutros?.length ?? 0) > 0 ||
+    (data.emp?.videosOutos?.length ?? 0) > 0;
 
   return (
     <>
@@ -566,32 +559,29 @@ const EmpreendimentoApp: NextPage<Props> = ({ data }) => {
               </div>
             )}
         </section>
-        {(data.emp?.imagensOutros != undefined &&
-          data.emp?.imagensOutros?.length > 0) ||
-          (data.emp?.videosOutos != undefined &&
-            data.emp?.videosOutos?.length > 0 && (
-              <section className="container">
-                <div className="flex items-center justify-center">
-                  <div className="flex flex-col items-center w-full pt-16 space-y-12">
-                    <div className="text-center space-y-2">
-                      <h2 className="text-2xl lg:text-4xl text-green">
-                        Conheça mais sobre o {data.emp?.nomeDoEmpreendimento}
-                      </h2>
-                    </div>
-                    <div className="block w-full">
-                      <SlideApp
-                        items={galleryProgress}
-                        responsive={responsiveGalleryProgress}
-                        gap={30}
-                        infinite={false}
-                        dots={false}
-                        navigation={false}
-                      />
-                    </div>
-                  </div>
+        {hasGallery && (
+          <section className="container">
+            <div className="flex items-center justify-center">
+              <div className="flex flex-col items-center w-full pt-16 space-y-12">
+                <div className="text-center space-y-2">
+                  <h2 className="text-2xl lg:text-4xl text-green">
+                    Conheça mais sobre o {data.emp?.nomeDoEmpreendimento}
+                  </h2>
                 </div>
-              </section>
-            ))}
+                <div className="block w-full">
+                  <SlideApp
+                    items={galleryProgress}
+                    responsive={responsiveGalleryProgress}
+                    gap={30}
+                    infinite={false}
+                    dots={false}
+                    navigation={false}
+                  />
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
         {(data.emp?.listaItensTec || data.emp?.listaItensTec2) && (
           <section className="bg-green">
             <div className="container">
