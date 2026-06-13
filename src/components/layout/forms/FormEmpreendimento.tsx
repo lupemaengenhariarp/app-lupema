@@ -5,11 +5,17 @@ import { axiosInstance } from '../../../lib/axios';
 import Error from './Error';
 import MensageApp from '../Mensage';
 
+declare global {
+  interface Window {
+    dataLayer?: Array<Record<string, unknown>>;
+  }
+}
+
 interface Props {
   name: string | undefined;
 }
 
-const FormEmpreendimento = ({ name }: Props) => {
+const FormEmpreendimento = ({ name, ...props }: Props) => {
   const mutation = useMutation((data: IInitialValues) => {
     return axiosInstance.post('../api/sendEmail', data);
   });
@@ -28,17 +34,31 @@ const FormEmpreendimento = ({ name }: Props) => {
       {mutation.isLoading && <span className="text-white">Enviando...</span>}
       <Formik
         initialValues={initialValues}
-        onSubmit={(data) => {
-          let formData = {
+        validationSchema={Schema}
+        onSubmit={async (data) => {
+          const formData = {
             ...data,
             data: new Date().toLocaleString(),
             subject: 'Novo contato via site: Empreendimento ' + name,
             for: 'empreendimento',
           };
 
-          mutation.mutate(formData);
+          window.dataLayer = window.dataLayer || [];
+
+          window.dataLayer.push({
+            event: 'lead_form_submit',
+            formName: 'Empreendimento',
+            nome: data.nome,
+            email: data.email,
+            telefone: data.telefone,
+          });
+
+          try {
+            await mutation.mutateAsync(formData);
+          } catch (error) {
+            console.error(error);
+          }
         }}
-        validationSchema={Schema}
       >
         {() => (
           <Form className="flex flex-col w-full space-y-8 [&>label]:text-white">

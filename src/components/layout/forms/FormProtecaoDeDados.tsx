@@ -53,7 +53,8 @@ const FormProtecarDeDados = () => {
       {mutation.isLoading && <span className="text-white">Enviando...</span>}
       <Formik
         initialValues={initialValues}
-        onSubmit={(data) => {
+        validationSchema={Schema}
+        onSubmit={async (data) => {
           let formData = {
             ...data,
             data: new Date().toLocaleString(),
@@ -61,9 +62,22 @@ const FormProtecarDeDados = () => {
             for: 'empreendimento',
           };
 
-          mutation.mutate(formData);
+          window.dataLayer = window.dataLayer || [];
+
+          window.dataLayer.push({
+            event: 'lead_form_submit',
+            formName: 'fale-conosco',
+            nome: data.nome,
+            email: data.email,
+            telefone: data.telefone,
+          });
+
+          try {
+            await mutation.mutateAsync(formData);
+          } catch (error) {
+            console.error(error);
+          }
         }}
-        validationSchema={Schema}
       >
         {() => (
           <Form className="form">

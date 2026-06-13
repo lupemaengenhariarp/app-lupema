@@ -34,7 +34,8 @@ const FormDownloadApresentation = ({ setValue, file }: Props) => {
         </p>
         <Formik
           initialValues={initialValues}
-          onSubmit={(data) => {
+          validationSchema={Schema}
+          onSubmit={async (data) => {
             let formData = {
               ...data,
               pdf: file,
@@ -43,9 +44,22 @@ const FormDownloadApresentation = ({ setValue, file }: Props) => {
               for: 'apresentacao',
             };
 
-            mutation.mutate(formData);
+            window.dataLayer = window.dataLayer || [];
+
+            window.dataLayer.push({
+              event: 'lead_form_submit',
+              formName: 'Baixar Apresentação',
+              nome: data.nome,
+              email: data.email,
+              telefone: data.telefone,
+            });
+
+            try {
+              await mutation.mutateAsync(formData);
+            } catch (error) {
+              console.error(error);
+            }
           }}
-          validationSchema={Schema}
         >
           {() => (
             <Form className="form">

@@ -7,7 +7,7 @@ import MensageApp from '../Mensage';
 
 const FormAssessoria = () => {
   const mutation = useMutation((data: IInitialValues) => {
-    return axiosInstance.post('../api/sendEmail', data)
+    return axiosInstance.post('../api/sendEmail', data);
   });
 
   return (
@@ -24,7 +24,8 @@ const FormAssessoria = () => {
       {mutation.isLoading && <span className="text-white">Enviando...</span>}
       <Formik
         initialValues={initialValues}
-        onSubmit={(data) => {
+        validationSchema={Schema}
+        onSubmit={async (data) => {
           let formData = {
             ...data,
             data: new Date().toLocaleString(),
@@ -32,9 +33,22 @@ const FormAssessoria = () => {
             for: 'assessoria',
           };
 
-          mutation.mutate(formData);
+          window.dataLayer = window.dataLayer || [];
+
+          window.dataLayer.push({
+            event: 'lead_form_submit',
+            formName: 'assessoria',
+            nome: data.nome,
+            email: data.email,
+            telefone: data.telefone,
+          });
+
+          try {
+            await mutation.mutateAsync(formData);
+          } catch (error) {
+            console.error(error);
+          }
         }}
-        validationSchema={Schema}
       >
         {() => (
           <Form className="flex flex-col w-full space-y-8 [&>label]:text-white">

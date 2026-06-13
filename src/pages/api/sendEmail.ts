@@ -8,10 +8,11 @@ import { genEmailTrabalheConosco } from '../../mjml/generates/trabalheConosco';
 import { genEmailEmpreendimento } from '../../mjml/generates/empreendimento';
 import { genEmailApresentacao } from '../../mjml/generates/apresentacao';
 
-const api_key = `${process.env.VERCEL_ENV === 'production'
-  ? process.env.SENDINBLUE_KEY
-  : process.env.NEXT_PUBLIC_SENDINBLUE_KEY
-  }`;
+const api_key = `${
+  process.env.VERCEL_ENV === 'production'
+    ? process.env.SENDINBLUE_KEY
+    : process.env.NEXT_PUBLIC_SENDINBLUE_KEY
+}`;
 
 const clientMail = new SibApivV3Sdk.TransactionalEmailsApi();
 const ccRecipient = new SibApivV3Sdk.SendSmtpEmailCc();
@@ -71,27 +72,45 @@ export default async function handler(
       break;
   }
 
-  if (emailCc == null || emailCc == '') {
-    await clientMail
-      .sendTransacEmail({
-        to: [{ name: 'Lupema', email: `${emailTo}` }],
-        // bcc: [{ name: 'Lupema', email: `${emailCc}` }],
-        sender: { name: 'Lupema', email: 'lupema@lupemaengenharia.com.br' },
-        subject: bodyData?.subject,
-        htmlContent: emailHTML,
-      })
-      .then((response) => res.send({ success: true }))
-      .catch((err) => res.send({ success: false }));
-  } else {
-    await clientMail
-      .sendTransacEmail({
-        to: [{ name: 'Lupema', email: `${emailTo}` }],
-        bcc: [{ name: 'Lupema', email: `${emailCc}` }],
-        sender: { name: 'Lupema', email: 'lupema@lupemaengenharia.com.br' },
-        subject: bodyData?.subject,
-        htmlContent: emailHTML,
-      })
-      .then((response) => res.send({ success: true }))
-      .catch((err) => res.send({ success: false }));
+  try {
+    await sendToRD(bodyData).catch((error) => {
+      console.error('Erro ao enviar para RD', error);
+    });
+
+    await clientMail.sendTransacEmail({
+      to: [
+        {
+          name: 'Lupema',
+          email: emailTo,
+        },
+      ],
+
+      ...(emailCc && {
+        bcc: [
+          {
+            name: 'Lupema',
+            email: emailCc,
+          },
+        ],
+      }),
+
+      sender: {
+        name: 'Lupema',
+        email: 'lupema@lupemaengenharia.com.br',
+      },
+
+      subject: bodyData?.subject,
+      htmlContent: emailHTML,
+    });
+
+    return res.status(200).json({
+      success: true,
+    });
+  } catch (error) {
+    console.error('Erro ao enviar email', error);
+
+    return res.status(500).json({
+      success: false,
+    });
   }
 }

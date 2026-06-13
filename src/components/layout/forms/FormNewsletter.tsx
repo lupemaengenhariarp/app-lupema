@@ -25,15 +25,37 @@ const FormNewsletter = () => {
 
       <Formik
         initialValues={initialValues}
-        onSubmit={(data) => {
+        onSubmit={ async (data) => {
           let formData = {
             ...data,
             data: new Date().toLocaleString(),
-            subject: 'Novo contato via site: Newsletter ' + name,
+            subject: 'Novo contato via site: Newsletter ' + data.nome,
             for: 'newsletter',
           };
 
-          mutation.mutate(formData);
+          window.dataLayer = window.dataLayer || [];
+
+          window.dataLayer.push({
+            event: 'lead_form_submit',
+            formName: 'Newsletter',
+            name,
+            email: data.email,
+          });
+
+          try {
+            await mutation.mutateAsync(formData);
+
+            window.dataLayer = window.dataLayer || [];
+
+            window.dataLayer.push({
+              event: 'formSubmitSuccess',
+              formName: 'Newsletter',
+              name: name,
+              email: data.email,
+            });
+          } catch (error) {
+            console.error(error);
+          }
         }}
         validationSchema={Schema}
       >
