@@ -23,7 +23,7 @@ async function getRDAccessToken() {
   return data.access_token;
 }
 
-async function sendToRD(bodyData: any) {
+export default async function sendToRD(bodyData: any) {
   const accessToken = await getRDAccessToken();
 
   const response = await fetch(

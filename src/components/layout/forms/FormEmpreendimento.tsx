@@ -15,7 +15,7 @@ interface Props {
   name: string | undefined;
 }
 
-const FormEmpreendimento = ({ name, ...props }: Props) => {
+const FormEmpreendimento = ({ name }: Props) => {
   const mutation = useMutation((data: IInitialValues) => {
     return axiosInstance.post('../api/sendEmail', data);
   });
@@ -118,12 +118,12 @@ const initialValues: IInitialValues = {
 
 const Schema = yup.object().shape({
   nome: yup
-    .string()
-    .matches(
-      /^([a-zA-ZÀ-ÖØ-öø-ÿ])([a-zA-ZÀ-ÖØ-öø-ÿ]+)(\s)?([a-zA-ZÀ-ÖØ-öø-ÿ]+)([a-zA-ZÀ-ÖØ-öø-ÿ]+)(?:\s([a-zA-ZÀ-ÖØ-öø-ÿ]+))+$/,
-      'Nome inválido.'
-    )
-    .required('Campo requerido.'),
+  .string()
+  .matches(
+    /^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:\s+[A-Za-zÀ-ÖØ-öø-ÿ]+)+$/,
+    'Informe nome e sobrenome.'
+  )
+  .required('Campo requerido.'),
   email: yup.string().email('E-mail inválido.').required('Campo requerido.'),
   telefone: yup
     .string()

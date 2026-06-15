@@ -7,6 +7,7 @@ import { genEmailOferecaSuaArea } from '../../mjml/generates/oferecaSuaArea';
 import { genEmailTrabalheConosco } from '../../mjml/generates/trabalheConosco';
 import { genEmailEmpreendimento } from '../../mjml/generates/empreendimento';
 import { genEmailApresentacao } from '../../mjml/generates/apresentacao';
+import sendToRD from './lead';
 
 const api_key = `${
   process.env.VERCEL_ENV === 'production'
@@ -81,7 +82,7 @@ export default async function handler(
       to: [
         {
           name: 'Lupema',
-          email: emailTo,
+          email: `${emailTo}`,
         },
       ],
 
@@ -89,7 +90,7 @@ export default async function handler(
         bcc: [
           {
             name: 'Lupema',
-            email: emailCc,
+            email: `${emailCc}`,
           },
         ],
       }),
