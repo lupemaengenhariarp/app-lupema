@@ -41,6 +41,7 @@ const FormEmpreendimento = ({ name }: Props) => {
             data: new Date().toLocaleString(),
             subject: 'Novo contato via site: Empreendimento ' + name,
             for: 'empreendimento',
+            empName: name,
           };
 
           window.dataLayer = window.dataLayer || [];

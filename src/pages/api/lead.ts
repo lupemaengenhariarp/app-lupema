@@ -39,7 +39,7 @@ export default async function sendToRD(bodyData: any) {
         event_type: 'CONVERSION',
         event_family: 'CDP',
         payload: {
-          conversion_identifier:  `site-lupema-${bodyData.for}` || 'site-lupema',
+          conversion_identifier: bodyData.for === 'empreendimento' ? '/empreendimento/' + bodyData.empName : '/' + bodyData.for,
 
           name: bodyData.nome,
           email: bodyData.email,
