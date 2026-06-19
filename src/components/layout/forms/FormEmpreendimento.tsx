@@ -13,9 +13,10 @@ declare global {
 
 interface Props {
   name: string | undefined;
+  slug: string | undefined;
 }
 
-const FormEmpreendimento = ({ name }: Props) => {
+const FormEmpreendimento = ({ name, slug }: Props) => {
   const mutation = useMutation((data: IInitialValues) => {
     return axiosInstance.post('../api/sendEmail', data);
   });
@@ -41,7 +42,7 @@ const FormEmpreendimento = ({ name }: Props) => {
             data: new Date().toLocaleString(),
             subject: 'Novo contato via site: Empreendimento ' + name,
             for: 'empreendimento',
-            empName: name,
+            empName: slug,
           };
 
           window.dataLayer = window.dataLayer || [];

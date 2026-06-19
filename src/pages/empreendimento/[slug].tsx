@@ -31,6 +31,7 @@ interface Props {
     emp: Empreendimento_Empreendimento;
     housi: Empreendimento_Housiverso;
     banners: RootQueryToBannerConnection;
+    slugPage: string;
   };
 }
 
@@ -53,9 +54,7 @@ const EmpreendimentoApp: NextPage<Props> = ({ data }) => {
   const [value, setValue] = useState('');
   const [valueStage, setValueStage] = useState('');
   const [modalShare, setModalShare] = useState('');
-  Fancybox.bind('[data-fancybox]', {
-    // Your custom options
-  });
+  Fancybox.bind('[data-fancybox]', {});
 
   let combinedArray = [];
 
@@ -395,7 +394,7 @@ const EmpreendimentoApp: NextPage<Props> = ({ data }) => {
               </div>
 
               <div className="block w-full">
-                <FormEmpreendimento name={data.emp.nomeDoEmpreendimento} />
+                <FormEmpreendimento name={data.emp.nomeDoEmpreendimento} slug={data.slugPage} />
               </div>
             </div>
           </div>
@@ -829,6 +828,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         housi: empreendimento?.housiVerso,
         social: page?.informacoesDeContato,
         banners: banners,
+        slugPage: empreendimento?.slug,
       },
     },
     revalidate: 30,
