@@ -5,6 +5,7 @@ import { useMutation } from 'react-query';
 import { axiosInstance } from '../../../lib/axios';
 import React, { useCallback } from 'react';
 import { Cep, Currency, DataNascimento, Telefone } from '../Mask';
+import { getStoredUtms } from '../../../utils/utm';
 
 const MultiStepForm = () => {
   const mutation = useMutation((data: any) => {
@@ -61,6 +62,7 @@ const MultiStepForm = () => {
     onSubmit: async (data) => {
       let formData = {
         ...data,
+        ...getStoredUtms(),
         data: new Date().toLocaleString(),
         subject: 'Novo contato via site: Trabalhe-conosco',
         for: 'trabalhe_conosco',

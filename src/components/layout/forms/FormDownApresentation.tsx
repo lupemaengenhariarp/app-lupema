@@ -4,6 +4,7 @@ import * as yup from 'yup';
 import { axiosInstance } from '../../../lib/axios';
 import Error from './Error';
 import { IoMdClose } from 'react-icons/io';
+import { getStoredUtms } from '../../../utils/utm';
 
 interface Props {
   setValue: (value: string) => void;
@@ -38,6 +39,7 @@ const FormDownloadApresentation = ({ setValue, file }: Props) => {
           onSubmit={async (data) => {
             let formData = {
               ...data,
+              ...getStoredUtms(),
               pdf: file,
               data: new Date().toLocaleString(),
               subject: 'Novo contato via site: Baixar Apresentação',

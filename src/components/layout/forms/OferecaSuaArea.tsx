@@ -4,6 +4,7 @@ import * as yup from 'yup';
 import { axiosInstance } from '../../../lib/axios';
 import Error from './Error';
 import MensageApp from '../Mensage';
+import { getStoredUtms } from '../../../utils/utm';
 
 const OferecaSuaArea = () => {
   const mutation = useMutation((data: IInitialValues) => {
@@ -33,6 +34,7 @@ const OferecaSuaArea = () => {
         onSubmit={async (data) => {
           let formData = {
             ...data,
+            ...getStoredUtms(),
             data: new Date().toLocaleString(),
             subject: 'Novo contato via site: Ofereça-sua-área',
             for: 'ofereca_sua_area',

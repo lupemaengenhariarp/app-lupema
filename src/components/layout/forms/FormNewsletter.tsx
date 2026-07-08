@@ -4,6 +4,7 @@ import * as yup from 'yup';
 import { axiosInstance } from '../../../lib/axios';
 import Error from './Error';
 import MensageApp from '../Mensage';
+import { getStoredUtms } from '../../../utils/utm';
 
 const FormNewsletter = () => {
   const mutation = useMutation((data: IInitialValues) => {
@@ -28,6 +29,7 @@ const FormNewsletter = () => {
         onSubmit={ async (data) => {
           let formData = {
             ...data,
+            ...getStoredUtms(),
             data: new Date().toLocaleString(),
             subject: 'Novo contato via site: Newsletter ' + data.nome,
             for: 'newsletter',
