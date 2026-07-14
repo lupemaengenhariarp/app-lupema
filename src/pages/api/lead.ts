@@ -44,16 +44,23 @@ export default async function sendToRD(bodyData: any) {
           name: bodyData.nome,
           email: bodyData.email,
           personal_phone: bodyData.telefone || bodyData.celular1,
-          utm_source: bodyData.utm_source || '',
-          utm_medium: bodyData.utm_medium || '',
-          utm_campaign: bodyData.utm_campaign || '',
-          utm_term: bodyData.utm_term || '',
-          utm_content: bodyData.utm_content || '',
+          // campos padrão
+          utm_source: bodyData.utm_source,
+          utm_medium: bodyData.utm_medium,
+          utm_campaign: bodyData.utm_campaign,
+          utm_term: bodyData.utm_term,
+          utm_content: bodyData.utm_content,
+
+          // campos personalizados
+          cf_utm_source: bodyData.utm_source,
+          cf_utm_medium: bodyData.utm_medium,
+          cf_utm_campaign: bodyData.utm_campaign,
+          cf_utm_term: bodyData.utm_term,
+          cf_utm_content: bodyData.utm_content,
         },
       }),
     }
   );
-
 
   if (!response.ok) {
     const error = await response.text();
