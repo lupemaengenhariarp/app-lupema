@@ -10,30 +10,89 @@ interface Props {
 }
 
 const PoliticaDeQualidade: NextPage<Props> = ({ data }) => {
+  console.log(data.page);
+
   return (
-    <section>
-      <div className="flex flex-col lg:flex-row flex-wrap">
-        <div className='w-full sm:w-[640px] md:w-[460px] lg:w-[614px] xl:w-[768px] 2xl:w-[956px] ml-auto mr-auto xl:mr-0 py-[40px] md:py-[80px] mt-[100px] sm:mt-[74px] pl-4 xl:pl-[20px] 2xl:pl-0 pr-4 sm:pr-0 xl:pr-16 justify-end'>
-          <h1 className="border-0 text-2xl sm:text-3xl text-green mb-8 relative">
-            {data.page?.title}
-          </h1>
-          {
-            <div
-              dangerouslySetInnerHTML={{
-                __html: data.page?.content || '',
-              }}
-              className="content-wp"
+    <>
+      <section className="container py-[40px] md:py-[100px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+          <div className="py-8">
+            <h1 className="border-0 text-2xl sm:text-3xl text-green mb-8 relative">
+              {data.page?.title}
+            </h1>
+            {
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: data.page?.content || '',
+                }}
+                className="content-wp"
+              />
+            }
+          </div>
+          <div className="w-full">
+            <img
+              src={data.page?.featuredImage?.node.sourceUrl || ''}
+              className="object-cover h-full w-full"
             />
-          }
+          </div>
         </div>
-        <div className="w-full lg:w-[40%] max-h-96 h-auto lg:max-h-[100dvh] sticky top-0">
-          <img
-            src={data.page?.featuredImage?.node.sourceUrl || ''}
-            className="object-cover h-full w-full"
-          />
+      </section>
+
+      <section className="container mb-20">
+        <h2 className="text-2xl xl:text-4xl tracking-[8px] xl:tracking-[15px] text-green text-center uppercase font-normal">
+          Certificações e Práticas de Excelência
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-20">
+          {data.page?.conteudoPoliticaDeQualidade?.certificacaoPq?.map(
+            (item, index) => (
+              <div
+                key={index}
+                className="border border-black p-6 sm:p-10 2xl:p-16"
+              >
+                <img
+                  src={item?.imagemCertPq?.sourceUrl || ''}
+                  width="110"
+                  height="110"
+                  className="mx-auto"
+                />
+                <h3 className="text-center mt-4 text-green text-xl">
+                  {item?.tituloCertPq}
+                </h3>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: item?.descricaoCertPq || '',
+                  }}
+                  className="content-cert text-center"
+                />
+              </div>
+            )
+          )}
         </div>
-      </div>
-    </section>
+        <div className="grid  grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-5 mt-5">
+          {data.page?.conteudoPoliticaDeQualidade?.praticaItensPq?.map(
+            (item, index) => (
+              <div key={index} className="border border-black p-16">
+                <img
+                  src={item?.imagemCertPq?.sourceUrl || ''}
+                  width="180"
+                  height="180"
+                  className="mx-auto"
+                />
+                <h3 className="text-center mt-4 text-green text-xl">
+                  {item?.tituloCertPq}
+                </h3>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: item?.descricaoCertPq || '',
+                  }}
+                  className="content-cert text-center"
+                />
+              </div>
+            )
+          )}
+        </div>
+      </section>
+    </>
   );
 };
 
@@ -52,6 +111,22 @@ export const getStaticProps = async () => {
         featuredImage: {
           node: {
             sourceUrl: true,
+          },
+        },
+        conteudoPoliticaDeQualidade: {
+          certificacaoPq: {
+            imagemCertPq: {
+              sourceUrl: true,
+            },
+            tituloCertPq: true,
+            descricaoCertPq: true,
+          },
+          praticaItensPq: {
+            imagemCertPq: {
+              sourceUrl: true,
+            },
+            tituloCertPq: true,
+            descricaoCertPq: true,
           },
         },
       },

@@ -4,6 +4,7 @@ import * as yup from 'yup';
 import { axiosInstance } from '../../../lib/axios';
 import Error from './Error';
 import MensageApp from '../Mensage';
+import { getStoredUtms } from '../../../utils/utm';
 
 const FaleConosco = () => {
   const mutation = useMutation((data: IInitialValues) => {
@@ -29,17 +30,32 @@ const FaleConosco = () => {
 
       <Formik
         initialValues={initialValues}
-        onSubmit={(data) => {
+        validationSchema={Schema}
+        onSubmit={async (data) => {
           let formData = {
             ...data,
+            ...getStoredUtms(),
             data: new Date().toLocaleString(),
             subject: 'Novo contato via site: fale-conosco',
             for: 'fale_conosco',
           };
 
-          mutation.mutate(formData);
+          window.dataLayer = window.dataLayer || [];
+
+          window.dataLayer.push({
+            event: 'lead_form_submit',
+            formName: 'fale-conosco',
+            nome: data.nome,
+            email: data.email,
+            telefone: data.telefone,
+          });
+
+          try {
+            await mutation.mutateAsync(formData);
+          } catch (error) {
+            console.error(error);
+          }
         }}
-        validationSchema={Schema}
       >
         {() => (
           <Form className="form grid grid-cols-1 gap-4">
@@ -62,11 +78,17 @@ const FaleConosco = () => {
             </Field>
             <Error inputName="assunto" />
 
-            <Field as="textarea" name="mensagem" row={4} placeholder="Mensagem" />
+            <Field
+              as="textarea"
+              name="mensagem"
+              row={4}
+              placeholder="Mensagem"
+            />
             <Error inputName="mensagem" />
 
             <input
-              type="submit" value="Enviar"
+              type="submit"
+              value="Enviar"
               className="bg-green text-black uppercase font-semibold"
             />
 

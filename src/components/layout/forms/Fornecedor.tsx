@@ -4,6 +4,7 @@ import * as yup from 'yup';
 import { axiosInstance } from '../../../lib/axios';
 import Error from './Error';
 import MensageApp from '../Mensage';
+import { getStoredUtms } from '../../../utils/utm';
 
 const Fornecedor = () => {
   const mutation = useMutation((data: IInitialValues) => {
@@ -30,17 +31,32 @@ const Fornecedor = () => {
 
       <Formik
         initialValues={initialValues}
-        onSubmit={(data) => {
+        validationSchema={Schema}
+        onSubmit={async (data) => {
           let formData = {
             ...data,
+            ...getStoredUtms(),
             data: new Date().toLocaleString(),
             subject: 'Novo contato via site: seja-fornecedor',
             for: 'seja_fornecedor',
           };
 
-          mutation.mutate(formData);
+          window.dataLayer = window.dataLayer || [];
+
+          window.dataLayer.push({
+            event: 'lead_form_submit',
+            formName: 'seja_fornecedor',
+            nome: data.nome,
+            email: data.email,
+            telefone: data.telefone,
+          });
+
+          try {
+            await mutation.mutateAsync(formData);
+          } catch (error) {
+            console.error(error);
+          }
         }}
-        validationSchema={Schema}
       >
         {() => (
           <Form className="form grid grid-cols-1 gap-4 mt-4">

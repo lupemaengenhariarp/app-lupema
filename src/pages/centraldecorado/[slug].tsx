@@ -1,17 +1,10 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import Image from 'next/image';
 import {
-    CentraldeDecorado_Centraldedecorados, MediaItem,
-    MediaItemRequest,
+    CentraldeDecorado_Centraldedecorados
 } from '../../generated';
 import ClientApp from '../../lib/genql';
-import { TbArrowRightBar, TbCar } from 'react-icons/tb';
-import { BiBed, BiShareAlt } from 'react-icons/bi';
-import { BsPlusLg } from 'react-icons/bs';
-import { useEffect, useState } from 'react';
 import { Fancybox } from '@fancyapps/ui';
 import '@fancyapps/ui/dist/fancybox/fancybox.css';
-import { useRouter } from 'next/router';
 import DecoradoBanner from '../../components/layout/decorados/DecoradoBanner';
 import DecoradoMenu from '../../components/layout/decorados/DecoradoMenu';
 import DecoradoInfo from '../../components/layout/decorados/DecoradoInfo';
@@ -36,19 +29,9 @@ interface Props {
     };
 }
 
-
-interface mediaItem {
-    sourceUrl: MediaItemRequest;
-}
-
 const CentralDecoradoApp: NextPage<Props> = ({ data }) => {
-    const [value, setValue] = useState('');
-    const [valueStage, setValueStage] = useState('');
-    const [modalShare, setModalShare] = useState('');
     Fancybox.bind('[data-fancybox]', {
     });
-
-    let combinedArray = [];
 
     return (
         <>

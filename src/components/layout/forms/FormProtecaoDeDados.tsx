@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import { axiosInstance } from '../../../lib/axios';
 import MensageApp from '../Mensage';
 import Error from './Error';
+import { getStoredUtms } from '../../../utils/utm';
 
 const objetos = [
   'Acessar seus dados, podendo solicitá-los em uma cópia legível sob forma impressa ou por meio eletrônico, seguro e idôneo',
@@ -53,17 +54,32 @@ const FormProtecarDeDados = () => {
       {mutation.isLoading && <span className="text-white">Enviando...</span>}
       <Formik
         initialValues={initialValues}
-        onSubmit={(data) => {
+        validationSchema={Schema}
+        onSubmit={async (data) => {
           let formData = {
             ...data,
+            ...getStoredUtms(),
             data: new Date().toLocaleString(),
             subject: 'Novo contato via site: Empreendimento ' + name,
             for: 'empreendimento',
           };
 
-          mutation.mutate(formData);
+          window.dataLayer = window.dataLayer || [];
+
+          window.dataLayer.push({
+            event: 'lead_form_submit',
+            formName: 'fale-conosco',
+            nome: data.nome,
+            email: data.email,
+            telefone: data.telefone,
+          });
+
+          try {
+            await mutation.mutateAsync(formData);
+          } catch (error) {
+            console.error(error);
+          }
         }}
-        validationSchema={Schema}
       >
         {() => (
           <Form className="form">

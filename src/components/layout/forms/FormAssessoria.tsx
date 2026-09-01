@@ -4,10 +4,11 @@ import * as yup from 'yup';
 import { axiosInstance } from '../../../lib/axios';
 import Error from './Error';
 import MensageApp from '../Mensage';
+import { getStoredUtms } from '../../../utils/utm';
 
 const FormAssessoria = () => {
   const mutation = useMutation((data: IInitialValues) => {
-    return axiosInstance.post('../api/sendEmail', data)
+    return axiosInstance.post('../api/sendEmail', data);
   });
 
   return (
@@ -24,17 +25,32 @@ const FormAssessoria = () => {
       {mutation.isLoading && <span className="text-white">Enviando...</span>}
       <Formik
         initialValues={initialValues}
-        onSubmit={(data) => {
+        validationSchema={Schema}
+        onSubmit={async (data) => {
           let formData = {
             ...data,
+            ...getStoredUtms(),
             data: new Date().toLocaleString(),
             subject: 'Novo contato via site: Assessoria ' + name,
             for: 'assessoria',
           };
 
-          mutation.mutate(formData);
+          window.dataLayer = window.dataLayer || [];
+
+          window.dataLayer.push({
+            event: 'lead_form_submit',
+            formName: 'assessoria',
+            nome: data.nome,
+            email: data.email,
+            telefone: data.telefone,
+          });
+
+          try {
+            await mutation.mutateAsync(formData);
+          } catch (error) {
+            console.error(error);
+          }
         }}
-        validationSchema={Schema}
       >
         {() => (
           <Form className="flex flex-col w-full space-y-8 [&>label]:text-white">

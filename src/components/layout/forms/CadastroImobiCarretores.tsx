@@ -4,6 +4,7 @@ import * as yup from 'yup';
 import { axiosInstance } from '../../../lib/axios';
 import Error from './Error';
 import MensageApp from '../Mensage';
+import { getStoredUtms } from '../../../utils/utm';
 
 const CadastroImobiCorretores = () => {
   const mutation = useMutation((data: IInitialValues) => {
@@ -25,17 +26,32 @@ const CadastroImobiCorretores = () => {
       {mutation.isLoading && <span className="text-white">Enviando...</span>}
       <Formik
         initialValues={initialValues}
-        onSubmit={(data) => {
+        validationSchema={Schema}
+        onSubmit={async (data) => {
           let formData = {
             ...data,
+            ...getStoredUtms(),
             data: new Date().toLocaleString(),
             subject: 'Novo contato via site: Cadastro-imobiliárias',
             for: 'cadastro_imobiliarias',
           };
 
-          mutation.mutate(formData);
+          window.dataLayer = window.dataLayer || [];
+
+          window.dataLayer.push({
+            event: 'lead_form_submit',
+            formName: 'Cadastro-imobiliárias',
+            nome: data.nome,
+            email: data.email,
+            telefone: data.telefone,
+          });
+
+          try {
+            await mutation.mutateAsync(formData);
+          } catch (error) {
+            console.error(error);
+          }
         }}
-        validationSchema={Schema}
       >
         {() => (
           <Form className="form grid grid-cols-1 gap-4 mt-4">

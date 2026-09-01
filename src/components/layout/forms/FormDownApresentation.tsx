@@ -4,6 +4,7 @@ import * as yup from 'yup';
 import { axiosInstance } from '../../../lib/axios';
 import Error from './Error';
 import { IoMdClose } from 'react-icons/io';
+import { getStoredUtms } from '../../../utils/utm';
 
 interface Props {
   setValue: (value: string) => void;
@@ -34,18 +35,33 @@ const FormDownloadApresentation = ({ setValue, file }: Props) => {
         </p>
         <Formik
           initialValues={initialValues}
-          onSubmit={(data) => {
+          validationSchema={Schema}
+          onSubmit={async (data) => {
             let formData = {
               ...data,
+              ...getStoredUtms(),
               pdf: file,
               data: new Date().toLocaleString(),
               subject: 'Novo contato via site: Baixar Apresentação',
               for: 'apresentacao',
             };
 
-            mutation.mutate(formData);
+            window.dataLayer = window.dataLayer || [];
+
+            window.dataLayer.push({
+              event: 'lead_form_submit',
+              formName: 'Baixar Apresentação',
+              nome: data.nome,
+              email: data.email,
+              telefone: data.telefone,
+            });
+
+            try {
+              await mutation.mutateAsync(formData);
+            } catch (error) {
+              console.error(error);
+            }
           }}
-          validationSchema={Schema}
         >
           {() => (
             <Form className="form">

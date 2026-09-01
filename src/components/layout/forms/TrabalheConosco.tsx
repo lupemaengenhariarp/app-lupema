@@ -5,6 +5,7 @@ import { useMutation } from 'react-query';
 import { axiosInstance } from '../../../lib/axios';
 import React, { useCallback } from 'react';
 import { Cep, Currency, DataNascimento, Telefone } from '../Mask';
+import { getStoredUtms } from '../../../utils/utm';
 
 const MultiStepForm = () => {
   const mutation = useMutation((data: any) => {
@@ -58,15 +59,30 @@ const MultiStepForm = () => {
       funcao3: '',
       atribuicoes3: '',
     },
-    onSubmit: (data) => {
+    onSubmit: async (data) => {
       let formData = {
         ...data,
+        ...getStoredUtms(),
         data: new Date().toLocaleString(),
         subject: 'Novo contato via site: Trabalhe-conosco',
         for: 'trabalhe_conosco',
       };
 
-      mutation.mutate(formData);
+      window.dataLayer = window.dataLayer || [];
+
+      window.dataLayer.push({
+        event: 'lead_form_submit',
+        formName: 'trabalhe_conosco',
+        nome: data.nome,
+        email: data.email,
+        telefone: data.celular1,
+      });
+
+      try {
+        await mutation.mutateAsync(formData);
+      } catch (error) {
+        console.error(error);
+      }
     },
     validateOnNext: true,
     activeStepIndex: 0,
@@ -267,8 +283,9 @@ const MultiStepForm = () => {
 
             <button
               type="button"
-              className={`bg-green py-2 px-6 text-black uppercase font-semibold ${isLastStep && 'w-full'
-                }`}
+              className={`bg-green py-2 px-6 text-black uppercase font-semibold ${
+                isLastStep && 'w-full'
+              }`}
               disabled={isNextDisabled}
               onClick={handleNext}
             >
@@ -293,8 +310,9 @@ const Stage0 = ({ values, errors, touched, handleChange }: any) => {
       <div>
         <label
           htmlFor="emprego"
-          className={`py-2 pl-4 pr-8 text-white cursor-pointer inline-block ${values.opcaoArea === 'emprego' ? 'bg-green' : 'bg-black'
-            }`}
+          className={`py-2 pl-4 pr-8 text-white cursor-pointer inline-block ${
+            values.opcaoArea === 'emprego' ? 'bg-green' : 'bg-black'
+          }`}
         >
           <input
             type="radio"
@@ -308,8 +326,9 @@ const Stage0 = ({ values, errors, touched, handleChange }: any) => {
         </label>
         <label
           htmlFor="estagio"
-          className={`py-2 pl-4 pr-8 text-white ml-4 cursor-pointer inline-block ${values.opcaoArea === 'estagio' ? 'bg-green' : 'bg-black'
-            }`}
+          className={`py-2 pl-4 pr-8 text-white ml-4 cursor-pointer inline-block ${
+            values.opcaoArea === 'estagio' ? 'bg-green' : 'bg-black'
+          }`}
         >
           <input
             type="radio"

@@ -4,6 +4,7 @@ import * as yup from 'yup';
 import { axiosInstance } from '../../../lib/axios';
 import Error from './Error';
 import MensageApp from '../Mensage';
+import { getStoredUtms } from '../../../utils/utm';
 
 const FormNewsletter = () => {
   const mutation = useMutation((data: IInitialValues) => {
@@ -25,15 +26,38 @@ const FormNewsletter = () => {
 
       <Formik
         initialValues={initialValues}
-        onSubmit={(data) => {
+        onSubmit={ async (data) => {
           let formData = {
             ...data,
+            ...getStoredUtms(),
             data: new Date().toLocaleString(),
-            subject: 'Novo contato via site: Newsletter ' + name,
+            subject: 'Novo contato via site: Newsletter ' + data.nome,
             for: 'newsletter',
           };
 
-          mutation.mutate(formData);
+          window.dataLayer = window.dataLayer || [];
+
+          window.dataLayer.push({
+            event: 'lead_form_submit',
+            formName: 'Newsletter',
+            name,
+            email: data.email,
+          });
+
+          try {
+            await mutation.mutateAsync(formData);
+
+            window.dataLayer = window.dataLayer || [];
+
+            window.dataLayer.push({
+              event: 'formSubmitSuccess',
+              formName: 'Newsletter',
+              name: name,
+              email: data.email,
+            });
+          } catch (error) {
+            console.error(error);
+          }
         }}
         validationSchema={Schema}
       >
