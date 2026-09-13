@@ -31,7 +31,6 @@ const LayoutApp = ({ children, ApiData }: Props) => {
 
       <main>{children}</main>
 
-      <WhatsApp data={ApiData.data?.social} />
       <FooterApp data={ApiData.data?.social} />
       <CookieNotice />
     </div>
