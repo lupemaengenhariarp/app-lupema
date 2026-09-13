@@ -14,7 +14,7 @@ module.exports.version = version
 module.exports.createClient = function(options) {
   options = options || {}
   var optionsCopy = {
-    url: 'https://lupema.mayacomunicacao.com.br/graphql',
+    url: 'http://painel.lupemaengenharia.com.br/index.php?graphql',
     queryRoot: typeMap.Query,
     mutationRoot: typeMap.Mutation,
     subscriptionRoot: typeMap.Subscription,
@@ -267,6 +267,10 @@ module.exports.enumTaxonomyEnum = {
   CATEGORY: 'CATEGORY',
   POSTFORMAT: 'POSTFORMAT',
   TAG: 'TAG',
+}
+
+module.exports.enumContentTemplateEnum = {
+  DEFAULT_TEMPLATE: 'DEFAULT_TEMPLATE',
 }
 
 module.exports.enumAvatarRatingEnum = {

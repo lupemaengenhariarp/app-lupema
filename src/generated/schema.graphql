@@ -20,11 +20,6 @@ type RootQuery {
 
     """Type of unique identifier to fetch by. Default is Global ID"""
     idType: ArquivoAssessoriaIdType
-
-    """
-    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
-    """
-    asPreview: Boolean
   ): ArquivoAssessoria
 
   """A ArquivoAssessoria object"""
@@ -73,11 +68,6 @@ type RootQuery {
 
     """Type of unique identifier to fetch by. Default is Global ID"""
     idType: BannerIdType
-
-    """
-    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
-    """
-    asPreview: Boolean
   ): Banner
 
   """A Banner object"""
@@ -155,11 +145,6 @@ type RootQuery {
 
     """Type of unique identifier to fetch by. Default is Global ID"""
     idType: CentraldeDecoradoIdType
-
-    """
-    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
-    """
-    asPreview: Boolean
   ): CentraldeDecorado
 
   """A CentraldeDecorado object"""
@@ -246,11 +231,6 @@ type RootQuery {
     The content type the node is used for. Required when idType is set to "name" or "slug"
     """
     contentType: ContentTypeEnum
-
-    """
-    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
-    """
-    asPreview: Boolean
   ): ContentNode
 
   """Connection between the RootQuery type and the ContentNode type"""
@@ -315,11 +295,6 @@ type RootQuery {
 
     """Type of unique identifier to fetch by. Default is Global ID"""
     idType: EmpreendimentoIdType
-
-    """
-    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
-    """
-    asPreview: Boolean
   ): Empreendimento
 
   """A Empreendimento object"""
@@ -371,11 +346,6 @@ type RootQuery {
 
     """Type of unique identifier to fetch by. Default is Global ID"""
     idType: MediaItemIdType
-
-    """
-    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
-    """
-    asPreview: Boolean
   ): MediaItem
 
   """A mediaItem object"""
@@ -502,11 +472,6 @@ type RootQuery {
 
     """Type of unique identifier to fetch by. Default is Global ID"""
     idType: PageIdType
-
-    """
-    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
-    """
-    asPreview: Boolean
   ): Page
 
   """A page object"""
@@ -543,6 +508,9 @@ type RootQuery {
     where: RootQueryToPageConnectionWhereArgs
   ): RootQueryToPageConnection
 
+  """Fields of the &#039;PermalinkSettings&#039; settings group"""
+  permalinkSettings: PermalinkSettings
+
   """A WordPress plugin"""
   plugin(
     """The globally unique identifier of the plugin."""
@@ -578,11 +546,6 @@ type RootQuery {
 
     """Type of unique identifier to fetch by. Default is Global ID"""
     idType: PostIdType
-
-    """
-    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
-    """
-    asPreview: Boolean
   ): Post
 
   """A post object"""
@@ -673,6 +636,9 @@ type RootQuery {
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: RootQueryToEnqueuedScriptConnectionWhereArgs
   ): RootQueryToEnqueuedScriptConnection
 
   """Connection between the RootQuery type and the EnqueuedStylesheet type"""
@@ -692,6 +658,9 @@ type RootQuery {
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: RootQueryToEnqueuedStylesheetConnectionWhereArgs
   ): RootQueryToEnqueuedStylesheetConnection
 
   """Connection between the RootQuery type and the ContentNode type"""
@@ -903,58 +872,70 @@ type RootQuery {
 
 """All of the registered settings"""
 type Settings {
-  """Settings of the the string Settings Group"""
+  """Settings of the string Settings Group"""
   discussionSettingsDefaultCommentStatus: String
 
-  """Settings of the the string Settings Group"""
+  """Settings of the string Settings Group"""
   discussionSettingsDefaultPingStatus: String
 
-  """Settings of the the string Settings Group"""
+  """Settings of the string Settings Group"""
   generalSettingsDateFormat: String
 
-  """Settings of the the string Settings Group"""
+  """Settings of the string Settings Group"""
   generalSettingsDescription: String
 
-  """Settings of the the string Settings Group"""
+  """Settings of the string Settings Group"""
   generalSettingsEmail: String
 
-  """Settings of the the string Settings Group"""
+  """Settings of the string Settings Group"""
+  generalSettingsHomeUrl: String
+
+  """Settings of the string Settings Group"""
   generalSettingsLanguage: String
 
-  """Settings of the the integer Settings Group"""
+  """Settings of the integer Settings Group"""
   generalSettingsStartOfWeek: Int
 
-  """Settings of the the string Settings Group"""
+  """Settings of the string Settings Group"""
   generalSettingsTimeFormat: String
 
-  """Settings of the the string Settings Group"""
+  """Settings of the string Settings Group"""
   generalSettingsTimezone: String
 
-  """Settings of the the string Settings Group"""
+  """Settings of the string Settings Group"""
   generalSettingsTitle: String
 
-  """Settings of the the string Settings Group"""
+  """Settings of the string Settings Group"""
   generalSettingsUrl: String
 
-  """Settings of the the integer Settings Group"""
+  """Settings of the string Settings Group"""
+  permalinkSettingsCategoryBase: String
+
+  """Settings of the string Settings Group"""
+  permalinkSettingsStructure: String
+
+  """Settings of the string Settings Group"""
+  permalinkSettingsTagBase: String
+
+  """Settings of the integer Settings Group"""
   readingSettingsPageForPosts: Int
 
-  """Settings of the the integer Settings Group"""
+  """Settings of the integer Settings Group"""
   readingSettingsPageOnFront: Int
 
-  """Settings of the the integer Settings Group"""
+  """Settings of the integer Settings Group"""
   readingSettingsPostsPerPage: Int
 
-  """Settings of the the string Settings Group"""
+  """Settings of the string Settings Group"""
   readingSettingsShowOnFront: String
 
-  """Settings of the the integer Settings Group"""
+  """Settings of the integer Settings Group"""
   writingSettingsDefaultCategory: Int
 
-  """Settings of the the string Settings Group"""
+  """Settings of the string Settings Group"""
   writingSettingsDefaultPostFormat: String
 
-  """Settings of the the boolean Settings Group"""
+  """Settings of the boolean Settings Group"""
   writingSettingsUseSmilies: Boolean
 }
 
@@ -979,7 +960,7 @@ enum ArquivoAssessoriaIdType {
 
 """The ArquivoAssessoria type"""
 type ArquivoAssessoria implements Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & NodeWithTemplate & Previewable & NodeWithTitle & MenuItemLinkable {
-  """The id field matches the WP_Post-&gt;ID field."""
+  """The unique numeric identifier for the content node."""
   arquivoAssessoriaId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
 
   """The ancestors of the content node."""
@@ -1049,6 +1030,9 @@ type ArquivoAssessoria implements Node & ContentNode & UniformResourceIdentifiab
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: ContentNodeToEnqueuedScriptConnectionWhereArgs
   ): ContentNodeToEnqueuedScriptConnection
 
   """
@@ -1070,10 +1054,13 @@ type ArquivoAssessoria implements Node & ContentNode & UniformResourceIdentifiab
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: ContentNodeToEnqueuedStylesheetConnectionWhereArgs
   ): ContentNodeToEnqueuedStylesheetConnection
 
   """
-  The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table.
+  The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes.
   """
   guid: String
 
@@ -1138,7 +1125,7 @@ type ArquivoAssessoria implements Node & ContentNode & UniformResourceIdentifiab
   previewRevisionId: ID
 
   """
-  The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table.
+  The URL-friendly, human-readable identifier for the content node, used in its permalink.
   """
   slug: String
 
@@ -1207,6 +1194,9 @@ interface ContentNode implements Node & UniformResourceIdentifiable {
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: ContentNodeToEnqueuedScriptConnectionWhereArgs
   ): ContentNodeToEnqueuedScriptConnection
 
   """
@@ -1228,10 +1218,13 @@ interface ContentNode implements Node & UniformResourceIdentifiable {
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: ContentNodeToEnqueuedStylesheetConnectionWhereArgs
   ): ContentNodeToEnqueuedStylesheetConnection
 
   """
-  The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table.
+  The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes.
   """
   guid: String
 
@@ -1278,11 +1271,11 @@ interface ContentNode implements Node & UniformResourceIdentifiable {
   """The database id of the preview node"""
   previewRevisionDatabaseId: Int
 
-  """Whether the object is a node in the preview state"""
+  """The globally unique ID of the preview node"""
   previewRevisionId: ID
 
   """
-  The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table.
+  The URL-friendly, human-readable identifier for the content node, used in its permalink.
   """
   slug: String
 
@@ -1643,9 +1636,7 @@ type Taxonomy implements Node {
     before: String
   ): TaxonomyToTermNodeConnection
 
-  """
-  Description of the taxonomy. This field is equivalent to WP_Taxonomy-&gt;description
-  """
+  """Description of the taxonomy."""
   description: String
 
   """The plural name of the post type within the GraphQL Schema."""
@@ -1666,9 +1657,7 @@ type Taxonomy implements Node {
   """Name of the taxonomy shown in the menu. Usually plural."""
   label: String
 
-  """
-  The display name of the taxonomy. This field is equivalent to WP_Taxonomy-&gt;label
-  """
+  """The display name of the taxonomy."""
   name: String
 
   """Whether the taxonomy is publicly queryable"""
@@ -1682,9 +1671,7 @@ type Taxonomy implements Node {
   """The REST Controller class assigned to handling this content type."""
   restControllerClass: String
 
-  """
-  Whether to show the taxonomy as part of a tag cloud widget. This field is equivalent to WP_Taxonomy-&gt;show_tagcloud
-  """
+  """Whether to show the taxonomy as part of a tag cloud widget."""
   showCloud: Boolean
 
   """
@@ -1874,6 +1861,9 @@ interface TermNode implements Node & UniformResourceIdentifiable {
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: TermNodeToEnqueuedScriptConnectionWhereArgs
   ): TermNodeToEnqueuedScriptConnection
 
   """Connection between the TermNode type and the EnqueuedStylesheet type"""
@@ -1893,6 +1883,9 @@ interface TermNode implements Node & UniformResourceIdentifiable {
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: TermNodeToEnqueuedStylesheetConnectionWhereArgs
   ): TermNodeToEnqueuedStylesheetConnection
 
   """The globally unique ID for the object"""
@@ -1936,6 +1929,16 @@ interface TermNode implements Node & UniformResourceIdentifiable {
 
   """The unique resource identifier path"""
   uri: String
+}
+
+"""
+Arguments for filtering the TermNodeToEnqueuedScriptConnection connection
+"""
+input TermNodeToEnqueuedScriptConnectionWhereArgs {
+  """
+  Limit results to assets whose handle is in the provided list. Handles that do not match an asset are ignored. An empty list matches no assets, while omitting the argument (or passing null) leaves the connection unfiltered.
+  """
+  handlesIn: [String]
 }
 
 """Connection between the TermNode type and the EnqueuedScript type"""
@@ -2137,6 +2140,16 @@ type TermNodeToEnqueuedScriptConnectionPageInfo implements EnqueuedScriptConnect
 
   """When paginating backwards, the cursor to continue."""
   startCursor: String
+}
+
+"""
+Arguments for filtering the TermNodeToEnqueuedStylesheetConnection connection
+"""
+input TermNodeToEnqueuedStylesheetConnectionWhereArgs {
+  """
+  Limit results to assets whose handle is in the provided list. Handles that do not match an asset are ignored. An empty list matches no assets, while omitting the argument (or passing null) leaves the connection unfiltered.
+  """
+  handlesIn: [String]
 }
 
 """Connection between the TermNode type and the EnqueuedStylesheet type"""
@@ -2389,6 +2402,11 @@ input ContentTypeToContentNodeConnectionWhereArgs {
 
   """Array of IDs for the objects to retrieve"""
   in: [ID]
+
+  """
+  True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results.
+  """
+  isSticky: Boolean
   metaQuery: ContentTypeToContentNodeConnectionWhereArgsMetaQuery
 
   """Get objects with a specific mimeType property"""
@@ -2429,6 +2447,9 @@ input ContentTypeToContentNodeConnectionWhereArgs {
   """Show posts with a specific status."""
   status: PostStatusEnum
   taxQuery: TaxQuery
+
+  """Filter the connection to content assigned a specific template."""
+  template: ContentTemplateEnum
 
   """Title of the object"""
   title: String
@@ -2507,8 +2528,17 @@ input DateInput {
   """Day of the month (from 1 to 31)"""
   day: Int
 
+  """Hour of the day (from 0 to 23)"""
+  hour: Int
+
+  """Minute of the hour (from 0 to 59)"""
+  minute: Int
+
   """Month number (from 1 to 12)"""
   month: Int
+
+  """Second of the minute (from 0 to 59)"""
+  second: Int
 
   """4 digit year (e.g. 2017)"""
   year: Int
@@ -3106,6 +3136,14 @@ enum TaxonomyEnum {
   TAG
 }
 
+"""
+The templates that can be assigned to content. Used to filter a connection by the template its content uses.
+"""
+enum ContentTemplateEnum {
+  """The default template, applied when no specific template is assigned."""
+  DEFAULT_TEMPLATE
+}
+
 """Connection between the ContentType type and the ContentNode type"""
 type ContentTypeToContentNodeConnection implements ContentNodeConnection & Connection {
   """Edges for the ContentTypeToContentNodeConnection connection"""
@@ -3358,9 +3396,7 @@ type User implements Node & UniformResourceIdentifiable & Commenter & DatabaseId
   """Description of the user."""
   description: String
 
-  """
-  Email address of the user. This is equivalent to the WP_User-&gt;user_email property.
-  """
+  """Email address of the user."""
   email: String
 
   """Connection between the User type and the EnqueuedScript type"""
@@ -3380,6 +3416,9 @@ type User implements Node & UniformResourceIdentifiable & Commenter & DatabaseId
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: UserToEnqueuedScriptConnectionWhereArgs
   ): UserToEnqueuedScriptConnection
 
   """Connection between the User type and the EnqueuedStylesheet type"""
@@ -3399,16 +3438,17 @@ type User implements Node & UniformResourceIdentifiable & Commenter & DatabaseId
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: UserToEnqueuedStylesheetConnectionWhereArgs
   ): UserToEnqueuedStylesheetConnection
 
   """
-  A complete list of capabilities including capabilities inherited from a role. This is equivalent to the array keys of WP_User-&gt;allcaps.
+  A complete list of capabilities including capabilities inherited from a role.
   """
   extraCapabilities: [String]
 
-  """
-  First name of the user. This is equivalent to the WP_User-&gt;user_first_name property.
-  """
+  """First name of the user."""
   firstName: String
 
   """
@@ -3447,9 +3487,7 @@ type User implements Node & UniformResourceIdentifiable & Commenter & DatabaseId
   """Whether the node is a Term"""
   isTermNode: Boolean!
 
-  """
-  Last name of the user. This is equivalent to the WP_User-&gt;user_last_name property.
-  """
+  """Last name of the user."""
   lastName: String
 
   """
@@ -3479,13 +3517,11 @@ type User implements Node & UniformResourceIdentifiable & Commenter & DatabaseId
     where: UserToMediaItemConnectionWhereArgs
   ): UserToMediaItemConnection
 
-  """
-  Display name of the user. This is equivalent to the WP_User-&gt;display_name property.
-  """
+  """Display name of the user."""
   name: String
 
   """
-  The nicename for the user. This field is equivalent to WP_User-&gt;user_nicename
+  The url friendly name for the user, used to reference the user in a public url.
   """
   nicename: String
 
@@ -3587,9 +3623,7 @@ type User implements Node & UniformResourceIdentifiable & Commenter & DatabaseId
   """
   shouldShowAdminToolbar: Boolean
 
-  """
-  The slug for the user. This field is equivalent to WP_User-&gt;user_nicename
-  """
+  """The url friendly identifier for the user."""
   slug: String
 
   """The unique resource identifier path"""
@@ -3598,11 +3632,11 @@ type User implements Node & UniformResourceIdentifiable & Commenter & DatabaseId
   """A website url that is associated with the user."""
   url: String
 
-  """The Id of the user. Equivalent to WP_User-&gt;ID"""
+  """The unique numeric identifier for the user."""
   userId: Int @deprecated(reason: "Deprecated in favor of the databaseId field")
 
   """
-  Username for the user. This field is equivalent to WP_User-&gt;user_login.
+  Username for the user. This is the unique identifier the user provides to log in.
   """
   username: String
 }
@@ -3885,22 +3919,16 @@ interface CommentConnectionEdge implements Edge {
 A response or reaction to content submitted by users. Comments are typically associated with a specific content entry.
 """
 type Comment implements Node & DatabaseIdentifier & UniformResourceIdentifiable {
-  """
-  User agent used to post the comment. This field is equivalent to WP_Comment-&gt;comment_agent and the value matching the &quot;comment_agent&quot; column in SQL.
-  """
+  """User agent (browser or client) used to post the comment."""
   agent: String
 
-  """
-  The approval status of the comment. This field is equivalent to WP_Comment-&gt;comment_approved and the value matching the &quot;comment_approved&quot; column in SQL.
-  """
+  """The approval status of the comment."""
   approved: Boolean @deprecated(reason: "Deprecated in favor of the `status` field")
 
   """The author of the comment"""
   author: CommentToCommenterConnectionEdge
 
-  """
-  IP address for the author at the time of commenting. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL.
-  """
+  """IP address for the author at the time of commenting."""
   authorIp: String @deprecated(reason: "Use the ipAddress field on the edge between the comment and author")
 
   """ID for the comment, unique among comments."""
@@ -3909,9 +3937,7 @@ type Comment implements Node & DatabaseIdentifier & UniformResourceIdentifiable 
   """Connection between the Comment type and the ContentNode type"""
   commentedOn: CommentToContentNodeConnectionEdge
 
-  """
-  Content of the comment. This field is equivalent to WP_Comment-&gt;comment_content and the value matching the &quot;comment_content&quot; column in SQL.
-  """
+  """Content of the comment."""
   content(
     """Format of the field output"""
     format: PostObjectFieldFormatEnum
@@ -3920,14 +3946,10 @@ type Comment implements Node & DatabaseIdentifier & UniformResourceIdentifiable 
   """The unique identifier stored in the database"""
   databaseId: Int!
 
-  """
-  Date the comment was posted in local time. This field is equivalent to WP_Comment-&gt;date and the value matching the &quot;date&quot; column in SQL.
-  """
+  """Date the comment was posted in local time."""
   date: String
 
-  """
-  Date the comment was posted in GMT. This field is equivalent to WP_Comment-&gt;date_gmt and the value matching the &quot;date_gmt&quot; column in SQL.
-  """
+  """Date the comment was posted in GMT."""
   dateGmt: String
 
   """The globally unique identifier for the comment object"""
@@ -3951,9 +3973,7 @@ type Comment implements Node & DatabaseIdentifier & UniformResourceIdentifiable 
   """Whether the node is a Term"""
   isTermNode: Boolean!
 
-  """
-  Karma value for the comment. This field is equivalent to WP_Comment-&gt;comment_karma and the value matching the &quot;comment_karma&quot; column in SQL.
-  """
+  """Karma value for the comment."""
   karma: Int
 
   """The permalink of the comment"""
@@ -3995,14 +4015,10 @@ type Comment implements Node & DatabaseIdentifier & UniformResourceIdentifiable 
     where: CommentToCommentConnectionWhereArgs
   ): CommentToCommentConnection
 
-  """
-  The approval status of the comment. This field is equivalent to WP_Comment-&gt;comment_approved and the value matching the &quot;comment_approved&quot; column in SQL.
-  """
+  """The approval status of the comment."""
   status: CommentStatusEnum
 
-  """
-  Type of comment. This field is equivalent to WP_Comment-&gt;comment_type and the value matching the &quot;comment_type&quot; column in SQL.
-  """
+  """Type of comment."""
   type: String
 
   """The unique resource identifier path"""
@@ -4019,9 +4035,7 @@ type CommentToCommenterConnectionEdge implements OneToOneConnection & Edge & Com
   """Email address representing the author for this particular comment"""
   email: String
 
-  """
-  IP address of the author at the time of making this comment. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL.
-  """
+  """IP address of the author at the time of making this comment."""
   ipAddress: String
 
   """The display name of the comment author for this particular comment"""
@@ -4363,6 +4377,14 @@ type UserToCommentConnectionPageInfo implements CommentConnectionPageInfo & WPPa
   startCursor: String
 }
 
+"""Arguments for filtering the UserToEnqueuedScriptConnection connection"""
+input UserToEnqueuedScriptConnectionWhereArgs {
+  """
+  Limit results to assets whose handle is in the provided list. Handles that do not match an asset are ignored. An empty list matches no assets, while omitting the argument (or passing null) leaves the connection unfiltered.
+  """
+  handlesIn: [String]
+}
+
 """Connection between the User type and the EnqueuedScript type"""
 type UserToEnqueuedScriptConnection implements EnqueuedScriptConnection & Connection {
   """Edges for the UserToEnqueuedScriptConnection connection"""
@@ -4399,6 +4421,16 @@ type UserToEnqueuedScriptConnectionPageInfo implements EnqueuedScriptConnectionP
 
   """When paginating backwards, the cursor to continue."""
   startCursor: String
+}
+
+"""
+Arguments for filtering the UserToEnqueuedStylesheetConnection connection
+"""
+input UserToEnqueuedStylesheetConnectionWhereArgs {
+  """
+  Limit results to assets whose handle is in the provided list. Handles that do not match an asset are ignored. An empty list matches no assets, while omitting the argument (or passing null) leaves the connection unfiltered.
+  """
+  handlesIn: [String]
 }
 
 """Connection between the User type and the EnqueuedStylesheet type"""
@@ -4470,6 +4502,11 @@ input UserToMediaItemConnectionWhereArgs {
 
   """Array of IDs for the objects to retrieve"""
   in: [ID]
+
+  """
+  True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results.
+  """
+  isSticky: Boolean
   metaQuery: UserToMediaItemConnectionWhereArgsMetaQuery
 
   """Get objects with a specific mimeType property"""
@@ -4510,6 +4547,9 @@ input UserToMediaItemConnectionWhereArgs {
   """Show posts with a specific status."""
   status: PostStatusEnum
   taxQuery: TaxQuery
+
+  """Filter the connection to content assigned a specific template."""
+  template: ContentTemplateEnum
 
   """Title of the object"""
   title: String
@@ -4797,6 +4837,9 @@ type MediaItem implements Node & ContentNode & UniformResourceIdentifiable & Dat
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: ContentNodeToEnqueuedScriptConnectionWhereArgs
   ): ContentNodeToEnqueuedScriptConnection
 
   """
@@ -4818,6 +4861,9 @@ type MediaItem implements Node & ContentNode & UniformResourceIdentifiable & Dat
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: ContentNodeToEnqueuedStylesheetConnectionWhereArgs
   ): ContentNodeToEnqueuedStylesheetConnection
 
   """
@@ -4841,7 +4887,7 @@ type MediaItem implements Node & ContentNode & UniformResourceIdentifiable & Dat
   ): Int
 
   """
-  The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table.
+  The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes.
   """
   guid: String
 
@@ -4881,7 +4927,7 @@ type MediaItem implements Node & ContentNode & UniformResourceIdentifiable & Dat
   """Details about the mediaItem"""
   mediaDetails: MediaDetails
 
-  """The id field matches the WP_Post-&gt;ID field."""
+  """The unique numeric identifier for the content node."""
   mediaItemId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
 
   """Url of the mediaItem"""
@@ -4918,7 +4964,7 @@ type MediaItem implements Node & ContentNode & UniformResourceIdentifiable & Dat
   """The database id of the preview node"""
   previewRevisionDatabaseId: Int
 
-  """Whether the object is a node in the preview state"""
+  """The globally unique ID of the preview node"""
   previewRevisionId: ID
 
   """The sizes attribute value for an image."""
@@ -4928,7 +4974,7 @@ type MediaItem implements Node & ContentNode & UniformResourceIdentifiable & Dat
   ): String
 
   """
-  The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table.
+  The URL-friendly, human-readable identifier for the content node, used in its permalink.
   """
   slug: String
 
@@ -5130,6 +5176,9 @@ interface HierarchicalContentNode implements Node & ContentNode & UniformResourc
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: ContentNodeToEnqueuedScriptConnectionWhereArgs
   ): ContentNodeToEnqueuedScriptConnection
 
   """
@@ -5151,10 +5200,13 @@ interface HierarchicalContentNode implements Node & ContentNode & UniformResourc
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: ContentNodeToEnqueuedStylesheetConnectionWhereArgs
   ): ContentNodeToEnqueuedStylesheetConnection
 
   """
-  The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table.
+  The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes.
   """
   guid: String
 
@@ -5210,11 +5262,11 @@ interface HierarchicalContentNode implements Node & ContentNode & UniformResourc
   """The database id of the preview node"""
   previewRevisionDatabaseId: Int
 
-  """Whether the object is a node in the preview state"""
+  """The globally unique ID of the preview node"""
   previewRevisionId: ID
 
   """
-  The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table.
+  The URL-friendly, human-readable identifier for the content node, used in its permalink.
   """
   slug: String
 
@@ -5265,6 +5317,11 @@ input HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgs {
 
   """Array of IDs for the objects to retrieve"""
   in: [ID]
+
+  """
+  True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results.
+  """
+  isSticky: Boolean
   metaQuery: HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgsMetaQuery
 
   """Get objects with a specific mimeType property"""
@@ -5305,6 +5362,9 @@ input HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgs {
   """Show posts with a specific status."""
   status: PostStatusEnum
   taxQuery: TaxQuery
+
+  """Filter the connection to content assigned a specific template."""
+  template: ContentTemplateEnum
 
   """Title of the object"""
   title: String
@@ -5464,6 +5524,11 @@ input HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgs {
 
   """Array of IDs for the objects to retrieve"""
   in: [ID]
+
+  """
+  True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results.
+  """
+  isSticky: Boolean
   metaQuery: HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgsMetaQuery
 
   """Get objects with a specific mimeType property"""
@@ -5504,6 +5569,9 @@ input HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgs {
   """Show posts with a specific status."""
   status: PostStatusEnum
   taxQuery: TaxQuery
+
+  """Filter the connection to content assigned a specific template."""
+  template: ContentTemplateEnum
 
   """Title of the object"""
   title: String
@@ -5643,6 +5711,16 @@ type HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo implements C
   startCursor: String
 }
 
+"""
+Arguments for filtering the ContentNodeToEnqueuedScriptConnection connection
+"""
+input ContentNodeToEnqueuedScriptConnectionWhereArgs {
+  """
+  Limit results to assets whose handle is in the provided list. Handles that do not match an asset are ignored. An empty list matches no assets, while omitting the argument (or passing null) leaves the connection unfiltered.
+  """
+  handlesIn: [String]
+}
+
 """Connection between the ContentNode type and the EnqueuedScript type"""
 type ContentNodeToEnqueuedScriptConnection implements EnqueuedScriptConnection & Connection {
   """Edges for the ContentNodeToEnqueuedScriptConnection connection"""
@@ -5679,6 +5757,16 @@ type ContentNodeToEnqueuedScriptConnectionPageInfo implements EnqueuedScriptConn
 
   """When paginating backwards, the cursor to continue."""
   startCursor: String
+}
+
+"""
+Arguments for filtering the ContentNodeToEnqueuedStylesheetConnection connection
+"""
+input ContentNodeToEnqueuedStylesheetConnectionWhereArgs {
+  """
+  Limit results to assets whose handle is in the provided list. Handles that do not match an asset are ignored. An empty list matches no assets, while omitting the argument (or passing null) leaves the connection unfiltered.
+  """
+  handlesIn: [String]
 }
 
 """
@@ -6077,6 +6165,11 @@ input UserToPageConnectionWhereArgs {
 
   """Array of IDs for the objects to retrieve"""
   in: [ID]
+
+  """
+  True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results.
+  """
+  isSticky: Boolean
   metaQuery: UserToPageConnectionWhereArgsMetaQuery
 
   """Get objects with a specific mimeType property"""
@@ -6117,6 +6210,9 @@ input UserToPageConnectionWhereArgs {
   """Show posts with a specific status."""
   status: PostStatusEnum
   taxQuery: TaxQuery
+
+  """Filter the connection to content assigned a specific template."""
+  template: ContentTemplateEnum
 
   """Title of the object"""
   title: String
@@ -6420,6 +6516,9 @@ type Page implements Node & ContentNode & UniformResourceIdentifiable & Database
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: ContentNodeToEnqueuedScriptConnectionWhereArgs
   ): ContentNodeToEnqueuedScriptConnection
 
   """
@@ -6441,6 +6540,9 @@ type Page implements Node & ContentNode & UniformResourceIdentifiable & Database
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: ContentNodeToEnqueuedStylesheetConnectionWhereArgs
   ): ContentNodeToEnqueuedStylesheetConnection
 
   """
@@ -6457,7 +6559,7 @@ type Page implements Node & ContentNode & UniformResourceIdentifiable & Database
   featuredImageId: ID
 
   """
-  The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table.
+  The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes.
   """
   guid: String
 
@@ -6520,7 +6622,7 @@ type Page implements Node & ContentNode & UniformResourceIdentifiable & Database
   """
   modifiedGmt: String
 
-  """The id field matches the WP_Post-&gt;ID field."""
+  """The unique numeric identifier for the content node."""
   pageId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
 
   """The parent of the node. The parent object can be of various types"""
@@ -6541,7 +6643,7 @@ type Page implements Node & ContentNode & UniformResourceIdentifiable & Database
   """The database id of the preview node"""
   previewRevisionDatabaseId: Int
 
-  """Whether the object is a node in the preview state"""
+  """The globally unique ID of the preview node"""
   previewRevisionId: ID
 
   """
@@ -6572,7 +6674,7 @@ type Page implements Node & ContentNode & UniformResourceIdentifiable & Database
   ): PageToRevisionConnection
 
   """
-  The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table.
+  The URL-friendly, human-readable identifier for the content node, used in its permalink.
   """
   slug: String
 
@@ -7203,6 +7305,11 @@ input PageToRevisionConnectionWhereArgs {
 
   """Array of IDs for the objects to retrieve"""
   in: [ID]
+
+  """
+  True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results.
+  """
+  isSticky: Boolean
   metaQuery: PageToRevisionConnectionWhereArgsMetaQuery
 
   """Get objects with a specific mimeType property"""
@@ -7243,6 +7350,9 @@ input PageToRevisionConnectionWhereArgs {
   """Show posts with a specific status."""
   status: PostStatusEnum
   taxQuery: TaxQuery
+
+  """Filter the connection to content assigned a specific template."""
+  template: ContentTemplateEnum
 
   """Title of the object"""
   title: String
@@ -7468,6 +7578,11 @@ input UserToPostConnectionWhereArgs {
 
   """Array of IDs for the objects to retrieve"""
   in: [ID]
+
+  """
+  True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results.
+  """
+  isSticky: Boolean
   metaQuery: UserToPostConnectionWhereArgsMetaQuery
 
   """Get objects with a specific mimeType property"""
@@ -7526,6 +7641,9 @@ input UserToPostConnectionWhereArgs {
   """Array of tag slugs, used to include objects in ANY specified tags"""
   tagSlugIn: [String]
   taxQuery: TaxQuery
+
+  """Filter the connection to content assigned a specific template."""
+  template: ContentTemplateEnum
 
   """Title of the object"""
   title: String
@@ -7797,6 +7915,9 @@ type Post implements Node & ContentNode & UniformResourceIdentifiable & Database
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: ContentNodeToEnqueuedScriptConnectionWhereArgs
   ): ContentNodeToEnqueuedScriptConnection
 
   """
@@ -7818,6 +7939,9 @@ type Post implements Node & ContentNode & UniformResourceIdentifiable & Database
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: ContentNodeToEnqueuedStylesheetConnectionWhereArgs
   ): ContentNodeToEnqueuedStylesheetConnection
 
   """The excerpt of the post."""
@@ -7840,7 +7964,7 @@ type Post implements Node & ContentNode & UniformResourceIdentifiable & Database
   featuredImageId: ID
 
   """
-  The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table.
+  The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes.
   """
   guid: String
 
@@ -7927,7 +8051,7 @@ type Post implements Node & ContentNode & UniformResourceIdentifiable & Database
     where: PostToPostFormatConnectionWhereArgs
   ): PostToPostFormatConnection
 
-  """The id field matches the WP_Post-&gt;ID field."""
+  """The unique numeric identifier for the content node."""
   postId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
 
   """Connection between the post type and the post type"""
@@ -7967,7 +8091,7 @@ type Post implements Node & ContentNode & UniformResourceIdentifiable & Database
   ): PostToRevisionConnection
 
   """
-  The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table.
+  The URL-friendly, human-readable identifier for the content node, used in its permalink.
   """
   slug: String
 
@@ -8082,10 +8206,10 @@ type PostToPostConnection implements PostConnection & Connection {
 """An edge in a connection"""
 type PostToPostConnectionEdge implements PostConnectionEdge & Edge {
   """A cursor for use in pagination"""
-  cursor: String @deprecated(reason: "This content type is not hierarchical and typically will not have ancestors")
+  cursor: String
 
   """The item at the end of the edge"""
-  node: Post! @deprecated(reason: "This content type is not hierarchical and typically will not have ancestors")
+  node: Post!
 }
 
 """
@@ -8299,7 +8423,7 @@ type Category implements Node & TermNode & UniformResourceIdentifiable & Databas
     before: String
   ): CategoryToAncestorsCategoryConnection
 
-  """The id field matches the WP_Post-&gt;ID field."""
+  """The unique numeric identifier for the term."""
   categoryId: Int @deprecated(reason: "Deprecated in favor of databaseId")
 
   """Connection between the Category type and the CentraldeDecorado type"""
@@ -8416,6 +8540,9 @@ type Category implements Node & TermNode & UniformResourceIdentifiable & Databas
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: TermNodeToEnqueuedScriptConnectionWhereArgs
   ): TermNodeToEnqueuedScriptConnection
 
   """Connection between the TermNode type and the EnqueuedStylesheet type"""
@@ -8435,6 +8562,9 @@ type Category implements Node & TermNode & UniformResourceIdentifiable & Databas
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: TermNodeToEnqueuedStylesheetConnectionWhereArgs
   ): TermNodeToEnqueuedStylesheetConnection
 
   """The globally unique ID for the object"""
@@ -8542,6 +8672,9 @@ interface HierarchicalTermNode implements Node & TermNode & UniformResourceIdent
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: TermNodeToEnqueuedScriptConnectionWhereArgs
   ): TermNodeToEnqueuedScriptConnection
 
   """Connection between the TermNode type and the EnqueuedStylesheet type"""
@@ -8561,6 +8694,9 @@ interface HierarchicalTermNode implements Node & TermNode & UniformResourceIdent
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: TermNodeToEnqueuedStylesheetConnectionWhereArgs
   ): TermNodeToEnqueuedStylesheetConnection
 
   """The globally unique ID for the object"""
@@ -8700,6 +8836,11 @@ input CategoryToCentraldeDecoradoConnectionWhereArgs {
 
   """Array of IDs for the objects to retrieve"""
   in: [ID]
+
+  """
+  True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results.
+  """
+  isSticky: Boolean
   metaQuery: CategoryToCentraldeDecoradoConnectionWhereArgsMetaQuery
 
   """Get objects with a specific mimeType property"""
@@ -8740,6 +8881,9 @@ input CategoryToCentraldeDecoradoConnectionWhereArgs {
   """Show posts with a specific status."""
   status: PostStatusEnum
   taxQuery: TaxQuery
+
+  """Filter the connection to content assigned a specific template."""
+  template: ContentTemplateEnum
 
   """Title of the object"""
   title: String
@@ -8880,7 +9024,7 @@ interface CentraldeDecoradoConnectionEdge implements Edge {
 
 """The CentraldeDecorado type"""
 type CentraldeDecorado implements Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & NodeWithTemplate & Previewable & NodeWithTitle & NodeWithFeaturedImage & MenuItemLinkable {
-  """The id field matches the WP_Post-&gt;ID field."""
+  """The unique numeric identifier for the content node."""
   centraldeDecoradoId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
 
   """The ancestors of the content node."""
@@ -8972,6 +9116,9 @@ type CentraldeDecorado implements Node & ContentNode & UniformResourceIdentifiab
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: ContentNodeToEnqueuedScriptConnectionWhereArgs
   ): ContentNodeToEnqueuedScriptConnection
 
   """
@@ -8993,6 +9140,9 @@ type CentraldeDecorado implements Node & ContentNode & UniformResourceIdentifiab
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: ContentNodeToEnqueuedStylesheetConnectionWhereArgs
   ): ContentNodeToEnqueuedStylesheetConnection
 
   """
@@ -9009,7 +9159,7 @@ type CentraldeDecorado implements Node & ContentNode & UniformResourceIdentifiab
   featuredImageId: ID
 
   """
-  The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table.
+  The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes.
   """
   guid: String
 
@@ -9074,7 +9224,7 @@ type CentraldeDecorado implements Node & ContentNode & UniformResourceIdentifiab
   previewRevisionId: ID
 
   """
-  The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table.
+  The URL-friendly, human-readable identifier for the content node, used in its permalink.
   """
   slug: String
 
@@ -9137,10 +9287,10 @@ type CentraldeDecoradoToCentraldeDecoradoConnection implements CentraldeDecorado
 """An edge in a connection"""
 type CentraldeDecoradoToCentraldeDecoradoConnectionEdge implements CentraldeDecoradoConnectionEdge & Edge {
   """A cursor for use in pagination"""
-  cursor: String @deprecated(reason: "This content type is not hierarchical and typically will not have ancestors")
+  cursor: String
 
   """The item at the end of the edge"""
-  node: CentraldeDecorado! @deprecated(reason: "This content type is not hierarchical and typically will not have ancestors")
+  node: CentraldeDecorado!
 }
 
 """
@@ -9351,7 +9501,7 @@ type CentraldeDecoradoToParentConnectionEdge implements OneToOneConnection & Edg
   cursor: String
 
   """The node of the connection, without the edges"""
-  node: CentraldeDecorado! @deprecated(reason: "This content type is not hierarchical and typically will not have a parent")
+  node: CentraldeDecorado!
 }
 
 """
@@ -9662,6 +9812,11 @@ input CategoryToContentNodeConnectionWhereArgs {
 
   """Array of IDs for the objects to retrieve"""
   in: [ID]
+
+  """
+  True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results.
+  """
+  isSticky: Boolean
   metaQuery: CategoryToContentNodeConnectionWhereArgsMetaQuery
 
   """Get objects with a specific mimeType property"""
@@ -9702,6 +9857,9 @@ input CategoryToContentNodeConnectionWhereArgs {
   """Show posts with a specific status."""
   status: PostStatusEnum
   taxQuery: TaxQuery
+
+  """Filter the connection to content assigned a specific template."""
+  template: ContentTemplateEnum
 
   """Title of the object"""
   title: String
@@ -9882,6 +10040,11 @@ input CategoryToEmpreendimentoConnectionWhereArgs {
 
   """Array of IDs for the objects to retrieve"""
   in: [ID]
+
+  """
+  True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results.
+  """
+  isSticky: Boolean
   metaQuery: CategoryToEmpreendimentoConnectionWhereArgsMetaQuery
 
   """Get objects with a specific mimeType property"""
@@ -9922,6 +10085,9 @@ input CategoryToEmpreendimentoConnectionWhereArgs {
   """Show posts with a specific status."""
   status: PostStatusEnum
   taxQuery: TaxQuery
+
+  """Filter the connection to content assigned a specific template."""
+  template: ContentTemplateEnum
 
   """Title of the object"""
   title: String
@@ -10062,7 +10228,7 @@ interface EmpreendimentoConnectionEdge implements Edge {
 
 """The Empreendimento type"""
 type Empreendimento implements Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & NodeWithTemplate & Previewable & NodeWithTitle & NodeWithFeaturedImage & MenuItemLinkable {
-  """The id field matches the WP_Post-&gt;ID field."""
+  """The unique numeric identifier for the content node."""
   empreendimentoId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
 
   """The ancestors of the content node."""
@@ -10154,6 +10320,9 @@ type Empreendimento implements Node & ContentNode & UniformResourceIdentifiable 
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: ContentNodeToEnqueuedScriptConnectionWhereArgs
   ): ContentNodeToEnqueuedScriptConnection
 
   """
@@ -10175,6 +10344,9 @@ type Empreendimento implements Node & ContentNode & UniformResourceIdentifiable 
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: ContentNodeToEnqueuedStylesheetConnectionWhereArgs
   ): ContentNodeToEnqueuedStylesheetConnection
 
   """
@@ -10191,7 +10363,7 @@ type Empreendimento implements Node & ContentNode & UniformResourceIdentifiable 
   featuredImageId: ID
 
   """
-  The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table.
+  The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes.
   """
   guid: String
 
@@ -10259,7 +10431,7 @@ type Empreendimento implements Node & ContentNode & UniformResourceIdentifiable 
   previewRevisionId: ID
 
   """
-  The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table.
+  The URL-friendly, human-readable identifier for the content node, used in its permalink.
   """
   slug: String
 
@@ -10318,10 +10490,10 @@ type EmpreendimentoToEmpreendimentoConnection implements EmpreendimentoConnectio
 """An edge in a connection"""
 type EmpreendimentoToEmpreendimentoConnectionEdge implements EmpreendimentoConnectionEdge & Edge {
   """A cursor for use in pagination"""
-  cursor: String @deprecated(reason: "This content type is not hierarchical and typically will not have ancestors")
+  cursor: String
 
   """The item at the end of the edge"""
-  node: Empreendimento! @deprecated(reason: "This content type is not hierarchical and typically will not have ancestors")
+  node: Empreendimento!
 }
 
 """
@@ -10680,7 +10852,7 @@ type EmpreendimentoToParentConnectionEdge implements OneToOneConnection & Edge &
   cursor: String
 
   """The node of the connection, without the edges"""
-  node: Empreendimento! @deprecated(reason: "This content type is not hierarchical and typically will not have a parent")
+  node: Empreendimento!
 }
 
 """Connection between the Empreendimento type and the Empreendimento type"""
@@ -10906,6 +11078,11 @@ input CategoryToPostConnectionWhereArgs {
 
   """Array of IDs for the objects to retrieve"""
   in: [ID]
+
+  """
+  True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results.
+  """
+  isSticky: Boolean
   metaQuery: CategoryToPostConnectionWhereArgsMetaQuery
 
   """Get objects with a specific mimeType property"""
@@ -10964,6 +11141,9 @@ input CategoryToPostConnectionWhereArgs {
   """Array of tag slugs, used to include objects in ANY specified tags"""
   tagSlugIn: [String]
   taxQuery: TaxQuery
+
+  """Filter the connection to content assigned a specific template."""
+  template: ContentTemplateEnum
 
   """Title of the object"""
   title: String
@@ -11280,7 +11460,7 @@ type PostToParentConnectionEdge implements OneToOneConnection & Edge & PostConne
   cursor: String
 
   """The node of the connection, without the edges"""
-  node: Post! @deprecated(reason: "This content type is not hierarchical and typically will not have a parent")
+  node: Post!
 }
 
 """Arguments for filtering the PostToPostFormatConnection connection"""
@@ -11461,6 +11641,9 @@ type PostFormat implements Node & TermNode & UniformResourceIdentifiable & Datab
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: TermNodeToEnqueuedScriptConnectionWhereArgs
   ): TermNodeToEnqueuedScriptConnection
 
   """Connection between the TermNode type and the EnqueuedStylesheet type"""
@@ -11480,6 +11663,9 @@ type PostFormat implements Node & TermNode & UniformResourceIdentifiable & Datab
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: TermNodeToEnqueuedStylesheetConnectionWhereArgs
   ): TermNodeToEnqueuedStylesheetConnection
 
   """The globally unique ID for the object"""
@@ -11509,7 +11695,7 @@ type PostFormat implements Node & TermNode & UniformResourceIdentifiable & Datab
   """The human friendly name of the object."""
   name: String
 
-  """The id field matches the WP_Post-&gt;ID field."""
+  """The unique numeric identifier for the term."""
   postFormatId: Int @deprecated(reason: "Deprecated in favor of databaseId")
 
   """Connection between the PostFormat type and the post type"""
@@ -11573,6 +11759,11 @@ input PostFormatToContentNodeConnectionWhereArgs {
 
   """Array of IDs for the objects to retrieve"""
   in: [ID]
+
+  """
+  True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results.
+  """
+  isSticky: Boolean
   metaQuery: PostFormatToContentNodeConnectionWhereArgsMetaQuery
 
   """Get objects with a specific mimeType property"""
@@ -11613,6 +11804,9 @@ input PostFormatToContentNodeConnectionWhereArgs {
   """Show posts with a specific status."""
   status: PostStatusEnum
   taxQuery: TaxQuery
+
+  """Filter the connection to content assigned a specific template."""
+  template: ContentTemplateEnum
 
   """Title of the object"""
   title: String
@@ -11801,6 +11995,11 @@ input PostFormatToPostConnectionWhereArgs {
 
   """Array of IDs for the objects to retrieve"""
   in: [ID]
+
+  """
+  True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results.
+  """
+  isSticky: Boolean
   metaQuery: PostFormatToPostConnectionWhereArgsMetaQuery
 
   """Get objects with a specific mimeType property"""
@@ -11859,6 +12058,9 @@ input PostFormatToPostConnectionWhereArgs {
   """Array of tag slugs, used to include objects in ANY specified tags"""
   tagSlugIn: [String]
   taxQuery: TaxQuery
+
+  """Filter the connection to content assigned a specific template."""
+  template: ContentTemplateEnum
 
   """Title of the object"""
   title: String
@@ -12106,6 +12308,11 @@ input PostToRevisionConnectionWhereArgs {
 
   """Array of IDs for the objects to retrieve"""
   in: [ID]
+
+  """
+  True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results.
+  """
+  isSticky: Boolean
   metaQuery: PostToRevisionConnectionWhereArgsMetaQuery
 
   """Get objects with a specific mimeType property"""
@@ -12164,6 +12371,9 @@ input PostToRevisionConnectionWhereArgs {
   """Array of tag slugs, used to include objects in ANY specified tags"""
   tagSlugIn: [String]
   taxQuery: TaxQuery
+
+  """Filter the connection to content assigned a specific template."""
+  template: ContentTemplateEnum
 
   """Title of the object"""
   title: String
@@ -12477,6 +12687,9 @@ type Tag implements Node & TermNode & UniformResourceIdentifiable & DatabaseIden
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: TermNodeToEnqueuedScriptConnectionWhereArgs
   ): TermNodeToEnqueuedScriptConnection
 
   """Connection between the TermNode type and the EnqueuedStylesheet type"""
@@ -12496,6 +12709,9 @@ type Tag implements Node & TermNode & UniformResourceIdentifiable & DatabaseIden
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: TermNodeToEnqueuedStylesheetConnectionWhereArgs
   ): TermNodeToEnqueuedStylesheetConnection
 
   """The globally unique ID for the object"""
@@ -12550,7 +12766,7 @@ type Tag implements Node & TermNode & UniformResourceIdentifiable & DatabaseIden
   """An alphanumeric identifier for the object unique to its type."""
   slug: String
 
-  """The id field matches the WP_Post-&gt;ID field."""
+  """The unique numeric identifier for the term."""
   tagId: Int @deprecated(reason: "Deprecated in favor of databaseId")
 
   """Connection between the Tag type and the Taxonomy type"""
@@ -12587,6 +12803,11 @@ input TagToContentNodeConnectionWhereArgs {
 
   """Array of IDs for the objects to retrieve"""
   in: [ID]
+
+  """
+  True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results.
+  """
+  isSticky: Boolean
   metaQuery: TagToContentNodeConnectionWhereArgsMetaQuery
 
   """Get objects with a specific mimeType property"""
@@ -12627,6 +12848,9 @@ input TagToContentNodeConnectionWhereArgs {
   """Show posts with a specific status."""
   status: PostStatusEnum
   taxQuery: TaxQuery
+
+  """Filter the connection to content assigned a specific template."""
+  template: ContentTemplateEnum
 
   """Title of the object"""
   title: String
@@ -12815,6 +13039,11 @@ input TagToPostConnectionWhereArgs {
 
   """Array of IDs for the objects to retrieve"""
   in: [ID]
+
+  """
+  True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results.
+  """
+  isSticky: Boolean
   metaQuery: TagToPostConnectionWhereArgsMetaQuery
 
   """Get objects with a specific mimeType property"""
@@ -12873,6 +13102,9 @@ input TagToPostConnectionWhereArgs {
   """Array of tag slugs, used to include objects in ANY specified tags"""
   tagSlugIn: [String]
   taxQuery: TaxQuery
+
+  """Filter the connection to content assigned a specific template."""
+  template: ContentTemplateEnum
 
   """Title of the object"""
   title: String
@@ -13232,6 +13464,11 @@ input UserToRevisionsConnectionWhereArgs {
 
   """Array of IDs for the objects to retrieve"""
   in: [ID]
+
+  """
+  True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results.
+  """
+  isSticky: Boolean
   metaQuery: UserToRevisionsConnectionWhereArgsMetaQuery
 
   """Get objects with a specific mimeType property"""
@@ -13272,6 +13509,9 @@ input UserToRevisionsConnectionWhereArgs {
   """Show posts with a specific status."""
   status: PostStatusEnum
   taxQuery: TaxQuery
+
+  """Filter the connection to content assigned a specific template."""
+  template: ContentTemplateEnum
 
   """Title of the object"""
   title: String
@@ -13574,10 +13814,10 @@ interface ArquivoAssessoriaConnectionPageInfo implements WPPageInfo & PageInfo {
 """An edge in a connection"""
 type ArquivoAssessoriaToArquivoAssessoriaConnectionEdge implements ArquivoAssessoriaConnectionEdge & Edge {
   """A cursor for use in pagination"""
-  cursor: String @deprecated(reason: "This content type is not hierarchical and typically will not have ancestors")
+  cursor: String
 
   """The item at the end of the edge"""
-  node: ArquivoAssessoria! @deprecated(reason: "This content type is not hierarchical and typically will not have ancestors")
+  node: ArquivoAssessoria!
 }
 
 """
@@ -13625,7 +13865,7 @@ type ArquivoAssessoriaToParentConnectionEdge implements OneToOneConnection & Edg
   cursor: String
 
   """The node of the connection, without the edges"""
-  node: ArquivoAssessoria! @deprecated(reason: "This content type is not hierarchical and typically will not have a parent")
+  node: ArquivoAssessoria!
 }
 
 """
@@ -13658,6 +13898,11 @@ input RootQueryToArquivoAssessoriaConnectionWhereArgs {
 
   """Array of IDs for the objects to retrieve"""
   in: [ID]
+
+  """
+  True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results.
+  """
+  isSticky: Boolean
   metaQuery: RootQueryToArquivoAssessoriaConnectionWhereArgsMetaQuery
 
   """Get objects with a specific mimeType property"""
@@ -13698,6 +13943,9 @@ input RootQueryToArquivoAssessoriaConnectionWhereArgs {
   """Show posts with a specific status."""
   status: PostStatusEnum
   taxQuery: TaxQuery
+
+  """Filter the connection to content assigned a specific template."""
+  template: ContentTemplateEnum
 
   """Title of the object"""
   title: String
@@ -13854,7 +14102,7 @@ enum BannerIdType {
 
 """The Banner type"""
 type Banner implements Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & NodeWithTemplate & Previewable & NodeWithTitle & MenuItemLinkable {
-  """The id field matches the WP_Post-&gt;ID field."""
+  """The unique numeric identifier for the content node."""
   bannerId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
 
   """The ancestors of the content node."""
@@ -13924,6 +14172,9 @@ type Banner implements Node & ContentNode & UniformResourceIdentifiable & Databa
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: ContentNodeToEnqueuedScriptConnectionWhereArgs
   ): ContentNodeToEnqueuedScriptConnection
 
   """
@@ -13945,10 +14196,13 @@ type Banner implements Node & ContentNode & UniformResourceIdentifiable & Databa
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
+
+    """Arguments for filtering the connection"""
+    where: ContentNodeToEnqueuedStylesheetConnectionWhereArgs
   ): ContentNodeToEnqueuedStylesheetConnection
 
   """
-  The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table.
+  The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes.
   """
   guid: String
 
@@ -14011,7 +14265,7 @@ type Banner implements Node & ContentNode & UniformResourceIdentifiable & Databa
   previewRevisionId: ID
 
   """
-  The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table.
+  The URL-friendly, human-readable identifier for the content node, used in its permalink.
   """
   slug: String
 
@@ -14094,10 +14348,10 @@ interface BannerConnectionPageInfo implements WPPageInfo & PageInfo {
 """An edge in a connection"""
 type BannerToBannerConnectionEdge implements BannerConnectionEdge & Edge {
   """A cursor for use in pagination"""
-  cursor: String @deprecated(reason: "This content type is not hierarchical and typically will not have ancestors")
+  cursor: String
 
   """The item at the end of the edge"""
-  node: Banner! @deprecated(reason: "This content type is not hierarchical and typically will not have ancestors")
+  node: Banner!
 }
 
 """
@@ -14196,7 +14450,7 @@ type BannerToParentConnectionEdge implements OneToOneConnection & Edge & BannerC
   cursor: String
 
   """The node of the connection, without the edges"""
-  node: Banner! @deprecated(reason: "This content type is not hierarchical and typically will not have a parent")
+  node: Banner!
 }
 
 """Connection between the Banner type and the Banner type"""
@@ -14225,6 +14479,11 @@ input RootQueryToBannerConnectionWhereArgs {
 
   """Array of IDs for the objects to retrieve"""
   in: [ID]
+
+  """
+  True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results.
+  """
+  isSticky: Boolean
   metaQuery: RootQueryToBannerConnectionWhereArgsMetaQuery
 
   """Get objects with a specific mimeType property"""
@@ -14265,6 +14524,9 @@ input RootQueryToBannerConnectionWhereArgs {
   """Show posts with a specific status."""
   status: PostStatusEnum
   taxQuery: TaxQuery
+
+  """Filter the connection to content assigned a specific template."""
+  template: ContentTemplateEnum
 
   """Title of the object"""
   title: String
@@ -14595,6 +14857,11 @@ input RootQueryToCentraldeDecoradoConnectionWhereArgs {
 
   """Array of IDs for the objects to retrieve"""
   in: [ID]
+
+  """
+  True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results.
+  """
+  isSticky: Boolean
   metaQuery: RootQueryToCentraldeDecoradoConnectionWhereArgsMetaQuery
 
   """Get objects with a specific mimeType property"""
@@ -14635,6 +14902,9 @@ input RootQueryToCentraldeDecoradoConnectionWhereArgs {
   """Show posts with a specific status."""
   status: PostStatusEnum
   taxQuery: TaxQuery
+
+  """Filter the connection to content assigned a specific template."""
+  template: ContentTemplateEnum
 
   """Title of the object"""
   title: String
@@ -14951,6 +15221,11 @@ input RootQueryToContentNodeConnectionWhereArgs {
 
   """Array of IDs for the objects to retrieve"""
   in: [ID]
+
+  """
+  True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results.
+  """
+  isSticky: Boolean
   metaQuery: RootQueryToContentNodeConnectionWhereArgsMetaQuery
 
   """Get objects with a specific mimeType property"""
@@ -14991,6 +15266,9 @@ input RootQueryToContentNodeConnectionWhereArgs {
   """Show posts with a specific status."""
   status: PostStatusEnum
   taxQuery: TaxQuery
+
+  """Filter the connection to content assigned a specific template."""
+  template: ContentTemplateEnum
 
   """Title of the object"""
   title: String
@@ -15176,7 +15454,7 @@ type RootQueryToContentTypeConnectionPageInfo implements ContentTypeConnectionPa
 }
 
 """The discussion setting type"""
-type DiscussionSettings {
+type DiscussionSettings implements Node {
   """Permitir que pessoas enviem comentários em novos posts."""
   defaultCommentStatus: String
 
@@ -15184,6 +15462,9 @@ type DiscussionSettings {
   Permitir avisos de links de outros blogs (pingbacks ou trackbacks) em novos artigos.
   """
   defaultPingStatus: String
+
+  """The globally unique identifier of the settings group."""
+  id: ID!
 }
 
 """
@@ -15238,6 +15519,11 @@ input RootQueryToEmpreendimentoConnectionWhereArgs {
 
   """Array of IDs for the objects to retrieve"""
   in: [ID]
+
+  """
+  True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results.
+  """
+  isSticky: Boolean
   metaQuery: RootQueryToEmpreendimentoConnectionWhereArgsMetaQuery
 
   """Get objects with a specific mimeType property"""
@@ -15278,6 +15564,9 @@ input RootQueryToEmpreendimentoConnectionWhereArgs {
   """Show posts with a specific status."""
   status: PostStatusEnum
   taxQuery: TaxQuery
+
+  """Filter the connection to content assigned a specific template."""
+  template: ContentTemplateEnum
 
   """Title of the object"""
   title: String
@@ -15414,7 +15703,7 @@ type RootQueryToEmpreendimentoConnectionPageInfo implements EmpreendimentoConnec
 }
 
 """The general setting type"""
-type GeneralSettings {
+type GeneralSettings implements Node {
   """Um formato de data para todos os textos."""
   dateFormat: String
 
@@ -15425,6 +15714,14 @@ type GeneralSettings {
   Este endereço é utilizado para administração, como notificação de novo usuário.
   """
   email: String
+
+  """
+  The address at which visitors reach the site&#039;s front end. Can differ from the `url` field when the front end and the content management backend are served from different addresses, such as on headless or decoupled installs.
+  """
+  homeUrl: String
+
+  """The globally unique identifier of the settings group."""
+  id: ID!
 
   """Código de localização do WordPress."""
   language: String
@@ -15522,6 +15819,11 @@ input RootQueryToMediaItemConnectionWhereArgs {
 
   """Array of IDs for the objects to retrieve"""
   in: [ID]
+
+  """
+  True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results.
+  """
+  isSticky: Boolean
   metaQuery: RootQueryToMediaItemConnectionWhereArgsMetaQuery
 
   """Get objects with a specific mimeType property"""
@@ -15562,6 +15864,9 @@ input RootQueryToMediaItemConnectionWhereArgs {
   """Show posts with a specific status."""
   status: PostStatusEnum
   taxQuery: TaxQuery
+
+  """Filter the connection to content assigned a specific template."""
+  template: ContentTemplateEnum
 
   """Title of the object"""
   title: String
@@ -15763,10 +16068,10 @@ type Menu implements Node & DatabaseIdentifier {
     where: MenuToMenuItemConnectionWhereArgs
   ): MenuToMenuItemConnection
 
-  """Display name of the menu. Equivalent to WP_Term-&gt;name."""
+  """Display name of the menu."""
   name: String
 
-  """The url friendly name of the menu. Equivalent to WP_Term-&gt;slug"""
+  """The url friendly name of the menu."""
   slug: String
 }
 
@@ -16262,6 +16567,11 @@ input RootQueryToPageConnectionWhereArgs {
 
   """Array of IDs for the objects to retrieve"""
   in: [ID]
+
+  """
+  True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results.
+  """
+  isSticky: Boolean
   metaQuery: RootQueryToPageConnectionWhereArgsMetaQuery
 
   """Get objects with a specific mimeType property"""
@@ -16302,6 +16612,9 @@ input RootQueryToPageConnectionWhereArgs {
   """Show posts with a specific status."""
   status: PostStatusEnum
   taxQuery: TaxQuery
+
+  """Filter the connection to content assigned a specific template."""
+  template: ContentTemplateEnum
 
   """Title of the object"""
   title: String
@@ -16435,6 +16748,21 @@ type RootQueryToPageConnectionPageInfo implements PageConnectionPageInfo & WPPag
 
   """When paginating backwards, the cursor to continue."""
   startCursor: String
+}
+
+"""The permalink setting type"""
+type PermalinkSettings implements Node {
+  """The prefix used in the URLs of category archive pages."""
+  categoryBase: String
+
+  """The globally unique identifier of the settings group."""
+  id: ID!
+
+  """The structure used to build the URLs for content on the site."""
+  structure: String
+
+  """The prefix used in the URLs of tag archive pages."""
+  tagBase: String
 }
 
 """An plugin object"""
@@ -16800,6 +17128,11 @@ input RootQueryToPostConnectionWhereArgs {
 
   """Array of IDs for the objects to retrieve"""
   in: [ID]
+
+  """
+  True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results.
+  """
+  isSticky: Boolean
   metaQuery: RootQueryToPostConnectionWhereArgsMetaQuery
 
   """Get objects with a specific mimeType property"""
@@ -16858,6 +17191,9 @@ input RootQueryToPostConnectionWhereArgs {
   """Array of tag slugs, used to include objects in ANY specified tags"""
   tagSlugIn: [String]
   taxQuery: TaxQuery
+
+  """Filter the connection to content assigned a specific template."""
+  template: ContentTemplateEnum
 
   """Title of the object"""
   title: String
@@ -16994,7 +17330,10 @@ type RootQueryToPostConnectionPageInfo implements PostConnectionPageInfo & WPPag
 }
 
 """The reading setting type"""
-type ReadingSettings {
+type ReadingSettings implements Node {
+  """The globally unique identifier of the settings group."""
+  id: ID!
+
   """O ID da página que deve exibir os posts mais recentes"""
   pageForPosts: Int
 
@@ -17006,6 +17345,16 @@ type ReadingSettings {
 
   """O que exibir na página inicial"""
   showOnFront: String
+}
+
+"""
+Arguments for filtering the RootQueryToEnqueuedScriptConnection connection
+"""
+input RootQueryToEnqueuedScriptConnectionWhereArgs {
+  """
+  Limit results to assets whose handle is in the provided list. Handles that do not match an asset are ignored. An empty list matches no assets, while omitting the argument (or passing null) leaves the connection unfiltered.
+  """
+  handlesIn: [String]
 }
 
 """Connection between the RootQuery type and the EnqueuedScript type"""
@@ -17044,6 +17393,16 @@ type RootQueryToEnqueuedScriptConnectionPageInfo implements EnqueuedScriptConnec
 
   """When paginating backwards, the cursor to continue."""
   startCursor: String
+}
+
+"""
+Arguments for filtering the RootQueryToEnqueuedStylesheetConnection connection
+"""
+input RootQueryToEnqueuedStylesheetConnectionWhereArgs {
+  """
+  Limit results to assets whose handle is in the provided list. Handles that do not match an asset are ignored. An empty list matches no assets, while omitting the argument (or passing null) leaves the connection unfiltered.
+  """
+  handlesIn: [String]
 }
 
 """Connection between the RootQuery type and the EnqueuedStylesheet type"""
@@ -17102,6 +17461,11 @@ input RootQueryToRevisionsConnectionWhereArgs {
 
   """Array of IDs for the objects to retrieve"""
   in: [ID]
+
+  """
+  True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results.
+  """
+  isSticky: Boolean
   metaQuery: RootQueryToRevisionsConnectionWhereArgsMetaQuery
 
   """Get objects with a specific mimeType property"""
@@ -17142,6 +17506,9 @@ input RootQueryToRevisionsConnectionWhereArgs {
   """Show posts with a specific status."""
   status: PostStatusEnum
   taxQuery: TaxQuery
+
+  """Filter the connection to content assigned a specific template."""
+  template: ContentTemplateEnum
 
   """Title of the object"""
   title: String
@@ -17617,19 +17984,13 @@ type RootQueryToTermNodeConnectionPageInfo implements TermNodeConnectionPageInfo
 
 """A theme object"""
 type Theme implements Node {
-  """
-  Name of the theme author(s), could also be a company name. This field is equivalent to WP_Theme-&gt;get( &quot;Author&quot; ).
-  """
+  """Name of the theme author(s), could also be a company name."""
   author: String
 
-  """
-  URI for the author/company website. This field is equivalent to WP_Theme-&gt;get( &quot;AuthorURI&quot; ).
-  """
+  """URI for the author/company website."""
   authorUri: String
 
-  """
-  The description of the theme. This field is equivalent to WP_Theme-&gt;get( &quot;Description&quot; ).
-  """
+  """The description of the theme."""
   description: String
 
   """The globally unique identifier of the theme object."""
@@ -17638,34 +17999,30 @@ type Theme implements Node {
   """Whether the object is restricted from the current viewer"""
   isRestricted: Boolean
 
-  """
-  Display name of the theme. This field is equivalent to WP_Theme-&gt;get( &quot;Name&quot; ).
-  """
+  """Display name of the theme."""
   name: String
 
   """
-  The URL of the screenshot for the theme. The screenshot is intended to give an overview of what the theme looks like. This field is equivalent to WP_Theme-&gt;get_screenshot().
+  The URL of the screenshot for the theme. The screenshot is intended to give an overview of what the theme looks like.
   """
   screenshot: String
 
   """
-  The theme slug is used to internally match themes. Theme slugs can have subdirectories like: my-theme/sub-theme. This field is equivalent to WP_Theme-&gt;get_stylesheet().
+  The theme slug is used to internally match themes. Theme slugs can have subdirectories like: my-theme/sub-theme.
   """
   slug: String
 
   """
-  URI for the author/company website. This field is equivalent to WP_Theme-&gt;get( &quot;Tags&quot; ).
+  A list of tags associated with the theme, typically describing its features (e.g. custom-logo, accessibility-ready, full-site-editing).
   """
   tags: [String]
 
   """
-  A URI if the theme has a website associated with it. The Theme URI is handy for directing users to a theme site for support etc. This field is equivalent to WP_Theme-&gt;get( &quot;ThemeURI&quot; ).
+  A URI if the theme has a website associated with it. The Theme URI is handy for directing users to a theme site for support etc.
   """
   themeUri: String
 
-  """
-  The current version of the theme. This field is equivalent to WP_Theme-&gt;get( &quot;Version&quot; ).
-  """
+  """The current version of the theme."""
   version: String
 }
 
@@ -17924,16 +18281,16 @@ enum UsersConnectionOrderbyEnum {
 Permission levels for user accounts. Defines the standard access levels that control what actions users can perform within the system.
 """
 enum UserRoleEnum {
-  """User role with specific capabilities"""
+  """Full system access with ability to manage all aspects of the site."""
   ADMINISTRATOR
 
-  """User role with specific capabilities"""
+  """Can publish and manage their own content."""
   AUTHOR
 
-  """User role with specific capabilities"""
+  """Can write and manage their own content but cannot publish."""
   CONTRIBUTOR
 
-  """User role with specific capabilities"""
+  """Content management access without administrative capabilities."""
   EDITOR
 
   """User role with specific capabilities"""
@@ -17942,7 +18299,7 @@ enum UserRoleEnum {
   """User role with specific capabilities"""
   SEO_MANAGER
 
-  """User role with specific capabilities"""
+  """Can only manage their profile and read content."""
   SUBSCRIBER
 }
 
@@ -18038,12 +18395,15 @@ type RootQueryToUserConnectionPageInfo implements UserConnectionPageInfo & WPPag
 }
 
 """The writing setting type"""
-type WritingSettings {
+type WritingSettings implements Node {
   """Categoria padrão para post."""
   defaultCategory: Int
 
   """Formato de post padrão."""
   defaultPostFormat: String
+
+  """The globally unique identifier of the settings group."""
+  id: ID!
 
   """Converter emoticons como :-) e :-P em gráficos ao exibí-los."""
   useSmilies: Boolean
@@ -18411,7 +18771,7 @@ input CreateArquivoAssessoriaInput {
   clientMutationId: String
 
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
 
@@ -18452,7 +18812,7 @@ input CreateBannerInput {
   clientMutationId: String
 
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
 
@@ -18539,7 +18899,7 @@ input CreateCentraldeDecoradoInput {
   clientMutationId: String
 
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
 
@@ -18631,7 +18991,7 @@ input CreateCommentInput {
   content: String
 
   """
-  The date of the object. Preferable to enter as year/month/day ( e.g. 01/31/2017 ) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day ( e.g. 01/31/2017 ) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
 
@@ -18672,7 +19032,7 @@ input CreateEmpreendimentoInput {
   clientMutationId: String
 
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
 
@@ -18836,7 +19196,7 @@ input CreatePageInput {
   content: String
 
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
 
@@ -18892,7 +19252,7 @@ input CreatePostInput {
   content: String
 
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
 
@@ -19715,7 +20075,7 @@ input UpdateArquivoAssessoriaInput {
   clientMutationId: String
 
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
 
@@ -19762,7 +20122,7 @@ input UpdateBannerInput {
   clientMutationId: String
 
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
 
@@ -19858,7 +20218,7 @@ input UpdateCentraldeDecoradoInput {
   clientMutationId: String
 
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
 
@@ -19920,7 +20280,7 @@ input UpdateCommentInput {
   content: String
 
   """
-  The date of the object. Preferable to enter as year/month/day ( e.g. 01/31/2017 ) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day ( e.g. 01/31/2017 ) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
 
@@ -19964,7 +20324,7 @@ input UpdateEmpreendimentoInput {
   clientMutationId: String
 
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
 
@@ -20084,7 +20444,7 @@ input UpdatePageInput {
   content: String
 
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
 
@@ -20146,7 +20506,7 @@ input UpdatePostInput {
   content: String
 
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
 
@@ -20280,9 +20640,6 @@ input UpdateSettingsInput {
   """Título do site."""
   generalSettingsTitle: String
 
-  """URL do site."""
-  generalSettingsUrl: String
-
   """O ID da página que deve exibir os posts mais recentes"""
   readingSettingsPageForPosts: Int
 
@@ -20320,6 +20677,9 @@ type UpdateSettingsPayload {
 
   """Update the GeneralSettings setting."""
   generalSettings: GeneralSettings
+
+  """Update the PermalinkSettings setting."""
+  permalinkSettings: PermalinkSettings
 
   """Update the ReadingSettings setting."""
   readingSettings: ReadingSettings

@@ -99,6 +99,8 @@ export interface RootQuery {
     pageBy?: Page
     /** Connection between the RootQuery type and the page type */
     pages?: RootQueryToPageConnection
+    /** Fields of the &#039;PermalinkSettings&#039; settings group */
+    permalinkSettings?: PermalinkSettings
     /** A WordPress plugin */
     plugin?: Plugin
     /** Connection between the RootQuery type and the Plugin type */
@@ -158,41 +160,49 @@ export interface RootQuery {
 
 /** All of the registered settings */
 export interface Settings {
-    /** Settings of the the string Settings Group */
+    /** Settings of the string Settings Group */
     discussionSettingsDefaultCommentStatus?: Scalars['String']
-    /** Settings of the the string Settings Group */
+    /** Settings of the string Settings Group */
     discussionSettingsDefaultPingStatus?: Scalars['String']
-    /** Settings of the the string Settings Group */
+    /** Settings of the string Settings Group */
     generalSettingsDateFormat?: Scalars['String']
-    /** Settings of the the string Settings Group */
+    /** Settings of the string Settings Group */
     generalSettingsDescription?: Scalars['String']
-    /** Settings of the the string Settings Group */
+    /** Settings of the string Settings Group */
     generalSettingsEmail?: Scalars['String']
-    /** Settings of the the string Settings Group */
+    /** Settings of the string Settings Group */
+    generalSettingsHomeUrl?: Scalars['String']
+    /** Settings of the string Settings Group */
     generalSettingsLanguage?: Scalars['String']
-    /** Settings of the the integer Settings Group */
+    /** Settings of the integer Settings Group */
     generalSettingsStartOfWeek?: Scalars['Int']
-    /** Settings of the the string Settings Group */
+    /** Settings of the string Settings Group */
     generalSettingsTimeFormat?: Scalars['String']
-    /** Settings of the the string Settings Group */
+    /** Settings of the string Settings Group */
     generalSettingsTimezone?: Scalars['String']
-    /** Settings of the the string Settings Group */
+    /** Settings of the string Settings Group */
     generalSettingsTitle?: Scalars['String']
-    /** Settings of the the string Settings Group */
+    /** Settings of the string Settings Group */
     generalSettingsUrl?: Scalars['String']
-    /** Settings of the the integer Settings Group */
+    /** Settings of the string Settings Group */
+    permalinkSettingsCategoryBase?: Scalars['String']
+    /** Settings of the string Settings Group */
+    permalinkSettingsStructure?: Scalars['String']
+    /** Settings of the string Settings Group */
+    permalinkSettingsTagBase?: Scalars['String']
+    /** Settings of the integer Settings Group */
     readingSettingsPageForPosts?: Scalars['Int']
-    /** Settings of the the integer Settings Group */
+    /** Settings of the integer Settings Group */
     readingSettingsPageOnFront?: Scalars['Int']
-    /** Settings of the the integer Settings Group */
+    /** Settings of the integer Settings Group */
     readingSettingsPostsPerPage?: Scalars['Int']
-    /** Settings of the the string Settings Group */
+    /** Settings of the string Settings Group */
     readingSettingsShowOnFront?: Scalars['String']
-    /** Settings of the the integer Settings Group */
+    /** Settings of the integer Settings Group */
     writingSettingsDefaultCategory?: Scalars['Int']
-    /** Settings of the the string Settings Group */
+    /** Settings of the string Settings Group */
     writingSettingsDefaultPostFormat?: Scalars['String']
-    /** Settings of the the boolean Settings Group */
+    /** Settings of the boolean Settings Group */
     writingSettingsUseSmilies?: Scalars['Boolean']
     __typename: 'Settings'
 }
@@ -206,7 +216,7 @@ export type ArquivoAssessoriaIdType = 'DATABASE_ID' | 'ID' | 'SLUG' | 'URI'
 export interface ArquivoAssessoria {
     /**
      * @deprecated Deprecated in favor of the databaseId field
-     * The id field matches the WP_Post-&gt;ID field.
+     * The unique numeric identifier for the content node.
      */
     arquivoAssessoriaId: Scalars['Int']
     /**
@@ -236,7 +246,7 @@ export interface ArquivoAssessoria {
     enqueuedScripts?: ContentNodeToEnqueuedScriptConnection
     /** Connection between the ContentNode type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: ContentNodeToEnqueuedStylesheetConnection
-    /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+    /** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
     guid?: Scalars['String']
     /** Whether the arq_assessoria object is password protected. */
     hasPassword?: Scalars['Boolean']
@@ -277,7 +287,7 @@ export interface ArquivoAssessoria {
     previewRevisionDatabaseId?: Scalars['Int']
     /** Whether the object is a node in the preview state */
     previewRevisionId?: Scalars['ID']
-    /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+    /** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
     slug?: Scalars['String']
     /** The current status of the object */
     status?: Scalars['String']
@@ -427,7 +437,7 @@ export interface Taxonomy {
     connectedContentTypes?: TaxonomyToContentTypeConnection
     /** List of Term Nodes associated with the Taxonomy */
     connectedTerms?: TaxonomyToTermNodeConnection
-    /** Description of the taxonomy. This field is equivalent to WP_Taxonomy-&gt;description */
+    /** Description of the taxonomy. */
     description?: Scalars['String']
     /** The plural name of the post type within the GraphQL Schema. */
     graphqlPluralName?: Scalars['String']
@@ -441,7 +451,7 @@ export interface Taxonomy {
     isRestricted?: Scalars['Boolean']
     /** Name of the taxonomy shown in the menu. Usually plural. */
     label?: Scalars['String']
-    /** The display name of the taxonomy. This field is equivalent to WP_Taxonomy-&gt;label */
+    /** The display name of the taxonomy. */
     name?: Scalars['String']
     /** Whether the taxonomy is publicly queryable */
     public?: Scalars['Boolean']
@@ -449,7 +459,7 @@ export interface Taxonomy {
     restBase?: Scalars['String']
     /** The REST Controller class assigned to handling this content type. */
     restControllerClass?: Scalars['String']
-    /** Whether to show the taxonomy as part of a tag cloud widget. This field is equivalent to WP_Taxonomy-&gt;show_tagcloud */
+    /** Whether to show the taxonomy as part of a tag cloud widget. */
     showCloud?: Scalars['Boolean']
     /** Whether to display a column for the taxonomy on its post type listing screens. */
     showInAdminColumn?: Scalars['Boolean']
@@ -833,6 +843,10 @@ export type TaxQueryOperator = 'AND' | 'EXISTS' | 'IN' | 'NOT_EXISTS' | 'NOT_IN'
 export type TaxonomyEnum = 'CATEGORY' | 'POSTFORMAT' | 'TAG'
 
 
+/** The templates that can be assigned to content. Used to filter a connection by the template its content uses. */
+export type ContentTemplateEnum = 'DEFAULT_TEMPLATE'
+
+
 /** Connection between the ContentType type and the ContentNode type */
 export interface ContentTypeToContentNodeConnection {
     /** Edges for the ContentTypeToContentNodeConnection connection */
@@ -969,15 +983,15 @@ export interface User {
     databaseId: Scalars['Int']
     /** Description of the user. */
     description?: Scalars['String']
-    /** Email address of the user. This is equivalent to the WP_User-&gt;user_email property. */
+    /** Email address of the user. */
     email?: Scalars['String']
     /** Connection between the User type and the EnqueuedScript type */
     enqueuedScripts?: UserToEnqueuedScriptConnection
     /** Connection between the User type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: UserToEnqueuedStylesheetConnection
-    /** A complete list of capabilities including capabilities inherited from a role. This is equivalent to the array keys of WP_User-&gt;allcaps. */
+    /** A complete list of capabilities including capabilities inherited from a role. */
     extraCapabilities?: (Scalars['String'] | undefined)[]
-    /** First name of the user. This is equivalent to the WP_User-&gt;user_first_name property. */
+    /** First name of the user. */
     firstName?: Scalars['String']
     /** Whether the user has enabled keyboard shortcuts for comment moderation. Defaults to false. */
     hasCommentShortcutsEnabled?: Scalars['Boolean']
@@ -999,15 +1013,15 @@ export interface User {
     isRestricted?: Scalars['Boolean']
     /** Whether the node is a Term */
     isTermNode: Scalars['Boolean']
-    /** Last name of the user. This is equivalent to the WP_User-&gt;user_last_name property. */
+    /** Last name of the user. */
     lastName?: Scalars['String']
     /** The preferred language locale set for the user. Value derived from get_user_locale(). */
     locale?: Scalars['String']
     /** Connection between the User type and the mediaItem type */
     mediaItems?: UserToMediaItemConnection
-    /** Display name of the user. This is equivalent to the WP_User-&gt;display_name property. */
+    /** Display name of the user. */
     name?: Scalars['String']
-    /** The nicename for the user. This field is equivalent to WP_User-&gt;user_nicename */
+    /** The url friendly name for the user, used to reference the user in a public url. */
     nicename?: Scalars['String']
     /** Nickname of the user. */
     nickname?: Scalars['String']
@@ -1023,7 +1037,7 @@ export interface User {
     roles?: UserToUserRoleConnection
     /** Whether the Toolbar should be displayed when the user is viewing the site. */
     shouldShowAdminToolbar?: Scalars['Boolean']
-    /** The slug for the user. This field is equivalent to WP_User-&gt;user_nicename */
+    /** The url friendly identifier for the user. */
     slug?: Scalars['String']
     /** The unique resource identifier path */
     uri?: Scalars['String']
@@ -1031,10 +1045,10 @@ export interface User {
     url?: Scalars['String']
     /**
      * @deprecated Deprecated in favor of the databaseId field
-     * The Id of the user. Equivalent to WP_User-&gt;ID
+     * The unique numeric identifier for the user.
      */
     userId?: Scalars['Int']
-    /** Username for the user. This field is equivalent to WP_User-&gt;user_login. */
+    /** Username for the user. This is the unique identifier the user provides to log in. */
     username?: Scalars['String']
     __typename: 'User'
 }
@@ -1102,18 +1116,18 @@ export type CommentConnectionEdge = (CommentToParentCommentConnectionEdge | Comm
 
 /** A response or reaction to content submitted by users. Comments are typically associated with a specific content entry. */
 export interface Comment {
-    /** User agent used to post the comment. This field is equivalent to WP_Comment-&gt;comment_agent and the value matching the &quot;comment_agent&quot; column in SQL. */
+    /** User agent (browser or client) used to post the comment. */
     agent?: Scalars['String']
     /**
      * @deprecated Deprecated in favor of the `status` field
-     * The approval status of the comment. This field is equivalent to WP_Comment-&gt;comment_approved and the value matching the &quot;comment_approved&quot; column in SQL.
+     * The approval status of the comment.
      */
     approved?: Scalars['Boolean']
     /** The author of the comment */
     author?: CommentToCommenterConnectionEdge
     /**
      * @deprecated Use the ipAddress field on the edge between the comment and author
-     * IP address for the author at the time of commenting. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL.
+     * IP address for the author at the time of commenting.
      */
     authorIp?: Scalars['String']
     /**
@@ -1123,13 +1137,13 @@ export interface Comment {
     commentId?: Scalars['Int']
     /** Connection between the Comment type and the ContentNode type */
     commentedOn?: CommentToContentNodeConnectionEdge
-    /** Content of the comment. This field is equivalent to WP_Comment-&gt;comment_content and the value matching the &quot;comment_content&quot; column in SQL. */
+    /** Content of the comment. */
     content?: Scalars['String']
     /** The unique identifier stored in the database */
     databaseId: Scalars['Int']
-    /** Date the comment was posted in local time. This field is equivalent to WP_Comment-&gt;date and the value matching the &quot;date&quot; column in SQL. */
+    /** Date the comment was posted in local time. */
     date?: Scalars['String']
-    /** Date the comment was posted in GMT. This field is equivalent to WP_Comment-&gt;date_gmt and the value matching the &quot;date_gmt&quot; column in SQL. */
+    /** Date the comment was posted in GMT. */
     dateGmt?: Scalars['String']
     /** The globally unique identifier for the comment object */
     id: Scalars['ID']
@@ -1145,7 +1159,7 @@ export interface Comment {
     isRestricted?: Scalars['Boolean']
     /** Whether the node is a Term */
     isTermNode: Scalars['Boolean']
-    /** Karma value for the comment. This field is equivalent to WP_Comment-&gt;comment_karma and the value matching the &quot;comment_karma&quot; column in SQL. */
+    /** Karma value for the comment. */
     karma?: Scalars['Int']
     /** The permalink of the comment */
     link?: Scalars['String']
@@ -1157,9 +1171,9 @@ export interface Comment {
     parentId?: Scalars['ID']
     /** Connection between the Comment type and the Comment type */
     replies?: CommentToCommentConnection
-    /** The approval status of the comment. This field is equivalent to WP_Comment-&gt;comment_approved and the value matching the &quot;comment_approved&quot; column in SQL. */
+    /** The approval status of the comment. */
     status?: CommentStatusEnum
-    /** Type of comment. This field is equivalent to WP_Comment-&gt;comment_type and the value matching the &quot;comment_type&quot; column in SQL. */
+    /** Type of comment. */
     type?: Scalars['String']
     /** The unique resource identifier path */
     uri?: Scalars['String']
@@ -1173,7 +1187,7 @@ export interface CommentToCommenterConnectionEdge {
     cursor?: Scalars['String']
     /** Email address representing the author for this particular comment */
     email?: Scalars['String']
-    /** IP address of the author at the time of making this comment. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL. */
+    /** IP address of the author at the time of making this comment. */
     ipAddress?: Scalars['String']
     /** The display name of the comment author for this particular comment */
     name?: Scalars['String']
@@ -1423,7 +1437,7 @@ export interface MediaItem {
     filePath?: Scalars['String']
     /** The filesize in bytes of the resource */
     fileSize?: Scalars['Int']
-    /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+    /** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
     guid?: Scalars['String']
     /** Whether the attachment object is password protected. */
     hasPassword?: Scalars['Boolean']
@@ -1451,7 +1465,7 @@ export interface MediaItem {
     mediaDetails?: MediaDetails
     /**
      * @deprecated Deprecated in favor of the databaseId field
-     * The id field matches the WP_Post-&gt;ID field.
+     * The unique numeric identifier for the content node.
      */
     mediaItemId: Scalars['Int']
     /** Url of the mediaItem */
@@ -1474,11 +1488,11 @@ export interface MediaItem {
     password?: Scalars['String']
     /** The database id of the preview node */
     previewRevisionDatabaseId?: Scalars['Int']
-    /** Whether the object is a node in the preview state */
+    /** The globally unique ID of the preview node */
     previewRevisionId?: Scalars['ID']
     /** The sizes attribute value for an image. */
     sizes?: Scalars['String']
-    /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+    /** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
     slug?: Scalars['String']
     /** Url of the mediaItem */
     sourceUrl?: Scalars['String']
@@ -1920,7 +1934,7 @@ export interface Page {
     featuredImageDatabaseId?: Scalars['Int']
     /** Globally unique ID of the featured image assigned to the node */
     featuredImageId?: Scalars['ID']
-    /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+    /** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
     guid?: Scalars['String']
     /** Whether the page object is password protected. */
     hasPassword?: Scalars['Boolean']
@@ -1958,7 +1972,7 @@ export interface Page {
     modifiedGmt?: Scalars['String']
     /**
      * @deprecated Deprecated in favor of the databaseId field
-     * The id field matches the WP_Post-&gt;ID field.
+     * The unique numeric identifier for the content node.
      */
     pageId: Scalars['Int']
     /** The parent of the node. The parent object can be of various types */
@@ -1973,13 +1987,13 @@ export interface Page {
     preview?: PageToPreviewConnectionEdge
     /** The database id of the preview node */
     previewRevisionDatabaseId?: Scalars['Int']
-    /** Whether the object is a node in the preview state */
+    /** The globally unique ID of the preview node */
     previewRevisionId?: Scalars['ID']
     /** If the current node is a revision, this field exposes the node this is a revision of. Returns null if the node is not a revision of another node. */
     revisionOf?: NodeWithRevisionsToContentNodeConnectionEdge
     /** Connection between the Page type and the page type */
     revisions?: PageToRevisionConnection
-    /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+    /** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
     slug?: Scalars['String']
     /** The current status of the object */
     status?: Scalars['String']
@@ -2394,7 +2408,7 @@ export interface Post {
     featuredImageDatabaseId?: Scalars['Int']
     /** Globally unique ID of the featured image assigned to the node */
     featuredImageId?: Scalars['ID']
-    /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+    /** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
     guid?: Scalars['String']
     /** Whether the post object is password protected. */
     hasPassword?: Scalars['Boolean']
@@ -2441,7 +2455,7 @@ export interface Post {
     postFormats?: PostToPostFormatConnection
     /**
      * @deprecated Deprecated in favor of the databaseId field
-     * The id field matches the WP_Post-&gt;ID field.
+     * The unique numeric identifier for the content node.
      */
     postId: Scalars['Int']
     /** Connection between the post type and the post type */
@@ -2454,7 +2468,7 @@ export interface Post {
     revisionOf?: NodeWithRevisionsToContentNodeConnectionEdge
     /** Connection between the Post type and the post type */
     revisions?: PostToRevisionConnection
-    /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+    /** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
     slug?: Scalars['String']
     /** The current status of the object */
     status?: Scalars['String']
@@ -2496,15 +2510,9 @@ export interface PostToPostConnection {
 
 /** An edge in a connection */
 export interface PostToPostConnectionEdge {
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have ancestors
-     * A cursor for use in pagination
-     */
+    /** A cursor for use in pagination */
     cursor?: Scalars['String']
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have ancestors
-     * The item at the end of the edge
-     */
+    /** The item at the end of the edge */
     node: Post
     __typename: 'PostToPostConnectionEdge'
 }
@@ -2558,7 +2566,7 @@ export interface Category {
     ancestors?: CategoryToAncestorsCategoryConnection
     /**
      * @deprecated Deprecated in favor of databaseId
-     * The id field matches the WP_Post-&gt;ID field.
+     * The unique numeric identifier for the term.
      */
     categoryId?: Scalars['Int']
     /** Connection between the Category type and the CentraldeDecorado type */
@@ -2693,7 +2701,7 @@ export type CentraldeDecoradoConnectionEdge = (CentraldeDecoradoToCentraldeDecor
 export interface CentraldeDecorado {
     /**
      * @deprecated Deprecated in favor of the databaseId field
-     * The id field matches the WP_Post-&gt;ID field.
+     * The unique numeric identifier for the content node.
      */
     centraldeDecoradoId: Scalars['Int']
     /**
@@ -2731,7 +2739,7 @@ export interface CentraldeDecorado {
     featuredImageDatabaseId?: Scalars['Int']
     /** Globally unique ID of the featured image assigned to the node */
     featuredImageId?: Scalars['ID']
-    /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+    /** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
     guid?: Scalars['String']
     /** Whether the centraldecorado object is password protected. */
     hasPassword?: Scalars['Boolean']
@@ -2772,7 +2780,7 @@ export interface CentraldeDecorado {
     previewRevisionDatabaseId?: Scalars['Int']
     /** Whether the object is a node in the preview state */
     previewRevisionId?: Scalars['ID']
-    /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+    /** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
     slug?: Scalars['String']
     /** The current status of the object */
     status?: Scalars['String']
@@ -2802,15 +2810,9 @@ export interface CentraldeDecoradoToCentraldeDecoradoConnection {
 
 /** An edge in a connection */
 export interface CentraldeDecoradoToCentraldeDecoradoConnectionEdge {
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have ancestors
-     * A cursor for use in pagination
-     */
+    /** A cursor for use in pagination */
     cursor?: Scalars['String']
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have ancestors
-     * The item at the end of the edge
-     */
+    /** The item at the end of the edge */
     node: CentraldeDecorado
     __typename: 'CentraldeDecoradoToCentraldeDecoradoConnectionEdge'
 }
@@ -2894,10 +2896,7 @@ export interface CentraldeDecorado_Centraldedecorados {
 export interface CentraldeDecoradoToParentConnectionEdge {
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: Scalars['String']
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have a parent
-     * The node of the connection, without the edges
-     */
+    /** The node of the connection, without the edges */
     node: CentraldeDecorado
     __typename: 'CentraldeDecoradoToParentConnectionEdge'
 }
@@ -3081,7 +3080,7 @@ export type EmpreendimentoConnectionEdge = (EmpreendimentoToEmpreendimentoConnec
 export interface Empreendimento {
     /**
      * @deprecated Deprecated in favor of the databaseId field
-     * The id field matches the WP_Post-&gt;ID field.
+     * The unique numeric identifier for the content node.
      */
     empreendimentoId: Scalars['Int']
     /**
@@ -3119,7 +3118,7 @@ export interface Empreendimento {
     featuredImageDatabaseId?: Scalars['Int']
     /** Globally unique ID of the featured image assigned to the node */
     featuredImageId?: Scalars['ID']
-    /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+    /** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
     guid?: Scalars['String']
     /** Whether the empreendimentos object is password protected. */
     hasPassword?: Scalars['Boolean']
@@ -3162,7 +3161,7 @@ export interface Empreendimento {
     previewRevisionDatabaseId?: Scalars['Int']
     /** Whether the object is a node in the preview state */
     previewRevisionId?: Scalars['ID']
-    /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+    /** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
     slug?: Scalars['String']
     /** The current status of the object */
     status?: Scalars['String']
@@ -3192,15 +3191,9 @@ export interface EmpreendimentoToEmpreendimentoConnection {
 
 /** An edge in a connection */
 export interface EmpreendimentoToEmpreendimentoConnectionEdge {
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have ancestors
-     * A cursor for use in pagination
-     */
+    /** A cursor for use in pagination */
     cursor?: Scalars['String']
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have ancestors
-     * The item at the end of the edge
-     */
+    /** The item at the end of the edge */
     node: Empreendimento
     __typename: 'EmpreendimentoToEmpreendimentoConnectionEdge'
 }
@@ -3382,10 +3375,7 @@ export interface Empreendimento_Housiverso_diferencial {
 export interface EmpreendimentoToParentConnectionEdge {
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: Scalars['String']
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have a parent
-     * The node of the connection, without the edges
-     */
+    /** The node of the connection, without the edges */
     node: Empreendimento
     __typename: 'EmpreendimentoToParentConnectionEdge'
 }
@@ -3585,10 +3575,7 @@ export interface PostToCommentConnectionPageInfo {
 export interface PostToParentConnectionEdge {
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: Scalars['String']
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have a parent
-     * The node of the connection, without the edges
-     */
+    /** The node of the connection, without the edges */
     node: Post
     __typename: 'PostToParentConnectionEdge'
 }
@@ -3648,7 +3635,7 @@ export interface PostFormat {
     name?: Scalars['String']
     /**
      * @deprecated Deprecated in favor of databaseId
-     * The id field matches the WP_Post-&gt;ID field.
+     * The unique numeric identifier for the term.
      */
     postFormatId?: Scalars['Int']
     /** Connection between the PostFormat type and the post type */
@@ -3899,7 +3886,7 @@ export interface Tag {
     slug?: Scalars['String']
     /**
      * @deprecated Deprecated in favor of databaseId
-     * The id field matches the WP_Post-&gt;ID field.
+     * The unique numeric identifier for the term.
      */
     tagId?: Scalars['Int']
     /** Connection between the Tag type and the Taxonomy type */
@@ -4228,15 +4215,9 @@ export type ArquivoAssessoriaConnectionPageInfo = (ArquivoAssessoriaToArquivoAss
 
 /** An edge in a connection */
 export interface ArquivoAssessoriaToArquivoAssessoriaConnectionEdge {
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have ancestors
-     * A cursor for use in pagination
-     */
+    /** A cursor for use in pagination */
     cursor?: Scalars['String']
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have ancestors
-     * The item at the end of the edge
-     */
+    /** The item at the end of the edge */
     node: ArquivoAssessoria
     __typename: 'ArquivoAssessoriaToArquivoAssessoriaConnectionEdge'
 }
@@ -4273,10 +4254,7 @@ export interface ArquivoAssessoria_DownAssessoria {
 export interface ArquivoAssessoriaToParentConnectionEdge {
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: Scalars['String']
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have a parent
-     * The node of the connection, without the edges
-     */
+    /** The node of the connection, without the edges */
     node: ArquivoAssessoria
     __typename: 'ArquivoAssessoriaToParentConnectionEdge'
 }
@@ -4340,7 +4318,7 @@ export type BannerIdType = 'DATABASE_ID' | 'ID' | 'SLUG' | 'URI'
 export interface Banner {
     /**
      * @deprecated Deprecated in favor of the databaseId field
-     * The id field matches the WP_Post-&gt;ID field.
+     * The unique numeric identifier for the content node.
      */
     bannerId: Scalars['Int']
     /**
@@ -4370,7 +4348,7 @@ export interface Banner {
     enqueuedScripts?: ContentNodeToEnqueuedScriptConnection
     /** Connection between the ContentNode type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: ContentNodeToEnqueuedStylesheetConnection
-    /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+    /** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
     guid?: Scalars['String']
     /** Whether the banner_home object is password protected. */
     hasPassword?: Scalars['Boolean']
@@ -4411,7 +4389,7 @@ export interface Banner {
     previewRevisionDatabaseId?: Scalars['Int']
     /** Whether the object is a node in the preview state */
     previewRevisionId?: Scalars['ID']
-    /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+    /** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
     slug?: Scalars['String']
     /** The current status of the object */
     status?: Scalars['String']
@@ -4451,15 +4429,9 @@ export type BannerConnectionPageInfo = (BannerToBannerConnectionPageInfo | RootQ
 
 /** An edge in a connection */
 export interface BannerToBannerConnectionEdge {
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have ancestors
-     * A cursor for use in pagination
-     */
+    /** A cursor for use in pagination */
     cursor?: Scalars['String']
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have ancestors
-     * The item at the end of the edge
-     */
+    /** The item at the end of the edge */
     node: Banner
     __typename: 'BannerToBannerConnectionEdge'
 }
@@ -4532,10 +4504,7 @@ export type Banner_BannerHome_QualEOEmpreendimento = (Empreendimento) & { __isUn
 export interface BannerToParentConnectionEdge {
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: Scalars['String']
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have a parent
-     * The node of the connection, without the edges
-     */
+    /** The node of the connection, without the edges */
     node: Banner
     __typename: 'BannerToParentConnectionEdge'
 }
@@ -4805,6 +4774,8 @@ export interface DiscussionSettings {
     defaultCommentStatus?: Scalars['String']
     /** Permitir avisos de links de outros blogs (pingbacks ou trackbacks) em novos artigos. */
     defaultPingStatus?: Scalars['String']
+    /** The globally unique identifier of the settings group. */
+    id: Scalars['ID']
     __typename: 'DiscussionSettings'
 }
 
@@ -4861,6 +4832,10 @@ export interface GeneralSettings {
     description?: Scalars['String']
     /** Este endereço é utilizado para administração, como notificação de novo usuário. */
     email?: Scalars['String']
+    /** The address at which visitors reach the site&#039;s front end. Can differ from the `url` field when the front end and the content management backend are served from different addresses, such as on headless or decoupled installs. */
+    homeUrl?: Scalars['String']
+    /** The globally unique identifier of the settings group. */
+    id: Scalars['ID']
     /** Código de localização do WordPress. */
     language?: Scalars['String']
     /** The media item representing the site icon configured in site settings, used as the site&#039;s favicon and app icon. */
@@ -4958,9 +4933,9 @@ export interface Menu {
     menuId?: Scalars['Int']
     /** Connection between the Menu type and the MenuItem type */
     menuItems?: MenuToMenuItemConnection
-    /** Display name of the menu. Equivalent to WP_Term-&gt;name. */
+    /** Display name of the menu. */
     name?: Scalars['String']
-    /** The url friendly name of the menu. Equivalent to WP_Term-&gt;slug */
+    /** The url friendly name of the menu. */
     slug?: Scalars['String']
     __typename: 'Menu'
 }
@@ -5268,6 +5243,20 @@ export interface RootQueryToPageConnectionPageInfo {
 }
 
 
+/** The permalink setting type */
+export interface PermalinkSettings {
+    /** The prefix used in the URLs of category archive pages. */
+    categoryBase?: Scalars['String']
+    /** The globally unique identifier of the settings group. */
+    id: Scalars['ID']
+    /** The structure used to build the URLs for content on the site. */
+    structure?: Scalars['String']
+    /** The prefix used in the URLs of tag archive pages. */
+    tagBase?: Scalars['String']
+    __typename: 'PermalinkSettings'
+}
+
+
 /** An plugin object */
 export interface Plugin {
     /** Name of the plugin author(s), may also be a company name. */
@@ -5430,6 +5419,8 @@ export interface RootQueryToPostConnectionPageInfo {
 
 /** The reading setting type */
 export interface ReadingSettings {
+    /** The globally unique identifier of the settings group. */
+    id: Scalars['ID']
     /** O ID da página que deve exibir os posts mais recentes */
     pageForPosts?: Scalars['Int']
     /** O ID da página que deve ser exibida na página inicial */
@@ -5676,27 +5667,27 @@ export interface RootQueryToTermNodeConnectionPageInfo {
 
 /** A theme object */
 export interface Theme {
-    /** Name of the theme author(s), could also be a company name. This field is equivalent to WP_Theme-&gt;get( &quot;Author&quot; ). */
+    /** Name of the theme author(s), could also be a company name. */
     author?: Scalars['String']
-    /** URI for the author/company website. This field is equivalent to WP_Theme-&gt;get( &quot;AuthorURI&quot; ). */
+    /** URI for the author/company website. */
     authorUri?: Scalars['String']
-    /** The description of the theme. This field is equivalent to WP_Theme-&gt;get( &quot;Description&quot; ). */
+    /** The description of the theme. */
     description?: Scalars['String']
     /** The globally unique identifier of the theme object. */
     id: Scalars['ID']
     /** Whether the object is restricted from the current viewer */
     isRestricted?: Scalars['Boolean']
-    /** Display name of the theme. This field is equivalent to WP_Theme-&gt;get( &quot;Name&quot; ). */
+    /** Display name of the theme. */
     name?: Scalars['String']
-    /** The URL of the screenshot for the theme. The screenshot is intended to give an overview of what the theme looks like. This field is equivalent to WP_Theme-&gt;get_screenshot(). */
+    /** The URL of the screenshot for the theme. The screenshot is intended to give an overview of what the theme looks like. */
     screenshot?: Scalars['String']
-    /** The theme slug is used to internally match themes. Theme slugs can have subdirectories like: my-theme/sub-theme. This field is equivalent to WP_Theme-&gt;get_stylesheet(). */
+    /** The theme slug is used to internally match themes. Theme slugs can have subdirectories like: my-theme/sub-theme. */
     slug?: Scalars['String']
-    /** URI for the author/company website. This field is equivalent to WP_Theme-&gt;get( &quot;Tags&quot; ). */
+    /** A list of tags associated with the theme, typically describing its features (e.g. custom-logo, accessibility-ready, full-site-editing). */
     tags?: (Scalars['String'] | undefined)[]
-    /** A URI if the theme has a website associated with it. The Theme URI is handy for directing users to a theme site for support etc. This field is equivalent to WP_Theme-&gt;get( &quot;ThemeURI&quot; ). */
+    /** A URI if the theme has a website associated with it. The Theme URI is handy for directing users to a theme site for support etc. */
     themeUri?: Scalars['String']
-    /** The current version of the theme. This field is equivalent to WP_Theme-&gt;get( &quot;Version&quot; ). */
+    /** The current version of the theme. */
     version?: Scalars['String']
     __typename: 'Theme'
 }
@@ -5852,6 +5843,8 @@ export interface WritingSettings {
     defaultCategory?: Scalars['Int']
     /** Formato de post padrão. */
     defaultPostFormat?: Scalars['String']
+    /** The globally unique identifier of the settings group. */
+    id: Scalars['ID']
     /** Converter emoticons como :-) e :-P em gráficos ao exibí-los. */
     useSmilies?: Scalars['Boolean']
     __typename: 'WritingSettings'
@@ -5859,7 +5852,7 @@ export interface WritingSettings {
 
 
 /** An object with a globally unique identifier. All objects that can be identified by a unique ID implement this interface. */
-export type Node = (ArquivoAssessoria | ContentType | Taxonomy | EnqueuedScript | EnqueuedStylesheet | User | Comment | MediaItem | Page | Post | Category | CentraldeDecorado | Empreendimento | PostFormat | Tag | UserRole | Banner | Menu | MenuItem | Plugin | Theme | CommentAuthor) & { __isUnion?: true }
+export type Node = (ArquivoAssessoria | ContentType | Taxonomy | EnqueuedScript | EnqueuedStylesheet | User | Comment | MediaItem | Page | Post | Category | CentraldeDecorado | Empreendimento | PostFormat | Tag | UserRole | Banner | DiscussionSettings | GeneralSettings | Menu | MenuItem | PermalinkSettings | Plugin | ReadingSettings | Theme | WritingSettings | CommentAuthor) & { __isUnion?: true }
 
 
 /** An object that has a unique numeric identifier in the database. Provides consistent access to the database ID across different object types. */
@@ -6421,6 +6414,8 @@ export interface UpdateSettingsPayload {
     discussionSettings?: DiscussionSettings
     /** Update the GeneralSettings setting. */
     generalSettings?: GeneralSettings
+    /** Update the PermalinkSettings setting. */
+    permalinkSettings?: PermalinkSettings
     /** Update the ReadingSettings setting. */
     readingSettings?: ReadingSettings
     /** Update the WritingSettings setting. */
@@ -6461,9 +6456,7 @@ export interface RootQueryRequest{
     /** The globally unique identifier of the object. */
     id: Scalars['ID'],
     /** Type of unique identifier to fetch by. Default is Global ID */
-    idType?: (ArquivoAssessoriaIdType | null),
-    /** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
-    asPreview?: (Scalars['Boolean'] | null)},ArquivoAssessoriaRequest]
+    idType?: (ArquivoAssessoriaIdType | null)},ArquivoAssessoriaRequest]
     /**
      * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
      * A ArquivoAssessoria object
@@ -6494,9 +6487,7 @@ export interface RootQueryRequest{
     /** The globally unique identifier of the object. */
     id: Scalars['ID'],
     /** Type of unique identifier to fetch by. Default is Global ID */
-    idType?: (BannerIdType | null),
-    /** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
-    asPreview?: (Scalars['Boolean'] | null)},BannerRequest]
+    idType?: (BannerIdType | null)},BannerRequest]
     /**
      * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
      * A Banner object
@@ -6545,9 +6536,7 @@ export interface RootQueryRequest{
     /** The globally unique identifier of the object. */
     id: Scalars['ID'],
     /** Type of unique identifier to fetch by. Default is Global ID */
-    idType?: (CentraldeDecoradoIdType | null),
-    /** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
-    asPreview?: (Scalars['Boolean'] | null)},CentraldeDecoradoRequest]
+    idType?: (CentraldeDecoradoIdType | null)},CentraldeDecoradoRequest]
     /**
      * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
      * A CentraldeDecorado object
@@ -6598,9 +6587,7 @@ export interface RootQueryRequest{
     /** Type of unique identifier to fetch a content node by. Default is Global ID */
     idType?: (ContentNodeIdTypeEnum | null),
     /** The content type the node is used for. Required when idType is set to "name" or "slug" */
-    contentType?: (ContentTypeEnum | null),
-    /** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
-    asPreview?: (Scalars['Boolean'] | null)},ContentNodeRequest]
+    contentType?: (ContentTypeEnum | null)},ContentNodeRequest]
     /** Connection between the RootQuery type and the ContentNode type */
     contentNodes?: [{
     /** The number of items to return after the referenced "after" cursor */
@@ -6636,9 +6623,7 @@ export interface RootQueryRequest{
     /** The globally unique identifier of the object. */
     id: Scalars['ID'],
     /** Type of unique identifier to fetch by. Default is Global ID */
-    idType?: (EmpreendimentoIdType | null),
-    /** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
-    asPreview?: (Scalars['Boolean'] | null)},EmpreendimentoRequest]
+    idType?: (EmpreendimentoIdType | null)},EmpreendimentoRequest]
     /**
      * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
      * A Empreendimento object
@@ -6671,9 +6656,7 @@ export interface RootQueryRequest{
     /** The globally unique identifier of the object. */
     id: Scalars['ID'],
     /** Type of unique identifier to fetch by. Default is Global ID */
-    idType?: (MediaItemIdType | null),
-    /** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
-    asPreview?: (Scalars['Boolean'] | null)},MediaItemRequest]
+    idType?: (MediaItemIdType | null)},MediaItemRequest]
     /**
      * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
      * A mediaItem object
@@ -6748,9 +6731,7 @@ export interface RootQueryRequest{
     /** The globally unique identifier of the object. */
     id: Scalars['ID'],
     /** Type of unique identifier to fetch by. Default is Global ID */
-    idType?: (PageIdType | null),
-    /** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
-    asPreview?: (Scalars['Boolean'] | null)},PageRequest]
+    idType?: (PageIdType | null)},PageRequest]
     /**
      * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
      * A page object
@@ -6774,6 +6755,8 @@ export interface RootQueryRequest{
     before?: (Scalars['String'] | null),
     /** Arguments for filtering the connection */
     where?: (RootQueryToPageConnectionWhereArgs | null)},RootQueryToPageConnectionRequest] | RootQueryToPageConnectionRequest
+    /** Fields of the &#039;PermalinkSettings&#039; settings group */
+    permalinkSettings?: PermalinkSettingsRequest
     /** A WordPress plugin */
     plugin?: [{
     /** The globally unique identifier of the plugin. */
@@ -6795,9 +6778,7 @@ export interface RootQueryRequest{
     /** The globally unique identifier of the object. */
     id: Scalars['ID'],
     /** Type of unique identifier to fetch by. Default is Global ID */
-    idType?: (PostIdType | null),
-    /** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
-    asPreview?: (Scalars['Boolean'] | null)},PostRequest]
+    idType?: (PostIdType | null)},PostRequest]
     /**
      * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
      * A post object
@@ -6852,7 +6833,9 @@ export interface RootQueryRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},RootQueryToEnqueuedScriptConnectionRequest] | RootQueryToEnqueuedScriptConnectionRequest
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (RootQueryToEnqueuedScriptConnectionWhereArgs | null)},RootQueryToEnqueuedScriptConnectionRequest] | RootQueryToEnqueuedScriptConnectionRequest
     /** Connection between the RootQuery type and the EnqueuedStylesheet type */
     registeredStylesheets?: [{
     /** The number of items to return after the referenced "after" cursor */
@@ -6862,7 +6845,9 @@ export interface RootQueryRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},RootQueryToEnqueuedStylesheetConnectionRequest] | RootQueryToEnqueuedStylesheetConnectionRequest
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (RootQueryToEnqueuedStylesheetConnectionWhereArgs | null)},RootQueryToEnqueuedStylesheetConnectionRequest] | RootQueryToEnqueuedStylesheetConnectionRequest
     /** Connection between the RootQuery type and the ContentNode type */
     revisions?: [{
     /** The number of items to return after the referenced "after" cursor */
@@ -6986,41 +6971,49 @@ export interface RootQueryRequest{
 
 /** All of the registered settings */
 export interface SettingsRequest{
-    /** Settings of the the string Settings Group */
+    /** Settings of the string Settings Group */
     discussionSettingsDefaultCommentStatus?: boolean | number
-    /** Settings of the the string Settings Group */
+    /** Settings of the string Settings Group */
     discussionSettingsDefaultPingStatus?: boolean | number
-    /** Settings of the the string Settings Group */
+    /** Settings of the string Settings Group */
     generalSettingsDateFormat?: boolean | number
-    /** Settings of the the string Settings Group */
+    /** Settings of the string Settings Group */
     generalSettingsDescription?: boolean | number
-    /** Settings of the the string Settings Group */
+    /** Settings of the string Settings Group */
     generalSettingsEmail?: boolean | number
-    /** Settings of the the string Settings Group */
+    /** Settings of the string Settings Group */
+    generalSettingsHomeUrl?: boolean | number
+    /** Settings of the string Settings Group */
     generalSettingsLanguage?: boolean | number
-    /** Settings of the the integer Settings Group */
+    /** Settings of the integer Settings Group */
     generalSettingsStartOfWeek?: boolean | number
-    /** Settings of the the string Settings Group */
+    /** Settings of the string Settings Group */
     generalSettingsTimeFormat?: boolean | number
-    /** Settings of the the string Settings Group */
+    /** Settings of the string Settings Group */
     generalSettingsTimezone?: boolean | number
-    /** Settings of the the string Settings Group */
+    /** Settings of the string Settings Group */
     generalSettingsTitle?: boolean | number
-    /** Settings of the the string Settings Group */
+    /** Settings of the string Settings Group */
     generalSettingsUrl?: boolean | number
-    /** Settings of the the integer Settings Group */
+    /** Settings of the string Settings Group */
+    permalinkSettingsCategoryBase?: boolean | number
+    /** Settings of the string Settings Group */
+    permalinkSettingsStructure?: boolean | number
+    /** Settings of the string Settings Group */
+    permalinkSettingsTagBase?: boolean | number
+    /** Settings of the integer Settings Group */
     readingSettingsPageForPosts?: boolean | number
-    /** Settings of the the integer Settings Group */
+    /** Settings of the integer Settings Group */
     readingSettingsPageOnFront?: boolean | number
-    /** Settings of the the integer Settings Group */
+    /** Settings of the integer Settings Group */
     readingSettingsPostsPerPage?: boolean | number
-    /** Settings of the the string Settings Group */
+    /** Settings of the string Settings Group */
     readingSettingsShowOnFront?: boolean | number
-    /** Settings of the the integer Settings Group */
+    /** Settings of the integer Settings Group */
     writingSettingsDefaultCategory?: boolean | number
-    /** Settings of the the string Settings Group */
+    /** Settings of the string Settings Group */
     writingSettingsDefaultPostFormat?: boolean | number
-    /** Settings of the the boolean Settings Group */
+    /** Settings of the boolean Settings Group */
     writingSettingsUseSmilies?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -7031,7 +7024,7 @@ export interface SettingsRequest{
 export interface ArquivoAssessoriaRequest{
     /**
      * @deprecated Deprecated in favor of the databaseId field
-     * The id field matches the WP_Post-&gt;ID field.
+     * The unique numeric identifier for the content node.
      */
     arquivoAssessoriaId?: boolean | number
     /**
@@ -7074,7 +7067,9 @@ export interface ArquivoAssessoriaRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},ContentNodeToEnqueuedScriptConnectionRequest] | ContentNodeToEnqueuedScriptConnectionRequest
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)},ContentNodeToEnqueuedScriptConnectionRequest] | ContentNodeToEnqueuedScriptConnectionRequest
     /** Connection between the ContentNode type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: [{
     /** The number of items to return after the referenced "after" cursor */
@@ -7084,8 +7079,10 @@ export interface ArquivoAssessoriaRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},ContentNodeToEnqueuedStylesheetConnectionRequest] | ContentNodeToEnqueuedStylesheetConnectionRequest
-    /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)},ContentNodeToEnqueuedStylesheetConnectionRequest] | ContentNodeToEnqueuedStylesheetConnectionRequest
+    /** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
     guid?: boolean | number
     /** Whether the arq_assessoria object is password protected. */
     hasPassword?: boolean | number
@@ -7126,7 +7123,7 @@ export interface ArquivoAssessoriaRequest{
     previewRevisionDatabaseId?: boolean | number
     /** Whether the object is a node in the preview state */
     previewRevisionId?: boolean | number
-    /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+    /** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
     slug?: boolean | number
     /** The current status of the object */
     status?: boolean | number
@@ -7170,7 +7167,9 @@ export interface ContentNodeRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},ContentNodeToEnqueuedScriptConnectionRequest] | ContentNodeToEnqueuedScriptConnectionRequest
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)},ContentNodeToEnqueuedScriptConnectionRequest] | ContentNodeToEnqueuedScriptConnectionRequest
     /** Connection between the ContentNode type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: [{
     /** The number of items to return after the referenced "after" cursor */
@@ -7180,8 +7179,10 @@ export interface ContentNodeRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},ContentNodeToEnqueuedStylesheetConnectionRequest] | ContentNodeToEnqueuedStylesheetConnectionRequest
-    /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)},ContentNodeToEnqueuedStylesheetConnectionRequest] | ContentNodeToEnqueuedStylesheetConnectionRequest
+    /** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
     guid?: boolean | number
     /** The globally unique ID for the object */
     id?: boolean | number
@@ -7209,9 +7210,9 @@ export interface ContentNodeRequest{
     modifiedGmt?: boolean | number
     /** The database id of the preview node */
     previewRevisionDatabaseId?: boolean | number
-    /** Whether the object is a node in the preview state */
+    /** The globally unique ID of the preview node */
     previewRevisionId?: boolean | number
-    /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+    /** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
     slug?: boolean | number
     /** The current status of the object */
     status?: boolean | number
@@ -7772,7 +7773,7 @@ export interface TaxonomyRequest{
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
     before?: (Scalars['String'] | null)},TaxonomyToTermNodeConnectionRequest] | TaxonomyToTermNodeConnectionRequest
-    /** Description of the taxonomy. This field is equivalent to WP_Taxonomy-&gt;description */
+    /** Description of the taxonomy. */
     description?: boolean | number
     /** The plural name of the post type within the GraphQL Schema. */
     graphqlPluralName?: boolean | number
@@ -7786,7 +7787,7 @@ export interface TaxonomyRequest{
     isRestricted?: boolean | number
     /** Name of the taxonomy shown in the menu. Usually plural. */
     label?: boolean | number
-    /** The display name of the taxonomy. This field is equivalent to WP_Taxonomy-&gt;label */
+    /** The display name of the taxonomy. */
     name?: boolean | number
     /** Whether the taxonomy is publicly queryable */
     public?: boolean | number
@@ -7794,7 +7795,7 @@ export interface TaxonomyRequest{
     restBase?: boolean | number
     /** The REST Controller class assigned to handling this content type. */
     restControllerClass?: boolean | number
-    /** Whether to show the taxonomy as part of a tag cloud widget. This field is equivalent to WP_Taxonomy-&gt;show_tagcloud */
+    /** Whether to show the taxonomy as part of a tag cloud widget. */
     showCloud?: boolean | number
     /** Whether to display a column for the taxonomy on its post type listing screens. */
     showInAdminColumn?: boolean | number
@@ -8038,7 +8039,9 @@ export interface TermNodeRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},TermNodeToEnqueuedScriptConnectionRequest] | TermNodeToEnqueuedScriptConnectionRequest
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (TermNodeToEnqueuedScriptConnectionWhereArgs | null)},TermNodeToEnqueuedScriptConnectionRequest] | TermNodeToEnqueuedScriptConnectionRequest
     /** Connection between the TermNode type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: [{
     /** The number of items to return after the referenced "after" cursor */
@@ -8048,7 +8051,9 @@ export interface TermNodeRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},TermNodeToEnqueuedStylesheetConnectionRequest] | TermNodeToEnqueuedStylesheetConnectionRequest
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (TermNodeToEnqueuedStylesheetConnectionWhereArgs | null)},TermNodeToEnqueuedStylesheetConnectionRequest] | TermNodeToEnqueuedStylesheetConnectionRequest
     /** The globally unique ID for the object */
     id?: boolean | number
     /** Whether the node is a Comment */
@@ -8083,6 +8088,12 @@ export interface TermNodeRequest{
     __typename?: boolean | number
     __scalar?: boolean | number
 }
+
+
+/** Arguments for filtering the TermNodeToEnqueuedScriptConnection connection */
+export interface TermNodeToEnqueuedScriptConnectionWhereArgs {
+/** Limit results to assets whose handle is in the provided list. Handles that do not match an asset are ignored. An empty list matches no assets, while omitting the argument (or passing null) leaves the connection unfiltered. */
+handlesIn?: ((Scalars['String'] | null)[] | null)}
 
 
 /** Connection between the TermNode type and the EnqueuedScript type */
@@ -8251,6 +8262,12 @@ export interface TermNodeToEnqueuedScriptConnectionPageInfoRequest{
     __typename?: boolean | number
     __scalar?: boolean | number
 }
+
+
+/** Arguments for filtering the TermNodeToEnqueuedStylesheetConnection connection */
+export interface TermNodeToEnqueuedStylesheetConnectionWhereArgs {
+/** Limit results to assets whose handle is in the provided list. Handles that do not match an asset are ignored. An empty list matches no assets, while omitting the argument (or passing null) leaves the connection unfiltered. */
+handlesIn?: ((Scalars['String'] | null)[] | null)}
 
 
 /** Connection between the TermNode type and the EnqueuedStylesheet type */
@@ -8490,7 +8507,9 @@ hasPassword?: (Scalars['Boolean'] | null),
 /** Specific database ID of the object */
 id?: (Scalars['Int'] | null),
 /** Array of IDs for the objects to retrieve */
-in?: ((Scalars['ID'] | null)[] | null),metaQuery?: (ContentTypeToContentNodeConnectionWhereArgsMetaQuery | null),
+in?: ((Scalars['ID'] | null)[] | null),
+/** True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results. */
+isSticky?: (Scalars['Boolean'] | null),metaQuery?: (ContentTypeToContentNodeConnectionWhereArgsMetaQuery | null),
 /** Get objects with a specific mimeType property */
 mimeType?: (MimeTypeEnum | null),
 /** Slug / post_name of the object */
@@ -8515,6 +8534,8 @@ search?: (Scalars['String'] | null),
 stati?: ((PostStatusEnum | null)[] | null),
 /** Show posts with a specific status. */
 status?: (PostStatusEnum | null),taxQuery?: (TaxQuery | null),
+/** Filter the connection to content assigned a specific template. */
+template?: (ContentTemplateEnum | null),
 /** Title of the object */
 title?: (Scalars['String'] | null)}
 
@@ -8553,8 +8574,14 @@ year?: (Scalars['Int'] | null)}
 export interface DateInput {
 /** Day of the month (from 1 to 31) */
 day?: (Scalars['Int'] | null),
+/** Hour of the day (from 0 to 23) */
+hour?: (Scalars['Int'] | null),
+/** Minute of the hour (from 0 to 59) */
+minute?: (Scalars['Int'] | null),
 /** Month number (from 1 to 12) */
 month?: (Scalars['Int'] | null),
+/** Second of the minute (from 0 to 59) */
+second?: (Scalars['Int'] | null),
 /** 4 digit year (e.g. 2017) */
 year?: (Scalars['Int'] | null)}
 
@@ -8814,7 +8841,7 @@ export interface UserRequest{
     databaseId?: boolean | number
     /** Description of the user. */
     description?: boolean | number
-    /** Email address of the user. This is equivalent to the WP_User-&gt;user_email property. */
+    /** Email address of the user. */
     email?: boolean | number
     /** Connection between the User type and the EnqueuedScript type */
     enqueuedScripts?: [{
@@ -8825,7 +8852,9 @@ export interface UserRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},UserToEnqueuedScriptConnectionRequest] | UserToEnqueuedScriptConnectionRequest
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (UserToEnqueuedScriptConnectionWhereArgs | null)},UserToEnqueuedScriptConnectionRequest] | UserToEnqueuedScriptConnectionRequest
     /** Connection between the User type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: [{
     /** The number of items to return after the referenced "after" cursor */
@@ -8835,10 +8864,12 @@ export interface UserRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},UserToEnqueuedStylesheetConnectionRequest] | UserToEnqueuedStylesheetConnectionRequest
-    /** A complete list of capabilities including capabilities inherited from a role. This is equivalent to the array keys of WP_User-&gt;allcaps. */
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (UserToEnqueuedStylesheetConnectionWhereArgs | null)},UserToEnqueuedStylesheetConnectionRequest] | UserToEnqueuedStylesheetConnectionRequest
+    /** A complete list of capabilities including capabilities inherited from a role. */
     extraCapabilities?: boolean | number
-    /** First name of the user. This is equivalent to the WP_User-&gt;user_first_name property. */
+    /** First name of the user. */
     firstName?: boolean | number
     /** Whether the user has enabled keyboard shortcuts for comment moderation. Defaults to false. */
     hasCommentShortcutsEnabled?: boolean | number
@@ -8860,7 +8891,7 @@ export interface UserRequest{
     isRestricted?: boolean | number
     /** Whether the node is a Term */
     isTermNode?: boolean | number
-    /** Last name of the user. This is equivalent to the WP_User-&gt;user_last_name property. */
+    /** Last name of the user. */
     lastName?: boolean | number
     /** The preferred language locale set for the user. Value derived from get_user_locale(). */
     locale?: boolean | number
@@ -8876,9 +8907,9 @@ export interface UserRequest{
     before?: (Scalars['String'] | null),
     /** Arguments for filtering the connection */
     where?: (UserToMediaItemConnectionWhereArgs | null)},UserToMediaItemConnectionRequest] | UserToMediaItemConnectionRequest
-    /** Display name of the user. This is equivalent to the WP_User-&gt;display_name property. */
+    /** Display name of the user. */
     name?: boolean | number
-    /** The nicename for the user. This field is equivalent to WP_User-&gt;user_nicename */
+    /** The url friendly name for the user, used to reference the user in a public url. */
     nicename?: boolean | number
     /** Nickname of the user. */
     nickname?: boolean | number
@@ -8932,7 +8963,7 @@ export interface UserRequest{
     before?: (Scalars['String'] | null)},UserToUserRoleConnectionRequest] | UserToUserRoleConnectionRequest
     /** Whether the Toolbar should be displayed when the user is viewing the site. */
     shouldShowAdminToolbar?: boolean | number
-    /** The slug for the user. This field is equivalent to WP_User-&gt;user_nicename */
+    /** The url friendly identifier for the user. */
     slug?: boolean | number
     /** The unique resource identifier path */
     uri?: boolean | number
@@ -8940,10 +8971,10 @@ export interface UserRequest{
     url?: boolean | number
     /**
      * @deprecated Deprecated in favor of the databaseId field
-     * The Id of the user. Equivalent to WP_User-&gt;ID
+     * The unique numeric identifier for the user.
      */
     userId?: boolean | number
-    /** Username for the user. This field is equivalent to WP_User-&gt;user_login. */
+    /** Username for the user. This is the unique identifier the user provides to log in. */
     username?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -9093,18 +9124,18 @@ export interface CommentConnectionEdgeRequest{
 
 /** A response or reaction to content submitted by users. Comments are typically associated with a specific content entry. */
 export interface CommentRequest{
-    /** User agent used to post the comment. This field is equivalent to WP_Comment-&gt;comment_agent and the value matching the &quot;comment_agent&quot; column in SQL. */
+    /** User agent (browser or client) used to post the comment. */
     agent?: boolean | number
     /**
      * @deprecated Deprecated in favor of the `status` field
-     * The approval status of the comment. This field is equivalent to WP_Comment-&gt;comment_approved and the value matching the &quot;comment_approved&quot; column in SQL.
+     * The approval status of the comment.
      */
     approved?: boolean | number
     /** The author of the comment */
     author?: CommentToCommenterConnectionEdgeRequest
     /**
      * @deprecated Use the ipAddress field on the edge between the comment and author
-     * IP address for the author at the time of commenting. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL.
+     * IP address for the author at the time of commenting.
      */
     authorIp?: boolean | number
     /**
@@ -9114,15 +9145,15 @@ export interface CommentRequest{
     commentId?: boolean | number
     /** Connection between the Comment type and the ContentNode type */
     commentedOn?: CommentToContentNodeConnectionEdgeRequest
-    /** Content of the comment. This field is equivalent to WP_Comment-&gt;comment_content and the value matching the &quot;comment_content&quot; column in SQL. */
+    /** Content of the comment. */
     content?: [{
     /** Format of the field output */
     format?: (PostObjectFieldFormatEnum | null)}] | boolean | number
     /** The unique identifier stored in the database */
     databaseId?: boolean | number
-    /** Date the comment was posted in local time. This field is equivalent to WP_Comment-&gt;date and the value matching the &quot;date&quot; column in SQL. */
+    /** Date the comment was posted in local time. */
     date?: boolean | number
-    /** Date the comment was posted in GMT. This field is equivalent to WP_Comment-&gt;date_gmt and the value matching the &quot;date_gmt&quot; column in SQL. */
+    /** Date the comment was posted in GMT. */
     dateGmt?: boolean | number
     /** The globally unique identifier for the comment object */
     id?: boolean | number
@@ -9138,7 +9169,7 @@ export interface CommentRequest{
     isRestricted?: boolean | number
     /** Whether the node is a Term */
     isTermNode?: boolean | number
-    /** Karma value for the comment. This field is equivalent to WP_Comment-&gt;comment_karma and the value matching the &quot;comment_karma&quot; column in SQL. */
+    /** Karma value for the comment. */
     karma?: boolean | number
     /** The permalink of the comment */
     link?: boolean | number
@@ -9162,9 +9193,9 @@ export interface CommentRequest{
     before?: (Scalars['String'] | null),
     /** Arguments for filtering the connection */
     where?: (CommentToCommentConnectionWhereArgs | null)},CommentToCommentConnectionRequest] | CommentToCommentConnectionRequest
-    /** The approval status of the comment. This field is equivalent to WP_Comment-&gt;comment_approved and the value matching the &quot;comment_approved&quot; column in SQL. */
+    /** The approval status of the comment. */
     status?: boolean | number
-    /** Type of comment. This field is equivalent to WP_Comment-&gt;comment_type and the value matching the &quot;comment_type&quot; column in SQL. */
+    /** Type of comment. */
     type?: boolean | number
     /** The unique resource identifier path */
     uri?: boolean | number
@@ -9179,7 +9210,7 @@ export interface CommentToCommenterConnectionEdgeRequest{
     cursor?: boolean | number
     /** Email address representing the author for this particular comment */
     email?: boolean | number
-    /** IP address of the author at the time of making this comment. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL. */
+    /** IP address of the author at the time of making this comment. */
     ipAddress?: boolean | number
     /** The display name of the comment author for this particular comment */
     name?: boolean | number
@@ -9436,6 +9467,12 @@ export interface UserToCommentConnectionPageInfoRequest{
 }
 
 
+/** Arguments for filtering the UserToEnqueuedScriptConnection connection */
+export interface UserToEnqueuedScriptConnectionWhereArgs {
+/** Limit results to assets whose handle is in the provided list. Handles that do not match an asset are ignored. An empty list matches no assets, while omitting the argument (or passing null) leaves the connection unfiltered. */
+handlesIn?: ((Scalars['String'] | null)[] | null)}
+
+
 /** Connection between the User type and the EnqueuedScript type */
 export interface UserToEnqueuedScriptConnectionRequest{
     /** Edges for the UserToEnqueuedScriptConnection connection */
@@ -9473,6 +9510,12 @@ export interface UserToEnqueuedScriptConnectionPageInfoRequest{
     __typename?: boolean | number
     __scalar?: boolean | number
 }
+
+
+/** Arguments for filtering the UserToEnqueuedStylesheetConnection connection */
+export interface UserToEnqueuedStylesheetConnectionWhereArgs {
+/** Limit results to assets whose handle is in the provided list. Handles that do not match an asset are ignored. An empty list matches no assets, while omitting the argument (or passing null) leaves the connection unfiltered. */
+handlesIn?: ((Scalars['String'] | null)[] | null)}
 
 
 /** Connection between the User type and the EnqueuedStylesheet type */
@@ -9531,7 +9574,9 @@ hasPassword?: (Scalars['Boolean'] | null),
 /** Specific database ID of the object */
 id?: (Scalars['Int'] | null),
 /** Array of IDs for the objects to retrieve */
-in?: ((Scalars['ID'] | null)[] | null),metaQuery?: (UserToMediaItemConnectionWhereArgsMetaQuery | null),
+in?: ((Scalars['ID'] | null)[] | null),
+/** True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results. */
+isSticky?: (Scalars['Boolean'] | null),metaQuery?: (UserToMediaItemConnectionWhereArgsMetaQuery | null),
 /** Get objects with a specific mimeType property */
 mimeType?: (MimeTypeEnum | null),
 /** Slug / post_name of the object */
@@ -9556,6 +9601,8 @@ search?: (Scalars['String'] | null),
 stati?: ((PostStatusEnum | null)[] | null),
 /** Show posts with a specific status. */
 status?: (PostStatusEnum | null),taxQuery?: (TaxQuery | null),
+/** Filter the connection to content assigned a specific template. */
+template?: (ContentTemplateEnum | null),
 /** Title of the object */
 title?: (Scalars['String'] | null)}
 
@@ -9698,7 +9745,9 @@ export interface MediaItemRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},ContentNodeToEnqueuedScriptConnectionRequest] | ContentNodeToEnqueuedScriptConnectionRequest
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)},ContentNodeToEnqueuedScriptConnectionRequest] | ContentNodeToEnqueuedScriptConnectionRequest
     /** Connection between the ContentNode type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: [{
     /** The number of items to return after the referenced "after" cursor */
@@ -9708,7 +9757,9 @@ export interface MediaItemRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},ContentNodeToEnqueuedStylesheetConnectionRequest] | ContentNodeToEnqueuedStylesheetConnectionRequest
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)},ContentNodeToEnqueuedStylesheetConnectionRequest] | ContentNodeToEnqueuedStylesheetConnectionRequest
     /** The filename of the mediaItem for the specified size (default size is full) */
     file?: [{
     /** Size of the MediaItem to return */
@@ -9721,7 +9772,7 @@ export interface MediaItemRequest{
     fileSize?: [{
     /** Size of the MediaItem to return */
     size?: (MediaItemSizeEnum | null)}] | boolean | number
-    /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+    /** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
     guid?: boolean | number
     /** Whether the attachment object is password protected. */
     hasPassword?: boolean | number
@@ -9749,7 +9800,7 @@ export interface MediaItemRequest{
     mediaDetails?: MediaDetailsRequest
     /**
      * @deprecated Deprecated in favor of the databaseId field
-     * The id field matches the WP_Post-&gt;ID field.
+     * The unique numeric identifier for the content node.
      */
     mediaItemId?: boolean | number
     /** Url of the mediaItem */
@@ -9772,13 +9823,13 @@ export interface MediaItemRequest{
     password?: boolean | number
     /** The database id of the preview node */
     previewRevisionDatabaseId?: boolean | number
-    /** Whether the object is a node in the preview state */
+    /** The globally unique ID of the preview node */
     previewRevisionId?: boolean | number
     /** The sizes attribute value for an image. */
     sizes?: [{
     /** Size of the MediaItem to calculate sizes with */
     size?: (MediaItemSizeEnum | null)}] | boolean | number
-    /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+    /** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
     slug?: boolean | number
     /** Url of the mediaItem */
     sourceUrl?: [{
@@ -9937,7 +9988,9 @@ export interface HierarchicalContentNodeRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},ContentNodeToEnqueuedScriptConnectionRequest] | ContentNodeToEnqueuedScriptConnectionRequest
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)},ContentNodeToEnqueuedScriptConnectionRequest] | ContentNodeToEnqueuedScriptConnectionRequest
     /** Connection between the ContentNode type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: [{
     /** The number of items to return after the referenced "after" cursor */
@@ -9947,8 +10000,10 @@ export interface HierarchicalContentNodeRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},ContentNodeToEnqueuedStylesheetConnectionRequest] | ContentNodeToEnqueuedStylesheetConnectionRequest
-    /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)},ContentNodeToEnqueuedStylesheetConnectionRequest] | ContentNodeToEnqueuedStylesheetConnectionRequest
+    /** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
     guid?: boolean | number
     /** The globally unique ID for the object */
     id?: boolean | number
@@ -9982,9 +10037,9 @@ export interface HierarchicalContentNodeRequest{
     parentId?: boolean | number
     /** The database id of the preview node */
     previewRevisionDatabaseId?: boolean | number
-    /** Whether the object is a node in the preview state */
+    /** The globally unique ID of the preview node */
     previewRevisionId?: boolean | number
-    /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+    /** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
     slug?: boolean | number
     /** The current status of the object */
     status?: boolean | number
@@ -10028,7 +10083,9 @@ hasPassword?: (Scalars['Boolean'] | null),
 /** Specific database ID of the object */
 id?: (Scalars['Int'] | null),
 /** Array of IDs for the objects to retrieve */
-in?: ((Scalars['ID'] | null)[] | null),metaQuery?: (HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgsMetaQuery | null),
+in?: ((Scalars['ID'] | null)[] | null),
+/** True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results. */
+isSticky?: (Scalars['Boolean'] | null),metaQuery?: (HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgsMetaQuery | null),
 /** Get objects with a specific mimeType property */
 mimeType?: (MimeTypeEnum | null),
 /** Slug / post_name of the object */
@@ -10053,6 +10110,8 @@ search?: (Scalars['String'] | null),
 stati?: ((PostStatusEnum | null)[] | null),
 /** Show posts with a specific status. */
 status?: (PostStatusEnum | null),taxQuery?: (TaxQuery | null),
+/** Filter the connection to content assigned a specific template. */
+template?: (ContentTemplateEnum | null),
 /** Title of the object */
 title?: (Scalars['String'] | null)}
 
@@ -10119,7 +10178,9 @@ hasPassword?: (Scalars['Boolean'] | null),
 /** Specific database ID of the object */
 id?: (Scalars['Int'] | null),
 /** Array of IDs for the objects to retrieve */
-in?: ((Scalars['ID'] | null)[] | null),metaQuery?: (HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgsMetaQuery | null),
+in?: ((Scalars['ID'] | null)[] | null),
+/** True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results. */
+isSticky?: (Scalars['Boolean'] | null),metaQuery?: (HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgsMetaQuery | null),
 /** Get objects with a specific mimeType property */
 mimeType?: (MimeTypeEnum | null),
 /** Slug / post_name of the object */
@@ -10144,6 +10205,8 @@ search?: (Scalars['String'] | null),
 stati?: ((PostStatusEnum | null)[] | null),
 /** Show posts with a specific status. */
 status?: (PostStatusEnum | null),taxQuery?: (TaxQuery | null),
+/** Filter the connection to content assigned a specific template. */
+template?: (ContentTemplateEnum | null),
 /** Title of the object */
 title?: (Scalars['String'] | null)}
 
@@ -10199,6 +10262,12 @@ export interface HierarchicalContentNodeToContentNodeChildrenConnectionPageInfoR
 }
 
 
+/** Arguments for filtering the ContentNodeToEnqueuedScriptConnection connection */
+export interface ContentNodeToEnqueuedScriptConnectionWhereArgs {
+/** Limit results to assets whose handle is in the provided list. Handles that do not match an asset are ignored. An empty list matches no assets, while omitting the argument (or passing null) leaves the connection unfiltered. */
+handlesIn?: ((Scalars['String'] | null)[] | null)}
+
+
 /** Connection between the ContentNode type and the EnqueuedScript type */
 export interface ContentNodeToEnqueuedScriptConnectionRequest{
     /** Edges for the ContentNodeToEnqueuedScriptConnection connection */
@@ -10236,6 +10305,12 @@ export interface ContentNodeToEnqueuedScriptConnectionPageInfoRequest{
     __typename?: boolean | number
     __scalar?: boolean | number
 }
+
+
+/** Arguments for filtering the ContentNodeToEnqueuedStylesheetConnection connection */
+export interface ContentNodeToEnqueuedStylesheetConnectionWhereArgs {
+/** Limit results to assets whose handle is in the provided list. Handles that do not match an asset are ignored. An empty list matches no assets, while omitting the argument (or passing null) leaves the connection unfiltered. */
+handlesIn?: ((Scalars['String'] | null)[] | null)}
 
 
 /** Connection between the ContentNode type and the EnqueuedStylesheet type */
@@ -10537,7 +10612,9 @@ hasPassword?: (Scalars['Boolean'] | null),
 /** Specific database ID of the object */
 id?: (Scalars['Int'] | null),
 /** Array of IDs for the objects to retrieve */
-in?: ((Scalars['ID'] | null)[] | null),metaQuery?: (UserToPageConnectionWhereArgsMetaQuery | null),
+in?: ((Scalars['ID'] | null)[] | null),
+/** True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results. */
+isSticky?: (Scalars['Boolean'] | null),metaQuery?: (UserToPageConnectionWhereArgsMetaQuery | null),
 /** Get objects with a specific mimeType property */
 mimeType?: (MimeTypeEnum | null),
 /** Slug / post_name of the object */
@@ -10562,6 +10639,8 @@ search?: (Scalars['String'] | null),
 stati?: ((PostStatusEnum | null)[] | null),
 /** Show posts with a specific status. */
 status?: (PostStatusEnum | null),taxQuery?: (TaxQuery | null),
+/** Filter the connection to content assigned a specific template. */
+template?: (ContentTemplateEnum | null),
 /** Title of the object */
 title?: (Scalars['String'] | null)}
 
@@ -10709,7 +10788,9 @@ export interface PageRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},ContentNodeToEnqueuedScriptConnectionRequest] | ContentNodeToEnqueuedScriptConnectionRequest
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)},ContentNodeToEnqueuedScriptConnectionRequest] | ContentNodeToEnqueuedScriptConnectionRequest
     /** Connection between the ContentNode type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: [{
     /** The number of items to return after the referenced "after" cursor */
@@ -10719,14 +10800,16 @@ export interface PageRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},ContentNodeToEnqueuedStylesheetConnectionRequest] | ContentNodeToEnqueuedStylesheetConnectionRequest
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)},ContentNodeToEnqueuedStylesheetConnectionRequest] | ContentNodeToEnqueuedStylesheetConnectionRequest
     /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
     featuredImage?: NodeWithFeaturedImageToMediaItemConnectionEdgeRequest
     /** The database identifier for the featured image node assigned to the content node */
     featuredImageDatabaseId?: boolean | number
     /** Globally unique ID of the featured image assigned to the node */
     featuredImageId?: boolean | number
-    /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+    /** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
     guid?: boolean | number
     /** Whether the page object is password protected. */
     hasPassword?: boolean | number
@@ -10764,7 +10847,7 @@ export interface PageRequest{
     modifiedGmt?: boolean | number
     /**
      * @deprecated Deprecated in favor of the databaseId field
-     * The id field matches the WP_Post-&gt;ID field.
+     * The unique numeric identifier for the content node.
      */
     pageId?: boolean | number
     /** The parent of the node. The parent object can be of various types */
@@ -10779,7 +10862,7 @@ export interface PageRequest{
     preview?: PageToPreviewConnectionEdgeRequest
     /** The database id of the preview node */
     previewRevisionDatabaseId?: boolean | number
-    /** Whether the object is a node in the preview state */
+    /** The globally unique ID of the preview node */
     previewRevisionId?: boolean | number
     /** If the current node is a revision, this field exposes the node this is a revision of. Returns null if the node is not a revision of another node. */
     revisionOf?: NodeWithRevisionsToContentNodeConnectionEdgeRequest
@@ -10795,7 +10878,7 @@ export interface PageRequest{
     before?: (Scalars['String'] | null),
     /** Arguments for filtering the connection */
     where?: (PageToRevisionConnectionWhereArgs | null)},PageToRevisionConnectionRequest] | PageToRevisionConnectionRequest
-    /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+    /** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
     slug?: boolean | number
     /** The current status of the object */
     status?: boolean | number
@@ -11283,7 +11366,9 @@ hasPassword?: (Scalars['Boolean'] | null),
 /** Specific database ID of the object */
 id?: (Scalars['Int'] | null),
 /** Array of IDs for the objects to retrieve */
-in?: ((Scalars['ID'] | null)[] | null),metaQuery?: (PageToRevisionConnectionWhereArgsMetaQuery | null),
+in?: ((Scalars['ID'] | null)[] | null),
+/** True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results. */
+isSticky?: (Scalars['Boolean'] | null),metaQuery?: (PageToRevisionConnectionWhereArgsMetaQuery | null),
 /** Get objects with a specific mimeType property */
 mimeType?: (MimeTypeEnum | null),
 /** Slug / post_name of the object */
@@ -11308,6 +11393,8 @@ search?: (Scalars['String'] | null),
 stati?: ((PostStatusEnum | null)[] | null),
 /** Show posts with a specific status. */
 status?: (PostStatusEnum | null),taxQuery?: (TaxQuery | null),
+/** Filter the connection to content assigned a specific template. */
+template?: (ContentTemplateEnum | null),
 /** Title of the object */
 title?: (Scalars['String'] | null)}
 
@@ -11432,7 +11519,9 @@ hasPassword?: (Scalars['Boolean'] | null),
 /** Specific database ID of the object */
 id?: (Scalars['Int'] | null),
 /** Array of IDs for the objects to retrieve */
-in?: ((Scalars['ID'] | null)[] | null),metaQuery?: (UserToPostConnectionWhereArgsMetaQuery | null),
+in?: ((Scalars['ID'] | null)[] | null),
+/** True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results. */
+isSticky?: (Scalars['Boolean'] | null),metaQuery?: (UserToPostConnectionWhereArgsMetaQuery | null),
 /** Get objects with a specific mimeType property */
 mimeType?: (MimeTypeEnum | null),
 /** Slug / post_name of the object */
@@ -11469,6 +11558,8 @@ tagNotIn?: ((Scalars['ID'] | null)[] | null),
 tagSlugAnd?: ((Scalars['String'] | null)[] | null),
 /** Array of tag slugs, used to include objects in ANY specified tags */
 tagSlugIn?: ((Scalars['String'] | null)[] | null),taxQuery?: (TaxQuery | null),
+/** Filter the connection to content assigned a specific template. */
+template?: (ContentTemplateEnum | null),
 /** Title of the object */
 title?: (Scalars['String'] | null)}
 
@@ -11616,7 +11707,9 @@ export interface PostRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},ContentNodeToEnqueuedScriptConnectionRequest] | ContentNodeToEnqueuedScriptConnectionRequest
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)},ContentNodeToEnqueuedScriptConnectionRequest] | ContentNodeToEnqueuedScriptConnectionRequest
     /** Connection between the ContentNode type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: [{
     /** The number of items to return after the referenced "after" cursor */
@@ -11626,7 +11719,9 @@ export interface PostRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},ContentNodeToEnqueuedStylesheetConnectionRequest] | ContentNodeToEnqueuedStylesheetConnectionRequest
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)},ContentNodeToEnqueuedStylesheetConnectionRequest] | ContentNodeToEnqueuedStylesheetConnectionRequest
     /** The excerpt of the post. */
     excerpt?: [{
     /** Format of the field output */
@@ -11637,7 +11732,7 @@ export interface PostRequest{
     featuredImageDatabaseId?: boolean | number
     /** Globally unique ID of the featured image assigned to the node */
     featuredImageId?: boolean | number
-    /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+    /** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
     guid?: boolean | number
     /** Whether the post object is password protected. */
     hasPassword?: boolean | number
@@ -11694,7 +11789,7 @@ export interface PostRequest{
     where?: (PostToPostFormatConnectionWhereArgs | null)},PostToPostFormatConnectionRequest] | PostToPostFormatConnectionRequest
     /**
      * @deprecated Deprecated in favor of the databaseId field
-     * The id field matches the WP_Post-&gt;ID field.
+     * The unique numeric identifier for the content node.
      */
     postId?: boolean | number
     /** Connection between the post type and the post type */
@@ -11717,7 +11812,7 @@ export interface PostRequest{
     before?: (Scalars['String'] | null),
     /** Arguments for filtering the connection */
     where?: (PostToRevisionConnectionWhereArgs | null)},PostToRevisionConnectionRequest] | PostToRevisionConnectionRequest
-    /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+    /** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
     slug?: boolean | number
     /** The current status of the object */
     status?: boolean | number
@@ -11805,15 +11900,9 @@ export interface PostToPostConnectionRequest{
 
 /** An edge in a connection */
 export interface PostToPostConnectionEdgeRequest{
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have ancestors
-     * A cursor for use in pagination
-     */
+    /** A cursor for use in pagination */
     cursor?: boolean | number
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have ancestors
-     * The item at the end of the edge
-     */
+    /** The item at the end of the edge */
     node?: PostRequest
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -11965,7 +12054,7 @@ export interface CategoryRequest{
     before?: (Scalars['String'] | null)},CategoryToAncestorsCategoryConnectionRequest] | CategoryToAncestorsCategoryConnectionRequest
     /**
      * @deprecated Deprecated in favor of databaseId
-     * The id field matches the WP_Post-&gt;ID field.
+     * The unique numeric identifier for the term.
      */
     categoryId?: boolean | number
     /** Connection between the Category type and the CentraldeDecorado type */
@@ -12031,7 +12120,9 @@ export interface CategoryRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},TermNodeToEnqueuedScriptConnectionRequest] | TermNodeToEnqueuedScriptConnectionRequest
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (TermNodeToEnqueuedScriptConnectionWhereArgs | null)},TermNodeToEnqueuedScriptConnectionRequest] | TermNodeToEnqueuedScriptConnectionRequest
     /** Connection between the TermNode type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: [{
     /** The number of items to return after the referenced "after" cursor */
@@ -12041,7 +12132,9 @@ export interface CategoryRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},TermNodeToEnqueuedStylesheetConnectionRequest] | TermNodeToEnqueuedStylesheetConnectionRequest
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (TermNodeToEnqueuedStylesheetConnectionWhereArgs | null)},TermNodeToEnqueuedStylesheetConnectionRequest] | TermNodeToEnqueuedStylesheetConnectionRequest
     /** The globally unique ID for the object */
     id?: boolean | number
     /** Whether the node is a Comment */
@@ -12112,7 +12205,9 @@ export interface HierarchicalTermNodeRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},TermNodeToEnqueuedScriptConnectionRequest] | TermNodeToEnqueuedScriptConnectionRequest
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (TermNodeToEnqueuedScriptConnectionWhereArgs | null)},TermNodeToEnqueuedScriptConnectionRequest] | TermNodeToEnqueuedScriptConnectionRequest
     /** Connection between the TermNode type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: [{
     /** The number of items to return after the referenced "after" cursor */
@@ -12122,7 +12217,9 @@ export interface HierarchicalTermNodeRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},TermNodeToEnqueuedStylesheetConnectionRequest] | TermNodeToEnqueuedStylesheetConnectionRequest
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (TermNodeToEnqueuedStylesheetConnectionWhereArgs | null)},TermNodeToEnqueuedStylesheetConnectionRequest] | TermNodeToEnqueuedStylesheetConnectionRequest
     /** The globally unique ID for the object */
     id?: boolean | number
     /** Whether the node is a Comment */
@@ -12238,7 +12335,9 @@ hasPassword?: (Scalars['Boolean'] | null),
 /** Specific database ID of the object */
 id?: (Scalars['Int'] | null),
 /** Array of IDs for the objects to retrieve */
-in?: ((Scalars['ID'] | null)[] | null),metaQuery?: (CategoryToCentraldeDecoradoConnectionWhereArgsMetaQuery | null),
+in?: ((Scalars['ID'] | null)[] | null),
+/** True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results. */
+isSticky?: (Scalars['Boolean'] | null),metaQuery?: (CategoryToCentraldeDecoradoConnectionWhereArgsMetaQuery | null),
 /** Get objects with a specific mimeType property */
 mimeType?: (MimeTypeEnum | null),
 /** Slug / post_name of the object */
@@ -12263,6 +12362,8 @@ search?: (Scalars['String'] | null),
 stati?: ((PostStatusEnum | null)[] | null),
 /** Show posts with a specific status. */
 status?: (PostStatusEnum | null),taxQuery?: (TaxQuery | null),
+/** Filter the connection to content assigned a specific template. */
+template?: (ContentTemplateEnum | null),
 /** Title of the object */
 title?: (Scalars['String'] | null)}
 
@@ -12328,7 +12429,7 @@ export interface CentraldeDecoradoConnectionEdgeRequest{
 export interface CentraldeDecoradoRequest{
     /**
      * @deprecated Deprecated in favor of the databaseId field
-     * The id field matches the WP_Post-&gt;ID field.
+     * The unique numeric identifier for the content node.
      */
     centraldeDecoradoId?: boolean | number
     /**
@@ -12383,7 +12484,9 @@ export interface CentraldeDecoradoRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},ContentNodeToEnqueuedScriptConnectionRequest] | ContentNodeToEnqueuedScriptConnectionRequest
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)},ContentNodeToEnqueuedScriptConnectionRequest] | ContentNodeToEnqueuedScriptConnectionRequest
     /** Connection between the ContentNode type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: [{
     /** The number of items to return after the referenced "after" cursor */
@@ -12393,14 +12496,16 @@ export interface CentraldeDecoradoRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},ContentNodeToEnqueuedStylesheetConnectionRequest] | ContentNodeToEnqueuedStylesheetConnectionRequest
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)},ContentNodeToEnqueuedStylesheetConnectionRequest] | ContentNodeToEnqueuedStylesheetConnectionRequest
     /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
     featuredImage?: NodeWithFeaturedImageToMediaItemConnectionEdgeRequest
     /** The database identifier for the featured image node assigned to the content node */
     featuredImageDatabaseId?: boolean | number
     /** Globally unique ID of the featured image assigned to the node */
     featuredImageId?: boolean | number
-    /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+    /** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
     guid?: boolean | number
     /** Whether the centraldecorado object is password protected. */
     hasPassword?: boolean | number
@@ -12441,7 +12546,7 @@ export interface CentraldeDecoradoRequest{
     previewRevisionDatabaseId?: boolean | number
     /** Whether the object is a node in the preview state */
     previewRevisionId?: boolean | number
-    /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+    /** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
     slug?: boolean | number
     /** The current status of the object */
     status?: boolean | number
@@ -12485,15 +12590,9 @@ export interface CentraldeDecoradoToCentraldeDecoradoConnectionRequest{
 
 /** An edge in a connection */
 export interface CentraldeDecoradoToCentraldeDecoradoConnectionEdgeRequest{
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have ancestors
-     * A cursor for use in pagination
-     */
+    /** A cursor for use in pagination */
     cursor?: boolean | number
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have ancestors
-     * The item at the end of the edge
-     */
+    /** The item at the end of the edge */
     node?: CentraldeDecoradoRequest
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -12641,10 +12740,7 @@ export interface CentraldeDecorado_CentraldedecoradosRequest{
 export interface CentraldeDecoradoToParentConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have a parent
-     * The node of the connection, without the edges
-     */
+    /** The node of the connection, without the edges */
     node?: CentraldeDecoradoRequest
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -12867,7 +12963,9 @@ hasPassword?: (Scalars['Boolean'] | null),
 /** Specific database ID of the object */
 id?: (Scalars['Int'] | null),
 /** Array of IDs for the objects to retrieve */
-in?: ((Scalars['ID'] | null)[] | null),metaQuery?: (CategoryToContentNodeConnectionWhereArgsMetaQuery | null),
+in?: ((Scalars['ID'] | null)[] | null),
+/** True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results. */
+isSticky?: (Scalars['Boolean'] | null),metaQuery?: (CategoryToContentNodeConnectionWhereArgsMetaQuery | null),
 /** Get objects with a specific mimeType property */
 mimeType?: (MimeTypeEnum | null),
 /** Slug / post_name of the object */
@@ -12892,6 +12990,8 @@ search?: (Scalars['String'] | null),
 stati?: ((PostStatusEnum | null)[] | null),
 /** Show posts with a specific status. */
 status?: (PostStatusEnum | null),taxQuery?: (TaxQuery | null),
+/** Filter the connection to content assigned a specific template. */
+template?: (ContentTemplateEnum | null),
 /** Title of the object */
 title?: (Scalars['String'] | null)}
 
@@ -12964,7 +13064,9 @@ hasPassword?: (Scalars['Boolean'] | null),
 /** Specific database ID of the object */
 id?: (Scalars['Int'] | null),
 /** Array of IDs for the objects to retrieve */
-in?: ((Scalars['ID'] | null)[] | null),metaQuery?: (CategoryToEmpreendimentoConnectionWhereArgsMetaQuery | null),
+in?: ((Scalars['ID'] | null)[] | null),
+/** True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results. */
+isSticky?: (Scalars['Boolean'] | null),metaQuery?: (CategoryToEmpreendimentoConnectionWhereArgsMetaQuery | null),
 /** Get objects with a specific mimeType property */
 mimeType?: (MimeTypeEnum | null),
 /** Slug / post_name of the object */
@@ -12989,6 +13091,8 @@ search?: (Scalars['String'] | null),
 stati?: ((PostStatusEnum | null)[] | null),
 /** Show posts with a specific status. */
 status?: (PostStatusEnum | null),taxQuery?: (TaxQuery | null),
+/** Filter the connection to content assigned a specific template. */
+template?: (ContentTemplateEnum | null),
 /** Title of the object */
 title?: (Scalars['String'] | null)}
 
@@ -13054,7 +13158,7 @@ export interface EmpreendimentoConnectionEdgeRequest{
 export interface EmpreendimentoRequest{
     /**
      * @deprecated Deprecated in favor of the databaseId field
-     * The id field matches the WP_Post-&gt;ID field.
+     * The unique numeric identifier for the content node.
      */
     empreendimentoId?: boolean | number
     /**
@@ -13109,7 +13213,9 @@ export interface EmpreendimentoRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},ContentNodeToEnqueuedScriptConnectionRequest] | ContentNodeToEnqueuedScriptConnectionRequest
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)},ContentNodeToEnqueuedScriptConnectionRequest] | ContentNodeToEnqueuedScriptConnectionRequest
     /** Connection between the ContentNode type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: [{
     /** The number of items to return after the referenced "after" cursor */
@@ -13119,14 +13225,16 @@ export interface EmpreendimentoRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},ContentNodeToEnqueuedStylesheetConnectionRequest] | ContentNodeToEnqueuedStylesheetConnectionRequest
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)},ContentNodeToEnqueuedStylesheetConnectionRequest] | ContentNodeToEnqueuedStylesheetConnectionRequest
     /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
     featuredImage?: NodeWithFeaturedImageToMediaItemConnectionEdgeRequest
     /** The database identifier for the featured image node assigned to the content node */
     featuredImageDatabaseId?: boolean | number
     /** Globally unique ID of the featured image assigned to the node */
     featuredImageId?: boolean | number
-    /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+    /** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
     guid?: boolean | number
     /** Whether the empreendimentos object is password protected. */
     hasPassword?: boolean | number
@@ -13169,7 +13277,7 @@ export interface EmpreendimentoRequest{
     previewRevisionDatabaseId?: boolean | number
     /** Whether the object is a node in the preview state */
     previewRevisionId?: boolean | number
-    /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+    /** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
     slug?: boolean | number
     /** The current status of the object */
     status?: boolean | number
@@ -13213,15 +13321,9 @@ export interface EmpreendimentoToEmpreendimentoConnectionRequest{
 
 /** An edge in a connection */
 export interface EmpreendimentoToEmpreendimentoConnectionEdgeRequest{
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have ancestors
-     * A cursor for use in pagination
-     */
+    /** A cursor for use in pagination */
     cursor?: boolean | number
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have ancestors
-     * The item at the end of the edge
-     */
+    /** The item at the end of the edge */
     node?: EmpreendimentoRequest
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -13475,10 +13577,7 @@ export interface Empreendimento_Housiverso_diferencialRequest{
 export interface EmpreendimentoToParentConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have a parent
-     * The node of the connection, without the edges
-     */
+    /** The node of the connection, without the edges */
     node?: EmpreendimentoRequest
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -13643,7 +13742,9 @@ hasPassword?: (Scalars['Boolean'] | null),
 /** Specific database ID of the object */
 id?: (Scalars['Int'] | null),
 /** Array of IDs for the objects to retrieve */
-in?: ((Scalars['ID'] | null)[] | null),metaQuery?: (CategoryToPostConnectionWhereArgsMetaQuery | null),
+in?: ((Scalars['ID'] | null)[] | null),
+/** True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results. */
+isSticky?: (Scalars['Boolean'] | null),metaQuery?: (CategoryToPostConnectionWhereArgsMetaQuery | null),
 /** Get objects with a specific mimeType property */
 mimeType?: (MimeTypeEnum | null),
 /** Slug / post_name of the object */
@@ -13680,6 +13781,8 @@ tagNotIn?: ((Scalars['ID'] | null)[] | null),
 tagSlugAnd?: ((Scalars['String'] | null)[] | null),
 /** Array of tag slugs, used to include objects in ANY specified tags */
 tagSlugIn?: ((Scalars['String'] | null)[] | null),taxQuery?: (TaxQuery | null),
+/** Filter the connection to content assigned a specific template. */
+template?: (ContentTemplateEnum | null),
 /** Title of the object */
 title?: (Scalars['String'] | null)}
 
@@ -13877,10 +13980,7 @@ export interface PostToCommentConnectionPageInfoRequest{
 export interface PostToParentConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have a parent
-     * The node of the connection, without the edges
-     */
+    /** The node of the connection, without the edges */
     node?: PostRequest
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -14001,7 +14101,9 @@ export interface PostFormatRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},TermNodeToEnqueuedScriptConnectionRequest] | TermNodeToEnqueuedScriptConnectionRequest
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (TermNodeToEnqueuedScriptConnectionWhereArgs | null)},TermNodeToEnqueuedScriptConnectionRequest] | TermNodeToEnqueuedScriptConnectionRequest
     /** Connection between the TermNode type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: [{
     /** The number of items to return after the referenced "after" cursor */
@@ -14011,7 +14113,9 @@ export interface PostFormatRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},TermNodeToEnqueuedStylesheetConnectionRequest] | TermNodeToEnqueuedStylesheetConnectionRequest
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (TermNodeToEnqueuedStylesheetConnectionWhereArgs | null)},TermNodeToEnqueuedStylesheetConnectionRequest] | TermNodeToEnqueuedStylesheetConnectionRequest
     /** The globally unique ID for the object */
     id?: boolean | number
     /** Whether the node is a Comment */
@@ -14032,7 +14136,7 @@ export interface PostFormatRequest{
     name?: boolean | number
     /**
      * @deprecated Deprecated in favor of databaseId
-     * The id field matches the WP_Post-&gt;ID field.
+     * The unique numeric identifier for the term.
      */
     postFormatId?: boolean | number
     /** Connection between the PostFormat type and the post type */
@@ -14075,7 +14179,9 @@ hasPassword?: (Scalars['Boolean'] | null),
 /** Specific database ID of the object */
 id?: (Scalars['Int'] | null),
 /** Array of IDs for the objects to retrieve */
-in?: ((Scalars['ID'] | null)[] | null),metaQuery?: (PostFormatToContentNodeConnectionWhereArgsMetaQuery | null),
+in?: ((Scalars['ID'] | null)[] | null),
+/** True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results. */
+isSticky?: (Scalars['Boolean'] | null),metaQuery?: (PostFormatToContentNodeConnectionWhereArgsMetaQuery | null),
 /** Get objects with a specific mimeType property */
 mimeType?: (MimeTypeEnum | null),
 /** Slug / post_name of the object */
@@ -14100,6 +14206,8 @@ search?: (Scalars['String'] | null),
 stati?: ((PostStatusEnum | null)[] | null),
 /** Show posts with a specific status. */
 status?: (PostStatusEnum | null),taxQuery?: (TaxQuery | null),
+/** Filter the connection to content assigned a specific template. */
+template?: (ContentTemplateEnum | null),
 /** Title of the object */
 title?: (Scalars['String'] | null)}
 
@@ -14180,7 +14288,9 @@ hasPassword?: (Scalars['Boolean'] | null),
 /** Specific database ID of the object */
 id?: (Scalars['Int'] | null),
 /** Array of IDs for the objects to retrieve */
-in?: ((Scalars['ID'] | null)[] | null),metaQuery?: (PostFormatToPostConnectionWhereArgsMetaQuery | null),
+in?: ((Scalars['ID'] | null)[] | null),
+/** True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results. */
+isSticky?: (Scalars['Boolean'] | null),metaQuery?: (PostFormatToPostConnectionWhereArgsMetaQuery | null),
 /** Get objects with a specific mimeType property */
 mimeType?: (MimeTypeEnum | null),
 /** Slug / post_name of the object */
@@ -14217,6 +14327,8 @@ tagNotIn?: ((Scalars['ID'] | null)[] | null),
 tagSlugAnd?: ((Scalars['String'] | null)[] | null),
 /** Array of tag slugs, used to include objects in ANY specified tags */
 tagSlugIn?: ((Scalars['String'] | null)[] | null),taxQuery?: (TaxQuery | null),
+/** Filter the connection to content assigned a specific template. */
+template?: (ContentTemplateEnum | null),
 /** Title of the object */
 title?: (Scalars['String'] | null)}
 
@@ -14362,7 +14474,9 @@ hasPassword?: (Scalars['Boolean'] | null),
 /** Specific database ID of the object */
 id?: (Scalars['Int'] | null),
 /** Array of IDs for the objects to retrieve */
-in?: ((Scalars['ID'] | null)[] | null),metaQuery?: (PostToRevisionConnectionWhereArgsMetaQuery | null),
+in?: ((Scalars['ID'] | null)[] | null),
+/** True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results. */
+isSticky?: (Scalars['Boolean'] | null),metaQuery?: (PostToRevisionConnectionWhereArgsMetaQuery | null),
 /** Get objects with a specific mimeType property */
 mimeType?: (MimeTypeEnum | null),
 /** Slug / post_name of the object */
@@ -14399,6 +14513,8 @@ tagNotIn?: ((Scalars['ID'] | null)[] | null),
 tagSlugAnd?: ((Scalars['String'] | null)[] | null),
 /** Array of tag slugs, used to include objects in ANY specified tags */
 tagSlugIn?: ((Scalars['String'] | null)[] | null),taxQuery?: (TaxQuery | null),
+/** Filter the connection to content assigned a specific template. */
+template?: (ContentTemplateEnum | null),
 /** Title of the object */
 title?: (Scalars['String'] | null)}
 
@@ -14568,7 +14684,9 @@ export interface TagRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},TermNodeToEnqueuedScriptConnectionRequest] | TermNodeToEnqueuedScriptConnectionRequest
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (TermNodeToEnqueuedScriptConnectionWhereArgs | null)},TermNodeToEnqueuedScriptConnectionRequest] | TermNodeToEnqueuedScriptConnectionRequest
     /** Connection between the TermNode type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: [{
     /** The number of items to return after the referenced "after" cursor */
@@ -14578,7 +14696,9 @@ export interface TagRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},TermNodeToEnqueuedStylesheetConnectionRequest] | TermNodeToEnqueuedStylesheetConnectionRequest
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (TermNodeToEnqueuedStylesheetConnectionWhereArgs | null)},TermNodeToEnqueuedStylesheetConnectionRequest] | TermNodeToEnqueuedStylesheetConnectionRequest
     /** The globally unique ID for the object */
     id?: boolean | number
     /** Whether the node is a Comment */
@@ -14613,7 +14733,7 @@ export interface TagRequest{
     slug?: boolean | number
     /**
      * @deprecated Deprecated in favor of databaseId
-     * The id field matches the WP_Post-&gt;ID field.
+     * The unique numeric identifier for the term.
      */
     tagId?: boolean | number
     /** Connection between the Tag type and the Taxonomy type */
@@ -14642,7 +14762,9 @@ hasPassword?: (Scalars['Boolean'] | null),
 /** Specific database ID of the object */
 id?: (Scalars['Int'] | null),
 /** Array of IDs for the objects to retrieve */
-in?: ((Scalars['ID'] | null)[] | null),metaQuery?: (TagToContentNodeConnectionWhereArgsMetaQuery | null),
+in?: ((Scalars['ID'] | null)[] | null),
+/** True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results. */
+isSticky?: (Scalars['Boolean'] | null),metaQuery?: (TagToContentNodeConnectionWhereArgsMetaQuery | null),
 /** Get objects with a specific mimeType property */
 mimeType?: (MimeTypeEnum | null),
 /** Slug / post_name of the object */
@@ -14667,6 +14789,8 @@ search?: (Scalars['String'] | null),
 stati?: ((PostStatusEnum | null)[] | null),
 /** Show posts with a specific status. */
 status?: (PostStatusEnum | null),taxQuery?: (TaxQuery | null),
+/** Filter the connection to content assigned a specific template. */
+template?: (ContentTemplateEnum | null),
 /** Title of the object */
 title?: (Scalars['String'] | null)}
 
@@ -14747,7 +14871,9 @@ hasPassword?: (Scalars['Boolean'] | null),
 /** Specific database ID of the object */
 id?: (Scalars['Int'] | null),
 /** Array of IDs for the objects to retrieve */
-in?: ((Scalars['ID'] | null)[] | null),metaQuery?: (TagToPostConnectionWhereArgsMetaQuery | null),
+in?: ((Scalars['ID'] | null)[] | null),
+/** True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results. */
+isSticky?: (Scalars['Boolean'] | null),metaQuery?: (TagToPostConnectionWhereArgsMetaQuery | null),
 /** Get objects with a specific mimeType property */
 mimeType?: (MimeTypeEnum | null),
 /** Slug / post_name of the object */
@@ -14784,6 +14910,8 @@ tagNotIn?: ((Scalars['ID'] | null)[] | null),
 tagSlugAnd?: ((Scalars['String'] | null)[] | null),
 /** Array of tag slugs, used to include objects in ANY specified tags */
 tagSlugIn?: ((Scalars['String'] | null)[] | null),taxQuery?: (TaxQuery | null),
+/** Filter the connection to content assigned a specific template. */
+template?: (ContentTemplateEnum | null),
 /** Title of the object */
 title?: (Scalars['String'] | null)}
 
@@ -15015,7 +15143,9 @@ hasPassword?: (Scalars['Boolean'] | null),
 /** Specific database ID of the object */
 id?: (Scalars['Int'] | null),
 /** Array of IDs for the objects to retrieve */
-in?: ((Scalars['ID'] | null)[] | null),metaQuery?: (UserToRevisionsConnectionWhereArgsMetaQuery | null),
+in?: ((Scalars['ID'] | null)[] | null),
+/** True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results. */
+isSticky?: (Scalars['Boolean'] | null),metaQuery?: (UserToRevisionsConnectionWhereArgsMetaQuery | null),
 /** Get objects with a specific mimeType property */
 mimeType?: (MimeTypeEnum | null),
 /** Slug / post_name of the object */
@@ -15040,6 +15170,8 @@ search?: (Scalars['String'] | null),
 stati?: ((PostStatusEnum | null)[] | null),
 /** Show posts with a specific status. */
 status?: (PostStatusEnum | null),taxQuery?: (TaxQuery | null),
+/** Filter the connection to content assigned a specific template. */
+template?: (ContentTemplateEnum | null),
 /** Title of the object */
 title?: (Scalars['String'] | null)}
 
@@ -15258,15 +15390,9 @@ export interface ArquivoAssessoriaConnectionPageInfoRequest{
 
 /** An edge in a connection */
 export interface ArquivoAssessoriaToArquivoAssessoriaConnectionEdgeRequest{
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have ancestors
-     * A cursor for use in pagination
-     */
+    /** A cursor for use in pagination */
     cursor?: boolean | number
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have ancestors
-     * The item at the end of the edge
-     */
+    /** The item at the end of the edge */
     node?: ArquivoAssessoriaRequest
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -15306,10 +15432,7 @@ export interface ArquivoAssessoria_DownAssessoriaRequest{
 export interface ArquivoAssessoriaToParentConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have a parent
-     * The node of the connection, without the edges
-     */
+    /** The node of the connection, without the edges */
     node?: ArquivoAssessoriaRequest
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -15336,7 +15459,9 @@ hasPassword?: (Scalars['Boolean'] | null),
 /** Specific database ID of the object */
 id?: (Scalars['Int'] | null),
 /** Array of IDs for the objects to retrieve */
-in?: ((Scalars['ID'] | null)[] | null),metaQuery?: (RootQueryToArquivoAssessoriaConnectionWhereArgsMetaQuery | null),
+in?: ((Scalars['ID'] | null)[] | null),
+/** True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results. */
+isSticky?: (Scalars['Boolean'] | null),metaQuery?: (RootQueryToArquivoAssessoriaConnectionWhereArgsMetaQuery | null),
 /** Get objects with a specific mimeType property */
 mimeType?: (MimeTypeEnum | null),
 /** Slug / post_name of the object */
@@ -15361,6 +15486,8 @@ search?: (Scalars['String'] | null),
 stati?: ((PostStatusEnum | null)[] | null),
 /** Show posts with a specific status. */
 status?: (PostStatusEnum | null),taxQuery?: (TaxQuery | null),
+/** Filter the connection to content assigned a specific template. */
+template?: (ContentTemplateEnum | null),
 /** Title of the object */
 title?: (Scalars['String'] | null)}
 
@@ -15420,7 +15547,7 @@ export interface RootQueryToArquivoAssessoriaConnectionPageInfoRequest{
 export interface BannerRequest{
     /**
      * @deprecated Deprecated in favor of the databaseId field
-     * The id field matches the WP_Post-&gt;ID field.
+     * The unique numeric identifier for the content node.
      */
     bannerId?: boolean | number
     /**
@@ -15463,7 +15590,9 @@ export interface BannerRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},ContentNodeToEnqueuedScriptConnectionRequest] | ContentNodeToEnqueuedScriptConnectionRequest
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)},ContentNodeToEnqueuedScriptConnectionRequest] | ContentNodeToEnqueuedScriptConnectionRequest
     /** Connection between the ContentNode type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: [{
     /** The number of items to return after the referenced "after" cursor */
@@ -15473,8 +15602,10 @@ export interface BannerRequest{
     /** Cursor used along with the "first" argument to reference where in the dataset to get data */
     after?: (Scalars['String'] | null),
     /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-    before?: (Scalars['String'] | null)},ContentNodeToEnqueuedStylesheetConnectionRequest] | ContentNodeToEnqueuedStylesheetConnectionRequest
-    /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)},ContentNodeToEnqueuedStylesheetConnectionRequest] | ContentNodeToEnqueuedStylesheetConnectionRequest
+    /** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
     guid?: boolean | number
     /** Whether the banner_home object is password protected. */
     hasPassword?: boolean | number
@@ -15515,7 +15646,7 @@ export interface BannerRequest{
     previewRevisionDatabaseId?: boolean | number
     /** Whether the object is a node in the preview state */
     previewRevisionId?: boolean | number
-    /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+    /** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
     slug?: boolean | number
     /** The current status of the object */
     status?: boolean | number
@@ -15594,15 +15725,9 @@ export interface BannerConnectionPageInfoRequest{
 
 /** An edge in a connection */
 export interface BannerToBannerConnectionEdgeRequest{
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have ancestors
-     * A cursor for use in pagination
-     */
+    /** A cursor for use in pagination */
     cursor?: boolean | number
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have ancestors
-     * The item at the end of the edge
-     */
+    /** The item at the end of the edge */
     node?: BannerRequest
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -15692,10 +15817,7 @@ export interface Banner_BannerHome_QualEOEmpreendimentoRequest{
 export interface BannerToParentConnectionEdgeRequest{
     /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
     cursor?: boolean | number
-    /**
-     * @deprecated This content type is not hierarchical and typically will not have a parent
-     * The node of the connection, without the edges
-     */
+    /** The node of the connection, without the edges */
     node?: BannerRequest
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -15722,7 +15844,9 @@ hasPassword?: (Scalars['Boolean'] | null),
 /** Specific database ID of the object */
 id?: (Scalars['Int'] | null),
 /** Array of IDs for the objects to retrieve */
-in?: ((Scalars['ID'] | null)[] | null),metaQuery?: (RootQueryToBannerConnectionWhereArgsMetaQuery | null),
+in?: ((Scalars['ID'] | null)[] | null),
+/** True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results. */
+isSticky?: (Scalars['Boolean'] | null),metaQuery?: (RootQueryToBannerConnectionWhereArgsMetaQuery | null),
 /** Get objects with a specific mimeType property */
 mimeType?: (MimeTypeEnum | null),
 /** Slug / post_name of the object */
@@ -15747,6 +15871,8 @@ search?: (Scalars['String'] | null),
 stati?: ((PostStatusEnum | null)[] | null),
 /** Show posts with a specific status. */
 status?: (PostStatusEnum | null),taxQuery?: (TaxQuery | null),
+/** Filter the connection to content assigned a specific template. */
+template?: (ContentTemplateEnum | null),
 /** Title of the object */
 title?: (Scalars['String'] | null)}
 
@@ -15902,7 +16028,9 @@ hasPassword?: (Scalars['Boolean'] | null),
 /** Specific database ID of the object */
 id?: (Scalars['Int'] | null),
 /** Array of IDs for the objects to retrieve */
-in?: ((Scalars['ID'] | null)[] | null),metaQuery?: (RootQueryToCentraldeDecoradoConnectionWhereArgsMetaQuery | null),
+in?: ((Scalars['ID'] | null)[] | null),
+/** True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results. */
+isSticky?: (Scalars['Boolean'] | null),metaQuery?: (RootQueryToCentraldeDecoradoConnectionWhereArgsMetaQuery | null),
 /** Get objects with a specific mimeType property */
 mimeType?: (MimeTypeEnum | null),
 /** Slug / post_name of the object */
@@ -15927,6 +16055,8 @@ search?: (Scalars['String'] | null),
 stati?: ((PostStatusEnum | null)[] | null),
 /** Show posts with a specific status. */
 status?: (PostStatusEnum | null),taxQuery?: (TaxQuery | null),
+/** Filter the connection to content assigned a specific template. */
+template?: (ContentTemplateEnum | null),
 /** Title of the object */
 title?: (Scalars['String'] | null)}
 
@@ -16094,7 +16224,9 @@ hasPassword?: (Scalars['Boolean'] | null),
 /** Specific database ID of the object */
 id?: (Scalars['Int'] | null),
 /** Array of IDs for the objects to retrieve */
-in?: ((Scalars['ID'] | null)[] | null),metaQuery?: (RootQueryToContentNodeConnectionWhereArgsMetaQuery | null),
+in?: ((Scalars['ID'] | null)[] | null),
+/** True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results. */
+isSticky?: (Scalars['Boolean'] | null),metaQuery?: (RootQueryToContentNodeConnectionWhereArgsMetaQuery | null),
 /** Get objects with a specific mimeType property */
 mimeType?: (MimeTypeEnum | null),
 /** Slug / post_name of the object */
@@ -16119,6 +16251,8 @@ search?: (Scalars['String'] | null),
 stati?: ((PostStatusEnum | null)[] | null),
 /** Show posts with a specific status. */
 status?: (PostStatusEnum | null),taxQuery?: (TaxQuery | null),
+/** Filter the connection to content assigned a specific template. */
+template?: (ContentTemplateEnum | null),
 /** Title of the object */
 title?: (Scalars['String'] | null)}
 
@@ -16219,6 +16353,8 @@ export interface DiscussionSettingsRequest{
     defaultCommentStatus?: boolean | number
     /** Permitir avisos de links de outros blogs (pingbacks ou trackbacks) em novos artigos. */
     defaultPingStatus?: boolean | number
+    /** The globally unique identifier of the settings group. */
+    id?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -16241,7 +16377,9 @@ hasPassword?: (Scalars['Boolean'] | null),
 /** Specific database ID of the object */
 id?: (Scalars['Int'] | null),
 /** Array of IDs for the objects to retrieve */
-in?: ((Scalars['ID'] | null)[] | null),metaQuery?: (RootQueryToEmpreendimentoConnectionWhereArgsMetaQuery | null),
+in?: ((Scalars['ID'] | null)[] | null),
+/** True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results. */
+isSticky?: (Scalars['Boolean'] | null),metaQuery?: (RootQueryToEmpreendimentoConnectionWhereArgsMetaQuery | null),
 /** Get objects with a specific mimeType property */
 mimeType?: (MimeTypeEnum | null),
 /** Slug / post_name of the object */
@@ -16266,6 +16404,8 @@ search?: (Scalars['String'] | null),
 stati?: ((PostStatusEnum | null)[] | null),
 /** Show posts with a specific status. */
 status?: (PostStatusEnum | null),taxQuery?: (TaxQuery | null),
+/** Filter the connection to content assigned a specific template. */
+template?: (ContentTemplateEnum | null),
 /** Title of the object */
 title?: (Scalars['String'] | null)}
 
@@ -16329,6 +16469,10 @@ export interface GeneralSettingsRequest{
     description?: boolean | number
     /** Este endereço é utilizado para administração, como notificação de novo usuário. */
     email?: boolean | number
+    /** The address at which visitors reach the site&#039;s front end. Can differ from the `url` field when the front end and the content management backend are served from different addresses, such as on headless or decoupled installs. */
+    homeUrl?: boolean | number
+    /** The globally unique identifier of the settings group. */
+    id?: boolean | number
     /** Código de localização do WordPress. */
     language?: boolean | number
     /** The media item representing the site icon configured in site settings, used as the site&#039;s favicon and app icon. */
@@ -16380,7 +16524,9 @@ hasPassword?: (Scalars['Boolean'] | null),
 /** Specific database ID of the object */
 id?: (Scalars['Int'] | null),
 /** Array of IDs for the objects to retrieve */
-in?: ((Scalars['ID'] | null)[] | null),metaQuery?: (RootQueryToMediaItemConnectionWhereArgsMetaQuery | null),
+in?: ((Scalars['ID'] | null)[] | null),
+/** True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results. */
+isSticky?: (Scalars['Boolean'] | null),metaQuery?: (RootQueryToMediaItemConnectionWhereArgsMetaQuery | null),
 /** Get objects with a specific mimeType property */
 mimeType?: (MimeTypeEnum | null),
 /** Slug / post_name of the object */
@@ -16405,6 +16551,8 @@ search?: (Scalars['String'] | null),
 stati?: ((PostStatusEnum | null)[] | null),
 /** Show posts with a specific status. */
 status?: (PostStatusEnum | null),taxQuery?: (TaxQuery | null),
+/** Filter the connection to content assigned a specific template. */
+template?: (ContentTemplateEnum | null),
 /** Title of the object */
 title?: (Scalars['String'] | null)}
 
@@ -16489,9 +16637,9 @@ export interface MenuRequest{
     before?: (Scalars['String'] | null),
     /** Arguments for filtering the connection */
     where?: (MenuToMenuItemConnectionWhereArgs | null)},MenuToMenuItemConnectionRequest] | MenuToMenuItemConnectionRequest
-    /** Display name of the menu. Equivalent to WP_Term-&gt;name. */
+    /** Display name of the menu. */
     name?: boolean | number
-    /** The url friendly name of the menu. Equivalent to WP_Term-&gt;slug */
+    /** The url friendly name of the menu. */
     slug?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -16941,7 +17089,9 @@ hasPassword?: (Scalars['Boolean'] | null),
 /** Specific database ID of the object */
 id?: (Scalars['Int'] | null),
 /** Array of IDs for the objects to retrieve */
-in?: ((Scalars['ID'] | null)[] | null),metaQuery?: (RootQueryToPageConnectionWhereArgsMetaQuery | null),
+in?: ((Scalars['ID'] | null)[] | null),
+/** True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results. */
+isSticky?: (Scalars['Boolean'] | null),metaQuery?: (RootQueryToPageConnectionWhereArgsMetaQuery | null),
 /** Get objects with a specific mimeType property */
 mimeType?: (MimeTypeEnum | null),
 /** Slug / post_name of the object */
@@ -16966,6 +17116,8 @@ search?: (Scalars['String'] | null),
 stati?: ((PostStatusEnum | null)[] | null),
 /** Show posts with a specific status. */
 status?: (PostStatusEnum | null),taxQuery?: (TaxQuery | null),
+/** Filter the connection to content assigned a specific template. */
+template?: (ContentTemplateEnum | null),
 /** Title of the object */
 title?: (Scalars['String'] | null)}
 
@@ -17016,6 +17168,21 @@ export interface RootQueryToPageConnectionPageInfoRequest{
     hasPreviousPage?: boolean | number
     /** When paginating backwards, the cursor to continue. */
     startCursor?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** The permalink setting type */
+export interface PermalinkSettingsRequest{
+    /** The prefix used in the URLs of category archive pages. */
+    categoryBase?: boolean | number
+    /** The globally unique identifier of the settings group. */
+    id?: boolean | number
+    /** The structure used to build the URLs for content on the site. */
+    structure?: boolean | number
+    /** The prefix used in the URLs of tag archive pages. */
+    tagBase?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -17245,7 +17412,9 @@ hasPassword?: (Scalars['Boolean'] | null),
 /** Specific database ID of the object */
 id?: (Scalars['Int'] | null),
 /** Array of IDs for the objects to retrieve */
-in?: ((Scalars['ID'] | null)[] | null),metaQuery?: (RootQueryToPostConnectionWhereArgsMetaQuery | null),
+in?: ((Scalars['ID'] | null)[] | null),
+/** True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results. */
+isSticky?: (Scalars['Boolean'] | null),metaQuery?: (RootQueryToPostConnectionWhereArgsMetaQuery | null),
 /** Get objects with a specific mimeType property */
 mimeType?: (MimeTypeEnum | null),
 /** Slug / post_name of the object */
@@ -17282,6 +17451,8 @@ tagNotIn?: ((Scalars['ID'] | null)[] | null),
 tagSlugAnd?: ((Scalars['String'] | null)[] | null),
 /** Array of tag slugs, used to include objects in ANY specified tags */
 tagSlugIn?: ((Scalars['String'] | null)[] | null),taxQuery?: (TaxQuery | null),
+/** Filter the connection to content assigned a specific template. */
+template?: (ContentTemplateEnum | null),
 /** Title of the object */
 title?: (Scalars['String'] | null)}
 
@@ -17339,6 +17510,8 @@ export interface RootQueryToPostConnectionPageInfoRequest{
 
 /** The reading setting type */
 export interface ReadingSettingsRequest{
+    /** The globally unique identifier of the settings group. */
+    id?: boolean | number
     /** O ID da página que deve exibir os posts mais recentes */
     pageForPosts?: boolean | number
     /** O ID da página que deve ser exibida na página inicial */
@@ -17350,6 +17523,12 @@ export interface ReadingSettingsRequest{
     __typename?: boolean | number
     __scalar?: boolean | number
 }
+
+
+/** Arguments for filtering the RootQueryToEnqueuedScriptConnection connection */
+export interface RootQueryToEnqueuedScriptConnectionWhereArgs {
+/** Limit results to assets whose handle is in the provided list. Handles that do not match an asset are ignored. An empty list matches no assets, while omitting the argument (or passing null) leaves the connection unfiltered. */
+handlesIn?: ((Scalars['String'] | null)[] | null)}
 
 
 /** Connection between the RootQuery type and the EnqueuedScript type */
@@ -17389,6 +17568,12 @@ export interface RootQueryToEnqueuedScriptConnectionPageInfoRequest{
     __typename?: boolean | number
     __scalar?: boolean | number
 }
+
+
+/** Arguments for filtering the RootQueryToEnqueuedStylesheetConnection connection */
+export interface RootQueryToEnqueuedStylesheetConnectionWhereArgs {
+/** Limit results to assets whose handle is in the provided list. Handles that do not match an asset are ignored. An empty list matches no assets, while omitting the argument (or passing null) leaves the connection unfiltered. */
+handlesIn?: ((Scalars['String'] | null)[] | null)}
 
 
 /** Connection between the RootQuery type and the EnqueuedStylesheet type */
@@ -17441,7 +17626,9 @@ hasPassword?: (Scalars['Boolean'] | null),
 /** Specific database ID of the object */
 id?: (Scalars['Int'] | null),
 /** Array of IDs for the objects to retrieve */
-in?: ((Scalars['ID'] | null)[] | null),metaQuery?: (RootQueryToRevisionsConnectionWhereArgsMetaQuery | null),
+in?: ((Scalars['ID'] | null)[] | null),
+/** True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results. */
+isSticky?: (Scalars['Boolean'] | null),metaQuery?: (RootQueryToRevisionsConnectionWhereArgsMetaQuery | null),
 /** Get objects with a specific mimeType property */
 mimeType?: (MimeTypeEnum | null),
 /** Slug / post_name of the object */
@@ -17466,6 +17653,8 @@ search?: (Scalars['String'] | null),
 stati?: ((PostStatusEnum | null)[] | null),
 /** Show posts with a specific status. */
 status?: (PostStatusEnum | null),taxQuery?: (TaxQuery | null),
+/** Filter the connection to content assigned a specific template. */
+template?: (ContentTemplateEnum | null),
 /** Title of the object */
 title?: (Scalars['String'] | null)}
 
@@ -17730,27 +17919,27 @@ export interface RootQueryToTermNodeConnectionPageInfoRequest{
 
 /** A theme object */
 export interface ThemeRequest{
-    /** Name of the theme author(s), could also be a company name. This field is equivalent to WP_Theme-&gt;get( &quot;Author&quot; ). */
+    /** Name of the theme author(s), could also be a company name. */
     author?: boolean | number
-    /** URI for the author/company website. This field is equivalent to WP_Theme-&gt;get( &quot;AuthorURI&quot; ). */
+    /** URI for the author/company website. */
     authorUri?: boolean | number
-    /** The description of the theme. This field is equivalent to WP_Theme-&gt;get( &quot;Description&quot; ). */
+    /** The description of the theme. */
     description?: boolean | number
     /** The globally unique identifier of the theme object. */
     id?: boolean | number
     /** Whether the object is restricted from the current viewer */
     isRestricted?: boolean | number
-    /** Display name of the theme. This field is equivalent to WP_Theme-&gt;get( &quot;Name&quot; ). */
+    /** Display name of the theme. */
     name?: boolean | number
-    /** The URL of the screenshot for the theme. The screenshot is intended to give an overview of what the theme looks like. This field is equivalent to WP_Theme-&gt;get_screenshot(). */
+    /** The URL of the screenshot for the theme. The screenshot is intended to give an overview of what the theme looks like. */
     screenshot?: boolean | number
-    /** The theme slug is used to internally match themes. Theme slugs can have subdirectories like: my-theme/sub-theme. This field is equivalent to WP_Theme-&gt;get_stylesheet(). */
+    /** The theme slug is used to internally match themes. Theme slugs can have subdirectories like: my-theme/sub-theme. */
     slug?: boolean | number
-    /** URI for the author/company website. This field is equivalent to WP_Theme-&gt;get( &quot;Tags&quot; ). */
+    /** A list of tags associated with the theme, typically describing its features (e.g. custom-logo, accessibility-ready, full-site-editing). */
     tags?: boolean | number
-    /** A URI if the theme has a website associated with it. The Theme URI is handy for directing users to a theme site for support etc. This field is equivalent to WP_Theme-&gt;get( &quot;ThemeURI&quot; ). */
+    /** A URI if the theme has a website associated with it. The Theme URI is handy for directing users to a theme site for support etc. */
     themeUri?: boolean | number
-    /** The current version of the theme. This field is equivalent to WP_Theme-&gt;get( &quot;Version&quot; ). */
+    /** The current version of the theme. */
     version?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -17994,6 +18183,8 @@ export interface WritingSettingsRequest{
     defaultCategory?: boolean | number
     /** Formato de post padrão. */
     defaultPostFormat?: boolean | number
+    /** The globally unique identifier of the settings group. */
+    id?: boolean | number
     /** Converter emoticons como :-) e :-P em gráficos ao exibí-los. */
     useSmilies?: boolean | number
     __typename?: boolean | number
@@ -18022,10 +18213,15 @@ export interface NodeRequest{
     on_Tag?: TagRequest
     on_UserRole?: UserRoleRequest
     on_Banner?: BannerRequest
+    on_DiscussionSettings?: DiscussionSettingsRequest
+    on_GeneralSettings?: GeneralSettingsRequest
     on_Menu?: MenuRequest
     on_MenuItem?: MenuItemRequest
+    on_PermalinkSettings?: PermalinkSettingsRequest
     on_Plugin?: PluginRequest
+    on_ReadingSettings?: ReadingSettingsRequest
     on_Theme?: ThemeRequest
+    on_WritingSettings?: WritingSettingsRequest
     on_CommentAuthor?: CommentAuthorRequest
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -19615,8 +19811,6 @@ generalSettingsTimeFormat?: (Scalars['String'] | null),
 generalSettingsTimezone?: (Scalars['String'] | null),
 /** Título do site. */
 generalSettingsTitle?: (Scalars['String'] | null),
-/** URL do site. */
-generalSettingsUrl?: (Scalars['String'] | null),
 /** O ID da página que deve exibir os posts mais recentes */
 readingSettingsPageForPosts?: (Scalars['Int'] | null),
 /** O ID da página que deve ser exibida na página inicial */
@@ -19643,6 +19837,8 @@ export interface UpdateSettingsPayloadRequest{
     discussionSettings?: DiscussionSettingsRequest
     /** Update the GeneralSettings setting. */
     generalSettings?: GeneralSettingsRequest
+    /** Update the PermalinkSettings setting. */
+    permalinkSettings?: PermalinkSettingsRequest
     /** Update the ReadingSettings setting. */
     readingSettings?: ReadingSettingsRequest
     /** Update the WritingSettings setting. */
@@ -22565,6 +22761,14 @@ export const isRootQueryToPageConnectionPageInfo = (obj?: { __typename?: any } |
 
 
 
+const PermalinkSettings_possibleTypes: string[] = ['PermalinkSettings']
+export const isPermalinkSettings = (obj?: { __typename?: any } | null): obj is PermalinkSettings => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isPermalinkSettings"')
+  return PermalinkSettings_possibleTypes.includes(obj.__typename)
+}
+
+
+
 const Plugin_possibleTypes: string[] = ['Plugin']
 export const isPlugin = (obj?: { __typename?: any } | null): obj is Plugin => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isPlugin"')
@@ -22949,7 +23153,7 @@ export const isWritingSettings = (obj?: { __typename?: any } | null): obj is Wri
 
 
 
-const Node_possibleTypes: string[] = ['ArquivoAssessoria','ContentType','Taxonomy','EnqueuedScript','EnqueuedStylesheet','User','Comment','MediaItem','Page','Post','Category','CentraldeDecorado','Empreendimento','PostFormat','Tag','UserRole','Banner','Menu','MenuItem','Plugin','Theme','CommentAuthor']
+const Node_possibleTypes: string[] = ['ArquivoAssessoria','ContentType','Taxonomy','EnqueuedScript','EnqueuedStylesheet','User','Comment','MediaItem','Page','Post','Category','CentraldeDecorado','Empreendimento','PostFormat','Tag','UserRole','Banner','DiscussionSettings','GeneralSettings','Menu','MenuItem','PermalinkSettings','Plugin','ReadingSettings','Theme','WritingSettings','CommentAuthor']
 export const isNode = (obj?: { __typename?: any } | null): obj is Node => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isNode"')
   return Node_possibleTypes.includes(obj.__typename)
@@ -23344,9 +23548,7 @@ arquivoAssessoria: ((args: {
 /** The globally unique identifier of the object. */
 id: Scalars['ID'],
 /** Type of unique identifier to fetch by. Default is Global ID */
-idType?: (ArquivoAssessoriaIdType | null),
-/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
-asPreview?: (Scalars['Boolean'] | null)}) => ArquivoAssessoriaPromiseChain & {get: <R extends ArquivoAssessoriaRequest>(request: R, defaultValue?: (FieldsSelection<ArquivoAssessoria, R> | undefined)) => Promise<(FieldsSelection<ArquivoAssessoria, R> | undefined)>}),
+idType?: (ArquivoAssessoriaIdType | null)}) => ArquivoAssessoriaPromiseChain & {get: <R extends ArquivoAssessoriaRequest>(request: R, defaultValue?: (FieldsSelection<ArquivoAssessoria, R> | undefined)) => Promise<(FieldsSelection<ArquivoAssessoria, R> | undefined)>}),
     
 /**
  * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
@@ -23380,9 +23582,7 @@ banner: ((args: {
 /** The globally unique identifier of the object. */
 id: Scalars['ID'],
 /** Type of unique identifier to fetch by. Default is Global ID */
-idType?: (BannerIdType | null),
-/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
-asPreview?: (Scalars['Boolean'] | null)}) => BannerPromiseChain & {get: <R extends BannerRequest>(request: R, defaultValue?: (FieldsSelection<Banner, R> | undefined)) => Promise<(FieldsSelection<Banner, R> | undefined)>}),
+idType?: (BannerIdType | null)}) => BannerPromiseChain & {get: <R extends BannerRequest>(request: R, defaultValue?: (FieldsSelection<Banner, R> | undefined)) => Promise<(FieldsSelection<Banner, R> | undefined)>}),
     
 /**
  * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
@@ -23436,9 +23636,7 @@ centraldeDecorado: ((args: {
 /** The globally unique identifier of the object. */
 id: Scalars['ID'],
 /** Type of unique identifier to fetch by. Default is Global ID */
-idType?: (CentraldeDecoradoIdType | null),
-/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
-asPreview?: (Scalars['Boolean'] | null)}) => CentraldeDecoradoPromiseChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecorado, R> | undefined)) => Promise<(FieldsSelection<CentraldeDecorado, R> | undefined)>}),
+idType?: (CentraldeDecoradoIdType | null)}) => CentraldeDecoradoPromiseChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecorado, R> | undefined)) => Promise<(FieldsSelection<CentraldeDecorado, R> | undefined)>}),
     
 /**
  * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
@@ -23494,9 +23692,7 @@ id: Scalars['ID'],
 /** Type of unique identifier to fetch a content node by. Default is Global ID */
 idType?: (ContentNodeIdTypeEnum | null),
 /** The content type the node is used for. Required when idType is set to "name" or "slug" */
-contentType?: (ContentTypeEnum | null),
-/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
-asPreview?: (Scalars['Boolean'] | null)}) => ContentNodePromiseChain & {get: <R extends ContentNodeRequest>(request: R, defaultValue?: (FieldsSelection<ContentNode, R> | undefined)) => Promise<(FieldsSelection<ContentNode, R> | undefined)>}),
+contentType?: (ContentTypeEnum | null)}) => ContentNodePromiseChain & {get: <R extends ContentNodeRequest>(request: R, defaultValue?: (FieldsSelection<ContentNode, R> | undefined)) => Promise<(FieldsSelection<ContentNode, R> | undefined)>}),
     
 /** Connection between the RootQuery type and the ContentNode type */
 contentNodes: ((args?: {
@@ -23537,9 +23733,7 @@ empreendimento: ((args: {
 /** The globally unique identifier of the object. */
 id: Scalars['ID'],
 /** Type of unique identifier to fetch by. Default is Global ID */
-idType?: (EmpreendimentoIdType | null),
-/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
-asPreview?: (Scalars['Boolean'] | null)}) => EmpreendimentoPromiseChain & {get: <R extends EmpreendimentoRequest>(request: R, defaultValue?: (FieldsSelection<Empreendimento, R> | undefined)) => Promise<(FieldsSelection<Empreendimento, R> | undefined)>}),
+idType?: (EmpreendimentoIdType | null)}) => EmpreendimentoPromiseChain & {get: <R extends EmpreendimentoRequest>(request: R, defaultValue?: (FieldsSelection<Empreendimento, R> | undefined)) => Promise<(FieldsSelection<Empreendimento, R> | undefined)>}),
     
 /**
  * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
@@ -23576,9 +23770,7 @@ mediaItem: ((args: {
 /** The globally unique identifier of the object. */
 id: Scalars['ID'],
 /** Type of unique identifier to fetch by. Default is Global ID */
-idType?: (MediaItemIdType | null),
-/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
-asPreview?: (Scalars['Boolean'] | null)}) => MediaItemPromiseChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Promise<(FieldsSelection<MediaItem, R> | undefined)>}),
+idType?: (MediaItemIdType | null)}) => MediaItemPromiseChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Promise<(FieldsSelection<MediaItem, R> | undefined)>}),
     
 /**
  * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
@@ -23662,9 +23854,7 @@ page: ((args: {
 /** The globally unique identifier of the object. */
 id: Scalars['ID'],
 /** Type of unique identifier to fetch by. Default is Global ID */
-idType?: (PageIdType | null),
-/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
-asPreview?: (Scalars['Boolean'] | null)}) => PagePromiseChain & {get: <R extends PageRequest>(request: R, defaultValue?: (FieldsSelection<Page, R> | undefined)) => Promise<(FieldsSelection<Page, R> | undefined)>}),
+idType?: (PageIdType | null)}) => PagePromiseChain & {get: <R extends PageRequest>(request: R, defaultValue?: (FieldsSelection<Page, R> | undefined)) => Promise<(FieldsSelection<Page, R> | undefined)>}),
     
 /**
  * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
@@ -23691,6 +23881,9 @@ before?: (Scalars['String'] | null),
 /** Arguments for filtering the connection */
 where?: (RootQueryToPageConnectionWhereArgs | null)}) => RootQueryToPageConnectionPromiseChain & {get: <R extends RootQueryToPageConnectionRequest>(request: R, defaultValue?: (FieldsSelection<RootQueryToPageConnection, R> | undefined)) => Promise<(FieldsSelection<RootQueryToPageConnection, R> | undefined)>})&(RootQueryToPageConnectionPromiseChain & {get: <R extends RootQueryToPageConnectionRequest>(request: R, defaultValue?: (FieldsSelection<RootQueryToPageConnection, R> | undefined)) => Promise<(FieldsSelection<RootQueryToPageConnection, R> | undefined)>}),
     
+/** Fields of the &#039;PermalinkSettings&#039; settings group */
+permalinkSettings: (PermalinkSettingsPromiseChain & {get: <R extends PermalinkSettingsRequest>(request: R, defaultValue?: (FieldsSelection<PermalinkSettings, R> | undefined)) => Promise<(FieldsSelection<PermalinkSettings, R> | undefined)>}),
+    
 /** A WordPress plugin */
 plugin: ((args: {
 /** The globally unique identifier of the plugin. */
@@ -23714,9 +23907,7 @@ post: ((args: {
 /** The globally unique identifier of the object. */
 id: Scalars['ID'],
 /** Type of unique identifier to fetch by. Default is Global ID */
-idType?: (PostIdType | null),
-/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
-asPreview?: (Scalars['Boolean'] | null)}) => PostPromiseChain & {get: <R extends PostRequest>(request: R, defaultValue?: (FieldsSelection<Post, R> | undefined)) => Promise<(FieldsSelection<Post, R> | undefined)>}),
+idType?: (PostIdType | null)}) => PostPromiseChain & {get: <R extends PostRequest>(request: R, defaultValue?: (FieldsSelection<Post, R> | undefined)) => Promise<(FieldsSelection<Post, R> | undefined)>}),
     
 /**
  * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
@@ -23777,7 +23968,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => RootQueryToEnqueuedScriptConnectionPromiseChain & {get: <R extends RootQueryToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<RootQueryToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<RootQueryToEnqueuedScriptConnection, R> | undefined)>})&(RootQueryToEnqueuedScriptConnectionPromiseChain & {get: <R extends RootQueryToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<RootQueryToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<RootQueryToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (RootQueryToEnqueuedScriptConnectionWhereArgs | null)}) => RootQueryToEnqueuedScriptConnectionPromiseChain & {get: <R extends RootQueryToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<RootQueryToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<RootQueryToEnqueuedScriptConnection, R> | undefined)>})&(RootQueryToEnqueuedScriptConnectionPromiseChain & {get: <R extends RootQueryToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<RootQueryToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<RootQueryToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the RootQuery type and the EnqueuedStylesheet type */
 registeredStylesheets: ((args?: {
@@ -23788,7 +23981,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => RootQueryToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends RootQueryToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<RootQueryToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<RootQueryToEnqueuedStylesheetConnection, R> | undefined)>})&(RootQueryToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends RootQueryToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<RootQueryToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<RootQueryToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (RootQueryToEnqueuedStylesheetConnectionWhereArgs | null)}) => RootQueryToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends RootQueryToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<RootQueryToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<RootQueryToEnqueuedStylesheetConnection, R> | undefined)>})&(RootQueryToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends RootQueryToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<RootQueryToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<RootQueryToEnqueuedStylesheetConnection, R> | undefined)>}),
     
 /** Connection between the RootQuery type and the ContentNode type */
 revisions: ((args?: {
@@ -23934,9 +24129,7 @@ arquivoAssessoria: ((args: {
 /** The globally unique identifier of the object. */
 id: Scalars['ID'],
 /** Type of unique identifier to fetch by. Default is Global ID */
-idType?: (ArquivoAssessoriaIdType | null),
-/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
-asPreview?: (Scalars['Boolean'] | null)}) => ArquivoAssessoriaObservableChain & {get: <R extends ArquivoAssessoriaRequest>(request: R, defaultValue?: (FieldsSelection<ArquivoAssessoria, R> | undefined)) => Observable<(FieldsSelection<ArquivoAssessoria, R> | undefined)>}),
+idType?: (ArquivoAssessoriaIdType | null)}) => ArquivoAssessoriaObservableChain & {get: <R extends ArquivoAssessoriaRequest>(request: R, defaultValue?: (FieldsSelection<ArquivoAssessoria, R> | undefined)) => Observable<(FieldsSelection<ArquivoAssessoria, R> | undefined)>}),
     
 /**
  * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
@@ -23970,9 +24163,7 @@ banner: ((args: {
 /** The globally unique identifier of the object. */
 id: Scalars['ID'],
 /** Type of unique identifier to fetch by. Default is Global ID */
-idType?: (BannerIdType | null),
-/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
-asPreview?: (Scalars['Boolean'] | null)}) => BannerObservableChain & {get: <R extends BannerRequest>(request: R, defaultValue?: (FieldsSelection<Banner, R> | undefined)) => Observable<(FieldsSelection<Banner, R> | undefined)>}),
+idType?: (BannerIdType | null)}) => BannerObservableChain & {get: <R extends BannerRequest>(request: R, defaultValue?: (FieldsSelection<Banner, R> | undefined)) => Observable<(FieldsSelection<Banner, R> | undefined)>}),
     
 /**
  * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
@@ -24026,9 +24217,7 @@ centraldeDecorado: ((args: {
 /** The globally unique identifier of the object. */
 id: Scalars['ID'],
 /** Type of unique identifier to fetch by. Default is Global ID */
-idType?: (CentraldeDecoradoIdType | null),
-/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
-asPreview?: (Scalars['Boolean'] | null)}) => CentraldeDecoradoObservableChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecorado, R> | undefined)) => Observable<(FieldsSelection<CentraldeDecorado, R> | undefined)>}),
+idType?: (CentraldeDecoradoIdType | null)}) => CentraldeDecoradoObservableChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: (FieldsSelection<CentraldeDecorado, R> | undefined)) => Observable<(FieldsSelection<CentraldeDecorado, R> | undefined)>}),
     
 /**
  * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
@@ -24084,9 +24273,7 @@ id: Scalars['ID'],
 /** Type of unique identifier to fetch a content node by. Default is Global ID */
 idType?: (ContentNodeIdTypeEnum | null),
 /** The content type the node is used for. Required when idType is set to "name" or "slug" */
-contentType?: (ContentTypeEnum | null),
-/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
-asPreview?: (Scalars['Boolean'] | null)}) => ContentNodeObservableChain & {get: <R extends ContentNodeRequest>(request: R, defaultValue?: (FieldsSelection<ContentNode, R> | undefined)) => Observable<(FieldsSelection<ContentNode, R> | undefined)>}),
+contentType?: (ContentTypeEnum | null)}) => ContentNodeObservableChain & {get: <R extends ContentNodeRequest>(request: R, defaultValue?: (FieldsSelection<ContentNode, R> | undefined)) => Observable<(FieldsSelection<ContentNode, R> | undefined)>}),
     
 /** Connection between the RootQuery type and the ContentNode type */
 contentNodes: ((args?: {
@@ -24127,9 +24314,7 @@ empreendimento: ((args: {
 /** The globally unique identifier of the object. */
 id: Scalars['ID'],
 /** Type of unique identifier to fetch by. Default is Global ID */
-idType?: (EmpreendimentoIdType | null),
-/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
-asPreview?: (Scalars['Boolean'] | null)}) => EmpreendimentoObservableChain & {get: <R extends EmpreendimentoRequest>(request: R, defaultValue?: (FieldsSelection<Empreendimento, R> | undefined)) => Observable<(FieldsSelection<Empreendimento, R> | undefined)>}),
+idType?: (EmpreendimentoIdType | null)}) => EmpreendimentoObservableChain & {get: <R extends EmpreendimentoRequest>(request: R, defaultValue?: (FieldsSelection<Empreendimento, R> | undefined)) => Observable<(FieldsSelection<Empreendimento, R> | undefined)>}),
     
 /**
  * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
@@ -24166,9 +24351,7 @@ mediaItem: ((args: {
 /** The globally unique identifier of the object. */
 id: Scalars['ID'],
 /** Type of unique identifier to fetch by. Default is Global ID */
-idType?: (MediaItemIdType | null),
-/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
-asPreview?: (Scalars['Boolean'] | null)}) => MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Observable<(FieldsSelection<MediaItem, R> | undefined)>}),
+idType?: (MediaItemIdType | null)}) => MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Observable<(FieldsSelection<MediaItem, R> | undefined)>}),
     
 /**
  * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
@@ -24252,9 +24435,7 @@ page: ((args: {
 /** The globally unique identifier of the object. */
 id: Scalars['ID'],
 /** Type of unique identifier to fetch by. Default is Global ID */
-idType?: (PageIdType | null),
-/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
-asPreview?: (Scalars['Boolean'] | null)}) => PageObservableChain & {get: <R extends PageRequest>(request: R, defaultValue?: (FieldsSelection<Page, R> | undefined)) => Observable<(FieldsSelection<Page, R> | undefined)>}),
+idType?: (PageIdType | null)}) => PageObservableChain & {get: <R extends PageRequest>(request: R, defaultValue?: (FieldsSelection<Page, R> | undefined)) => Observable<(FieldsSelection<Page, R> | undefined)>}),
     
 /**
  * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
@@ -24281,6 +24462,9 @@ before?: (Scalars['String'] | null),
 /** Arguments for filtering the connection */
 where?: (RootQueryToPageConnectionWhereArgs | null)}) => RootQueryToPageConnectionObservableChain & {get: <R extends RootQueryToPageConnectionRequest>(request: R, defaultValue?: (FieldsSelection<RootQueryToPageConnection, R> | undefined)) => Observable<(FieldsSelection<RootQueryToPageConnection, R> | undefined)>})&(RootQueryToPageConnectionObservableChain & {get: <R extends RootQueryToPageConnectionRequest>(request: R, defaultValue?: (FieldsSelection<RootQueryToPageConnection, R> | undefined)) => Observable<(FieldsSelection<RootQueryToPageConnection, R> | undefined)>}),
     
+/** Fields of the &#039;PermalinkSettings&#039; settings group */
+permalinkSettings: (PermalinkSettingsObservableChain & {get: <R extends PermalinkSettingsRequest>(request: R, defaultValue?: (FieldsSelection<PermalinkSettings, R> | undefined)) => Observable<(FieldsSelection<PermalinkSettings, R> | undefined)>}),
+    
 /** A WordPress plugin */
 plugin: ((args: {
 /** The globally unique identifier of the plugin. */
@@ -24304,9 +24488,7 @@ post: ((args: {
 /** The globally unique identifier of the object. */
 id: Scalars['ID'],
 /** Type of unique identifier to fetch by. Default is Global ID */
-idType?: (PostIdType | null),
-/** Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument. */
-asPreview?: (Scalars['Boolean'] | null)}) => PostObservableChain & {get: <R extends PostRequest>(request: R, defaultValue?: (FieldsSelection<Post, R> | undefined)) => Observable<(FieldsSelection<Post, R> | undefined)>}),
+idType?: (PostIdType | null)}) => PostObservableChain & {get: <R extends PostRequest>(request: R, defaultValue?: (FieldsSelection<Post, R> | undefined)) => Observable<(FieldsSelection<Post, R> | undefined)>}),
     
 /**
  * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
@@ -24367,7 +24549,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => RootQueryToEnqueuedScriptConnectionObservableChain & {get: <R extends RootQueryToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<RootQueryToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<RootQueryToEnqueuedScriptConnection, R> | undefined)>})&(RootQueryToEnqueuedScriptConnectionObservableChain & {get: <R extends RootQueryToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<RootQueryToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<RootQueryToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (RootQueryToEnqueuedScriptConnectionWhereArgs | null)}) => RootQueryToEnqueuedScriptConnectionObservableChain & {get: <R extends RootQueryToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<RootQueryToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<RootQueryToEnqueuedScriptConnection, R> | undefined)>})&(RootQueryToEnqueuedScriptConnectionObservableChain & {get: <R extends RootQueryToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<RootQueryToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<RootQueryToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the RootQuery type and the EnqueuedStylesheet type */
 registeredStylesheets: ((args?: {
@@ -24378,7 +24562,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => RootQueryToEnqueuedStylesheetConnectionObservableChain & {get: <R extends RootQueryToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<RootQueryToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<RootQueryToEnqueuedStylesheetConnection, R> | undefined)>})&(RootQueryToEnqueuedStylesheetConnectionObservableChain & {get: <R extends RootQueryToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<RootQueryToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<RootQueryToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (RootQueryToEnqueuedStylesheetConnectionWhereArgs | null)}) => RootQueryToEnqueuedStylesheetConnectionObservableChain & {get: <R extends RootQueryToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<RootQueryToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<RootQueryToEnqueuedStylesheetConnection, R> | undefined)>})&(RootQueryToEnqueuedStylesheetConnectionObservableChain & {get: <R extends RootQueryToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<RootQueryToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<RootQueryToEnqueuedStylesheetConnection, R> | undefined)>}),
     
 /** Connection between the RootQuery type and the ContentNode type */
 revisions: ((args?: {
@@ -24516,58 +24702,70 @@ writingSettings: (WritingSettingsObservableChain & {get: <R extends WritingSetti
 /** All of the registered settings */
 export interface SettingsPromiseChain{
     
-/** Settings of the the string Settings Group */
+/** Settings of the string Settings Group */
 discussionSettingsDefaultCommentStatus: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** Settings of the the string Settings Group */
+/** Settings of the string Settings Group */
 discussionSettingsDefaultPingStatus: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** Settings of the the string Settings Group */
+/** Settings of the string Settings Group */
 generalSettingsDateFormat: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** Settings of the the string Settings Group */
+/** Settings of the string Settings Group */
 generalSettingsDescription: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** Settings of the the string Settings Group */
+/** Settings of the string Settings Group */
 generalSettingsEmail: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** Settings of the the string Settings Group */
+/** Settings of the string Settings Group */
+generalSettingsHomeUrl: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** Settings of the string Settings Group */
 generalSettingsLanguage: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** Settings of the the integer Settings Group */
+/** Settings of the integer Settings Group */
 generalSettingsStartOfWeek: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
     
-/** Settings of the the string Settings Group */
+/** Settings of the string Settings Group */
 generalSettingsTimeFormat: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** Settings of the the string Settings Group */
+/** Settings of the string Settings Group */
 generalSettingsTimezone: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** Settings of the the string Settings Group */
+/** Settings of the string Settings Group */
 generalSettingsTitle: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** Settings of the the string Settings Group */
+/** Settings of the string Settings Group */
 generalSettingsUrl: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** Settings of the the integer Settings Group */
+/** Settings of the string Settings Group */
+permalinkSettingsCategoryBase: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** Settings of the string Settings Group */
+permalinkSettingsStructure: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** Settings of the string Settings Group */
+permalinkSettingsTagBase: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** Settings of the integer Settings Group */
 readingSettingsPageForPosts: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
     
-/** Settings of the the integer Settings Group */
+/** Settings of the integer Settings Group */
 readingSettingsPageOnFront: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
     
-/** Settings of the the integer Settings Group */
+/** Settings of the integer Settings Group */
 readingSettingsPostsPerPage: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
     
-/** Settings of the the string Settings Group */
+/** Settings of the string Settings Group */
 readingSettingsShowOnFront: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** Settings of the the integer Settings Group */
+/** Settings of the integer Settings Group */
 writingSettingsDefaultCategory: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
     
-/** Settings of the the string Settings Group */
+/** Settings of the string Settings Group */
 writingSettingsDefaultPostFormat: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** Settings of the the boolean Settings Group */
+/** Settings of the boolean Settings Group */
 writingSettingsUseSmilies: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>})
 }
 
@@ -24575,58 +24773,70 @@ writingSettingsUseSmilies: ({get: (request?: boolean|number, defaultValue?: (Sca
 /** All of the registered settings */
 export interface SettingsObservableChain{
     
-/** Settings of the the string Settings Group */
+/** Settings of the string Settings Group */
 discussionSettingsDefaultCommentStatus: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** Settings of the the string Settings Group */
+/** Settings of the string Settings Group */
 discussionSettingsDefaultPingStatus: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** Settings of the the string Settings Group */
+/** Settings of the string Settings Group */
 generalSettingsDateFormat: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** Settings of the the string Settings Group */
+/** Settings of the string Settings Group */
 generalSettingsDescription: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** Settings of the the string Settings Group */
+/** Settings of the string Settings Group */
 generalSettingsEmail: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** Settings of the the string Settings Group */
+/** Settings of the string Settings Group */
+generalSettingsHomeUrl: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** Settings of the string Settings Group */
 generalSettingsLanguage: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** Settings of the the integer Settings Group */
+/** Settings of the integer Settings Group */
 generalSettingsStartOfWeek: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
     
-/** Settings of the the string Settings Group */
+/** Settings of the string Settings Group */
 generalSettingsTimeFormat: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** Settings of the the string Settings Group */
+/** Settings of the string Settings Group */
 generalSettingsTimezone: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** Settings of the the string Settings Group */
+/** Settings of the string Settings Group */
 generalSettingsTitle: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** Settings of the the string Settings Group */
+/** Settings of the string Settings Group */
 generalSettingsUrl: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** Settings of the the integer Settings Group */
+/** Settings of the string Settings Group */
+permalinkSettingsCategoryBase: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** Settings of the string Settings Group */
+permalinkSettingsStructure: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** Settings of the string Settings Group */
+permalinkSettingsTagBase: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** Settings of the integer Settings Group */
 readingSettingsPageForPosts: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
     
-/** Settings of the the integer Settings Group */
+/** Settings of the integer Settings Group */
 readingSettingsPageOnFront: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
     
-/** Settings of the the integer Settings Group */
+/** Settings of the integer Settings Group */
 readingSettingsPostsPerPage: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
     
-/** Settings of the the string Settings Group */
+/** Settings of the string Settings Group */
 readingSettingsShowOnFront: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** Settings of the the integer Settings Group */
+/** Settings of the integer Settings Group */
 writingSettingsDefaultCategory: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
     
-/** Settings of the the string Settings Group */
+/** Settings of the string Settings Group */
 writingSettingsDefaultPostFormat: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** Settings of the the boolean Settings Group */
+/** Settings of the boolean Settings Group */
 writingSettingsUseSmilies: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>})
 }
 
@@ -24636,7 +24846,7 @@ export interface ArquivoAssessoriaPromiseChain{
     
 /**
  * @deprecated Deprecated in favor of the databaseId field
- * The id field matches the WP_Post-&gt;ID field.
+ * The unique numeric identifier for the content node.
  */
 arquivoAssessoriaId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>}),
     
@@ -24690,7 +24900,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)}) => ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the ContentNode type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -24701,9 +24913,11 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
-/** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+/** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** Whether the arq_assessoria object is password protected. */
@@ -24763,7 +24977,7 @@ previewRevisionDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Sca
 /** Whether the object is a node in the preview state */
 previewRevisionId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Promise<(Scalars['ID'] | undefined)>}),
     
-/** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+/** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
 slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** The current status of the object */
@@ -24787,7 +25001,7 @@ export interface ArquivoAssessoriaObservableChain{
     
 /**
  * @deprecated Deprecated in favor of the databaseId field
- * The id field matches the WP_Post-&gt;ID field.
+ * The unique numeric identifier for the content node.
  */
 arquivoAssessoriaId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>}),
     
@@ -24841,7 +25055,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)}) => ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the ContentNode type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -24852,9 +25068,11 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
-/** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+/** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** Whether the arq_assessoria object is password protected. */
@@ -24914,7 +25132,7 @@ previewRevisionDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Sca
 /** Whether the object is a node in the preview state */
 previewRevisionId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Observable<(Scalars['ID'] | undefined)>}),
     
-/** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+/** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
 slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** The current status of the object */
@@ -24969,7 +25187,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)}) => ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the ContentNode type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -24980,9 +25200,11 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
-/** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+/** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** The globally unique ID for the object */
@@ -25024,10 +25246,10 @@ modifiedGmt: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 /** The database id of the preview node */
 previewRevisionDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
     
-/** Whether the object is a node in the preview state */
+/** The globally unique ID of the preview node */
 previewRevisionId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Promise<(Scalars['ID'] | undefined)>}),
     
-/** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+/** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
 slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** The current status of the object */
@@ -25077,7 +25299,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)}) => ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the ContentNode type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -25088,9 +25312,11 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
-/** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+/** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** The globally unique ID for the object */
@@ -25132,10 +25358,10 @@ modifiedGmt: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 /** The database id of the preview node */
 previewRevisionDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
     
-/** Whether the object is a node in the preview state */
+/** The globally unique ID of the preview node */
 previewRevisionId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Observable<(Scalars['ID'] | undefined)>}),
     
-/** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+/** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
 slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** The current status of the object */
@@ -25698,7 +25924,7 @@ after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
 before?: (Scalars['String'] | null)}) => TaxonomyToTermNodeConnectionPromiseChain & {get: <R extends TaxonomyToTermNodeConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TaxonomyToTermNodeConnection, R> | undefined)) => Promise<(FieldsSelection<TaxonomyToTermNodeConnection, R> | undefined)>})&(TaxonomyToTermNodeConnectionPromiseChain & {get: <R extends TaxonomyToTermNodeConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TaxonomyToTermNodeConnection, R> | undefined)) => Promise<(FieldsSelection<TaxonomyToTermNodeConnection, R> | undefined)>}),
     
-/** Description of the taxonomy. This field is equivalent to WP_Taxonomy-&gt;description */
+/** Description of the taxonomy. */
 description: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** The plural name of the post type within the GraphQL Schema. */
@@ -25719,7 +25945,7 @@ isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean
 /** Name of the taxonomy shown in the menu. Usually plural. */
 label: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** The display name of the taxonomy. This field is equivalent to WP_Taxonomy-&gt;label */
+/** The display name of the taxonomy. */
 name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** Whether the taxonomy is publicly queryable */
@@ -25731,7 +25957,7 @@ restBase: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | 
 /** The REST Controller class assigned to handling this content type. */
 restControllerClass: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** Whether to show the taxonomy as part of a tag cloud widget. This field is equivalent to WP_Taxonomy-&gt;show_tagcloud */
+/** Whether to show the taxonomy as part of a tag cloud widget. */
 showCloud: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
     
 /** Whether to display a column for the taxonomy on its post type listing screens. */
@@ -25782,7 +26008,7 @@ after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
 before?: (Scalars['String'] | null)}) => TaxonomyToTermNodeConnectionObservableChain & {get: <R extends TaxonomyToTermNodeConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TaxonomyToTermNodeConnection, R> | undefined)) => Observable<(FieldsSelection<TaxonomyToTermNodeConnection, R> | undefined)>})&(TaxonomyToTermNodeConnectionObservableChain & {get: <R extends TaxonomyToTermNodeConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TaxonomyToTermNodeConnection, R> | undefined)) => Observable<(FieldsSelection<TaxonomyToTermNodeConnection, R> | undefined)>}),
     
-/** Description of the taxonomy. This field is equivalent to WP_Taxonomy-&gt;description */
+/** Description of the taxonomy. */
 description: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** The plural name of the post type within the GraphQL Schema. */
@@ -25803,7 +26029,7 @@ isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean
 /** Name of the taxonomy shown in the menu. Usually plural. */
 label: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** The display name of the taxonomy. This field is equivalent to WP_Taxonomy-&gt;label */
+/** The display name of the taxonomy. */
 name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** Whether the taxonomy is publicly queryable */
@@ -25815,7 +26041,7 @@ restBase: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | 
 /** The REST Controller class assigned to handling this content type. */
 restControllerClass: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** Whether to show the taxonomy as part of a tag cloud widget. This field is equivalent to WP_Taxonomy-&gt;show_tagcloud */
+/** Whether to show the taxonomy as part of a tag cloud widget. */
 showCloud: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
     
 /** Whether to display a column for the taxonomy on its post type listing screens. */
@@ -26120,7 +26346,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>})&(TermNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (TermNodeToEnqueuedScriptConnectionWhereArgs | null)}) => TermNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>})&(TermNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the TermNode type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -26131,7 +26359,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (TermNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
 /** The globally unique ID for the object */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
@@ -26198,7 +26428,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>})&(TermNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (TermNodeToEnqueuedScriptConnectionWhereArgs | null)}) => TermNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>})&(TermNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the TermNode type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -26209,7 +26441,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (TermNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
 /** The globally unique ID for the object */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
@@ -27507,7 +27741,7 @@ databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => 
 /** Description of the user. */
 description: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** Email address of the user. This is equivalent to the WP_User-&gt;user_email property. */
+/** Email address of the user. */
 email: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** Connection between the User type and the EnqueuedScript type */
@@ -27519,7 +27753,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => UserToEnqueuedScriptConnectionPromiseChain & {get: <R extends UserToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<UserToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<UserToEnqueuedScriptConnection, R> | undefined)>})&(UserToEnqueuedScriptConnectionPromiseChain & {get: <R extends UserToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<UserToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<UserToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (UserToEnqueuedScriptConnectionWhereArgs | null)}) => UserToEnqueuedScriptConnectionPromiseChain & {get: <R extends UserToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<UserToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<UserToEnqueuedScriptConnection, R> | undefined)>})&(UserToEnqueuedScriptConnectionPromiseChain & {get: <R extends UserToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<UserToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<UserToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the User type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -27530,12 +27766,14 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => UserToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends UserToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<UserToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<UserToEnqueuedStylesheetConnection, R> | undefined)>})&(UserToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends UserToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<UserToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<UserToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (UserToEnqueuedStylesheetConnectionWhereArgs | null)}) => UserToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends UserToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<UserToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<UserToEnqueuedStylesheetConnection, R> | undefined)>})&(UserToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends UserToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<UserToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<UserToEnqueuedStylesheetConnection, R> | undefined)>}),
     
-/** A complete list of capabilities including capabilities inherited from a role. This is equivalent to the array keys of WP_User-&gt;allcaps. */
+/** A complete list of capabilities including capabilities inherited from a role. */
 extraCapabilities: ({get: (request?: boolean|number, defaultValue?: ((Scalars['String'] | undefined)[] | undefined)) => Promise<((Scalars['String'] | undefined)[] | undefined)>}),
     
-/** First name of the user. This is equivalent to the WP_User-&gt;user_first_name property. */
+/** First name of the user. */
 firstName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** Whether the user has enabled keyboard shortcuts for comment moderation. Defaults to false. */
@@ -27568,7 +27806,7 @@ isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean
 /** Whether the node is a Term */
 isTermNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
     
-/** Last name of the user. This is equivalent to the WP_User-&gt;user_last_name property. */
+/** Last name of the user. */
 lastName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** The preferred language locale set for the user. Value derived from get_user_locale(). */
@@ -27587,10 +27825,10 @@ before?: (Scalars['String'] | null),
 /** Arguments for filtering the connection */
 where?: (UserToMediaItemConnectionWhereArgs | null)}) => UserToMediaItemConnectionPromiseChain & {get: <R extends UserToMediaItemConnectionRequest>(request: R, defaultValue?: (FieldsSelection<UserToMediaItemConnection, R> | undefined)) => Promise<(FieldsSelection<UserToMediaItemConnection, R> | undefined)>})&(UserToMediaItemConnectionPromiseChain & {get: <R extends UserToMediaItemConnectionRequest>(request: R, defaultValue?: (FieldsSelection<UserToMediaItemConnection, R> | undefined)) => Promise<(FieldsSelection<UserToMediaItemConnection, R> | undefined)>}),
     
-/** Display name of the user. This is equivalent to the WP_User-&gt;display_name property. */
+/** Display name of the user. */
 name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** The nicename for the user. This field is equivalent to WP_User-&gt;user_nicename */
+/** The url friendly name for the user, used to reference the user in a public url. */
 nicename: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** Nickname of the user. */
@@ -27652,7 +27890,7 @@ before?: (Scalars['String'] | null)}) => UserToUserRoleConnectionPromiseChain & 
 /** Whether the Toolbar should be displayed when the user is viewing the site. */
 shouldShowAdminToolbar: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
     
-/** The slug for the user. This field is equivalent to WP_User-&gt;user_nicename */
+/** The url friendly identifier for the user. */
 slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** The unique resource identifier path */
@@ -27663,11 +27901,11 @@ url: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undef
     
 /**
  * @deprecated Deprecated in favor of the databaseId field
- * The Id of the user. Equivalent to WP_User-&gt;ID
+ * The unique numeric identifier for the user.
  */
 userId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
     
-/** Username for the user. This field is equivalent to WP_User-&gt;user_login. */
+/** Username for the user. This is the unique identifier the user provides to log in. */
 username: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
 }
 
@@ -27712,7 +27950,7 @@ databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => 
 /** Description of the user. */
 description: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** Email address of the user. This is equivalent to the WP_User-&gt;user_email property. */
+/** Email address of the user. */
 email: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** Connection between the User type and the EnqueuedScript type */
@@ -27724,7 +27962,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => UserToEnqueuedScriptConnectionObservableChain & {get: <R extends UserToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<UserToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<UserToEnqueuedScriptConnection, R> | undefined)>})&(UserToEnqueuedScriptConnectionObservableChain & {get: <R extends UserToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<UserToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<UserToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (UserToEnqueuedScriptConnectionWhereArgs | null)}) => UserToEnqueuedScriptConnectionObservableChain & {get: <R extends UserToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<UserToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<UserToEnqueuedScriptConnection, R> | undefined)>})&(UserToEnqueuedScriptConnectionObservableChain & {get: <R extends UserToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<UserToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<UserToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the User type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -27735,12 +27975,14 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => UserToEnqueuedStylesheetConnectionObservableChain & {get: <R extends UserToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<UserToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<UserToEnqueuedStylesheetConnection, R> | undefined)>})&(UserToEnqueuedStylesheetConnectionObservableChain & {get: <R extends UserToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<UserToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<UserToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (UserToEnqueuedStylesheetConnectionWhereArgs | null)}) => UserToEnqueuedStylesheetConnectionObservableChain & {get: <R extends UserToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<UserToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<UserToEnqueuedStylesheetConnection, R> | undefined)>})&(UserToEnqueuedStylesheetConnectionObservableChain & {get: <R extends UserToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<UserToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<UserToEnqueuedStylesheetConnection, R> | undefined)>}),
     
-/** A complete list of capabilities including capabilities inherited from a role. This is equivalent to the array keys of WP_User-&gt;allcaps. */
+/** A complete list of capabilities including capabilities inherited from a role. */
 extraCapabilities: ({get: (request?: boolean|number, defaultValue?: ((Scalars['String'] | undefined)[] | undefined)) => Observable<((Scalars['String'] | undefined)[] | undefined)>}),
     
-/** First name of the user. This is equivalent to the WP_User-&gt;user_first_name property. */
+/** First name of the user. */
 firstName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** Whether the user has enabled keyboard shortcuts for comment moderation. Defaults to false. */
@@ -27773,7 +28015,7 @@ isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean
 /** Whether the node is a Term */
 isTermNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
     
-/** Last name of the user. This is equivalent to the WP_User-&gt;user_last_name property. */
+/** Last name of the user. */
 lastName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** The preferred language locale set for the user. Value derived from get_user_locale(). */
@@ -27792,10 +28034,10 @@ before?: (Scalars['String'] | null),
 /** Arguments for filtering the connection */
 where?: (UserToMediaItemConnectionWhereArgs | null)}) => UserToMediaItemConnectionObservableChain & {get: <R extends UserToMediaItemConnectionRequest>(request: R, defaultValue?: (FieldsSelection<UserToMediaItemConnection, R> | undefined)) => Observable<(FieldsSelection<UserToMediaItemConnection, R> | undefined)>})&(UserToMediaItemConnectionObservableChain & {get: <R extends UserToMediaItemConnectionRequest>(request: R, defaultValue?: (FieldsSelection<UserToMediaItemConnection, R> | undefined)) => Observable<(FieldsSelection<UserToMediaItemConnection, R> | undefined)>}),
     
-/** Display name of the user. This is equivalent to the WP_User-&gt;display_name property. */
+/** Display name of the user. */
 name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** The nicename for the user. This field is equivalent to WP_User-&gt;user_nicename */
+/** The url friendly name for the user, used to reference the user in a public url. */
 nicename: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** Nickname of the user. */
@@ -27857,7 +28099,7 @@ before?: (Scalars['String'] | null)}) => UserToUserRoleConnectionObservableChain
 /** Whether the Toolbar should be displayed when the user is viewing the site. */
 shouldShowAdminToolbar: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
     
-/** The slug for the user. This field is equivalent to WP_User-&gt;user_nicename */
+/** The url friendly identifier for the user. */
 slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** The unique resource identifier path */
@@ -27868,11 +28110,11 @@ url: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undef
     
 /**
  * @deprecated Deprecated in favor of the databaseId field
- * The Id of the user. Equivalent to WP_User-&gt;ID
+ * The unique numeric identifier for the user.
  */
 userId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
     
-/** Username for the user. This field is equivalent to WP_User-&gt;user_login. */
+/** Username for the user. This is the unique identifier the user provides to log in. */
 username: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
 }
 
@@ -28034,12 +28276,12 @@ node: (CommentObservableChain & {get: <R extends CommentRequest>(request: R, def
 /** A response or reaction to content submitted by users. Comments are typically associated with a specific content entry. */
 export interface CommentPromiseChain{
     
-/** User agent used to post the comment. This field is equivalent to WP_Comment-&gt;comment_agent and the value matching the &quot;comment_agent&quot; column in SQL. */
+/** User agent (browser or client) used to post the comment. */
 agent: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /**
  * @deprecated Deprecated in favor of the `status` field
- * The approval status of the comment. This field is equivalent to WP_Comment-&gt;comment_approved and the value matching the &quot;comment_approved&quot; column in SQL.
+ * The approval status of the comment.
  */
 approved: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
     
@@ -28048,7 +28290,7 @@ author: (CommentToCommenterConnectionEdgePromiseChain & {get: <R extends Comment
     
 /**
  * @deprecated Use the ipAddress field on the edge between the comment and author
- * IP address for the author at the time of commenting. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL.
+ * IP address for the author at the time of commenting.
  */
 authorIp: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
@@ -28061,7 +28303,7 @@ commentId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | un
 /** Connection between the Comment type and the ContentNode type */
 commentedOn: (CommentToContentNodeConnectionEdgePromiseChain & {get: <R extends CommentToContentNodeConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<CommentToContentNodeConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<CommentToContentNodeConnectionEdge, R> | undefined)>}),
     
-/** Content of the comment. This field is equivalent to WP_Comment-&gt;comment_content and the value matching the &quot;comment_content&quot; column in SQL. */
+/** Content of the comment. */
 content: ((args?: {
 /** Format of the field output */
 format?: (PostObjectFieldFormatEnum | null)}) => {get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})&({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
@@ -28069,10 +28311,10 @@ format?: (PostObjectFieldFormatEnum | null)}) => {get: (request?: boolean|number
 /** The unique identifier stored in the database */
 databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>}),
     
-/** Date the comment was posted in local time. This field is equivalent to WP_Comment-&gt;date and the value matching the &quot;date&quot; column in SQL. */
+/** Date the comment was posted in local time. */
 date: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** Date the comment was posted in GMT. This field is equivalent to WP_Comment-&gt;date_gmt and the value matching the &quot;date_gmt&quot; column in SQL. */
+/** Date the comment was posted in GMT. */
 dateGmt: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** The globally unique identifier for the comment object */
@@ -28096,7 +28338,7 @@ isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean
 /** Whether the node is a Term */
 isTermNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
     
-/** Karma value for the comment. This field is equivalent to WP_Comment-&gt;comment_karma and the value matching the &quot;comment_karma&quot; column in SQL. */
+/** Karma value for the comment. */
 karma: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
     
 /** The permalink of the comment */
@@ -28126,10 +28368,10 @@ before?: (Scalars['String'] | null),
 /** Arguments for filtering the connection */
 where?: (CommentToCommentConnectionWhereArgs | null)}) => CommentToCommentConnectionPromiseChain & {get: <R extends CommentToCommentConnectionRequest>(request: R, defaultValue?: (FieldsSelection<CommentToCommentConnection, R> | undefined)) => Promise<(FieldsSelection<CommentToCommentConnection, R> | undefined)>})&(CommentToCommentConnectionPromiseChain & {get: <R extends CommentToCommentConnectionRequest>(request: R, defaultValue?: (FieldsSelection<CommentToCommentConnection, R> | undefined)) => Promise<(FieldsSelection<CommentToCommentConnection, R> | undefined)>}),
     
-/** The approval status of the comment. This field is equivalent to WP_Comment-&gt;comment_approved and the value matching the &quot;comment_approved&quot; column in SQL. */
+/** The approval status of the comment. */
 status: ({get: (request?: boolean|number, defaultValue?: (CommentStatusEnum | undefined)) => Promise<(CommentStatusEnum | undefined)>}),
     
-/** Type of comment. This field is equivalent to WP_Comment-&gt;comment_type and the value matching the &quot;comment_type&quot; column in SQL. */
+/** Type of comment. */
 type: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** The unique resource identifier path */
@@ -28140,12 +28382,12 @@ uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undef
 /** A response or reaction to content submitted by users. Comments are typically associated with a specific content entry. */
 export interface CommentObservableChain{
     
-/** User agent used to post the comment. This field is equivalent to WP_Comment-&gt;comment_agent and the value matching the &quot;comment_agent&quot; column in SQL. */
+/** User agent (browser or client) used to post the comment. */
 agent: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /**
  * @deprecated Deprecated in favor of the `status` field
- * The approval status of the comment. This field is equivalent to WP_Comment-&gt;comment_approved and the value matching the &quot;comment_approved&quot; column in SQL.
+ * The approval status of the comment.
  */
 approved: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
     
@@ -28154,7 +28396,7 @@ author: (CommentToCommenterConnectionEdgeObservableChain & {get: <R extends Comm
     
 /**
  * @deprecated Use the ipAddress field on the edge between the comment and author
- * IP address for the author at the time of commenting. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL.
+ * IP address for the author at the time of commenting.
  */
 authorIp: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
@@ -28167,7 +28409,7 @@ commentId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | un
 /** Connection between the Comment type and the ContentNode type */
 commentedOn: (CommentToContentNodeConnectionEdgeObservableChain & {get: <R extends CommentToContentNodeConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<CommentToContentNodeConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<CommentToContentNodeConnectionEdge, R> | undefined)>}),
     
-/** Content of the comment. This field is equivalent to WP_Comment-&gt;comment_content and the value matching the &quot;comment_content&quot; column in SQL. */
+/** Content of the comment. */
 content: ((args?: {
 /** Format of the field output */
 format?: (PostObjectFieldFormatEnum | null)}) => {get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})&({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
@@ -28175,10 +28417,10 @@ format?: (PostObjectFieldFormatEnum | null)}) => {get: (request?: boolean|number
 /** The unique identifier stored in the database */
 databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>}),
     
-/** Date the comment was posted in local time. This field is equivalent to WP_Comment-&gt;date and the value matching the &quot;date&quot; column in SQL. */
+/** Date the comment was posted in local time. */
 date: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** Date the comment was posted in GMT. This field is equivalent to WP_Comment-&gt;date_gmt and the value matching the &quot;date_gmt&quot; column in SQL. */
+/** Date the comment was posted in GMT. */
 dateGmt: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** The globally unique identifier for the comment object */
@@ -28202,7 +28444,7 @@ isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean
 /** Whether the node is a Term */
 isTermNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
     
-/** Karma value for the comment. This field is equivalent to WP_Comment-&gt;comment_karma and the value matching the &quot;comment_karma&quot; column in SQL. */
+/** Karma value for the comment. */
 karma: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
     
 /** The permalink of the comment */
@@ -28232,10 +28474,10 @@ before?: (Scalars['String'] | null),
 /** Arguments for filtering the connection */
 where?: (CommentToCommentConnectionWhereArgs | null)}) => CommentToCommentConnectionObservableChain & {get: <R extends CommentToCommentConnectionRequest>(request: R, defaultValue?: (FieldsSelection<CommentToCommentConnection, R> | undefined)) => Observable<(FieldsSelection<CommentToCommentConnection, R> | undefined)>})&(CommentToCommentConnectionObservableChain & {get: <R extends CommentToCommentConnectionRequest>(request: R, defaultValue?: (FieldsSelection<CommentToCommentConnection, R> | undefined)) => Observable<(FieldsSelection<CommentToCommentConnection, R> | undefined)>}),
     
-/** The approval status of the comment. This field is equivalent to WP_Comment-&gt;comment_approved and the value matching the &quot;comment_approved&quot; column in SQL. */
+/** The approval status of the comment. */
 status: ({get: (request?: boolean|number, defaultValue?: (CommentStatusEnum | undefined)) => Observable<(CommentStatusEnum | undefined)>}),
     
-/** Type of comment. This field is equivalent to WP_Comment-&gt;comment_type and the value matching the &quot;comment_type&quot; column in SQL. */
+/** Type of comment. */
 type: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** The unique resource identifier path */
@@ -28252,7 +28494,7 @@ cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | un
 /** Email address representing the author for this particular comment */
 email: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** IP address of the author at the time of making this comment. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL. */
+/** IP address of the author at the time of making this comment. */
 ipAddress: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** The display name of the comment author for this particular comment */
@@ -28275,7 +28517,7 @@ cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | un
 /** Email address representing the author for this particular comment */
 email: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** IP address of the author at the time of making this comment. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL. */
+/** IP address of the author at the time of making this comment. */
 ipAddress: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** The display name of the comment author for this particular comment */
@@ -28878,7 +29120,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)}) => ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the ContentNode type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -28889,7 +29133,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
 /** The filename of the mediaItem for the specified size (default size is full) */
 file: ((args?: {
@@ -28906,7 +29152,7 @@ fileSize: ((args?: {
 /** Size of the MediaItem to return */
 size?: (MediaItemSizeEnum | null)}) => {get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>})&({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
     
-/** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+/** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** Whether the attachment object is password protected. */
@@ -28947,7 +29193,7 @@ mediaDetails: (MediaDetailsPromiseChain & {get: <R extends MediaDetailsRequest>(
     
 /**
  * @deprecated Deprecated in favor of the databaseId field
- * The id field matches the WP_Post-&gt;ID field.
+ * The unique numeric identifier for the content node.
  */
 mediaItemId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>}),
     
@@ -28981,7 +29227,7 @@ password: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | 
 /** The database id of the preview node */
 previewRevisionDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
     
-/** Whether the object is a node in the preview state */
+/** The globally unique ID of the preview node */
 previewRevisionId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Promise<(Scalars['ID'] | undefined)>}),
     
 /** The sizes attribute value for an image. */
@@ -28989,7 +29235,7 @@ sizes: ((args?: {
 /** Size of the MediaItem to calculate sizes with */
 size?: (MediaItemSizeEnum | null)}) => {get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})&({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+/** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
 slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** Url of the mediaItem */
@@ -29121,7 +29367,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)}) => ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the ContentNode type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -29132,7 +29380,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
 /** The filename of the mediaItem for the specified size (default size is full) */
 file: ((args?: {
@@ -29149,7 +29399,7 @@ fileSize: ((args?: {
 /** Size of the MediaItem to return */
 size?: (MediaItemSizeEnum | null)}) => {get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>})&({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
     
-/** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+/** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** Whether the attachment object is password protected. */
@@ -29190,7 +29440,7 @@ mediaDetails: (MediaDetailsObservableChain & {get: <R extends MediaDetailsReques
     
 /**
  * @deprecated Deprecated in favor of the databaseId field
- * The id field matches the WP_Post-&gt;ID field.
+ * The unique numeric identifier for the content node.
  */
 mediaItemId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>}),
     
@@ -29224,7 +29474,7 @@ password: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | 
 /** The database id of the preview node */
 previewRevisionDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
     
-/** Whether the object is a node in the preview state */
+/** The globally unique ID of the preview node */
 previewRevisionId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Observable<(Scalars['ID'] | undefined)>}),
     
 /** The sizes attribute value for an image. */
@@ -29232,7 +29482,7 @@ sizes: ((args?: {
 /** Size of the MediaItem to calculate sizes with */
 size?: (MediaItemSizeEnum | null)}) => {get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})&({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+/** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
 slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** Url of the mediaItem */
@@ -29455,7 +29705,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)}) => ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the ContentNode type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -29466,9 +29718,11 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
-/** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+/** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** The globally unique ID for the object */
@@ -29519,10 +29773,10 @@ parentId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | unde
 /** The database id of the preview node */
 previewRevisionDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
     
-/** Whether the object is a node in the preview state */
+/** The globally unique ID of the preview node */
 previewRevisionId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Promise<(Scalars['ID'] | undefined)>}),
     
-/** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+/** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
 slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** The current status of the object */
@@ -29598,7 +29852,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)}) => ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the ContentNode type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -29609,9 +29865,11 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
-/** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+/** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** The globally unique ID for the object */
@@ -29662,10 +29920,10 @@ parentId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | unde
 /** The database id of the preview node */
 previewRevisionDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
     
-/** Whether the object is a node in the preview state */
+/** The globally unique ID of the preview node */
 previewRevisionId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Observable<(Scalars['ID'] | undefined)>}),
     
-/** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+/** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
 slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** The current status of the object */
@@ -30649,7 +30907,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)}) => ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the ContentNode type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -30660,7 +30920,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
 /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
 featuredImage: (NodeWithFeaturedImageToMediaItemConnectionEdgePromiseChain & {get: <R extends NodeWithFeaturedImageToMediaItemConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<NodeWithFeaturedImageToMediaItemConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<NodeWithFeaturedImageToMediaItemConnectionEdge, R> | undefined)>}),
@@ -30671,7 +30933,7 @@ featuredImageDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Scala
 /** Globally unique ID of the featured image assigned to the node */
 featuredImageId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Promise<(Scalars['ID'] | undefined)>}),
     
-/** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+/** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** Whether the page object is password protected. */
@@ -30727,7 +30989,7 @@ modifiedGmt: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
     
 /**
  * @deprecated Deprecated in favor of the databaseId field
- * The id field matches the WP_Post-&gt;ID field.
+ * The unique numeric identifier for the content node.
  */
 pageId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>}),
     
@@ -30749,7 +31011,7 @@ preview: (PageToPreviewConnectionEdgePromiseChain & {get: <R extends PageToPrevi
 /** The database id of the preview node */
 previewRevisionDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
     
-/** Whether the object is a node in the preview state */
+/** The globally unique ID of the preview node */
 previewRevisionId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Promise<(Scalars['ID'] | undefined)>}),
     
 /** If the current node is a revision, this field exposes the node this is a revision of. Returns null if the node is not a revision of another node. */
@@ -30768,7 +31030,7 @@ before?: (Scalars['String'] | null),
 /** Arguments for filtering the connection */
 where?: (PageToRevisionConnectionWhereArgs | null)}) => PageToRevisionConnectionPromiseChain & {get: <R extends PageToRevisionConnectionRequest>(request: R, defaultValue?: (FieldsSelection<PageToRevisionConnection, R> | undefined)) => Promise<(FieldsSelection<PageToRevisionConnection, R> | undefined)>})&(PageToRevisionConnectionPromiseChain & {get: <R extends PageToRevisionConnectionRequest>(request: R, defaultValue?: (FieldsSelection<PageToRevisionConnection, R> | undefined)) => Promise<(FieldsSelection<PageToRevisionConnection, R> | undefined)>}),
     
-/** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+/** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
 slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** The current status of the object */
@@ -30897,7 +31159,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)}) => ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the ContentNode type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -30908,7 +31172,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
 /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
 featuredImage: (NodeWithFeaturedImageToMediaItemConnectionEdgeObservableChain & {get: <R extends NodeWithFeaturedImageToMediaItemConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<NodeWithFeaturedImageToMediaItemConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<NodeWithFeaturedImageToMediaItemConnectionEdge, R> | undefined)>}),
@@ -30919,7 +31185,7 @@ featuredImageDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Scala
 /** Globally unique ID of the featured image assigned to the node */
 featuredImageId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Observable<(Scalars['ID'] | undefined)>}),
     
-/** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+/** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** Whether the page object is password protected. */
@@ -30975,7 +31241,7 @@ modifiedGmt: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
     
 /**
  * @deprecated Deprecated in favor of the databaseId field
- * The id field matches the WP_Post-&gt;ID field.
+ * The unique numeric identifier for the content node.
  */
 pageId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>}),
     
@@ -30997,7 +31263,7 @@ preview: (PageToPreviewConnectionEdgeObservableChain & {get: <R extends PageToPr
 /** The database id of the preview node */
 previewRevisionDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
     
-/** Whether the object is a node in the preview state */
+/** The globally unique ID of the preview node */
 previewRevisionId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Observable<(Scalars['ID'] | undefined)>}),
     
 /** If the current node is a revision, this field exposes the node this is a revision of. Returns null if the node is not a revision of another node. */
@@ -31016,7 +31282,7 @@ before?: (Scalars['String'] | null),
 /** Arguments for filtering the connection */
 where?: (PageToRevisionConnectionWhereArgs | null)}) => PageToRevisionConnectionObservableChain & {get: <R extends PageToRevisionConnectionRequest>(request: R, defaultValue?: (FieldsSelection<PageToRevisionConnection, R> | undefined)) => Observable<(FieldsSelection<PageToRevisionConnection, R> | undefined)>})&(PageToRevisionConnectionObservableChain & {get: <R extends PageToRevisionConnectionRequest>(request: R, defaultValue?: (FieldsSelection<PageToRevisionConnection, R> | undefined)) => Observable<(FieldsSelection<PageToRevisionConnection, R> | undefined)>}),
     
-/** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+/** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
 slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** The current status of the object */
@@ -32073,7 +32339,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)}) => ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the ContentNode type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -32084,7 +32352,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
 /** The excerpt of the post. */
 excerpt: ((args?: {
@@ -32100,7 +32370,7 @@ featuredImageDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Scala
 /** Globally unique ID of the featured image assigned to the node */
 featuredImageId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Promise<(Scalars['ID'] | undefined)>}),
     
-/** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+/** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** Whether the post object is password protected. */
@@ -32178,7 +32448,7 @@ where?: (PostToPostFormatConnectionWhereArgs | null)}) => PostToPostFormatConnec
     
 /**
  * @deprecated Deprecated in favor of the databaseId field
- * The id field matches the WP_Post-&gt;ID field.
+ * The unique numeric identifier for the content node.
  */
 postId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>}),
     
@@ -32207,7 +32477,7 @@ before?: (Scalars['String'] | null),
 /** Arguments for filtering the connection */
 where?: (PostToRevisionConnectionWhereArgs | null)}) => PostToRevisionConnectionPromiseChain & {get: <R extends PostToRevisionConnectionRequest>(request: R, defaultValue?: (FieldsSelection<PostToRevisionConnection, R> | undefined)) => Promise<(FieldsSelection<PostToRevisionConnection, R> | undefined)>})&(PostToRevisionConnectionPromiseChain & {get: <R extends PostToRevisionConnectionRequest>(request: R, defaultValue?: (FieldsSelection<PostToRevisionConnection, R> | undefined)) => Promise<(FieldsSelection<PostToRevisionConnection, R> | undefined)>}),
     
-/** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+/** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
 slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** The current status of the object */
@@ -32351,7 +32621,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)}) => ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the ContentNode type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -32362,7 +32634,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
 /** The excerpt of the post. */
 excerpt: ((args?: {
@@ -32378,7 +32652,7 @@ featuredImageDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Scala
 /** Globally unique ID of the featured image assigned to the node */
 featuredImageId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Observable<(Scalars['ID'] | undefined)>}),
     
-/** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+/** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** Whether the post object is password protected. */
@@ -32456,7 +32730,7 @@ where?: (PostToPostFormatConnectionWhereArgs | null)}) => PostToPostFormatConnec
     
 /**
  * @deprecated Deprecated in favor of the databaseId field
- * The id field matches the WP_Post-&gt;ID field.
+ * The unique numeric identifier for the content node.
  */
 postId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>}),
     
@@ -32485,7 +32759,7 @@ before?: (Scalars['String'] | null),
 /** Arguments for filtering the connection */
 where?: (PostToRevisionConnectionWhereArgs | null)}) => PostToRevisionConnectionObservableChain & {get: <R extends PostToRevisionConnectionRequest>(request: R, defaultValue?: (FieldsSelection<PostToRevisionConnection, R> | undefined)) => Observable<(FieldsSelection<PostToRevisionConnection, R> | undefined)>})&(PostToRevisionConnectionObservableChain & {get: <R extends PostToRevisionConnectionRequest>(request: R, defaultValue?: (FieldsSelection<PostToRevisionConnection, R> | undefined)) => Observable<(FieldsSelection<PostToRevisionConnection, R> | undefined)>}),
     
-/** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+/** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
 slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** The current status of the object */
@@ -32624,16 +32898,10 @@ pageInfo: (PostToPostConnectionPageInfoObservableChain & {get: <R extends PostTo
 /** An edge in a connection */
 export interface PostToPostConnectionEdgePromiseChain{
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have ancestors
- * A cursor for use in pagination
- */
+/** A cursor for use in pagination */
 cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have ancestors
- * The item at the end of the edge
- */
+/** The item at the end of the edge */
 node: (PostPromiseChain & {get: <R extends PostRequest>(request: R, defaultValue?: FieldsSelection<Post, R>) => Promise<FieldsSelection<Post, R>>})
 }
 
@@ -32641,16 +32909,10 @@ node: (PostPromiseChain & {get: <R extends PostRequest>(request: R, defaultValue
 /** An edge in a connection */
 export interface PostToPostConnectionEdgeObservableChain{
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have ancestors
- * A cursor for use in pagination
- */
+/** A cursor for use in pagination */
 cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have ancestors
- * The item at the end of the edge
- */
+/** The item at the end of the edge */
 node: (PostObservableChain & {get: <R extends PostRequest>(request: R, defaultValue?: FieldsSelection<Post, R>) => Observable<FieldsSelection<Post, R>>})
 }
 
@@ -32817,7 +33079,7 @@ before?: (Scalars['String'] | null)}) => CategoryToAncestorsCategoryConnectionPr
     
 /**
  * @deprecated Deprecated in favor of databaseId
- * The id field matches the WP_Post-&gt;ID field.
+ * The unique numeric identifier for the term.
  */
 categoryId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
     
@@ -32891,7 +33153,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>})&(TermNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (TermNodeToEnqueuedScriptConnectionWhereArgs | null)}) => TermNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>})&(TermNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the TermNode type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -32902,7 +33166,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (TermNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
 /** The globally unique ID for the object */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
@@ -32989,7 +33255,7 @@ before?: (Scalars['String'] | null)}) => CategoryToAncestorsCategoryConnectionOb
     
 /**
  * @deprecated Deprecated in favor of databaseId
- * The id field matches the WP_Post-&gt;ID field.
+ * The unique numeric identifier for the term.
  */
 categoryId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
     
@@ -33063,7 +33329,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>})&(TermNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (TermNodeToEnqueuedScriptConnectionWhereArgs | null)}) => TermNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>})&(TermNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the TermNode type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -33074,7 +33342,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (TermNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
 /** The globally unique ID for the object */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
@@ -33166,7 +33436,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>})&(TermNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (TermNodeToEnqueuedScriptConnectionWhereArgs | null)}) => TermNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>})&(TermNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the TermNode type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -33177,7 +33449,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (TermNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
 /** The globally unique ID for the object */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
@@ -33250,7 +33524,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>})&(TermNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (TermNodeToEnqueuedScriptConnectionWhereArgs | null)}) => TermNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>})&(TermNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the TermNode type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -33261,7 +33537,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (TermNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
 /** The globally unique ID for the object */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
@@ -33514,7 +33792,7 @@ export interface CentraldeDecoradoPromiseChain{
     
 /**
  * @deprecated Deprecated in favor of the databaseId field
- * The id field matches the WP_Post-&gt;ID field.
+ * The unique numeric identifier for the content node.
  */
 centraldeDecoradoId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>}),
     
@@ -33581,7 +33859,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)}) => ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the ContentNode type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -33592,7 +33872,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
 /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
 featuredImage: (NodeWithFeaturedImageToMediaItemConnectionEdgePromiseChain & {get: <R extends NodeWithFeaturedImageToMediaItemConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<NodeWithFeaturedImageToMediaItemConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<NodeWithFeaturedImageToMediaItemConnectionEdge, R> | undefined)>}),
@@ -33603,7 +33885,7 @@ featuredImageDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Scala
 /** Globally unique ID of the featured image assigned to the node */
 featuredImageId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Promise<(Scalars['ID'] | undefined)>}),
     
-/** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+/** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** Whether the centraldecorado object is password protected. */
@@ -33663,7 +33945,7 @@ previewRevisionDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Sca
 /** Whether the object is a node in the preview state */
 previewRevisionId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Promise<(Scalars['ID'] | undefined)>}),
     
-/** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+/** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
 slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** The current status of the object */
@@ -33700,7 +33982,7 @@ export interface CentraldeDecoradoObservableChain{
     
 /**
  * @deprecated Deprecated in favor of the databaseId field
- * The id field matches the WP_Post-&gt;ID field.
+ * The unique numeric identifier for the content node.
  */
 centraldeDecoradoId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>}),
     
@@ -33767,7 +34049,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)}) => ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the ContentNode type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -33778,7 +34062,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
 /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
 featuredImage: (NodeWithFeaturedImageToMediaItemConnectionEdgeObservableChain & {get: <R extends NodeWithFeaturedImageToMediaItemConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<NodeWithFeaturedImageToMediaItemConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<NodeWithFeaturedImageToMediaItemConnectionEdge, R> | undefined)>}),
@@ -33789,7 +34075,7 @@ featuredImageDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Scala
 /** Globally unique ID of the featured image assigned to the node */
 featuredImageId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Observable<(Scalars['ID'] | undefined)>}),
     
-/** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+/** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** Whether the centraldecorado object is password protected. */
@@ -33849,7 +34135,7 @@ previewRevisionDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Sca
 /** Whether the object is a node in the preview state */
 previewRevisionId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Observable<(Scalars['ID'] | undefined)>}),
     
-/** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+/** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
 slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** The current status of the object */
@@ -33912,16 +34198,10 @@ pageInfo: (CentraldeDecoradoToCentraldeDecoradoConnectionPageInfoObservableChain
 /** An edge in a connection */
 export interface CentraldeDecoradoToCentraldeDecoradoConnectionEdgePromiseChain{
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have ancestors
- * A cursor for use in pagination
- */
+/** A cursor for use in pagination */
 cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have ancestors
- * The item at the end of the edge
- */
+/** The item at the end of the edge */
 node: (CentraldeDecoradoPromiseChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecorado, R>) => Promise<FieldsSelection<CentraldeDecorado, R>>})
 }
 
@@ -33929,16 +34209,10 @@ node: (CentraldeDecoradoPromiseChain & {get: <R extends CentraldeDecoradoRequest
 /** An edge in a connection */
 export interface CentraldeDecoradoToCentraldeDecoradoConnectionEdgeObservableChain{
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have ancestors
- * A cursor for use in pagination
- */
+/** A cursor for use in pagination */
 cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have ancestors
- * The item at the end of the edge
- */
+/** The item at the end of the edge */
 node: (CentraldeDecoradoObservableChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecorado, R>) => Observable<FieldsSelection<CentraldeDecorado, R>>})
 }
 
@@ -34143,10 +34417,7 @@ export interface CentraldeDecoradoToParentConnectionEdgePromiseChain{
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
 cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have a parent
- * The node of the connection, without the edges
- */
+/** The node of the connection, without the edges */
 node: (CentraldeDecoradoPromiseChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecorado, R>) => Promise<FieldsSelection<CentraldeDecorado, R>>})
 }
 
@@ -34157,10 +34428,7 @@ export interface CentraldeDecoradoToParentConnectionEdgeObservableChain{
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
 cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have a parent
- * The node of the connection, without the edges
- */
+/** The node of the connection, without the edges */
 node: (CentraldeDecoradoObservableChain & {get: <R extends CentraldeDecoradoRequest>(request: R, defaultValue?: FieldsSelection<CentraldeDecorado, R>) => Observable<FieldsSelection<CentraldeDecorado, R>>})
 }
 
@@ -34578,7 +34846,7 @@ export interface EmpreendimentoPromiseChain{
     
 /**
  * @deprecated Deprecated in favor of the databaseId field
- * The id field matches the WP_Post-&gt;ID field.
+ * The unique numeric identifier for the content node.
  */
 empreendimentoId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>}),
     
@@ -34645,7 +34913,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)}) => ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the ContentNode type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -34656,7 +34926,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
 /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
 featuredImage: (NodeWithFeaturedImageToMediaItemConnectionEdgePromiseChain & {get: <R extends NodeWithFeaturedImageToMediaItemConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<NodeWithFeaturedImageToMediaItemConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<NodeWithFeaturedImageToMediaItemConnectionEdge, R> | undefined)>}),
@@ -34667,7 +34939,7 @@ featuredImageDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Scala
 /** Globally unique ID of the featured image assigned to the node */
 featuredImageId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Promise<(Scalars['ID'] | undefined)>}),
     
-/** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+/** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** Whether the empreendimentos object is password protected. */
@@ -34730,7 +35002,7 @@ previewRevisionDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Sca
 /** Whether the object is a node in the preview state */
 previewRevisionId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Promise<(Scalars['ID'] | undefined)>}),
     
-/** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+/** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
 slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** The current status of the object */
@@ -34767,7 +35039,7 @@ export interface EmpreendimentoObservableChain{
     
 /**
  * @deprecated Deprecated in favor of the databaseId field
- * The id field matches the WP_Post-&gt;ID field.
+ * The unique numeric identifier for the content node.
  */
 empreendimentoId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>}),
     
@@ -34834,7 +35106,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)}) => ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the ContentNode type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -34845,7 +35119,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
 /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
 featuredImage: (NodeWithFeaturedImageToMediaItemConnectionEdgeObservableChain & {get: <R extends NodeWithFeaturedImageToMediaItemConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<NodeWithFeaturedImageToMediaItemConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<NodeWithFeaturedImageToMediaItemConnectionEdge, R> | undefined)>}),
@@ -34856,7 +35132,7 @@ featuredImageDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Scala
 /** Globally unique ID of the featured image assigned to the node */
 featuredImageId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Observable<(Scalars['ID'] | undefined)>}),
     
-/** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+/** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** Whether the empreendimentos object is password protected. */
@@ -34919,7 +35195,7 @@ previewRevisionDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Sca
 /** Whether the object is a node in the preview state */
 previewRevisionId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Observable<(Scalars['ID'] | undefined)>}),
     
-/** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+/** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
 slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** The current status of the object */
@@ -34982,16 +35258,10 @@ pageInfo: (EmpreendimentoToEmpreendimentoConnectionPageInfoObservableChain & {ge
 /** An edge in a connection */
 export interface EmpreendimentoToEmpreendimentoConnectionEdgePromiseChain{
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have ancestors
- * A cursor for use in pagination
- */
+/** A cursor for use in pagination */
 cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have ancestors
- * The item at the end of the edge
- */
+/** The item at the end of the edge */
 node: (EmpreendimentoPromiseChain & {get: <R extends EmpreendimentoRequest>(request: R, defaultValue?: FieldsSelection<Empreendimento, R>) => Promise<FieldsSelection<Empreendimento, R>>})
 }
 
@@ -34999,16 +35269,10 @@ node: (EmpreendimentoPromiseChain & {get: <R extends EmpreendimentoRequest>(requ
 /** An edge in a connection */
 export interface EmpreendimentoToEmpreendimentoConnectionEdgeObservableChain{
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have ancestors
- * A cursor for use in pagination
- */
+/** A cursor for use in pagination */
 cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have ancestors
- * The item at the end of the edge
- */
+/** The item at the end of the edge */
 node: (EmpreendimentoObservableChain & {get: <R extends EmpreendimentoRequest>(request: R, defaultValue?: FieldsSelection<Empreendimento, R>) => Observable<FieldsSelection<Empreendimento, R>>})
 }
 
@@ -35409,10 +35673,7 @@ export interface EmpreendimentoToParentConnectionEdgePromiseChain{
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
 cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have a parent
- * The node of the connection, without the edges
- */
+/** The node of the connection, without the edges */
 node: (EmpreendimentoPromiseChain & {get: <R extends EmpreendimentoRequest>(request: R, defaultValue?: FieldsSelection<Empreendimento, R>) => Promise<FieldsSelection<Empreendimento, R>>})
 }
 
@@ -35423,10 +35684,7 @@ export interface EmpreendimentoToParentConnectionEdgeObservableChain{
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
 cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have a parent
- * The node of the connection, without the edges
- */
+/** The node of the connection, without the edges */
 node: (EmpreendimentoObservableChain & {get: <R extends EmpreendimentoRequest>(request: R, defaultValue?: FieldsSelection<Empreendimento, R>) => Observable<FieldsSelection<Empreendimento, R>>})
 }
 
@@ -35867,10 +36125,7 @@ export interface PostToParentConnectionEdgePromiseChain{
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
 cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have a parent
- * The node of the connection, without the edges
- */
+/** The node of the connection, without the edges */
 node: (PostPromiseChain & {get: <R extends PostRequest>(request: R, defaultValue?: FieldsSelection<Post, R>) => Promise<FieldsSelection<Post, R>>})
 }
 
@@ -35881,10 +36136,7 @@ export interface PostToParentConnectionEdgeObservableChain{
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
 cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have a parent
- * The node of the connection, without the edges
- */
+/** The node of the connection, without the edges */
 node: (PostObservableChain & {get: <R extends PostRequest>(request: R, defaultValue?: FieldsSelection<Post, R>) => Observable<FieldsSelection<Post, R>>})
 }
 
@@ -36001,7 +36253,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>})&(TermNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (TermNodeToEnqueuedScriptConnectionWhereArgs | null)}) => TermNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>})&(TermNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the TermNode type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -36012,7 +36266,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (TermNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
 /** The globally unique ID for the object */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
@@ -36043,7 +36299,7 @@ name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | unde
     
 /**
  * @deprecated Deprecated in favor of databaseId
- * The id field matches the WP_Post-&gt;ID field.
+ * The unique numeric identifier for the term.
  */
 postFormatId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
     
@@ -36114,7 +36370,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>})&(TermNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (TermNodeToEnqueuedScriptConnectionWhereArgs | null)}) => TermNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>})&(TermNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the TermNode type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -36125,7 +36383,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (TermNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
 /** The globally unique ID for the object */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
@@ -36156,7 +36416,7 @@ name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | unde
     
 /**
  * @deprecated Deprecated in favor of databaseId
- * The id field matches the WP_Post-&gt;ID field.
+ * The unique numeric identifier for the term.
  */
 postFormatId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
     
@@ -36691,7 +36951,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>})&(TermNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (TermNodeToEnqueuedScriptConnectionWhereArgs | null)}) => TermNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>})&(TermNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the TermNode type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -36702,7 +36964,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (TermNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
 /** The globally unique ID for the object */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
@@ -36749,7 +37013,7 @@ slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | unde
     
 /**
  * @deprecated Deprecated in favor of databaseId
- * The id field matches the WP_Post-&gt;ID field.
+ * The unique numeric identifier for the term.
  */
 tagId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
     
@@ -36804,7 +37068,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>})&(TermNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (TermNodeToEnqueuedScriptConnectionWhereArgs | null)}) => TermNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>})&(TermNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends TermNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the TermNode type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -36815,7 +37081,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (TermNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(TermNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends TermNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<TermNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
 /** The globally unique ID for the object */
 id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
@@ -36862,7 +37130,7 @@ slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | unde
     
 /**
  * @deprecated Deprecated in favor of databaseId
- * The id field matches the WP_Post-&gt;ID field.
+ * The unique numeric identifier for the term.
  */
 tagId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
     
@@ -37710,16 +37978,10 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 /** An edge in a connection */
 export interface ArquivoAssessoriaToArquivoAssessoriaConnectionEdgePromiseChain{
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have ancestors
- * A cursor for use in pagination
- */
+/** A cursor for use in pagination */
 cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have ancestors
- * The item at the end of the edge
- */
+/** The item at the end of the edge */
 node: (ArquivoAssessoriaPromiseChain & {get: <R extends ArquivoAssessoriaRequest>(request: R, defaultValue?: FieldsSelection<ArquivoAssessoria, R>) => Promise<FieldsSelection<ArquivoAssessoria, R>>})
 }
 
@@ -37727,16 +37989,10 @@ node: (ArquivoAssessoriaPromiseChain & {get: <R extends ArquivoAssessoriaRequest
 /** An edge in a connection */
 export interface ArquivoAssessoriaToArquivoAssessoriaConnectionEdgeObservableChain{
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have ancestors
- * A cursor for use in pagination
- */
+/** A cursor for use in pagination */
 cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have ancestors
- * The item at the end of the edge
- */
+/** The item at the end of the edge */
 node: (ArquivoAssessoriaObservableChain & {get: <R extends ArquivoAssessoriaRequest>(request: R, defaultValue?: FieldsSelection<ArquivoAssessoria, R>) => Observable<FieldsSelection<ArquivoAssessoria, R>>})
 }
 
@@ -37809,10 +38065,7 @@ export interface ArquivoAssessoriaToParentConnectionEdgePromiseChain{
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
 cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have a parent
- * The node of the connection, without the edges
- */
+/** The node of the connection, without the edges */
 node: (ArquivoAssessoriaPromiseChain & {get: <R extends ArquivoAssessoriaRequest>(request: R, defaultValue?: FieldsSelection<ArquivoAssessoria, R>) => Promise<FieldsSelection<ArquivoAssessoria, R>>})
 }
 
@@ -37823,10 +38076,7 @@ export interface ArquivoAssessoriaToParentConnectionEdgeObservableChain{
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
 cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have a parent
- * The node of the connection, without the edges
- */
+/** The node of the connection, without the edges */
 node: (ArquivoAssessoriaObservableChain & {get: <R extends ArquivoAssessoriaRequest>(request: R, defaultValue?: FieldsSelection<ArquivoAssessoria, R>) => Observable<FieldsSelection<ArquivoAssessoria, R>>})
 }
 
@@ -37942,7 +38192,7 @@ export interface BannerPromiseChain{
     
 /**
  * @deprecated Deprecated in favor of the databaseId field
- * The id field matches the WP_Post-&gt;ID field.
+ * The unique numeric identifier for the content node.
  */
 bannerId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>}),
     
@@ -37996,7 +38246,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)}) => ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the ContentNode type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -38007,9 +38259,11 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
-/** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+/** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** Whether the banner_home object is password protected. */
@@ -38069,7 +38323,7 @@ previewRevisionDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Sca
 /** Whether the object is a node in the preview state */
 previewRevisionId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Promise<(Scalars['ID'] | undefined)>}),
     
-/** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+/** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
 slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** The current status of the object */
@@ -38093,7 +38347,7 @@ export interface BannerObservableChain{
     
 /**
  * @deprecated Deprecated in favor of the databaseId field
- * The id field matches the WP_Post-&gt;ID field.
+ * The unique numeric identifier for the content node.
  */
 bannerId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>}),
     
@@ -38147,7 +38401,9 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)}) => ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
     
 /** Connection between the ContentNode type and the EnqueuedStylesheet type */
 enqueuedStylesheets: ((args?: {
@@ -38158,9 +38414,11 @@ last?: (Scalars['Int'] | null),
 /** Cursor used along with the "first" argument to reference where in the dataset to get data */
 after?: (Scalars['String'] | null),
 /** Cursor used along with the "last" argument to reference where in the dataset to get data */
-before?: (Scalars['String'] | null)}) => ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
     
-/** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+/** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
 guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** Whether the banner_home object is password protected. */
@@ -38220,7 +38478,7 @@ previewRevisionDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Sca
 /** Whether the object is a node in the preview state */
 previewRevisionId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Observable<(Scalars['ID'] | undefined)>}),
     
-/** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+/** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
 slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** The current status of the object */
@@ -38354,16 +38612,10 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 /** An edge in a connection */
 export interface BannerToBannerConnectionEdgePromiseChain{
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have ancestors
- * A cursor for use in pagination
- */
+/** A cursor for use in pagination */
 cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have ancestors
- * The item at the end of the edge
- */
+/** The item at the end of the edge */
 node: (BannerPromiseChain & {get: <R extends BannerRequest>(request: R, defaultValue?: FieldsSelection<Banner, R>) => Promise<FieldsSelection<Banner, R>>})
 }
 
@@ -38371,16 +38623,10 @@ node: (BannerPromiseChain & {get: <R extends BannerRequest>(request: R, defaultV
 /** An edge in a connection */
 export interface BannerToBannerConnectionEdgeObservableChain{
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have ancestors
- * A cursor for use in pagination
- */
+/** A cursor for use in pagination */
 cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have ancestors
- * The item at the end of the edge
- */
+/** The item at the end of the edge */
 node: (BannerObservableChain & {get: <R extends BannerRequest>(request: R, defaultValue?: FieldsSelection<Banner, R>) => Observable<FieldsSelection<Banner, R>>})
 }
 
@@ -38531,10 +38777,7 @@ export interface BannerToParentConnectionEdgePromiseChain{
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
 cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have a parent
- * The node of the connection, without the edges
- */
+/** The node of the connection, without the edges */
 node: (BannerPromiseChain & {get: <R extends BannerRequest>(request: R, defaultValue?: FieldsSelection<Banner, R>) => Promise<FieldsSelection<Banner, R>>})
 }
 
@@ -38545,10 +38788,7 @@ export interface BannerToParentConnectionEdgeObservableChain{
 /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
 cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/**
- * @deprecated This content type is not hierarchical and typically will not have a parent
- * The node of the connection, without the edges
- */
+/** The node of the connection, without the edges */
 node: (BannerObservableChain & {get: <R extends BannerRequest>(request: R, defaultValue?: FieldsSelection<Banner, R>) => Observable<FieldsSelection<Banner, R>>})
 }
 
@@ -39086,7 +39326,10 @@ export interface DiscussionSettingsPromiseChain{
 defaultCommentStatus: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** Permitir avisos de links de outros blogs (pingbacks ou trackbacks) em novos artigos. */
-defaultPingStatus: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+defaultPingStatus: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The globally unique identifier of the settings group. */
+id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>})
 }
 
 
@@ -39097,7 +39340,10 @@ export interface DiscussionSettingsObservableChain{
 defaultCommentStatus: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** Permitir avisos de links de outros blogs (pingbacks ou trackbacks) em novos artigos. */
-defaultPingStatus: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+defaultPingStatus: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The globally unique identifier of the settings group. */
+id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>})
 }
 
 
@@ -39197,6 +39443,12 @@ description: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 /** Este endereço é utilizado para administração, como notificação de novo usuário. */
 email: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
+/** The address at which visitors reach the site&#039;s front end. Can differ from the `url` field when the front end and the content management backend are served from different addresses, such as on headless or decoupled installs. */
+homeUrl: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The globally unique identifier of the settings group. */
+id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
+    
 /** Código de localização do WordPress. */
 language: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
@@ -39236,6 +39488,12 @@ description: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
     
 /** Este endereço é utilizado para administração, como notificação de novo usuário. */
 email: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The address at which visitors reach the site&#039;s front end. Can differ from the `url` field when the front end and the content management backend are served from different addresses, such as on headless or decoupled installs. */
+homeUrl: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The globally unique identifier of the settings group. */
+id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
     
 /** Código de localização do WordPress. */
 language: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
@@ -39408,10 +39666,10 @@ before?: (Scalars['String'] | null),
 /** Arguments for filtering the connection */
 where?: (MenuToMenuItemConnectionWhereArgs | null)}) => MenuToMenuItemConnectionPromiseChain & {get: <R extends MenuToMenuItemConnectionRequest>(request: R, defaultValue?: (FieldsSelection<MenuToMenuItemConnection, R> | undefined)) => Promise<(FieldsSelection<MenuToMenuItemConnection, R> | undefined)>})&(MenuToMenuItemConnectionPromiseChain & {get: <R extends MenuToMenuItemConnectionRequest>(request: R, defaultValue?: (FieldsSelection<MenuToMenuItemConnection, R> | undefined)) => Promise<(FieldsSelection<MenuToMenuItemConnection, R> | undefined)>}),
     
-/** Display name of the menu. Equivalent to WP_Term-&gt;name. */
+/** Display name of the menu. */
 name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** The url friendly name of the menu. Equivalent to WP_Term-&gt;slug */
+/** The url friendly name of the menu. */
 slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
 }
 
@@ -39453,10 +39711,10 @@ before?: (Scalars['String'] | null),
 /** Arguments for filtering the connection */
 where?: (MenuToMenuItemConnectionWhereArgs | null)}) => MenuToMenuItemConnectionObservableChain & {get: <R extends MenuToMenuItemConnectionRequest>(request: R, defaultValue?: (FieldsSelection<MenuToMenuItemConnection, R> | undefined)) => Observable<(FieldsSelection<MenuToMenuItemConnection, R> | undefined)>})&(MenuToMenuItemConnectionObservableChain & {get: <R extends MenuToMenuItemConnectionRequest>(request: R, defaultValue?: (FieldsSelection<MenuToMenuItemConnection, R> | undefined)) => Observable<(FieldsSelection<MenuToMenuItemConnection, R> | undefined)>}),
     
-/** Display name of the menu. Equivalent to WP_Term-&gt;name. */
+/** Display name of the menu. */
 name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** The url friendly name of the menu. Equivalent to WP_Term-&gt;slug */
+/** The url friendly name of the menu. */
 slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
 }
 
@@ -40283,6 +40541,40 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 }
 
 
+/** The permalink setting type */
+export interface PermalinkSettingsPromiseChain{
+    
+/** The prefix used in the URLs of category archive pages. */
+categoryBase: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The globally unique identifier of the settings group. */
+id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
+    
+/** The structure used to build the URLs for content on the site. */
+structure: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The prefix used in the URLs of tag archive pages. */
+tagBase: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** The permalink setting type */
+export interface PermalinkSettingsObservableChain{
+    
+/** The prefix used in the URLs of category archive pages. */
+categoryBase: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The globally unique identifier of the settings group. */
+id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
+    
+/** The structure used to build the URLs for content on the site. */
+structure: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The prefix used in the URLs of tag archive pages. */
+tagBase: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
 /** An plugin object */
 export interface PluginPromiseChain{
     
@@ -40686,6 +40978,9 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 /** The reading setting type */
 export interface ReadingSettingsPromiseChain{
     
+/** The globally unique identifier of the settings group. */
+id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
+    
 /** O ID da página que deve exibir os posts mais recentes */
 pageForPosts: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
     
@@ -40702,6 +40997,9 @@ showOnFront: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 
 /** The reading setting type */
 export interface ReadingSettingsObservableChain{
+    
+/** The globally unique identifier of the settings group. */
+id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
     
 /** O ID da página que deve exibir os posts mais recentes */
 pageForPosts: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
@@ -41224,13 +41522,13 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 /** A theme object */
 export interface ThemePromiseChain{
     
-/** Name of the theme author(s), could also be a company name. This field is equivalent to WP_Theme-&gt;get( &quot;Author&quot; ). */
+/** Name of the theme author(s), could also be a company name. */
 author: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** URI for the author/company website. This field is equivalent to WP_Theme-&gt;get( &quot;AuthorURI&quot; ). */
+/** URI for the author/company website. */
 authorUri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** The description of the theme. This field is equivalent to WP_Theme-&gt;get( &quot;Description&quot; ). */
+/** The description of the theme. */
 description: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
 /** The globally unique identifier of the theme object. */
@@ -41239,22 +41537,22 @@ id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<S
 /** Whether the object is restricted from the current viewer */
 isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
     
-/** Display name of the theme. This field is equivalent to WP_Theme-&gt;get( &quot;Name&quot; ). */
+/** Display name of the theme. */
 name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** The URL of the screenshot for the theme. The screenshot is intended to give an overview of what the theme looks like. This field is equivalent to WP_Theme-&gt;get_screenshot(). */
+/** The URL of the screenshot for the theme. The screenshot is intended to give an overview of what the theme looks like. */
 screenshot: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** The theme slug is used to internally match themes. Theme slugs can have subdirectories like: my-theme/sub-theme. This field is equivalent to WP_Theme-&gt;get_stylesheet(). */
+/** The theme slug is used to internally match themes. Theme slugs can have subdirectories like: my-theme/sub-theme. */
 slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** URI for the author/company website. This field is equivalent to WP_Theme-&gt;get( &quot;Tags&quot; ). */
+/** A list of tags associated with the theme, typically describing its features (e.g. custom-logo, accessibility-ready, full-site-editing). */
 tags: ({get: (request?: boolean|number, defaultValue?: ((Scalars['String'] | undefined)[] | undefined)) => Promise<((Scalars['String'] | undefined)[] | undefined)>}),
     
-/** A URI if the theme has a website associated with it. The Theme URI is handy for directing users to a theme site for support etc. This field is equivalent to WP_Theme-&gt;get( &quot;ThemeURI&quot; ). */
+/** A URI if the theme has a website associated with it. The Theme URI is handy for directing users to a theme site for support etc. */
 themeUri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** The current version of the theme. This field is equivalent to WP_Theme-&gt;get( &quot;Version&quot; ). */
+/** The current version of the theme. */
 version: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
 }
 
@@ -41262,13 +41560,13 @@ version: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | u
 /** A theme object */
 export interface ThemeObservableChain{
     
-/** Name of the theme author(s), could also be a company name. This field is equivalent to WP_Theme-&gt;get( &quot;Author&quot; ). */
+/** Name of the theme author(s), could also be a company name. */
 author: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** URI for the author/company website. This field is equivalent to WP_Theme-&gt;get( &quot;AuthorURI&quot; ). */
+/** URI for the author/company website. */
 authorUri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** The description of the theme. This field is equivalent to WP_Theme-&gt;get( &quot;Description&quot; ). */
+/** The description of the theme. */
 description: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
 /** The globally unique identifier of the theme object. */
@@ -41277,22 +41575,22 @@ id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observabl
 /** Whether the object is restricted from the current viewer */
 isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
     
-/** Display name of the theme. This field is equivalent to WP_Theme-&gt;get( &quot;Name&quot; ). */
+/** Display name of the theme. */
 name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** The URL of the screenshot for the theme. The screenshot is intended to give an overview of what the theme looks like. This field is equivalent to WP_Theme-&gt;get_screenshot(). */
+/** The URL of the screenshot for the theme. The screenshot is intended to give an overview of what the theme looks like. */
 screenshot: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** The theme slug is used to internally match themes. Theme slugs can have subdirectories like: my-theme/sub-theme. This field is equivalent to WP_Theme-&gt;get_stylesheet(). */
+/** The theme slug is used to internally match themes. Theme slugs can have subdirectories like: my-theme/sub-theme. */
 slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** URI for the author/company website. This field is equivalent to WP_Theme-&gt;get( &quot;Tags&quot; ). */
+/** A list of tags associated with the theme, typically describing its features (e.g. custom-logo, accessibility-ready, full-site-editing). */
 tags: ({get: (request?: boolean|number, defaultValue?: ((Scalars['String'] | undefined)[] | undefined)) => Observable<((Scalars['String'] | undefined)[] | undefined)>}),
     
-/** A URI if the theme has a website associated with it. The Theme URI is handy for directing users to a theme site for support etc. This field is equivalent to WP_Theme-&gt;get( &quot;ThemeURI&quot; ). */
+/** A URI if the theme has a website associated with it. The Theme URI is handy for directing users to a theme site for support etc. */
 themeUri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** The current version of the theme. This field is equivalent to WP_Theme-&gt;get( &quot;Version&quot; ). */
+/** The current version of the theme. */
 version: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
 }
 
@@ -41704,6 +42002,9 @@ defaultCategory: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'
 /** Formato de post padrão. */
 defaultPostFormat: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
+/** The globally unique identifier of the settings group. */
+id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
+    
 /** Converter emoticons como :-) e :-P em gráficos ao exibí-los. */
 useSmilies: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>})
 }
@@ -41717,6 +42018,9 @@ defaultCategory: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'
     
 /** Formato de post padrão. */
 defaultPostFormat: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The globally unique identifier of the settings group. */
+id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
     
 /** Converter emoticons como :-) e :-P em gráficos ao exibí-los. */
 useSmilies: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>})
@@ -43286,6 +43590,9 @@ discussionSettings: (DiscussionSettingsPromiseChain & {get: <R extends Discussio
 /** Update the GeneralSettings setting. */
 generalSettings: (GeneralSettingsPromiseChain & {get: <R extends GeneralSettingsRequest>(request: R, defaultValue?: (FieldsSelection<GeneralSettings, R> | undefined)) => Promise<(FieldsSelection<GeneralSettings, R> | undefined)>}),
     
+/** Update the PermalinkSettings setting. */
+permalinkSettings: (PermalinkSettingsPromiseChain & {get: <R extends PermalinkSettingsRequest>(request: R, defaultValue?: (FieldsSelection<PermalinkSettings, R> | undefined)) => Promise<(FieldsSelection<PermalinkSettings, R> | undefined)>}),
+    
 /** Update the ReadingSettings setting. */
 readingSettings: (ReadingSettingsPromiseChain & {get: <R extends ReadingSettingsRequest>(request: R, defaultValue?: (FieldsSelection<ReadingSettings, R> | undefined)) => Promise<(FieldsSelection<ReadingSettings, R> | undefined)>}),
     
@@ -43308,6 +43615,9 @@ discussionSettings: (DiscussionSettingsObservableChain & {get: <R extends Discus
     
 /** Update the GeneralSettings setting. */
 generalSettings: (GeneralSettingsObservableChain & {get: <R extends GeneralSettingsRequest>(request: R, defaultValue?: (FieldsSelection<GeneralSettings, R> | undefined)) => Observable<(FieldsSelection<GeneralSettings, R> | undefined)>}),
+    
+/** Update the PermalinkSettings setting. */
+permalinkSettings: (PermalinkSettingsObservableChain & {get: <R extends PermalinkSettingsRequest>(request: R, defaultValue?: (FieldsSelection<PermalinkSettings, R> | undefined)) => Observable<(FieldsSelection<PermalinkSettings, R> | undefined)>}),
     
 /** Update the ReadingSettings setting. */
 readingSettings: (ReadingSettingsObservableChain & {get: <R extends ReadingSettingsRequest>(request: R, defaultValue?: (FieldsSelection<ReadingSettings, R> | undefined)) => Observable<(FieldsSelection<ReadingSettings, R> | undefined)>}),

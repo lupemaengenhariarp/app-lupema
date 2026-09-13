@@ -270,6 +270,10 @@ export declare const enumTaxonomyEnum: {
   readonly TAG: 'TAG'
 }
 
+export declare const enumContentTemplateEnum: {
+  readonly DEFAULT_TEMPLATE: 'DEFAULT_TEMPLATE'
+}
+
 export declare const enumAvatarRatingEnum: {
   readonly G: 'G'
   readonly PG: 'PG'

@@ -3,107 +3,106 @@ module.exports = {
         0,
         1,
         2,
-        3,
         4,
         5,
-        35,
         36,
-        54,
-        57,
-        58,
-        61,
-        62,
+        37,
+        56,
+        59,
+        60,
         63,
+        64,
         65,
-        66,
         67,
-        70,
-        71,
+        68,
+        69,
         72,
         73,
+        74,
+        75,
         87,
         89,
         90,
         98,
-        117,
-        118,
-        134,
+        119,
+        120,
         135,
-        142,
+        136,
         143,
-        159,
+        144,
         162,
-        170,
-        171,
-        197,
-        198,
+        165,
+        173,
+        174,
+        207,
         208,
-        209,
-        221,
-        234,
-        235,
-        262,
-        265,
-        266,
-        273,
-        274,
-        308,
-        309,
-        327,
-        330,
-        331,
-        338,
-        339,
-        351,
-        352,
+        218,
+        219,
+        231,
+        244,
+        245,
+        272,
+        275,
+        276,
+        283,
+        284,
+        318,
+        319,
+        337,
+        340,
+        341,
+        348,
+        349,
+        361,
         362,
-        365,
-        366,
-        373,
-        374,
-        391,
-        392,
-        415,
-        416,
-        420,
-        437,
-        438,
-        446,
+        372,
+        375,
+        376,
+        383,
+        384,
+        401,
+        402,
+        425,
+        426,
+        430,
         447,
-        451,
-        452,
+        448,
         456,
+        457,
         461,
-        465,
+        462,
         466,
-        470,
+        471,
         475,
-        479,
+        476,
         480,
         485,
         489,
         490,
-        494,
         496,
-        514,
+        500,
+        501,
+        505,
+        507,
         525,
-        529,
-        530,
         536,
-        543,
-        544,
-        552,
-        553,
-        567,
-        568,
-        572,
-        580,
+        540,
+        541,
+        548,
+        555,
+        556,
+        564,
+        565,
         581,
-        593,
-        599,
-        600,
-        601,
-        625
+        582,
+        586,
+        594,
+        595,
+        607,
+        613,
+        614,
+        615,
+        645
     ],
     "types": {
         "String": {},
@@ -125,6 +124,9 @@ module.exports = {
             "generalSettingsEmail": [
                 0
             ],
+            "generalSettingsHomeUrl": [
+                0
+            ],
             "generalSettingsLanguage": [
                 0
             ],
@@ -141,6 +143,15 @@ module.exports = {
                 0
             ],
             "generalSettingsUrl": [
+                0
+            ],
+            "permalinkSettingsCategoryBase": [
+                0
+            ],
+            "permalinkSettingsStructure": [
+                0
+            ],
+            "permalinkSettingsTagBase": [
                 0
             ],
             "readingSettingsPageForPosts": [
@@ -175,7 +186,7 @@ module.exports = {
                 1
             ],
             "ancestors": [
-                403,
+                413,
                 {
                     "first": [
                         1
@@ -210,16 +221,16 @@ module.exports = {
                 0
             ],
             "down_assessoria": [
-                409
+                419
             ],
             "editingLockedBy": [
-                80
+                83
             ],
             "enclosure": [
                 0
             ],
             "enqueuedScripts": [
-                143,
+                149,
                 {
                     "first": [
                         1
@@ -232,11 +243,14 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        148
                     ]
                 }
             ],
             "enqueuedStylesheets": [
-                146,
+                153,
                 {
                     "first": [
                         1
@@ -249,6 +263,9 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        152
                     ]
                 }
             ],
@@ -283,7 +300,7 @@ module.exports = {
                 2
             ],
             "lastEditedBy": [
-                149
+                156
             ],
             "link": [
                 0
@@ -295,13 +312,13 @@ module.exports = {
                 0
             ],
             "parent": [
-                410
+                420
             ],
             "password": [
                 0
             ],
             "preview": [
-                411
+                421
             ],
             "previewRevisionDatabaseId": [
                 1
@@ -316,13 +333,13 @@ module.exports = {
                 0
             ],
             "template": [
-                616
+                626
             ],
             "title": [
                 0,
                 {
                     "format": [
-                        95
+                        98
                     ]
                 }
             ],
@@ -330,81 +347,7 @@ module.exports = {
                 0
             ],
             "__typename": [
-                1
-            ]
-        },
-        "Node": {
-            "id": [
-                4
-            ],
-            "on_ArquivoAssessoria": [
-                6
-            ],
-            "on_ContentType": [
-                14
-            ],
-            "on_Taxonomy": [
-                20
-            ],
-            "on_EnqueuedScript": [
-                34
-            ],
-            "on_EnqueuedStylesheet": [
-                44
-            ],
-            "on_User": [
-                83
-            ],
-            "on_Comment": [
-                94
-            ],
-            "on_MediaItem": [
-                122
-            ],
-            "on_Page": [
-                175
-            ],
-            "on_Post": [
-                213
-            ],
-            "on_Category": [
-                225
-            ],
-            "on_CentraldeDecorado": [
-                239
-            ],
-            "on_Empreendimento": [
-                278
-            ],
-            "on_PostFormat": [
-                325
-            ],
-            "on_Tag": [
-                360
-            ],
-            "on_UserRole": [
-                399
-            ],
-            "on_Banner": [
-                421
-            ],
-            "on_Menu": [
-                495
-            ],
-            "on_MenuItem": [
-                501
-            ],
-            "on_Plugin": [
-                534
-            ],
-            "on_Theme": [
-                586
-            ],
-            "on_CommentAuthor": [
-                701
-            ],
-            "__typename": [
-                1
+                0
             ]
         },
         "ContentNode": {
@@ -427,13 +370,13 @@ module.exports = {
                 0
             ],
             "editingLockedBy": [
-                80
+                83
             ],
             "enclosure": [
                 0
             ],
             "enqueuedScripts": [
-                143,
+                149,
                 {
                     "first": [
                         1
@@ -446,11 +389,14 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        148
                     ]
                 }
             ],
             "enqueuedStylesheets": [
-                146,
+                153,
                 {
                     "first": [
                         1
@@ -463,6 +409,9 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        152
                     ]
                 }
             ],
@@ -494,7 +443,7 @@ module.exports = {
                 2
             ],
             "lastEditedBy": [
-                149
+                156
             ],
             "link": [
                 0
@@ -518,7 +467,7 @@ module.exports = {
                 0
             ],
             "template": [
-                616
+                626
             ],
             "uri": [
                 0
@@ -527,22 +476,22 @@ module.exports = {
                 6
             ],
             "on_MediaItem": [
-                119
+                124
             ],
             "on_Page": [
-                171
+                178
             ],
             "on_Post": [
-                213
+                223
             ],
             "on_CentraldeDecorado": [
-                239
+                249
             ],
             "on_Empreendimento": [
-                278
+                288
             ],
             "on_Banner": [
-                421
+                431
             ],
             "__typename": [
                 0
@@ -577,37 +526,37 @@ module.exports = {
                 13
             ],
             "on_User": [
-                82
+                85
             ],
             "on_Comment": [
-                91
+                94
             ],
             "on_MediaItem": [
-                119
+                124
             ],
             "on_Page": [
-                171
+                178
             ],
             "on_Post": [
-                213
+                223
             ],
             "on_Category": [
-                225
+                235
             ],
             "on_CentraldeDecorado": [
-                239
+                249
             ],
             "on_Empreendimento": [
-                278
+                288
             ],
             "on_PostFormat": [
-                325
+                335
             ],
             "on_Tag": [
-                360
+                370
             ],
             "on_Banner": [
-                421
+                431
             ],
             "__typename": [
                 0
@@ -629,88 +578,91 @@ module.exports = {
                 0
             ],
             "node": [
-                612
+                622
             ],
             "on_ContentNodeToContentTypeConnectionEdge": [
                 9
             ],
             "on_ContentNodeToEditLockConnectionEdge": [
-                80
+                83
             ],
             "on_CommentToCommenterConnectionEdge": [
-                92
+                95
             ],
             "on_CommentToContentNodeConnectionEdge": [
-                94
-            ],
-            "on_CommentToParentCommentConnectionEdge": [
                 97
             ],
+            "on_CommentToParentCommentConnectionEdge": [
+                100
+            ],
             "on_NodeWithAuthorToUserConnectionEdge": [
-                123
+                128
             ],
             "on_ContentNodeToEditLastConnectionEdge": [
-                149
+                156
             ],
             "on_HierarchicalContentNodeToParentContentNodeConnectionEdge": [
-                150
+                157
             ],
             "on_NodeWithFeaturedImageToMediaItemConnectionEdge": [
-                175
+                182
             ],
             "on_NodeWithRevisionsToContentNodeConnectionEdge": [
-                177
+                184
             ],
             "on_PageToPreviewConnectionEdge": [
-                193
+                203
             ],
             "on_CentraldeDecoradoToParentConnectionEdge": [
-                249
+                259
             ],
             "on_CentraldeDecoradoToPreviewConnectionEdge": [
-                250
+                260
             ],
             "on_EmpreendimentoToParentConnectionEdge": [
-                296
+                306
             ],
             "on_EmpreendimentoToPreviewConnectionEdge": [
-                297
+                307
             ],
             "on_CategoryToParentCategoryConnectionEdge": [
-                304
+                314
             ],
             "on_CategoryToTaxonomyConnectionEdge": [
-                313
+                323
             ],
             "on_PostToParentConnectionEdge": [
-                320
+                330
             ],
             "on_PostFormatToTaxonomyConnectionEdge": [
-                343
+                353
             ],
             "on_PostToPreviewConnectionEdge": [
-                347
+                357
             ],
             "on_TagToTaxonomyConnectionEdge": [
-                378
+                388
             ],
             "on_ArquivoAssessoriaToParentConnectionEdge": [
-                410
+                420
             ],
             "on_ArquivoAssessoriaToPreviewConnectionEdge": [
-                411
+                421
             ],
             "on_BannerToParentConnectionEdge": [
-                432
+                442
             ],
             "on_BannerToPreviewConnectionEdge": [
-                433
+                443
+            ],
+            "on_GeneralSettingsToMediaItemConnectionEdge": [
+                495
             ],
             "on_MenuItemToMenuItemLinkableConnectionEdge": [
-                511
+                518
             ],
             "on_MenuItemToMenuConnectionEdge": [
-                514
+                521
             ],
             "__typename": [
                 0
@@ -721,7 +673,7 @@ module.exports = {
                 0
             ],
             "node": [
-                612
+                622
             ],
             "on_ContentNodeToContentTypeConnectionEdge": [
                 9
@@ -730,298 +682,301 @@ module.exports = {
                 24
             ],
             "on_TermNodeToEnqueuedScriptConnectionEdge": [
-                38
+                39
             ],
             "on_TermNodeToEnqueuedStylesheetConnectionEdge": [
-                45
+                47
             ],
             "on_TaxonomyToTermNodeConnectionEdge": [
-                48
+                50
             ],
             "on_ContentTypeToTaxonomyConnectionEdge": [
-                51
+                53
             ],
             "on_ContentTypeToContentNodeConnectionEdge": [
-                77
-            ],
-            "on_ContentNodeToEditLockConnectionEdge": [
                 80
             ],
+            "on_ContentNodeToEditLockConnectionEdge": [
+                83
+            ],
             "on_CommentToCommenterConnectionEdge": [
-                92
+                95
             ],
             "on_CommentToContentNodeConnectionEdge": [
-                94
-            ],
-            "on_CommentToParentCommentConnectionEdge": [
                 97
             ],
-            "on_CommentToCommentConnectionEdge": [
+            "on_CommentToParentCommentConnectionEdge": [
                 100
             ],
-            "on_UserToCommentConnectionEdge": [
+            "on_CommentToCommentConnectionEdge": [
                 103
             ],
-            "on_UserToEnqueuedScriptConnectionEdge": [
+            "on_UserToCommentConnectionEdge": [
                 106
             ],
+            "on_UserToEnqueuedScriptConnectionEdge": [
+                110
+            ],
             "on_UserToEnqueuedStylesheetConnectionEdge": [
-                109
+                114
             ],
             "on_NodeWithAuthorToUserConnectionEdge": [
-                123
+                128
             ],
             "on_HierarchicalContentNodeToContentNodeAncestorsConnectionEdge": [
-                133
+                138
             ],
             "on_HierarchicalContentNodeToContentNodeChildrenConnectionEdge": [
-                141
+                146
             ],
             "on_ContentNodeToEnqueuedScriptConnectionEdge": [
-                144
-            ],
-            "on_ContentNodeToEnqueuedStylesheetConnectionEdge": [
-                147
-            ],
-            "on_ContentNodeToEditLastConnectionEdge": [
-                149
-            ],
-            "on_HierarchicalContentNodeToParentContentNodeConnectionEdge": [
                 150
             ],
+            "on_ContentNodeToEnqueuedStylesheetConnectionEdge": [
+                154
+            ],
+            "on_ContentNodeToEditLastConnectionEdge": [
+                156
+            ],
+            "on_HierarchicalContentNodeToParentContentNodeConnectionEdge": [
+                157
+            ],
             "on_MediaItemToCommentConnectionEdge": [
-                153
+                160
             ],
             "on_UserToMediaItemConnectionEdge": [
-                161
+                168
             ],
             "on_NodeWithFeaturedImageToMediaItemConnectionEdge": [
-                175
+                182
             ],
             "on_NodeWithRevisionsToContentNodeConnectionEdge": [
-                177
-            ],
-            "on_PageToCommentConnectionEdge": [
                 184
             ],
+            "on_PageToCommentConnectionEdge": [
+                191
+            ],
             "on_PageToPreviewConnectionEdge": [
-                193
-            ],
-            "on_PageToRevisionConnectionEdge": [
-                200
-            ],
-            "on_UserToPageConnectionEdge": [
                 203
             ],
+            "on_PageToRevisionConnectionEdge": [
+                210
+            ],
+            "on_UserToPageConnectionEdge": [
+                213
+            ],
             "on_PostToPostConnectionEdge": [
-                217
+                227
             ],
             "on_CategoryToAncestorsCategoryConnectionEdge": [
-                228
+                238
             ],
             "on_CentraldeDecoradoToCentraldeDecoradoConnectionEdge": [
-                241
+                251
             ],
             "on_CentraldeDecoradoToCategoryConnectionEdge": [
-                246
+                256
             ],
             "on_CentraldeDecoradoToParentConnectionEdge": [
-                249
-            ],
-            "on_CentraldeDecoradoToPreviewConnectionEdge": [
-                250
-            ],
-            "on_CentraldeDecoradoToTermNodeConnectionEdge": [
-                253
-            ],
-            "on_CategoryToCentraldeDecoradoConnectionEdge": [
-                255
-            ],
-            "on_CategoryToCategoryConnectionEdge": [
                 259
             ],
+            "on_CentraldeDecoradoToPreviewConnectionEdge": [
+                260
+            ],
+            "on_CentraldeDecoradoToTermNodeConnectionEdge": [
+                263
+            ],
+            "on_CategoryToCentraldeDecoradoConnectionEdge": [
+                265
+            ],
+            "on_CategoryToCategoryConnectionEdge": [
+                269
+            ],
             "on_CategoryToContentNodeConnectionEdge": [
-                268
+                278
             ],
             "on_EmpreendimentoToEmpreendimentoConnectionEdge": [
-                280
+                290
             ],
             "on_EmpreendimentoToCategoryConnectionEdge": [
-                285
+                295
             ],
             "on_EmpreendimentoToParentConnectionEdge": [
-                296
+                306
             ],
             "on_EmpreendimentoToPreviewConnectionEdge": [
-                297
+                307
             ],
             "on_EmpreendimentoToTermNodeConnectionEdge": [
-                300
+                310
             ],
             "on_CategoryToEmpreendimentoConnectionEdge": [
-                302
+                312
             ],
             "on_CategoryToParentCategoryConnectionEdge": [
-                304
-            ],
-            "on_CategoryToPostConnectionEdge": [
-                311
-            ],
-            "on_CategoryToTaxonomyConnectionEdge": [
-                313
-            ],
-            "on_PostToCategoryConnectionEdge": [
                 314
             ],
+            "on_CategoryToPostConnectionEdge": [
+                321
+            ],
+            "on_CategoryToTaxonomyConnectionEdge": [
+                323
+            ],
+            "on_PostToCategoryConnectionEdge": [
+                324
+            ],
             "on_PostToCommentConnectionEdge": [
-                318
+                328
             ],
             "on_PostToParentConnectionEdge": [
-                320
+                330
             ],
             "on_PostFormatToContentNodeConnectionEdge": [
-                333
-            ],
-            "on_PostFormatToPostConnectionEdge": [
-                341
-            ],
-            "on_PostFormatToTaxonomyConnectionEdge": [
                 343
             ],
+            "on_PostFormatToPostConnectionEdge": [
+                351
+            ],
+            "on_PostFormatToTaxonomyConnectionEdge": [
+                353
+            ],
             "on_PostToPostFormatConnectionEdge": [
-                345
+                355
             ],
             "on_PostToPreviewConnectionEdge": [
-                347
+                357
             ],
             "on_PostToRevisionConnectionEdge": [
-                354
+                364
             ],
             "on_TagToContentNodeConnectionEdge": [
-                368
-            ],
-            "on_TagToPostConnectionEdge": [
-                376
-            ],
-            "on_TagToTaxonomyConnectionEdge": [
                 378
             ],
-            "on_PostToTagConnectionEdge": [
-                380
-            ],
-            "on_PostToTermNodeConnectionEdge": [
-                384
-            ],
-            "on_UserToPostConnectionEdge": [
+            "on_TagToPostConnectionEdge": [
                 386
             ],
-            "on_UserToRevisionsConnectionEdge": [
+            "on_TagToTaxonomyConnectionEdge": [
+                388
+            ],
+            "on_PostToTagConnectionEdge": [
+                390
+            ],
+            "on_PostToTermNodeConnectionEdge": [
                 394
             ],
+            "on_UserToPostConnectionEdge": [
+                396
+            ],
+            "on_UserToRevisionsConnectionEdge": [
+                404
+            ],
             "on_UserToUserRoleConnectionEdge": [
-                401
-            ],
-            "on_ArquivoAssessoriaToArquivoAssessoriaConnectionEdge": [
-                407
-            ],
-            "on_ArquivoAssessoriaToParentConnectionEdge": [
-                410
-            ],
-            "on_ArquivoAssessoriaToPreviewConnectionEdge": [
                 411
             ],
+            "on_ArquivoAssessoriaToArquivoAssessoriaConnectionEdge": [
+                417
+            ],
+            "on_ArquivoAssessoriaToParentConnectionEdge": [
+                420
+            ],
+            "on_ArquivoAssessoriaToPreviewConnectionEdge": [
+                421
+            ],
             "on_RootQueryToArquivoAssessoriaConnectionEdge": [
-                418
+                428
             ],
             "on_BannerToBannerConnectionEdge": [
-                426
+                436
             ],
             "on_BannerToParentConnectionEdge": [
-                432
+                442
             ],
             "on_BannerToPreviewConnectionEdge": [
-                433
+                443
             ],
             "on_RootQueryToBannerConnectionEdge": [
-                440
+                450
             ],
             "on_RootQueryToCategoryConnectionEdge": [
-                444
-            ],
-            "on_RootQueryToCentraldeDecoradoConnectionEdge": [
                 454
             ],
+            "on_RootQueryToCentraldeDecoradoConnectionEdge": [
+                464
+            ],
             "on_RootQueryToCommentConnectionEdge": [
-                459
+                469
             ],
             "on_RootQueryToContentNodeConnectionEdge": [
-                468
+                478
             ],
             "on_RootQueryToContentTypeConnectionEdge": [
-                472
-            ],
-            "on_RootQueryToEmpreendimentoConnectionEdge": [
                 482
             ],
+            "on_RootQueryToEmpreendimentoConnectionEdge": [
+                492
+            ],
+            "on_GeneralSettingsToMediaItemConnectionEdge": [
+                495
+            ],
             "on_RootQueryToMediaItemConnectionEdge": [
-                496
+                503
             ],
             "on_MenuItemToMenuItemConnectionEdge": [
-                508
+                515
             ],
             "on_MenuItemToMenuItemLinkableConnectionEdge": [
-                511
+                518
             ],
             "on_MenuItemToMenuConnectionEdge": [
-                514
-            ],
-            "on_MenuToMenuItemConnectionEdge": [
-                516
-            ],
-            "on_RootQueryToMenuItemConnectionEdge": [
                 521
             ],
+            "on_MenuToMenuItemConnectionEdge": [
+                523
+            ],
+            "on_RootQueryToMenuItemConnectionEdge": [
+                528
+            ],
             "on_RootQueryToMenuConnectionEdge": [
-                527
+                534
             ],
             "on_RootQueryToPageConnectionEdge": [
-                536
+                543
             ],
             "on_RootQueryToPluginConnectionEdge": [
-                545
+                553
             ],
             "on_RootQueryToPostFormatConnectionEdge": [
-                551
-            ],
-            "on_RootQueryToPostConnectionEdge": [
                 559
             ],
+            "on_RootQueryToPostConnectionEdge": [
+                567
+            ],
             "on_RootQueryToEnqueuedScriptConnectionEdge": [
-                563
+                572
             ],
             "on_RootQueryToEnqueuedStylesheetConnectionEdge": [
-                566
+                576
             ],
             "on_RootQueryToRevisionsConnectionEdge": [
-                574
+                584
             ],
             "on_RootQueryToTagConnectionEdge": [
-                579
+                589
             ],
             "on_RootQueryToTaxonomyConnectionEdge": [
-                582
+                592
             ],
             "on_RootQueryToTermNodeConnectionEdge": [
-                588
+                598
             ],
             "on_RootQueryToThemeConnectionEdge": [
-                595
+                605
             ],
             "on_RootQueryToUserRoleConnectionEdge": [
-                599
+                609
             ],
             "on_RootQueryToUserConnectionEdge": [
-                609
+                619
             ],
             "__typename": [
                 0
@@ -1041,7 +996,7 @@ module.exports = {
                 24
             ],
             "on_RootQueryToContentTypeConnectionEdge": [
-                472
+                482
             ],
             "__typename": [
                 0
@@ -1069,7 +1024,7 @@ module.exports = {
                 }
             ],
             "contentNodes": [
-                73,
+                76,
                 {
                     "first": [
                         1
@@ -1084,7 +1039,7 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        53
+                        55
                     ]
                 }
             ],
@@ -1134,7 +1089,7 @@ module.exports = {
                 0
             ],
             "labels": [
-                79
+                82
             ],
             "menuIcon": [
                 0
@@ -1184,13 +1139,13 @@ module.exports = {
         },
         "ContentTypeToTaxonomyConnection": {
             "edges": [
-                51
+                53
             ],
             "nodes": [
                 19
             ],
             "pageInfo": [
-                52
+                54
             ],
             "__typename": [
                 0
@@ -1204,13 +1159,13 @@ module.exports = {
                 19
             ],
             "pageInfo": [
-                50
+                52
             ],
             "on_ContentTypeToTaxonomyConnection": [
                 14
             ],
             "on_RootQueryToTaxonomyConnection": [
-                581
+                591
             ],
             "__typename": [
                 0
@@ -1221,7 +1176,7 @@ module.exports = {
                 11
             ],
             "nodes": [
-                612
+                622
             ],
             "pageInfo": [
                 17
@@ -1236,214 +1191,214 @@ module.exports = {
                 26
             ],
             "on_TermNodeToEnqueuedScriptConnection": [
-                30
+                31
             ],
             "on_TermNodeToEnqueuedStylesheetConnection": [
-                40
+                42
             ],
             "on_ContentTypeToContentNodeConnection": [
-                73
+                76
             ],
             "on_UserToCommentConnection": [
-                88
+                91
             ],
             "on_CommentToCommentConnection": [
-                99
+                102
             ],
             "on_UserToEnqueuedScriptConnection": [
-                105
+                109
             ],
             "on_UserToEnqueuedStylesheetConnection": [
-                108
+                113
             ],
             "on_UserToMediaItemConnection": [
-                116
+                121
             ],
             "on_HierarchicalContentNodeToContentNodeAncestorsConnection": [
-                132
+                137
             ],
             "on_HierarchicalContentNodeToContentNodeChildrenConnection": [
-                140
+                145
             ],
             "on_ContentNodeToEnqueuedScriptConnection": [
-                143
+                149
             ],
             "on_ContentNodeToEnqueuedStylesheetConnection": [
-                146
+                153
             ],
             "on_MediaItemToCommentConnection": [
-                152
+                159
             ],
             "on_UserToPageConnection": [
-                168
+                175
             ],
             "on_PageToCommentConnection": [
-                183
+                190
             ],
             "on_PageToRevisionConnection": [
-                199
+                209
             ],
             "on_UserToPostConnection": [
-                210
+                220
             ],
             "on_PostToPostConnection": [
-                216
+                226
             ],
             "on_PostToCategoryConnection": [
-                222
+                232
             ],
             "on_CategoryToAncestorsCategoryConnection": [
-                227
+                237
             ],
             "on_CategoryToCentraldeDecoradoConnection": [
-                236
+                246
             ],
             "on_CentraldeDecoradoToCentraldeDecoradoConnection": [
-                240
+                250
             ],
             "on_CentraldeDecoradoToCategoryConnection": [
-                245
+                255
             ],
             "on_CentraldeDecoradoToTermNodeConnection": [
-                252
+                262
             ],
             "on_CategoryToCategoryConnection": [
-                258
+                268
             ],
             "on_CategoryToContentNodeConnection": [
-                267
+                277
             ],
             "on_CategoryToEmpreendimentoConnection": [
-                275
+                285
             ],
             "on_EmpreendimentoToEmpreendimentoConnection": [
-                279
+                289
             ],
             "on_EmpreendimentoToCategoryConnection": [
-                284
+                294
             ],
             "on_EmpreendimentoToTermNodeConnection": [
-                299
+                309
             ],
             "on_CategoryToPostConnection": [
-                310
+                320
             ],
             "on_PostToCommentConnection": [
-                317
+                327
             ],
             "on_PostToPostFormatConnection": [
-                322
-            ],
-            "on_PostFormatToContentNodeConnection": [
                 332
             ],
+            "on_PostFormatToContentNodeConnection": [
+                342
+            ],
             "on_PostFormatToPostConnection": [
-                340
+                350
             ],
             "on_PostToRevisionConnection": [
-                353
+                363
             ],
             "on_PostToTagConnection": [
-                357
-            ],
-            "on_TagToContentNodeConnection": [
                 367
             ],
+            "on_TagToContentNodeConnection": [
+                377
+            ],
             "on_TagToPostConnection": [
-                375
+                385
             ],
             "on_PostToTermNodeConnection": [
-                383
-            ],
-            "on_UserToRevisionsConnection": [
                 393
             ],
-            "on_UserToUserRoleConnection": [
-                396
-            ],
-            "on_ArquivoAssessoriaToArquivoAssessoriaConnection": [
+            "on_UserToRevisionsConnection": [
                 403
             ],
+            "on_UserToUserRoleConnection": [
+                406
+            ],
+            "on_ArquivoAssessoriaToArquivoAssessoriaConnection": [
+                413
+            ],
             "on_RootQueryToArquivoAssessoriaConnection": [
-                417
+                427
             ],
             "on_BannerToBannerConnection": [
-                422
+                432
             ],
             "on_RootQueryToBannerConnection": [
-                439
+                449
             ],
             "on_RootQueryToCategoryConnection": [
-                443
-            ],
-            "on_RootQueryToCentraldeDecoradoConnection": [
                 453
             ],
+            "on_RootQueryToCentraldeDecoradoConnection": [
+                463
+            ],
             "on_RootQueryToCommentConnection": [
-                458
+                468
             ],
             "on_RootQueryToContentNodeConnection": [
-                467
+                477
             ],
             "on_RootQueryToContentTypeConnection": [
-                471
-            ],
-            "on_RootQueryToEmpreendimentoConnection": [
                 481
             ],
-            "on_RootQueryToMediaItemConnection": [
-                495
+            "on_RootQueryToEmpreendimentoConnection": [
+                491
             ],
-            "on_MenuToMenuItemConnection": [
+            "on_RootQueryToMediaItemConnection": [
                 502
             ],
+            "on_MenuToMenuItemConnection": [
+                509
+            ],
             "on_MenuItemToMenuItemConnection": [
-                507
+                514
             ],
             "on_RootQueryToMenuItemConnection": [
-                520
+                527
             ],
             "on_RootQueryToMenuConnection": [
-                524
+                531
             ],
             "on_RootQueryToPageConnection": [
-                535
+                542
             ],
             "on_RootQueryToPluginConnection": [
-                541
+                549
             ],
             "on_RootQueryToPostFormatConnection": [
-                550
-            ],
-            "on_RootQueryToPostConnection": [
                 558
             ],
+            "on_RootQueryToPostConnection": [
+                566
+            ],
             "on_RootQueryToEnqueuedScriptConnection": [
-                562
+                571
             ],
             "on_RootQueryToEnqueuedStylesheetConnection": [
-                565
+                575
             ],
             "on_RootQueryToRevisionsConnection": [
-                573
+                583
             ],
             "on_RootQueryToTagConnection": [
-                578
+                588
             ],
             "on_RootQueryToTaxonomyConnection": [
-                581
-            ],
-            "on_RootQueryToTermNodeConnection": [
-                587
-            ],
-            "on_RootQueryToThemeConnection": [
                 591
             ],
+            "on_RootQueryToTermNodeConnection": [
+                597
+            ],
+            "on_RootQueryToThemeConnection": [
+                601
+            ],
             "on_RootQueryToUserRoleConnection": [
-                598
+                608
             ],
             "on_RootQueryToUserConnection": [
-                606
+                616
             ],
             "__typename": [
                 0
@@ -1466,220 +1421,220 @@ module.exports = {
                 25
             ],
             "on_TermNodeToEnqueuedScriptConnectionPageInfo": [
-                39
+                40
             ],
             "on_TermNodeToEnqueuedStylesheetConnectionPageInfo": [
-                46
+                48
             ],
             "on_TaxonomyToTermNodeConnectionPageInfo": [
-                49
+                51
             ],
             "on_ContentTypeToTaxonomyConnectionPageInfo": [
-                52
+                54
             ],
             "on_ContentTypeToContentNodeConnectionPageInfo": [
-                78
+                81
             ],
             "on_CommentToCommentConnectionPageInfo": [
-                101
-            ],
-            "on_UserToCommentConnectionPageInfo": [
                 104
             ],
-            "on_UserToEnqueuedScriptConnectionPageInfo": [
+            "on_UserToCommentConnectionPageInfo": [
                 107
             ],
+            "on_UserToEnqueuedScriptConnectionPageInfo": [
+                111
+            ],
             "on_UserToEnqueuedStylesheetConnectionPageInfo": [
-                110
+                115
             ],
             "on_HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo": [
-                134
+                139
             ],
             "on_HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo": [
-                142
+                147
             ],
             "on_ContentNodeToEnqueuedScriptConnectionPageInfo": [
-                145
+                151
             ],
             "on_ContentNodeToEnqueuedStylesheetConnectionPageInfo": [
-                148
+                155
             ],
             "on_MediaItemToCommentConnectionPageInfo": [
-                154
+                161
             ],
             "on_UserToMediaItemConnectionPageInfo": [
-                162
+                169
             ],
             "on_PageToCommentConnectionPageInfo": [
-                185
+                192
             ],
             "on_PageToRevisionConnectionPageInfo": [
-                201
+                211
             ],
             "on_UserToPageConnectionPageInfo": [
-                204
+                214
             ],
             "on_PostToPostConnectionPageInfo": [
-                218
+                228
             ],
             "on_CategoryToAncestorsCategoryConnectionPageInfo": [
-                229
+                239
             ],
             "on_CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo": [
-                242
+                252
             ],
             "on_CentraldeDecoradoToCategoryConnectionPageInfo": [
-                247
+                257
             ],
             "on_CentraldeDecoradoToTermNodeConnectionPageInfo": [
-                254
+                264
             ],
             "on_CategoryToCentraldeDecoradoConnectionPageInfo": [
-                256
+                266
             ],
             "on_CategoryToCategoryConnectionPageInfo": [
-                260
+                270
             ],
             "on_CategoryToContentNodeConnectionPageInfo": [
-                269
+                279
             ],
             "on_EmpreendimentoToEmpreendimentoConnectionPageInfo": [
-                281
+                291
             ],
             "on_EmpreendimentoToCategoryConnectionPageInfo": [
-                286
+                296
             ],
             "on_EmpreendimentoToTermNodeConnectionPageInfo": [
-                301
+                311
             ],
             "on_CategoryToEmpreendimentoConnectionPageInfo": [
-                303
+                313
             ],
             "on_CategoryToPostConnectionPageInfo": [
-                312
+                322
             ],
             "on_PostToCategoryConnectionPageInfo": [
-                315
+                325
             ],
             "on_PostToCommentConnectionPageInfo": [
-                319
+                329
             ],
             "on_PostFormatToContentNodeConnectionPageInfo": [
-                334
+                344
             ],
             "on_PostFormatToPostConnectionPageInfo": [
-                342
+                352
             ],
             "on_PostToPostFormatConnectionPageInfo": [
-                346
+                356
             ],
             "on_PostToRevisionConnectionPageInfo": [
-                355
+                365
             ],
             "on_TagToContentNodeConnectionPageInfo": [
-                369
+                379
             ],
             "on_TagToPostConnectionPageInfo": [
-                377
-            ],
-            "on_PostToTagConnectionPageInfo": [
-                381
-            ],
-            "on_PostToTermNodeConnectionPageInfo": [
-                385
-            ],
-            "on_UserToPostConnectionPageInfo": [
                 387
             ],
-            "on_UserToRevisionsConnectionPageInfo": [
+            "on_PostToTagConnectionPageInfo": [
+                391
+            ],
+            "on_PostToTermNodeConnectionPageInfo": [
                 395
             ],
+            "on_UserToPostConnectionPageInfo": [
+                397
+            ],
+            "on_UserToRevisionsConnectionPageInfo": [
+                405
+            ],
             "on_UserToUserRoleConnectionPageInfo": [
-                402
+                412
             ],
             "on_ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo": [
-                408
+                418
             ],
             "on_RootQueryToArquivoAssessoriaConnectionPageInfo": [
-                419
+                429
             ],
             "on_BannerToBannerConnectionPageInfo": [
-                427
+                437
             ],
             "on_RootQueryToBannerConnectionPageInfo": [
-                441
+                451
             ],
             "on_RootQueryToCategoryConnectionPageInfo": [
-                445
-            ],
-            "on_RootQueryToCentraldeDecoradoConnectionPageInfo": [
                 455
             ],
+            "on_RootQueryToCentraldeDecoradoConnectionPageInfo": [
+                465
+            ],
             "on_RootQueryToCommentConnectionPageInfo": [
-                460
+                470
             ],
             "on_RootQueryToContentNodeConnectionPageInfo": [
-                469
+                479
             ],
             "on_RootQueryToContentTypeConnectionPageInfo": [
-                473
-            ],
-            "on_RootQueryToEmpreendimentoConnectionPageInfo": [
                 483
             ],
+            "on_RootQueryToEmpreendimentoConnectionPageInfo": [
+                493
+            ],
             "on_RootQueryToMediaItemConnectionPageInfo": [
-                497
+                504
             ],
             "on_MenuItemToMenuItemConnectionPageInfo": [
-                509
+                516
             ],
             "on_MenuToMenuItemConnectionPageInfo": [
-                517
+                524
             ],
             "on_RootQueryToMenuItemConnectionPageInfo": [
-                522
+                529
             ],
             "on_RootQueryToMenuConnectionPageInfo": [
-                528
+                535
             ],
             "on_RootQueryToPageConnectionPageInfo": [
-                537
+                544
             ],
             "on_RootQueryToPluginConnectionPageInfo": [
-                546
+                554
             ],
             "on_RootQueryToPostFormatConnectionPageInfo": [
-                552
-            ],
-            "on_RootQueryToPostConnectionPageInfo": [
                 560
             ],
+            "on_RootQueryToPostConnectionPageInfo": [
+                568
+            ],
             "on_RootQueryToEnqueuedScriptConnectionPageInfo": [
-                564
+                573
             ],
             "on_RootQueryToEnqueuedStylesheetConnectionPageInfo": [
-                567
+                577
             ],
             "on_RootQueryToRevisionsConnectionPageInfo": [
-                575
+                585
             ],
             "on_RootQueryToTagConnectionPageInfo": [
-                580
+                590
             ],
             "on_RootQueryToTaxonomyConnectionPageInfo": [
-                583
+                593
             ],
             "on_RootQueryToTermNodeConnectionPageInfo": [
-                589
+                599
             ],
             "on_RootQueryToThemeConnectionPageInfo": [
-                596
+                606
             ],
             "on_RootQueryToUserRoleConnectionPageInfo": [
-                600
+                610
             ],
             "on_RootQueryToUserConnectionPageInfo": [
-                610
+                620
             ],
             "__typename": [
                 0
@@ -1693,19 +1648,19 @@ module.exports = {
                 19
             ],
             "on_ContentTypeToTaxonomyConnectionEdge": [
-                51
+                53
             ],
             "on_CategoryToTaxonomyConnectionEdge": [
-                313
+                323
             ],
             "on_PostFormatToTaxonomyConnectionEdge": [
-                343
+                353
             ],
             "on_TagToTaxonomyConnectionEdge": [
-                378
+                388
             ],
             "on_RootQueryToTaxonomyConnectionEdge": [
-                582
+                592
             ],
             "__typename": [
                 0
@@ -1835,7 +1790,7 @@ module.exports = {
                 20
             ],
             "on_RootQueryToContentTypeConnection": [
-                471
+                481
             ],
             "__typename": [
                 0
@@ -1858,7 +1813,7 @@ module.exports = {
                 25
             ],
             "on_RootQueryToContentTypeConnectionPageInfo": [
-                473
+                483
             ],
             "__typename": [
                 0
@@ -1881,220 +1836,220 @@ module.exports = {
                 25
             ],
             "on_TermNodeToEnqueuedScriptConnectionPageInfo": [
-                39
+                40
             ],
             "on_TermNodeToEnqueuedStylesheetConnectionPageInfo": [
-                46
+                48
             ],
             "on_TaxonomyToTermNodeConnectionPageInfo": [
-                49
+                51
             ],
             "on_ContentTypeToTaxonomyConnectionPageInfo": [
-                52
+                54
             ],
             "on_ContentTypeToContentNodeConnectionPageInfo": [
-                78
+                81
             ],
             "on_CommentToCommentConnectionPageInfo": [
-                101
-            ],
-            "on_UserToCommentConnectionPageInfo": [
                 104
             ],
-            "on_UserToEnqueuedScriptConnectionPageInfo": [
+            "on_UserToCommentConnectionPageInfo": [
                 107
             ],
+            "on_UserToEnqueuedScriptConnectionPageInfo": [
+                111
+            ],
             "on_UserToEnqueuedStylesheetConnectionPageInfo": [
-                110
+                115
             ],
             "on_HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo": [
-                134
+                139
             ],
             "on_HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo": [
-                142
+                147
             ],
             "on_ContentNodeToEnqueuedScriptConnectionPageInfo": [
-                145
+                151
             ],
             "on_ContentNodeToEnqueuedStylesheetConnectionPageInfo": [
-                148
+                155
             ],
             "on_MediaItemToCommentConnectionPageInfo": [
-                154
+                161
             ],
             "on_UserToMediaItemConnectionPageInfo": [
-                162
+                169
             ],
             "on_PageToCommentConnectionPageInfo": [
-                185
+                192
             ],
             "on_PageToRevisionConnectionPageInfo": [
-                201
+                211
             ],
             "on_UserToPageConnectionPageInfo": [
-                204
+                214
             ],
             "on_PostToPostConnectionPageInfo": [
-                218
+                228
             ],
             "on_CategoryToAncestorsCategoryConnectionPageInfo": [
-                229
+                239
             ],
             "on_CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo": [
-                242
+                252
             ],
             "on_CentraldeDecoradoToCategoryConnectionPageInfo": [
-                247
+                257
             ],
             "on_CentraldeDecoradoToTermNodeConnectionPageInfo": [
-                254
+                264
             ],
             "on_CategoryToCentraldeDecoradoConnectionPageInfo": [
-                256
+                266
             ],
             "on_CategoryToCategoryConnectionPageInfo": [
-                260
+                270
             ],
             "on_CategoryToContentNodeConnectionPageInfo": [
-                269
+                279
             ],
             "on_EmpreendimentoToEmpreendimentoConnectionPageInfo": [
-                281
+                291
             ],
             "on_EmpreendimentoToCategoryConnectionPageInfo": [
-                286
+                296
             ],
             "on_EmpreendimentoToTermNodeConnectionPageInfo": [
-                301
+                311
             ],
             "on_CategoryToEmpreendimentoConnectionPageInfo": [
-                303
+                313
             ],
             "on_CategoryToPostConnectionPageInfo": [
-                312
+                322
             ],
             "on_PostToCategoryConnectionPageInfo": [
-                315
+                325
             ],
             "on_PostToCommentConnectionPageInfo": [
-                319
+                329
             ],
             "on_PostFormatToContentNodeConnectionPageInfo": [
-                334
+                344
             ],
             "on_PostFormatToPostConnectionPageInfo": [
-                342
+                352
             ],
             "on_PostToPostFormatConnectionPageInfo": [
-                346
+                356
             ],
             "on_PostToRevisionConnectionPageInfo": [
-                355
+                365
             ],
             "on_TagToContentNodeConnectionPageInfo": [
-                369
+                379
             ],
             "on_TagToPostConnectionPageInfo": [
-                377
-            ],
-            "on_PostToTagConnectionPageInfo": [
-                381
-            ],
-            "on_PostToTermNodeConnectionPageInfo": [
-                385
-            ],
-            "on_UserToPostConnectionPageInfo": [
                 387
             ],
-            "on_UserToRevisionsConnectionPageInfo": [
+            "on_PostToTagConnectionPageInfo": [
+                391
+            ],
+            "on_PostToTermNodeConnectionPageInfo": [
                 395
             ],
+            "on_UserToPostConnectionPageInfo": [
+                397
+            ],
+            "on_UserToRevisionsConnectionPageInfo": [
+                405
+            ],
             "on_UserToUserRoleConnectionPageInfo": [
-                402
+                412
             ],
             "on_ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo": [
-                408
+                418
             ],
             "on_RootQueryToArquivoAssessoriaConnectionPageInfo": [
-                419
+                429
             ],
             "on_BannerToBannerConnectionPageInfo": [
-                427
+                437
             ],
             "on_RootQueryToBannerConnectionPageInfo": [
-                441
+                451
             ],
             "on_RootQueryToCategoryConnectionPageInfo": [
-                445
-            ],
-            "on_RootQueryToCentraldeDecoradoConnectionPageInfo": [
                 455
             ],
+            "on_RootQueryToCentraldeDecoradoConnectionPageInfo": [
+                465
+            ],
             "on_RootQueryToCommentConnectionPageInfo": [
-                460
+                470
             ],
             "on_RootQueryToContentNodeConnectionPageInfo": [
-                469
+                479
             ],
             "on_RootQueryToContentTypeConnectionPageInfo": [
-                473
-            ],
-            "on_RootQueryToEmpreendimentoConnectionPageInfo": [
                 483
             ],
+            "on_RootQueryToEmpreendimentoConnectionPageInfo": [
+                493
+            ],
             "on_RootQueryToMediaItemConnectionPageInfo": [
-                497
+                504
             ],
             "on_MenuItemToMenuItemConnectionPageInfo": [
-                509
+                516
             ],
             "on_MenuToMenuItemConnectionPageInfo": [
-                517
+                524
             ],
             "on_RootQueryToMenuItemConnectionPageInfo": [
-                522
+                529
             ],
             "on_RootQueryToMenuConnectionPageInfo": [
-                528
+                535
             ],
             "on_RootQueryToPageConnectionPageInfo": [
-                537
+                544
             ],
             "on_RootQueryToPluginConnectionPageInfo": [
-                546
+                554
             ],
             "on_RootQueryToPostFormatConnectionPageInfo": [
-                552
-            ],
-            "on_RootQueryToPostConnectionPageInfo": [
                 560
             ],
+            "on_RootQueryToPostConnectionPageInfo": [
+                568
+            ],
             "on_RootQueryToEnqueuedScriptConnectionPageInfo": [
-                564
+                573
             ],
             "on_RootQueryToEnqueuedStylesheetConnectionPageInfo": [
-                567
+                577
             ],
             "on_RootQueryToRevisionsConnectionPageInfo": [
-                575
+                585
             ],
             "on_RootQueryToTagConnectionPageInfo": [
-                580
+                590
             ],
             "on_RootQueryToTaxonomyConnectionPageInfo": [
-                583
+                593
             ],
             "on_RootQueryToTermNodeConnectionPageInfo": [
-                589
+                599
             ],
             "on_RootQueryToThemeConnectionPageInfo": [
-                596
+                606
             ],
             "on_RootQueryToUserRoleConnectionPageInfo": [
-                600
+                610
             ],
             "on_RootQueryToUserConnectionPageInfo": [
-                610
+                620
             ],
             "__typename": [
                 0
@@ -2130,13 +2085,13 @@ module.exports = {
         },
         "TaxonomyToTermNodeConnection": {
             "edges": [
-                48
+                50
             ],
             "nodes": [
                 29
             ],
             "pageInfo": [
-                49
+                51
             ],
             "__typename": [
                 0
@@ -2150,22 +2105,22 @@ module.exports = {
                 29
             ],
             "pageInfo": [
-                47
+                49
             ],
             "on_TaxonomyToTermNodeConnection": [
                 26
             ],
             "on_CentraldeDecoradoToTermNodeConnection": [
-                252
+                262
             ],
             "on_EmpreendimentoToTermNodeConnection": [
-                299
+                309
             ],
             "on_PostToTermNodeConnection": [
-                383
+                393
             ],
             "on_RootQueryToTermNodeConnection": [
-                587
+                597
             ],
             "__typename": [
                 0
@@ -2179,19 +2134,19 @@ module.exports = {
                 29
             ],
             "on_TaxonomyToTermNodeConnectionEdge": [
-                48
+                50
             ],
             "on_CentraldeDecoradoToTermNodeConnectionEdge": [
-                253
+                263
             ],
             "on_EmpreendimentoToTermNodeConnectionEdge": [
-                300
+                310
             ],
             "on_PostToTermNodeConnectionEdge": [
-                384
+                394
             ],
             "on_RootQueryToTermNodeConnectionEdge": [
-                588
+                598
             ],
             "__typename": [
                 0
@@ -2208,7 +2163,7 @@ module.exports = {
                 0
             ],
             "enqueuedScripts": [
-                30,
+                31,
                 {
                     "first": [
                         1
@@ -2221,11 +2176,14 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        30
                     ]
                 }
             ],
             "enqueuedStylesheets": [
-                40,
+                42,
                 {
                     "first": [
                         1
@@ -2238,6 +2196,9 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        41
                     ]
                 }
             ],
@@ -2284,13 +2245,21 @@ module.exports = {
                 0
             ],
             "on_Category": [
-                225
+                235
             ],
             "on_PostFormat": [
-                325
+                335
             ],
             "on_Tag": [
-                360
+                370
+            ],
+            "__typename": [
+                0
+            ]
+        },
+        "TermNodeToEnqueuedScriptConnectionWhereArgs": {
+            "handlesIn": [
+                0
             ],
             "__typename": [
                 0
@@ -2298,13 +2267,13 @@ module.exports = {
         },
         "TermNodeToEnqueuedScriptConnection": {
             "edges": [
-                38
+                39
             ],
             "nodes": [
-                33
+                34
             ],
             "pageInfo": [
-                39
+                40
             ],
             "__typename": [
                 0
@@ -2312,25 +2281,25 @@ module.exports = {
         },
         "EnqueuedScriptConnection": {
             "edges": [
-                32
-            ],
-            "nodes": [
                 33
             ],
+            "nodes": [
+                34
+            ],
             "pageInfo": [
-                37
+                38
             ],
             "on_TermNodeToEnqueuedScriptConnection": [
-                30
+                31
             ],
             "on_UserToEnqueuedScriptConnection": [
-                105
+                109
             ],
             "on_ContentNodeToEnqueuedScriptConnection": [
-                143
+                149
             ],
             "on_RootQueryToEnqueuedScriptConnection": [
-                562
+                571
             ],
             "__typename": [
                 0
@@ -2341,19 +2310,19 @@ module.exports = {
                 0
             ],
             "node": [
-                33
+                34
             ],
             "on_TermNodeToEnqueuedScriptConnectionEdge": [
-                38
+                39
             ],
             "on_UserToEnqueuedScriptConnectionEdge": [
-                106
+                110
             ],
             "on_ContentNodeToEnqueuedScriptConnectionEdge": [
-                144
+                150
             ],
             "on_RootQueryToEnqueuedScriptConnectionEdge": [
-                563
+                572
             ],
             "__typename": [
                 0
@@ -2373,7 +2342,7 @@ module.exports = {
                 0
             ],
             "dependencies": [
-                33
+                34
             ],
             "extra": [
                 0
@@ -2385,7 +2354,7 @@ module.exports = {
                 1
             ],
             "groupLocation": [
-                35
+                36
             ],
             "handle": [
                 0
@@ -2397,7 +2366,7 @@ module.exports = {
                 0
             ],
             "strategy": [
-                36
+                37
             ],
             "version": [
                 0
@@ -2420,7 +2389,7 @@ module.exports = {
                 0
             ],
             "dependencies": [
-                34
+                35
             ],
             "extra": [
                 0
@@ -2441,10 +2410,10 @@ module.exports = {
                 0
             ],
             "on_EnqueuedScript": [
-                33
+                34
             ],
             "on_EnqueuedStylesheet": [
-                43
+                45
             ],
             "__typename": [
                 0
@@ -2466,16 +2435,16 @@ module.exports = {
                 0
             ],
             "on_TermNodeToEnqueuedScriptConnectionPageInfo": [
-                39
+                40
             ],
             "on_UserToEnqueuedScriptConnectionPageInfo": [
-                107
+                111
             ],
             "on_ContentNodeToEnqueuedScriptConnectionPageInfo": [
-                145
+                151
             ],
             "on_RootQueryToEnqueuedScriptConnectionPageInfo": [
-                564
+                573
             ],
             "__typename": [
                 0
@@ -2486,7 +2455,7 @@ module.exports = {
                 0
             ],
             "node": [
-                33
+                34
             ],
             "__typename": [
                 0
@@ -2509,15 +2478,23 @@ module.exports = {
                 0
             ]
         },
+        "TermNodeToEnqueuedStylesheetConnectionWhereArgs": {
+            "handlesIn": [
+                0
+            ],
+            "__typename": [
+                0
+            ]
+        },
         "TermNodeToEnqueuedStylesheetConnection": {
             "edges": [
-                45
+                47
             ],
             "nodes": [
-                43
+                45
             ],
             "pageInfo": [
-                46
+                48
             ],
             "__typename": [
                 0
@@ -2525,25 +2502,25 @@ module.exports = {
         },
         "EnqueuedStylesheetConnection": {
             "edges": [
-                42
-            ],
-            "nodes": [
-                43
-            ],
-            "pageInfo": [
                 44
             ],
+            "nodes": [
+                45
+            ],
+            "pageInfo": [
+                46
+            ],
             "on_TermNodeToEnqueuedStylesheetConnection": [
-                40
+                42
             ],
             "on_UserToEnqueuedStylesheetConnection": [
-                108
+                113
             ],
             "on_ContentNodeToEnqueuedStylesheetConnection": [
-                146
+                153
             ],
             "on_RootQueryToEnqueuedStylesheetConnection": [
-                565
+                575
             ],
             "__typename": [
                 0
@@ -2554,19 +2531,19 @@ module.exports = {
                 0
             ],
             "node": [
-                43
-            ],
-            "on_TermNodeToEnqueuedStylesheetConnectionEdge": [
                 45
             ],
+            "on_TermNodeToEnqueuedStylesheetConnectionEdge": [
+                47
+            ],
             "on_UserToEnqueuedStylesheetConnectionEdge": [
-                109
+                114
             ],
             "on_ContentNodeToEnqueuedStylesheetConnectionEdge": [
-                147
+                154
             ],
             "on_RootQueryToEnqueuedStylesheetConnectionEdge": [
-                566
+                576
             ],
             "__typename": [
                 0
@@ -2586,7 +2563,7 @@ module.exports = {
                 0
             ],
             "dependencies": [
-                43
+                45
             ],
             "extra": [
                 0
@@ -2642,16 +2619,16 @@ module.exports = {
                 0
             ],
             "on_TermNodeToEnqueuedStylesheetConnectionPageInfo": [
-                46
+                48
             ],
             "on_UserToEnqueuedStylesheetConnectionPageInfo": [
-                110
+                115
             ],
             "on_ContentNodeToEnqueuedStylesheetConnectionPageInfo": [
-                148
+                155
             ],
             "on_RootQueryToEnqueuedStylesheetConnectionPageInfo": [
-                567
+                577
             ],
             "__typename": [
                 0
@@ -2662,7 +2639,7 @@ module.exports = {
                 0
             ],
             "node": [
-                43
+                45
             ],
             "__typename": [
                 0
@@ -2699,19 +2676,19 @@ module.exports = {
                 0
             ],
             "on_TaxonomyToTermNodeConnectionPageInfo": [
-                49
+                51
             ],
             "on_CentraldeDecoradoToTermNodeConnectionPageInfo": [
-                254
+                264
             ],
             "on_EmpreendimentoToTermNodeConnectionPageInfo": [
-                301
+                311
             ],
             "on_PostToTermNodeConnectionPageInfo": [
-                385
+                395
             ],
             "on_RootQueryToTermNodeConnectionPageInfo": [
-                589
+                599
             ],
             "__typename": [
                 0
@@ -2759,10 +2736,10 @@ module.exports = {
                 0
             ],
             "on_ContentTypeToTaxonomyConnectionPageInfo": [
-                52
+                54
             ],
             "on_RootQueryToTaxonomyConnectionPageInfo": [
-                583
+                593
             ],
             "__typename": [
                 0
@@ -2798,10 +2775,10 @@ module.exports = {
         },
         "ContentTypeToContentNodeConnectionWhereArgs": {
             "contentTypes": [
-                54
+                56
             ],
             "dateQuery": [
-                55
+                57
             ],
             "hasPassword": [
                 2
@@ -2812,11 +2789,14 @@ module.exports = {
             "in": [
                 4
             ],
+            "isSticky": [
+                2
+            ],
             "metaQuery": [
-                59
+                61
             ],
             "mimeType": [
-                63
+                65
             ],
             "name": [
                 0
@@ -2828,7 +2808,7 @@ module.exports = {
                 4
             ],
             "orderby": [
-                64
+                66
             ],
             "parent": [
                 4
@@ -2846,13 +2826,16 @@ module.exports = {
                 0
             ],
             "stati": [
-                67
+                69
             ],
             "status": [
-                67
+                69
             ],
             "taxQuery": [
-                68
+                70
+            ],
+            "template": [
+                75
             ],
             "title": [
                 0
@@ -2864,13 +2847,13 @@ module.exports = {
         "ContentTypeEnum": {},
         "DateQueryInput": {
             "after": [
-                56
+                58
             ],
             "before": [
-                56
+                58
             ],
             "column": [
-                57
+                59
             ],
             "compare": [
                 0
@@ -2891,7 +2874,7 @@ module.exports = {
                 1
             ],
             "relation": [
-                58
+                60
             ],
             "second": [
                 1
@@ -2910,7 +2893,16 @@ module.exports = {
             "day": [
                 1
             ],
+            "hour": [
+                1
+            ],
+            "minute": [
+                1
+            ],
             "month": [
+                1
+            ],
+            "second": [
                 1
             ],
             "year": [
@@ -2924,10 +2916,10 @@ module.exports = {
         "RelationEnum": {},
         "ContentTypeToContentNodeConnectionWhereArgsMetaQuery": {
             "metaArray": [
-                60
+                62
             ],
             "relation": [
-                58
+                60
             ],
             "__typename": [
                 0
@@ -2935,13 +2927,13 @@ module.exports = {
         },
         "ContentTypeToContentNodeConnectionWhereArgsMetaArray": {
             "compare": [
-                61
+                63
             ],
             "key": [
                 0
             ],
             "type": [
-                62
+                64
             ],
             "value": [
                 0
@@ -2955,10 +2947,10 @@ module.exports = {
         "MimeTypeEnum": {},
         "PostObjectsConnectionOrderbyInput": {
             "field": [
-                65
+                67
             ],
             "order": [
-                66
+                68
             ],
             "__typename": [
                 0
@@ -2969,10 +2961,10 @@ module.exports = {
         "PostStatusEnum": {},
         "TaxQuery": {
             "relation": [
-                58
+                60
             ],
             "taxArray": [
-                69
+                71
             ],
             "__typename": [
                 0
@@ -2980,16 +2972,16 @@ module.exports = {
         },
         "TaxArray": {
             "field": [
-                70
+                72
             ],
             "includeChildren": [
                 2
             ],
             "operator": [
-                71
+                73
             ],
             "taxonomy": [
-                72
+                74
             ],
             "terms": [
                 0
@@ -3001,15 +2993,16 @@ module.exports = {
         "TaxQueryField": {},
         "TaxQueryOperator": {},
         "TaxonomyEnum": {},
+        "ContentTemplateEnum": {},
         "ContentTypeToContentNodeConnection": {
             "edges": [
-                77
+                80
             ],
             "nodes": [
                 7
             ],
             "pageInfo": [
-                78
+                81
             ],
             "__typename": [
                 0
@@ -3017,40 +3010,40 @@ module.exports = {
         },
         "ContentNodeConnection": {
             "edges": [
-                75
+                78
             ],
             "nodes": [
                 7
             ],
             "pageInfo": [
-                76
+                79
             ],
             "on_ContentTypeToContentNodeConnection": [
-                73
+                76
             ],
             "on_HierarchicalContentNodeToContentNodeAncestorsConnection": [
-                132
+                137
             ],
             "on_HierarchicalContentNodeToContentNodeChildrenConnection": [
-                140
+                145
             ],
             "on_CategoryToContentNodeConnection": [
-                267
+                277
             ],
             "on_PostFormatToContentNodeConnection": [
-                332
+                342
             ],
             "on_TagToContentNodeConnection": [
-                367
+                377
             ],
             "on_UserToRevisionsConnection": [
-                393
+                403
             ],
             "on_RootQueryToContentNodeConnection": [
-                467
+                477
             ],
             "on_RootQueryToRevisionsConnection": [
-                573
+                583
             ],
             "__typename": [
                 0
@@ -3064,40 +3057,40 @@ module.exports = {
                 7
             ],
             "on_ContentTypeToContentNodeConnectionEdge": [
-                77
+                80
             ],
             "on_CommentToContentNodeConnectionEdge": [
-                94
+                97
             ],
             "on_HierarchicalContentNodeToContentNodeAncestorsConnectionEdge": [
-                133
+                138
             ],
             "on_HierarchicalContentNodeToContentNodeChildrenConnectionEdge": [
-                141
+                146
             ],
             "on_HierarchicalContentNodeToParentContentNodeConnectionEdge": [
-                150
+                157
             ],
             "on_NodeWithRevisionsToContentNodeConnectionEdge": [
-                177
+                184
             ],
             "on_CategoryToContentNodeConnectionEdge": [
-                268
+                278
             ],
             "on_PostFormatToContentNodeConnectionEdge": [
-                333
+                343
             ],
             "on_TagToContentNodeConnectionEdge": [
-                368
+                378
             ],
             "on_UserToRevisionsConnectionEdge": [
-                394
+                404
             ],
             "on_RootQueryToContentNodeConnectionEdge": [
-                468
+                478
             ],
             "on_RootQueryToRevisionsConnectionEdge": [
-                574
+                584
             ],
             "__typename": [
                 0
@@ -3117,31 +3110,31 @@ module.exports = {
                 0
             ],
             "on_ContentTypeToContentNodeConnectionPageInfo": [
-                78
+                81
             ],
             "on_HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo": [
-                134
+                139
             ],
             "on_HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo": [
-                142
+                147
             ],
             "on_CategoryToContentNodeConnectionPageInfo": [
-                269
+                279
             ],
             "on_PostFormatToContentNodeConnectionPageInfo": [
-                334
+                344
             ],
             "on_TagToContentNodeConnectionPageInfo": [
-                369
+                379
             ],
             "on_UserToRevisionsConnectionPageInfo": [
-                395
+                405
             ],
             "on_RootQueryToContentNodeConnectionPageInfo": [
-                469
+                479
             ],
             "on_RootQueryToRevisionsConnectionPageInfo": [
-                575
+                585
             ],
             "__typename": [
                 0
@@ -3263,7 +3256,7 @@ module.exports = {
                 0
             ],
             "node": [
-                82
+                85
             ],
             "__typename": [
                 0
@@ -3274,19 +3267,19 @@ module.exports = {
                 0
             ],
             "node": [
-                82
+                85
             ],
             "on_ContentNodeToEditLockConnectionEdge": [
-                80
+                83
             ],
             "on_NodeWithAuthorToUserConnectionEdge": [
-                123
+                128
             ],
             "on_ContentNodeToEditLastConnectionEdge": [
-                149
+                156
             ],
             "on_RootQueryToUserConnectionEdge": [
-                609
+                619
             ],
             "__typename": [
                 0
@@ -3297,7 +3290,7 @@ module.exports = {
                 0
             ],
             "avatar": [
-                83,
+                86,
                 {
                     "size": [
                         1
@@ -3306,7 +3299,7 @@ module.exports = {
                         2
                     ],
                     "rating": [
-                        84
+                        87
                     ]
                 }
             ],
@@ -3317,7 +3310,7 @@ module.exports = {
                 0
             ],
             "comments": [
-                88,
+                91,
                 {
                     "first": [
                         1
@@ -3332,7 +3325,7 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        85
+                        88
                     ]
                 }
             ],
@@ -3346,7 +3339,7 @@ module.exports = {
                 0
             ],
             "enqueuedScripts": [
-                105,
+                109,
                 {
                     "first": [
                         1
@@ -3359,11 +3352,14 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        108
                     ]
                 }
             ],
             "enqueuedStylesheets": [
-                108,
+                113,
                 {
                     "first": [
                         1
@@ -3376,6 +3372,9 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        112
                     ]
                 }
             ],
@@ -3422,7 +3421,7 @@ module.exports = {
                 0
             ],
             "mediaItems": [
-                116,
+                121,
                 {
                     "first": [
                         1
@@ -3437,7 +3436,7 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        111
+                        116
                     ]
                 }
             ],
@@ -3451,7 +3450,7 @@ module.exports = {
                 0
             ],
             "pages": [
-                168,
+                175,
                 {
                     "first": [
                         1
@@ -3466,12 +3465,12 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        163
+                        170
                     ]
                 }
             ],
             "posts": [
-                210,
+                220,
                 {
                     "first": [
                         1
@@ -3486,7 +3485,7 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        205
+                        215
                     ]
                 }
             ],
@@ -3494,7 +3493,7 @@ module.exports = {
                 0
             ],
             "revisions": [
-                393,
+                403,
                 {
                     "first": [
                         1
@@ -3509,12 +3508,12 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        388
+                        398
                     ]
                 }
             ],
             "roles": [
-                396,
+                406,
                 {
                     "first": [
                         1
@@ -3549,92 +3548,7 @@ module.exports = {
                 0
             ],
             "__typename": [
-                1
-            ]
-        },
-        "Commenter": {
-            "avatar": [
-                86
-            ],
-            "databaseId": [
-                2
-            ],
-            "email": [
-                1
-            ],
-            "id": [
-                4
-            ],
-            "isRestricted": [
-                3
-            ],
-            "name": [
-                1
-            ],
-            "url": [
-                1
-            ],
-            "on_User": [
-                83
-            ],
-            "on_CommentAuthor": [
-                701
-            ],
-            "__typename": [
-                1
-            ]
-        },
-        "DatabaseIdentifier": {
-            "databaseId": [
-                2
-            ],
-            "on_ArquivoAssessoria": [
-                6
-            ],
-            "on_User": [
-                83
-            ],
-            "on_Comment": [
-                94
-            ],
-            "on_MediaItem": [
-                122
-            ],
-            "on_Page": [
-                175
-            ],
-            "on_Post": [
-                213
-            ],
-            "on_Category": [
-                225
-            ],
-            "on_CentraldeDecorado": [
-                239
-            ],
-            "on_Empreendimento": [
-                278
-            ],
-            "on_PostFormat": [
-                325
-            ],
-            "on_Tag": [
-                360
-            ],
-            "on_Banner": [
-                421
-            ],
-            "on_Menu": [
-                495
-            ],
-            "on_MenuItem": [
-                501
-            ],
-            "on_CommentAuthor": [
-                701
-            ],
-            "__typename": [
-                1
+                0
             ]
         },
         "Avatar": {
@@ -3729,10 +3643,10 @@ module.exports = {
                 1
             ],
             "contentStatus": [
-                67
+                69
             ],
             "contentType": [
-                54
+                56
             ],
             "includeUnapproved": [
                 4
@@ -3741,10 +3655,10 @@ module.exports = {
                 1
             ],
             "order": [
-                66
+                68
             ],
             "orderby": [
-                86
+                89
             ],
             "parent": [
                 1
@@ -3759,7 +3673,7 @@ module.exports = {
                 0
             ],
             "statusIn": [
-                87
+                90
             ],
             "userId": [
                 4
@@ -3772,13 +3686,13 @@ module.exports = {
         "CommentStatusEnum": {},
         "UserToCommentConnection": {
             "edges": [
-                103
+                106
             ],
             "nodes": [
-                91
+                94
             ],
             "pageInfo": [
-                104
+                107
             ],
             "__typename": [
                 0
@@ -3786,31 +3700,31 @@ module.exports = {
         },
         "CommentConnection": {
             "edges": [
-                90
+                93
             ],
             "nodes": [
-                91
+                94
             ],
             "pageInfo": [
-                102
+                105
             ],
             "on_UserToCommentConnection": [
-                88
+                91
             ],
             "on_CommentToCommentConnection": [
-                99
+                102
             ],
             "on_MediaItemToCommentConnection": [
-                152
+                159
             ],
             "on_PageToCommentConnection": [
-                183
+                190
             ],
             "on_PostToCommentConnection": [
-                317
+                327
             ],
             "on_RootQueryToCommentConnection": [
-                458
+                468
             ],
             "__typename": [
                 0
@@ -3821,28 +3735,28 @@ module.exports = {
                 0
             ],
             "node": [
-                91
+                94
             ],
             "on_CommentToParentCommentConnectionEdge": [
-                97
-            ],
-            "on_CommentToCommentConnectionEdge": [
                 100
             ],
-            "on_UserToCommentConnectionEdge": [
+            "on_CommentToCommentConnectionEdge": [
                 103
             ],
+            "on_UserToCommentConnectionEdge": [
+                106
+            ],
             "on_MediaItemToCommentConnectionEdge": [
-                153
+                160
             ],
             "on_PageToCommentConnectionEdge": [
-                184
+                191
             ],
             "on_PostToCommentConnectionEdge": [
-                318
+                328
             ],
             "on_RootQueryToCommentConnectionEdge": [
-                459
+                469
             ],
             "__typename": [
                 0
@@ -3856,7 +3770,7 @@ module.exports = {
                 2
             ],
             "author": [
-                92
+                95
             ],
             "authorIp": [
                 0
@@ -3865,13 +3779,13 @@ module.exports = {
                 1
             ],
             "commentedOn": [
-                94
+                97
             ],
             "content": [
                 0,
                 {
                     "format": [
-                        95
+                        98
                     ]
                 }
             ],
@@ -3912,10 +3826,10 @@ module.exports = {
                 0
             ],
             "parent": [
-                97,
+                100,
                 {
                     "where": [
-                        96
+                        99
                     ]
                 }
             ],
@@ -3926,7 +3840,7 @@ module.exports = {
                 4
             ],
             "replies": [
-                99,
+                102,
                 {
                     "first": [
                         1
@@ -3941,12 +3855,12 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        98
+                        101
                     ]
                 }
             ],
             "status": [
-                87
+                90
             ],
             "type": [
                 0
@@ -3972,7 +3886,7 @@ module.exports = {
                 0
             ],
             "node": [
-                614
+                624
             ],
             "url": [
                 0
@@ -3986,10 +3900,10 @@ module.exports = {
                 0
             ],
             "node": [
-                614
+                624
             ],
             "on_CommentToCommenterConnectionEdge": [
-                92
+                95
             ],
             "__typename": [
                 0
@@ -4060,10 +3974,10 @@ module.exports = {
                 1
             ],
             "contentStatus": [
-                67
+                69
             ],
             "contentType": [
-                54
+                56
             ],
             "includeUnapproved": [
                 4
@@ -4072,10 +3986,10 @@ module.exports = {
                 1
             ],
             "order": [
-                66
+                68
             ],
             "orderby": [
-                86
+                89
             ],
             "parent": [
                 1
@@ -4090,7 +4004,7 @@ module.exports = {
                 0
             ],
             "statusIn": [
-                87
+                90
             ],
             "userId": [
                 4
@@ -4104,7 +4018,7 @@ module.exports = {
                 0
             ],
             "node": [
-                91
+                94
             ],
             "__typename": [
                 0
@@ -4163,10 +4077,10 @@ module.exports = {
                 1
             ],
             "contentStatus": [
-                67
+                69
             ],
             "contentType": [
-                54
+                56
             ],
             "includeUnapproved": [
                 4
@@ -4175,10 +4089,10 @@ module.exports = {
                 1
             ],
             "order": [
-                66
+                68
             ],
             "orderby": [
-                86
+                89
             ],
             "parent": [
                 1
@@ -4193,7 +4107,7 @@ module.exports = {
                 0
             ],
             "statusIn": [
-                87
+                90
             ],
             "userId": [
                 4
@@ -4204,13 +4118,13 @@ module.exports = {
         },
         "CommentToCommentConnection": {
             "edges": [
-                100
+                103
             ],
             "nodes": [
-                91
+                94
             ],
             "pageInfo": [
-                101
+                104
             ],
             "__typename": [
                 0
@@ -4221,7 +4135,7 @@ module.exports = {
                 0
             ],
             "node": [
-                91
+                94
             ],
             "__typename": [
                 0
@@ -4258,22 +4172,22 @@ module.exports = {
                 0
             ],
             "on_CommentToCommentConnectionPageInfo": [
-                101
-            ],
-            "on_UserToCommentConnectionPageInfo": [
                 104
             ],
+            "on_UserToCommentConnectionPageInfo": [
+                107
+            ],
             "on_MediaItemToCommentConnectionPageInfo": [
-                154
+                161
             ],
             "on_PageToCommentConnectionPageInfo": [
-                185
+                192
             ],
             "on_PostToCommentConnectionPageInfo": [
-                319
+                329
             ],
             "on_RootQueryToCommentConnectionPageInfo": [
-                460
+                470
             ],
             "__typename": [
                 0
@@ -4284,7 +4198,7 @@ module.exports = {
                 0
             ],
             "node": [
-                91
+                94
             ],
             "__typename": [
                 0
@@ -4307,15 +4221,23 @@ module.exports = {
                 0
             ]
         },
+        "UserToEnqueuedScriptConnectionWhereArgs": {
+            "handlesIn": [
+                0
+            ],
+            "__typename": [
+                0
+            ]
+        },
         "UserToEnqueuedScriptConnection": {
             "edges": [
-                106
+                110
             ],
             "nodes": [
-                33
+                34
             ],
             "pageInfo": [
-                107
+                111
             ],
             "__typename": [
                 0
@@ -4326,7 +4248,7 @@ module.exports = {
                 0
             ],
             "node": [
-                33
+                34
             ],
             "__typename": [
                 0
@@ -4349,15 +4271,23 @@ module.exports = {
                 0
             ]
         },
+        "UserToEnqueuedStylesheetConnectionWhereArgs": {
+            "handlesIn": [
+                0
+            ],
+            "__typename": [
+                0
+            ]
+        },
         "UserToEnqueuedStylesheetConnection": {
             "edges": [
-                109
+                114
             ],
             "nodes": [
-                43
+                45
             ],
             "pageInfo": [
-                110
+                115
             ],
             "__typename": [
                 0
@@ -4368,7 +4298,7 @@ module.exports = {
                 0
             ],
             "node": [
-                43
+                45
             ],
             "__typename": [
                 0
@@ -4405,7 +4335,7 @@ module.exports = {
                 4
             ],
             "dateQuery": [
-                55
+                57
             ],
             "hasPassword": [
                 2
@@ -4416,11 +4346,14 @@ module.exports = {
             "in": [
                 4
             ],
+            "isSticky": [
+                2
+            ],
             "metaQuery": [
-                112
+                117
             ],
             "mimeType": [
-                63
+                65
             ],
             "name": [
                 0
@@ -4432,7 +4365,7 @@ module.exports = {
                 4
             ],
             "orderby": [
-                64
+                66
             ],
             "parent": [
                 4
@@ -4450,13 +4383,16 @@ module.exports = {
                 0
             ],
             "stati": [
-                67
+                69
             ],
             "status": [
-                67
+                69
             ],
             "taxQuery": [
-                68
+                70
+            ],
+            "template": [
+                75
             ],
             "title": [
                 0
@@ -4467,10 +4403,10 @@ module.exports = {
         },
         "UserToMediaItemConnectionWhereArgsMetaQuery": {
             "metaArray": [
-                113
+                118
             ],
             "relation": [
-                58
+                60
             ],
             "__typename": [
                 0
@@ -4478,13 +4414,13 @@ module.exports = {
         },
         "UserToMediaItemConnectionWhereArgsMetaArray": {
             "compare": [
-                114
+                119
             ],
             "key": [
                 0
             ],
             "type": [
-                115
+                120
             ],
             "value": [
                 0
@@ -4497,13 +4433,13 @@ module.exports = {
         "UserToMediaItemConnectionWhereArgsMetaTypeEnum": {},
         "UserToMediaItemConnection": {
             "edges": [
-                161
+                168
             ],
             "nodes": [
-                119
+                124
             ],
             "pageInfo": [
-                162
+                169
             ],
             "__typename": [
                 0
@@ -4511,19 +4447,19 @@ module.exports = {
         },
         "MediaItemConnection": {
             "edges": [
-                118
+                123
             ],
             "nodes": [
-                119
+                124
             ],
             "pageInfo": [
-                160
+                167
             ],
             "on_UserToMediaItemConnection": [
-                116
+                121
             ],
             "on_RootQueryToMediaItemConnection": [
-                495
+                502
             ],
             "__typename": [
                 0
@@ -4534,19 +4470,19 @@ module.exports = {
                 0
             ],
             "node": [
-                119
+                124
             ],
             "on_UserToMediaItemConnectionEdge": [
-                161
+                168
             ],
             "on_NodeWithFeaturedImageToMediaItemConnectionEdge": [
-                175
+                182
             ],
             "on_GeneralSettingsToMediaItemConnectionEdge": [
-                488
+                495
             ],
             "on_RootQueryToMediaItemConnectionEdge": [
-                496
+                503
             ],
             "__typename": [
                 0
@@ -4557,7 +4493,7 @@ module.exports = {
                 0
             ],
             "ancestors": [
-                132,
+                137,
                 {
                     "first": [
                         1
@@ -4572,12 +4508,12 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        127
+                        132
                     ]
                 }
             ],
             "author": [
-                123
+                128
             ],
             "authorDatabaseId": [
                 1
@@ -4589,12 +4525,12 @@ module.exports = {
                 0,
                 {
                     "format": [
-                        95
+                        98
                     ]
                 }
             ],
             "children": [
-                140,
+                145,
                 {
                     "first": [
                         1
@@ -4609,7 +4545,7 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        135
+                        140
                     ]
                 }
             ],
@@ -4620,7 +4556,7 @@ module.exports = {
                 0
             ],
             "comments": [
-                152,
+                159,
                 {
                     "first": [
                         1
@@ -4635,7 +4571,7 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        151
+                        158
                     ]
                 }
             ],
@@ -4658,7 +4594,7 @@ module.exports = {
                 0,
                 {
                     "format": [
-                        95
+                        98
                     ]
                 }
             ],
@@ -4666,13 +4602,13 @@ module.exports = {
                 0
             ],
             "editingLockedBy": [
-                80
+                83
             ],
             "enclosure": [
                 0
             ],
             "enqueuedScripts": [
-                143,
+                149,
                 {
                     "first": [
                         1
@@ -4685,11 +4621,14 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        148
                     ]
                 }
             ],
             "enqueuedStylesheets": [
-                146,
+                153,
                 {
                     "first": [
                         1
@@ -4702,6 +4641,9 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        152
                     ]
                 }
             ],
@@ -4709,7 +4651,7 @@ module.exports = {
                 0,
                 {
                     "size": [
-                        155
+                        162
                     ]
                 }
             ],
@@ -4717,7 +4659,7 @@ module.exports = {
                 0,
                 {
                     "size": [
-                        155
+                        162
                     ]
                 }
             ],
@@ -4725,7 +4667,7 @@ module.exports = {
                 1,
                 {
                     "size": [
-                        155
+                        162
                     ]
                 }
             ],
@@ -4760,13 +4702,13 @@ module.exports = {
                 2
             ],
             "lastEditedBy": [
-                149
+                156
             ],
             "link": [
                 0
             ],
             "mediaDetails": [
-                156
+                163
             ],
             "mediaItemId": [
                 1
@@ -4787,7 +4729,7 @@ module.exports = {
                 0
             ],
             "parent": [
-                150
+                157
             ],
             "parentDatabaseId": [
                 1
@@ -4808,7 +4750,7 @@ module.exports = {
                 0,
                 {
                     "size": [
-                        155
+                        162
                     ]
                 }
             ],
@@ -4819,7 +4761,7 @@ module.exports = {
                 0,
                 {
                     "size": [
-                        155
+                        162
                     ]
                 }
             ],
@@ -4827,7 +4769,7 @@ module.exports = {
                 0,
                 {
                     "size": [
-                        155
+                        162
                     ]
                 }
             ],
@@ -4835,13 +4777,13 @@ module.exports = {
                 0
             ],
             "template": [
-                616
+                626
             ],
             "title": [
                 0,
                 {
                     "format": [
-                        95
+                        98
                     ]
                 }
             ],
@@ -4857,42 +4799,31 @@ module.exports = {
                 4
             ],
             "template": [
-                616
+                626
             ],
             "on_ArquivoAssessoria": [
                 6
             ],
             "on_MediaItem": [
-                119
+                124
             ],
             "on_Page": [
-                171
+                178
             ],
             "on_Post": [
-                213
+                223
             ],
             "on_CentraldeDecorado": [
-                239
+                249
             ],
             "on_Empreendimento": [
-                278
+                288
             ],
             "on_Banner": [
-                421
+                431
             ],
             "__typename": [
-                1
-            ]
-        },
-        "ContentTemplate": {
-            "templateName": [
-                1
-            ],
-            "on_DefaultTemplate": [
-                702
-            ],
-            "__typename": [
-                1
+                0
             ]
         },
         "NodeWithTitle": {
@@ -4903,7 +4834,7 @@ module.exports = {
                 0,
                 {
                     "format": [
-                        95
+                        98
                     ]
                 }
             ],
@@ -4911,22 +4842,22 @@ module.exports = {
                 6
             ],
             "on_MediaItem": [
-                119
+                124
             ],
             "on_Page": [
-                171
+                178
             ],
             "on_Post": [
-                213
+                223
             ],
             "on_CentraldeDecorado": [
-                239
+                249
             ],
             "on_Empreendimento": [
-                278
+                288
             ],
             "on_Banner": [
-                421
+                431
             ],
             "__typename": [
                 0
@@ -4934,7 +4865,7 @@ module.exports = {
         },
         "NodeWithAuthor": {
             "author": [
-                123
+                128
             ],
             "authorDatabaseId": [
                 1
@@ -4946,13 +4877,13 @@ module.exports = {
                 4
             ],
             "on_MediaItem": [
-                119
+                124
             ],
             "on_Page": [
-                171
+                178
             ],
             "on_Post": [
-                213
+                223
             ],
             "__typename": [
                 0
@@ -4963,7 +4894,7 @@ module.exports = {
                 0
             ],
             "node": [
-                82
+                85
             ],
             "__typename": [
                 0
@@ -4980,13 +4911,13 @@ module.exports = {
                 4
             ],
             "on_MediaItem": [
-                119
+                124
             ],
             "on_Page": [
-                171
+                178
             ],
             "on_Post": [
-                213
+                223
             ],
             "__typename": [
                 0
@@ -4994,7 +4925,7 @@ module.exports = {
         },
         "HierarchicalContentNode": {
             "ancestors": [
-                132,
+                137,
                 {
                     "first": [
                         1
@@ -5009,12 +4940,12 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        127
+                        132
                     ]
                 }
             ],
             "children": [
-                140,
+                145,
                 {
                     "first": [
                         1
@@ -5029,7 +4960,7 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        135
+                        140
                     ]
                 }
             ],
@@ -5052,13 +4983,13 @@ module.exports = {
                 0
             ],
             "editingLockedBy": [
-                80
+                83
             ],
             "enclosure": [
                 0
             ],
             "enqueuedScripts": [
-                143,
+                149,
                 {
                     "first": [
                         1
@@ -5071,11 +5002,14 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        148
                     ]
                 }
             ],
             "enqueuedStylesheets": [
-                146,
+                153,
                 {
                     "first": [
                         1
@@ -5088,6 +5022,9 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        152
                     ]
                 }
             ],
@@ -5119,7 +5056,7 @@ module.exports = {
                 2
             ],
             "lastEditedBy": [
-                149
+                156
             ],
             "link": [
                 0
@@ -5131,7 +5068,7 @@ module.exports = {
                 0
             ],
             "parent": [
-                150
+                157
             ],
             "parentDatabaseId": [
                 1
@@ -5152,16 +5089,16 @@ module.exports = {
                 0
             ],
             "template": [
-                616
+                626
             ],
             "uri": [
                 0
             ],
             "on_MediaItem": [
-                119
+                124
             ],
             "on_Page": [
-                171
+                178
             ],
             "__typename": [
                 0
@@ -5181,13 +5118,13 @@ module.exports = {
                 4
             ],
             "on_MediaItem": [
-                119
+                124
             ],
             "on_Page": [
-                171
+                178
             ],
             "on_Category": [
-                225
+                235
             ],
             "__typename": [
                 0
@@ -5195,10 +5132,10 @@ module.exports = {
         },
         "HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgs": {
             "contentTypes": [
-                54
+                56
             ],
             "dateQuery": [
-                55
+                57
             ],
             "hasPassword": [
                 2
@@ -5209,11 +5146,14 @@ module.exports = {
             "in": [
                 4
             ],
+            "isSticky": [
+                2
+            ],
             "metaQuery": [
-                128
+                133
             ],
             "mimeType": [
-                63
+                65
             ],
             "name": [
                 0
@@ -5225,7 +5165,7 @@ module.exports = {
                 4
             ],
             "orderby": [
-                64
+                66
             ],
             "parent": [
                 4
@@ -5243,13 +5183,16 @@ module.exports = {
                 0
             ],
             "stati": [
-                67
+                69
             ],
             "status": [
-                67
+                69
             ],
             "taxQuery": [
-                68
+                70
+            ],
+            "template": [
+                75
             ],
             "title": [
                 0
@@ -5260,10 +5203,10 @@ module.exports = {
         },
         "HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgsMetaQuery": {
             "metaArray": [
-                129
+                134
             ],
             "relation": [
-                58
+                60
             ],
             "__typename": [
                 0
@@ -5271,13 +5214,13 @@ module.exports = {
         },
         "HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgsMetaArray": {
             "compare": [
-                130
+                135
             ],
             "key": [
                 0
             ],
             "type": [
-                131
+                136
             ],
             "value": [
                 0
@@ -5290,13 +5233,13 @@ module.exports = {
         "HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgsMetaTypeEnum": {},
         "HierarchicalContentNodeToContentNodeAncestorsConnection": {
             "edges": [
-                133
+                138
             ],
             "nodes": [
                 7
             ],
             "pageInfo": [
-                134
+                139
             ],
             "__typename": [
                 0
@@ -5332,10 +5275,10 @@ module.exports = {
         },
         "HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgs": {
             "contentTypes": [
-                54
+                56
             ],
             "dateQuery": [
-                55
+                57
             ],
             "hasPassword": [
                 2
@@ -5346,11 +5289,14 @@ module.exports = {
             "in": [
                 4
             ],
+            "isSticky": [
+                2
+            ],
             "metaQuery": [
-                136
+                141
             ],
             "mimeType": [
-                63
+                65
             ],
             "name": [
                 0
@@ -5362,7 +5308,7 @@ module.exports = {
                 4
             ],
             "orderby": [
-                64
+                66
             ],
             "parent": [
                 4
@@ -5380,13 +5326,16 @@ module.exports = {
                 0
             ],
             "stati": [
-                67
+                69
             ],
             "status": [
-                67
+                69
             ],
             "taxQuery": [
-                68
+                70
+            ],
+            "template": [
+                75
             ],
             "title": [
                 0
@@ -5397,10 +5346,10 @@ module.exports = {
         },
         "HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgsMetaQuery": {
             "metaArray": [
-                137
+                142
             ],
             "relation": [
-                58
+                60
             ],
             "__typename": [
                 0
@@ -5408,13 +5357,13 @@ module.exports = {
         },
         "HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgsMetaArray": {
             "compare": [
-                138
+                143
             ],
             "key": [
                 0
             ],
             "type": [
-                139
+                144
             ],
             "value": [
                 0
@@ -5427,13 +5376,13 @@ module.exports = {
         "HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgsMetaTypeEnum": {},
         "HierarchicalContentNodeToContentNodeChildrenConnection": {
             "edges": [
-                141
+                146
             ],
             "nodes": [
                 7
             ],
             "pageInfo": [
-                142
+                147
             ],
             "__typename": [
                 0
@@ -5467,15 +5416,23 @@ module.exports = {
                 0
             ]
         },
+        "ContentNodeToEnqueuedScriptConnectionWhereArgs": {
+            "handlesIn": [
+                0
+            ],
+            "__typename": [
+                0
+            ]
+        },
         "ContentNodeToEnqueuedScriptConnection": {
             "edges": [
-                144
+                150
             ],
             "nodes": [
-                33
+                34
             ],
             "pageInfo": [
-                145
+                151
             ],
             "__typename": [
                 0
@@ -5486,7 +5443,7 @@ module.exports = {
                 0
             ],
             "node": [
-                33
+                34
             ],
             "__typename": [
                 0
@@ -5509,15 +5466,23 @@ module.exports = {
                 0
             ]
         },
+        "ContentNodeToEnqueuedStylesheetConnectionWhereArgs": {
+            "handlesIn": [
+                0
+            ],
+            "__typename": [
+                0
+            ]
+        },
         "ContentNodeToEnqueuedStylesheetConnection": {
             "edges": [
-                147
+                154
             ],
             "nodes": [
-                43
+                45
             ],
             "pageInfo": [
-                148
+                155
             ],
             "__typename": [
                 0
@@ -5528,7 +5493,7 @@ module.exports = {
                 0
             ],
             "node": [
-                43
+                45
             ],
             "__typename": [
                 0
@@ -5556,7 +5521,7 @@ module.exports = {
                 0
             ],
             "node": [
-                82
+                85
             ],
             "__typename": [
                 0
@@ -5626,10 +5591,10 @@ module.exports = {
                 1
             ],
             "contentStatus": [
-                67
+                69
             ],
             "contentType": [
-                54
+                56
             ],
             "includeUnapproved": [
                 4
@@ -5638,10 +5603,10 @@ module.exports = {
                 1
             ],
             "order": [
-                66
+                68
             ],
             "orderby": [
-                86
+                89
             ],
             "parent": [
                 1
@@ -5656,7 +5621,7 @@ module.exports = {
                 0
             ],
             "statusIn": [
-                87
+                90
             ],
             "userId": [
                 4
@@ -5667,13 +5632,13 @@ module.exports = {
         },
         "MediaItemToCommentConnection": {
             "edges": [
-                153
+                160
             ],
             "nodes": [
-                91
+                94
             ],
             "pageInfo": [
-                154
+                161
             ],
             "__typename": [
                 0
@@ -5684,7 +5649,7 @@ module.exports = {
                 0
             ],
             "node": [
-                91
+                94
             ],
             "__typename": [
                 0
@@ -5719,17 +5684,17 @@ module.exports = {
                 1
             ],
             "meta": [
-                157
+                164
             ],
             "sizes": [
-                159,
+                166,
                 {
                     "exclude": [
-                        155,
+                        162,
                         "[MediaItemSizeEnum]"
                     ],
                     "include": [
-                        155,
+                        162,
                         "[MediaItemSizeEnum]"
                     ]
                 }
@@ -5743,7 +5708,7 @@ module.exports = {
         },
         "MediaItemMeta": {
             "aperture": [
-                158
+                165
             ],
             "camera": [
                 0
@@ -5761,7 +5726,7 @@ module.exports = {
                 0
             ],
             "focalLength": [
-                158
+                165
             ],
             "iso": [
                 1
@@ -5773,7 +5738,7 @@ module.exports = {
                 0
             ],
             "shutterSpeed": [
-                158
+                165
             ],
             "title": [
                 0
@@ -5826,10 +5791,10 @@ module.exports = {
                 0
             ],
             "on_UserToMediaItemConnectionPageInfo": [
-                162
+                169
             ],
             "on_RootQueryToMediaItemConnectionPageInfo": [
-                497
+                504
             ],
             "__typename": [
                 0
@@ -5840,7 +5805,7 @@ module.exports = {
                 0
             ],
             "node": [
-                119
+                124
             ],
             "__typename": [
                 0
@@ -5877,7 +5842,7 @@ module.exports = {
                 4
             ],
             "dateQuery": [
-                55
+                57
             ],
             "hasPassword": [
                 2
@@ -5888,11 +5853,14 @@ module.exports = {
             "in": [
                 4
             ],
+            "isSticky": [
+                2
+            ],
             "metaQuery": [
-                164
+                171
             ],
             "mimeType": [
-                63
+                65
             ],
             "name": [
                 0
@@ -5904,7 +5872,7 @@ module.exports = {
                 4
             ],
             "orderby": [
-                64
+                66
             ],
             "parent": [
                 4
@@ -5922,13 +5890,16 @@ module.exports = {
                 0
             ],
             "stati": [
-                67
+                69
             ],
             "status": [
-                67
+                69
             ],
             "taxQuery": [
-                68
+                70
+            ],
+            "template": [
+                75
             ],
             "title": [
                 0
@@ -5939,10 +5910,10 @@ module.exports = {
         },
         "UserToPageConnectionWhereArgsMetaQuery": {
             "metaArray": [
-                165
+                172
             ],
             "relation": [
-                58
+                60
             ],
             "__typename": [
                 0
@@ -5950,13 +5921,13 @@ module.exports = {
         },
         "UserToPageConnectionWhereArgsMetaArray": {
             "compare": [
-                166
+                173
             ],
             "key": [
                 0
             ],
             "type": [
-                167
+                174
             ],
             "value": [
                 0
@@ -5969,13 +5940,13 @@ module.exports = {
         "UserToPageConnectionWhereArgsMetaTypeEnum": {},
         "UserToPageConnection": {
             "edges": [
-                203
+                213
             ],
             "nodes": [
-                171
+                178
             ],
             "pageInfo": [
-                204
+                214
             ],
             "__typename": [
                 0
@@ -5983,22 +5954,22 @@ module.exports = {
         },
         "PageConnection": {
             "edges": [
-                170
+                177
             ],
             "nodes": [
-                171
+                178
             ],
             "pageInfo": [
-                202
+                212
             ],
             "on_UserToPageConnection": [
-                168
+                175
             ],
             "on_PageToRevisionConnection": [
-                199
+                209
             ],
             "on_RootQueryToPageConnection": [
-                535
+                542
             ],
             "__typename": [
                 0
@@ -6009,19 +5980,19 @@ module.exports = {
                 0
             ],
             "node": [
-                171
+                178
             ],
             "on_PageToPreviewConnectionEdge": [
-                193
-            ],
-            "on_PageToRevisionConnectionEdge": [
-                200
-            ],
-            "on_UserToPageConnectionEdge": [
                 203
             ],
+            "on_PageToRevisionConnectionEdge": [
+                210
+            ],
+            "on_UserToPageConnectionEdge": [
+                213
+            ],
             "on_RootQueryToPageConnectionEdge": [
-                536
+                543
             ],
             "__typename": [
                 0
@@ -6029,7 +6000,7 @@ module.exports = {
         },
         "Page": {
             "ancestors": [
-                132,
+                137,
                 {
                     "first": [
                         1
@@ -6044,15 +6015,15 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        127
+                        132
                     ]
                 }
             ],
             "assessoria": [
-                180
+                187
             ],
             "author": [
-                123
+                128
             ],
             "authorDatabaseId": [
                 1
@@ -6061,7 +6032,7 @@ module.exports = {
                 4
             ],
             "children": [
-                140,
+                145,
                 {
                     "first": [
                         1
@@ -6076,7 +6047,7 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        135
+                        140
                     ]
                 }
             ],
@@ -6087,7 +6058,7 @@ module.exports = {
                 0
             ],
             "comments": [
-                183,
+                190,
                 {
                     "first": [
                         1
@@ -6102,7 +6073,7 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        182
+                        189
                     ]
                 }
             ],
@@ -6110,7 +6081,7 @@ module.exports = {
                 0,
                 {
                     "format": [
-                        95
+                        98
                     ]
                 }
             ],
@@ -6121,22 +6092,16 @@ module.exports = {
                 0
             ],
             "conteuSobre": [
-                186
+                193
             ],
             "conteudoIndiqueEGanhe": [
-                188
+                195
             ],
             "conteudoLStore": [
-                191
+                198
             ],
             "conteudoPoliticaDeQualidade": [
-                192
-            ],
-            "conteudoIndiqueEGanhe": [
-                192
-            ],
-            "conteudoLStore": [
-                195
+                199
             ],
             "databaseId": [
                 1
@@ -6151,13 +6116,13 @@ module.exports = {
                 0
             ],
             "editingLockedBy": [
-                80
+                83
             ],
             "enclosure": [
                 0
             ],
             "enqueuedScripts": [
-                143,
+                149,
                 {
                     "first": [
                         1
@@ -6170,11 +6135,14 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        148
                     ]
                 }
             ],
             "enqueuedStylesheets": [
-                146,
+                153,
                 {
                     "first": [
                         1
@@ -6187,11 +6155,14 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        152
                     ]
                 }
             ],
             "featuredImage": [
-                175
+                182
             ],
             "featuredImageDatabaseId": [
                 1
@@ -6209,7 +6180,7 @@ module.exports = {
                 4
             ],
             "informacoesDeContato": [
-                192
+                202
             ],
             "isComment": [
                 2
@@ -6239,7 +6210,7 @@ module.exports = {
                 2
             ],
             "lastEditedBy": [
-                149
+                156
             ],
             "link": [
                 0
@@ -6257,7 +6228,7 @@ module.exports = {
                 1
             ],
             "parent": [
-                150
+                157
             ],
             "parentDatabaseId": [
                 1
@@ -6269,7 +6240,7 @@ module.exports = {
                 0
             ],
             "preview": [
-                193
+                203
             ],
             "previewRevisionDatabaseId": [
                 1
@@ -6278,10 +6249,10 @@ module.exports = {
                 4
             ],
             "revisionOf": [
-                177
+                184
             ],
             "revisions": [
-                199,
+                209,
                 {
                     "first": [
                         1
@@ -6296,7 +6267,7 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        194
+                        204
                     ]
                 }
             ],
@@ -6307,13 +6278,13 @@ module.exports = {
                 0
             ],
             "template": [
-                616
+                626
             ],
             "title": [
                 0,
                 {
                     "format": [
-                        95
+                        98
                     ]
                 }
             ],
@@ -6338,19 +6309,19 @@ module.exports = {
                 6
             ],
             "on_Page": [
-                171
+                178
             ],
             "on_Post": [
-                213
+                223
             ],
             "on_CentraldeDecorado": [
-                239
+                249
             ],
             "on_Empreendimento": [
-                278
+                288
             ],
             "on_Banner": [
-                421
+                431
             ],
             "__typename": [
                 0
@@ -6361,7 +6332,7 @@ module.exports = {
                 0,
                 {
                     "format": [
-                        95
+                        98
                     ]
                 }
             ],
@@ -6369,10 +6340,10 @@ module.exports = {
                 4
             ],
             "on_Page": [
-                171
+                178
             ],
             "on_Post": [
-                213
+                223
             ],
             "__typename": [
                 0
@@ -6380,7 +6351,7 @@ module.exports = {
         },
         "NodeWithFeaturedImage": {
             "featuredImage": [
-                175
+                182
             ],
             "featuredImageDatabaseId": [
                 1
@@ -6392,16 +6363,16 @@ module.exports = {
                 4
             ],
             "on_Page": [
-                171
+                178
             ],
             "on_Post": [
-                213
+                223
             ],
             "on_CentraldeDecorado": [
-                239
+                249
             ],
             "on_Empreendimento": [
-                278
+                288
             ],
             "__typename": [
                 0
@@ -6412,7 +6383,7 @@ module.exports = {
                 0
             ],
             "node": [
-                119
+                124
             ],
             "__typename": [
                 0
@@ -6426,13 +6397,13 @@ module.exports = {
                 2
             ],
             "revisionOf": [
-                177
+                184
             ],
             "on_Page": [
-                171
+                178
             ],
             "on_Post": [
-                213
+                223
             ],
             "__typename": [
                 0
@@ -6457,7 +6428,7 @@ module.exports = {
                 1
             ],
             "on_Page": [
-                171
+                178
             ],
             "__typename": [
                 0
@@ -6492,25 +6463,25 @@ module.exports = {
                 6
             ],
             "on_Page": [
-                171
+                178
             ],
             "on_Post": [
-                213
+                223
             ],
             "on_Category": [
-                225
+                235
             ],
             "on_CentraldeDecorado": [
-                239
+                249
             ],
             "on_Empreendimento": [
-                278
+                288
             ],
             "on_Tag": [
-                360
+                370
             ],
             "on_Banner": [
-                421
+                431
             ],
             "__typename": [
                 0
@@ -6541,70 +6512,79 @@ module.exports = {
                 0
             ],
             "on_Page_Assessoria": [
-                180
-            ],
-            "on_Page_Conteusobre": [
-                186
-            ],
-            "on_Page_Conteusobre_item": [
                 187
             ],
+            "on_Page_Conteusobre": [
+                193
+            ],
+            "on_Page_Conteusobre_item": [
+                194
+            ],
             "on_Page_Conteudoindiqueeganhe": [
-                188
+                195
             ],
             "on_Page_Conteudoindiqueeganhe_EmObra": [
-                189
+                196
             ],
             "on_Page_Conteudoindiqueeganhe_Entregue": [
-                190
+                197
             ],
             "on_Page_Conteudolstore": [
-                191
+                198
+            ],
+            "on_Page_Conteudopoliticadequalidade": [
+                199
+            ],
+            "on_Page_Conteudopoliticadequalidade_certificacaoPq": [
+                200
+            ],
+            "on_Page_Conteudopoliticadequalidade_praticaItensPq": [
+                201
             ],
             "on_Page_Informacoesdecontato": [
-                192
+                202
             ],
             "on_CentraldeDecorado_Centraldedecorados": [
-                248
+                258
             ],
             "on_Empreendimento_Empreendimento": [
-                287
+                297
             ],
             "on_Empreendimento_Empreendimento_andamentoDaObra": [
-                288
+                298
             ],
             "on_Empreendimento_Empreendimento_diferenciaisItems": [
-                289
+                299
             ],
             "on_Empreendimento_Empreendimento_itemsPlantas": [
-                290
+                300
             ],
             "on_Empreendimento_Empreendimento_itensAreacomuns": [
-                291
+                301
             ],
             "on_Empreendimento_Empreendimento_pontosDeReferencia": [
-                292
+                302
             ],
             "on_Empreendimento_Empreendimento_videosOutos": [
-                293
+                303
             ],
             "on_Empreendimento_Housiverso": [
-                294
+                304
             ],
             "on_Empreendimento_Housiverso_diferencial": [
-                295
+                305
             ],
             "on_ArquivoAssessoria_DownAssessoria": [
-                409
+                419
             ],
             "on_Banner_BannerHome": [
-                428
+                438
             ],
             "on_Banner_BannerHome_BhConteudo": [
-                429
+                439
             ],
             "on_Banner_BannerHome_ImagensProntas": [
-                430
+                440
             ],
             "__typename": [
                 0
@@ -6663,10 +6643,10 @@ module.exports = {
                 1
             ],
             "contentStatus": [
-                67
+                69
             ],
             "contentType": [
-                54
+                56
             ],
             "includeUnapproved": [
                 4
@@ -6675,10 +6655,10 @@ module.exports = {
                 1
             ],
             "order": [
-                66
+                68
             ],
             "orderby": [
-                86
+                89
             ],
             "parent": [
                 1
@@ -6693,7 +6673,7 @@ module.exports = {
                 0
             ],
             "statusIn": [
-                87
+                90
             ],
             "userId": [
                 4
@@ -6704,13 +6684,13 @@ module.exports = {
         },
         "PageToCommentConnection": {
             "edges": [
-                184
+                191
             ],
             "nodes": [
-                91
+                94
             ],
             "pageInfo": [
-                185
+                192
             ],
             "__typename": [
                 0
@@ -6721,7 +6701,7 @@ module.exports = {
                 0
             ],
             "node": [
-                91
+                94
             ],
             "__typename": [
                 0
@@ -6761,19 +6741,19 @@ module.exports = {
                 0
             ],
             "imagem1": [
-                119
+                124
             ],
             "imagem2": [
-                119
+                124
             ],
             "imagembannerDoTourVirtual": [
-                119
+                124
             ],
             "imagensSelos": [
-                119
+                124
             ],
             "item": [
-                187
+                194
             ],
             "linkDoTourVirtual": [
                 0
@@ -6825,19 +6805,19 @@ module.exports = {
                 0
             ],
             "emObra": [
-                189
+                196
             ],
             "entregue": [
-                190
+                197
             ],
             "fieldGroupName": [
                 0
             ],
             "imagemIg": [
-                119
+                124
             ],
             "regulamentoIndiqueGanhe": [
-                119
+                124
             ],
             "tituloPasso1Ig": [
                 0
@@ -6915,19 +6895,19 @@ module.exports = {
                 0
             ],
             "imagem1": [
-                119
+                124
             ],
             "imagem2": [
-                119
+                124
             ],
             "imagemSobreLstore": [
-                119
+                124
             ],
             "imagensGaleriaLstore": [
-                119
+                124
             ],
             "imagensSalaLstore": [
-                119
+                124
             ],
             "numeroParaAgendamentoLstore": [
                 0
@@ -6965,13 +6945,13 @@ module.exports = {
         },
         "Page_Conteudopoliticadequalidade": {
             "certificacaoPq": [
-                193
+                200
             ],
             "fieldGroupName": [
                 0
             ],
             "praticaItensPq": [
-                194
+                201
             ],
             "__typename": [
                 0
@@ -6985,7 +6965,7 @@ module.exports = {
                 0
             ],
             "imagemCertPq": [
-                119
+                124
             ],
             "tituloCertPq": [
                 0
@@ -7002,165 +6982,13 @@ module.exports = {
                 0
             ],
             "imagemCertPq": [
-                119
+                124
             ],
             "tituloCertPq": [
                 0
             ],
             "__typename": [
                 0
-            ]
-        },
-        "Page_Conteudoindiqueeganhe": {
-            "descricaoIg": [
-                1
-            ],
-            "descricaoPasso1Ig": [
-                1
-            ],
-            "descricaoPasso2Ig": [
-                1
-            ],
-            "descricaoPasso3Ig": [
-                1
-            ],
-            "emObra": [
-                193
-            ],
-            "entregue": [
-                194
-            ],
-            "fieldGroupName": [
-                1
-            ],
-            "imagemIg": [
-                122
-            ],
-            "regulamentoIndiqueGanhe": [
-                122
-            ],
-            "tituloPasso1Ig": [
-                1
-            ],
-            "tituloPasso2Ig": [
-                1
-            ],
-            "tituloPasso3Ig": [
-                1
-            ],
-            "__typename": [
-                1
-            ]
-        },
-        "Page_Conteudoindiqueeganhe_EmObra": {
-            "beneficioEmobraIg": [
-                1
-            ],
-            "fieldGroupName": [
-                1
-            ],
-            "observacaoEmobraIg": [
-                1
-            ],
-            "__typename": [
-                1
-            ]
-        },
-        "Page_Conteudoindiqueeganhe_Entregue": {
-            "beneficioEntregueIg": [
-                1
-            ],
-            "fieldGroupName": [
-                1
-            ],
-            "observacaoEntregueIg": [
-                1
-            ],
-            "__typename": [
-                1
-            ]
-        },
-        "Page_Conteudolstore": {
-            "descicaoBannerLstore": [
-                1
-            ],
-            "descricaoGaleriaLstore": [
-                1
-            ],
-            "descricaoPasso1Lstore": [
-                1
-            ],
-            "descricaoPasso2Lstore": [
-                1
-            ],
-            "descricaoPasso3Lstore": [
-                1
-            ],
-            "descricaoPassoLstore": [
-                1
-            ],
-            "descricaoSalaLstore": [
-                1
-            ],
-            "descricaoSobreLstore": [
-                1
-            ],
-            "descricaoUltimoLstore": [
-                1
-            ],
-            "fieldGroupName": [
-                1
-            ],
-            "fraseBannerLstore": [
-                1
-            ],
-            "imagem1": [
-                122
-            ],
-            "imagem2": [
-                122
-            ],
-            "imagemSobreLstore": [
-                122
-            ],
-            "imagensGaleriaLstore": [
-                122
-            ],
-            "imagensSalaLstore": [
-                122
-            ],
-            "numeroParaAgendamentoLstore": [
-                1
-            ],
-            "textoAuxiliarSobreLstore": [
-                1
-            ],
-            "tituloBannerLstore": [
-                1
-            ],
-            "tituloGaleriaLstore": [
-                1
-            ],
-            "tituloPasso1Lstore": [
-                1
-            ],
-            "tituloPasso2Lstore": [
-                1
-            ],
-            "tituloPasso3Lstore": [
-                1
-            ],
-            "tituloPassoLstore": [
-                1
-            ],
-            "tituloSalaLstore": [
-                1
-            ],
-            "tituloUltimoLstore": [
-                1
-            ],
-            "__typename": [
-                1
             ]
         },
         "Page_Informacoesdecontato": {
@@ -7197,7 +7025,7 @@ module.exports = {
                 0
             ],
             "node": [
-                171
+                178
             ],
             "__typename": [
                 0
@@ -7217,7 +7045,7 @@ module.exports = {
                 4
             ],
             "dateQuery": [
-                55
+                57
             ],
             "hasPassword": [
                 2
@@ -7228,11 +7056,14 @@ module.exports = {
             "in": [
                 4
             ],
+            "isSticky": [
+                2
+            ],
             "metaQuery": [
-                195
+                205
             ],
             "mimeType": [
-                63
+                65
             ],
             "name": [
                 0
@@ -7244,7 +7075,7 @@ module.exports = {
                 4
             ],
             "orderby": [
-                64
+                66
             ],
             "parent": [
                 4
@@ -7262,13 +7093,16 @@ module.exports = {
                 0
             ],
             "stati": [
-                67
+                69
             ],
             "status": [
-                67
+                69
             ],
             "taxQuery": [
-                68
+                70
+            ],
+            "template": [
+                75
             ],
             "title": [
                 0
@@ -7279,10 +7113,10 @@ module.exports = {
         },
         "PageToRevisionConnectionWhereArgsMetaQuery": {
             "metaArray": [
-                196
+                206
             ],
             "relation": [
-                58
+                60
             ],
             "__typename": [
                 0
@@ -7290,13 +7124,13 @@ module.exports = {
         },
         "PageToRevisionConnectionWhereArgsMetaArray": {
             "compare": [
-                197
+                207
             ],
             "key": [
                 0
             ],
             "type": [
-                198
+                208
             ],
             "value": [
                 0
@@ -7309,13 +7143,13 @@ module.exports = {
         "PageToRevisionConnectionWhereArgsMetaTypeEnum": {},
         "PageToRevisionConnection": {
             "edges": [
-                200
+                210
             ],
             "nodes": [
-                171
+                178
             ],
             "pageInfo": [
-                201
+                211
             ],
             "__typename": [
                 0
@@ -7326,7 +7160,7 @@ module.exports = {
                 0
             ],
             "node": [
-                171
+                178
             ],
             "__typename": [
                 0
@@ -7363,13 +7197,13 @@ module.exports = {
                 0
             ],
             "on_PageToRevisionConnectionPageInfo": [
-                201
+                211
             ],
             "on_UserToPageConnectionPageInfo": [
-                204
+                214
             ],
             "on_RootQueryToPageConnectionPageInfo": [
-                537
+                544
             ],
             "__typename": [
                 0
@@ -7380,7 +7214,7 @@ module.exports = {
                 0
             ],
             "node": [
-                171
+                178
             ],
             "__typename": [
                 0
@@ -7429,7 +7263,7 @@ module.exports = {
                 4
             ],
             "dateQuery": [
-                55
+                57
             ],
             "hasPassword": [
                 2
@@ -7440,11 +7274,14 @@ module.exports = {
             "in": [
                 4
             ],
+            "isSticky": [
+                2
+            ],
             "metaQuery": [
-                206
+                216
             ],
             "mimeType": [
-                63
+                65
             ],
             "name": [
                 0
@@ -7456,7 +7293,7 @@ module.exports = {
                 4
             ],
             "orderby": [
-                64
+                66
             ],
             "parent": [
                 4
@@ -7474,10 +7311,10 @@ module.exports = {
                 0
             ],
             "stati": [
-                67
+                69
             ],
             "status": [
-                67
+                69
             ],
             "tag": [
                 0
@@ -7498,7 +7335,10 @@ module.exports = {
                 0
             ],
             "taxQuery": [
-                68
+                70
+            ],
+            "template": [
+                75
             ],
             "title": [
                 0
@@ -7509,10 +7349,10 @@ module.exports = {
         },
         "UserToPostConnectionWhereArgsMetaQuery": {
             "metaArray": [
-                207
+                217
             ],
             "relation": [
-                58
+                60
             ],
             "__typename": [
                 0
@@ -7520,13 +7360,13 @@ module.exports = {
         },
         "UserToPostConnectionWhereArgsMetaArray": {
             "compare": [
-                208
+                218
             ],
             "key": [
                 0
             ],
             "type": [
-                209
+                219
             ],
             "value": [
                 0
@@ -7539,13 +7379,13 @@ module.exports = {
         "UserToPostConnectionWhereArgsMetaTypeEnum": {},
         "UserToPostConnection": {
             "edges": [
-                386
+                396
             ],
             "nodes": [
-                213
+                223
             ],
             "pageInfo": [
-                387
+                397
             ],
             "__typename": [
                 0
@@ -7553,34 +7393,34 @@ module.exports = {
         },
         "PostConnection": {
             "edges": [
-                212
+                222
             ],
             "nodes": [
-                213
+                223
             ],
             "pageInfo": [
-                219
+                229
             ],
             "on_UserToPostConnection": [
-                210
+                220
             ],
             "on_PostToPostConnection": [
-                216
+                226
             ],
             "on_CategoryToPostConnection": [
-                310
+                320
             ],
             "on_PostFormatToPostConnection": [
-                340
+                350
             ],
             "on_PostToRevisionConnection": [
-                353
+                363
             ],
             "on_TagToPostConnection": [
-                375
+                385
             ],
             "on_RootQueryToPostConnection": [
-                558
+                566
             ],
             "__typename": [
                 0
@@ -7591,34 +7431,34 @@ module.exports = {
                 0
             ],
             "node": [
-                213
+                223
             ],
             "on_PostToPostConnectionEdge": [
-                217
+                227
             ],
             "on_CategoryToPostConnectionEdge": [
-                311
+                321
             ],
             "on_PostToParentConnectionEdge": [
-                320
+                330
             ],
             "on_PostFormatToPostConnectionEdge": [
-                341
+                351
             ],
             "on_PostToPreviewConnectionEdge": [
-                347
+                357
             ],
             "on_PostToRevisionConnectionEdge": [
-                354
+                364
             ],
             "on_TagToPostConnectionEdge": [
-                376
-            ],
-            "on_UserToPostConnectionEdge": [
                 386
             ],
+            "on_UserToPostConnectionEdge": [
+                396
+            ],
             "on_RootQueryToPostConnectionEdge": [
-                559
+                567
             ],
             "__typename": [
                 0
@@ -7626,7 +7466,7 @@ module.exports = {
         },
         "Post": {
             "ancestors": [
-                216,
+                226,
                 {
                     "first": [
                         1
@@ -7643,7 +7483,7 @@ module.exports = {
                 }
             ],
             "author": [
-                123
+                128
             ],
             "authorDatabaseId": [
                 1
@@ -7652,7 +7492,7 @@ module.exports = {
                 4
             ],
             "categories": [
-                222,
+                232,
                 {
                     "first": [
                         1
@@ -7667,7 +7507,7 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        220
+                        230
                     ]
                 }
             ],
@@ -7678,7 +7518,7 @@ module.exports = {
                 0
             ],
             "comments": [
-                317,
+                327,
                 {
                     "first": [
                         1
@@ -7693,7 +7533,7 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        316
+                        326
                     ]
                 }
             ],
@@ -7701,7 +7541,7 @@ module.exports = {
                 0,
                 {
                     "format": [
-                        95
+                        98
                     ]
                 }
             ],
@@ -7724,13 +7564,13 @@ module.exports = {
                 0
             ],
             "editingLockedBy": [
-                80
+                83
             ],
             "enclosure": [
                 0
             ],
             "enqueuedScripts": [
-                143,
+                149,
                 {
                     "first": [
                         1
@@ -7743,11 +7583,14 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        148
                     ]
                 }
             ],
             "enqueuedStylesheets": [
-                146,
+                153,
                 {
                     "first": [
                         1
@@ -7760,6 +7603,9 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        152
                     ]
                 }
             ],
@@ -7767,12 +7613,12 @@ module.exports = {
                 0,
                 {
                     "format": [
-                        95
+                        98
                     ]
                 }
             ],
             "featuredImage": [
-                175
+                182
             ],
             "featuredImageDatabaseId": [
                 1
@@ -7817,7 +7663,7 @@ module.exports = {
                 2
             ],
             "lastEditedBy": [
-                149
+                156
             ],
             "link": [
                 0
@@ -7829,7 +7675,7 @@ module.exports = {
                 0
             ],
             "parent": [
-                320
+                330
             ],
             "password": [
                 0
@@ -7841,7 +7687,7 @@ module.exports = {
                 0
             ],
             "postFormats": [
-                322,
+                332,
                 {
                     "first": [
                         1
@@ -7856,7 +7702,7 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        321
+                        331
                     ]
                 }
             ],
@@ -7864,7 +7710,7 @@ module.exports = {
                 1
             ],
             "preview": [
-                347
+                357
             ],
             "previewRevisionDatabaseId": [
                 1
@@ -7873,10 +7719,10 @@ module.exports = {
                 4
             ],
             "revisionOf": [
-                177
+                184
             ],
             "revisions": [
-                353,
+                363,
                 {
                     "first": [
                         1
@@ -7891,7 +7737,7 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        348
+                        358
                     ]
                 }
             ],
@@ -7902,7 +7748,7 @@ module.exports = {
                 0
             ],
             "tags": [
-                357,
+                367,
                 {
                     "first": [
                         1
@@ -7917,15 +7763,15 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        356
+                        366
                     ]
                 }
             ],
             "template": [
-                616
+                626
             ],
             "terms": [
-                383,
+                393,
                 {
                     "first": [
                         1
@@ -7940,7 +7786,7 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        382
+                        392
                     ]
                 }
             ],
@@ -7948,7 +7794,7 @@ module.exports = {
                 0,
                 {
                     "format": [
-                        95
+                        98
                     ]
                 }
             ],
@@ -7967,7 +7813,7 @@ module.exports = {
                 0,
                 {
                     "format": [
-                        95
+                        98
                     ]
                 }
             ],
@@ -7975,7 +7821,7 @@ module.exports = {
                 4
             ],
             "on_Post": [
-                213
+                223
             ],
             "__typename": [
                 0
@@ -7995,7 +7841,7 @@ module.exports = {
                 0
             ],
             "on_Post": [
-                213
+                223
             ],
             "__typename": [
                 0
@@ -8003,13 +7849,13 @@ module.exports = {
         },
         "PostToPostConnection": {
             "edges": [
-                217
+                227
             ],
             "nodes": [
-                213
+                223
             ],
             "pageInfo": [
-                218
+                228
             ],
             "__typename": [
                 0
@@ -8020,7 +7866,7 @@ module.exports = {
                 0
             ],
             "node": [
-                213
+                223
             ],
             "__typename": [
                 0
@@ -8057,25 +7903,25 @@ module.exports = {
                 0
             ],
             "on_PostToPostConnectionPageInfo": [
-                218
+                228
             ],
             "on_CategoryToPostConnectionPageInfo": [
-                312
+                322
             ],
             "on_PostFormatToPostConnectionPageInfo": [
-                342
+                352
             ],
             "on_PostToRevisionConnectionPageInfo": [
-                355
+                365
             ],
             "on_TagToPostConnectionPageInfo": [
-                377
-            ],
-            "on_UserToPostConnectionPageInfo": [
                 387
             ],
+            "on_UserToPostConnectionPageInfo": [
+                397
+            ],
             "on_RootQueryToPostConnectionPageInfo": [
-                560
+                568
             ],
             "__typename": [
                 0
@@ -8119,10 +7965,10 @@ module.exports = {
                 4
             ],
             "order": [
-                66
+                68
             ],
             "orderby": [
-                221
+                231
             ],
             "padCounts": [
                 2
@@ -8149,13 +7995,13 @@ module.exports = {
         "TermObjectsConnectionOrderbyEnum": {},
         "PostToCategoryConnection": {
             "edges": [
-                314
+                324
             ],
             "nodes": [
-                225
+                235
             ],
             "pageInfo": [
-                315
+                325
             ],
             "__typename": [
                 0
@@ -8163,31 +8009,31 @@ module.exports = {
         },
         "CategoryConnection": {
             "edges": [
-                224
+                234
             ],
             "nodes": [
-                225
+                235
             ],
             "pageInfo": [
-                230
+                240
             ],
             "on_PostToCategoryConnection": [
-                222
+                232
             ],
             "on_CategoryToAncestorsCategoryConnection": [
-                227
+                237
             ],
             "on_CentraldeDecoradoToCategoryConnection": [
-                245
+                255
             ],
             "on_CategoryToCategoryConnection": [
-                258
+                268
             ],
             "on_EmpreendimentoToCategoryConnection": [
-                284
+                294
             ],
             "on_RootQueryToCategoryConnection": [
-                443
+                453
             ],
             "__typename": [
                 0
@@ -8198,28 +8044,28 @@ module.exports = {
                 0
             ],
             "node": [
-                225
+                235
             ],
             "on_CategoryToAncestorsCategoryConnectionEdge": [
-                228
+                238
             ],
             "on_CentraldeDecoradoToCategoryConnectionEdge": [
-                246
+                256
             ],
             "on_CategoryToCategoryConnectionEdge": [
-                259
+                269
             ],
             "on_EmpreendimentoToCategoryConnectionEdge": [
-                285
+                295
             ],
             "on_CategoryToParentCategoryConnectionEdge": [
-                304
-            ],
-            "on_PostToCategoryConnectionEdge": [
                 314
             ],
+            "on_PostToCategoryConnectionEdge": [
+                324
+            ],
             "on_RootQueryToCategoryConnectionEdge": [
-                444
+                454
             ],
             "__typename": [
                 0
@@ -8227,7 +8073,7 @@ module.exports = {
         },
         "Category": {
             "ancestors": [
-                227,
+                237,
                 {
                     "first": [
                         1
@@ -8247,7 +8093,7 @@ module.exports = {
                 1
             ],
             "centraldeDecorados": [
-                236,
+                246,
                 {
                     "first": [
                         1
@@ -8262,12 +8108,12 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        231
+                        241
                     ]
                 }
             ],
             "children": [
-                258,
+                268,
                 {
                     "first": [
                         1
@@ -8282,12 +8128,12 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        257
+                        267
                     ]
                 }
             ],
             "contentNodes": [
-                267,
+                277,
                 {
                     "first": [
                         1
@@ -8302,7 +8148,7 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        261
+                        271
                     ]
                 }
             ],
@@ -8316,7 +8162,7 @@ module.exports = {
                 0
             ],
             "empreendimentos": [
-                275,
+                285,
                 {
                     "first": [
                         1
@@ -8331,12 +8177,12 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        270
+                        280
                     ]
                 }
             ],
             "enqueuedScripts": [
-                30,
+                31,
                 {
                     "first": [
                         1
@@ -8349,11 +8195,14 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        30
                     ]
                 }
             ],
             "enqueuedStylesheets": [
-                40,
+                42,
                 {
                     "first": [
                         1
@@ -8366,6 +8215,9 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        41
                     ]
                 }
             ],
@@ -8397,7 +8249,7 @@ module.exports = {
                 0
             ],
             "parent": [
-                304
+                314
             ],
             "parentDatabaseId": [
                 1
@@ -8406,7 +8258,7 @@ module.exports = {
                 4
             ],
             "posts": [
-                310,
+                320,
                 {
                     "first": [
                         1
@@ -8421,7 +8273,7 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        305
+                        315
                     ]
                 }
             ],
@@ -8429,7 +8281,7 @@ module.exports = {
                 0
             ],
             "taxonomy": [
-                313
+                323
             ],
             "taxonomyName": [
                 0
@@ -8458,7 +8310,7 @@ module.exports = {
                 0
             ],
             "enqueuedScripts": [
-                30,
+                31,
                 {
                     "first": [
                         1
@@ -8471,11 +8323,14 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        30
                     ]
                 }
             ],
             "enqueuedStylesheets": [
-                40,
+                42,
                 {
                     "first": [
                         1
@@ -8488,6 +8343,9 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        41
                     ]
                 }
             ],
@@ -8540,7 +8398,7 @@ module.exports = {
                 0
             ],
             "on_Category": [
-                225
+                235
             ],
             "__typename": [
                 0
@@ -8548,13 +8406,13 @@ module.exports = {
         },
         "CategoryToAncestorsCategoryConnection": {
             "edges": [
-                228
+                238
             ],
             "nodes": [
-                225
+                235
             ],
             "pageInfo": [
-                229
+                239
             ],
             "__typename": [
                 0
@@ -8565,7 +8423,7 @@ module.exports = {
                 0
             ],
             "node": [
-                225
+                235
             ],
             "__typename": [
                 0
@@ -8602,22 +8460,22 @@ module.exports = {
                 0
             ],
             "on_CategoryToAncestorsCategoryConnectionPageInfo": [
-                229
+                239
             ],
             "on_CentraldeDecoradoToCategoryConnectionPageInfo": [
-                247
+                257
             ],
             "on_CategoryToCategoryConnectionPageInfo": [
-                260
+                270
             ],
             "on_EmpreendimentoToCategoryConnectionPageInfo": [
-                286
+                296
             ],
             "on_PostToCategoryConnectionPageInfo": [
-                315
+                325
             ],
             "on_RootQueryToCategoryConnectionPageInfo": [
-                445
+                455
             ],
             "__typename": [
                 0
@@ -8637,7 +8495,7 @@ module.exports = {
                 4
             ],
             "dateQuery": [
-                55
+                57
             ],
             "hasPassword": [
                 2
@@ -8648,11 +8506,14 @@ module.exports = {
             "in": [
                 4
             ],
+            "isSticky": [
+                2
+            ],
             "metaQuery": [
-                232
+                242
             ],
             "mimeType": [
-                63
+                65
             ],
             "name": [
                 0
@@ -8664,7 +8525,7 @@ module.exports = {
                 4
             ],
             "orderby": [
-                64
+                66
             ],
             "parent": [
                 4
@@ -8682,13 +8543,16 @@ module.exports = {
                 0
             ],
             "stati": [
-                67
+                69
             ],
             "status": [
-                67
+                69
             ],
             "taxQuery": [
-                68
+                70
+            ],
+            "template": [
+                75
             ],
             "title": [
                 0
@@ -8699,10 +8563,10 @@ module.exports = {
         },
         "CategoryToCentraldeDecoradoConnectionWhereArgsMetaQuery": {
             "metaArray": [
-                233
+                243
             ],
             "relation": [
-                58
+                60
             ],
             "__typename": [
                 0
@@ -8710,13 +8574,13 @@ module.exports = {
         },
         "CategoryToCentraldeDecoradoConnectionWhereArgsMetaArray": {
             "compare": [
-                234
+                244
             ],
             "key": [
                 0
             ],
             "type": [
-                235
+                245
             ],
             "value": [
                 0
@@ -8729,13 +8593,13 @@ module.exports = {
         "CategoryToCentraldeDecoradoConnectionWhereArgsMetaTypeEnum": {},
         "CategoryToCentraldeDecoradoConnection": {
             "edges": [
-                255
+                265
             ],
             "nodes": [
-                239
+                249
             ],
             "pageInfo": [
-                256
+                266
             ],
             "__typename": [
                 0
@@ -8743,22 +8607,22 @@ module.exports = {
         },
         "CentraldeDecoradoConnection": {
             "edges": [
-                238
+                248
             ],
             "nodes": [
-                239
+                249
             ],
             "pageInfo": [
-                243
+                253
             ],
             "on_CategoryToCentraldeDecoradoConnection": [
-                236
+                246
             ],
             "on_CentraldeDecoradoToCentraldeDecoradoConnection": [
-                240
+                250
             ],
             "on_RootQueryToCentraldeDecoradoConnection": [
-                453
+                463
             ],
             "__typename": [
                 0
@@ -8769,22 +8633,22 @@ module.exports = {
                 0
             ],
             "node": [
-                239
-            ],
-            "on_CentraldeDecoradoToCentraldeDecoradoConnectionEdge": [
-                241
-            ],
-            "on_CentraldeDecoradoToParentConnectionEdge": [
                 249
             ],
+            "on_CentraldeDecoradoToCentraldeDecoradoConnectionEdge": [
+                251
+            ],
+            "on_CentraldeDecoradoToParentConnectionEdge": [
+                259
+            ],
             "on_CentraldeDecoradoToPreviewConnectionEdge": [
-                250
+                260
             ],
             "on_CategoryToCentraldeDecoradoConnectionEdge": [
-                255
+                265
             ],
             "on_RootQueryToCentraldeDecoradoConnectionEdge": [
-                454
+                464
             ],
             "__typename": [
                 0
@@ -8795,7 +8659,7 @@ module.exports = {
                 1
             ],
             "ancestors": [
-                240,
+                250,
                 {
                     "first": [
                         1
@@ -8812,7 +8676,7 @@ module.exports = {
                 }
             ],
             "categories": [
-                245,
+                255,
                 {
                     "first": [
                         1
@@ -8827,12 +8691,12 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        244
+                        254
                     ]
                 }
             ],
             "centralDeDecorados": [
-                248
+                258
             ],
             "contentType": [
                 9
@@ -8853,13 +8717,13 @@ module.exports = {
                 0
             ],
             "editingLockedBy": [
-                80
+                83
             ],
             "enclosure": [
                 0
             ],
             "enqueuedScripts": [
-                143,
+                149,
                 {
                     "first": [
                         1
@@ -8872,11 +8736,14 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        148
                     ]
                 }
             ],
             "enqueuedStylesheets": [
-                146,
+                153,
                 {
                     "first": [
                         1
@@ -8889,11 +8756,14 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        152
                     ]
                 }
             ],
             "featuredImage": [
-                175
+                182
             ],
             "featuredImageDatabaseId": [
                 1
@@ -8932,7 +8802,7 @@ module.exports = {
                 2
             ],
             "lastEditedBy": [
-                149
+                156
             ],
             "link": [
                 0
@@ -8944,13 +8814,13 @@ module.exports = {
                 0
             ],
             "parent": [
-                249
+                259
             ],
             "password": [
                 0
             ],
             "preview": [
-                250
+                260
             ],
             "previewRevisionDatabaseId": [
                 1
@@ -8965,10 +8835,10 @@ module.exports = {
                 0
             ],
             "template": [
-                616
+                626
             ],
             "terms": [
-                252,
+                262,
                 {
                     "first": [
                         1
@@ -8983,7 +8853,7 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        251
+                        261
                     ]
                 }
             ],
@@ -8991,7 +8861,7 @@ module.exports = {
                 0,
                 {
                     "format": [
-                        95
+                        98
                     ]
                 }
             ],
@@ -9004,13 +8874,13 @@ module.exports = {
         },
         "CentraldeDecoradoToCentraldeDecoradoConnection": {
             "edges": [
-                241
+                251
             ],
             "nodes": [
-                239
+                249
             ],
             "pageInfo": [
-                242
+                252
             ],
             "__typename": [
                 0
@@ -9021,7 +8891,7 @@ module.exports = {
                 0
             ],
             "node": [
-                239
+                249
             ],
             "__typename": [
                 0
@@ -9058,13 +8928,13 @@ module.exports = {
                 0
             ],
             "on_CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo": [
-                242
+                252
             ],
             "on_CategoryToCentraldeDecoradoConnectionPageInfo": [
-                256
+                266
             ],
             "on_RootQueryToCentraldeDecoradoConnectionPageInfo": [
-                455
+                465
             ],
             "__typename": [
                 0
@@ -9108,10 +8978,10 @@ module.exports = {
                 4
             ],
             "order": [
-                66
+                68
             ],
             "orderby": [
-                221
+                231
             ],
             "padCounts": [
                 2
@@ -9137,13 +9007,13 @@ module.exports = {
         },
         "CentraldeDecoradoToCategoryConnection": {
             "edges": [
-                246
+                256
             ],
             "nodes": [
-                225
+                235
             ],
             "pageInfo": [
-                247
+                257
             ],
             "__typename": [
                 0
@@ -9154,7 +9024,7 @@ module.exports = {
                 0
             ],
             "node": [
-                225
+                235
             ],
             "__typename": [
                 0
@@ -9206,7 +9076,7 @@ module.exports = {
                 0
             ],
             "imagemPrincipal": [
-                119
+                124
             ],
             "telefone": [
                 0
@@ -9223,7 +9093,7 @@ module.exports = {
                 0
             ],
             "node": [
-                239
+                249
             ],
             "__typename": [
                 0
@@ -9234,7 +9104,7 @@ module.exports = {
                 0
             ],
             "node": [
-                239
+                249
             ],
             "__typename": [
                 0
@@ -9278,10 +9148,10 @@ module.exports = {
                 4
             ],
             "order": [
-                66
+                68
             ],
             "orderby": [
-                221
+                231
             ],
             "padCounts": [
                 2
@@ -9296,7 +9166,7 @@ module.exports = {
                 0
             ],
             "taxonomies": [
-                72
+                74
             ],
             "termTaxonomyId": [
                 4
@@ -9310,13 +9180,13 @@ module.exports = {
         },
         "CentraldeDecoradoToTermNodeConnection": {
             "edges": [
-                253
+                263
             ],
             "nodes": [
                 29
             ],
             "pageInfo": [
-                254
+                264
             ],
             "__typename": [
                 0
@@ -9355,7 +9225,7 @@ module.exports = {
                 0
             ],
             "node": [
-                239
+                249
             ],
             "__typename": [
                 0
@@ -9416,10 +9286,10 @@ module.exports = {
                 4
             ],
             "order": [
-                66
+                68
             ],
             "orderby": [
-                221
+                231
             ],
             "padCounts": [
                 2
@@ -9445,13 +9315,13 @@ module.exports = {
         },
         "CategoryToCategoryConnection": {
             "edges": [
-                259
+                269
             ],
             "nodes": [
-                225
+                235
             ],
             "pageInfo": [
-                260
+                270
             ],
             "__typename": [
                 0
@@ -9462,7 +9332,7 @@ module.exports = {
                 0
             ],
             "node": [
-                225
+                235
             ],
             "__typename": [
                 0
@@ -9487,10 +9357,10 @@ module.exports = {
         },
         "CategoryToContentNodeConnectionWhereArgs": {
             "contentTypes": [
-                262
+                272
             ],
             "dateQuery": [
-                55
+                57
             ],
             "hasPassword": [
                 2
@@ -9501,11 +9371,14 @@ module.exports = {
             "in": [
                 4
             ],
+            "isSticky": [
+                2
+            ],
             "metaQuery": [
-                263
+                273
             ],
             "mimeType": [
-                63
+                65
             ],
             "name": [
                 0
@@ -9517,7 +9390,7 @@ module.exports = {
                 4
             ],
             "orderby": [
-                64
+                66
             ],
             "parent": [
                 4
@@ -9535,13 +9408,16 @@ module.exports = {
                 0
             ],
             "stati": [
-                67
+                69
             ],
             "status": [
-                67
+                69
             ],
             "taxQuery": [
-                68
+                70
+            ],
+            "template": [
+                75
             ],
             "title": [
                 0
@@ -9553,10 +9429,10 @@ module.exports = {
         "ContentTypesOfCategoryEnum": {},
         "CategoryToContentNodeConnectionWhereArgsMetaQuery": {
             "metaArray": [
-                264
+                274
             ],
             "relation": [
-                58
+                60
             ],
             "__typename": [
                 0
@@ -9564,13 +9440,13 @@ module.exports = {
         },
         "CategoryToContentNodeConnectionWhereArgsMetaArray": {
             "compare": [
-                265
+                275
             ],
             "key": [
                 0
             ],
             "type": [
-                266
+                276
             ],
             "value": [
                 0
@@ -9583,13 +9459,13 @@ module.exports = {
         "CategoryToContentNodeConnectionWhereArgsMetaTypeEnum": {},
         "CategoryToContentNodeConnection": {
             "edges": [
-                268
+                278
             ],
             "nodes": [
                 7
             ],
             "pageInfo": [
-                269
+                279
             ],
             "__typename": [
                 0
@@ -9637,7 +9513,7 @@ module.exports = {
                 4
             ],
             "dateQuery": [
-                55
+                57
             ],
             "hasPassword": [
                 2
@@ -9648,11 +9524,14 @@ module.exports = {
             "in": [
                 4
             ],
+            "isSticky": [
+                2
+            ],
             "metaQuery": [
-                271
+                281
             ],
             "mimeType": [
-                63
+                65
             ],
             "name": [
                 0
@@ -9664,7 +9543,7 @@ module.exports = {
                 4
             ],
             "orderby": [
-                64
+                66
             ],
             "parent": [
                 4
@@ -9682,13 +9561,16 @@ module.exports = {
                 0
             ],
             "stati": [
-                67
+                69
             ],
             "status": [
-                67
+                69
             ],
             "taxQuery": [
-                68
+                70
+            ],
+            "template": [
+                75
             ],
             "title": [
                 0
@@ -9699,10 +9581,10 @@ module.exports = {
         },
         "CategoryToEmpreendimentoConnectionWhereArgsMetaQuery": {
             "metaArray": [
-                272
+                282
             ],
             "relation": [
-                58
+                60
             ],
             "__typename": [
                 0
@@ -9710,13 +9592,13 @@ module.exports = {
         },
         "CategoryToEmpreendimentoConnectionWhereArgsMetaArray": {
             "compare": [
-                273
+                283
             ],
             "key": [
                 0
             ],
             "type": [
-                274
+                284
             ],
             "value": [
                 0
@@ -9729,13 +9611,13 @@ module.exports = {
         "CategoryToEmpreendimentoConnectionWhereArgsMetaTypeEnum": {},
         "CategoryToEmpreendimentoConnection": {
             "edges": [
-                302
+                312
             ],
             "nodes": [
-                278
+                288
             ],
             "pageInfo": [
-                303
+                313
             ],
             "__typename": [
                 0
@@ -9743,22 +9625,22 @@ module.exports = {
         },
         "EmpreendimentoConnection": {
             "edges": [
-                277
+                287
             ],
             "nodes": [
-                278
+                288
             ],
             "pageInfo": [
-                282
+                292
             ],
             "on_CategoryToEmpreendimentoConnection": [
-                275
+                285
             ],
             "on_EmpreendimentoToEmpreendimentoConnection": [
-                279
+                289
             ],
             "on_RootQueryToEmpreendimentoConnection": [
-                481
+                491
             ],
             "__typename": [
                 0
@@ -9769,22 +9651,22 @@ module.exports = {
                 0
             ],
             "node": [
-                278
+                288
             ],
             "on_EmpreendimentoToEmpreendimentoConnectionEdge": [
-                280
+                290
             ],
             "on_EmpreendimentoToParentConnectionEdge": [
-                296
+                306
             ],
             "on_EmpreendimentoToPreviewConnectionEdge": [
-                297
+                307
             ],
             "on_CategoryToEmpreendimentoConnectionEdge": [
-                302
+                312
             ],
             "on_RootQueryToEmpreendimentoConnectionEdge": [
-                482
+                492
             ],
             "__typename": [
                 0
@@ -9795,7 +9677,7 @@ module.exports = {
                 1
             ],
             "ancestors": [
-                279,
+                289,
                 {
                     "first": [
                         1
@@ -9812,7 +9694,7 @@ module.exports = {
                 }
             ],
             "categories": [
-                284,
+                294,
                 {
                     "first": [
                         1
@@ -9827,7 +9709,7 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        283
+                        293
                     ]
                 }
             ],
@@ -9850,16 +9732,16 @@ module.exports = {
                 0
             ],
             "editingLockedBy": [
-                80
+                83
             ],
             "empreendimento": [
-                287
+                297
             ],
             "enclosure": [
                 0
             ],
             "enqueuedScripts": [
-                143,
+                149,
                 {
                     "first": [
                         1
@@ -9872,11 +9754,14 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        148
                     ]
                 }
             ],
             "enqueuedStylesheets": [
-                146,
+                153,
                 {
                     "first": [
                         1
@@ -9889,11 +9774,14 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        152
                     ]
                 }
             ],
             "featuredImage": [
-                175
+                182
             ],
             "featuredImageDatabaseId": [
                 1
@@ -9908,7 +9796,7 @@ module.exports = {
                 2
             ],
             "housiVerso": [
-                294
+                304
             ],
             "id": [
                 4
@@ -9935,7 +9823,7 @@ module.exports = {
                 2
             ],
             "lastEditedBy": [
-                149
+                156
             ],
             "link": [
                 0
@@ -9947,13 +9835,13 @@ module.exports = {
                 0
             ],
             "parent": [
-                296
+                306
             ],
             "password": [
                 0
             ],
             "preview": [
-                297
+                307
             ],
             "previewRevisionDatabaseId": [
                 1
@@ -9968,10 +9856,10 @@ module.exports = {
                 0
             ],
             "template": [
-                616
+                626
             ],
             "terms": [
-                299,
+                309,
                 {
                     "first": [
                         1
@@ -9986,7 +9874,7 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        298
+                        308
                     ]
                 }
             ],
@@ -9994,7 +9882,7 @@ module.exports = {
                 0,
                 {
                     "format": [
-                        95
+                        98
                     ]
                 }
             ],
@@ -10007,13 +9895,13 @@ module.exports = {
         },
         "EmpreendimentoToEmpreendimentoConnection": {
             "edges": [
-                280
+                290
             ],
             "nodes": [
-                278
+                288
             ],
             "pageInfo": [
-                281
+                291
             ],
             "__typename": [
                 0
@@ -10024,7 +9912,7 @@ module.exports = {
                 0
             ],
             "node": [
-                278
+                288
             ],
             "__typename": [
                 0
@@ -10061,13 +9949,13 @@ module.exports = {
                 0
             ],
             "on_EmpreendimentoToEmpreendimentoConnectionPageInfo": [
-                281
+                291
             ],
             "on_CategoryToEmpreendimentoConnectionPageInfo": [
-                303
+                313
             ],
             "on_RootQueryToEmpreendimentoConnectionPageInfo": [
-                483
+                493
             ],
             "__typename": [
                 0
@@ -10111,10 +9999,10 @@ module.exports = {
                 4
             ],
             "order": [
-                66
+                68
             ],
             "orderby": [
-                221
+                231
             ],
             "padCounts": [
                 2
@@ -10140,13 +10028,13 @@ module.exports = {
         },
         "EmpreendimentoToCategoryConnection": {
             "edges": [
-                285
+                295
             ],
             "nodes": [
-                225
+                235
             ],
             "pageInfo": [
-                286
+                296
             ],
             "__typename": [
                 0
@@ -10157,7 +10045,7 @@ module.exports = {
                 0
             ],
             "node": [
-                225
+                235
             ],
             "__typename": [
                 0
@@ -10182,13 +10070,13 @@ module.exports = {
         },
         "Empreendimento_Empreendimento": {
             "andamentoDaObra": [
-                288
+                298
             ],
             "arquivoDaApresentacao": [
-                119
+                124
             ],
             "diferenciaisItems": [
-                289
+                299
             ],
             "empCidade": [
                 0
@@ -10224,25 +10112,25 @@ module.exports = {
                 0
             ],
             "estagioDaObra": [
-                225
+                235
             ],
             "fieldGroupName": [
                 0
             ],
             "galeriaDeFotos": [
-                119
+                124
             ],
             "imagemPrincipal": [
-                119
+                124
             ],
             "imagensOutros": [
-                119
+                124
             ],
             "itemsPlantas": [
-                290
+                300
             ],
             "itensAreacomuns": [
-                291
+                301
             ],
             "linkDoTourVirtual": [
                 0
@@ -10257,13 +10145,13 @@ module.exports = {
                 0
             ],
             "logotipoDoEmpreendimento": [
-                119
+                124
             ],
             "nomeDoEmpreendimento": [
                 0
             ],
             "pontosDeReferencia": [
-                292
+                302
             ],
             "textoLegal": [
                 0
@@ -10275,7 +10163,7 @@ module.exports = {
                 0
             ],
             "videosOutos": [
-                293
+                303
             ],
             "__typename": [
                 0
@@ -10289,7 +10177,7 @@ module.exports = {
                 0
             ],
             "valorAndamentoDaObra": [
-                158
+                165
             ],
             "__typename": [
                 0
@@ -10300,7 +10188,7 @@ module.exports = {
                 0
             ],
             "iconeimagemDoDiferencial": [
-                119
+                124
             ],
             "nomeDiferencial": [
                 0
@@ -10314,7 +10202,7 @@ module.exports = {
                 0
             ],
             "imagensDasPlantas": [
-                119
+                124
             ],
             "plantasDescricao": [
                 0
@@ -10331,7 +10219,7 @@ module.exports = {
                 0
             ],
             "iconeimagemAreacomuns": [
-                119
+                124
             ],
             "__typename": [
                 0
@@ -10342,7 +10230,7 @@ module.exports = {
                 0
             ],
             "iconeOuImagemRef": [
-                119
+                124
             ],
             "nomePontoReferencia": [
                 0
@@ -10364,7 +10252,7 @@ module.exports = {
         },
         "Empreendimento_Housiverso": {
             "diferencial": [
-                295
+                305
             ],
             "fieldGroupName": [
                 0
@@ -10378,7 +10266,7 @@ module.exports = {
                 0
             ],
             "iconeHousi": [
-                119
+                124
             ],
             "nomeHousi": [
                 0
@@ -10392,7 +10280,7 @@ module.exports = {
                 0
             ],
             "node": [
-                278
+                288
             ],
             "__typename": [
                 0
@@ -10403,7 +10291,7 @@ module.exports = {
                 0
             ],
             "node": [
-                278
+                288
             ],
             "__typename": [
                 0
@@ -10447,10 +10335,10 @@ module.exports = {
                 4
             ],
             "order": [
-                66
+                68
             ],
             "orderby": [
-                221
+                231
             ],
             "padCounts": [
                 2
@@ -10465,7 +10353,7 @@ module.exports = {
                 0
             ],
             "taxonomies": [
-                72
+                74
             ],
             "termTaxonomyId": [
                 4
@@ -10479,13 +10367,13 @@ module.exports = {
         },
         "EmpreendimentoToTermNodeConnection": {
             "edges": [
-                300
+                310
             ],
             "nodes": [
                 29
             ],
             "pageInfo": [
-                301
+                311
             ],
             "__typename": [
                 0
@@ -10524,7 +10412,7 @@ module.exports = {
                 0
             ],
             "node": [
-                278
+                288
             ],
             "__typename": [
                 0
@@ -10552,7 +10440,7 @@ module.exports = {
                 0
             ],
             "node": [
-                225
+                235
             ],
             "__typename": [
                 0
@@ -10584,7 +10472,7 @@ module.exports = {
                 4
             ],
             "dateQuery": [
-                55
+                57
             ],
             "hasPassword": [
                 2
@@ -10595,11 +10483,14 @@ module.exports = {
             "in": [
                 4
             ],
+            "isSticky": [
+                2
+            ],
             "metaQuery": [
-                306
+                316
             ],
             "mimeType": [
-                63
+                65
             ],
             "name": [
                 0
@@ -10611,7 +10502,7 @@ module.exports = {
                 4
             ],
             "orderby": [
-                64
+                66
             ],
             "parent": [
                 4
@@ -10629,10 +10520,10 @@ module.exports = {
                 0
             ],
             "stati": [
-                67
+                69
             ],
             "status": [
-                67
+                69
             ],
             "tag": [
                 0
@@ -10653,7 +10544,10 @@ module.exports = {
                 0
             ],
             "taxQuery": [
-                68
+                70
+            ],
+            "template": [
+                75
             ],
             "title": [
                 0
@@ -10664,10 +10558,10 @@ module.exports = {
         },
         "CategoryToPostConnectionWhereArgsMetaQuery": {
             "metaArray": [
-                307
+                317
             ],
             "relation": [
-                58
+                60
             ],
             "__typename": [
                 0
@@ -10675,13 +10569,13 @@ module.exports = {
         },
         "CategoryToPostConnectionWhereArgsMetaArray": {
             "compare": [
-                308
+                318
             ],
             "key": [
                 0
             ],
             "type": [
-                309
+                319
             ],
             "value": [
                 0
@@ -10694,13 +10588,13 @@ module.exports = {
         "CategoryToPostConnectionWhereArgsMetaTypeEnum": {},
         "CategoryToPostConnection": {
             "edges": [
-                311
+                321
             ],
             "nodes": [
-                213
+                223
             ],
             "pageInfo": [
-                312
+                322
             ],
             "__typename": [
                 0
@@ -10711,7 +10605,7 @@ module.exports = {
                 0
             ],
             "node": [
-                213
+                223
             ],
             "__typename": [
                 0
@@ -10750,7 +10644,7 @@ module.exports = {
                 0
             ],
             "node": [
-                225
+                235
             ],
             "__typename": [
                 0
@@ -10826,10 +10720,10 @@ module.exports = {
                 1
             ],
             "contentStatus": [
-                67
+                69
             ],
             "contentType": [
-                54
+                56
             ],
             "includeUnapproved": [
                 4
@@ -10838,10 +10732,10 @@ module.exports = {
                 1
             ],
             "order": [
-                66
+                68
             ],
             "orderby": [
-                86
+                89
             ],
             "parent": [
                 1
@@ -10856,7 +10750,7 @@ module.exports = {
                 0
             ],
             "statusIn": [
-                87
+                90
             ],
             "userId": [
                 4
@@ -10867,13 +10761,13 @@ module.exports = {
         },
         "PostToCommentConnection": {
             "edges": [
-                318
+                328
             ],
             "nodes": [
-                91
+                94
             ],
             "pageInfo": [
-                319
+                329
             ],
             "__typename": [
                 0
@@ -10884,7 +10778,7 @@ module.exports = {
                 0
             ],
             "node": [
-                91
+                94
             ],
             "__typename": [
                 0
@@ -10912,7 +10806,7 @@ module.exports = {
                 0
             ],
             "node": [
-                213
+                223
             ],
             "__typename": [
                 0
@@ -10956,10 +10850,10 @@ module.exports = {
                 4
             ],
             "order": [
-                66
+                68
             ],
             "orderby": [
-                221
+                231
             ],
             "padCounts": [
                 2
@@ -10985,13 +10879,13 @@ module.exports = {
         },
         "PostToPostFormatConnection": {
             "edges": [
-                345
+                355
             ],
             "nodes": [
-                325
+                335
             ],
             "pageInfo": [
-                346
+                356
             ],
             "__typename": [
                 0
@@ -10999,19 +10893,19 @@ module.exports = {
         },
         "PostFormatConnection": {
             "edges": [
-                324
+                334
             ],
             "nodes": [
-                325
+                335
             ],
             "pageInfo": [
-                344
+                354
             ],
             "on_PostToPostFormatConnection": [
-                322
+                332
             ],
             "on_RootQueryToPostFormatConnection": [
-                550
+                558
             ],
             "__typename": [
                 0
@@ -11022,13 +10916,13 @@ module.exports = {
                 0
             ],
             "node": [
-                325
+                335
             ],
             "on_PostToPostFormatConnectionEdge": [
-                345
+                355
             ],
             "on_RootQueryToPostFormatConnectionEdge": [
-                551
+                559
             ],
             "__typename": [
                 0
@@ -11036,7 +10930,7 @@ module.exports = {
         },
         "PostFormat": {
             "contentNodes": [
-                332,
+                342,
                 {
                     "first": [
                         1
@@ -11051,7 +10945,7 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        326
+                        336
                     ]
                 }
             ],
@@ -11065,7 +10959,7 @@ module.exports = {
                 0
             ],
             "enqueuedScripts": [
-                30,
+                31,
                 {
                     "first": [
                         1
@@ -11078,11 +10972,14 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        30
                     ]
                 }
             ],
             "enqueuedStylesheets": [
-                40,
+                42,
                 {
                     "first": [
                         1
@@ -11095,6 +10992,9 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        41
                     ]
                 }
             ],
@@ -11129,7 +11029,7 @@ module.exports = {
                 1
             ],
             "posts": [
-                340,
+                350,
                 {
                     "first": [
                         1
@@ -11144,7 +11044,7 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        335
+                        345
                     ]
                 }
             ],
@@ -11152,7 +11052,7 @@ module.exports = {
                 0
             ],
             "taxonomy": [
-                343
+                353
             ],
             "taxonomyName": [
                 0
@@ -11172,10 +11072,10 @@ module.exports = {
         },
         "PostFormatToContentNodeConnectionWhereArgs": {
             "contentTypes": [
-                327
+                337
             ],
             "dateQuery": [
-                55
+                57
             ],
             "hasPassword": [
                 2
@@ -11186,11 +11086,14 @@ module.exports = {
             "in": [
                 4
             ],
+            "isSticky": [
+                2
+            ],
             "metaQuery": [
-                328
+                338
             ],
             "mimeType": [
-                63
+                65
             ],
             "name": [
                 0
@@ -11202,7 +11105,7 @@ module.exports = {
                 4
             ],
             "orderby": [
-                64
+                66
             ],
             "parent": [
                 4
@@ -11220,13 +11123,16 @@ module.exports = {
                 0
             ],
             "stati": [
-                67
+                69
             ],
             "status": [
-                67
+                69
             ],
             "taxQuery": [
-                68
+                70
+            ],
+            "template": [
+                75
             ],
             "title": [
                 0
@@ -11238,10 +11144,10 @@ module.exports = {
         "ContentTypesOfPostFormatEnum": {},
         "PostFormatToContentNodeConnectionWhereArgsMetaQuery": {
             "metaArray": [
-                329
+                339
             ],
             "relation": [
-                58
+                60
             ],
             "__typename": [
                 0
@@ -11249,13 +11155,13 @@ module.exports = {
         },
         "PostFormatToContentNodeConnectionWhereArgsMetaArray": {
             "compare": [
-                330
+                340
             ],
             "key": [
                 0
             ],
             "type": [
-                331
+                341
             ],
             "value": [
                 0
@@ -11268,13 +11174,13 @@ module.exports = {
         "PostFormatToContentNodeConnectionWhereArgsMetaTypeEnum": {},
         "PostFormatToContentNodeConnection": {
             "edges": [
-                333
+                343
             ],
             "nodes": [
                 7
             ],
             "pageInfo": [
-                334
+                344
             ],
             "__typename": [
                 0
@@ -11334,7 +11240,7 @@ module.exports = {
                 4
             ],
             "dateQuery": [
-                55
+                57
             ],
             "hasPassword": [
                 2
@@ -11345,11 +11251,14 @@ module.exports = {
             "in": [
                 4
             ],
+            "isSticky": [
+                2
+            ],
             "metaQuery": [
-                336
+                346
             ],
             "mimeType": [
-                63
+                65
             ],
             "name": [
                 0
@@ -11361,7 +11270,7 @@ module.exports = {
                 4
             ],
             "orderby": [
-                64
+                66
             ],
             "parent": [
                 4
@@ -11379,10 +11288,10 @@ module.exports = {
                 0
             ],
             "stati": [
-                67
+                69
             ],
             "status": [
-                67
+                69
             ],
             "tag": [
                 0
@@ -11403,7 +11312,10 @@ module.exports = {
                 0
             ],
             "taxQuery": [
-                68
+                70
+            ],
+            "template": [
+                75
             ],
             "title": [
                 0
@@ -11414,10 +11326,10 @@ module.exports = {
         },
         "PostFormatToPostConnectionWhereArgsMetaQuery": {
             "metaArray": [
-                337
+                347
             ],
             "relation": [
-                58
+                60
             ],
             "__typename": [
                 0
@@ -11425,13 +11337,13 @@ module.exports = {
         },
         "PostFormatToPostConnectionWhereArgsMetaArray": {
             "compare": [
-                338
+                348
             ],
             "key": [
                 0
             ],
             "type": [
-                339
+                349
             ],
             "value": [
                 0
@@ -11444,13 +11356,13 @@ module.exports = {
         "PostFormatToPostConnectionWhereArgsMetaTypeEnum": {},
         "PostFormatToPostConnection": {
             "edges": [
-                341
+                351
             ],
             "nodes": [
-                213
+                223
             ],
             "pageInfo": [
-                342
+                352
             ],
             "__typename": [
                 0
@@ -11461,7 +11373,7 @@ module.exports = {
                 0
             ],
             "node": [
-                213
+                223
             ],
             "__typename": [
                 0
@@ -11509,10 +11421,10 @@ module.exports = {
                 0
             ],
             "on_PostToPostFormatConnectionPageInfo": [
-                346
+                356
             ],
             "on_RootQueryToPostFormatConnectionPageInfo": [
-                552
+                560
             ],
             "__typename": [
                 0
@@ -11523,7 +11435,7 @@ module.exports = {
                 0
             ],
             "node": [
-                325
+                335
             ],
             "__typename": [
                 0
@@ -11551,7 +11463,7 @@ module.exports = {
                 0
             ],
             "node": [
-                213
+                223
             ],
             "__typename": [
                 0
@@ -11583,7 +11495,7 @@ module.exports = {
                 4
             ],
             "dateQuery": [
-                55
+                57
             ],
             "hasPassword": [
                 2
@@ -11594,11 +11506,14 @@ module.exports = {
             "in": [
                 4
             ],
+            "isSticky": [
+                2
+            ],
             "metaQuery": [
-                349
+                359
             ],
             "mimeType": [
-                63
+                65
             ],
             "name": [
                 0
@@ -11610,7 +11525,7 @@ module.exports = {
                 4
             ],
             "orderby": [
-                64
+                66
             ],
             "parent": [
                 4
@@ -11628,10 +11543,10 @@ module.exports = {
                 0
             ],
             "stati": [
-                67
+                69
             ],
             "status": [
-                67
+                69
             ],
             "tag": [
                 0
@@ -11652,7 +11567,10 @@ module.exports = {
                 0
             ],
             "taxQuery": [
-                68
+                70
+            ],
+            "template": [
+                75
             ],
             "title": [
                 0
@@ -11663,10 +11581,10 @@ module.exports = {
         },
         "PostToRevisionConnectionWhereArgsMetaQuery": {
             "metaArray": [
-                350
+                360
             ],
             "relation": [
-                58
+                60
             ],
             "__typename": [
                 0
@@ -11674,13 +11592,13 @@ module.exports = {
         },
         "PostToRevisionConnectionWhereArgsMetaArray": {
             "compare": [
-                351
+                361
             ],
             "key": [
                 0
             ],
             "type": [
-                352
+                362
             ],
             "value": [
                 0
@@ -11693,13 +11611,13 @@ module.exports = {
         "PostToRevisionConnectionWhereArgsMetaTypeEnum": {},
         "PostToRevisionConnection": {
             "edges": [
-                354
+                364
             ],
             "nodes": [
-                213
+                223
             ],
             "pageInfo": [
-                355
+                365
             ],
             "__typename": [
                 0
@@ -11710,7 +11628,7 @@ module.exports = {
                 0
             ],
             "node": [
-                213
+                223
             ],
             "__typename": [
                 0
@@ -11771,10 +11689,10 @@ module.exports = {
                 4
             ],
             "order": [
-                66
+                68
             ],
             "orderby": [
-                221
+                231
             ],
             "padCounts": [
                 2
@@ -11800,13 +11718,13 @@ module.exports = {
         },
         "PostToTagConnection": {
             "edges": [
-                380
+                390
             ],
             "nodes": [
-                360
+                370
             ],
             "pageInfo": [
-                381
+                391
             ],
             "__typename": [
                 0
@@ -11814,19 +11732,19 @@ module.exports = {
         },
         "TagConnection": {
             "edges": [
-                359
+                369
             ],
             "nodes": [
-                360
+                370
             ],
             "pageInfo": [
-                379
+                389
             ],
             "on_PostToTagConnection": [
-                357
+                367
             ],
             "on_RootQueryToTagConnection": [
-                578
+                588
             ],
             "__typename": [
                 0
@@ -11837,13 +11755,13 @@ module.exports = {
                 0
             ],
             "node": [
-                360
+                370
             ],
             "on_PostToTagConnectionEdge": [
-                380
+                390
             ],
             "on_RootQueryToTagConnectionEdge": [
-                579
+                589
             ],
             "__typename": [
                 0
@@ -11851,7 +11769,7 @@ module.exports = {
         },
         "Tag": {
             "contentNodes": [
-                367,
+                377,
                 {
                     "first": [
                         1
@@ -11866,7 +11784,7 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        361
+                        371
                     ]
                 }
             ],
@@ -11880,7 +11798,7 @@ module.exports = {
                 0
             ],
             "enqueuedScripts": [
-                30,
+                31,
                 {
                     "first": [
                         1
@@ -11893,11 +11811,14 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        30
                     ]
                 }
             ],
             "enqueuedStylesheets": [
-                40,
+                42,
                 {
                     "first": [
                         1
@@ -11910,6 +11831,9 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        41
                     ]
                 }
             ],
@@ -11941,7 +11865,7 @@ module.exports = {
                 0
             ],
             "posts": [
-                375,
+                385,
                 {
                     "first": [
                         1
@@ -11956,7 +11880,7 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        370
+                        380
                     ]
                 }
             ],
@@ -11967,7 +11891,7 @@ module.exports = {
                 1
             ],
             "taxonomy": [
-                378
+                388
             ],
             "taxonomyName": [
                 0
@@ -11987,10 +11911,10 @@ module.exports = {
         },
         "TagToContentNodeConnectionWhereArgs": {
             "contentTypes": [
-                362
+                372
             ],
             "dateQuery": [
-                55
+                57
             ],
             "hasPassword": [
                 2
@@ -12001,11 +11925,14 @@ module.exports = {
             "in": [
                 4
             ],
+            "isSticky": [
+                2
+            ],
             "metaQuery": [
-                363
+                373
             ],
             "mimeType": [
-                63
+                65
             ],
             "name": [
                 0
@@ -12017,7 +11944,7 @@ module.exports = {
                 4
             ],
             "orderby": [
-                64
+                66
             ],
             "parent": [
                 4
@@ -12035,13 +11962,16 @@ module.exports = {
                 0
             ],
             "stati": [
-                67
+                69
             ],
             "status": [
-                67
+                69
             ],
             "taxQuery": [
-                68
+                70
+            ],
+            "template": [
+                75
             ],
             "title": [
                 0
@@ -12053,10 +11983,10 @@ module.exports = {
         "ContentTypesOfTagEnum": {},
         "TagToContentNodeConnectionWhereArgsMetaQuery": {
             "metaArray": [
-                364
+                374
             ],
             "relation": [
-                58
+                60
             ],
             "__typename": [
                 0
@@ -12064,13 +11994,13 @@ module.exports = {
         },
         "TagToContentNodeConnectionWhereArgsMetaArray": {
             "compare": [
-                365
+                375
             ],
             "key": [
                 0
             ],
             "type": [
-                366
+                376
             ],
             "value": [
                 0
@@ -12083,13 +12013,13 @@ module.exports = {
         "TagToContentNodeConnectionWhereArgsMetaTypeEnum": {},
         "TagToContentNodeConnection": {
             "edges": [
-                368
+                378
             ],
             "nodes": [
                 7
             ],
             "pageInfo": [
-                369
+                379
             ],
             "__typename": [
                 0
@@ -12149,7 +12079,7 @@ module.exports = {
                 4
             ],
             "dateQuery": [
-                55
+                57
             ],
             "hasPassword": [
                 2
@@ -12160,11 +12090,14 @@ module.exports = {
             "in": [
                 4
             ],
+            "isSticky": [
+                2
+            ],
             "metaQuery": [
-                371
+                381
             ],
             "mimeType": [
-                63
+                65
             ],
             "name": [
                 0
@@ -12176,7 +12109,7 @@ module.exports = {
                 4
             ],
             "orderby": [
-                64
+                66
             ],
             "parent": [
                 4
@@ -12194,10 +12127,10 @@ module.exports = {
                 0
             ],
             "stati": [
-                67
+                69
             ],
             "status": [
-                67
+                69
             ],
             "tag": [
                 0
@@ -12218,7 +12151,10 @@ module.exports = {
                 0
             ],
             "taxQuery": [
-                68
+                70
+            ],
+            "template": [
+                75
             ],
             "title": [
                 0
@@ -12229,10 +12165,10 @@ module.exports = {
         },
         "TagToPostConnectionWhereArgsMetaQuery": {
             "metaArray": [
-                372
+                382
             ],
             "relation": [
-                58
+                60
             ],
             "__typename": [
                 0
@@ -12240,13 +12176,13 @@ module.exports = {
         },
         "TagToPostConnectionWhereArgsMetaArray": {
             "compare": [
-                373
+                383
             ],
             "key": [
                 0
             ],
             "type": [
-                374
+                384
             ],
             "value": [
                 0
@@ -12259,13 +12195,13 @@ module.exports = {
         "TagToPostConnectionWhereArgsMetaTypeEnum": {},
         "TagToPostConnection": {
             "edges": [
-                376
+                386
             ],
             "nodes": [
-                213
+                223
             ],
             "pageInfo": [
-                377
+                387
             ],
             "__typename": [
                 0
@@ -12276,7 +12212,7 @@ module.exports = {
                 0
             ],
             "node": [
-                213
+                223
             ],
             "__typename": [
                 0
@@ -12324,10 +12260,10 @@ module.exports = {
                 0
             ],
             "on_PostToTagConnectionPageInfo": [
-                381
+                391
             ],
             "on_RootQueryToTagConnectionPageInfo": [
-                580
+                590
             ],
             "__typename": [
                 0
@@ -12338,7 +12274,7 @@ module.exports = {
                 0
             ],
             "node": [
-                360
+                370
             ],
             "__typename": [
                 0
@@ -12399,10 +12335,10 @@ module.exports = {
                 4
             ],
             "order": [
-                66
+                68
             ],
             "orderby": [
-                221
+                231
             ],
             "padCounts": [
                 2
@@ -12417,7 +12353,7 @@ module.exports = {
                 0
             ],
             "taxonomies": [
-                72
+                74
             ],
             "termTaxonomyId": [
                 4
@@ -12431,13 +12367,13 @@ module.exports = {
         },
         "PostToTermNodeConnection": {
             "edges": [
-                384
+                394
             ],
             "nodes": [
                 29
             ],
             "pageInfo": [
-                385
+                395
             ],
             "__typename": [
                 0
@@ -12476,7 +12412,7 @@ module.exports = {
                 0
             ],
             "node": [
-                213
+                223
             ],
             "__typename": [
                 0
@@ -12501,10 +12437,10 @@ module.exports = {
         },
         "UserToRevisionsConnectionWhereArgs": {
             "contentTypes": [
-                54
+                56
             ],
             "dateQuery": [
-                55
+                57
             ],
             "hasPassword": [
                 2
@@ -12515,11 +12451,14 @@ module.exports = {
             "in": [
                 4
             ],
+            "isSticky": [
+                2
+            ],
             "metaQuery": [
-                389
+                399
             ],
             "mimeType": [
-                63
+                65
             ],
             "name": [
                 0
@@ -12531,7 +12470,7 @@ module.exports = {
                 4
             ],
             "orderby": [
-                64
+                66
             ],
             "parent": [
                 4
@@ -12549,13 +12488,16 @@ module.exports = {
                 0
             ],
             "stati": [
-                67
+                69
             ],
             "status": [
-                67
+                69
             ],
             "taxQuery": [
-                68
+                70
+            ],
+            "template": [
+                75
             ],
             "title": [
                 0
@@ -12566,10 +12508,10 @@ module.exports = {
         },
         "UserToRevisionsConnectionWhereArgsMetaQuery": {
             "metaArray": [
-                390
+                400
             ],
             "relation": [
-                58
+                60
             ],
             "__typename": [
                 0
@@ -12577,13 +12519,13 @@ module.exports = {
         },
         "UserToRevisionsConnectionWhereArgsMetaArray": {
             "compare": [
-                391
+                401
             ],
             "key": [
                 0
             ],
             "type": [
-                392
+                402
             ],
             "value": [
                 0
@@ -12596,13 +12538,13 @@ module.exports = {
         "UserToRevisionsConnectionWhereArgsMetaTypeEnum": {},
         "UserToRevisionsConnection": {
             "edges": [
-                394
+                404
             ],
             "nodes": [
                 7
             ],
             "pageInfo": [
-                395
+                405
             ],
             "__typename": [
                 0
@@ -12638,13 +12580,13 @@ module.exports = {
         },
         "UserToUserRoleConnection": {
             "edges": [
-                401
+                411
             ],
             "nodes": [
-                399
+                409
             ],
             "pageInfo": [
-                402
+                412
             ],
             "__typename": [
                 0
@@ -12652,19 +12594,19 @@ module.exports = {
         },
         "UserRoleConnection": {
             "edges": [
-                398
+                408
             ],
             "nodes": [
-                399
+                409
             ],
             "pageInfo": [
-                400
+                410
             ],
             "on_UserToUserRoleConnection": [
-                396
+                406
             ],
             "on_RootQueryToUserRoleConnection": [
-                598
+                608
             ],
             "__typename": [
                 0
@@ -12675,13 +12617,13 @@ module.exports = {
                 0
             ],
             "node": [
-                399
+                409
             ],
             "on_UserToUserRoleConnectionEdge": [
-                401
+                411
             ],
             "on_RootQueryToUserRoleConnectionEdge": [
-                599
+                609
             ],
             "__typename": [
                 0
@@ -12721,10 +12663,10 @@ module.exports = {
                 0
             ],
             "on_UserToUserRoleConnectionPageInfo": [
-                402
+                412
             ],
             "on_RootQueryToUserRoleConnectionPageInfo": [
-                600
+                610
             ],
             "__typename": [
                 0
@@ -12735,7 +12677,7 @@ module.exports = {
                 0
             ],
             "node": [
-                399
+                409
             ],
             "__typename": [
                 0
@@ -12760,13 +12702,13 @@ module.exports = {
         },
         "ArquivoAssessoriaToArquivoAssessoriaConnection": {
             "edges": [
-                407
+                417
             ],
             "nodes": [
                 6
             ],
             "pageInfo": [
-                408
+                418
             ],
             "__typename": [
                 0
@@ -12774,19 +12716,19 @@ module.exports = {
         },
         "ArquivoAssessoriaConnection": {
             "edges": [
-                405
+                415
             ],
             "nodes": [
                 6
             ],
             "pageInfo": [
-                406
+                416
             ],
             "on_ArquivoAssessoriaToArquivoAssessoriaConnection": [
-                403
+                413
             ],
             "on_RootQueryToArquivoAssessoriaConnection": [
-                417
+                427
             ],
             "__typename": [
                 0
@@ -12800,16 +12742,16 @@ module.exports = {
                 6
             ],
             "on_ArquivoAssessoriaToArquivoAssessoriaConnectionEdge": [
-                407
+                417
             ],
             "on_ArquivoAssessoriaToParentConnectionEdge": [
-                410
+                420
             ],
             "on_ArquivoAssessoriaToPreviewConnectionEdge": [
-                411
+                421
             ],
             "on_RootQueryToArquivoAssessoriaConnectionEdge": [
-                418
+                428
             ],
             "__typename": [
                 0
@@ -12829,10 +12771,10 @@ module.exports = {
                 0
             ],
             "on_ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo": [
-                408
+                418
             ],
             "on_RootQueryToArquivoAssessoriaConnectionPageInfo": [
-                419
+                429
             ],
             "__typename": [
                 0
@@ -12871,7 +12813,7 @@ module.exports = {
                 0
             ],
             "downImagem": [
-                119
+                124
             ],
             "downTitulo": [
                 0
@@ -12910,7 +12852,7 @@ module.exports = {
         },
         "RootQueryToArquivoAssessoriaConnectionWhereArgs": {
             "dateQuery": [
-                55
+                57
             ],
             "hasPassword": [
                 2
@@ -12921,11 +12863,14 @@ module.exports = {
             "in": [
                 4
             ],
+            "isSticky": [
+                2
+            ],
             "metaQuery": [
-                413
+                423
             ],
             "mimeType": [
-                63
+                65
             ],
             "name": [
                 0
@@ -12937,7 +12882,7 @@ module.exports = {
                 4
             ],
             "orderby": [
-                64
+                66
             ],
             "parent": [
                 4
@@ -12955,13 +12900,16 @@ module.exports = {
                 0
             ],
             "stati": [
-                67
+                69
             ],
             "status": [
-                67
+                69
             ],
             "taxQuery": [
-                68
+                70
+            ],
+            "template": [
+                75
             ],
             "title": [
                 0
@@ -12972,10 +12920,10 @@ module.exports = {
         },
         "RootQueryToArquivoAssessoriaConnectionWhereArgsMetaQuery": {
             "metaArray": [
-                414
+                424
             ],
             "relation": [
-                58
+                60
             ],
             "__typename": [
                 0
@@ -12983,13 +12931,13 @@ module.exports = {
         },
         "RootQueryToArquivoAssessoriaConnectionWhereArgsMetaArray": {
             "compare": [
-                415
+                425
             ],
             "key": [
                 0
             ],
             "type": [
-                416
+                426
             ],
             "value": [
                 0
@@ -13002,13 +12950,13 @@ module.exports = {
         "RootQueryToArquivoAssessoriaConnectionWhereArgsMetaTypeEnum": {},
         "RootQueryToArquivoAssessoriaConnection": {
             "edges": [
-                418
+                428
             ],
             "nodes": [
                 6
             ],
             "pageInfo": [
-                419
+                429
             ],
             "__typename": [
                 0
@@ -13048,7 +12996,7 @@ module.exports = {
                 1
             ],
             "ancestors": [
-                422,
+                432,
                 {
                     "first": [
                         1
@@ -13065,7 +13013,7 @@ module.exports = {
                 }
             ],
             "banner_home": [
-                428
+                438
             ],
             "contentType": [
                 9
@@ -13086,13 +13034,13 @@ module.exports = {
                 0
             ],
             "editingLockedBy": [
-                80
+                83
             ],
             "enclosure": [
                 0
             ],
             "enqueuedScripts": [
-                143,
+                149,
                 {
                     "first": [
                         1
@@ -13105,11 +13053,14 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        148
                     ]
                 }
             ],
             "enqueuedStylesheets": [
-                146,
+                153,
                 {
                     "first": [
                         1
@@ -13122,6 +13073,9 @@ module.exports = {
                     ],
                     "before": [
                         0
+                    ],
+                    "where": [
+                        152
                     ]
                 }
             ],
@@ -13156,7 +13110,7 @@ module.exports = {
                 2
             ],
             "lastEditedBy": [
-                149
+                156
             ],
             "link": [
                 0
@@ -13168,13 +13122,13 @@ module.exports = {
                 0
             ],
             "parent": [
-                432
+                442
             ],
             "password": [
                 0
             ],
             "preview": [
-                433
+                443
             ],
             "previewRevisionDatabaseId": [
                 1
@@ -13189,13 +13143,13 @@ module.exports = {
                 0
             ],
             "template": [
-                616
+                626
             ],
             "title": [
                 0,
                 {
                     "format": [
-                        95
+                        98
                     ]
                 }
             ],
@@ -13208,13 +13162,13 @@ module.exports = {
         },
         "BannerToBannerConnection": {
             "edges": [
-                426
+                436
             ],
             "nodes": [
-                421
+                431
             ],
             "pageInfo": [
-                427
+                437
             ],
             "__typename": [
                 0
@@ -13222,19 +13176,19 @@ module.exports = {
         },
         "BannerConnection": {
             "edges": [
-                424
+                434
             ],
             "nodes": [
-                421
+                431
             ],
             "pageInfo": [
-                425
+                435
             ],
             "on_BannerToBannerConnection": [
-                422
+                432
             ],
             "on_RootQueryToBannerConnection": [
-                439
+                449
             ],
             "__typename": [
                 0
@@ -13245,19 +13199,19 @@ module.exports = {
                 0
             ],
             "node": [
-                421
+                431
             ],
             "on_BannerToBannerConnectionEdge": [
-                426
+                436
             ],
             "on_BannerToParentConnectionEdge": [
-                432
+                442
             ],
             "on_BannerToPreviewConnectionEdge": [
-                433
+                443
             ],
             "on_RootQueryToBannerConnectionEdge": [
-                440
+                450
             ],
             "__typename": [
                 0
@@ -13277,10 +13231,10 @@ module.exports = {
                 0
             ],
             "on_BannerToBannerConnectionPageInfo": [
-                427
+                437
             ],
             "on_RootQueryToBannerConnectionPageInfo": [
-                441
+                451
             ],
             "__typename": [
                 0
@@ -13291,7 +13245,7 @@ module.exports = {
                 0
             ],
             "node": [
-                421
+                431
             ],
             "__typename": [
                 0
@@ -13319,16 +13273,16 @@ module.exports = {
                 2
             ],
             "bhConteudo": [
-                429
+                439
             ],
             "fieldGroupName": [
                 0
             ],
             "imagensProntas": [
-                430
+                440
             ],
             "qualEOEmpreendimento": [
-                431
+                441
             ],
             "__typename": [
                 0
@@ -13336,10 +13290,10 @@ module.exports = {
         },
         "Banner_BannerHome_BhConteudo": {
             "bhImagemDesktop": [
-                119
+                124
             ],
             "bhImagemMobile": [
-                119
+                124
             ],
             "bhLinkBanner": [
                 0
@@ -13377,10 +13331,10 @@ module.exports = {
                 0
             ],
             "imagemDesktopP": [
-                119
+                124
             ],
             "imagemMobileP": [
-                119
+                124
             ],
             "linkDoBannerP": [
                 0
@@ -13391,10 +13345,10 @@ module.exports = {
         },
         "Banner_BannerHome_QualEOEmpreendimento": {
             "on_Empreendimento": [
-                278
+                288
             ],
             "on_Node": [
-                612
+                622
             ],
             "on_ContentNode": [
                 7
@@ -13403,22 +13357,22 @@ module.exports = {
                 8
             ],
             "on_DatabaseIdentifier": [
-                613
+                623
             ],
             "on_NodeWithTemplate": [
-                120
+                125
             ],
             "on_Previewable": [
-                172
+                179
             ],
             "on_NodeWithTitle": [
-                121
+                126
             ],
             "on_NodeWithFeaturedImage": [
-                174
+                181
             ],
             "on_MenuItemLinkable": [
-                179
+                186
             ],
             "__typename": [
                 0
@@ -13429,7 +13383,7 @@ module.exports = {
                 0
             ],
             "node": [
-                421
+                431
             ],
             "__typename": [
                 0
@@ -13440,7 +13394,7 @@ module.exports = {
                 0
             ],
             "node": [
-                421
+                431
             ],
             "__typename": [
                 0
@@ -13448,7 +13402,7 @@ module.exports = {
         },
         "RootQueryToBannerConnectionWhereArgs": {
             "dateQuery": [
-                55
+                57
             ],
             "hasPassword": [
                 2
@@ -13459,11 +13413,14 @@ module.exports = {
             "in": [
                 4
             ],
+            "isSticky": [
+                2
+            ],
             "metaQuery": [
-                435
+                445
             ],
             "mimeType": [
-                63
+                65
             ],
             "name": [
                 0
@@ -13475,7 +13432,7 @@ module.exports = {
                 4
             ],
             "orderby": [
-                64
+                66
             ],
             "parent": [
                 4
@@ -13493,13 +13450,16 @@ module.exports = {
                 0
             ],
             "stati": [
-                67
+                69
             ],
             "status": [
-                67
+                69
             ],
             "taxQuery": [
-                68
+                70
+            ],
+            "template": [
+                75
             ],
             "title": [
                 0
@@ -13510,10 +13470,10 @@ module.exports = {
         },
         "RootQueryToBannerConnectionWhereArgsMetaQuery": {
             "metaArray": [
-                436
+                446
             ],
             "relation": [
-                58
+                60
             ],
             "__typename": [
                 0
@@ -13521,13 +13481,13 @@ module.exports = {
         },
         "RootQueryToBannerConnectionWhereArgsMetaArray": {
             "compare": [
-                437
+                447
             ],
             "key": [
                 0
             ],
             "type": [
-                438
+                448
             ],
             "value": [
                 0
@@ -13540,13 +13500,13 @@ module.exports = {
         "RootQueryToBannerConnectionWhereArgsMetaTypeEnum": {},
         "RootQueryToBannerConnection": {
             "edges": [
-                440
+                450
             ],
             "nodes": [
-                421
+                431
             ],
             "pageInfo": [
-                441
+                451
             ],
             "__typename": [
                 0
@@ -13557,7 +13517,7 @@ module.exports = {
                 0
             ],
             "node": [
-                421
+                431
             ],
             "__typename": [
                 0
@@ -13618,10 +13578,10 @@ module.exports = {
                 4
             ],
             "order": [
-                66
+                68
             ],
             "orderby": [
-                221
+                231
             ],
             "padCounts": [
                 2
@@ -13647,13 +13607,13 @@ module.exports = {
         },
         "RootQueryToCategoryConnection": {
             "edges": [
-                444
+                454
             ],
             "nodes": [
-                225
+                235
             ],
             "pageInfo": [
-                445
+                455
             ],
             "__typename": [
                 0
@@ -13664,7 +13624,7 @@ module.exports = {
                 0
             ],
             "node": [
-                225
+                235
             ],
             "__typename": [
                 0
@@ -13703,7 +13663,7 @@ module.exports = {
                 4
             ],
             "dateQuery": [
-                55
+                57
             ],
             "hasPassword": [
                 2
@@ -13714,11 +13674,14 @@ module.exports = {
             "in": [
                 4
             ],
+            "isSticky": [
+                2
+            ],
             "metaQuery": [
-                449
+                459
             ],
             "mimeType": [
-                63
+                65
             ],
             "name": [
                 0
@@ -13730,7 +13693,7 @@ module.exports = {
                 4
             ],
             "orderby": [
-                64
+                66
             ],
             "parent": [
                 4
@@ -13748,13 +13711,16 @@ module.exports = {
                 0
             ],
             "stati": [
-                67
+                69
             ],
             "status": [
-                67
+                69
             ],
             "taxQuery": [
-                68
+                70
+            ],
+            "template": [
+                75
             ],
             "title": [
                 0
@@ -13765,10 +13731,10 @@ module.exports = {
         },
         "RootQueryToCentraldeDecoradoConnectionWhereArgsMetaQuery": {
             "metaArray": [
-                450
+                460
             ],
             "relation": [
-                58
+                60
             ],
             "__typename": [
                 0
@@ -13776,13 +13742,13 @@ module.exports = {
         },
         "RootQueryToCentraldeDecoradoConnectionWhereArgsMetaArray": {
             "compare": [
-                451
+                461
             ],
             "key": [
                 0
             ],
             "type": [
-                452
+                462
             ],
             "value": [
                 0
@@ -13795,13 +13761,13 @@ module.exports = {
         "RootQueryToCentraldeDecoradoConnectionWhereArgsMetaTypeEnum": {},
         "RootQueryToCentraldeDecoradoConnection": {
             "edges": [
-                454
+                464
             ],
             "nodes": [
-                239
+                249
             ],
             "pageInfo": [
-                455
+                465
             ],
             "__typename": [
                 0
@@ -13812,7 +13778,7 @@ module.exports = {
                 0
             ],
             "node": [
-                239
+                249
             ],
             "__typename": [
                 0
@@ -13889,10 +13855,10 @@ module.exports = {
                 1
             ],
             "contentStatus": [
-                67
+                69
             ],
             "contentType": [
-                54
+                56
             ],
             "includeUnapproved": [
                 4
@@ -13901,10 +13867,10 @@ module.exports = {
                 1
             ],
             "order": [
-                66
+                68
             ],
             "orderby": [
-                86
+                89
             ],
             "parent": [
                 1
@@ -13919,7 +13885,7 @@ module.exports = {
                 0
             ],
             "statusIn": [
-                87
+                90
             ],
             "userId": [
                 4
@@ -13930,13 +13896,13 @@ module.exports = {
         },
         "RootQueryToCommentConnection": {
             "edges": [
-                459
+                469
             ],
             "nodes": [
-                91
+                94
             ],
             "pageInfo": [
-                460
+                470
             ],
             "__typename": [
                 0
@@ -13947,7 +13913,7 @@ module.exports = {
                 0
             ],
             "node": [
-                91
+                94
             ],
             "__typename": [
                 0
@@ -13973,10 +13939,10 @@ module.exports = {
         "ContentNodeIdTypeEnum": {},
         "RootQueryToContentNodeConnectionWhereArgs": {
             "contentTypes": [
-                54
+                56
             ],
             "dateQuery": [
-                55
+                57
             ],
             "hasPassword": [
                 2
@@ -13987,11 +13953,14 @@ module.exports = {
             "in": [
                 4
             ],
+            "isSticky": [
+                2
+            ],
             "metaQuery": [
-                463
+                473
             ],
             "mimeType": [
-                63
+                65
             ],
             "name": [
                 0
@@ -14003,7 +13972,7 @@ module.exports = {
                 4
             ],
             "orderby": [
-                64
+                66
             ],
             "parent": [
                 4
@@ -14021,13 +13990,16 @@ module.exports = {
                 0
             ],
             "stati": [
-                67
+                69
             ],
             "status": [
-                67
+                69
             ],
             "taxQuery": [
-                68
+                70
+            ],
+            "template": [
+                75
             ],
             "title": [
                 0
@@ -14038,10 +14010,10 @@ module.exports = {
         },
         "RootQueryToContentNodeConnectionWhereArgsMetaQuery": {
             "metaArray": [
-                464
+                474
             ],
             "relation": [
-                58
+                60
             ],
             "__typename": [
                 0
@@ -14049,13 +14021,13 @@ module.exports = {
         },
         "RootQueryToContentNodeConnectionWhereArgsMetaArray": {
             "compare": [
-                465
+                475
             ],
             "key": [
                 0
             ],
             "type": [
-                466
+                476
             ],
             "value": [
                 0
@@ -14068,13 +14040,13 @@ module.exports = {
         "RootQueryToContentNodeConnectionWhereArgsMetaTypeEnum": {},
         "RootQueryToContentNodeConnection": {
             "edges": [
-                468
+                478
             ],
             "nodes": [
                 7
             ],
             "pageInfo": [
-                469
+                479
             ],
             "__typename": [
                 0
@@ -14111,13 +14083,13 @@ module.exports = {
         "ContentTypeIdTypeEnum": {},
         "RootQueryToContentTypeConnection": {
             "edges": [
-                472
+                482
             ],
             "nodes": [
                 13
             ],
             "pageInfo": [
-                473
+                483
             ],
             "__typename": [
                 0
@@ -14158,6 +14130,9 @@ module.exports = {
             "defaultPingStatus": [
                 0
             ],
+            "id": [
+                4
+            ],
             "__typename": [
                 0
             ]
@@ -14177,7 +14152,7 @@ module.exports = {
                 4
             ],
             "dateQuery": [
-                55
+                57
             ],
             "hasPassword": [
                 2
@@ -14188,11 +14163,14 @@ module.exports = {
             "in": [
                 4
             ],
+            "isSticky": [
+                2
+            ],
             "metaQuery": [
-                477
+                487
             ],
             "mimeType": [
-                63
+                65
             ],
             "name": [
                 0
@@ -14204,7 +14182,7 @@ module.exports = {
                 4
             ],
             "orderby": [
-                64
+                66
             ],
             "parent": [
                 4
@@ -14222,13 +14200,16 @@ module.exports = {
                 0
             ],
             "stati": [
-                67
+                69
             ],
             "status": [
-                67
+                69
             ],
             "taxQuery": [
-                68
+                70
+            ],
+            "template": [
+                75
             ],
             "title": [
                 0
@@ -14239,10 +14220,10 @@ module.exports = {
         },
         "RootQueryToEmpreendimentoConnectionWhereArgsMetaQuery": {
             "metaArray": [
-                478
+                488
             ],
             "relation": [
-                58
+                60
             ],
             "__typename": [
                 0
@@ -14250,13 +14231,13 @@ module.exports = {
         },
         "RootQueryToEmpreendimentoConnectionWhereArgsMetaArray": {
             "compare": [
-                479
+                489
             ],
             "key": [
                 0
             ],
             "type": [
-                480
+                490
             ],
             "value": [
                 0
@@ -14269,13 +14250,13 @@ module.exports = {
         "RootQueryToEmpreendimentoConnectionWhereArgsMetaTypeEnum": {},
         "RootQueryToEmpreendimentoConnection": {
             "edges": [
-                482
+                492
             ],
             "nodes": [
-                278
+                288
             ],
             "pageInfo": [
-                483
+                493
             ],
             "__typename": [
                 0
@@ -14286,7 +14267,7 @@ module.exports = {
                 0
             ],
             "node": [
-                278
+                288
             ],
             "__typename": [
                 0
@@ -14319,11 +14300,17 @@ module.exports = {
             "email": [
                 0
             ],
+            "homeUrl": [
+                0
+            ],
+            "id": [
+                4
+            ],
             "language": [
                 0
             ],
             "siteIcon": [
-                488
+                495
             ],
             "siteIconUrl": [
                 0,
@@ -14357,7 +14344,7 @@ module.exports = {
                 0
             ],
             "node": [
-                119
+                124
             ],
             "__typename": [
                 0
@@ -14378,7 +14365,7 @@ module.exports = {
                 4
             ],
             "dateQuery": [
-                55
+                57
             ],
             "hasPassword": [
                 2
@@ -14389,11 +14376,14 @@ module.exports = {
             "in": [
                 4
             ],
+            "isSticky": [
+                2
+            ],
             "metaQuery": [
-                491
+                498
             ],
             "mimeType": [
-                63
+                65
             ],
             "name": [
                 0
@@ -14405,7 +14395,7 @@ module.exports = {
                 4
             ],
             "orderby": [
-                64
+                66
             ],
             "parent": [
                 4
@@ -14423,13 +14413,16 @@ module.exports = {
                 0
             ],
             "stati": [
-                67
+                69
             ],
             "status": [
-                67
+                69
             ],
             "taxQuery": [
-                68
+                70
+            ],
+            "template": [
+                75
             ],
             "title": [
                 0
@@ -14440,10 +14433,10 @@ module.exports = {
         },
         "RootQueryToMediaItemConnectionWhereArgsMetaQuery": {
             "metaArray": [
-                492
+                499
             ],
             "relation": [
-                58
+                60
             ],
             "__typename": [
                 0
@@ -14451,13 +14444,13 @@ module.exports = {
         },
         "RootQueryToMediaItemConnectionWhereArgsMetaArray": {
             "compare": [
-                493
+                500
             ],
             "key": [
                 0
             ],
             "type": [
-                494
+                501
             ],
             "value": [
                 0
@@ -14470,13 +14463,13 @@ module.exports = {
         "RootQueryToMediaItemConnectionWhereArgsMetaTypeEnum": {},
         "RootQueryToMediaItemConnection": {
             "edges": [
-                496
+                503
             ],
             "nodes": [
-                119
+                124
             ],
             "pageInfo": [
-                497
+                504
             ],
             "__typename": [
                 0
@@ -14487,7 +14480,7 @@ module.exports = {
                 0
             ],
             "node": [
-                119
+                124
             ],
             "__typename": [
                 0
@@ -14525,13 +14518,13 @@ module.exports = {
                 2
             ],
             "locations": [
-                500
+                507
             ],
             "menuId": [
                 1
             ],
             "menuItems": [
-                502,
+                509,
                 {
                     "first": [
                         1
@@ -14546,7 +14539,7 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        501
+                        508
                     ]
                 }
             ],
@@ -14566,7 +14559,7 @@ module.exports = {
                 1
             ],
             "location": [
-                500
+                507
             ],
             "parentDatabaseId": [
                 1
@@ -14580,13 +14573,13 @@ module.exports = {
         },
         "MenuToMenuItemConnection": {
             "edges": [
-                516
+                523
             ],
             "nodes": [
-                505
+                512
             ],
             "pageInfo": [
-                517
+                524
             ],
             "__typename": [
                 0
@@ -14594,22 +14587,22 @@ module.exports = {
         },
         "MenuItemConnection": {
             "edges": [
-                504
+                511
             ],
             "nodes": [
-                505
+                512
             ],
             "pageInfo": [
-                510
+                517
             ],
             "on_MenuToMenuItemConnection": [
-                502
+                509
             ],
             "on_MenuItemToMenuItemConnection": [
-                507
+                514
             ],
             "on_RootQueryToMenuItemConnection": [
-                520
+                527
             ],
             "__typename": [
                 0
@@ -14620,16 +14613,16 @@ module.exports = {
                 0
             ],
             "node": [
-                505
+                512
             ],
             "on_MenuItemToMenuItemConnectionEdge": [
-                508
+                515
             ],
             "on_MenuToMenuItemConnectionEdge": [
-                516
+                523
             ],
             "on_RootQueryToMenuItemConnectionEdge": [
-                521
+                528
             ],
             "__typename": [
                 0
@@ -14637,7 +14630,7 @@ module.exports = {
         },
         "MenuItem": {
             "childItems": [
-                507,
+                514,
                 {
                     "first": [
                         1
@@ -14652,15 +14645,15 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        506
+                        513
                     ]
                 }
             ],
             "connectedNode": [
-                511
+                518
             ],
             "connectedObject": [
-                513
+                520
             ],
             "cssClasses": [
                 0
@@ -14684,10 +14677,10 @@ module.exports = {
                 0
             ],
             "locations": [
-                500
+                507
             ],
             "menu": [
-                514
+                521
             ],
             "menuItemId": [
                 1
@@ -14725,7 +14718,7 @@ module.exports = {
                 1
             ],
             "location": [
-                500
+                507
             ],
             "parentDatabaseId": [
                 1
@@ -14739,13 +14732,13 @@ module.exports = {
         },
         "MenuItemToMenuItemConnection": {
             "edges": [
-                508
+                515
             ],
             "nodes": [
-                505
+                512
             ],
             "pageInfo": [
-                509
+                516
             ],
             "__typename": [
                 0
@@ -14756,7 +14749,7 @@ module.exports = {
                 0
             ],
             "node": [
-                505
+                512
             ],
             "__typename": [
                 0
@@ -14793,13 +14786,13 @@ module.exports = {
                 0
             ],
             "on_MenuItemToMenuItemConnectionPageInfo": [
-                509
+                516
             ],
             "on_MenuToMenuItemConnectionPageInfo": [
-                517
+                524
             ],
             "on_RootQueryToMenuItemConnectionPageInfo": [
-                522
+                529
             ],
             "__typename": [
                 0
@@ -14810,7 +14803,7 @@ module.exports = {
                 0
             ],
             "node": [
-                179
+                186
             ],
             "__typename": [
                 0
@@ -14821,10 +14814,10 @@ module.exports = {
                 0
             ],
             "node": [
-                179
+                186
             ],
             "on_MenuItemToMenuItemLinkableConnectionEdge": [
-                511
+                518
             ],
             "__typename": [
                 0
@@ -14832,31 +14825,31 @@ module.exports = {
         },
         "MenuItemObjectUnion": {
             "on_Post": [
-                213
+                223
             ],
             "on_Page": [
-                171
+                178
             ],
             "on_Banner": [
-                421
+                431
             ],
             "on_ArquivoAssessoria": [
                 6
             ],
             "on_Empreendimento": [
-                278
+                288
             ],
             "on_CentraldeDecorado": [
-                239
+                249
             ],
             "on_Category": [
-                225
+                235
             ],
             "on_Tag": [
-                360
+                370
             ],
             "on_Node": [
-                612
+                622
             ],
             "on_ContentNode": [
                 7
@@ -14865,55 +14858,55 @@ module.exports = {
                 8
             ],
             "on_DatabaseIdentifier": [
-                613
+                623
             ],
             "on_NodeWithTemplate": [
-                120
-            ],
-            "on_Previewable": [
-                172
-            ],
-            "on_NodeWithTitle": [
-                121
-            ],
-            "on_NodeWithContentEditor": [
-                173
-            ],
-            "on_NodeWithAuthor": [
-                122
-            ],
-            "on_NodeWithFeaturedImage": [
-                174
-            ],
-            "on_NodeWithExcerpt": [
-                214
-            ],
-            "on_NodeWithComments": [
-                124
-            ],
-            "on_NodeWithTrackbacks": [
-                215
-            ],
-            "on_NodeWithRevisions": [
-                176
-            ],
-            "on_MenuItemLinkable": [
-                179
-            ],
-            "on_NodeWithPageAttributes": [
-                178
-            ],
-            "on_HierarchicalContentNode": [
                 125
             ],
-            "on_HierarchicalNode": [
+            "on_Previewable": [
+                179
+            ],
+            "on_NodeWithTitle": [
                 126
+            ],
+            "on_NodeWithContentEditor": [
+                180
+            ],
+            "on_NodeWithAuthor": [
+                127
+            ],
+            "on_NodeWithFeaturedImage": [
+                181
+            ],
+            "on_NodeWithExcerpt": [
+                224
+            ],
+            "on_NodeWithComments": [
+                129
+            ],
+            "on_NodeWithTrackbacks": [
+                225
+            ],
+            "on_NodeWithRevisions": [
+                183
+            ],
+            "on_MenuItemLinkable": [
+                186
+            ],
+            "on_NodeWithPageAttributes": [
+                185
+            ],
+            "on_HierarchicalContentNode": [
+                130
+            ],
+            "on_HierarchicalNode": [
+                131
             ],
             "on_TermNode": [
                 29
             ],
             "on_HierarchicalTermNode": [
-                226
+                236
             ],
             "__typename": [
                 0
@@ -14924,7 +14917,7 @@ module.exports = {
                 0
             ],
             "node": [
-                499
+                506
             ],
             "__typename": [
                 0
@@ -14935,13 +14928,13 @@ module.exports = {
                 0
             ],
             "node": [
-                499
+                506
             ],
             "on_MenuItemToMenuConnectionEdge": [
-                514
+                521
             ],
             "on_RootQueryToMenuConnectionEdge": [
-                527
+                534
             ],
             "__typename": [
                 0
@@ -14952,7 +14945,7 @@ module.exports = {
                 0
             ],
             "node": [
-                505
+                512
             ],
             "__typename": [
                 0
@@ -14981,7 +14974,7 @@ module.exports = {
                 1
             ],
             "location": [
-                500
+                507
             ],
             "parentDatabaseId": [
                 1
@@ -14995,13 +14988,13 @@ module.exports = {
         },
         "RootQueryToMenuItemConnection": {
             "edges": [
-                521
+                528
             ],
             "nodes": [
-                505
+                512
             ],
             "pageInfo": [
-                522
+                529
             ],
             "__typename": [
                 0
@@ -15012,7 +15005,7 @@ module.exports = {
                 0
             ],
             "node": [
-                505
+                512
             ],
             "__typename": [
                 0
@@ -15040,7 +15033,7 @@ module.exports = {
                 1
             ],
             "location": [
-                500
+                507
             ],
             "slug": [
                 0
@@ -15051,13 +15044,13 @@ module.exports = {
         },
         "RootQueryToMenuConnection": {
             "edges": [
-                527
+                534
             ],
             "nodes": [
-                499
+                506
             ],
             "pageInfo": [
-                528
+                535
             ],
             "__typename": [
                 0
@@ -15065,16 +15058,16 @@ module.exports = {
         },
         "MenuConnection": {
             "edges": [
-                515
+                522
             ],
             "nodes": [
-                499
+                506
             ],
             "pageInfo": [
-                526
+                533
             ],
             "on_RootQueryToMenuConnection": [
-                524
+                531
             ],
             "__typename": [
                 0
@@ -15094,7 +15087,7 @@ module.exports = {
                 0
             ],
             "on_RootQueryToMenuConnectionPageInfo": [
-                528
+                535
             ],
             "__typename": [
                 0
@@ -15105,7 +15098,7 @@ module.exports = {
                 0
             ],
             "node": [
-                499
+                506
             ],
             "__typename": [
                 0
@@ -15143,7 +15136,7 @@ module.exports = {
                 4
             ],
             "dateQuery": [
-                55
+                57
             ],
             "hasPassword": [
                 2
@@ -15154,11 +15147,14 @@ module.exports = {
             "in": [
                 4
             ],
+            "isSticky": [
+                2
+            ],
             "metaQuery": [
-                531
+                538
             ],
             "mimeType": [
-                63
+                65
             ],
             "name": [
                 0
@@ -15170,7 +15166,7 @@ module.exports = {
                 4
             ],
             "orderby": [
-                64
+                66
             ],
             "parent": [
                 4
@@ -15188,13 +15184,16 @@ module.exports = {
                 0
             ],
             "stati": [
-                67
+                69
             ],
             "status": [
-                67
+                69
             ],
             "taxQuery": [
-                68
+                70
+            ],
+            "template": [
+                75
             ],
             "title": [
                 0
@@ -15205,10 +15204,10 @@ module.exports = {
         },
         "RootQueryToPageConnectionWhereArgsMetaQuery": {
             "metaArray": [
-                532
+                539
             ],
             "relation": [
-                58
+                60
             ],
             "__typename": [
                 0
@@ -15216,13 +15215,13 @@ module.exports = {
         },
         "RootQueryToPageConnectionWhereArgsMetaArray": {
             "compare": [
-                533
+                540
             ],
             "key": [
                 0
             ],
             "type": [
-                534
+                541
             ],
             "value": [
                 0
@@ -15235,13 +15234,13 @@ module.exports = {
         "RootQueryToPageConnectionWhereArgsMetaTypeEnum": {},
         "RootQueryToPageConnection": {
             "edges": [
-                536
+                543
             ],
             "nodes": [
-                171
+                178
             ],
             "pageInfo": [
-                537
+                544
             ],
             "__typename": [
                 0
@@ -15252,7 +15251,7 @@ module.exports = {
                 0
             ],
             "node": [
-                171
+                178
             ],
             "__typename": [
                 0
@@ -15269,6 +15268,23 @@ module.exports = {
                 2
             ],
             "startCursor": [
+                0
+            ],
+            "__typename": [
+                0
+            ]
+        },
+        "PermalinkSettings": {
+            "categoryBase": [
+                0
+            ],
+            "id": [
+                4
+            ],
+            "structure": [
+                0
+            ],
+            "tagBase": [
                 0
             ],
             "__typename": [
@@ -15312,10 +15328,10 @@ module.exports = {
                 0
             ],
             "stati": [
-                540
+                548
             ],
             "status": [
-                540
+                548
             ],
             "__typename": [
                 0
@@ -15324,13 +15340,13 @@ module.exports = {
         "PluginStatusEnum": {},
         "RootQueryToPluginConnection": {
             "edges": [
-                545
+                553
             ],
             "nodes": [
-                538
+                546
             ],
             "pageInfo": [
-                546
+                554
             ],
             "__typename": [
                 0
@@ -15338,16 +15354,16 @@ module.exports = {
         },
         "PluginConnection": {
             "edges": [
-                543
+                551
             ],
             "nodes": [
-                538
+                546
             ],
             "pageInfo": [
-                544
+                552
             ],
             "on_RootQueryToPluginConnection": [
-                541
+                549
             ],
             "__typename": [
                 0
@@ -15358,10 +15374,10 @@ module.exports = {
                 0
             ],
             "node": [
-                538
+                546
             ],
             "on_RootQueryToPluginConnectionEdge": [
-                545
+                553
             ],
             "__typename": [
                 0
@@ -15381,7 +15397,7 @@ module.exports = {
                 0
             ],
             "on_RootQueryToPluginConnectionPageInfo": [
-                546
+                554
             ],
             "__typename": [
                 0
@@ -15392,7 +15408,7 @@ module.exports = {
                 0
             ],
             "node": [
-                538
+                546
             ],
             "__typename": [
                 0
@@ -15455,10 +15471,10 @@ module.exports = {
                 4
             ],
             "order": [
-                66
+                68
             ],
             "orderby": [
-                221
+                231
             ],
             "padCounts": [
                 2
@@ -15484,13 +15500,13 @@ module.exports = {
         },
         "RootQueryToPostFormatConnection": {
             "edges": [
-                551
+                559
             ],
             "nodes": [
-                325
+                335
             ],
             "pageInfo": [
-                552
+                560
             ],
             "__typename": [
                 0
@@ -15501,7 +15517,7 @@ module.exports = {
                 0
             ],
             "node": [
-                325
+                335
             ],
             "__typename": [
                 0
@@ -15550,7 +15566,7 @@ module.exports = {
                 4
             ],
             "dateQuery": [
-                55
+                57
             ],
             "hasPassword": [
                 2
@@ -15561,11 +15577,14 @@ module.exports = {
             "in": [
                 4
             ],
+            "isSticky": [
+                2
+            ],
             "metaQuery": [
-                554
+                562
             ],
             "mimeType": [
-                63
+                65
             ],
             "name": [
                 0
@@ -15577,7 +15596,7 @@ module.exports = {
                 4
             ],
             "orderby": [
-                64
+                66
             ],
             "parent": [
                 4
@@ -15595,10 +15614,10 @@ module.exports = {
                 0
             ],
             "stati": [
-                67
+                69
             ],
             "status": [
-                67
+                69
             ],
             "tag": [
                 0
@@ -15619,7 +15638,10 @@ module.exports = {
                 0
             ],
             "taxQuery": [
-                68
+                70
+            ],
+            "template": [
+                75
             ],
             "title": [
                 0
@@ -15630,10 +15652,10 @@ module.exports = {
         },
         "RootQueryToPostConnectionWhereArgsMetaQuery": {
             "metaArray": [
-                555
+                563
             ],
             "relation": [
-                58
+                60
             ],
             "__typename": [
                 0
@@ -15641,13 +15663,13 @@ module.exports = {
         },
         "RootQueryToPostConnectionWhereArgsMetaArray": {
             "compare": [
-                556
+                564
             ],
             "key": [
                 0
             ],
             "type": [
-                557
+                565
             ],
             "value": [
                 0
@@ -15660,13 +15682,13 @@ module.exports = {
         "RootQueryToPostConnectionWhereArgsMetaTypeEnum": {},
         "RootQueryToPostConnection": {
             "edges": [
-                559
+                567
             ],
             "nodes": [
-                213
+                223
             ],
             "pageInfo": [
-                560
+                568
             ],
             "__typename": [
                 0
@@ -15677,7 +15699,7 @@ module.exports = {
                 0
             ],
             "node": [
-                213
+                223
             ],
             "__typename": [
                 0
@@ -15701,6 +15723,9 @@ module.exports = {
             ]
         },
         "ReadingSettings": {
+            "id": [
+                4
+            ],
             "pageForPosts": [
                 1
             ],
@@ -15717,15 +15742,23 @@ module.exports = {
                 0
             ]
         },
+        "RootQueryToEnqueuedScriptConnectionWhereArgs": {
+            "handlesIn": [
+                0
+            ],
+            "__typename": [
+                0
+            ]
+        },
         "RootQueryToEnqueuedScriptConnection": {
             "edges": [
-                563
+                572
             ],
             "nodes": [
-                33
+                34
             ],
             "pageInfo": [
-                564
+                573
             ],
             "__typename": [
                 0
@@ -15736,7 +15769,7 @@ module.exports = {
                 0
             ],
             "node": [
-                33
+                34
             ],
             "__typename": [
                 0
@@ -15759,15 +15792,23 @@ module.exports = {
                 0
             ]
         },
+        "RootQueryToEnqueuedStylesheetConnectionWhereArgs": {
+            "handlesIn": [
+                0
+            ],
+            "__typename": [
+                0
+            ]
+        },
         "RootQueryToEnqueuedStylesheetConnection": {
             "edges": [
-                566
+                576
             ],
             "nodes": [
-                43
+                45
             ],
             "pageInfo": [
-                567
+                577
             ],
             "__typename": [
                 0
@@ -15778,7 +15819,7 @@ module.exports = {
                 0
             ],
             "node": [
-                43
+                45
             ],
             "__typename": [
                 0
@@ -15803,10 +15844,10 @@ module.exports = {
         },
         "RootQueryToRevisionsConnectionWhereArgs": {
             "contentTypes": [
-                54
+                56
             ],
             "dateQuery": [
-                55
+                57
             ],
             "hasPassword": [
                 2
@@ -15817,11 +15858,14 @@ module.exports = {
             "in": [
                 4
             ],
+            "isSticky": [
+                2
+            ],
             "metaQuery": [
-                569
+                579
             ],
             "mimeType": [
-                63
+                65
             ],
             "name": [
                 0
@@ -15833,7 +15877,7 @@ module.exports = {
                 4
             ],
             "orderby": [
-                64
+                66
             ],
             "parent": [
                 4
@@ -15851,13 +15895,16 @@ module.exports = {
                 0
             ],
             "stati": [
-                67
+                69
             ],
             "status": [
-                67
+                69
             ],
             "taxQuery": [
-                68
+                70
+            ],
+            "template": [
+                75
             ],
             "title": [
                 0
@@ -15868,10 +15915,10 @@ module.exports = {
         },
         "RootQueryToRevisionsConnectionWhereArgsMetaQuery": {
             "metaArray": [
-                570
+                580
             ],
             "relation": [
-                58
+                60
             ],
             "__typename": [
                 0
@@ -15879,13 +15926,13 @@ module.exports = {
         },
         "RootQueryToRevisionsConnectionWhereArgsMetaArray": {
             "compare": [
-                571
+                581
             ],
             "key": [
                 0
             ],
             "type": [
-                572
+                582
             ],
             "value": [
                 0
@@ -15898,13 +15945,13 @@ module.exports = {
         "RootQueryToRevisionsConnectionWhereArgsMetaTypeEnum": {},
         "RootQueryToRevisionsConnection": {
             "edges": [
-                574
+                584
             ],
             "nodes": [
                 7
             ],
             "pageInfo": [
-                575
+                585
             ],
             "__typename": [
                 0
@@ -15977,10 +16024,10 @@ module.exports = {
                 4
             ],
             "order": [
-                66
+                68
             ],
             "orderby": [
-                221
+                231
             ],
             "padCounts": [
                 2
@@ -16006,13 +16053,13 @@ module.exports = {
         },
         "RootQueryToTagConnection": {
             "edges": [
-                579
+                589
             ],
             "nodes": [
-                360
+                370
             ],
             "pageInfo": [
-                580
+                590
             ],
             "__typename": [
                 0
@@ -16023,7 +16070,7 @@ module.exports = {
                 0
             ],
             "node": [
-                360
+                370
             ],
             "__typename": [
                 0
@@ -16048,13 +16095,13 @@ module.exports = {
         },
         "RootQueryToTaxonomyConnection": {
             "edges": [
-                582
+                592
             ],
             "nodes": [
                 19
             ],
             "pageInfo": [
-                583
+                593
             ],
             "__typename": [
                 0
@@ -16128,10 +16175,10 @@ module.exports = {
                 4
             ],
             "order": [
-                66
+                68
             ],
             "orderby": [
-                221
+                231
             ],
             "padCounts": [
                 2
@@ -16146,7 +16193,7 @@ module.exports = {
                 0
             ],
             "taxonomies": [
-                72
+                74
             ],
             "termTaxonomyId": [
                 4
@@ -16160,13 +16207,13 @@ module.exports = {
         },
         "RootQueryToTermNodeConnection": {
             "edges": [
-                588
+                598
             ],
             "nodes": [
                 29
             ],
             "pageInfo": [
-                589
+                599
             ],
             "__typename": [
                 0
@@ -16240,13 +16287,13 @@ module.exports = {
         },
         "RootQueryToThemeConnection": {
             "edges": [
-                595
+                605
             ],
             "nodes": [
-                590
+                600
             ],
             "pageInfo": [
-                596
+                606
             ],
             "__typename": [
                 0
@@ -16254,16 +16301,16 @@ module.exports = {
         },
         "ThemeConnection": {
             "edges": [
-                593
+                603
             ],
             "nodes": [
-                590
+                600
             ],
             "pageInfo": [
-                594
+                604
             ],
             "on_RootQueryToThemeConnection": [
-                591
+                601
             ],
             "__typename": [
                 0
@@ -16274,10 +16321,10 @@ module.exports = {
                 0
             ],
             "node": [
-                590
+                600
             ],
             "on_RootQueryToThemeConnectionEdge": [
-                595
+                605
             ],
             "__typename": [
                 0
@@ -16297,7 +16344,7 @@ module.exports = {
                 0
             ],
             "on_RootQueryToThemeConnectionPageInfo": [
-                596
+                606
             ],
             "__typename": [
                 0
@@ -16308,7 +16355,7 @@ module.exports = {
                 0
             ],
             "node": [
-                590
+                600
             ],
             "__typename": [
                 0
@@ -16334,13 +16381,13 @@ module.exports = {
         "UserNodeIdTypeEnum": {},
         "RootQueryToUserRoleConnection": {
             "edges": [
-                599
+                609
             ],
             "nodes": [
-                399
+                409
             ],
             "pageInfo": [
-                600
+                610
             ],
             "__typename": [
                 0
@@ -16351,7 +16398,7 @@ module.exports = {
                 0
             ],
             "node": [
-                399
+                409
             ],
             "__typename": [
                 0
@@ -16379,7 +16426,7 @@ module.exports = {
                 1
             ],
             "hasPublishedPosts": [
-                54
+                56
             ],
             "include": [
                 1
@@ -16403,22 +16450,22 @@ module.exports = {
                 0
             ],
             "orderby": [
-                602
+                612
             ],
             "role": [
-                604
+                614
             ],
             "roleIn": [
-                604
+                614
             ],
             "roleNotIn": [
-                604
+                614
             ],
             "search": [
                 0
             ],
             "searchColumns": [
-                605
+                615
             ],
             "__typename": [
                 0
@@ -16426,10 +16473,10 @@ module.exports = {
         },
         "UsersConnectionOrderbyInput": {
             "field": [
-                603
+                613
             ],
             "order": [
-                66
+                68
             ],
             "__typename": [
                 0
@@ -16440,13 +16487,13 @@ module.exports = {
         "UsersConnectionSearchColumnEnum": {},
         "RootQueryToUserConnection": {
             "edges": [
-                609
+                619
             ],
             "nodes": [
-                82
+                85
             ],
             "pageInfo": [
-                610
+                620
             ],
             "__typename": [
                 0
@@ -16454,16 +16501,16 @@ module.exports = {
         },
         "UserConnection": {
             "edges": [
-                81
+                84
             ],
             "nodes": [
-                82
+                85
             ],
             "pageInfo": [
-                608
+                618
             ],
             "on_RootQueryToUserConnection": [
-                606
+                616
             ],
             "__typename": [
                 0
@@ -16483,7 +16530,7 @@ module.exports = {
                 0
             ],
             "on_RootQueryToUserConnectionPageInfo": [
-                610
+                620
             ],
             "__typename": [
                 0
@@ -16494,7 +16541,7 @@ module.exports = {
                 0
             ],
             "node": [
-                82
+                85
             ],
             "__typename": [
                 0
@@ -16524,6 +16571,9 @@ module.exports = {
             "defaultPostFormat": [
                 0
             ],
+            "id": [
+                4
+            ],
             "useSmilies": [
                 2
             ],
@@ -16545,61 +16595,76 @@ module.exports = {
                 19
             ],
             "on_EnqueuedScript": [
-                33
+                34
             ],
             "on_EnqueuedStylesheet": [
-                43
+                45
             ],
             "on_User": [
-                82
+                85
             ],
             "on_Comment": [
-                91
+                94
             ],
             "on_MediaItem": [
-                119
+                124
             ],
             "on_Page": [
-                171
+                178
             ],
             "on_Post": [
-                216
+                223
             ],
             "on_Category": [
-                228
+                235
             ],
             "on_CentraldeDecorado": [
-                242
+                249
             ],
             "on_Empreendimento": [
-                281
+                288
             ],
             "on_PostFormat": [
-                328
+                335
             ],
             "on_Tag": [
-                363
+                370
             ],
             "on_UserRole": [
-                402
+                409
             ],
             "on_Banner": [
-                424
+                431
+            ],
+            "on_DiscussionSettings": [
+                484
+            ],
+            "on_GeneralSettings": [
+                494
             ],
             "on_Menu": [
-                499
+                506
             ],
             "on_MenuItem": [
-                505
+                512
+            ],
+            "on_PermalinkSettings": [
+                545
             ],
             "on_Plugin": [
-                538
+                546
+            ],
+            "on_ReadingSettings": [
+                569
             ],
             "on_Theme": [
-                590
+                600
+            ],
+            "on_WritingSettings": [
+                621
             ],
             "on_CommentAuthor": [
-                615
+                625
             ],
             "__typename": [
                 0
@@ -16613,46 +16678,46 @@ module.exports = {
                 6
             ],
             "on_User": [
-                82
+                85
             ],
             "on_Comment": [
-                91
+                94
             ],
             "on_MediaItem": [
-                119
+                124
             ],
             "on_Page": [
-                171
+                178
             ],
             "on_Post": [
-                216
+                223
             ],
             "on_Category": [
-                228
+                235
             ],
             "on_CentraldeDecorado": [
-                242
+                249
             ],
             "on_Empreendimento": [
-                281
+                288
             ],
             "on_PostFormat": [
-                328
+                335
             ],
             "on_Tag": [
-                363
+                370
             ],
             "on_Banner": [
-                424
+                431
             ],
             "on_Menu": [
-                499
+                506
             ],
             "on_MenuItem": [
-                505
+                512
             ],
             "on_CommentAuthor": [
-                615
+                625
             ],
             "__typename": [
                 0
@@ -16660,7 +16725,7 @@ module.exports = {
         },
         "Commenter": {
             "avatar": [
-                83
+                86
             ],
             "databaseId": [
                 1
@@ -16681,10 +16746,10 @@ module.exports = {
                 0
             ],
             "on_User": [
-                82
+                85
             ],
             "on_CommentAuthor": [
-                615
+                625
             ],
             "__typename": [
                 0
@@ -16692,7 +16757,7 @@ module.exports = {
         },
         "CommentAuthor": {
             "avatar": [
-                83,
+                86,
                 {
                     "size": [
                         1
@@ -16701,7 +16766,7 @@ module.exports = {
                         2
                     ],
                     "rating": [
-                        84
+                        87
                     ]
                 }
             ],
@@ -16732,7 +16797,7 @@ module.exports = {
                 0
             ],
             "on_DefaultTemplate": [
-                617
+                627
             ],
             "__typename": [
                 0
@@ -16763,7 +16828,7 @@ module.exports = {
                 0
             ],
             "status": [
-                67
+                69
             ],
             "title": [
                 0
@@ -16800,7 +16865,7 @@ module.exports = {
                 0
             ],
             "status": [
-                67
+                69
             ],
             "title": [
                 0
@@ -16811,7 +16876,7 @@ module.exports = {
         },
         "CreateBannerPayload": {
             "banner": [
-                421
+                431
             ],
             "clientMutationId": [
                 0
@@ -16848,7 +16913,7 @@ module.exports = {
         },
         "CreateCategoryPayload": {
             "category": [
-                225
+                235
             ],
             "clientMutationId": [
                 0
@@ -16859,7 +16924,7 @@ module.exports = {
         },
         "CreateCentraldeDecoradoInput": {
             "categories": [
-                615
+                635
             ],
             "clientMutationId": [
                 0
@@ -16877,7 +16942,7 @@ module.exports = {
                 0
             ],
             "status": [
-                67
+                69
             ],
             "title": [
                 0
@@ -16891,7 +16956,7 @@ module.exports = {
                 2
             ],
             "nodes": [
-                616
+                636
             ],
             "__typename": [
                 0
@@ -16916,7 +16981,7 @@ module.exports = {
         },
         "CreateCentraldeDecoradoPayload": {
             "centraldeDecorado": [
-                239
+                249
             ],
             "clientMutationId": [
                 0
@@ -16951,7 +17016,7 @@ module.exports = {
                 4
             ],
             "status": [
-                87
+                90
             ],
             "type": [
                 0
@@ -16965,7 +17030,7 @@ module.exports = {
                 0
             ],
             "comment": [
-                91
+                94
             ],
             "success": [
                 2
@@ -16976,7 +17041,7 @@ module.exports = {
         },
         "CreateEmpreendimentoInput": {
             "categories": [
-                621
+                641
             ],
             "clientMutationId": [
                 0
@@ -16994,7 +17059,7 @@ module.exports = {
                 0
             ],
             "status": [
-                67
+                69
             ],
             "title": [
                 0
@@ -17008,7 +17073,7 @@ module.exports = {
                 2
             ],
             "nodes": [
-                622
+                642
             ],
             "__typename": [
                 0
@@ -17033,7 +17098,7 @@ module.exports = {
         },
         "CreateEmpreendimentoPayload": {
             "empreendimento": [
-                278
+                288
             ],
             "clientMutationId": [
                 0
@@ -17071,7 +17136,7 @@ module.exports = {
                 0
             ],
             "fileType": [
-                63
+                65
             ],
             "parentId": [
                 4
@@ -17083,7 +17148,7 @@ module.exports = {
                 0
             ],
             "status": [
-                625
+                645
             ],
             "title": [
                 0
@@ -17098,7 +17163,7 @@ module.exports = {
                 0
             ],
             "mediaItem": [
-                119
+                124
             ],
             "__typename": [
                 0
@@ -17133,7 +17198,7 @@ module.exports = {
                 0
             ],
             "status": [
-                67
+                69
             ],
             "title": [
                 0
@@ -17147,7 +17212,7 @@ module.exports = {
                 0
             ],
             "page": [
-                171
+                178
             ],
             "__typename": [
                 0
@@ -17158,7 +17223,7 @@ module.exports = {
                 4
             ],
             "categories": [
-                630
+                650
             ],
             "clientMutationId": [
                 0
@@ -17188,16 +17253,16 @@ module.exports = {
                 0
             ],
             "postFormats": [
-                632
+                652
             ],
             "slug": [
                 0
             ],
             "status": [
-                67
+                69
             ],
             "tags": [
-                634
+                654
             ],
             "title": [
                 0
@@ -17214,7 +17279,7 @@ module.exports = {
                 2
             ],
             "nodes": [
-                631
+                651
             ],
             "__typename": [
                 0
@@ -17242,7 +17307,7 @@ module.exports = {
                 2
             ],
             "nodes": [
-                633
+                653
             ],
             "__typename": [
                 0
@@ -17270,7 +17335,7 @@ module.exports = {
                 2
             ],
             "nodes": [
-                635
+                655
             ],
             "__typename": [
                 0
@@ -17298,7 +17363,7 @@ module.exports = {
                 0
             ],
             "post": [
-                213
+                223
             ],
             "__typename": [
                 0
@@ -17329,7 +17394,7 @@ module.exports = {
                 0
             ],
             "postFormat": [
-                325
+                335
             ],
             "__typename": [
                 0
@@ -17360,7 +17425,7 @@ module.exports = {
                 0
             ],
             "tag": [
-                360
+                370
             ],
             "__typename": [
                 0
@@ -17430,7 +17495,7 @@ module.exports = {
                 0
             ],
             "user": [
-                82
+                85
             ],
             "__typename": [
                 0
@@ -17486,7 +17551,7 @@ module.exports = {
         },
         "DeleteBannerPayload": {
             "banner": [
-                421
+                431
             ],
             "clientMutationId": [
                 0
@@ -17511,7 +17576,7 @@ module.exports = {
         },
         "DeleteCategoryPayload": {
             "category": [
-                225
+                235
             ],
             "clientMutationId": [
                 0
@@ -17542,7 +17607,7 @@ module.exports = {
         },
         "DeleteCentraldeDecoradoPayload": {
             "centraldeDecorado": [
-                239
+                249
             ],
             "clientMutationId": [
                 0
@@ -17573,7 +17638,7 @@ module.exports = {
                 0
             ],
             "comment": [
-                91
+                94
             ],
             "deletedId": [
                 4
@@ -17601,7 +17666,7 @@ module.exports = {
         },
         "DeleteEmpreendimentoPayload": {
             "empreendimento": [
-                278
+                288
             ],
             "clientMutationId": [
                 0
@@ -17635,7 +17700,7 @@ module.exports = {
                 4
             ],
             "mediaItem": [
-                119
+                124
             ],
             "__typename": [
                 0
@@ -17666,7 +17731,7 @@ module.exports = {
                 4
             ],
             "page": [
-                171
+                178
             ],
             "__typename": [
                 0
@@ -17697,7 +17762,7 @@ module.exports = {
                 4
             ],
             "post": [
-                213
+                223
             ],
             "__typename": [
                 0
@@ -17722,7 +17787,7 @@ module.exports = {
                 4
             ],
             "postFormat": [
-                325
+                335
             ],
             "__typename": [
                 0
@@ -17747,7 +17812,7 @@ module.exports = {
                 4
             ],
             "tag": [
-                360
+                370
             ],
             "__typename": [
                 0
@@ -17775,7 +17840,7 @@ module.exports = {
                 4
             ],
             "user": [
-                82
+                85
             ],
             "__typename": [
                 0
@@ -17842,7 +17907,7 @@ module.exports = {
                 0
             ],
             "user": [
-                82
+                85
             ],
             "__typename": [
                 0
@@ -17870,7 +17935,7 @@ module.exports = {
                 0
             ],
             "user": [
-                82
+                85
             ],
             "__typename": [
                 0
@@ -17892,7 +17957,7 @@ module.exports = {
                 0
             ],
             "comment": [
-                91
+                94
             ],
             "restoredId": [
                 4
@@ -17920,7 +17985,7 @@ module.exports = {
                 2
             ],
             "user": [
-                82
+                85
             ],
             "__typename": [
                 0
@@ -17949,7 +18014,7 @@ module.exports = {
                 0
             ],
             "status": [
-                67
+                69
             ],
             "title": [
                 0
@@ -17992,7 +18057,7 @@ module.exports = {
                 0
             ],
             "status": [
-                67
+                69
             ],
             "title": [
                 0
@@ -18003,7 +18068,7 @@ module.exports = {
         },
         "UpdateBannerPayload": {
             "banner": [
-                421
+                431
             ],
             "clientMutationId": [
                 0
@@ -18043,7 +18108,7 @@ module.exports = {
         },
         "UpdateCategoryPayload": {
             "category": [
-                225
+                235
             ],
             "clientMutationId": [
                 0
@@ -18054,7 +18119,7 @@ module.exports = {
         },
         "UpdateCentraldeDecoradoInput": {
             "categories": [
-                615
+                635
             ],
             "clientMutationId": [
                 0
@@ -18078,7 +18143,7 @@ module.exports = {
                 0
             ],
             "status": [
-                67
+                69
             ],
             "title": [
                 0
@@ -18089,7 +18154,7 @@ module.exports = {
         },
         "UpdateCentraldeDecoradoPayload": {
             "centraldeDecorado": [
-                239
+                249
             ],
             "clientMutationId": [
                 0
@@ -18127,7 +18192,7 @@ module.exports = {
                 4
             ],
             "status": [
-                87
+                90
             ],
             "type": [
                 0
@@ -18141,7 +18206,7 @@ module.exports = {
                 0
             ],
             "comment": [
-                91
+                94
             ],
             "success": [
                 2
@@ -18152,7 +18217,7 @@ module.exports = {
         },
         "UpdateEmpreendimentoInput": {
             "categories": [
-                621
+                641
             ],
             "clientMutationId": [
                 0
@@ -18176,7 +18241,7 @@ module.exports = {
                 0
             ],
             "status": [
-                67
+                69
             ],
             "title": [
                 0
@@ -18187,7 +18252,7 @@ module.exports = {
         },
         "UpdateEmpreendimentoPayload": {
             "empreendimento": [
-                278
+                288
             ],
             "clientMutationId": [
                 0
@@ -18225,7 +18290,7 @@ module.exports = {
                 0
             ],
             "fileType": [
-                63
+                65
             ],
             "id": [
                 4
@@ -18240,7 +18305,7 @@ module.exports = {
                 0
             ],
             "status": [
-                625
+                645
             ],
             "title": [
                 0
@@ -18254,7 +18319,7 @@ module.exports = {
                 0
             ],
             "mediaItem": [
-                119
+                124
             ],
             "__typename": [
                 0
@@ -18295,7 +18360,7 @@ module.exports = {
                 0
             ],
             "status": [
-                67
+                69
             ],
             "title": [
                 0
@@ -18309,7 +18374,7 @@ module.exports = {
                 0
             ],
             "page": [
-                171
+                178
             ],
             "__typename": [
                 0
@@ -18320,7 +18385,7 @@ module.exports = {
                 4
             ],
             "categories": [
-                630
+                650
             ],
             "clientMutationId": [
                 0
@@ -18356,16 +18421,16 @@ module.exports = {
                 0
             ],
             "postFormats": [
-                632
+                652
             ],
             "slug": [
                 0
             ],
             "status": [
-                67
+                69
             ],
             "tags": [
-                634
+                654
             ],
             "title": [
                 0
@@ -18382,7 +18447,7 @@ module.exports = {
                 0
             ],
             "post": [
-                213
+                223
             ],
             "__typename": [
                 0
@@ -18416,7 +18481,7 @@ module.exports = {
                 0
             ],
             "postFormat": [
-                325
+                335
             ],
             "__typename": [
                 0
@@ -18456,9 +18521,6 @@ module.exports = {
             "generalSettingsTitle": [
                 0
             ],
-            "generalSettingsUrl": [
-                0
-            ],
             "readingSettingsPageForPosts": [
                 1
             ],
@@ -18492,16 +18554,19 @@ module.exports = {
                 0
             ],
             "discussionSettings": [
-                474
-            ],
-            "generalSettings": [
                 484
             ],
+            "generalSettings": [
+                494
+            ],
+            "permalinkSettings": [
+                545
+            ],
             "readingSettings": [
-                561
+                569
             ],
             "writingSettings": [
-                611
+                621
             ],
             "__typename": [
                 0
@@ -18535,7 +18600,7 @@ module.exports = {
                 0
             ],
             "tag": [
-                360
+                370
             ],
             "__typename": [
                 0
@@ -18605,7 +18670,7 @@ module.exports = {
                 0
             ],
             "user": [
-                82
+                85
             ],
             "__typename": [
                 0
@@ -18624,9 +18689,6 @@ module.exports = {
                     ],
                     "idType": [
                         5
-                    ],
-                    "asPreview": [
-                        2
                     ]
                 }
             ],
@@ -18648,7 +18710,7 @@ module.exports = {
                 }
             ],
             "arquivosAssessoria": [
-                417,
+                427,
                 {
                     "first": [
                         1
@@ -18663,27 +18725,24 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        412
+                        422
                     ]
                 }
             ],
             "banner": [
-                421,
+                431,
                 {
                     "id": [
                         4,
                         "ID!"
                     ],
                     "idType": [
-                        420
-                    ],
-                    "asPreview": [
-                        2
+                        430
                     ]
                 }
             ],
             "bannerBy": [
-                421,
+                431,
                 {
                     "id": [
                         4
@@ -18700,7 +18759,7 @@ module.exports = {
                 }
             ],
             "banners": [
-                439,
+                449,
                 {
                     "first": [
                         1
@@ -18715,12 +18774,12 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        434
+                        444
                     ]
                 }
             ],
             "categories": [
-                443,
+                453,
                 {
                     "first": [
                         1
@@ -18735,39 +18794,36 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        442
+                        452
                     ]
                 }
             ],
             "category": [
-                225,
+                235,
                 {
                     "id": [
                         4,
                         "ID!"
                     ],
                     "idType": [
-                        446
+                        456
                     ]
                 }
             ],
             "centraldeDecorado": [
-                239,
+                249,
                 {
                     "id": [
                         4,
                         "ID!"
                     ],
                     "idType": [
-                        447
-                    ],
-                    "asPreview": [
-                        2
+                        457
                     ]
                 }
             ],
             "centraldeDecoradoBy": [
-                239,
+                249,
                 {
                     "id": [
                         4
@@ -18784,7 +18840,7 @@ module.exports = {
                 }
             ],
             "centraldeDecorados": [
-                453,
+                463,
                 {
                     "first": [
                         1
@@ -18799,24 +18855,24 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        448
+                        458
                     ]
                 }
             ],
             "comment": [
-                91,
+                94,
                 {
                     "id": [
                         4,
                         "ID!"
                     ],
                     "idType": [
-                        456
+                        466
                     ]
                 }
             ],
             "comments": [
-                458,
+                468,
                 {
                     "first": [
                         1
@@ -18831,7 +18887,7 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        457
+                        467
                     ]
                 }
             ],
@@ -18843,18 +18899,15 @@ module.exports = {
                         "ID!"
                     ],
                     "idType": [
-                        461
+                        471
                     ],
                     "contentType": [
-                        54
-                    ],
-                    "asPreview": [
-                        2
+                        56
                     ]
                 }
             ],
             "contentNodes": [
-                467,
+                477,
                 {
                     "first": [
                         1
@@ -18869,7 +18922,7 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        462
+                        472
                     ]
                 }
             ],
@@ -18881,12 +18934,12 @@ module.exports = {
                         "ID!"
                     ],
                     "idType": [
-                        470
+                        480
                     ]
                 }
             ],
             "contentTypes": [
-                471,
+                481,
                 {
                     "first": [
                         1
@@ -18903,25 +18956,22 @@ module.exports = {
                 }
             ],
             "discussionSettings": [
-                474
+                484
             ],
             "empreendimento": [
-                278,
+                288,
                 {
                     "id": [
                         4,
                         "ID!"
                     ],
                     "idType": [
-                        475
-                    ],
-                    "asPreview": [
-                        2
+                        485
                     ]
                 }
             ],
             "empreendimentoBy": [
-                278,
+                288,
                 {
                     "id": [
                         4
@@ -18938,7 +18988,7 @@ module.exports = {
                 }
             ],
             "empreendimentos": [
-                481,
+                491,
                 {
                     "first": [
                         1
@@ -18953,30 +19003,27 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        476
+                        486
                     ]
                 }
             ],
             "generalSettings": [
-                484
+                494
             ],
             "mediaItem": [
-                119,
+                124,
                 {
                     "id": [
                         4,
                         "ID!"
                     ],
                     "idType": [
-                        489
-                    ],
-                    "asPreview": [
-                        2
+                        496
                     ]
                 }
             ],
             "mediaItemBy": [
-                119,
+                124,
                 {
                     "id": [
                         4
@@ -18993,7 +19040,7 @@ module.exports = {
                 }
             ],
             "mediaItems": [
-                495,
+                502,
                 {
                     "first": [
                         1
@@ -19008,36 +19055,36 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        490
+                        497
                     ]
                 }
             ],
             "menu": [
-                499,
+                506,
                 {
                     "id": [
                         4,
                         "ID!"
                     ],
                     "idType": [
-                        498
+                        505
                     ]
                 }
             ],
             "menuItem": [
-                505,
+                512,
                 {
                     "id": [
                         4,
                         "ID!"
                     ],
                     "idType": [
-                        518
+                        525
                     ]
                 }
             ],
             "menuItems": [
-                520,
+                527,
                 {
                     "first": [
                         1
@@ -19052,78 +19099,12 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        519
+                        526
                     ]
                 }
             ],
             "menus": [
-                524,
-                {
-                    "first": [
-                        1
-                    ],
-                    "last": [
-                        1
-                    ],
-                    "after": [
-                        0
-                    ],
-                    "before": [
-                        0
-                    ],
-                    "where": [
-                        523
-                    ]
-                }
-            ],
-            "node": [
-                612,
-                {
-                    "id": [
-                        4
-                    ]
-                }
-            ],
-            "nodeByUri": [
-                8,
-                {
-                    "uri": [
-                        0,
-                        "String!"
-                    ]
-                }
-            ],
-            "page": [
-                171,
-                {
-                    "id": [
-                        4,
-                        "ID!"
-                    ],
-                    "idType": [
-                        529
-                    ],
-                    "asPreview": [
-                        2
-                    ]
-                }
-            ],
-            "pageBy": [
-                171,
-                {
-                    "id": [
-                        4
-                    ],
-                    "pageId": [
-                        1
-                    ],
-                    "uri": [
-                        0
-                    ]
-                }
-            ],
-            "pages": [
-                535,
+                531,
                 {
                     "first": [
                         1
@@ -19142,17 +19123,51 @@ module.exports = {
                     ]
                 }
             ],
-            "plugin": [
-                538,
+            "node": [
+                622,
+                {
+                    "id": [
+                        4
+                    ]
+                }
+            ],
+            "nodeByUri": [
+                8,
+                {
+                    "uri": [
+                        0,
+                        "String!"
+                    ]
+                }
+            ],
+            "page": [
+                178,
                 {
                     "id": [
                         4,
                         "ID!"
+                    ],
+                    "idType": [
+                        536
                     ]
                 }
             ],
-            "plugins": [
-                541,
+            "pageBy": [
+                178,
+                {
+                    "id": [
+                        4
+                    ],
+                    "pageId": [
+                        1
+                    ],
+                    "uri": [
+                        0
+                    ]
+                }
+            ],
+            "pages": [
+                542,
                 {
                     "first": [
                         1
@@ -19167,27 +19182,56 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        539
+                        537
+                    ]
+                }
+            ],
+            "permalinkSettings": [
+                545
+            ],
+            "plugin": [
+                546,
+                {
+                    "id": [
+                        4,
+                        "ID!"
+                    ]
+                }
+            ],
+            "plugins": [
+                549,
+                {
+                    "first": [
+                        1
+                    ],
+                    "last": [
+                        1
+                    ],
+                    "after": [
+                        0
+                    ],
+                    "before": [
+                        0
+                    ],
+                    "where": [
+                        547
                     ]
                 }
             ],
             "post": [
-                213,
+                223,
                 {
                     "id": [
                         4,
                         "ID!"
                     ],
                     "idType": [
-                        547
-                    ],
-                    "asPreview": [
-                        2
+                        555
                     ]
                 }
             ],
             "postBy": [
-                213,
+                223,
                 {
                     "id": [
                         4
@@ -19204,38 +19248,18 @@ module.exports = {
                 }
             ],
             "postFormat": [
-                325,
+                335,
                 {
                     "id": [
                         4,
                         "ID!"
                     ],
                     "idType": [
-                        548
+                        556
                     ]
                 }
             ],
             "postFormats": [
-                550,
-                {
-                    "first": [
-                        1
-                    ],
-                    "last": [
-                        1
-                    ],
-                    "after": [
-                        0
-                    ],
-                    "before": [
-                        0
-                    ],
-                    "where": [
-                        549
-                    ]
-                }
-            ],
-            "posts": [
                 558,
                 {
                     "first": [
@@ -19251,49 +19275,12 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        553
+                        557
                     ]
                 }
             ],
-            "readingSettings": [
-                561
-            ],
-            "registeredScripts": [
-                562,
-                {
-                    "first": [
-                        1
-                    ],
-                    "last": [
-                        1
-                    ],
-                    "after": [
-                        0
-                    ],
-                    "before": [
-                        0
-                    ]
-                }
-            ],
-            "registeredStylesheets": [
-                565,
-                {
-                    "first": [
-                        1
-                    ],
-                    "last": [
-                        1
-                    ],
-                    "after": [
-                        0
-                    ],
-                    "before": [
-                        0
-                    ]
-                }
-            ],
-            "revisions": [
-                573,
+            "posts": [
+                566,
                 {
                     "first": [
                         1
@@ -19308,24 +19295,87 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        568
+                        561
+                    ]
+                }
+            ],
+            "readingSettings": [
+                569
+            ],
+            "registeredScripts": [
+                571,
+                {
+                    "first": [
+                        1
+                    ],
+                    "last": [
+                        1
+                    ],
+                    "after": [
+                        0
+                    ],
+                    "before": [
+                        0
+                    ],
+                    "where": [
+                        570
+                    ]
+                }
+            ],
+            "registeredStylesheets": [
+                575,
+                {
+                    "first": [
+                        1
+                    ],
+                    "last": [
+                        1
+                    ],
+                    "after": [
+                        0
+                    ],
+                    "before": [
+                        0
+                    ],
+                    "where": [
+                        574
+                    ]
+                }
+            ],
+            "revisions": [
+                583,
+                {
+                    "first": [
+                        1
+                    ],
+                    "last": [
+                        1
+                    ],
+                    "after": [
+                        0
+                    ],
+                    "before": [
+                        0
+                    ],
+                    "where": [
+                        578
                     ]
                 }
             ],
             "tag": [
-                360,
+                370,
                 {
                     "id": [
                         4,
                         "ID!"
                     ],
                     "idType": [
-                        576
+                        586
                     ]
                 }
             ],
             "tags": [
-                578,
+                588,
                 {
                     "first": [
                         1
@@ -19340,12 +19390,12 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        577
+                        587
                     ]
                 }
             ],
             "taxonomies": [
-                581,
+                591,
                 {
                     "first": [
                         1
@@ -19369,7 +19419,7 @@ module.exports = {
                         "ID!"
                     ],
                     "idType": [
-                        584
+                        594
                     ]
                 }
             ],
@@ -19381,15 +19431,15 @@ module.exports = {
                         "ID!"
                     ],
                     "idType": [
-                        585
+                        595
                     ],
                     "taxonomy": [
-                        72
+                        74
                     ]
                 }
             ],
             "terms": [
-                587,
+                597,
                 {
                     "first": [
                         1
@@ -19404,12 +19454,12 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        586
+                        596
                     ]
                 }
             ],
             "theme": [
-                590,
+                600,
                 {
                     "id": [
                         4,
@@ -19418,7 +19468,7 @@ module.exports = {
                 }
             ],
             "themes": [
-                591,
+                601,
                 {
                     "first": [
                         1
@@ -19435,19 +19485,19 @@ module.exports = {
                 }
             ],
             "user": [
-                82,
+                85,
                 {
                     "id": [
                         4,
                         "ID!"
                     ],
                     "idType": [
-                        597
+                        607
                     ]
                 }
             ],
             "userRole": [
-                399,
+                409,
                 {
                     "id": [
                         4,
@@ -19456,7 +19506,7 @@ module.exports = {
                 }
             ],
             "userRoles": [
-                598,
+                608,
                 {
                     "first": [
                         1
@@ -19473,7 +19523,7 @@ module.exports = {
                 }
             ],
             "users": [
-                606,
+                616,
                 {
                     "first": [
                         1
@@ -19488,15 +19538,15 @@ module.exports = {
                         0
                     ],
                     "where": [
-                        601
+                        611
                     ]
                 }
             ],
             "viewer": [
-                82
+                85
             ],
             "writingSettings": [
-                611
+                621
             ],
             "__typename": [
                 0
@@ -19504,217 +19554,217 @@ module.exports = {
         },
         "Mutation": {
             "createArquivoAssessoria": [
-                609,
+                629,
                 {
                     "input": [
-                        608,
+                        628,
                         "CreateArquivoAssessoriaInput!"
                     ]
                 }
             ],
             "createBanner": [
-                611,
+                631,
                 {
                     "input": [
-                        610,
+                        630,
                         "CreateBannerInput!"
                     ]
                 }
             ],
             "createCategory": [
-                613,
+                633,
                 {
                     "input": [
-                        612,
+                        632,
                         "CreateCategoryInput!"
                     ]
                 }
             ],
             "createCentraldeDecorado": [
-                617,
+                637,
                 {
                     "input": [
-                        614,
+                        634,
                         "CreateCentraldeDecoradoInput!"
                     ]
                 }
             ],
             "createComment": [
-                619,
+                639,
                 {
                     "input": [
-                        618,
+                        638,
                         "CreateCommentInput!"
                     ]
                 }
             ],
             "createEmpreendimento": [
-                623,
+                643,
                 {
                     "input": [
-                        620,
+                        640,
                         "CreateEmpreendimentoInput!"
                     ]
                 }
             ],
             "createMediaItem": [
-                626,
+                646,
                 {
                     "input": [
-                        624,
+                        644,
                         "CreateMediaItemInput!"
                     ]
                 }
             ],
             "createPage": [
-                628,
+                648,
                 {
                     "input": [
-                        627,
+                        647,
                         "CreatePageInput!"
                     ]
                 }
             ],
             "createPost": [
-                636,
+                656,
                 {
                     "input": [
-                        629,
+                        649,
                         "CreatePostInput!"
                     ]
                 }
             ],
             "createPostFormat": [
-                638,
+                658,
                 {
                     "input": [
-                        637,
+                        657,
                         "CreatePostFormatInput!"
                     ]
                 }
             ],
             "createTag": [
-                640,
+                660,
                 {
                     "input": [
-                        639,
+                        659,
                         "CreateTagInput!"
                     ]
                 }
             ],
             "createUser": [
-                642,
+                662,
                 {
                     "input": [
-                        641,
+                        661,
                         "CreateUserInput!"
                     ]
                 }
             ],
             "deleteArquivoAssessoria": [
-                644,
+                664,
                 {
                     "input": [
-                        643,
+                        663,
                         "DeleteArquivoAssessoriaInput!"
                     ]
                 }
             ],
             "deleteBanner": [
-                646,
+                666,
                 {
                     "input": [
-                        645,
+                        665,
                         "DeleteBannerInput!"
                     ]
                 }
             ],
             "deleteCategory": [
-                648,
+                668,
                 {
                     "input": [
-                        647,
+                        667,
                         "DeleteCategoryInput!"
                     ]
                 }
             ],
             "deleteCentraldeDecorado": [
-                650,
+                670,
                 {
                     "input": [
-                        649,
+                        669,
                         "DeleteCentraldeDecoradoInput!"
                     ]
                 }
             ],
             "deleteComment": [
-                652,
+                672,
                 {
                     "input": [
-                        651,
+                        671,
                         "DeleteCommentInput!"
                     ]
                 }
             ],
             "deleteEmpreendimento": [
-                654,
+                674,
                 {
                     "input": [
-                        653,
+                        673,
                         "DeleteEmpreendimentoInput!"
                     ]
                 }
             ],
             "deleteMediaItem": [
-                656,
+                676,
                 {
                     "input": [
-                        655,
+                        675,
                         "DeleteMediaItemInput!"
                     ]
                 }
             ],
             "deletePage": [
-                658,
+                678,
                 {
                     "input": [
-                        657,
+                        677,
                         "DeletePageInput!"
                     ]
                 }
             ],
             "deletePost": [
-                660,
+                680,
                 {
                     "input": [
-                        659,
+                        679,
                         "DeletePostInput!"
                     ]
                 }
             ],
             "deletePostFormat": [
-                662,
+                682,
                 {
                     "input": [
-                        661,
+                        681,
                         "DeletePostFormatInput!"
                     ]
                 }
             ],
             "deleteTag": [
-                664,
+                684,
                 {
                     "input": [
-                        663,
+                        683,
                         "DeleteTagInput!"
                     ]
                 }
             ],
             "deleteUser": [
-                666,
+                686,
                 {
                     "input": [
-                        665,
+                        685,
                         "DeleteUserInput!"
                     ]
                 }
@@ -19728,154 +19778,154 @@ module.exports = {
                 }
             ],
             "registerUser": [
-                668,
+                688,
                 {
                     "input": [
-                        667,
+                        687,
                         "RegisterUserInput!"
                     ]
                 }
             ],
             "resetUserPassword": [
-                670,
+                690,
                 {
                     "input": [
-                        669,
+                        689,
                         "ResetUserPasswordInput!"
                     ]
                 }
             ],
             "restoreComment": [
-                672,
+                692,
                 {
                     "input": [
-                        671,
+                        691,
                         "RestoreCommentInput!"
                     ]
                 }
             ],
             "sendPasswordResetEmail": [
-                674,
+                694,
                 {
                     "input": [
-                        673,
+                        693,
                         "SendPasswordResetEmailInput!"
                     ]
                 }
             ],
             "updateArquivoAssessoria": [
-                676,
+                696,
                 {
                     "input": [
-                        675,
+                        695,
                         "UpdateArquivoAssessoriaInput!"
                     ]
                 }
             ],
             "updateBanner": [
-                678,
+                698,
                 {
                     "input": [
-                        677,
+                        697,
                         "UpdateBannerInput!"
                     ]
                 }
             ],
             "updateCategory": [
-                680,
+                700,
                 {
                     "input": [
-                        679,
+                        699,
                         "UpdateCategoryInput!"
                     ]
                 }
             ],
             "updateCentraldeDecorado": [
-                682,
+                702,
                 {
                     "input": [
-                        681,
+                        701,
                         "UpdateCentraldeDecoradoInput!"
                     ]
                 }
             ],
             "updateComment": [
-                684,
+                704,
                 {
                     "input": [
-                        683,
+                        703,
                         "UpdateCommentInput!"
                     ]
                 }
             ],
             "updateEmpreendimento": [
-                686,
+                706,
                 {
                     "input": [
-                        685,
+                        705,
                         "UpdateEmpreendimentoInput!"
                     ]
                 }
             ],
             "updateMediaItem": [
-                688,
+                708,
                 {
                     "input": [
-                        687,
+                        707,
                         "UpdateMediaItemInput!"
                     ]
                 }
             ],
             "updatePage": [
-                690,
+                710,
                 {
                     "input": [
-                        689,
+                        709,
                         "UpdatePageInput!"
                     ]
                 }
             ],
             "updatePost": [
-                692,
+                712,
                 {
                     "input": [
-                        691,
+                        711,
                         "UpdatePostInput!"
                     ]
                 }
             ],
             "updatePostFormat": [
-                694,
+                714,
                 {
                     "input": [
-                        693,
+                        713,
                         "UpdatePostFormatInput!"
                     ]
                 }
             ],
             "updateSettings": [
-                696,
+                716,
                 {
                     "input": [
-                        695,
+                        715,
                         "UpdateSettingsInput!"
                     ]
                 }
             ],
             "updateTag": [
-                698,
+                718,
                 {
                     "input": [
-                        697,
+                        717,
                         "UpdateTagInput!"
                     ]
                 }
             ],
             "updateUser": [
-                700,
+                720,
                 {
                     "input": [
-                        699,
+                        719,
                         "UpdateUserInput!"
                     ]
                 }

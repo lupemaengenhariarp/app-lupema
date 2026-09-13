@@ -1,7 +1,7 @@
-import { createClient } from '../generated'
+import { createClient } from '../generated';
 
 const ClientApp = createClient({
-  url: 'https://lupema.mayacomunicacao.com.br/graphql',
+  url: 'http://painel.lupemaengenharia.com.br/index.php?graphql',
 })
 
 export default ClientApp;

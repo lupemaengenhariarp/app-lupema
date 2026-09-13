@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['localhost', 'lupema.mayacomunicacao.com.br'],
+    domains: ['localhost', 'painel.lupemaengenharia.com.br'],
   },
   i18n: {
     locales: ['pt-BR'],

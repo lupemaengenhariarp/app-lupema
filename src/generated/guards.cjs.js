@@ -2831,6 +2831,14 @@ module.exports.isRootQueryToPageConnectionPageInfo = function(obj) {
 
 
 
+var PermalinkSettings_possibleTypes = ['PermalinkSettings']
+module.exports.isPermalinkSettings = function(obj) {
+  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isPermalinkSettings"')
+  return PermalinkSettings_possibleTypes.includes(obj.__typename)
+}
+
+
+
 var Plugin_possibleTypes = ['Plugin']
 module.exports.isPlugin = function(obj) {
   if (!obj || !obj.__typename) throw new Error('__typename is missing in "isPlugin"')
@@ -3215,7 +3223,7 @@ module.exports.isWritingSettings = function(obj) {
 
 
 
-var Node_possibleTypes = ['ArquivoAssessoria','ContentType','Taxonomy','EnqueuedScript','EnqueuedStylesheet','User','Comment','MediaItem','Page','Post','Category','CentraldeDecorado','Empreendimento','PostFormat','Tag','UserRole','Banner','Menu','MenuItem','Plugin','Theme','CommentAuthor']
+var Node_possibleTypes = ['ArquivoAssessoria','ContentType','Taxonomy','EnqueuedScript','EnqueuedStylesheet','User','Comment','MediaItem','Page','Post','Category','CentraldeDecorado','Empreendimento','PostFormat','Tag','UserRole','Banner','DiscussionSettings','GeneralSettings','Menu','MenuItem','PermalinkSettings','Plugin','ReadingSettings','Theme','WritingSettings','CommentAuthor']
 module.exports.isNode = function(obj) {
   if (!obj || !obj.__typename) throw new Error('__typename is missing in "isNode"')
   return Node_possibleTypes.includes(obj.__typename)
