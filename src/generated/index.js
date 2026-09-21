@@ -14,7 +14,7 @@ module.exports.version = version
 module.exports.createClient = function(options) {
   options = options || {}
   var optionsCopy = {
-    url: 'http://painel.lupemaengenharia.com.br/index.php?graphql',
+    url: 'https://painel.lupemaengenharia.com.br/index.php?graphql',
     queryRoot: typeMap.Query,
     mutationRoot: typeMap.Mutation,
     subscriptionRoot: typeMap.Subscription,
