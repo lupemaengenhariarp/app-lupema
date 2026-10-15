@@ -6,6 +6,7 @@ import FilterApp from '../../components/layout/Filter';
 import { Page, RootQueryToEmpreendimentoConnection } from '../../generated';
 import ClientApp from '../../lib/genql';
 import { useRouter } from 'next/router';
+import { __Schema } from 'graphql';
 
 interface Props {
   data: {
@@ -25,6 +26,9 @@ const EmpreendimentosApp: NextPage<Props> = ({ data }) => {
   const handleValueFromChildChange = (slug: any) => {
     setValueFromChild(slug);
   };
+
+  console.log(data.emp.nodes);
+
 
   return (
     <>
@@ -130,27 +134,30 @@ export const getStaticProps = async () => {
         },
       },
     ],
-    empreendimentos: {
-      nodes: {
-        empreendimento: {
-          imagemPrincipal: {
-            sourceUrl: true,
+    empreendimentos: [
+      { first: 18 },
+      {
+        nodes: {
+          empreendimento: {
+            imagemPrincipal: {
+              sourceUrl: true,
+            },
+            nomeDoEmpreendimento: true,
+            estagioDaObra: {
+              name: true,
+              slug: true,
+            },
+            empCidade: true,
+            empMetragem: true,
+            empDormitorios: true,
+            empVagasDeGaragem: true,
+            enderecoBairro: true,
+            tipoDoEmpreendimento: true,
           },
-          nomeDoEmpreendimento: true,
-          estagioDaObra: {
-            name: true,
-            slug: true,
-          },
-          empCidade: true,
-          empMetragem: true,
-          empDormitorios: true,
-          empVagasDeGaragem: true,
-          enderecoBairro: true,
-          tipoDoEmpreendimento: true,
+          slug: true,
         },
-        slug: true,
       },
-    },
+    ],
   });
 
   return {
