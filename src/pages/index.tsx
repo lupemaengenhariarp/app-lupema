@@ -100,25 +100,28 @@ export const getStaticProps = async () => {
         },
       },
     },
-    empreendimentos: {
-      nodes: {
-        empreendimento: {
-          imagemPrincipal: {
-            sourceUrl: true,
+    empreendimentos: [
+      { first: 18 },
+      {
+        nodes: {
+          empreendimento: {
+            imagemPrincipal: {
+              sourceUrl: true,
+            },
+            nomeDoEmpreendimento: true,
+            estagioDaObra: {
+              name: true,
+              slug: true,
+            },
+            empCidade: true,
+            empMetragem: true,
+            empDormitorios: true,
+            empVagasDeGaragem: true,
           },
-          nomeDoEmpreendimento: true,
-          estagioDaObra: {
-            name: true,
-            slug: true,
-          },
-          empCidade: true,
-          empMetragem: true,
-          empDormitorios: true,
-          empVagasDeGaragem: true,
+          slug: true,
         },
-        slug: true,
       },
-    },
+    ],
   });
 
   return {
