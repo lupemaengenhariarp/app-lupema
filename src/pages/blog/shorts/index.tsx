@@ -68,11 +68,17 @@ export default function Shorts() {
           })}
         </div>
         <button className="py-2 px-4 bg-green text-white text-xl font-medium block rounded-2xl w-max mx-auto mt-10  mb-20">
-          Assistir todos os vídeos
+          Ver mais vídeos
         </button>
 
         <div className="container  !mb-28">
-          <Image src="/banner-group-2.png" alt="" width={1920} height={1080} className="w-full" />
+          <Image
+            src="/banner-group-2.png"
+            alt=""
+            width={1920}
+            height={1080}
+            className="w-full"
+          />
         </div>
       </section>
     </main>
