@@ -11,6 +11,7 @@ import { Page_Informacoesdecontato } from '../../generated';
 import UseChangeBg from '../../hooks/useChangeBgMenu';
 import MenuApp from '../layout/Menu';
 import SearchApp from '../layout/Search';
+import SocialIcons from '../layout/SocialIcons';
 
 interface Props {
   data: Page_Informacoesdecontato;
@@ -23,6 +24,7 @@ const HeaderApp = ({ data }: Props) => {
   const { state: status, toogleState } = useMenuMobileContext();
 
   const router = useRouter();
+  const isBlog = router.pathname.startsWith('/blog');
   const [clickSearch, setClickSearch] = useState(false);
 
   const [device, setDevice] = useState(false);
@@ -50,13 +52,18 @@ const HeaderApp = ({ data }: Props) => {
       ref={ref}
     >
       <div className="flex items-center justify-between sm:justify-start w-full sm:w-[40%] xl:w-[60%] h-[100px] sm:h-[72px] bg-menu">
-        <button
-          aria-label="Menu site lupema"
-          className="h-full py-4 px-6 border-r border-white/20 order-2 sm:order-1"
-          onClick={(e) => toogleState()}
-        >
-          {<HiMenuAlt2 size={26} />}
-        </button>
+        {isBlog ? (
+          <div className="h-full py-4 px-6 border-r border-white/20 order-2 sm:order-1 w-28" />
+        ) : (
+          <button
+            aria-label="Menu site lupema"
+            className="h-full py-4 px-6 border-r border-white/20 order-2 sm:order-1"
+            onClick={(e) => toogleState()}
+          >
+            {<HiMenuAlt2 size={26} />}
+          </button>
+        )}
+
         <Link href="/" className="px-6 order-1 sm:order-2 cursor-pointer">
           <Image
             src={Logo}
@@ -67,22 +74,37 @@ const HeaderApp = ({ data }: Props) => {
         </Link>
       </div>
 
-      <div className="hidden sm:flex items-center justify-end sm:w-[60%] xl:w-[40%] h-[100px] sm:h-[72px]">
-        <a
-          href={`https://lupemaengenharia.com.br/centraldecorado/central-de-decorados-lstore`}
-          className="mb-1 mr-4 inline-block border border-white py-2 w-[100px] text-white text-center cursor-pointer hover:bg-zinc-300 hover:text-black transition"
-        >LOJAS</a>
-        <a
-          href={`https://lupema.cvcrm.com.br/cliente/`}
-          className="mb-1 mr-4 inline-block border border-white py-2 w-[100px] text-white text-center cursor-pointer hover:bg-zinc-300 hover:text-black transition"
-        >PORTAL</a>
-        <a
-          href={`https://lancamentos.lupemaengenharia.com.br/ouvidoria`}
-          className="mb-1 mr-4 inline-block border border-white py-2 w-[100px] text-white text-center cursor-pointer hover:bg-zinc-300 hover:text-black transition"
-        >SAC</a>
+      <div className="hidden sm:flex items-center justify-end sm:w-[60%] 2xl:w-[40%] h-[100px] sm:h-[72px]">
+        {isBlog ? (
+          <div className="border-l border-l-white/20 border-r border-r-white/20 px-8 h-[100px] sm:h-[72px]">
+            <SocialIcons />
+          </div>
+        ) : (
+          <div>
+            <a
+              href={`https://lupemaengenharia.com.br/centraldecorado/central-de-decorados-lstore`}
+              className="mb-1 mr-4 inline-block border border-white py-2 w-[80px] xl:w-[100px] text-white text-center cursor-pointer hover:bg-zinc-300 hover:text-black transition"
+            >
+              LOJAS
+            </a>
+            <a
+              href={`https://lupema.cvcrm.com.br/cliente/`}
+              className="mb-1 mr-4 inline-block border border-white py-2 w-[80px] xl:w-[100px] text-white text-center cursor-pointer hover:bg-zinc-300 hover:text-black transition"
+            >
+              PORTAL
+            </a>
+            <a
+              href={`https://lancamentos.lupemaengenharia.com.br/ouvidoria`}
+              className="mb-1 mr-4 inline-block border border-white py-2 w-[80px] xl:w-[100px] text-white text-center cursor-pointer hover:bg-zinc-300 hover:text-black transition"
+            >
+              SAC
+            </a>
+          </div>
+        )}
+
         {device ? (
           <a
-            href={`tel:${data.coTelefone}`}
+            href={data?.coTelefone ? `tel:${data.coTelefone}` : undefined}
             className="border-l border-l-white/20 border-r border-r-white/20 px-6 h-[100px] sm:h-[72px] flex items-center"
           >
             <span className="border border-white rounded-full py-2 px-2">
@@ -91,29 +113,43 @@ const HeaderApp = ({ data }: Props) => {
           </a>
         ) : (
           <div className="border-l border-l-white/20 border-r border-r-white/20 px-6 h-[100px] sm:h-[72px] flex items-center min-w-max">
-            {data.coTelefone}
+            {data?.coTelefone ?? 'Tel.: (17) 4009-2300'}
           </div>
         )}
-        <div
-          className={`w-0 pl-4 transition-all ${clickSearch
-            ? 'w-[360px] visible opacity-100'
-            : 'w-0 invisible opacity-0'
-            }`}
-        >
-          <SearchApp />
-        </div>
-        <button
-          aria-label="Botão de pesquisa"
-          className="px-6 flex items-center h-[100px] sm:h-[72px]"
-          onClick={() => setClickSearch((prev) => !prev)}
-        >
-          {clickSearch ? <IoMdClose size={18} /> : <IoIosSearch size={18} />}
-        </button>
+        {isBlog ? (
+          <div className="w-28 pl-4 transition-all" />
+        ) : (
+          <>
+            <div
+              className={`w-0 pl-4 transition-all ${
+                clickSearch
+                  ? 'w-[360px] visible opacity-100'
+                  : 'w-0 invisible opacity-0'
+              }`}
+            >
+              <SearchApp />
+            </div>
+            <button
+              aria-label="Botão de pesquisa"
+              className="px-6 flex items-center h-[100px] sm:h-[72px]"
+              onClick={() => setClickSearch((prev) => !prev)}
+            >
+              {clickSearch ? (
+                <IoMdClose size={18} />
+              ) : (
+                <IoIosSearch size={18} />
+              )}
+            </button>
+          </>
+        )}
       </div>
 
       <div
-        className={`fixed top-0 left-0 right-0 w-full h-full overflow-auto bg-bgi bg-repeat ease-out duration-300 ${status ? 'opacity-100 visible translate-x-0' : 'opacity-0 invisible -translate-x-full'
-          }`}
+        className={`fixed top-0 left-0 right-0 w-full h-full overflow-auto bg-bgi bg-repeat ease-out duration-300 ${
+          status
+            ? 'opacity-100 visible translate-x-0'
+            : 'opacity-0 invisible -translate-x-full'
+        }`}
       >
         <MenuApp data={data} />
       </div>

@@ -10,7 +10,7 @@ interface Props {
 }
 
 const FooterApp = ({ data }: Props) => {
-  const whats = data.coWhatsapp?.replace(/\s/g, '');
+  const whats = data?.coWhatsapp?.replace(/\s/g, '');
   return (
     <footer className="bg-bgi pt-[40px] text-white">
       <div className="container">
@@ -19,13 +19,13 @@ const FooterApp = ({ data }: Props) => {
             <Image src={Logo} width={225} height={100} alt="Logo Lupema" />
           </Link>
           <div className="flex gap-8 mt-6 sm:mt-0">
-            <a href={data.linkFacebook} arial-label="Button Facebook">
+            <a href={data?.linkFacebook} arial-label="Button Facebook">
               <BsFacebook size={18} className="hover:text-green" />
             </a>
-            <a href={data.linkInstagram} arial-label="Button Instagram">
+            <a href={data?.linkInstagram} arial-label="Button Instagram">
               <BsInstagram size={18} className="hover:text-green" />
             </a>
-            <a href={data.linkYoutube} arial-label="Button Youtube">
+            <a href={data?.linkYoutube} arial-label="Button Youtube">
               <BsYoutube size={20} className="hover:text-green" />
             </a>
           </div>
@@ -35,18 +35,18 @@ const FooterApp = ({ data }: Props) => {
       <div className="container grid grid-cols-2 xl:grid-cols-5 gap-6 pt-[40px]">
         <div className="col-span-2">
           <h2 className="text-green text-2xl">Fale com a Lupema:</h2>
-          <a href={`tel:+55${data.coTelefone}`} className="block my-4 text-xl">
-            {data.coTelefone}
+          <a href={`tel:+55${data?.coTelefone}`} className="block my-4 text-xl">
+            {data?.coTelefone}
           </a>
           <a href={`tel:+55${whats}`} className="block my-4 text-xl">
-            {data.coWhatsapp}
+            {data?.coWhatsapp}
           </a>
           {
             <a
               href="mail:lupema@lupemaengenharia.com.br"
               className="block my-4 text-lg mb-6"
             >
-              {data.coEmail}
+              {data?.coEmail}
             </a>
           }
           <a href="/contato#fale-conosco" className="button my-4 text-sm">

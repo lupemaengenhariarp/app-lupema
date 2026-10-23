@@ -89,22 +89,22 @@ const MenuApp = ({ data }: Props) => {
         <div className="pb-6 sm:pb-0">
           <h2 className="text-green">Siga nossas redes sociais</h2>
           <div className="flex items-center justify-center sm:justify-start mt-2 space-x-3">
-            <a href={data.linkFacebook}>
+            <a href={data?.linkFacebook || ""}>
               <IoLogoFacebook size={20} className="hover:text-green" />
             </a>
-            <a className="px-3" href={data.linkInstagram}>
+            <a className="px-3" href={data?.linkInstagram  || ""}>
               <IoLogoInstagram size={20} className="hover:text-green" />
             </a>
-            <a href={data.linkYoutube}>
+            <a href={data?.linkYoutube  || ""}>
               <IoLogoYoutube size={20} className="hover:text-green" />
             </a>
           </div>
           <h2 className="text-green mt-8">Fale com a Lupema</h2>
-          <a href={`tel:+55${data.coTelefone}`} className="block">
-            {data.coTelefone}
+          <a href={`tel:+55${data?.coTelefone}`} className="block">
+            {data?.coTelefone || ""}
           </a>
-          <a href={`mailto:${data.coEmail}`} className="block">
-            {data.coEmail}
+          <a href={`mailto:${data?.coEmail}`} className="block">
+            {data?.coEmail || ""}
           </a>
           <a
             // href="https://goo.gl/maps/JGVmXZHQkEPRbeqp8"
@@ -120,7 +120,7 @@ const MenuApp = ({ data }: Props) => {
           <h2 className="text-green mb-2">Escritório</h2>
           <p
             dangerouslySetInnerHTML={{
-              __html: data.coEndereco || '',
+              __html: data?.coEndereco || '',
             }}
           />
         </div>

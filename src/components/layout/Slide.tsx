@@ -25,6 +25,7 @@ const SlideApp = ({
   navigation = false,
   dots = false,
   autoPlay = false,
+  gap = 0,
 }: Props) => {
   const Prev = () => {
     return (

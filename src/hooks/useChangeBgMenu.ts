@@ -10,6 +10,7 @@ const UseChangeBg = (ref: RefObject<HTMLDivElement>) => {
     '/empreendimentos/',
     '/indique-e-ganhe',
     '/l-store',
+    '/blog',
   ];
 
   const regex = new RegExp('empreendimento(s)?/*');
