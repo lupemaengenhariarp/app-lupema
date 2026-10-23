@@ -5,6 +5,7 @@ import ChoiceButtons from '../../components/layout/ChoiceButtons';
 import SearchBlob from '../../components/layout/SearchBlog';
 import BlogItem from '../../components/layout/BlogItem';
 import ShortVideo from '../../components/layout/ShortVideo';
+import Link from 'next/link';
 
 const banner = {
   image: '/15c4176de8643e3d7fc2160e2e460061b1e3e272.png',
@@ -145,9 +146,9 @@ export default function Blog() {
           autoPlay={true}
           responsive={responsiveMovies}
         />
-        <button className="py-2 px-4 bg-green text-white text-xl font-medium block rounded-2xl w-max mx-auto mt-10">
+        <Link href="/blog/shorts" className="py-2 px-4 bg-green text-white text-xl font-medium block rounded-2xl w-max mx-auto mt-10">
           Assistir todos os vídeos
-        </button>
+        </Link>
       </section>
     </main>
   );
