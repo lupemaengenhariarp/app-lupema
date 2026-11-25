@@ -30,18 +30,14 @@ export default function AuthorBlock() {
 
         <div className="h-[1px] xl:h-48 bg-[#28292E] w-full xl:w-[1px] block" />
         <div className="flex-1 space-y-4">
-          <h4 className="text-3xl font-medium text-center sm:text-left">Quem escreveu este post</h4>
+          <h4 className="text-3xl font-medium text-center sm:text-left">
+            Quem escreveu este post
+          </h4>
           <p className="text-center sm:text-left">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-            consectetur, ante non vulputate pharetra, sem nibh fringilla quam,
-            non efficitur risus lorem nec massa. Vestibulum maximus, arcu vel
-            egestas dignissim, nulla sem varius felis, id euismod libero nibh in
-            lorem. Etiam at purus ut justo elementum dignissim a et tellus.
-            Proin eleifend massa nec ante maximus tincidunt ac at purus. Integer
-            sodales dui eget mauris laoreet pulvinar. Pellentesque a erat
-            lectus. In consectetur sit amet ligula a tempus. Proin porttitor dui
-            quis sodales sagittis. Sed at nulla a nulla vulputate hendrerit eget
-            vitae ex. Fusce tempus quam ante, ac imperdiet massa fermentum vel.
+            Escrito por um especialista apaixonado por compartilhar conhecimento
+            e experiências. Com dedicação à pesquisa e ao conteúdo de qualidade,
+            busca trazer informações relevantes, dicas práticas e insights que
+            ajudam você a tomar decisões mais conscientes e informadas.
           </p>
         </div>
       </div>

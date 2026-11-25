@@ -2,35 +2,64 @@ import Image from 'next/image';
 import SocialIcons from '../../components/layout/SocialIcons';
 import AuthorBlock from '../../components/layout/AuthorBlock';
 import BlogItem from '../../components/layout/BlogItem';
+import {
+  Page_Informacoesdecontato,
+  Post,
+  RootQueryToEmpreendimentoConnection,
+} from '../../generated';
+import ClientApp from '../../lib/genql';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import Link from 'next/link';
 
-export default function SinglePost() {
+interface Props {
+  data: {
+    post: Post;
+    relatedPosts: Post[];
+    emp: RootQueryToEmpreendimentoConnection;
+    social: Page_Informacoesdecontato;
+  };
+}
+
+export default function SinglePost({ data }: Props) {
+  const { post } = data;
+  const publishedDate = post.date
+    ? new Date(post.date).toLocaleDateString('pt-BR', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+      })
+    : '';
   return (
     <main className="bg-bgi pt-44 border-b border-white/20">
       <div className="container text-white">
         <div className="space-y-6 pr-20">
-          <span className="text-xl sm:text-3xl text-green font-medium">BLOG</span>
-          <h1 className="text-3xl sm:text-5xl uppercase">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h1>
-          <p>
-            orem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-            consectetur, ante non vulputate pharetra, sem nibh fringilla quam,
-            non efficitur risus lorem nec massa. Vestibulum maximus, arcu vel
-            egestas dignissim, nulla sem varius felis, id euismod libero nibh in
-            lorem.
-          </p>
+          <span className="text-xl sm:text-3xl text-green font-medium">
+            BLOG
+          </span>
+          <h1 className="text-3xl sm:text-5xl uppercase">{post.title}</h1>
+          {post.excerpt && (
+            <p dangerouslySetInnerHTML={{ __html: post.excerpt }} />
+          )}
         </div>
 
         <div className="flex flex-col sm:flex-row items-start py-20">
           <aside className="w-full max-w-md space-y-6 xl:sticky top-44">
             <div className="space-y-4 border-b border-white/20 pb-6">
-              <span className="text-xl sm:text-2xl text-green font-medium">Autor:</span>
+              <span className="text-xl sm:text-2xl text-green font-medium">
+                Autor:
+              </span>
               <div className="flex items-center gap-4">
                 <div className="w-16 h-16 rounded-full bg-zinc-400" />
-                <p className="text-xl sm:text-2xl">Paulo André</p>
+                <p className="text-xl sm:text-2xl">
+                  {post.author?.node.name || 'Equipe Lupema'}
+                </p>
               </div>
             </div>
 
             <div className="space-y-4 border-b border-white/20 pb-6">
-              <span className="text-xl sm:text-2xl text-green font-medium">Data:</span>
+              <span className="text-xl sm:text-2xl text-green font-medium">
+                Data:
+              </span>
               <div className="flex items-center gap-4">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -44,152 +73,54 @@ export default function SinglePost() {
                     fill="white"
                   />
                 </svg>
-                <p className="text-xl sm:text-2xl">10 de fevereiro de 2026</p>
+                <p className="text-xl sm:text-2xl">{publishedDate}</p>
               </div>
             </div>
 
             <div className="space-y-4 border-b border-white/20 pb-6">
-              <span className="text-xl sm:text-2xl text-green font-medium">Índice:</span>
+              <span className="text-xl sm:text-2xl text-green font-medium">
+                Índice:
+              </span>
 
-              <button className="text-left">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-                consectetur, ante non.
-              </button>
-              <button className="text-left">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-                consectetur, ante non.
-              </button>
-              <button className="text-left">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-                consectetur, ante non.
-              </button>
-              <button className="text-left">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-                consectetur, ante non.
-              </button>
+              <button className="text-left"></button>
             </div>
 
             <div className="space-y-4">
-              <span className="text-xl sm:text-2xl text-green font-medium">Redes:</span>
+              <span className="text-xl sm:text-2xl text-green font-medium">
+                Redes:
+              </span>
               <SocialIcons />
             </div>
           </aside>
 
           <div className="flex-1 xl:px-4">
-            <div className="space-y-8 px-0 xl:px-20 mt-24 xl:mt-0">
+            <div className="space-y-8 px-0 xl:px-20 mt-24 xl:mt-0 [&>p]:hidden">
               <div className="relative aspect-square rounded-3xl max-h-[400px] 2xl:max-h-[550px] w-full mb-8 xl:mb-16">
-                <Image
-                  src="/2c019e0ab88382949e1ef76ee81146e0b4dd490d.png"
-                  alt="Banner"
-                  width={1920}
-                  height={1000}
-                  className="object-cover w-full h-full rounded-3xl"
-                />
+                {post.featuredImage?.node.sourceUrl && (
+                  <Image
+                    src={post.featuredImage.node.sourceUrl}
+                    alt={post.title || 'Imagem do artigo'}
+                    fill
+                    className="object-cover w-full h-full rounded-3xl"
+                  />
+                )}
               </div>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-                consectetur, ante non vulputate pharetra, sem nibh fringilla
-                quam, non efficitur risus lorem nec massa. Vestibulum maximus,
-                arcu vel egestas dignissim, nulla sem varius felis, id euismod
-                libero nibh in lorem. Etiam at purus ut justo elementum
-                dignissim a et tellus. Proin eleifend massa nec ante maximus
-                tincidunt ac at purus. Integer sodales dui eget mauris laoreet
-                pulvinar. Pellentesque a erat lectus. In consectetur sit amet
-                ligula a tempus. Proin porttitor dui quis sodales sagittis. Sed
-                at nulla a nulla vulputate hendrerit eget vitae ex. Fusce tempus
-                quam ante, ac imperdiet massa fermentum vel.
-              </p>
-              <p>
-                Nunc interdum lacus ac orci pretium, in sagittis ligula
-                consequat. Sed tincidunt ipsum eu lobortis efficitur. Sed
-                facilisis justo vel lacus imperdiet efficitur. Morbi blandit,
-                neque vel rutrum tincidunt, dolor orci ultrices dolor,
-                vestibulum interdum tellus ligula in diam. Ut ullamcorper nisl
-                at suscipit convallis. Etiam in neque bibendum, fringilla nibh
-                a, lobortis enim. Nullam ornare urna sed facilisis rhoncus.
-              </p>
-              <p>
-                Morbi pharetra justo vel quam pharetra sodales in et est. Nullam
-                in sollicitudin lacus. Mauris in ullamcorper sem. Donec vel
-                nulla ante. Nam vel dictum leo. Integer consequat erat diam, id
-                lobortis nunc porttitor eget. In in ante at augue mattis tempus.
-                Etiam venenatis risus ante, in dictum quam porttitor vitae.
-                Mauris interdum eros nulla, sit amet pellentesque est commodo
-                non. Aliquam accumsan mattis dolor, quis imperdiet augue
-                fringilla ut. Curabitur eu nibh nec ante laoreet egestas.
-              </p>
-              <p>
-                Aliquam erat volutpat. Ut convallis egestas scelerisque. Cras
-                efficitur libero vitae lacus bibendum, in cursus tellus ornare.
-                Vestibulum ac interdum neque. In accumsan leo ac mollis
-                pulvinar. Nam et velit ultricies, blandit lectus commodo,
-                euismod ante. Aenean finibus ac erat id hendrerit. Donec in orci
-                ullamcorper, fermentum nulla ut, ultricies mauris. Ut rhoncus
-                ante et sem dictum mollis. Donec vestibulum non nibh quis
-                laoreet. Aliquam in luctus arcu. Sed tellus libero, facilisis at
-                placerat lacinia, molestie id elit. Proin vitae volutpat nisl,
-                nec sodales sapien. Integer accumsan porttitor quam in accumsan.
-                Etiam consequat vitae neque a efficitur.
-              </p>
+              <div dangerouslySetInnerHTML={{ __html: post.content || '' }} />
             </div>
 
             <div className="relative xl:aspect-square rounded-3xl max-h-[310px] w-full my-16">
-              <Image
-                src="/banner-group.png"
-                alt="Banner"
-                width={1920}
-                height={320}
-                className="object-cover w-full h-full rounded-3xl"
-              />
+              <Link href="/l-store">
+                <Image
+                  src="/banner-group.png"
+                  alt="Banner"
+                  width={1920}
+                  height={320}
+                  className="object-cover w-full h-full rounded-3xl"
+                />
+              </Link>
             </div>
 
-            <div className="space-y-8 px-0 xl:px-20">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-                consectetur, ante non vulputate pharetra, sem nibh fringilla
-                quam, non efficitur risus lorem nec massa. Vestibulum maximus,
-                arcu vel egestas dignissim, nulla sem varius felis, id euismod
-                libero nibh in lorem. Etiam at purus ut justo elementum
-                dignissim a et tellus. Proin eleifend massa nec ante maximus
-                tincidunt ac at purus. Integer sodales dui eget mauris laoreet
-                pulvinar. Pellentesque a erat lectus. In consectetur sit amet
-                ligula a tempus. Proin porttitor dui quis sodales sagittis. Sed
-                at nulla a nulla vulputate hendrerit eget vitae ex. Fusce tempus
-                quam ante, ac imperdiet massa fermentum vel.
-              </p>
-              <p>
-                Nunc interdum lacus ac orci pretium, in sagittis ligula
-                consequat. Sed tincidunt ipsum eu lobortis efficitur. Sed
-                facilisis justo vel lacus imperdiet efficitur. Morbi blandit,
-                neque vel rutrum tincidunt, dolor orci ultrices dolor,
-                vestibulum interdum tellus ligula in diam. Ut ullamcorper nisl
-                at suscipit convallis. Etiam in neque bibendum, fringilla nibh
-                a, lobortis enim. Nullam ornare urna sed facilisis rhoncus.
-              </p>
-              <p>
-                Morbi pharetra justo vel quam pharetra sodales in et est. Nullam
-                in sollicitudin lacus. Mauris in ullamcorper sem. Donec vel
-                nulla ante. Nam vel dictum leo. Integer consequat erat diam, id
-                lobortis nunc porttitor eget. In in ante at augue mattis tempus.
-                Etiam venenatis risus ante, in dictum quam porttitor vitae.
-                Mauris interdum eros nulla, sit amet pellentesque est commodo
-                non. Aliquam accumsan mattis dolor, quis imperdiet augue
-                fringilla ut. Curabitur eu nibh nec ante laoreet egestas.
-              </p>
-              <p>
-                Aliquam erat volutpat. Ut convallis egestas scelerisque. Cras
-                efficitur libero vitae lacus bibendum, in cursus tellus ornare.
-                Vestibulum ac interdum neque. In accumsan leo ac mollis
-                pulvinar. Nam et velit ultricies, blandit lectus commodo,
-                euismod ante. Aenean finibus ac erat id hendrerit. Donec in orci
-                ullamcorper, fermentum nulla ut, ultricies mauris. Ut rhoncus
-                ante et sem dictum mollis. Donec vestibulum non nibh quis
-                laoreet. Aliquam in luctus arcu. Sed tellus libero, facilisis at
-                placerat lacinia, molestie id elit. Proin vitae volutpat nisl,
-                nec sodales sapien. Integer accumsan porttitor quam in accumsan.
-                Etiam consequat vitae neque a efficitur.
-              </p>
-            </div>
+            <div className="space-y-8 px-0 xl:px-20 hidden"></div>
           </div>
         </div>
 
@@ -208,13 +139,136 @@ export default function SinglePost() {
 
         <div className="container">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 pt-16 sm:pt-28">
-            <BlogItem />
-            <BlogItem />
-            <BlogItem />
-            <BlogItem />
+            {data.relatedPosts.map((relatedPost) => (
+              <BlogItem key={relatedPost.slug} post={relatedPost} />
+            ))}
           </div>
         </div>
       </section>
     </main>
   );
 }
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const { posts } = await ClientApp.query({
+    posts: {
+      nodes: {
+        slug: true,
+      },
+    },
+  });
+
+  const paths =
+    posts?.nodes.map((path) => {
+      return {
+        params: {
+          slug: path.slug as string,
+        },
+      };
+    }) || [];
+
+  return {
+    paths,
+    fallback: 'blocking',
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const slug = params?.slug as string;
+
+  if (!slug) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const { post, empreendimentos, page, posts } = await ClientApp.query({
+    post: [
+      {
+        id: `${slug}`,
+        idType: 'SLUG',
+      },
+      {
+        title: true,
+        content: true,
+        excerpt: true,
+        date: true,
+        author: { node: { name: true } },
+        featuredImage: {
+          node: {
+            sourceUrl: true,
+          },
+        },
+      },
+    ],
+    posts: [
+      { first: 4 },
+      {
+        nodes: {
+          title: true,
+          slug: true,
+          featuredImage: { node: { sourceUrl: true } },
+          excerpt: true,
+          categories: {
+            nodes: {
+              name: true,
+              slug: true,
+            },
+          },
+        },
+      },
+    ],
+    page: [
+      {
+        id: '201',
+        idType: 'DATABASE_ID',
+      },
+      {
+        informacoesDeContato: {
+          coTelefone: true,
+          coWhatsapp: true,
+          coEmail: true,
+          coEndereco: true,
+          linkFacebook: true,
+          linkInstagram: true,
+          linkYoutube: true,
+        },
+      },
+    ],
+    empreendimentos: {
+      nodes: {
+        empreendimento: {
+          imagemPrincipal: {
+            sourceUrl: true,
+          },
+          nomeDoEmpreendimento: true,
+          estagioDaObra: {
+            name: true,
+            slug: true,
+          },
+          empCidade: true,
+          empMetragem: true,
+          empDormitorios: true,
+          empVagasDeGaragem: true,
+        },
+        slug: true,
+      },
+    },
+  });
+
+  if (!post) {
+    return { notFound: true };
+  }
+
+  return {
+    props: {
+      data: {
+        post: post,
+        relatedPosts: (posts?.nodes || []).filter((item) => item.slug !== slug),
+        emp: empreendimentos,
+        social: page?.informacoesDeContato,
+      },
+      revalidate: 30,
+    },
+  };
+};

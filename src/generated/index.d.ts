@@ -1201,6 +1201,15 @@ export declare const enumUserNodeIdTypeEnum: {
   readonly USERNAME: 'USERNAME'
 }
 
+export declare const enumPublishableContentTypeEnum: {
+  readonly ARQ_ASSESSORIA: 'ARQ_ASSESSORIA'
+  readonly BANNER_HOME: 'BANNER_HOME'
+  readonly CENTRALDECORADO: 'CENTRALDECORADO'
+  readonly EMPREENDIMENTOS: 'EMPREENDIMENTOS'
+  readonly PAGE: 'PAGE'
+  readonly POST: 'POST'
+}
+
 export declare const enumUsersConnectionOrderbyEnum: {
   readonly DISPLAY_NAME: 'DISPLAY_NAME'
   readonly EMAIL: 'EMAIL'

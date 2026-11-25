@@ -453,8 +453,10 @@ export interface Taxonomy {
     label?: Scalars['String']
     /** The display name of the taxonomy. */
     name?: Scalars['String']
-    /** Whether the taxonomy is publicly queryable */
+    /** Whether the taxonomy is intended for public use. This is a broad statement of intent rather than a behavior of its own: the more specific settings, such as publiclyQueryable, showUi and showInNavMenus, follow it unless they are given their own value. */
     public?: Scalars['Boolean']
+    /** Whether terms in this taxonomy can be queried from the front end of the site. */
+    publiclyQueryable?: Scalars['Boolean']
     /** Name of content type to display in REST API &quot;wp/v2&quot; namespace. */
     restBase?: Scalars['String']
     /** The REST Controller class assigned to handling this content type. */
@@ -5781,6 +5783,10 @@ export interface RootQueryToUserRoleConnectionPageInfo {
 }
 
 
+/** Content types that can have published content. Unlike ContentTypeEnum, media items are excluded since they are never published. */
+export type PublishableContentTypeEnum = 'ARQ_ASSESSORIA' | 'BANNER_HOME' | 'CENTRALDECORADO' | 'EMPREENDIMENTOS' | 'PAGE' | 'POST'
+
+
 /** User attribute sorting options. Determines which property of user accounts is used for ordering user listings. */
 export type UsersConnectionOrderbyEnum = 'DISPLAY_NAME' | 'EMAIL' | 'LOGIN' | 'LOGIN_IN' | 'NICE_NAME' | 'NICE_NAME_IN' | 'REGISTERED' | 'URL'
 
@@ -7789,8 +7795,10 @@ export interface TaxonomyRequest{
     label?: boolean | number
     /** The display name of the taxonomy. */
     name?: boolean | number
-    /** Whether the taxonomy is publicly queryable */
+    /** Whether the taxonomy is intended for public use. This is a broad statement of intent rather than a behavior of its own: the more specific settings, such as publiclyQueryable, showUi and showInNavMenus, follow it unless they are given their own value. */
     public?: boolean | number
+    /** Whether terms in this taxonomy can be queried from the front end of the site. */
+    publiclyQueryable?: boolean | number
     /** Name of content type to display in REST API &quot;wp/v2&quot; namespace. */
     restBase?: boolean | number
     /** The REST Controller class assigned to handling this content type. */
@@ -9012,7 +9020,7 @@ export interface AvatarRequest{
 
 /** Arguments for filtering the UserToCommentConnection connection */
 export interface UserToCommentConnectionWhereArgs {
-/** Comment author email address. */
+/** Comment author email address. Only users who can moderate comments can filter by this; for other users it matches no comments. */
 authorEmail?: (Scalars['String'] | null),
 /** Array of author IDs to include comments for. */
 authorIn?: ((Scalars['ID'] | null)[] | null),
@@ -9024,9 +9032,9 @@ authorUrl?: (Scalars['String'] | null),
 commentIn?: ((Scalars['ID'] | null)[] | null),
 /** Array of IDs of users whose unapproved comments will be returned by the query regardless of status. */
 commentNotIn?: ((Scalars['ID'] | null)[] | null),
-/** Include comments of a given type. */
+/** Include comments of a given type. Notes are only returned to users who can edit them. */
 commentType?: (Scalars['String'] | null),
-/** Include comments from a given array of comment types. */
+/** Include comments from a given array of comment types. Notes are only returned to users who can edit them. */
 commentTypeIn?: ((Scalars['String'] | null)[] | null),
 /** Exclude comments from a given array of comment types. */
 commentTypeNotIn?: (Scalars['String'] | null),
@@ -9036,9 +9044,9 @@ contentAuthor?: ((Scalars['ID'] | null)[] | null),
 contentAuthorIn?: ((Scalars['ID'] | null)[] | null),
 /** Array of author IDs *not* to retrieve comments for. */
 contentAuthorNotIn?: ((Scalars['ID'] | null)[] | null),
-/** Limit results to those affiliated with a given content object ID. */
+/** Limit results to those affiliated with a given content object ID. For users who cannot moderate comments, content they cannot see matches no comments. */
 contentId?: (Scalars['ID'] | null),
-/** Array of content object IDs to include affiliated comments for. */
+/** Array of content object IDs to include affiliated comments for. For users who cannot moderate comments, content they cannot see is ignored. */
 contentIdIn?: ((Scalars['ID'] | null)[] | null),
 /** Array of content object IDs to exclude affiliated comments for. */
 contentIdNotIn?: ((Scalars['ID'] | null)[] | null),
@@ -9046,7 +9054,7 @@ contentIdNotIn?: ((Scalars['ID'] | null)[] | null),
 contentName?: (Scalars['String'] | null),
 /** Content Object parent ID to retrieve affiliated comments for. */
 contentParent?: (Scalars['Int'] | null),
-/** Array of content object statuses to retrieve affiliated comments for. Pass 'any' to match any value. */
+/** Array of content object statuses to retrieve affiliated comments for. Users who cannot moderate comments can only filter by published statuses: other statuses are ignored, and when none remain no comments are returned. */
 contentStatus?: ((PostStatusEnum | null)[] | null),
 /** Content object type or array of types to retrieve affiliated comments for. Pass 'any' to match any value. */
 contentType?: ((ContentTypeEnum | null)[] | null),
@@ -9056,7 +9064,7 @@ includeUnapproved?: ((Scalars['ID'] | null)[] | null),
 karma?: (Scalars['Int'] | null),
 /** The cardinality of the order of the connection */
 order?: (OrderEnum | null),
-/** Field to order the comments by. */
+/** Field to order the comments by. Ordering by the author email, the author IP address or the user agent requires permission to moderate comments; for other users, comments are ordered by date instead. */
 orderby?: (CommentsConnectionOrderbyEnum | null),
 /** Parent ID of comment to retrieve children of. */
 parent?: (Scalars['Int'] | null),
@@ -9064,9 +9072,9 @@ parent?: (Scalars['Int'] | null),
 parentIn?: ((Scalars['ID'] | null)[] | null),
 /** Array of parent IDs of comments *not* to retrieve children for. */
 parentNotIn?: ((Scalars['ID'] | null)[] | null),
-/** Search term(s) to retrieve matching comments for. */
+/** Search term(s) to retrieve matching comments for. For users who cannot moderate comments, only the comment content and the author name and URL are searched. */
 search?: (Scalars['String'] | null),
-/** One or more Comment Statuses to limit results by */
+/** One or more Comment Statuses to limit results by. Users who cannot moderate comments can only filter by APPROVE: other statuses are ignored, and when none remain no comments are returned. */
 statusIn?: ((CommentStatusEnum | null)[] | null),
 /** Include comments for a specific user ID. */
 userId?: (Scalars['ID'] | null)}
@@ -9248,7 +9256,7 @@ export interface CommentToContentNodeConnectionEdgeRequest{
 
 /** Arguments for filtering the CommentToParentCommentConnection connection */
 export interface CommentToParentCommentConnectionWhereArgs {
-/** Comment author email address. */
+/** Comment author email address. Only users who can moderate comments can filter by this; for other users it matches no comments. */
 authorEmail?: (Scalars['String'] | null),
 /** Array of author IDs to include comments for. */
 authorIn?: ((Scalars['ID'] | null)[] | null),
@@ -9260,9 +9268,9 @@ authorUrl?: (Scalars['String'] | null),
 commentIn?: ((Scalars['ID'] | null)[] | null),
 /** Array of IDs of users whose unapproved comments will be returned by the query regardless of status. */
 commentNotIn?: ((Scalars['ID'] | null)[] | null),
-/** Include comments of a given type. */
+/** Include comments of a given type. Notes are only returned to users who can edit them. */
 commentType?: (Scalars['String'] | null),
-/** Include comments from a given array of comment types. */
+/** Include comments from a given array of comment types. Notes are only returned to users who can edit them. */
 commentTypeIn?: ((Scalars['String'] | null)[] | null),
 /** Exclude comments from a given array of comment types. */
 commentTypeNotIn?: (Scalars['String'] | null),
@@ -9272,9 +9280,9 @@ contentAuthor?: ((Scalars['ID'] | null)[] | null),
 contentAuthorIn?: ((Scalars['ID'] | null)[] | null),
 /** Array of author IDs *not* to retrieve comments for. */
 contentAuthorNotIn?: ((Scalars['ID'] | null)[] | null),
-/** Limit results to those affiliated with a given content object ID. */
+/** Limit results to those affiliated with a given content object ID. For users who cannot moderate comments, content they cannot see matches no comments. */
 contentId?: (Scalars['ID'] | null),
-/** Array of content object IDs to include affiliated comments for. */
+/** Array of content object IDs to include affiliated comments for. For users who cannot moderate comments, content they cannot see is ignored. */
 contentIdIn?: ((Scalars['ID'] | null)[] | null),
 /** Array of content object IDs to exclude affiliated comments for. */
 contentIdNotIn?: ((Scalars['ID'] | null)[] | null),
@@ -9282,7 +9290,7 @@ contentIdNotIn?: ((Scalars['ID'] | null)[] | null),
 contentName?: (Scalars['String'] | null),
 /** Content Object parent ID to retrieve affiliated comments for. */
 contentParent?: (Scalars['Int'] | null),
-/** Array of content object statuses to retrieve affiliated comments for. Pass 'any' to match any value. */
+/** Array of content object statuses to retrieve affiliated comments for. Users who cannot moderate comments can only filter by published statuses: other statuses are ignored, and when none remain no comments are returned. */
 contentStatus?: ((PostStatusEnum | null)[] | null),
 /** Content object type or array of types to retrieve affiliated comments for. Pass 'any' to match any value. */
 contentType?: ((ContentTypeEnum | null)[] | null),
@@ -9292,7 +9300,7 @@ includeUnapproved?: ((Scalars['ID'] | null)[] | null),
 karma?: (Scalars['Int'] | null),
 /** The cardinality of the order of the connection */
 order?: (OrderEnum | null),
-/** Field to order the comments by. */
+/** Field to order the comments by. Ordering by the author email, the author IP address or the user agent requires permission to moderate comments; for other users, comments are ordered by date instead. */
 orderby?: (CommentsConnectionOrderbyEnum | null),
 /** Parent ID of comment to retrieve children of. */
 parent?: (Scalars['Int'] | null),
@@ -9300,9 +9308,9 @@ parent?: (Scalars['Int'] | null),
 parentIn?: ((Scalars['ID'] | null)[] | null),
 /** Array of parent IDs of comments *not* to retrieve children for. */
 parentNotIn?: ((Scalars['ID'] | null)[] | null),
-/** Search term(s) to retrieve matching comments for. */
+/** Search term(s) to retrieve matching comments for. For users who cannot moderate comments, only the comment content and the author name and URL are searched. */
 search?: (Scalars['String'] | null),
-/** One or more Comment Statuses to limit results by */
+/** One or more Comment Statuses to limit results by. Users who cannot moderate comments can only filter by APPROVE: other statuses are ignored, and when none remain no comments are returned. */
 statusIn?: ((CommentStatusEnum | null)[] | null),
 /** Include comments for a specific user ID. */
 userId?: (Scalars['ID'] | null)}
@@ -9321,7 +9329,7 @@ export interface CommentToParentCommentConnectionEdgeRequest{
 
 /** Arguments for filtering the CommentToCommentConnection connection */
 export interface CommentToCommentConnectionWhereArgs {
-/** Comment author email address. */
+/** Comment author email address. Only users who can moderate comments can filter by this; for other users it matches no comments. */
 authorEmail?: (Scalars['String'] | null),
 /** Array of author IDs to include comments for. */
 authorIn?: ((Scalars['ID'] | null)[] | null),
@@ -9333,9 +9341,9 @@ authorUrl?: (Scalars['String'] | null),
 commentIn?: ((Scalars['ID'] | null)[] | null),
 /** Array of IDs of users whose unapproved comments will be returned by the query regardless of status. */
 commentNotIn?: ((Scalars['ID'] | null)[] | null),
-/** Include comments of a given type. */
+/** Include comments of a given type. Notes are only returned to users who can edit them. */
 commentType?: (Scalars['String'] | null),
-/** Include comments from a given array of comment types. */
+/** Include comments from a given array of comment types. Notes are only returned to users who can edit them. */
 commentTypeIn?: ((Scalars['String'] | null)[] | null),
 /** Exclude comments from a given array of comment types. */
 commentTypeNotIn?: (Scalars['String'] | null),
@@ -9345,9 +9353,9 @@ contentAuthor?: ((Scalars['ID'] | null)[] | null),
 contentAuthorIn?: ((Scalars['ID'] | null)[] | null),
 /** Array of author IDs *not* to retrieve comments for. */
 contentAuthorNotIn?: ((Scalars['ID'] | null)[] | null),
-/** Limit results to those affiliated with a given content object ID. */
+/** Limit results to those affiliated with a given content object ID. For users who cannot moderate comments, content they cannot see matches no comments. */
 contentId?: (Scalars['ID'] | null),
-/** Array of content object IDs to include affiliated comments for. */
+/** Array of content object IDs to include affiliated comments for. For users who cannot moderate comments, content they cannot see is ignored. */
 contentIdIn?: ((Scalars['ID'] | null)[] | null),
 /** Array of content object IDs to exclude affiliated comments for. */
 contentIdNotIn?: ((Scalars['ID'] | null)[] | null),
@@ -9355,7 +9363,7 @@ contentIdNotIn?: ((Scalars['ID'] | null)[] | null),
 contentName?: (Scalars['String'] | null),
 /** Content Object parent ID to retrieve affiliated comments for. */
 contentParent?: (Scalars['Int'] | null),
-/** Array of content object statuses to retrieve affiliated comments for. Pass 'any' to match any value. */
+/** Array of content object statuses to retrieve affiliated comments for. Users who cannot moderate comments can only filter by published statuses: other statuses are ignored, and when none remain no comments are returned. */
 contentStatus?: ((PostStatusEnum | null)[] | null),
 /** Content object type or array of types to retrieve affiliated comments for. Pass 'any' to match any value. */
 contentType?: ((ContentTypeEnum | null)[] | null),
@@ -9365,7 +9373,7 @@ includeUnapproved?: ((Scalars['ID'] | null)[] | null),
 karma?: (Scalars['Int'] | null),
 /** The cardinality of the order of the connection */
 order?: (OrderEnum | null),
-/** Field to order the comments by. */
+/** Field to order the comments by. Ordering by the author email, the author IP address or the user agent requires permission to moderate comments; for other users, comments are ordered by date instead. */
 orderby?: (CommentsConnectionOrderbyEnum | null),
 /** Parent ID of comment to retrieve children of. */
 parent?: (Scalars['Int'] | null),
@@ -9373,9 +9381,9 @@ parent?: (Scalars['Int'] | null),
 parentIn?: ((Scalars['ID'] | null)[] | null),
 /** Array of parent IDs of comments *not* to retrieve children for. */
 parentNotIn?: ((Scalars['ID'] | null)[] | null),
-/** Search term(s) to retrieve matching comments for. */
+/** Search term(s) to retrieve matching comments for. For users who cannot moderate comments, only the comment content and the author name and URL are searched. */
 search?: (Scalars['String'] | null),
-/** One or more Comment Statuses to limit results by */
+/** One or more Comment Statuses to limit results by. Users who cannot moderate comments can only filter by APPROVE: other statuses are ignored, and when none remain no comments are returned. */
 statusIn?: ((CommentStatusEnum | null)[] | null),
 /** Include comments for a specific user ID. */
 userId?: (Scalars['ID'] | null)}
@@ -10376,7 +10384,7 @@ export interface HierarchicalContentNodeToParentContentNodeConnectionEdgeRequest
 
 /** Arguments for filtering the MediaItemToCommentConnection connection */
 export interface MediaItemToCommentConnectionWhereArgs {
-/** Comment author email address. */
+/** Comment author email address. Only users who can moderate comments can filter by this; for other users it matches no comments. */
 authorEmail?: (Scalars['String'] | null),
 /** Array of author IDs to include comments for. */
 authorIn?: ((Scalars['ID'] | null)[] | null),
@@ -10388,9 +10396,9 @@ authorUrl?: (Scalars['String'] | null),
 commentIn?: ((Scalars['ID'] | null)[] | null),
 /** Array of IDs of users whose unapproved comments will be returned by the query regardless of status. */
 commentNotIn?: ((Scalars['ID'] | null)[] | null),
-/** Include comments of a given type. */
+/** Include comments of a given type. Notes are only returned to users who can edit them. */
 commentType?: (Scalars['String'] | null),
-/** Include comments from a given array of comment types. */
+/** Include comments from a given array of comment types. Notes are only returned to users who can edit them. */
 commentTypeIn?: ((Scalars['String'] | null)[] | null),
 /** Exclude comments from a given array of comment types. */
 commentTypeNotIn?: (Scalars['String'] | null),
@@ -10400,9 +10408,9 @@ contentAuthor?: ((Scalars['ID'] | null)[] | null),
 contentAuthorIn?: ((Scalars['ID'] | null)[] | null),
 /** Array of author IDs *not* to retrieve comments for. */
 contentAuthorNotIn?: ((Scalars['ID'] | null)[] | null),
-/** Limit results to those affiliated with a given content object ID. */
+/** Limit results to those affiliated with a given content object ID. For users who cannot moderate comments, content they cannot see matches no comments. */
 contentId?: (Scalars['ID'] | null),
-/** Array of content object IDs to include affiliated comments for. */
+/** Array of content object IDs to include affiliated comments for. For users who cannot moderate comments, content they cannot see is ignored. */
 contentIdIn?: ((Scalars['ID'] | null)[] | null),
 /** Array of content object IDs to exclude affiliated comments for. */
 contentIdNotIn?: ((Scalars['ID'] | null)[] | null),
@@ -10410,7 +10418,7 @@ contentIdNotIn?: ((Scalars['ID'] | null)[] | null),
 contentName?: (Scalars['String'] | null),
 /** Content Object parent ID to retrieve affiliated comments for. */
 contentParent?: (Scalars['Int'] | null),
-/** Array of content object statuses to retrieve affiliated comments for. Pass 'any' to match any value. */
+/** Array of content object statuses to retrieve affiliated comments for. Users who cannot moderate comments can only filter by published statuses: other statuses are ignored, and when none remain no comments are returned. */
 contentStatus?: ((PostStatusEnum | null)[] | null),
 /** Content object type or array of types to retrieve affiliated comments for. Pass 'any' to match any value. */
 contentType?: ((ContentTypeEnum | null)[] | null),
@@ -10420,7 +10428,7 @@ includeUnapproved?: ((Scalars['ID'] | null)[] | null),
 karma?: (Scalars['Int'] | null),
 /** The cardinality of the order of the connection */
 order?: (OrderEnum | null),
-/** Field to order the comments by. */
+/** Field to order the comments by. Ordering by the author email, the author IP address or the user agent requires permission to moderate comments; for other users, comments are ordered by date instead. */
 orderby?: (CommentsConnectionOrderbyEnum | null),
 /** Parent ID of comment to retrieve children of. */
 parent?: (Scalars['Int'] | null),
@@ -10428,9 +10436,9 @@ parent?: (Scalars['Int'] | null),
 parentIn?: ((Scalars['ID'] | null)[] | null),
 /** Array of parent IDs of comments *not* to retrieve children for. */
 parentNotIn?: ((Scalars['ID'] | null)[] | null),
-/** Search term(s) to retrieve matching comments for. */
+/** Search term(s) to retrieve matching comments for. For users who cannot moderate comments, only the comment content and the author name and URL are searched. */
 search?: (Scalars['String'] | null),
-/** One or more Comment Statuses to limit results by */
+/** One or more Comment Statuses to limit results by. Users who cannot moderate comments can only filter by APPROVE: other statuses are ignored, and when none remain no comments are returned. */
 statusIn?: ((CommentStatusEnum | null)[] | null),
 /** Include comments for a specific user ID. */
 userId?: (Scalars['ID'] | null)}
@@ -11077,7 +11085,7 @@ export interface AcfFieldGroupRequest{
 
 /** Arguments for filtering the PageToCommentConnection connection */
 export interface PageToCommentConnectionWhereArgs {
-/** Comment author email address. */
+/** Comment author email address. Only users who can moderate comments can filter by this; for other users it matches no comments. */
 authorEmail?: (Scalars['String'] | null),
 /** Array of author IDs to include comments for. */
 authorIn?: ((Scalars['ID'] | null)[] | null),
@@ -11089,9 +11097,9 @@ authorUrl?: (Scalars['String'] | null),
 commentIn?: ((Scalars['ID'] | null)[] | null),
 /** Array of IDs of users whose unapproved comments will be returned by the query regardless of status. */
 commentNotIn?: ((Scalars['ID'] | null)[] | null),
-/** Include comments of a given type. */
+/** Include comments of a given type. Notes are only returned to users who can edit them. */
 commentType?: (Scalars['String'] | null),
-/** Include comments from a given array of comment types. */
+/** Include comments from a given array of comment types. Notes are only returned to users who can edit them. */
 commentTypeIn?: ((Scalars['String'] | null)[] | null),
 /** Exclude comments from a given array of comment types. */
 commentTypeNotIn?: (Scalars['String'] | null),
@@ -11101,9 +11109,9 @@ contentAuthor?: ((Scalars['ID'] | null)[] | null),
 contentAuthorIn?: ((Scalars['ID'] | null)[] | null),
 /** Array of author IDs *not* to retrieve comments for. */
 contentAuthorNotIn?: ((Scalars['ID'] | null)[] | null),
-/** Limit results to those affiliated with a given content object ID. */
+/** Limit results to those affiliated with a given content object ID. For users who cannot moderate comments, content they cannot see matches no comments. */
 contentId?: (Scalars['ID'] | null),
-/** Array of content object IDs to include affiliated comments for. */
+/** Array of content object IDs to include affiliated comments for. For users who cannot moderate comments, content they cannot see is ignored. */
 contentIdIn?: ((Scalars['ID'] | null)[] | null),
 /** Array of content object IDs to exclude affiliated comments for. */
 contentIdNotIn?: ((Scalars['ID'] | null)[] | null),
@@ -11111,7 +11119,7 @@ contentIdNotIn?: ((Scalars['ID'] | null)[] | null),
 contentName?: (Scalars['String'] | null),
 /** Content Object parent ID to retrieve affiliated comments for. */
 contentParent?: (Scalars['Int'] | null),
-/** Array of content object statuses to retrieve affiliated comments for. Pass 'any' to match any value. */
+/** Array of content object statuses to retrieve affiliated comments for. Users who cannot moderate comments can only filter by published statuses: other statuses are ignored, and when none remain no comments are returned. */
 contentStatus?: ((PostStatusEnum | null)[] | null),
 /** Content object type or array of types to retrieve affiliated comments for. Pass 'any' to match any value. */
 contentType?: ((ContentTypeEnum | null)[] | null),
@@ -11121,7 +11129,7 @@ includeUnapproved?: ((Scalars['ID'] | null)[] | null),
 karma?: (Scalars['Int'] | null),
 /** The cardinality of the order of the connection */
 order?: (OrderEnum | null),
-/** Field to order the comments by. */
+/** Field to order the comments by. Ordering by the author email, the author IP address or the user agent requires permission to moderate comments; for other users, comments are ordered by date instead. */
 orderby?: (CommentsConnectionOrderbyEnum | null),
 /** Parent ID of comment to retrieve children of. */
 parent?: (Scalars['Int'] | null),
@@ -11129,9 +11137,9 @@ parent?: (Scalars['Int'] | null),
 parentIn?: ((Scalars['ID'] | null)[] | null),
 /** Array of parent IDs of comments *not* to retrieve children for. */
 parentNotIn?: ((Scalars['ID'] | null)[] | null),
-/** Search term(s) to retrieve matching comments for. */
+/** Search term(s) to retrieve matching comments for. For users who cannot moderate comments, only the comment content and the author name and URL are searched. */
 search?: (Scalars['String'] | null),
-/** One or more Comment Statuses to limit results by */
+/** One or more Comment Statuses to limit results by. Users who cannot moderate comments can only filter by APPROVE: other statuses are ignored, and when none remain no comments are returned. */
 statusIn?: ((CommentStatusEnum | null)[] | null),
 /** Include comments for a specific user ID. */
 userId?: (Scalars['ID'] | null)}
@@ -13877,7 +13885,7 @@ export interface PostToCategoryConnectionPageInfoRequest{
 
 /** Arguments for filtering the PostToCommentConnection connection */
 export interface PostToCommentConnectionWhereArgs {
-/** Comment author email address. */
+/** Comment author email address. Only users who can moderate comments can filter by this; for other users it matches no comments. */
 authorEmail?: (Scalars['String'] | null),
 /** Array of author IDs to include comments for. */
 authorIn?: ((Scalars['ID'] | null)[] | null),
@@ -13889,9 +13897,9 @@ authorUrl?: (Scalars['String'] | null),
 commentIn?: ((Scalars['ID'] | null)[] | null),
 /** Array of IDs of users whose unapproved comments will be returned by the query regardless of status. */
 commentNotIn?: ((Scalars['ID'] | null)[] | null),
-/** Include comments of a given type. */
+/** Include comments of a given type. Notes are only returned to users who can edit them. */
 commentType?: (Scalars['String'] | null),
-/** Include comments from a given array of comment types. */
+/** Include comments from a given array of comment types. Notes are only returned to users who can edit them. */
 commentTypeIn?: ((Scalars['String'] | null)[] | null),
 /** Exclude comments from a given array of comment types. */
 commentTypeNotIn?: (Scalars['String'] | null),
@@ -13901,9 +13909,9 @@ contentAuthor?: ((Scalars['ID'] | null)[] | null),
 contentAuthorIn?: ((Scalars['ID'] | null)[] | null),
 /** Array of author IDs *not* to retrieve comments for. */
 contentAuthorNotIn?: ((Scalars['ID'] | null)[] | null),
-/** Limit results to those affiliated with a given content object ID. */
+/** Limit results to those affiliated with a given content object ID. For users who cannot moderate comments, content they cannot see matches no comments. */
 contentId?: (Scalars['ID'] | null),
-/** Array of content object IDs to include affiliated comments for. */
+/** Array of content object IDs to include affiliated comments for. For users who cannot moderate comments, content they cannot see is ignored. */
 contentIdIn?: ((Scalars['ID'] | null)[] | null),
 /** Array of content object IDs to exclude affiliated comments for. */
 contentIdNotIn?: ((Scalars['ID'] | null)[] | null),
@@ -13911,7 +13919,7 @@ contentIdNotIn?: ((Scalars['ID'] | null)[] | null),
 contentName?: (Scalars['String'] | null),
 /** Content Object parent ID to retrieve affiliated comments for. */
 contentParent?: (Scalars['Int'] | null),
-/** Array of content object statuses to retrieve affiliated comments for. Pass 'any' to match any value. */
+/** Array of content object statuses to retrieve affiliated comments for. Users who cannot moderate comments can only filter by published statuses: other statuses are ignored, and when none remain no comments are returned. */
 contentStatus?: ((PostStatusEnum | null)[] | null),
 /** Content object type or array of types to retrieve affiliated comments for. Pass 'any' to match any value. */
 contentType?: ((ContentTypeEnum | null)[] | null),
@@ -13921,7 +13929,7 @@ includeUnapproved?: ((Scalars['ID'] | null)[] | null),
 karma?: (Scalars['Int'] | null),
 /** The cardinality of the order of the connection */
 order?: (OrderEnum | null),
-/** Field to order the comments by. */
+/** Field to order the comments by. Ordering by the author email, the author IP address or the user agent requires permission to moderate comments; for other users, comments are ordered by date instead. */
 orderby?: (CommentsConnectionOrderbyEnum | null),
 /** Parent ID of comment to retrieve children of. */
 parent?: (Scalars['Int'] | null),
@@ -13929,9 +13937,9 @@ parent?: (Scalars['Int'] | null),
 parentIn?: ((Scalars['ID'] | null)[] | null),
 /** Array of parent IDs of comments *not* to retrieve children for. */
 parentNotIn?: ((Scalars['ID'] | null)[] | null),
-/** Search term(s) to retrieve matching comments for. */
+/** Search term(s) to retrieve matching comments for. For users who cannot moderate comments, only the comment content and the author name and URL are searched. */
 search?: (Scalars['String'] | null),
-/** One or more Comment Statuses to limit results by */
+/** One or more Comment Statuses to limit results by. Users who cannot moderate comments can only filter by APPROVE: other statuses are ignored, and when none remain no comments are returned. */
 statusIn?: ((CommentStatusEnum | null)[] | null),
 /** Include comments for a specific user ID. */
 userId?: (Scalars['ID'] | null)}
@@ -16114,7 +16122,7 @@ export interface RootQueryToCentraldeDecoradoConnectionPageInfoRequest{
 
 /** Arguments for filtering the RootQueryToCommentConnection connection */
 export interface RootQueryToCommentConnectionWhereArgs {
-/** Comment author email address. */
+/** Comment author email address. Only users who can moderate comments can filter by this; for other users it matches no comments. */
 authorEmail?: (Scalars['String'] | null),
 /** Array of author IDs to include comments for. */
 authorIn?: ((Scalars['ID'] | null)[] | null),
@@ -16126,9 +16134,9 @@ authorUrl?: (Scalars['String'] | null),
 commentIn?: ((Scalars['ID'] | null)[] | null),
 /** Array of IDs of users whose unapproved comments will be returned by the query regardless of status. */
 commentNotIn?: ((Scalars['ID'] | null)[] | null),
-/** Include comments of a given type. */
+/** Include comments of a given type. Notes are only returned to users who can edit them. */
 commentType?: (Scalars['String'] | null),
-/** Include comments from a given array of comment types. */
+/** Include comments from a given array of comment types. Notes are only returned to users who can edit them. */
 commentTypeIn?: ((Scalars['String'] | null)[] | null),
 /** Exclude comments from a given array of comment types. */
 commentTypeNotIn?: (Scalars['String'] | null),
@@ -16138,9 +16146,9 @@ contentAuthor?: ((Scalars['ID'] | null)[] | null),
 contentAuthorIn?: ((Scalars['ID'] | null)[] | null),
 /** Array of author IDs *not* to retrieve comments for. */
 contentAuthorNotIn?: ((Scalars['ID'] | null)[] | null),
-/** Limit results to those affiliated with a given content object ID. */
+/** Limit results to those affiliated with a given content object ID. For users who cannot moderate comments, content they cannot see matches no comments. */
 contentId?: (Scalars['ID'] | null),
-/** Array of content object IDs to include affiliated comments for. */
+/** Array of content object IDs to include affiliated comments for. For users who cannot moderate comments, content they cannot see is ignored. */
 contentIdIn?: ((Scalars['ID'] | null)[] | null),
 /** Array of content object IDs to exclude affiliated comments for. */
 contentIdNotIn?: ((Scalars['ID'] | null)[] | null),
@@ -16148,7 +16156,7 @@ contentIdNotIn?: ((Scalars['ID'] | null)[] | null),
 contentName?: (Scalars['String'] | null),
 /** Content Object parent ID to retrieve affiliated comments for. */
 contentParent?: (Scalars['Int'] | null),
-/** Array of content object statuses to retrieve affiliated comments for. Pass 'any' to match any value. */
+/** Array of content object statuses to retrieve affiliated comments for. Users who cannot moderate comments can only filter by published statuses: other statuses are ignored, and when none remain no comments are returned. */
 contentStatus?: ((PostStatusEnum | null)[] | null),
 /** Content object type or array of types to retrieve affiliated comments for. Pass 'any' to match any value. */
 contentType?: ((ContentTypeEnum | null)[] | null),
@@ -16158,7 +16166,7 @@ includeUnapproved?: ((Scalars['ID'] | null)[] | null),
 karma?: (Scalars['Int'] | null),
 /** The cardinality of the order of the connection */
 order?: (OrderEnum | null),
-/** Field to order the comments by. */
+/** Field to order the comments by. Ordering by the author email, the author IP address or the user agent requires permission to moderate comments; for other users, comments are ordered by date instead. */
 orderby?: (CommentsConnectionOrderbyEnum | null),
 /** Parent ID of comment to retrieve children of. */
 parent?: (Scalars['Int'] | null),
@@ -16166,9 +16174,9 @@ parent?: (Scalars['Int'] | null),
 parentIn?: ((Scalars['ID'] | null)[] | null),
 /** Array of parent IDs of comments *not* to retrieve children for. */
 parentNotIn?: ((Scalars['ID'] | null)[] | null),
-/** Search term(s) to retrieve matching comments for. */
+/** Search term(s) to retrieve matching comments for. For users who cannot moderate comments, only the comment content and the author name and URL are searched. */
 search?: (Scalars['String'] | null),
-/** One or more Comment Statuses to limit results by */
+/** One or more Comment Statuses to limit results by. Users who cannot moderate comments can only filter by APPROVE: other statuses are ignored, and when none remain no comments are returned. */
 statusIn?: ((CommentStatusEnum | null)[] | null),
 /** Include comments for a specific user ID. */
 userId?: (Scalars['ID'] | null)}
@@ -18070,8 +18078,8 @@ export interface RootQueryToUserRoleConnectionPageInfoRequest{
 export interface RootQueryToUserConnectionWhereArgs {
 /** Array of userIds to exclude. */
 exclude?: ((Scalars['Int'] | null)[] | null),
-/** Pass an array of post types to filter results to users who have published posts in those post types. */
-hasPublishedPosts?: ((ContentTypeEnum | null)[] | null),
+/** Limit results to users who have published content of at least one of the given content types. */
+hasPublishedContent?: ((PublishableContentTypeEnum | null)[] | null),
 /** Array of userIds to include. */
 include?: ((Scalars['Int'] | null)[] | null),
 /** The user login. */
@@ -25948,8 +25956,11 @@ label: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | und
 /** The display name of the taxonomy. */
 name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     
-/** Whether the taxonomy is publicly queryable */
+/** Whether the taxonomy is intended for public use. This is a broad statement of intent rather than a behavior of its own: the more specific settings, such as publiclyQueryable, showUi and showInNavMenus, follow it unless they are given their own value. */
 public: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
+    
+/** Whether terms in this taxonomy can be queried from the front end of the site. */
+publiclyQueryable: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
     
 /** Name of content type to display in REST API &quot;wp/v2&quot; namespace. */
 restBase: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
@@ -26032,8 +26043,11 @@ label: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | und
 /** The display name of the taxonomy. */
 name: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     
-/** Whether the taxonomy is publicly queryable */
+/** Whether the taxonomy is intended for public use. This is a broad statement of intent rather than a behavior of its own: the more specific settings, such as publiclyQueryable, showUi and showInNavMenus, follow it unless they are given their own value. */
 public: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
+    
+/** Whether terms in this taxonomy can be queried from the front end of the site. */
+publiclyQueryable: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
     
 /** Name of content type to display in REST API &quot;wp/v2&quot; namespace. */
 restBase: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),

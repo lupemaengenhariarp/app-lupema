@@ -99,10 +99,11 @@ module.exports = {
         594,
         595,
         607,
-        613,
+        612,
         614,
         615,
-        645
+        616,
+        646
     ],
     "types": {
         "String": {},
@@ -333,7 +334,7 @@ module.exports = {
                 0
             ],
             "template": [
-                626
+                627
             ],
             "title": [
                 0,
@@ -467,7 +468,7 @@ module.exports = {
                 0
             ],
             "template": [
-                626
+                627
             ],
             "uri": [
                 0
@@ -578,7 +579,7 @@ module.exports = {
                 0
             ],
             "node": [
-                622
+                623
             ],
             "on_ContentNodeToContentTypeConnectionEdge": [
                 9
@@ -673,7 +674,7 @@ module.exports = {
                 0
             ],
             "node": [
-                622
+                623
             ],
             "on_ContentNodeToContentTypeConnectionEdge": [
                 9
@@ -976,7 +977,7 @@ module.exports = {
                 609
             ],
             "on_RootQueryToUserConnectionEdge": [
-                619
+                620
             ],
             "__typename": [
                 0
@@ -1176,7 +1177,7 @@ module.exports = {
                 11
             ],
             "nodes": [
-                622
+                623
             ],
             "pageInfo": [
                 17
@@ -1398,7 +1399,7 @@ module.exports = {
                 608
             ],
             "on_RootQueryToUserConnection": [
-                616
+                617
             ],
             "__typename": [
                 0
@@ -1634,7 +1635,7 @@ module.exports = {
                 610
             ],
             "on_RootQueryToUserConnectionPageInfo": [
-                620
+                621
             ],
             "__typename": [
                 0
@@ -1726,6 +1727,9 @@ module.exports = {
                 0
             ],
             "public": [
+                2
+            ],
+            "publiclyQueryable": [
                 2
             ],
             "restBase": [
@@ -2049,7 +2053,7 @@ module.exports = {
                 610
             ],
             "on_RootQueryToUserConnectionPageInfo": [
-                620
+                621
             ],
             "__typename": [
                 0
@@ -3279,7 +3283,7 @@ module.exports = {
                 156
             ],
             "on_RootQueryToUserConnectionEdge": [
-                619
+                620
             ],
             "__typename": [
                 0
@@ -3886,7 +3890,7 @@ module.exports = {
                 0
             ],
             "node": [
-                624
+                625
             ],
             "url": [
                 0
@@ -3900,7 +3904,7 @@ module.exports = {
                 0
             ],
             "node": [
-                624
+                625
             ],
             "on_CommentToCommenterConnectionEdge": [
                 95
@@ -4777,7 +4781,7 @@ module.exports = {
                 0
             ],
             "template": [
-                626
+                627
             ],
             "title": [
                 0,
@@ -4799,7 +4803,7 @@ module.exports = {
                 4
             ],
             "template": [
-                626
+                627
             ],
             "on_ArquivoAssessoria": [
                 6
@@ -5089,7 +5093,7 @@ module.exports = {
                 0
             ],
             "template": [
-                626
+                627
             ],
             "uri": [
                 0
@@ -6278,7 +6282,7 @@ module.exports = {
                 0
             ],
             "template": [
-                626
+                627
             ],
             "title": [
                 0,
@@ -7768,7 +7772,7 @@ module.exports = {
                 }
             ],
             "template": [
-                626
+                627
             ],
             "terms": [
                 393,
@@ -8835,7 +8839,7 @@ module.exports = {
                 0
             ],
             "template": [
-                626
+                627
             ],
             "terms": [
                 262,
@@ -9856,7 +9860,7 @@ module.exports = {
                 0
             ],
             "template": [
-                626
+                627
             ],
             "terms": [
                 309,
@@ -13143,7 +13147,7 @@ module.exports = {
                 0
             ],
             "template": [
-                626
+                627
             ],
             "title": [
                 0,
@@ -13348,7 +13352,7 @@ module.exports = {
                 288
             ],
             "on_Node": [
-                622
+                623
             ],
             "on_ContentNode": [
                 7
@@ -13357,7 +13361,7 @@ module.exports = {
                 8
             ],
             "on_DatabaseIdentifier": [
-                623
+                624
             ],
             "on_NodeWithTemplate": [
                 125
@@ -14849,7 +14853,7 @@ module.exports = {
                 370
             ],
             "on_Node": [
-                622
+                623
             ],
             "on_ContentNode": [
                 7
@@ -14858,7 +14862,7 @@ module.exports = {
                 8
             ],
             "on_DatabaseIdentifier": [
-                623
+                624
             ],
             "on_NodeWithTemplate": [
                 125
@@ -16425,8 +16429,8 @@ module.exports = {
             "exclude": [
                 1
             ],
-            "hasPublishedPosts": [
-                56
+            "hasPublishedContent": [
+                612
             ],
             "include": [
                 1
@@ -16450,30 +16454,31 @@ module.exports = {
                 0
             ],
             "orderby": [
-                612
+                613
             ],
             "role": [
-                614
+                615
             ],
             "roleIn": [
-                614
+                615
             ],
             "roleNotIn": [
-                614
+                615
             ],
             "search": [
                 0
             ],
             "searchColumns": [
-                615
+                616
             ],
             "__typename": [
                 0
             ]
         },
+        "PublishableContentTypeEnum": {},
         "UsersConnectionOrderbyInput": {
             "field": [
-                613
+                614
             ],
             "order": [
                 68
@@ -16487,13 +16492,13 @@ module.exports = {
         "UsersConnectionSearchColumnEnum": {},
         "RootQueryToUserConnection": {
             "edges": [
-                619
+                620
             ],
             "nodes": [
                 85
             ],
             "pageInfo": [
-                620
+                621
             ],
             "__typename": [
                 0
@@ -16507,10 +16512,10 @@ module.exports = {
                 85
             ],
             "pageInfo": [
-                618
+                619
             ],
             "on_RootQueryToUserConnection": [
-                616
+                617
             ],
             "__typename": [
                 0
@@ -16530,7 +16535,7 @@ module.exports = {
                 0
             ],
             "on_RootQueryToUserConnectionPageInfo": [
-                620
+                621
             ],
             "__typename": [
                 0
@@ -16661,10 +16666,10 @@ module.exports = {
                 600
             ],
             "on_WritingSettings": [
-                621
+                622
             ],
             "on_CommentAuthor": [
-                625
+                626
             ],
             "__typename": [
                 0
@@ -16717,7 +16722,7 @@ module.exports = {
                 512
             ],
             "on_CommentAuthor": [
-                625
+                626
             ],
             "__typename": [
                 0
@@ -16749,7 +16754,7 @@ module.exports = {
                 85
             ],
             "on_CommentAuthor": [
-                625
+                626
             ],
             "__typename": [
                 0
@@ -16797,7 +16802,7 @@ module.exports = {
                 0
             ],
             "on_DefaultTemplate": [
-                627
+                628
             ],
             "__typename": [
                 0
@@ -16924,7 +16929,7 @@ module.exports = {
         },
         "CreateCentraldeDecoradoInput": {
             "categories": [
-                635
+                636
             ],
             "clientMutationId": [
                 0
@@ -16956,7 +16961,7 @@ module.exports = {
                 2
             ],
             "nodes": [
-                636
+                637
             ],
             "__typename": [
                 0
@@ -17041,7 +17046,7 @@ module.exports = {
         },
         "CreateEmpreendimentoInput": {
             "categories": [
-                641
+                642
             ],
             "clientMutationId": [
                 0
@@ -17073,7 +17078,7 @@ module.exports = {
                 2
             ],
             "nodes": [
-                642
+                643
             ],
             "__typename": [
                 0
@@ -17148,7 +17153,7 @@ module.exports = {
                 0
             ],
             "status": [
-                645
+                646
             ],
             "title": [
                 0
@@ -17223,7 +17228,7 @@ module.exports = {
                 4
             ],
             "categories": [
-                650
+                651
             ],
             "clientMutationId": [
                 0
@@ -17253,7 +17258,7 @@ module.exports = {
                 0
             ],
             "postFormats": [
-                652
+                653
             ],
             "slug": [
                 0
@@ -17262,7 +17267,7 @@ module.exports = {
                 69
             ],
             "tags": [
-                654
+                655
             ],
             "title": [
                 0
@@ -17279,7 +17284,7 @@ module.exports = {
                 2
             ],
             "nodes": [
-                651
+                652
             ],
             "__typename": [
                 0
@@ -17307,7 +17312,7 @@ module.exports = {
                 2
             ],
             "nodes": [
-                653
+                654
             ],
             "__typename": [
                 0
@@ -17335,7 +17340,7 @@ module.exports = {
                 2
             ],
             "nodes": [
-                655
+                656
             ],
             "__typename": [
                 0
@@ -18119,7 +18124,7 @@ module.exports = {
         },
         "UpdateCentraldeDecoradoInput": {
             "categories": [
-                635
+                636
             ],
             "clientMutationId": [
                 0
@@ -18217,7 +18222,7 @@ module.exports = {
         },
         "UpdateEmpreendimentoInput": {
             "categories": [
-                641
+                642
             ],
             "clientMutationId": [
                 0
@@ -18305,7 +18310,7 @@ module.exports = {
                 0
             ],
             "status": [
-                645
+                646
             ],
             "title": [
                 0
@@ -18385,7 +18390,7 @@ module.exports = {
                 4
             ],
             "categories": [
-                650
+                651
             ],
             "clientMutationId": [
                 0
@@ -18421,7 +18426,7 @@ module.exports = {
                 0
             ],
             "postFormats": [
-                652
+                653
             ],
             "slug": [
                 0
@@ -18430,7 +18435,7 @@ module.exports = {
                 69
             ],
             "tags": [
-                654
+                655
             ],
             "title": [
                 0
@@ -18566,7 +18571,7 @@ module.exports = {
                 569
             ],
             "writingSettings": [
-                621
+                622
             ],
             "__typename": [
                 0
@@ -19124,7 +19129,7 @@ module.exports = {
                 }
             ],
             "node": [
-                622,
+                623,
                 {
                     "id": [
                         4
@@ -19523,7 +19528,7 @@ module.exports = {
                 }
             ],
             "users": [
-                616,
+                617,
                 {
                     "first": [
                         1
@@ -19546,7 +19551,7 @@ module.exports = {
                 85
             ],
             "writingSettings": [
-                621
+                622
             ],
             "__typename": [
                 0
@@ -19554,217 +19559,217 @@ module.exports = {
         },
         "Mutation": {
             "createArquivoAssessoria": [
-                629,
+                630,
                 {
                     "input": [
-                        628,
+                        629,
                         "CreateArquivoAssessoriaInput!"
                     ]
                 }
             ],
             "createBanner": [
-                631,
+                632,
                 {
                     "input": [
-                        630,
+                        631,
                         "CreateBannerInput!"
                     ]
                 }
             ],
             "createCategory": [
-                633,
+                634,
                 {
                     "input": [
-                        632,
+                        633,
                         "CreateCategoryInput!"
                     ]
                 }
             ],
             "createCentraldeDecorado": [
-                637,
+                638,
                 {
                     "input": [
-                        634,
+                        635,
                         "CreateCentraldeDecoradoInput!"
                     ]
                 }
             ],
             "createComment": [
-                639,
+                640,
                 {
                     "input": [
-                        638,
+                        639,
                         "CreateCommentInput!"
                     ]
                 }
             ],
             "createEmpreendimento": [
-                643,
+                644,
                 {
                     "input": [
-                        640,
+                        641,
                         "CreateEmpreendimentoInput!"
                     ]
                 }
             ],
             "createMediaItem": [
-                646,
+                647,
                 {
                     "input": [
-                        644,
+                        645,
                         "CreateMediaItemInput!"
                     ]
                 }
             ],
             "createPage": [
-                648,
+                649,
                 {
                     "input": [
-                        647,
+                        648,
                         "CreatePageInput!"
                     ]
                 }
             ],
             "createPost": [
-                656,
+                657,
                 {
                     "input": [
-                        649,
+                        650,
                         "CreatePostInput!"
                     ]
                 }
             ],
             "createPostFormat": [
-                658,
+                659,
                 {
                     "input": [
-                        657,
+                        658,
                         "CreatePostFormatInput!"
                     ]
                 }
             ],
             "createTag": [
-                660,
+                661,
                 {
                     "input": [
-                        659,
+                        660,
                         "CreateTagInput!"
                     ]
                 }
             ],
             "createUser": [
-                662,
+                663,
                 {
                     "input": [
-                        661,
+                        662,
                         "CreateUserInput!"
                     ]
                 }
             ],
             "deleteArquivoAssessoria": [
-                664,
+                665,
                 {
                     "input": [
-                        663,
+                        664,
                         "DeleteArquivoAssessoriaInput!"
                     ]
                 }
             ],
             "deleteBanner": [
-                666,
+                667,
                 {
                     "input": [
-                        665,
+                        666,
                         "DeleteBannerInput!"
                     ]
                 }
             ],
             "deleteCategory": [
-                668,
+                669,
                 {
                     "input": [
-                        667,
+                        668,
                         "DeleteCategoryInput!"
                     ]
                 }
             ],
             "deleteCentraldeDecorado": [
-                670,
+                671,
                 {
                     "input": [
-                        669,
+                        670,
                         "DeleteCentraldeDecoradoInput!"
                     ]
                 }
             ],
             "deleteComment": [
-                672,
+                673,
                 {
                     "input": [
-                        671,
+                        672,
                         "DeleteCommentInput!"
                     ]
                 }
             ],
             "deleteEmpreendimento": [
-                674,
+                675,
                 {
                     "input": [
-                        673,
+                        674,
                         "DeleteEmpreendimentoInput!"
                     ]
                 }
             ],
             "deleteMediaItem": [
-                676,
+                677,
                 {
                     "input": [
-                        675,
+                        676,
                         "DeleteMediaItemInput!"
                     ]
                 }
             ],
             "deletePage": [
-                678,
+                679,
                 {
                     "input": [
-                        677,
+                        678,
                         "DeletePageInput!"
                     ]
                 }
             ],
             "deletePost": [
-                680,
+                681,
                 {
                     "input": [
-                        679,
+                        680,
                         "DeletePostInput!"
                     ]
                 }
             ],
             "deletePostFormat": [
-                682,
+                683,
                 {
                     "input": [
-                        681,
+                        682,
                         "DeletePostFormatInput!"
                     ]
                 }
             ],
             "deleteTag": [
-                684,
+                685,
                 {
                     "input": [
-                        683,
+                        684,
                         "DeleteTagInput!"
                     ]
                 }
             ],
             "deleteUser": [
-                686,
+                687,
                 {
                     "input": [
-                        685,
+                        686,
                         "DeleteUserInput!"
                     ]
                 }
@@ -19778,154 +19783,154 @@ module.exports = {
                 }
             ],
             "registerUser": [
-                688,
+                689,
                 {
                     "input": [
-                        687,
+                        688,
                         "RegisterUserInput!"
                     ]
                 }
             ],
             "resetUserPassword": [
-                690,
+                691,
                 {
                     "input": [
-                        689,
+                        690,
                         "ResetUserPasswordInput!"
                     ]
                 }
             ],
             "restoreComment": [
-                692,
+                693,
                 {
                     "input": [
-                        691,
+                        692,
                         "RestoreCommentInput!"
                     ]
                 }
             ],
             "sendPasswordResetEmail": [
-                694,
+                695,
                 {
                     "input": [
-                        693,
+                        694,
                         "SendPasswordResetEmailInput!"
                     ]
                 }
             ],
             "updateArquivoAssessoria": [
-                696,
+                697,
                 {
                     "input": [
-                        695,
+                        696,
                         "UpdateArquivoAssessoriaInput!"
                     ]
                 }
             ],
             "updateBanner": [
-                698,
+                699,
                 {
                     "input": [
-                        697,
+                        698,
                         "UpdateBannerInput!"
                     ]
                 }
             ],
             "updateCategory": [
-                700,
+                701,
                 {
                     "input": [
-                        699,
+                        700,
                         "UpdateCategoryInput!"
                     ]
                 }
             ],
             "updateCentraldeDecorado": [
-                702,
+                703,
                 {
                     "input": [
-                        701,
+                        702,
                         "UpdateCentraldeDecoradoInput!"
                     ]
                 }
             ],
             "updateComment": [
-                704,
+                705,
                 {
                     "input": [
-                        703,
+                        704,
                         "UpdateCommentInput!"
                     ]
                 }
             ],
             "updateEmpreendimento": [
-                706,
+                707,
                 {
                     "input": [
-                        705,
+                        706,
                         "UpdateEmpreendimentoInput!"
                     ]
                 }
             ],
             "updateMediaItem": [
-                708,
+                709,
                 {
                     "input": [
-                        707,
+                        708,
                         "UpdateMediaItemInput!"
                     ]
                 }
             ],
             "updatePage": [
-                710,
+                711,
                 {
                     "input": [
-                        709,
+                        710,
                         "UpdatePageInput!"
                     ]
                 }
             ],
             "updatePost": [
-                712,
+                713,
                 {
                     "input": [
-                        711,
+                        712,
                         "UpdatePostInput!"
                     ]
                 }
             ],
             "updatePostFormat": [
-                714,
+                715,
                 {
                     "input": [
-                        713,
+                        714,
                         "UpdatePostFormatInput!"
                     ]
                 }
             ],
             "updateSettings": [
-                716,
+                717,
                 {
                     "input": [
-                        715,
+                        716,
                         "UpdateSettingsInput!"
                     ]
                 }
             ],
             "updateTag": [
-                718,
+                719,
                 {
                     "input": [
-                        717,
+                        718,
                         "UpdateTagInput!"
                     ]
                 }
             ],
             "updateUser": [
-                720,
+                721,
                 {
                     "input": [
-                        719,
+                        720,
                         "UpdateUserInput!"
                     ]
                 }

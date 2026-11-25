@@ -54,14 +54,8 @@ const MenuApp = ({ data }: Props) => {
           <LinkPath path="/a-lupema" label="A Lupema" />
           <LinkPath path="/empreendimentos/todos" label="Empreendimentos" />
           <LinkPath path="/l-store" label="L.Store" />
-          <LinkPath path="/noticias" label="Notícias" />
           <LinkPath path="/assessoria" label="Imprensa" />
-          <Link
-            href="http://blog.lupemaengenharia.com.br"
-            className="hover:text-green"
-          >
-            Blog
-          </Link>
+          <LinkPath path="/blog" label="Blog" />
           <LinkPath path="/centraldecorado/central-de-decorados-lstore" label="Nossas lojas" />
 
         </div>

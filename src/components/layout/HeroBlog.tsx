@@ -33,7 +33,7 @@ export default function HeroBlog({
         <div className="container flex items-center h-full">
           <div className="w-full max-w-[530px] space-y-7">
             {label && (
-              <span className="text-green font-bold border border-green p-2 rounded-lg uppercase tracking-[4px] sm:tracking-[10px]">
+              <span className="text-green font-bold border border-green p-2 rounded-lg uppercase tracking-[4px] sm:tracking-[6px]">
                 {label}
               </span>
             )}

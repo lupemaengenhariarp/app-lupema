@@ -27,9 +27,6 @@ const EmpreendimentosApp: NextPage<Props> = ({ data }) => {
     setValueFromChild(slug);
   };
 
-  console.log(data.emp.nodes);
-
-
   return (
     <>
       <div className="relative h-[200px] sm:h-[350px] md:h-[500px] border-b-4 border-b-green">

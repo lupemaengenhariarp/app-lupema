@@ -1200,6 +1200,15 @@ module.exports.enumUserNodeIdTypeEnum = {
   USERNAME: 'USERNAME',
 }
 
+module.exports.enumPublishableContentTypeEnum = {
+  ARQ_ASSESSORIA: 'ARQ_ASSESSORIA',
+  BANNER_HOME: 'BANNER_HOME',
+  CENTRALDECORADO: 'CENTRALDECORADO',
+  EMPREENDIMENTOS: 'EMPREENDIMENTOS',
+  PAGE: 'PAGE',
+  POST: 'POST',
+}
+
 module.exports.enumUsersConnectionOrderbyEnum = {
   DISPLAY_NAME: 'DISPLAY_NAME',
   EMAIL: 'EMAIL',
