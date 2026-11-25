@@ -146,7 +146,7 @@ const FooterApp = ({ data }: Props) => {
             Imprensa
           </Link>
           <Link
-            href="http://blog.lupemaengenharia.com.br"
+            href="/blog"
             className="block hover:text-green"
           >
             Blog
