@@ -20,44 +20,29 @@ const banner = {
 
 const movies = [
   {
-    id: 1,
-    videoId: 'I4iNyDE_p1g',
-    thumbnail: '/video-1.png',
-    title: 'Video post title.',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consectetur, ante non vulputate pharetra.',
+    videoId: '_UCyPlDKDXQ',
+    thumbnail: 'https://i.ytimg.com/vi/_UCyPlDKDXQ/frame0.jpg',
+    title: 'Obras iniciadas — Sinni 551',
   },
   {
-    id: 2,
-    videoId: 'I4iNyDE_p1g',
-    thumbnail: '/video-2.png',
-    title: 'Video post title.',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consectetur, ante non vulputate pharetra.',
+    videoId: 'KbL-ufOt11w',
+    thumbnail: 'https://i.ytimg.com/vi/KbL-ufOt11w/frame0.jpg',
+    title: 'V3RSO JK — Tá duvidando?',
   },
   {
-    id: 3,
-    videoId: 'I4iNyDE_p1g',
-    thumbnail: '/video-3.png',
-    title: 'Video post title.',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consectetur, ante non vulputate pharetra.',
+    videoId: 'JJ3BGGnUWaE',
+    thumbnail: 'https://i.ytimg.com/vi/JJ3BGGnUWaE/frame0.jpg',
+    title: 'V3RSO JK',
   },
   {
-    id: 4,
     videoId: 'I4iNyDE_p1g',
-    thumbnail: '/video-4.png',
-    title: 'Video post title.',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consectetur, ante non vulputate pharetra.',
+    thumbnail: 'https://i.ytimg.com/vi/I4iNyDE_p1g/frame0.jpg',
+    title: 'Vem aí o Horizon',
   },
   {
-    id: 5,
-    videoId: 'I4iNyDE_p1g',
-    thumbnail: '/video-2.png',
-    title: 'Video post title.',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consectetur, ante non vulputate pharetra.',
+    videoId: 'Kf66wo_xWmM',
+    thumbnail: 'https://i.ytimg.com/vi/Kf66wo_xWmM/frame0.jpg',
+    title: 'Lupema 30 anos',
   },
 ];
 
@@ -81,13 +66,12 @@ const itemsBanner = banners.map((item) => {
   );
 });
 
-const moviesItens = movies.map((item, index) => (
+const moviesItens = movies.map((item) => (
   <ShortVideo
-    key={index}
+    key={item.videoId}
     thumbnailSrc={item.thumbnail}
     title={item.title}
     videoId={item.videoId}
-    description={item.description}
   />
 ));
 

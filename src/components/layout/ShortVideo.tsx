@@ -31,6 +31,7 @@ export default function ShortVideo({
               src={thumbnailSrc}
               alt={title || 'YouTube Short Thumbnail'}
               fill
+              unoptimized
               className="object-cover transition-transform duration-300 group-hover:scale-105 rounded-2xl"
               sizes="(max-width: 768px) 100vw, 315px"
             />

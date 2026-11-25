@@ -1,17 +1,116 @@
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import BlogItem from '../../../components/layout/BlogItem';
+import ClientApp from '../../../lib/genql';
+import { Post } from '../../../generated';
+
+const INITIAL_RESULTS_COUNT = 16;
 
 export default function Pesquisa() {
+  const router = useRouter();
+  const queryTerm = Array.isArray(router.query.s)
+    ? router.query.s[0] || ''
+    : router.query.s || '';
+  const [searchTerm, setSearchTerm] = useState('');
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [visibleCount, setVisibleCount] = useState(INITIAL_RESULTS_COUNT);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (!router.isReady) return;
+
+    setSearchTerm(queryTerm);
+    setVisibleCount(INITIAL_RESULTS_COUNT);
+
+    let ignore = false;
+
+    async function searchPosts() {
+      setIsLoading(true);
+      try {
+        const foundPosts: Post[] = [];
+        let cursor: string | undefined;
+        let hasNextPage = true;
+
+        while (hasNextPage && !ignore) {
+          const result = await ClientApp.query({
+            posts: [
+              {
+                first: 100,
+                ...(queryTerm.trim()
+                  ? { where: { search: queryTerm.trim() } }
+                  : {}),
+                ...(cursor ? { after: cursor } : {}),
+              },
+              {
+                nodes: {
+                  title: true,
+                  slug: true,
+                  excerpt: true,
+                  featuredImage: { node: { sourceUrl: true } },
+                  categories: {
+                    nodes: {
+                      name: true,
+                      slug: true
+                    }
+                  }
+                },
+                pageInfo: { hasNextPage: true, endCursor: true },
+              },
+            ],
+          });
+
+          const connection = result?.posts;
+          if (Array.isArray(connection?.nodes)) {
+            foundPosts.push(...(connection.nodes as Post[]));
+          }
+          hasNextPage = Boolean(connection?.pageInfo?.hasNextPage);
+          cursor = connection?.pageInfo?.endCursor || undefined;
+          if (!cursor) hasNextPage = false;
+        }
+
+        if (!ignore) {
+          foundPosts.sort((a, b) =>
+            (a.title || '').localeCompare(b.title || '', 'pt-BR', {
+              sensitivity: 'base',
+            })
+          );
+          setPosts(foundPosts);
+        }
+      } catch {
+        if (!ignore) setPosts([]);
+      } finally {
+        if (!ignore) setIsLoading(false);
+      }
+    }
+
+    searchPosts();
+    return () => {
+      ignore = true;
+    };
+  }, [router.isReady, queryTerm]);
+
+  function submitSearch() {
+    const term = searchTerm.trim();
+    router.push({
+      pathname: '/blog/pesquisa',
+      query: term ? { s: term } : {},
+    });
+  }
+
+  const visiblePosts = posts.slice(0, visibleCount);
+
   return (
     <main className="bg-bgi border-b border-white/20 pt-20">
       <section className="container">
         <div className="h-full min-h-[450px] py-32 text-center">
           <h1 className="text-3xl sm:text-5xl text-white">
-            Resultados da Pesquisa por: Horizon
+            Resultados da Pesquisa por:{' '}
+            {queryTerm || searchTerm || 'Todos os artigos'}
           </h1>
           <div className="h-20 border border-white/20 w-full max-w-5xl mx-auto flex items-center mt-28">
             <div className="border-r border-white/20 w-28 h-full">
-              <button className="w-full h-full flex items-center justify-center">
+              <button type="button" aria-label="Buscar artigos" onClick={submitSearch} className="w-full h-full flex items-center justify-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="33"
@@ -29,8 +128,21 @@ export default function Pesquisa() {
                 </svg>
               </button>
             </div>
-            <div className="p-9">
-              <span className="text-white">O que voê procura!</span>
+            <div className="p-9 flex-1 min-w-0">
+              <input
+                type="search"
+                value={searchTerm}
+                onChange={(event) => setSearchTerm(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') {
+                    event.preventDefault();
+                    submitSearch();
+                  }
+                }}
+                placeholder="O que você procura?"
+                aria-label="Buscar artigos"
+                className="w-full bg-transparent text-white placeholder:text-white outline-none border-none"
+              />
             </div>
           </div>
         </div>
@@ -58,22 +170,35 @@ export default function Pesquisa() {
           </div>
           <div className="border-l border-white/20 flex-1 h-full hidden md:block" />
           <div className="border-l border-white/20 w-max px-4 h-full flex items-center justify-center">
-            <span className="text-white">118 resultados</span>
+            <span className="text-white">
+              {isLoading ? 'Buscando...' : `${posts.length} resultados`}
+            </span>
           </div>
           <div className="border-l border-white/20 w-12 sm:w-28 h-full" />
         </div>
 
         <div className="container">
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-x-6 gap-y-12 py-20">
-            {Array(16)
-              .fill(0)
-              .map((_, index) => (
-                <BlogItem key={index} />
-              ))}
+            {visiblePosts.map((post, index) => (
+              <BlogItem key={post.slug || index} post={post} />
+            ))}
           </div>
-          <button className="py-2 px-4 bg-green text-white text-xl font-medium block rounded-2xl w-max mx-auto">
-            Mostrar mais
-          </button>
+          {!isLoading && posts.length === 0 && (
+            <p className="text-center text-white pb-12">
+              Nenhum artigo encontrado.
+            </p>
+          )}
+          {visibleCount < posts.length && (
+            <button
+              type="button"
+              onClick={() =>
+                setVisibleCount((count) => count + INITIAL_RESULTS_COUNT)
+              }
+              className="py-2 px-4 bg-green text-white text-xl font-medium block rounded-2xl w-max mx-auto"
+            >
+              Mostrar mais
+            </button>
+          )}
         </div>
       </section>
 
