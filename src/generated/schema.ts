@@ -69,6 +69,15 @@ export interface RootQuery {
     empreendimentos?: RootQueryToEmpreendimentoConnection
     /** Fields of the &#039;GeneralSettings&#039; settings group */
     generalSettings?: GeneralSettings
+    /** An object of the GqlShort Type.  */
+    gqlShort?: GqlShort
+    /**
+     * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
+     * A GqlShort object
+     */
+    gqlShortBy?: GqlShort
+    /** Connection between the RootQuery type and the GqlShort type */
+    gqlShorts?: RootQueryToGqlShortConnection
     /** An object of the mediaItem Type.  */
     mediaItem?: MediaItem
     /**
@@ -302,11 +311,11 @@ export interface ArquivoAssessoria {
 
 
 /** Base interface for content objects like posts, pages, and media items. Provides common fields available across these content types. */
-export type ContentNode = (ArquivoAssessoria | MediaItem | Page | Post | CentraldeDecorado | Empreendimento | Banner) & { __isUnion?: true }
+export type ContentNode = (ArquivoAssessoria | MediaItem | Page | Post | CentraldeDecorado | Empreendimento | Banner | GqlShort) & { __isUnion?: true }
 
 
 /** An interface for content that can be accessed via a unique URI/URL path. Implemented by content types that have their own permalinks. */
-export type UniformResourceIdentifiable = (ArquivoAssessoria | ContentType | User | Comment | MediaItem | Page | Post | Category | CentraldeDecorado | Empreendimento | PostFormat | Tag | Banner) & { __isUnion?: true }
+export type UniformResourceIdentifiable = (ArquivoAssessoria | ContentType | User | Comment | MediaItem | Page | Post | Category | CentraldeDecorado | Empreendimento | PostFormat | Tag | Banner | GqlShort) & { __isUnion?: true }
 
 
 /** Connection between the ContentNode type and the ContentType type */
@@ -320,11 +329,11 @@ export interface ContentNodeToContentTypeConnectionEdge {
 
 
 /** A direct one-to-one relationship between objects. Unlike plural connections, this represents a single related object rather than a collection. */
-export type OneToOneConnection = (ContentNodeToContentTypeConnectionEdge | ContentNodeToEditLockConnectionEdge | CommentToCommenterConnectionEdge | CommentToContentNodeConnectionEdge | CommentToParentCommentConnectionEdge | NodeWithAuthorToUserConnectionEdge | ContentNodeToEditLastConnectionEdge | HierarchicalContentNodeToParentContentNodeConnectionEdge | NodeWithFeaturedImageToMediaItemConnectionEdge | NodeWithRevisionsToContentNodeConnectionEdge | PageToPreviewConnectionEdge | CentraldeDecoradoToParentConnectionEdge | CentraldeDecoradoToPreviewConnectionEdge | EmpreendimentoToParentConnectionEdge | EmpreendimentoToPreviewConnectionEdge | CategoryToParentCategoryConnectionEdge | CategoryToTaxonomyConnectionEdge | PostToParentConnectionEdge | PostFormatToTaxonomyConnectionEdge | PostToPreviewConnectionEdge | TagToTaxonomyConnectionEdge | ArquivoAssessoriaToParentConnectionEdge | ArquivoAssessoriaToPreviewConnectionEdge | BannerToParentConnectionEdge | BannerToPreviewConnectionEdge | GeneralSettingsToMediaItemConnectionEdge | MenuItemToMenuItemLinkableConnectionEdge | MenuItemToMenuConnectionEdge) & { __isUnion?: true }
+export type OneToOneConnection = (ContentNodeToContentTypeConnectionEdge | ContentNodeToEditLockConnectionEdge | CommentToCommenterConnectionEdge | CommentToContentNodeConnectionEdge | CommentToParentCommentConnectionEdge | NodeWithAuthorToUserConnectionEdge | ContentNodeToEditLastConnectionEdge | HierarchicalContentNodeToParentContentNodeConnectionEdge | NodeWithFeaturedImageToMediaItemConnectionEdge | NodeWithRevisionsToContentNodeConnectionEdge | PageToPreviewConnectionEdge | CentraldeDecoradoToParentConnectionEdge | CentraldeDecoradoToPreviewConnectionEdge | EmpreendimentoToParentConnectionEdge | EmpreendimentoToPreviewConnectionEdge | CategoryToParentCategoryConnectionEdge | CategoryToTaxonomyConnectionEdge | PostToParentConnectionEdge | PostFormatToTaxonomyConnectionEdge | PostToPreviewConnectionEdge | TagToTaxonomyConnectionEdge | ArquivoAssessoriaToParentConnectionEdge | ArquivoAssessoriaToPreviewConnectionEdge | BannerToParentConnectionEdge | BannerToPreviewConnectionEdge | GeneralSettingsToMediaItemConnectionEdge | GqlShortToParentConnectionEdge | GqlShortToPreviewConnectionEdge | MenuItemToMenuItemLinkableConnectionEdge | MenuItemToMenuConnectionEdge) & { __isUnion?: true }
 
 
 /** Represents a connection between two objects. Contains both the related object (node) and metadata about the relationship (cursor). */
-export type Edge = (ContentNodeToContentTypeConnectionEdge | TaxonomyToContentTypeConnectionEdge | TermNodeToEnqueuedScriptConnectionEdge | TermNodeToEnqueuedStylesheetConnectionEdge | TaxonomyToTermNodeConnectionEdge | ContentTypeToTaxonomyConnectionEdge | ContentTypeToContentNodeConnectionEdge | ContentNodeToEditLockConnectionEdge | CommentToCommenterConnectionEdge | CommentToContentNodeConnectionEdge | CommentToParentCommentConnectionEdge | CommentToCommentConnectionEdge | UserToCommentConnectionEdge | UserToEnqueuedScriptConnectionEdge | UserToEnqueuedStylesheetConnectionEdge | NodeWithAuthorToUserConnectionEdge | HierarchicalContentNodeToContentNodeAncestorsConnectionEdge | HierarchicalContentNodeToContentNodeChildrenConnectionEdge | ContentNodeToEnqueuedScriptConnectionEdge | ContentNodeToEnqueuedStylesheetConnectionEdge | ContentNodeToEditLastConnectionEdge | HierarchicalContentNodeToParentContentNodeConnectionEdge | MediaItemToCommentConnectionEdge | UserToMediaItemConnectionEdge | NodeWithFeaturedImageToMediaItemConnectionEdge | NodeWithRevisionsToContentNodeConnectionEdge | PageToCommentConnectionEdge | PageToPreviewConnectionEdge | PageToRevisionConnectionEdge | UserToPageConnectionEdge | PostToPostConnectionEdge | CategoryToAncestorsCategoryConnectionEdge | CentraldeDecoradoToCentraldeDecoradoConnectionEdge | CentraldeDecoradoToCategoryConnectionEdge | CentraldeDecoradoToParentConnectionEdge | CentraldeDecoradoToPreviewConnectionEdge | CentraldeDecoradoToTermNodeConnectionEdge | CategoryToCentraldeDecoradoConnectionEdge | CategoryToCategoryConnectionEdge | CategoryToContentNodeConnectionEdge | EmpreendimentoToEmpreendimentoConnectionEdge | EmpreendimentoToCategoryConnectionEdge | EmpreendimentoToParentConnectionEdge | EmpreendimentoToPreviewConnectionEdge | EmpreendimentoToTermNodeConnectionEdge | CategoryToEmpreendimentoConnectionEdge | CategoryToParentCategoryConnectionEdge | CategoryToPostConnectionEdge | CategoryToTaxonomyConnectionEdge | PostToCategoryConnectionEdge | PostToCommentConnectionEdge | PostToParentConnectionEdge | PostFormatToContentNodeConnectionEdge | PostFormatToPostConnectionEdge | PostFormatToTaxonomyConnectionEdge | PostToPostFormatConnectionEdge | PostToPreviewConnectionEdge | PostToRevisionConnectionEdge | TagToContentNodeConnectionEdge | TagToPostConnectionEdge | TagToTaxonomyConnectionEdge | PostToTagConnectionEdge | PostToTermNodeConnectionEdge | UserToPostConnectionEdge | UserToRevisionsConnectionEdge | UserToUserRoleConnectionEdge | ArquivoAssessoriaToArquivoAssessoriaConnectionEdge | ArquivoAssessoriaToParentConnectionEdge | ArquivoAssessoriaToPreviewConnectionEdge | RootQueryToArquivoAssessoriaConnectionEdge | BannerToBannerConnectionEdge | BannerToParentConnectionEdge | BannerToPreviewConnectionEdge | RootQueryToBannerConnectionEdge | RootQueryToCategoryConnectionEdge | RootQueryToCentraldeDecoradoConnectionEdge | RootQueryToCommentConnectionEdge | RootQueryToContentNodeConnectionEdge | RootQueryToContentTypeConnectionEdge | RootQueryToEmpreendimentoConnectionEdge | GeneralSettingsToMediaItemConnectionEdge | RootQueryToMediaItemConnectionEdge | MenuItemToMenuItemConnectionEdge | MenuItemToMenuItemLinkableConnectionEdge | MenuItemToMenuConnectionEdge | MenuToMenuItemConnectionEdge | RootQueryToMenuItemConnectionEdge | RootQueryToMenuConnectionEdge | RootQueryToPageConnectionEdge | RootQueryToPluginConnectionEdge | RootQueryToPostFormatConnectionEdge | RootQueryToPostConnectionEdge | RootQueryToEnqueuedScriptConnectionEdge | RootQueryToEnqueuedStylesheetConnectionEdge | RootQueryToRevisionsConnectionEdge | RootQueryToTagConnectionEdge | RootQueryToTaxonomyConnectionEdge | RootQueryToTermNodeConnectionEdge | RootQueryToThemeConnectionEdge | RootQueryToUserRoleConnectionEdge | RootQueryToUserConnectionEdge) & { __isUnion?: true }
+export type Edge = (ContentNodeToContentTypeConnectionEdge | TaxonomyToContentTypeConnectionEdge | TermNodeToEnqueuedScriptConnectionEdge | TermNodeToEnqueuedStylesheetConnectionEdge | TaxonomyToTermNodeConnectionEdge | ContentTypeToTaxonomyConnectionEdge | ContentTypeToContentNodeConnectionEdge | ContentNodeToEditLockConnectionEdge | CommentToCommenterConnectionEdge | CommentToContentNodeConnectionEdge | CommentToParentCommentConnectionEdge | CommentToCommentConnectionEdge | UserToCommentConnectionEdge | UserToEnqueuedScriptConnectionEdge | UserToEnqueuedStylesheetConnectionEdge | NodeWithAuthorToUserConnectionEdge | HierarchicalContentNodeToContentNodeAncestorsConnectionEdge | HierarchicalContentNodeToContentNodeChildrenConnectionEdge | ContentNodeToEnqueuedScriptConnectionEdge | ContentNodeToEnqueuedStylesheetConnectionEdge | ContentNodeToEditLastConnectionEdge | HierarchicalContentNodeToParentContentNodeConnectionEdge | MediaItemToCommentConnectionEdge | UserToMediaItemConnectionEdge | NodeWithFeaturedImageToMediaItemConnectionEdge | NodeWithRevisionsToContentNodeConnectionEdge | PageToCommentConnectionEdge | PageToPreviewConnectionEdge | PageToRevisionConnectionEdge | UserToPageConnectionEdge | PostToPostConnectionEdge | CategoryToAncestorsCategoryConnectionEdge | CentraldeDecoradoToCentraldeDecoradoConnectionEdge | CentraldeDecoradoToCategoryConnectionEdge | CentraldeDecoradoToParentConnectionEdge | CentraldeDecoradoToPreviewConnectionEdge | CentraldeDecoradoToTermNodeConnectionEdge | CategoryToCentraldeDecoradoConnectionEdge | CategoryToCategoryConnectionEdge | CategoryToContentNodeConnectionEdge | EmpreendimentoToEmpreendimentoConnectionEdge | EmpreendimentoToCategoryConnectionEdge | EmpreendimentoToParentConnectionEdge | EmpreendimentoToPreviewConnectionEdge | EmpreendimentoToTermNodeConnectionEdge | CategoryToEmpreendimentoConnectionEdge | CategoryToParentCategoryConnectionEdge | CategoryToPostConnectionEdge | CategoryToTaxonomyConnectionEdge | PostToCategoryConnectionEdge | PostToCommentConnectionEdge | PostToParentConnectionEdge | PostFormatToContentNodeConnectionEdge | PostFormatToPostConnectionEdge | PostFormatToTaxonomyConnectionEdge | PostToPostFormatConnectionEdge | PostToPreviewConnectionEdge | PostToRevisionConnectionEdge | TagToContentNodeConnectionEdge | TagToPostConnectionEdge | TagToTaxonomyConnectionEdge | PostToTagConnectionEdge | PostToTermNodeConnectionEdge | UserToPostConnectionEdge | UserToRevisionsConnectionEdge | UserToUserRoleConnectionEdge | ArquivoAssessoriaToArquivoAssessoriaConnectionEdge | ArquivoAssessoriaToParentConnectionEdge | ArquivoAssessoriaToPreviewConnectionEdge | RootQueryToArquivoAssessoriaConnectionEdge | BannerToBannerConnectionEdge | BannerToParentConnectionEdge | BannerToPreviewConnectionEdge | RootQueryToBannerConnectionEdge | RootQueryToCategoryConnectionEdge | RootQueryToCentraldeDecoradoConnectionEdge | RootQueryToCommentConnectionEdge | RootQueryToContentNodeConnectionEdge | RootQueryToContentTypeConnectionEdge | RootQueryToEmpreendimentoConnectionEdge | GeneralSettingsToMediaItemConnectionEdge | GqlShortToGqlShortConnectionEdge | GqlShortToParentConnectionEdge | GqlShortToPreviewConnectionEdge | RootQueryToGqlShortConnectionEdge | RootQueryToMediaItemConnectionEdge | MenuItemToMenuItemConnectionEdge | MenuItemToMenuItemLinkableConnectionEdge | MenuItemToMenuConnectionEdge | MenuToMenuItemConnectionEdge | RootQueryToMenuItemConnectionEdge | RootQueryToMenuConnectionEdge | RootQueryToPageConnectionEdge | RootQueryToPluginConnectionEdge | RootQueryToPostFormatConnectionEdge | RootQueryToPostConnectionEdge | RootQueryToEnqueuedScriptConnectionEdge | RootQueryToEnqueuedStylesheetConnectionEdge | RootQueryToRevisionsConnectionEdge | RootQueryToTagConnectionEdge | RootQueryToTaxonomyConnectionEdge | RootQueryToTermNodeConnectionEdge | RootQueryToThemeConnectionEdge | RootQueryToUserRoleConnectionEdge | RootQueryToUserConnectionEdge) & { __isUnion?: true }
 
 
 /** Represents a connection to a ContentType. Contains both the ContentType Node and metadata about the relationship. */
@@ -420,11 +429,11 @@ export type TaxonomyConnection = (ContentTypeToTaxonomyConnection | RootQueryToT
 
 
 /** A paginated relationship between objects. Supports cursor-based pagination with edges containing relationship metadata and nodes containing the related objects. */
-export type Connection = (ContentTypeToTaxonomyConnection | TaxonomyToContentTypeConnection | TaxonomyToTermNodeConnection | TermNodeToEnqueuedScriptConnection | TermNodeToEnqueuedStylesheetConnection | ContentTypeToContentNodeConnection | UserToCommentConnection | CommentToCommentConnection | UserToEnqueuedScriptConnection | UserToEnqueuedStylesheetConnection | UserToMediaItemConnection | HierarchicalContentNodeToContentNodeAncestorsConnection | HierarchicalContentNodeToContentNodeChildrenConnection | ContentNodeToEnqueuedScriptConnection | ContentNodeToEnqueuedStylesheetConnection | MediaItemToCommentConnection | UserToPageConnection | PageToCommentConnection | PageToRevisionConnection | UserToPostConnection | PostToPostConnection | PostToCategoryConnection | CategoryToAncestorsCategoryConnection | CategoryToCentraldeDecoradoConnection | CentraldeDecoradoToCentraldeDecoradoConnection | CentraldeDecoradoToCategoryConnection | CentraldeDecoradoToTermNodeConnection | CategoryToCategoryConnection | CategoryToContentNodeConnection | CategoryToEmpreendimentoConnection | EmpreendimentoToEmpreendimentoConnection | EmpreendimentoToCategoryConnection | EmpreendimentoToTermNodeConnection | CategoryToPostConnection | PostToCommentConnection | PostToPostFormatConnection | PostFormatToContentNodeConnection | PostFormatToPostConnection | PostToRevisionConnection | PostToTagConnection | TagToContentNodeConnection | TagToPostConnection | PostToTermNodeConnection | UserToRevisionsConnection | UserToUserRoleConnection | ArquivoAssessoriaToArquivoAssessoriaConnection | RootQueryToArquivoAssessoriaConnection | BannerToBannerConnection | RootQueryToBannerConnection | RootQueryToCategoryConnection | RootQueryToCentraldeDecoradoConnection | RootQueryToCommentConnection | RootQueryToContentNodeConnection | RootQueryToContentTypeConnection | RootQueryToEmpreendimentoConnection | RootQueryToMediaItemConnection | MenuToMenuItemConnection | MenuItemToMenuItemConnection | RootQueryToMenuItemConnection | RootQueryToMenuConnection | RootQueryToPageConnection | RootQueryToPluginConnection | RootQueryToPostFormatConnection | RootQueryToPostConnection | RootQueryToEnqueuedScriptConnection | RootQueryToEnqueuedStylesheetConnection | RootQueryToRevisionsConnection | RootQueryToTagConnection | RootQueryToTaxonomyConnection | RootQueryToTermNodeConnection | RootQueryToThemeConnection | RootQueryToUserRoleConnection | RootQueryToUserConnection) & { __isUnion?: true }
+export type Connection = (ContentTypeToTaxonomyConnection | TaxonomyToContentTypeConnection | TaxonomyToTermNodeConnection | TermNodeToEnqueuedScriptConnection | TermNodeToEnqueuedStylesheetConnection | ContentTypeToContentNodeConnection | UserToCommentConnection | CommentToCommentConnection | UserToEnqueuedScriptConnection | UserToEnqueuedStylesheetConnection | UserToMediaItemConnection | HierarchicalContentNodeToContentNodeAncestorsConnection | HierarchicalContentNodeToContentNodeChildrenConnection | ContentNodeToEnqueuedScriptConnection | ContentNodeToEnqueuedStylesheetConnection | MediaItemToCommentConnection | UserToPageConnection | PageToCommentConnection | PageToRevisionConnection | UserToPostConnection | PostToPostConnection | PostToCategoryConnection | CategoryToAncestorsCategoryConnection | CategoryToCentraldeDecoradoConnection | CentraldeDecoradoToCentraldeDecoradoConnection | CentraldeDecoradoToCategoryConnection | CentraldeDecoradoToTermNodeConnection | CategoryToCategoryConnection | CategoryToContentNodeConnection | CategoryToEmpreendimentoConnection | EmpreendimentoToEmpreendimentoConnection | EmpreendimentoToCategoryConnection | EmpreendimentoToTermNodeConnection | CategoryToPostConnection | PostToCommentConnection | PostToPostFormatConnection | PostFormatToContentNodeConnection | PostFormatToPostConnection | PostToRevisionConnection | PostToTagConnection | TagToContentNodeConnection | TagToPostConnection | PostToTermNodeConnection | UserToRevisionsConnection | UserToUserRoleConnection | ArquivoAssessoriaToArquivoAssessoriaConnection | RootQueryToArquivoAssessoriaConnection | BannerToBannerConnection | RootQueryToBannerConnection | RootQueryToCategoryConnection | RootQueryToCentraldeDecoradoConnection | RootQueryToCommentConnection | RootQueryToContentNodeConnection | RootQueryToContentTypeConnection | RootQueryToEmpreendimentoConnection | GqlShortToGqlShortConnection | RootQueryToGqlShortConnection | RootQueryToMediaItemConnection | MenuToMenuItemConnection | MenuItemToMenuItemConnection | RootQueryToMenuItemConnection | RootQueryToMenuConnection | RootQueryToPageConnection | RootQueryToPluginConnection | RootQueryToPostFormatConnection | RootQueryToPostConnection | RootQueryToEnqueuedScriptConnection | RootQueryToEnqueuedStylesheetConnection | RootQueryToRevisionsConnection | RootQueryToTagConnection | RootQueryToTaxonomyConnection | RootQueryToTermNodeConnection | RootQueryToThemeConnection | RootQueryToUserRoleConnection | RootQueryToUserConnection) & { __isUnion?: true }
 
 
 /** Metadata for cursor-based pagination. Provides cursors for continuing pagination and boolean flags indicating if more items exist in either direction. */
-export type PageInfo = (TaxonomyToContentTypeConnectionPageInfo | TermNodeToEnqueuedScriptConnectionPageInfo | TermNodeToEnqueuedStylesheetConnectionPageInfo | TaxonomyToTermNodeConnectionPageInfo | ContentTypeToTaxonomyConnectionPageInfo | ContentTypeToContentNodeConnectionPageInfo | CommentToCommentConnectionPageInfo | UserToCommentConnectionPageInfo | UserToEnqueuedScriptConnectionPageInfo | UserToEnqueuedStylesheetConnectionPageInfo | HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo | HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo | ContentNodeToEnqueuedScriptConnectionPageInfo | ContentNodeToEnqueuedStylesheetConnectionPageInfo | MediaItemToCommentConnectionPageInfo | UserToMediaItemConnectionPageInfo | PageToCommentConnectionPageInfo | PageToRevisionConnectionPageInfo | UserToPageConnectionPageInfo | PostToPostConnectionPageInfo | CategoryToAncestorsCategoryConnectionPageInfo | CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo | CentraldeDecoradoToCategoryConnectionPageInfo | CentraldeDecoradoToTermNodeConnectionPageInfo | CategoryToCentraldeDecoradoConnectionPageInfo | CategoryToCategoryConnectionPageInfo | CategoryToContentNodeConnectionPageInfo | EmpreendimentoToEmpreendimentoConnectionPageInfo | EmpreendimentoToCategoryConnectionPageInfo | EmpreendimentoToTermNodeConnectionPageInfo | CategoryToEmpreendimentoConnectionPageInfo | CategoryToPostConnectionPageInfo | PostToCategoryConnectionPageInfo | PostToCommentConnectionPageInfo | PostFormatToContentNodeConnectionPageInfo | PostFormatToPostConnectionPageInfo | PostToPostFormatConnectionPageInfo | PostToRevisionConnectionPageInfo | TagToContentNodeConnectionPageInfo | TagToPostConnectionPageInfo | PostToTagConnectionPageInfo | PostToTermNodeConnectionPageInfo | UserToPostConnectionPageInfo | UserToRevisionsConnectionPageInfo | UserToUserRoleConnectionPageInfo | ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo | RootQueryToArquivoAssessoriaConnectionPageInfo | BannerToBannerConnectionPageInfo | RootQueryToBannerConnectionPageInfo | RootQueryToCategoryConnectionPageInfo | RootQueryToCentraldeDecoradoConnectionPageInfo | RootQueryToCommentConnectionPageInfo | RootQueryToContentNodeConnectionPageInfo | RootQueryToContentTypeConnectionPageInfo | RootQueryToEmpreendimentoConnectionPageInfo | RootQueryToMediaItemConnectionPageInfo | MenuItemToMenuItemConnectionPageInfo | MenuToMenuItemConnectionPageInfo | RootQueryToMenuItemConnectionPageInfo | RootQueryToMenuConnectionPageInfo | RootQueryToPageConnectionPageInfo | RootQueryToPluginConnectionPageInfo | RootQueryToPostFormatConnectionPageInfo | RootQueryToPostConnectionPageInfo | RootQueryToEnqueuedScriptConnectionPageInfo | RootQueryToEnqueuedStylesheetConnectionPageInfo | RootQueryToRevisionsConnectionPageInfo | RootQueryToTagConnectionPageInfo | RootQueryToTaxonomyConnectionPageInfo | RootQueryToTermNodeConnectionPageInfo | RootQueryToThemeConnectionPageInfo | RootQueryToUserRoleConnectionPageInfo | RootQueryToUserConnectionPageInfo) & { __isUnion?: true }
+export type PageInfo = (TaxonomyToContentTypeConnectionPageInfo | TermNodeToEnqueuedScriptConnectionPageInfo | TermNodeToEnqueuedStylesheetConnectionPageInfo | TaxonomyToTermNodeConnectionPageInfo | ContentTypeToTaxonomyConnectionPageInfo | ContentTypeToContentNodeConnectionPageInfo | CommentToCommentConnectionPageInfo | UserToCommentConnectionPageInfo | UserToEnqueuedScriptConnectionPageInfo | UserToEnqueuedStylesheetConnectionPageInfo | HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo | HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo | ContentNodeToEnqueuedScriptConnectionPageInfo | ContentNodeToEnqueuedStylesheetConnectionPageInfo | MediaItemToCommentConnectionPageInfo | UserToMediaItemConnectionPageInfo | PageToCommentConnectionPageInfo | PageToRevisionConnectionPageInfo | UserToPageConnectionPageInfo | PostToPostConnectionPageInfo | CategoryToAncestorsCategoryConnectionPageInfo | CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo | CentraldeDecoradoToCategoryConnectionPageInfo | CentraldeDecoradoToTermNodeConnectionPageInfo | CategoryToCentraldeDecoradoConnectionPageInfo | CategoryToCategoryConnectionPageInfo | CategoryToContentNodeConnectionPageInfo | EmpreendimentoToEmpreendimentoConnectionPageInfo | EmpreendimentoToCategoryConnectionPageInfo | EmpreendimentoToTermNodeConnectionPageInfo | CategoryToEmpreendimentoConnectionPageInfo | CategoryToPostConnectionPageInfo | PostToCategoryConnectionPageInfo | PostToCommentConnectionPageInfo | PostFormatToContentNodeConnectionPageInfo | PostFormatToPostConnectionPageInfo | PostToPostFormatConnectionPageInfo | PostToRevisionConnectionPageInfo | TagToContentNodeConnectionPageInfo | TagToPostConnectionPageInfo | PostToTagConnectionPageInfo | PostToTermNodeConnectionPageInfo | UserToPostConnectionPageInfo | UserToRevisionsConnectionPageInfo | UserToUserRoleConnectionPageInfo | ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo | RootQueryToArquivoAssessoriaConnectionPageInfo | BannerToBannerConnectionPageInfo | RootQueryToBannerConnectionPageInfo | RootQueryToCategoryConnectionPageInfo | RootQueryToCentraldeDecoradoConnectionPageInfo | RootQueryToCommentConnectionPageInfo | RootQueryToContentNodeConnectionPageInfo | RootQueryToContentTypeConnectionPageInfo | RootQueryToEmpreendimentoConnectionPageInfo | GqlShortToGqlShortConnectionPageInfo | RootQueryToGqlShortConnectionPageInfo | RootQueryToMediaItemConnectionPageInfo | MenuItemToMenuItemConnectionPageInfo | MenuToMenuItemConnectionPageInfo | RootQueryToMenuItemConnectionPageInfo | RootQueryToMenuConnectionPageInfo | RootQueryToPageConnectionPageInfo | RootQueryToPluginConnectionPageInfo | RootQueryToPostFormatConnectionPageInfo | RootQueryToPostConnectionPageInfo | RootQueryToEnqueuedScriptConnectionPageInfo | RootQueryToEnqueuedStylesheetConnectionPageInfo | RootQueryToRevisionsConnectionPageInfo | RootQueryToTagConnectionPageInfo | RootQueryToTaxonomyConnectionPageInfo | RootQueryToTermNodeConnectionPageInfo | RootQueryToThemeConnectionPageInfo | RootQueryToUserRoleConnectionPageInfo | RootQueryToUserConnectionPageInfo) & { __isUnion?: true }
 
 
 /** Represents a connection to a Taxonomy. Contains both the Taxonomy Node and metadata about the relationship. */
@@ -502,7 +511,7 @@ export type ContentTypeConnectionPageInfo = (TaxonomyToContentTypeConnectionPage
 
 
 /** Metadata for cursor-based pagination. Provides cursors for continuing pagination and boolean flags indicating if more items exist in either direction. */
-export type WPPageInfo = (TaxonomyToContentTypeConnectionPageInfo | TermNodeToEnqueuedScriptConnectionPageInfo | TermNodeToEnqueuedStylesheetConnectionPageInfo | TaxonomyToTermNodeConnectionPageInfo | ContentTypeToTaxonomyConnectionPageInfo | ContentTypeToContentNodeConnectionPageInfo | CommentToCommentConnectionPageInfo | UserToCommentConnectionPageInfo | UserToEnqueuedScriptConnectionPageInfo | UserToEnqueuedStylesheetConnectionPageInfo | HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo | HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo | ContentNodeToEnqueuedScriptConnectionPageInfo | ContentNodeToEnqueuedStylesheetConnectionPageInfo | MediaItemToCommentConnectionPageInfo | UserToMediaItemConnectionPageInfo | PageToCommentConnectionPageInfo | PageToRevisionConnectionPageInfo | UserToPageConnectionPageInfo | PostToPostConnectionPageInfo | CategoryToAncestorsCategoryConnectionPageInfo | CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo | CentraldeDecoradoToCategoryConnectionPageInfo | CentraldeDecoradoToTermNodeConnectionPageInfo | CategoryToCentraldeDecoradoConnectionPageInfo | CategoryToCategoryConnectionPageInfo | CategoryToContentNodeConnectionPageInfo | EmpreendimentoToEmpreendimentoConnectionPageInfo | EmpreendimentoToCategoryConnectionPageInfo | EmpreendimentoToTermNodeConnectionPageInfo | CategoryToEmpreendimentoConnectionPageInfo | CategoryToPostConnectionPageInfo | PostToCategoryConnectionPageInfo | PostToCommentConnectionPageInfo | PostFormatToContentNodeConnectionPageInfo | PostFormatToPostConnectionPageInfo | PostToPostFormatConnectionPageInfo | PostToRevisionConnectionPageInfo | TagToContentNodeConnectionPageInfo | TagToPostConnectionPageInfo | PostToTagConnectionPageInfo | PostToTermNodeConnectionPageInfo | UserToPostConnectionPageInfo | UserToRevisionsConnectionPageInfo | UserToUserRoleConnectionPageInfo | ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo | RootQueryToArquivoAssessoriaConnectionPageInfo | BannerToBannerConnectionPageInfo | RootQueryToBannerConnectionPageInfo | RootQueryToCategoryConnectionPageInfo | RootQueryToCentraldeDecoradoConnectionPageInfo | RootQueryToCommentConnectionPageInfo | RootQueryToContentNodeConnectionPageInfo | RootQueryToContentTypeConnectionPageInfo | RootQueryToEmpreendimentoConnectionPageInfo | RootQueryToMediaItemConnectionPageInfo | MenuItemToMenuItemConnectionPageInfo | MenuToMenuItemConnectionPageInfo | RootQueryToMenuItemConnectionPageInfo | RootQueryToMenuConnectionPageInfo | RootQueryToPageConnectionPageInfo | RootQueryToPluginConnectionPageInfo | RootQueryToPostFormatConnectionPageInfo | RootQueryToPostConnectionPageInfo | RootQueryToEnqueuedScriptConnectionPageInfo | RootQueryToEnqueuedStylesheetConnectionPageInfo | RootQueryToRevisionsConnectionPageInfo | RootQueryToTagConnectionPageInfo | RootQueryToTaxonomyConnectionPageInfo | RootQueryToTermNodeConnectionPageInfo | RootQueryToThemeConnectionPageInfo | RootQueryToUserRoleConnectionPageInfo | RootQueryToUserConnectionPageInfo) & { __isUnion?: true }
+export type WPPageInfo = (TaxonomyToContentTypeConnectionPageInfo | TermNodeToEnqueuedScriptConnectionPageInfo | TermNodeToEnqueuedStylesheetConnectionPageInfo | TaxonomyToTermNodeConnectionPageInfo | ContentTypeToTaxonomyConnectionPageInfo | ContentTypeToContentNodeConnectionPageInfo | CommentToCommentConnectionPageInfo | UserToCommentConnectionPageInfo | UserToEnqueuedScriptConnectionPageInfo | UserToEnqueuedStylesheetConnectionPageInfo | HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo | HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo | ContentNodeToEnqueuedScriptConnectionPageInfo | ContentNodeToEnqueuedStylesheetConnectionPageInfo | MediaItemToCommentConnectionPageInfo | UserToMediaItemConnectionPageInfo | PageToCommentConnectionPageInfo | PageToRevisionConnectionPageInfo | UserToPageConnectionPageInfo | PostToPostConnectionPageInfo | CategoryToAncestorsCategoryConnectionPageInfo | CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo | CentraldeDecoradoToCategoryConnectionPageInfo | CentraldeDecoradoToTermNodeConnectionPageInfo | CategoryToCentraldeDecoradoConnectionPageInfo | CategoryToCategoryConnectionPageInfo | CategoryToContentNodeConnectionPageInfo | EmpreendimentoToEmpreendimentoConnectionPageInfo | EmpreendimentoToCategoryConnectionPageInfo | EmpreendimentoToTermNodeConnectionPageInfo | CategoryToEmpreendimentoConnectionPageInfo | CategoryToPostConnectionPageInfo | PostToCategoryConnectionPageInfo | PostToCommentConnectionPageInfo | PostFormatToContentNodeConnectionPageInfo | PostFormatToPostConnectionPageInfo | PostToPostFormatConnectionPageInfo | PostToRevisionConnectionPageInfo | TagToContentNodeConnectionPageInfo | TagToPostConnectionPageInfo | PostToTagConnectionPageInfo | PostToTermNodeConnectionPageInfo | UserToPostConnectionPageInfo | UserToRevisionsConnectionPageInfo | UserToUserRoleConnectionPageInfo | ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo | RootQueryToArquivoAssessoriaConnectionPageInfo | BannerToBannerConnectionPageInfo | RootQueryToBannerConnectionPageInfo | RootQueryToCategoryConnectionPageInfo | RootQueryToCentraldeDecoradoConnectionPageInfo | RootQueryToCommentConnectionPageInfo | RootQueryToContentNodeConnectionPageInfo | RootQueryToContentTypeConnectionPageInfo | RootQueryToEmpreendimentoConnectionPageInfo | GqlShortToGqlShortConnectionPageInfo | RootQueryToGqlShortConnectionPageInfo | RootQueryToMediaItemConnectionPageInfo | MenuItemToMenuItemConnectionPageInfo | MenuToMenuItemConnectionPageInfo | RootQueryToMenuItemConnectionPageInfo | RootQueryToMenuConnectionPageInfo | RootQueryToPageConnectionPageInfo | RootQueryToPluginConnectionPageInfo | RootQueryToPostFormatConnectionPageInfo | RootQueryToPostConnectionPageInfo | RootQueryToEnqueuedScriptConnectionPageInfo | RootQueryToEnqueuedStylesheetConnectionPageInfo | RootQueryToRevisionsConnectionPageInfo | RootQueryToTagConnectionPageInfo | RootQueryToTaxonomyConnectionPageInfo | RootQueryToTermNodeConnectionPageInfo | RootQueryToThemeConnectionPageInfo | RootQueryToUserRoleConnectionPageInfo | RootQueryToUserConnectionPageInfo) & { __isUnion?: true }
 
 
 /** An edge in a connection */
@@ -804,7 +813,7 @@ export interface ContentTypeToTaxonomyConnectionPageInfo {
 
 
 /** Available content entity types that can be queried or filtered. Identifies the primary content structures available in the system. */
-export type ContentTypeEnum = 'ARQ_ASSESSORIA' | 'ATTACHMENT' | 'BANNER_HOME' | 'CENTRALDECORADO' | 'EMPREENDIMENTOS' | 'PAGE' | 'POST'
+export type ContentTypeEnum = 'ARQ_ASSESSORIA' | 'ATTACHMENT' | 'BANNER_HOME' | 'CENTRALDECORADO' | 'EMPREENDIMENTOS' | 'PAGE' | 'POST' | 'SHORTS'
 
 
 /** Date field selectors for content filtering. Specifies which date attribute (creation date, modification date) should be used for date-based queries. */
@@ -1513,11 +1522,11 @@ export interface MediaItem {
 
 
 /** Content that provides template metadata. The template can help inform how the content is might be structured, styled, and presented to the user. */
-export type NodeWithTemplate = (ArquivoAssessoria | MediaItem | Page | Post | CentraldeDecorado | Empreendimento | Banner) & { __isUnion?: true }
+export type NodeWithTemplate = (ArquivoAssessoria | MediaItem | Page | Post | CentraldeDecorado | Empreendimento | Banner | GqlShort) & { __isUnion?: true }
 
 
 /** Content with a dedicated title field. The title typically serves as the main heading and identifier for the content. */
-export type NodeWithTitle = (ArquivoAssessoria | MediaItem | Page | Post | CentraldeDecorado | Empreendimento | Banner) & { __isUnion?: true }
+export type NodeWithTitle = (ArquivoAssessoria | MediaItem | Page | Post | CentraldeDecorado | Empreendimento | Banner | GqlShort) & { __isUnion?: true }
 
 
 /** Content that can be attributed to a specific user. Provides fields for accessing the author&#039;s information and establishing content ownership. */
@@ -1906,6 +1915,8 @@ export interface Page {
     contentType?: ContentNodeToContentTypeConnectionEdge
     /** The name of the Content Type the node belongs to */
     contentTypeName: Scalars['String']
+    /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo blog&quot; was set to Show in GraphQL. */
+    conteuDoBlog?: Page_Conteudoblog
     /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo sobre&quot; was set to Show in GraphQL. */
     conteuSobre?: Page_Conteusobre
     /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo Indique e Ganhe&quot; was set to Show in GraphQL. */
@@ -1914,6 +1925,8 @@ export interface Page {
     conteudoLStore?: Page_Conteudolstore
     /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo política de qualidade&quot; was set to Show in GraphQL. */
     conteudoPoliticaDeQualidade?: Page_Conteudopoliticadequalidade
+    /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo Shorts&quot; was set to Show in GraphQL. */
+    conteudoShorts?: Page_Conteudoshorts
     /** The unique identifier stored in the database */
     databaseId: Scalars['Int']
     /** Post publishing date. */
@@ -2010,7 +2023,7 @@ export interface Page {
 
 
 /** Content that supports a draft preview mode. Allows viewing unpublished changes before they are made publicly available. Previewing unpublished changes requires appropriate permissions. */
-export type Previewable = (ArquivoAssessoria | Page | Post | CentraldeDecorado | Empreendimento | Banner) & { __isUnion?: true }
+export type Previewable = (ArquivoAssessoria | Page | Post | CentraldeDecorado | Empreendimento | Banner | GqlShort) & { __isUnion?: true }
 
 
 /** Content that has a main body field which can contain formatted text and media. Provides access to both raw (with appropriate permissions) and rendered versions of the content. */
@@ -2050,7 +2063,7 @@ export type NodeWithPageAttributes = (Page) & { __isUnion?: true }
 
 
 /** Content that can be referenced by navigation menu items. Provides the essential fields needed to create links within navigation structures. */
-export type MenuItemLinkable = (ArquivoAssessoria | Page | Post | Category | CentraldeDecorado | Empreendimento | Tag | Banner) & { __isUnion?: true }
+export type MenuItemLinkable = (ArquivoAssessoria | Page | Post | Category | CentraldeDecorado | Empreendimento | Tag | Banner | GqlShort) & { __isUnion?: true }
 
 
 /** Field Group */
@@ -2066,7 +2079,7 @@ export interface Page_Assessoria {
 
 
 /** A Field Group registered by ACF */
-export type AcfFieldGroup = (Page_Assessoria | Page_Conteusobre | Page_Conteusobre_item | Page_Conteudoindiqueeganhe | Page_Conteudoindiqueeganhe_EmObra | Page_Conteudoindiqueeganhe_Entregue | Page_Conteudolstore | Page_Conteudopoliticadequalidade | Page_Conteudopoliticadequalidade_certificacaoPq | Page_Conteudopoliticadequalidade_praticaItensPq | Page_Informacoesdecontato | CentraldeDecorado_Centraldedecorados | Empreendimento_Empreendimento | Empreendimento_Empreendimento_andamentoDaObra | Empreendimento_Empreendimento_diferenciaisItems | Empreendimento_Empreendimento_itemsPlantas | Empreendimento_Empreendimento_itensAreacomuns | Empreendimento_Empreendimento_pontosDeReferencia | Empreendimento_Empreendimento_videosOutos | Empreendimento_Housiverso | Empreendimento_Housiverso_diferencial | ArquivoAssessoria_DownAssessoria | Banner_BannerHome | Banner_BannerHome_BhConteudo | Banner_BannerHome_ImagensProntas) & { __isUnion?: true }
+export type AcfFieldGroup = (Page_Assessoria | Page_Conteudoblog | Page_Conteudoblog_blogImagemParaOsBanners | Page_Conteusobre | Page_Conteusobre_item | Page_Conteudoindiqueeganhe | Page_Conteudoindiqueeganhe_EmObra | Page_Conteudoindiqueeganhe_Entregue | Page_Conteudolstore | Page_Conteudopoliticadequalidade | Page_Conteudopoliticadequalidade_certificacaoPq | Page_Conteudopoliticadequalidade_praticaItensPq | Page_Conteudoshorts | Page_Informacoesdecontato | Post_Acoespost | CentraldeDecorado_Centraldedecorados | Empreendimento_Empreendimento | Empreendimento_Empreendimento_andamentoDaObra | Empreendimento_Empreendimento_diferenciaisItems | Empreendimento_Empreendimento_itemsPlantas | Empreendimento_Empreendimento_itensAreacomuns | Empreendimento_Empreendimento_pontosDeReferencia | Empreendimento_Empreendimento_videosOutos | Empreendimento_Housiverso | Empreendimento_Housiverso_diferencial | ArquivoAssessoria_DownAssessoria | Banner_BannerHome | Banner_BannerHome_BhConteudo | Banner_BannerHome_ImagensProntas | GqlShort_AcfShorts) & { __isUnion?: true }
 
 
 /** Connection between the Page type and the Comment type */
@@ -2102,6 +2115,33 @@ export interface PageToCommentConnectionPageInfo {
     /** When paginating backwards, the cursor to continue. */
     startCursor?: Scalars['String']
     __typename: 'PageToCommentConnectionPageInfo'
+}
+
+
+/** Field Group */
+export interface Page_Conteudoblog {
+    blogDescricaoBlog3?: Scalars['String']
+    blogDescricaoHero?: Scalars['String']
+    blogDescricaoShorts?: Scalars['String']
+    blogImagemDeFundoHero?: MediaItem
+    blogImagemParaOsBanners?: (Page_Conteudoblog_blogImagemParaOsBanners | undefined)[]
+    blogLabelHero?: Scalars['String']
+    blogTituloBloco3?: Scalars['String']
+    blogTituloHero?: Scalars['String']
+    blogTituloShorts?: Scalars['String']
+    /** The name of the ACF Field Group */
+    fieldGroupName?: Scalars['String']
+    __typename: 'Page_Conteudoblog'
+}
+
+
+/** Field Group */
+export interface Page_Conteudoblog_blogImagemParaOsBanners {
+    blogImagemDesktopBanner?: MediaItem
+    blogImagemMobileBanner?: MediaItem
+    /** The name of the ACF Field Group */
+    fieldGroupName?: Scalars['String']
+    __typename: 'Page_Conteudoblog_blogImagemParaOsBanners'
 }
 
 
@@ -2243,6 +2283,18 @@ export interface Page_Conteudopoliticadequalidade_praticaItensPq {
 
 
 /** Field Group */
+export interface Page_Conteudoshorts {
+    banner?: MediaItem
+    /** The name of the ACF Field Group */
+    fieldGroupName?: Scalars['String']
+    shortsDescricao?: Scalars['String']
+    shortsImagemDeFundo?: MediaItem
+    shortsTitulo?: Scalars['String']
+    __typename: 'Page_Conteudoshorts'
+}
+
+
+/** Field Group */
 export interface Page_Informacoesdecontato {
     coEmail?: Scalars['String']
     coEndereco?: Scalars['String']
@@ -2361,6 +2413,8 @@ export type PostConnectionEdge = (PostToPostConnectionEdge | CategoryToPostConne
 
 /** A chronological content entry typically used for blog posts, news articles, or similar date-based content. */
 export interface Post {
+    /** Added to the GraphQL Schema because the ACF Field Group &quot;Ações Post&quot; was set to Show in GraphQL. */
+    acoesPost?: Post_Acoespost
     /**
      * @deprecated This content type is not hierarchical and typically will not have ancestors
      * The ancestors of the content node.
@@ -2496,6 +2550,16 @@ export type NodeWithExcerpt = (Post) & { __isUnion?: true }
 
 /** Content that supports cross-site notifications when linked to by other sites. Includes fields for pingback status and linked URLs. */
 export type NodeWithTrackbacks = (Post) & { __isUnion?: true }
+
+
+/** Field Group */
+export interface Post_Acoespost {
+    exibirAutorDaMateria?: Scalars['Boolean']
+    /** The name of the ACF Field Group */
+    fieldGroupName?: Scalars['String']
+    imagemDoBannerPost?: MediaItem
+    __typename: 'Post_Acoespost'
+}
 
 
 /** Connection between the post type and the post type */
@@ -4868,6 +4932,219 @@ export interface GeneralSettingsToMediaItemConnectionEdge {
 }
 
 
+/** Identifier types for retrieving a specific GqlShort. Specifies which unique attribute is used to find an exact GqlShort. */
+export type GqlShortIdType = 'DATABASE_ID' | 'ID' | 'SLUG' | 'URI'
+
+
+/** The GqlShort type */
+export interface GqlShort {
+    /**
+     * @deprecated Deprecated in favor of the databaseId field
+     * The unique numeric identifier for the content node.
+     */
+    gqlShortId: Scalars['Int']
+    /** Added to the GraphQL Schema because the ACF Field Group &quot;Short do YouTube&quot; was set to Show in GraphQL. */
+    acf_shorts?: GqlShort_AcfShorts
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * The ancestors of the content node.
+     */
+    ancestors?: GqlShortToGqlShortConnection
+    /** Connection between the ContentNode type and the ContentType type */
+    contentType?: ContentNodeToContentTypeConnectionEdge
+    /** The name of the Content Type the node belongs to */
+    contentTypeName: Scalars['String']
+    /** The unique identifier stored in the database */
+    databaseId: Scalars['Int']
+    /** Post publishing date. */
+    date?: Scalars['String']
+    /** The publishing date set in GMT. */
+    dateGmt?: Scalars['String']
+    /** The desired slug of the post */
+    desiredSlug?: Scalars['String']
+    /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
+    editingLockedBy?: ContentNodeToEditLockConnectionEdge
+    /** The RSS enclosure for the object */
+    enclosure?: Scalars['String']
+    /** Connection between the ContentNode type and the EnqueuedScript type */
+    enqueuedScripts?: ContentNodeToEnqueuedScriptConnection
+    /** Connection between the ContentNode type and the EnqueuedStylesheet type */
+    enqueuedStylesheets?: ContentNodeToEnqueuedStylesheetConnection
+    /** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
+    guid?: Scalars['String']
+    /** Whether the shorts object is password protected. */
+    hasPassword?: Scalars['Boolean']
+    /** The globally unique identifier of the shorts object. */
+    id: Scalars['ID']
+    /** Whether the node is a Comment */
+    isComment: Scalars['Boolean']
+    /** Whether the node is a Content Node */
+    isContentNode: Scalars['Boolean']
+    /** Whether the node represents the front page. */
+    isFrontPage: Scalars['Boolean']
+    /** Whether  the node represents the blog page. */
+    isPostsPage: Scalars['Boolean']
+    /** Whether the object is a node in the preview state */
+    isPreview?: Scalars['Boolean']
+    /** Whether the object is restricted from the current viewer */
+    isRestricted?: Scalars['Boolean']
+    /** Whether the node is a Term */
+    isTermNode: Scalars['Boolean']
+    /** The user that most recently edited the node */
+    lastEditedBy?: ContentNodeToEditLastConnectionEdge
+    /** The permalink of the post */
+    link?: Scalars['String']
+    /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
+    modified?: Scalars['String']
+    /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
+    modifiedGmt?: Scalars['String']
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have a parent
+     * The parent of the content node.
+     */
+    parent?: GqlShortToParentConnectionEdge
+    /** The password for the shorts object. */
+    password?: Scalars['String']
+    /** Connection between the GqlShort type and the GqlShort type */
+    preview?: GqlShortToPreviewConnectionEdge
+    /** The database id of the preview node */
+    previewRevisionDatabaseId?: Scalars['Int']
+    /** Whether the object is a node in the preview state */
+    previewRevisionId?: Scalars['ID']
+    /** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
+    slug?: Scalars['String']
+    /** The current status of the object */
+    status?: Scalars['String']
+    /** The template assigned to the node */
+    template?: ContentTemplate
+    /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
+    title?: Scalars['String']
+    /** The unique resource identifier path */
+    uri?: Scalars['String']
+    __typename: 'GqlShort'
+}
+
+
+/** Field Group */
+export interface GqlShort_AcfShorts {
+    /** The name of the ACF Field Group */
+    fieldGroupName?: Scalars['String']
+    imagemDoShort?: MediaItem
+    linkDaImagemShort?: Scalars['String']
+    linkIdVideoYoutube?: Scalars['String']
+    tituloDoShort?: Scalars['String']
+    __typename: 'GqlShort_AcfShorts'
+}
+
+
+/** Connection between the GqlShort type and the GqlShort type */
+export interface GqlShortToGqlShortConnection {
+    /** Edges for the GqlShortToGqlShortConnection connection */
+    edges: GqlShortToGqlShortConnectionEdge[]
+    /** The nodes of the connection, without the edges */
+    nodes: GqlShort[]
+    /** Information about pagination in a connection. */
+    pageInfo: GqlShortToGqlShortConnectionPageInfo
+    __typename: 'GqlShortToGqlShortConnection'
+}
+
+
+/** A paginated collection of GqlShort Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of GqlShort Nodes */
+export type GqlShortConnection = (GqlShortToGqlShortConnection | RootQueryToGqlShortConnection) & { __isUnion?: true }
+
+
+/** Represents a connection to a GqlShort. Contains both the GqlShort Node and metadata about the relationship. */
+export type GqlShortConnectionEdge = (GqlShortToGqlShortConnectionEdge | GqlShortToParentConnectionEdge | GqlShortToPreviewConnectionEdge | RootQueryToGqlShortConnectionEdge) & { __isUnion?: true }
+
+
+/** Pagination metadata specific to &quot;GqlShortConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;GqlShortConnectionEdge&quot; Nodes. */
+export type GqlShortConnectionPageInfo = (GqlShortToGqlShortConnectionPageInfo | RootQueryToGqlShortConnectionPageInfo) & { __isUnion?: true }
+
+
+/** An edge in a connection */
+export interface GqlShortToGqlShortConnectionEdge {
+    /** A cursor for use in pagination */
+    cursor?: Scalars['String']
+    /** The item at the end of the edge */
+    node: GqlShort
+    __typename: 'GqlShortToGqlShortConnectionEdge'
+}
+
+
+/** Pagination metadata specific to &quot;GqlShortToGqlShortConnection&quot; collections. Provides cursors and flags for navigating through sets of GqlShortToGqlShortConnection Nodes. */
+export interface GqlShortToGqlShortConnectionPageInfo {
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Scalars['String']
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Scalars['String']
+    __typename: 'GqlShortToGqlShortConnectionPageInfo'
+}
+
+
+/** Connection between the GqlShort type and the GqlShort type */
+export interface GqlShortToParentConnectionEdge {
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: Scalars['String']
+    /** The node of the connection, without the edges */
+    node: GqlShort
+    __typename: 'GqlShortToParentConnectionEdge'
+}
+
+
+/** Connection between the GqlShort type and the GqlShort type */
+export interface GqlShortToPreviewConnectionEdge {
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: Scalars['String']
+    /** The node of the connection, without the edges */
+    node: GqlShort
+    __typename: 'GqlShortToPreviewConnectionEdge'
+}
+
+export type RootQueryToGqlShortConnectionWhereArgsMetaCompareEnum = 'BETWEEN' | 'EQUAL_TO' | 'EXISTS' | 'GREATER_THAN' | 'GREATER_THAN_OR_EQUAL_TO' | 'IN' | 'LESS_THAN' | 'LESS_THAN_OR_EQUAL_TO' | 'LIKE' | 'NOT_BETWEEN' | 'NOT_EQUAL_TO' | 'NOT_EXISTS' | 'NOT_IN' | 'NOT_LIKE'
+
+export type RootQueryToGqlShortConnectionWhereArgsMetaTypeEnum = 'BINARY' | 'CHAR' | 'DATE' | 'DATETIME' | 'DECIMAL' | 'NUMERIC' | 'SIGNED' | 'TIME' | 'UNSIGNED'
+
+
+/** Connection between the RootQuery type and the GqlShort type */
+export interface RootQueryToGqlShortConnection {
+    /** Edges for the RootQueryToGqlShortConnection connection */
+    edges: RootQueryToGqlShortConnectionEdge[]
+    /** The nodes of the connection, without the edges */
+    nodes: GqlShort[]
+    /** Information about pagination in a connection. */
+    pageInfo: RootQueryToGqlShortConnectionPageInfo
+    __typename: 'RootQueryToGqlShortConnection'
+}
+
+
+/** An edge in a connection */
+export interface RootQueryToGqlShortConnectionEdge {
+    /** A cursor for use in pagination */
+    cursor?: Scalars['String']
+    /** The item at the end of the edge */
+    node: GqlShort
+    __typename: 'RootQueryToGqlShortConnectionEdge'
+}
+
+
+/** Pagination metadata specific to &quot;RootQueryToGqlShortConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToGqlShortConnection Nodes. */
+export interface RootQueryToGqlShortConnectionPageInfo {
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Scalars['String']
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Scalars['String']
+    __typename: 'RootQueryToGqlShortConnectionPageInfo'
+}
+
+
 /** Identifier types for retrieving a specific MediaItem. Specifies which unique attribute is used to find an exact MediaItem. */
 export type MediaItemIdType = 'DATABASE_ID' | 'ID' | 'SLUG' | 'SOURCE_URL' | 'URI'
 
@@ -5076,7 +5353,7 @@ export type MenuItemLinkableConnectionEdge = (MenuItemToMenuItemLinkableConnecti
 
 
 /** Deprecated in favor of MenuItemLinkable Interface */
-export type MenuItemObjectUnion = (Post | Page | Banner | ArquivoAssessoria | Empreendimento | CentraldeDecorado | Category | Tag) & { __isUnion?: true }
+export type MenuItemObjectUnion = (Post | Page | Banner | ArquivoAssessoria | Empreendimento | CentraldeDecorado | GqlShort | Category | Tag) & { __isUnion?: true }
 
 
 /** Connection between the MenuItem type and the Menu type */
@@ -5784,7 +6061,7 @@ export interface RootQueryToUserRoleConnectionPageInfo {
 
 
 /** Content types that can have published content. Unlike ContentTypeEnum, media items are excluded since they are never published. */
-export type PublishableContentTypeEnum = 'ARQ_ASSESSORIA' | 'BANNER_HOME' | 'CENTRALDECORADO' | 'EMPREENDIMENTOS' | 'PAGE' | 'POST'
+export type PublishableContentTypeEnum = 'ARQ_ASSESSORIA' | 'BANNER_HOME' | 'CENTRALDECORADO' | 'EMPREENDIMENTOS' | 'PAGE' | 'POST' | 'SHORTS'
 
 
 /** User attribute sorting options. Determines which property of user accounts is used for ordering user listings. */
@@ -5858,11 +6135,11 @@ export interface WritingSettings {
 
 
 /** An object with a globally unique identifier. All objects that can be identified by a unique ID implement this interface. */
-export type Node = (ArquivoAssessoria | ContentType | Taxonomy | EnqueuedScript | EnqueuedStylesheet | User | Comment | MediaItem | Page | Post | Category | CentraldeDecorado | Empreendimento | PostFormat | Tag | UserRole | Banner | DiscussionSettings | GeneralSettings | Menu | MenuItem | PermalinkSettings | Plugin | ReadingSettings | Theme | WritingSettings | CommentAuthor) & { __isUnion?: true }
+export type Node = (ArquivoAssessoria | ContentType | Taxonomy | EnqueuedScript | EnqueuedStylesheet | User | Comment | MediaItem | Page | Post | Category | CentraldeDecorado | Empreendimento | PostFormat | Tag | UserRole | Banner | DiscussionSettings | GeneralSettings | GqlShort | Menu | MenuItem | PermalinkSettings | Plugin | ReadingSettings | Theme | WritingSettings | CommentAuthor) & { __isUnion?: true }
 
 
 /** An object that has a unique numeric identifier in the database. Provides consistent access to the database ID across different object types. */
-export type DatabaseIdentifier = (ArquivoAssessoria | User | Comment | MediaItem | Page | Post | Category | CentraldeDecorado | Empreendimento | PostFormat | Tag | Banner | Menu | MenuItem | CommentAuthor) & { __isUnion?: true }
+export type DatabaseIdentifier = (ArquivoAssessoria | User | Comment | MediaItem | Page | Post | Category | CentraldeDecorado | Empreendimento | PostFormat | Tag | Banner | GqlShort | Menu | MenuItem | CommentAuthor) & { __isUnion?: true }
 
 
 /** A user or guest who has submitted a comment. Provides identification and contact information for the comment author. */
@@ -5915,6 +6192,8 @@ export interface RootMutation {
     createComment?: CreateCommentPayload
     /** The createEmpreendimento mutation */
     createEmpreendimento?: CreateEmpreendimentoPayload
+    /** The createGqlShort mutation */
+    createGqlShort?: CreateGqlShortPayload
     /** The createMediaItem mutation */
     createMediaItem?: CreateMediaItemPayload
     /** The createPage mutation */
@@ -5939,6 +6218,8 @@ export interface RootMutation {
     deleteComment?: DeleteCommentPayload
     /** The deleteEmpreendimento mutation */
     deleteEmpreendimento?: DeleteEmpreendimentoPayload
+    /** The deleteGqlShort mutation */
+    deleteGqlShort?: DeleteGqlShortPayload
     /** The deleteMediaItem mutation */
     deleteMediaItem?: DeleteMediaItemPayload
     /** The deletePage mutation */
@@ -5973,6 +6254,8 @@ export interface RootMutation {
     updateComment?: UpdateCommentPayload
     /** The updateEmpreendimento mutation */
     updateEmpreendimento?: UpdateEmpreendimentoPayload
+    /** The updateGqlShort mutation */
+    updateGqlShort?: UpdateGqlShortPayload
     /** The updateMediaItem mutation */
     updateMediaItem?: UpdateMediaItemPayload
     /** The updatePage mutation */
@@ -6050,6 +6333,16 @@ export interface CreateEmpreendimentoPayload {
     /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
     clientMutationId?: Scalars['String']
     __typename: 'CreateEmpreendimentoPayload'
+}
+
+
+/** The payload for the createGqlShort mutation. */
+export interface CreateGqlShortPayload {
+    /** The Post object mutation type. */
+    gqlShort?: GqlShort
+    /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+    clientMutationId?: Scalars['String']
+    __typename: 'CreateGqlShortPayload'
 }
 
 
@@ -6186,6 +6479,18 @@ export interface DeleteEmpreendimentoPayload {
     /** The ID of the deleted object */
     deletedId?: Scalars['ID']
     __typename: 'DeleteEmpreendimentoPayload'
+}
+
+
+/** The payload for the deleteGqlShort mutation. */
+export interface DeleteGqlShortPayload {
+    /** The object before it was deleted */
+    gqlShort?: GqlShort
+    /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+    clientMutationId?: Scalars['String']
+    /** The ID of the deleted object */
+    deletedId?: Scalars['ID']
+    __typename: 'DeleteGqlShortPayload'
 }
 
 
@@ -6367,6 +6672,16 @@ export interface UpdateEmpreendimentoPayload {
     /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
     clientMutationId?: Scalars['String']
     __typename: 'UpdateEmpreendimentoPayload'
+}
+
+
+/** The payload for the updateGqlShort mutation. */
+export interface UpdateGqlShortPayload {
+    /** The Post object mutation type. */
+    gqlShort?: GqlShort
+    /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+    clientMutationId?: Scalars['String']
+    __typename: 'UpdateGqlShortPayload'
 }
 
 
@@ -6657,6 +6972,37 @@ export interface RootQueryRequest{
     where?: (RootQueryToEmpreendimentoConnectionWhereArgs | null)},RootQueryToEmpreendimentoConnectionRequest] | RootQueryToEmpreendimentoConnectionRequest
     /** Fields of the &#039;GeneralSettings&#039; settings group */
     generalSettings?: GeneralSettingsRequest
+    /** An object of the GqlShort Type.  */
+    gqlShort?: [{
+    /** The globally unique identifier of the object. */
+    id: Scalars['ID'],
+    /** Type of unique identifier to fetch by. Default is Global ID */
+    idType?: (GqlShortIdType | null)},GqlShortRequest]
+    /**
+     * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
+     * A GqlShort object
+     */
+    gqlShortBy?: [{
+    /** Get the GqlShort object by its global ID */
+    id?: (Scalars['ID'] | null),
+    /** Get the GqlShort by its database ID */
+    gqlShortId?: (Scalars['Int'] | null),
+    /** Get the GqlShort by its uri */
+    uri?: (Scalars['String'] | null),
+    /** Get the GqlShort by its slug (only available for non-hierarchical types) */
+    slug?: (Scalars['String'] | null)},GqlShortRequest] | GqlShortRequest
+    /** Connection between the RootQuery type and the GqlShort type */
+    gqlShorts?: [{
+    /** The number of items to return after the referenced "after" cursor */
+    first?: (Scalars['Int'] | null),
+    /** The number of items to return before the referenced "before" cursor */
+    last?: (Scalars['Int'] | null),
+    /** Cursor used along with the "first" argument to reference where in the dataset to get data */
+    after?: (Scalars['String'] | null),
+    /** Cursor used along with the "last" argument to reference where in the dataset to get data */
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (RootQueryToGqlShortConnectionWhereArgs | null)},RootQueryToGqlShortConnectionRequest] | RootQueryToGqlShortConnectionRequest
     /** An object of the mediaItem Type.  */
     mediaItem?: [{
     /** The globally unique identifier of the object. */
@@ -7233,6 +7579,7 @@ export interface ContentNodeRequest{
     on_CentraldeDecorado?: CentraldeDecoradoRequest
     on_Empreendimento?: EmpreendimentoRequest
     on_Banner?: BannerRequest
+    on_GqlShort?: GqlShortRequest
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -7267,6 +7614,7 @@ export interface UniformResourceIdentifiableRequest{
     on_PostFormat?: PostFormatRequest
     on_Tag?: TagRequest
     on_Banner?: BannerRequest
+    on_GqlShort?: GqlShortRequest
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -7315,6 +7663,8 @@ export interface OneToOneConnectionRequest{
     on_BannerToParentConnectionEdge?: BannerToParentConnectionEdgeRequest
     on_BannerToPreviewConnectionEdge?: BannerToPreviewConnectionEdgeRequest
     on_GeneralSettingsToMediaItemConnectionEdge?: GeneralSettingsToMediaItemConnectionEdgeRequest
+    on_GqlShortToParentConnectionEdge?: GqlShortToParentConnectionEdgeRequest
+    on_GqlShortToPreviewConnectionEdge?: GqlShortToPreviewConnectionEdgeRequest
     on_MenuItemToMenuItemLinkableConnectionEdge?: MenuItemToMenuItemLinkableConnectionEdgeRequest
     on_MenuItemToMenuConnectionEdge?: MenuItemToMenuConnectionEdgeRequest
     __typename?: boolean | number
@@ -7409,6 +7759,10 @@ export interface EdgeRequest{
     on_RootQueryToContentTypeConnectionEdge?: RootQueryToContentTypeConnectionEdgeRequest
     on_RootQueryToEmpreendimentoConnectionEdge?: RootQueryToEmpreendimentoConnectionEdgeRequest
     on_GeneralSettingsToMediaItemConnectionEdge?: GeneralSettingsToMediaItemConnectionEdgeRequest
+    on_GqlShortToGqlShortConnectionEdge?: GqlShortToGqlShortConnectionEdgeRequest
+    on_GqlShortToParentConnectionEdge?: GqlShortToParentConnectionEdgeRequest
+    on_GqlShortToPreviewConnectionEdge?: GqlShortToPreviewConnectionEdgeRequest
+    on_RootQueryToGqlShortConnectionEdge?: RootQueryToGqlShortConnectionEdgeRequest
     on_RootQueryToMediaItemConnectionEdge?: RootQueryToMediaItemConnectionEdgeRequest
     on_MenuItemToMenuItemConnectionEdge?: MenuItemToMenuItemConnectionEdgeRequest
     on_MenuItemToMenuItemLinkableConnectionEdge?: MenuItemToMenuItemLinkableConnectionEdgeRequest
@@ -7630,6 +7984,8 @@ export interface ConnectionRequest{
     on_RootQueryToContentNodeConnection?: RootQueryToContentNodeConnectionRequest
     on_RootQueryToContentTypeConnection?: RootQueryToContentTypeConnectionRequest
     on_RootQueryToEmpreendimentoConnection?: RootQueryToEmpreendimentoConnectionRequest
+    on_GqlShortToGqlShortConnection?: GqlShortToGqlShortConnectionRequest
+    on_RootQueryToGqlShortConnection?: RootQueryToGqlShortConnectionRequest
     on_RootQueryToMediaItemConnection?: RootQueryToMediaItemConnectionRequest
     on_MenuToMenuItemConnection?: MenuToMenuItemConnectionRequest
     on_MenuItemToMenuItemConnection?: MenuItemToMenuItemConnectionRequest
@@ -7718,6 +8074,8 @@ export interface PageInfoRequest{
     on_RootQueryToContentNodeConnectionPageInfo?: RootQueryToContentNodeConnectionPageInfoRequest
     on_RootQueryToContentTypeConnectionPageInfo?: RootQueryToContentTypeConnectionPageInfoRequest
     on_RootQueryToEmpreendimentoConnectionPageInfo?: RootQueryToEmpreendimentoConnectionPageInfoRequest
+    on_GqlShortToGqlShortConnectionPageInfo?: GqlShortToGqlShortConnectionPageInfoRequest
+    on_RootQueryToGqlShortConnectionPageInfo?: RootQueryToGqlShortConnectionPageInfoRequest
     on_RootQueryToMediaItemConnectionPageInfo?: RootQueryToMediaItemConnectionPageInfoRequest
     on_MenuItemToMenuItemConnectionPageInfo?: MenuItemToMenuItemConnectionPageInfoRequest
     on_MenuToMenuItemConnectionPageInfo?: MenuToMenuItemConnectionPageInfoRequest
@@ -7934,6 +8292,8 @@ export interface WPPageInfoRequest{
     on_RootQueryToContentNodeConnectionPageInfo?: RootQueryToContentNodeConnectionPageInfoRequest
     on_RootQueryToContentTypeConnectionPageInfo?: RootQueryToContentTypeConnectionPageInfoRequest
     on_RootQueryToEmpreendimentoConnectionPageInfo?: RootQueryToEmpreendimentoConnectionPageInfoRequest
+    on_GqlShortToGqlShortConnectionPageInfo?: GqlShortToGqlShortConnectionPageInfoRequest
+    on_RootQueryToGqlShortConnectionPageInfo?: RootQueryToGqlShortConnectionPageInfoRequest
     on_RootQueryToMediaItemConnectionPageInfo?: RootQueryToMediaItemConnectionPageInfoRequest
     on_MenuItemToMenuItemConnectionPageInfo?: MenuItemToMenuItemConnectionPageInfoRequest
     on_MenuToMenuItemConnectionPageInfo?: MenuToMenuItemConnectionPageInfoRequest
@@ -9875,6 +10235,7 @@ export interface NodeWithTemplateRequest{
     on_CentraldeDecorado?: CentraldeDecoradoRequest
     on_Empreendimento?: EmpreendimentoRequest
     on_Banner?: BannerRequest
+    on_GqlShort?: GqlShortRequest
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -9895,6 +10256,7 @@ export interface NodeWithTitleRequest{
     on_CentraldeDecorado?: CentraldeDecoradoRequest
     on_Empreendimento?: EmpreendimentoRequest
     on_Banner?: BannerRequest
+    on_GqlShort?: GqlShortRequest
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -10767,6 +11129,8 @@ export interface PageRequest{
     contentType?: ContentNodeToContentTypeConnectionEdgeRequest
     /** The name of the Content Type the node belongs to */
     contentTypeName?: boolean | number
+    /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo blog&quot; was set to Show in GraphQL. */
+    conteuDoBlog?: Page_ConteudoblogRequest
     /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo sobre&quot; was set to Show in GraphQL. */
     conteuSobre?: Page_ConteusobreRequest
     /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo Indique e Ganhe&quot; was set to Show in GraphQL. */
@@ -10775,6 +11139,8 @@ export interface PageRequest{
     conteudoLStore?: Page_ConteudolstoreRequest
     /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo política de qualidade&quot; was set to Show in GraphQL. */
     conteudoPoliticaDeQualidade?: Page_ConteudopoliticadequalidadeRequest
+    /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo Shorts&quot; was set to Show in GraphQL. */
+    conteudoShorts?: Page_ConteudoshortsRequest
     /** The unique identifier stored in the database */
     databaseId?: boolean | number
     /** Post publishing date. */
@@ -10917,6 +11283,7 @@ export interface PreviewableRequest{
     on_CentraldeDecorado?: CentraldeDecoradoRequest
     on_Empreendimento?: EmpreendimentoRequest
     on_Banner?: BannerRequest
+    on_GqlShort?: GqlShortRequest
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -11031,6 +11398,7 @@ export interface MenuItemLinkableRequest{
     on_Empreendimento?: EmpreendimentoRequest
     on_Tag?: TagRequest
     on_Banner?: BannerRequest
+    on_GqlShort?: GqlShortRequest
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -11054,6 +11422,8 @@ export interface AcfFieldGroupRequest{
     /** The name of the ACF Field Group */
     fieldGroupName?: boolean | number
     on_Page_Assessoria?: Page_AssessoriaRequest
+    on_Page_Conteudoblog?: Page_ConteudoblogRequest
+    on_Page_Conteudoblog_blogImagemParaOsBanners?: Page_Conteudoblog_blogImagemParaOsBannersRequest
     on_Page_Conteusobre?: Page_ConteusobreRequest
     on_Page_Conteusobre_item?: Page_Conteusobre_itemRequest
     on_Page_Conteudoindiqueeganhe?: Page_ConteudoindiqueeganheRequest
@@ -11063,7 +11433,9 @@ export interface AcfFieldGroupRequest{
     on_Page_Conteudopoliticadequalidade?: Page_ConteudopoliticadequalidadeRequest
     on_Page_Conteudopoliticadequalidade_certificacaoPq?: Page_Conteudopoliticadequalidade_certificacaoPqRequest
     on_Page_Conteudopoliticadequalidade_praticaItensPq?: Page_Conteudopoliticadequalidade_praticaItensPqRequest
+    on_Page_Conteudoshorts?: Page_ConteudoshortsRequest
     on_Page_Informacoesdecontato?: Page_InformacoesdecontatoRequest
+    on_Post_Acoespost?: Post_AcoespostRequest
     on_CentraldeDecorado_Centraldedecorados?: CentraldeDecorado_CentraldedecoradosRequest
     on_Empreendimento_Empreendimento?: Empreendimento_EmpreendimentoRequest
     on_Empreendimento_Empreendimento_andamentoDaObra?: Empreendimento_Empreendimento_andamentoDaObraRequest
@@ -11078,6 +11450,7 @@ export interface AcfFieldGroupRequest{
     on_Banner_BannerHome?: Banner_BannerHomeRequest
     on_Banner_BannerHome_BhConteudo?: Banner_BannerHome_BhConteudoRequest
     on_Banner_BannerHome_ImagensProntas?: Banner_BannerHome_ImagensProntasRequest
+    on_GqlShort_AcfShorts?: GqlShort_AcfShortsRequest
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -11179,6 +11552,35 @@ export interface PageToCommentConnectionPageInfoRequest{
     hasPreviousPage?: boolean | number
     /** When paginating backwards, the cursor to continue. */
     startCursor?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Field Group */
+export interface Page_ConteudoblogRequest{
+    blogDescricaoBlog3?: boolean | number
+    blogDescricaoHero?: boolean | number
+    blogDescricaoShorts?: boolean | number
+    blogImagemDeFundoHero?: MediaItemRequest
+    blogImagemParaOsBanners?: Page_Conteudoblog_blogImagemParaOsBannersRequest
+    blogLabelHero?: boolean | number
+    blogTituloBloco3?: boolean | number
+    blogTituloHero?: boolean | number
+    blogTituloShorts?: boolean | number
+    /** The name of the ACF Field Group */
+    fieldGroupName?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Field Group */
+export interface Page_Conteudoblog_blogImagemParaOsBannersRequest{
+    blogImagemDesktopBanner?: MediaItemRequest
+    blogImagemMobileBanner?: MediaItemRequest
+    /** The name of the ACF Field Group */
+    fieldGroupName?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -11325,6 +11727,19 @@ export interface Page_Conteudopoliticadequalidade_praticaItensPqRequest{
     fieldGroupName?: boolean | number
     imagemCertPq?: MediaItemRequest
     tituloCertPq?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Field Group */
+export interface Page_ConteudoshortsRequest{
+    banner?: MediaItemRequest
+    /** The name of the ACF Field Group */
+    fieldGroupName?: boolean | number
+    shortsDescricao?: boolean | number
+    shortsImagemDeFundo?: MediaItemRequest
+    shortsTitulo?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -11639,6 +12054,8 @@ export interface PostConnectionEdgeRequest{
 
 /** A chronological content entry typically used for blog posts, news articles, or similar date-based content. */
 export interface PostRequest{
+    /** Added to the GraphQL Schema because the ACF Field Group &quot;Ações Post&quot; was set to Show in GraphQL. */
+    acoesPost?: Post_AcoespostRequest
     /**
      * @deprecated This content type is not hierarchical and typically will not have ancestors
      * The ancestors of the content node.
@@ -11888,6 +12305,17 @@ export interface NodeWithTrackbacksRequest{
     /** URLs queued to be pinged. */
     toPing?: boolean | number
     on_Post?: PostRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Field Group */
+export interface Post_AcoespostRequest{
+    exibirAutorDaMateria?: boolean | number
+    /** The name of the ACF Field Group */
+    fieldGroupName?: boolean | number
+    imagemDoBannerPost?: MediaItemRequest
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -16515,6 +16943,340 @@ export interface GeneralSettingsToMediaItemConnectionEdgeRequest{
 }
 
 
+/** The GqlShort type */
+export interface GqlShortRequest{
+    /**
+     * @deprecated Deprecated in favor of the databaseId field
+     * The unique numeric identifier for the content node.
+     */
+    gqlShortId?: boolean | number
+    /** Added to the GraphQL Schema because the ACF Field Group &quot;Short do YouTube&quot; was set to Show in GraphQL. */
+    acf_shorts?: GqlShort_AcfShortsRequest
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have ancestors
+     * The ancestors of the content node.
+     */
+    ancestors?: [{
+    /** The number of items to return after the referenced "after" cursor */
+    first?: (Scalars['Int'] | null),
+    /** The number of items to return before the referenced "before" cursor */
+    last?: (Scalars['Int'] | null),
+    /** Cursor used along with the "first" argument to reference where in the dataset to get data */
+    after?: (Scalars['String'] | null),
+    /** Cursor used along with the "last" argument to reference where in the dataset to get data */
+    before?: (Scalars['String'] | null)},GqlShortToGqlShortConnectionRequest] | GqlShortToGqlShortConnectionRequest
+    /** Connection between the ContentNode type and the ContentType type */
+    contentType?: ContentNodeToContentTypeConnectionEdgeRequest
+    /** The name of the Content Type the node belongs to */
+    contentTypeName?: boolean | number
+    /** The unique identifier stored in the database */
+    databaseId?: boolean | number
+    /** Post publishing date. */
+    date?: boolean | number
+    /** The publishing date set in GMT. */
+    dateGmt?: boolean | number
+    /** The desired slug of the post */
+    desiredSlug?: boolean | number
+    /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
+    editingLockedBy?: ContentNodeToEditLockConnectionEdgeRequest
+    /** The RSS enclosure for the object */
+    enclosure?: boolean | number
+    /** Connection between the ContentNode type and the EnqueuedScript type */
+    enqueuedScripts?: [{
+    /** The number of items to return after the referenced "after" cursor */
+    first?: (Scalars['Int'] | null),
+    /** The number of items to return before the referenced "before" cursor */
+    last?: (Scalars['Int'] | null),
+    /** Cursor used along with the "first" argument to reference where in the dataset to get data */
+    after?: (Scalars['String'] | null),
+    /** Cursor used along with the "last" argument to reference where in the dataset to get data */
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)},ContentNodeToEnqueuedScriptConnectionRequest] | ContentNodeToEnqueuedScriptConnectionRequest
+    /** Connection between the ContentNode type and the EnqueuedStylesheet type */
+    enqueuedStylesheets?: [{
+    /** The number of items to return after the referenced "after" cursor */
+    first?: (Scalars['Int'] | null),
+    /** The number of items to return before the referenced "before" cursor */
+    last?: (Scalars['Int'] | null),
+    /** Cursor used along with the "first" argument to reference where in the dataset to get data */
+    after?: (Scalars['String'] | null),
+    /** Cursor used along with the "last" argument to reference where in the dataset to get data */
+    before?: (Scalars['String'] | null),
+    /** Arguments for filtering the connection */
+    where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)},ContentNodeToEnqueuedStylesheetConnectionRequest] | ContentNodeToEnqueuedStylesheetConnectionRequest
+    /** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
+    guid?: boolean | number
+    /** Whether the shorts object is password protected. */
+    hasPassword?: boolean | number
+    /** The globally unique identifier of the shorts object. */
+    id?: boolean | number
+    /** Whether the node is a Comment */
+    isComment?: boolean | number
+    /** Whether the node is a Content Node */
+    isContentNode?: boolean | number
+    /** Whether the node represents the front page. */
+    isFrontPage?: boolean | number
+    /** Whether  the node represents the blog page. */
+    isPostsPage?: boolean | number
+    /** Whether the object is a node in the preview state */
+    isPreview?: boolean | number
+    /** Whether the object is restricted from the current viewer */
+    isRestricted?: boolean | number
+    /** Whether the node is a Term */
+    isTermNode?: boolean | number
+    /** The user that most recently edited the node */
+    lastEditedBy?: ContentNodeToEditLastConnectionEdgeRequest
+    /** The permalink of the post */
+    link?: boolean | number
+    /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
+    modified?: boolean | number
+    /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
+    modifiedGmt?: boolean | number
+    /**
+     * @deprecated This content type is not hierarchical and typically will not have a parent
+     * The parent of the content node.
+     */
+    parent?: GqlShortToParentConnectionEdgeRequest
+    /** The password for the shorts object. */
+    password?: boolean | number
+    /** Connection between the GqlShort type and the GqlShort type */
+    preview?: GqlShortToPreviewConnectionEdgeRequest
+    /** The database id of the preview node */
+    previewRevisionDatabaseId?: boolean | number
+    /** Whether the object is a node in the preview state */
+    previewRevisionId?: boolean | number
+    /** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
+    slug?: boolean | number
+    /** The current status of the object */
+    status?: boolean | number
+    /** The template assigned to the node */
+    template?: ContentTemplateRequest
+    /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
+    title?: [{
+    /** Format of the field output */
+    format?: (PostObjectFieldFormatEnum | null)}] | boolean | number
+    /** The unique resource identifier path */
+    uri?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Field Group */
+export interface GqlShort_AcfShortsRequest{
+    /** The name of the ACF Field Group */
+    fieldGroupName?: boolean | number
+    imagemDoShort?: MediaItemRequest
+    linkDaImagemShort?: boolean | number
+    linkIdVideoYoutube?: boolean | number
+    tituloDoShort?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Connection between the GqlShort type and the GqlShort type */
+export interface GqlShortToGqlShortConnectionRequest{
+    /** Edges for the GqlShortToGqlShortConnection connection */
+    edges?: GqlShortToGqlShortConnectionEdgeRequest
+    /** The nodes of the connection, without the edges */
+    nodes?: GqlShortRequest
+    /** Information about pagination in a connection. */
+    pageInfo?: GqlShortToGqlShortConnectionPageInfoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** A paginated collection of GqlShort Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of GqlShort Nodes */
+export interface GqlShortConnectionRequest{
+    /** A list of edges (relational context) between RootQuery and connected GqlShort Nodes */
+    edges?: GqlShortConnectionEdgeRequest
+    /** A list of connected GqlShort Nodes */
+    nodes?: GqlShortRequest
+    /** Information about pagination in a connection. */
+    pageInfo?: GqlShortConnectionPageInfoRequest
+    on_GqlShortToGqlShortConnection?: GqlShortToGqlShortConnectionRequest
+    on_RootQueryToGqlShortConnection?: RootQueryToGqlShortConnectionRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Represents a connection to a GqlShort. Contains both the GqlShort Node and metadata about the relationship. */
+export interface GqlShortConnectionEdgeRequest{
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: boolean | number
+    /** The connected GqlShort Node */
+    node?: GqlShortRequest
+    on_GqlShortToGqlShortConnectionEdge?: GqlShortToGqlShortConnectionEdgeRequest
+    on_GqlShortToParentConnectionEdge?: GqlShortToParentConnectionEdgeRequest
+    on_GqlShortToPreviewConnectionEdge?: GqlShortToPreviewConnectionEdgeRequest
+    on_RootQueryToGqlShortConnectionEdge?: RootQueryToGqlShortConnectionEdgeRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Pagination metadata specific to &quot;GqlShortConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;GqlShortConnectionEdge&quot; Nodes. */
+export interface GqlShortConnectionPageInfoRequest{
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: boolean | number
+    /** When paginating forwards, are there more items? */
+    hasNextPage?: boolean | number
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage?: boolean | number
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: boolean | number
+    on_GqlShortToGqlShortConnectionPageInfo?: GqlShortToGqlShortConnectionPageInfoRequest
+    on_RootQueryToGqlShortConnectionPageInfo?: RootQueryToGqlShortConnectionPageInfoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** An edge in a connection */
+export interface GqlShortToGqlShortConnectionEdgeRequest{
+    /** A cursor for use in pagination */
+    cursor?: boolean | number
+    /** The item at the end of the edge */
+    node?: GqlShortRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Pagination metadata specific to &quot;GqlShortToGqlShortConnection&quot; collections. Provides cursors and flags for navigating through sets of GqlShortToGqlShortConnection Nodes. */
+export interface GqlShortToGqlShortConnectionPageInfoRequest{
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: boolean | number
+    /** When paginating forwards, are there more items? */
+    hasNextPage?: boolean | number
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage?: boolean | number
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Connection between the GqlShort type and the GqlShort type */
+export interface GqlShortToParentConnectionEdgeRequest{
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: boolean | number
+    /** The node of the connection, without the edges */
+    node?: GqlShortRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Connection between the GqlShort type and the GqlShort type */
+export interface GqlShortToPreviewConnectionEdgeRequest{
+    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+    cursor?: boolean | number
+    /** The node of the connection, without the edges */
+    node?: GqlShortRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Arguments for filtering the RootQueryToGqlShortConnection connection */
+export interface RootQueryToGqlShortConnectionWhereArgs {
+/** Filter the connection based on dates */
+dateQuery?: (DateQueryInput | null),
+/** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+hasPassword?: (Scalars['Boolean'] | null),
+/** Specific database ID of the object */
+id?: (Scalars['Int'] | null),
+/** Array of IDs for the objects to retrieve */
+in?: ((Scalars['ID'] | null)[] | null),
+/** True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results. */
+isSticky?: (Scalars['Boolean'] | null),metaQuery?: (RootQueryToGqlShortConnectionWhereArgsMetaQuery | null),
+/** Get objects with a specific mimeType property */
+mimeType?: (MimeTypeEnum | null),
+/** Slug / post_name of the object */
+name?: (Scalars['String'] | null),
+/** Specify objects to retrieve. Use slugs */
+nameIn?: ((Scalars['String'] | null)[] | null),
+/** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+notIn?: ((Scalars['ID'] | null)[] | null),
+/** What parameter to use to order the objects by. */
+orderby?: ((PostObjectsConnectionOrderbyInput | null)[] | null),
+/** Use ID to return only children. Use 0 to return only top-level items */
+parent?: (Scalars['ID'] | null),
+/** Specify objects whose parent is in an array */
+parentIn?: ((Scalars['ID'] | null)[] | null),
+/** Specify posts whose parent is not in an array */
+parentNotIn?: ((Scalars['ID'] | null)[] | null),
+/** Show posts with a specific password. */
+password?: (Scalars['String'] | null),
+/** Show Posts based on a keyword search */
+search?: (Scalars['String'] | null),
+/** Retrieve posts where post status is in an array. */
+stati?: ((PostStatusEnum | null)[] | null),
+/** Show posts with a specific status. */
+status?: (PostStatusEnum | null),taxQuery?: (TaxQuery | null),
+/** Filter the connection to content assigned a specific template. */
+template?: (ContentTemplateEnum | null),
+/** Title of the object */
+title?: (Scalars['String'] | null)}
+
+export interface RootQueryToGqlShortConnectionWhereArgsMetaQuery {metaArray?: ((RootQueryToGqlShortConnectionWhereArgsMetaArray | null)[] | null),relation?: (RelationEnum | null)}
+
+export interface RootQueryToGqlShortConnectionWhereArgsMetaArray {
+/** Custom field value */
+compare?: (RootQueryToGqlShortConnectionWhereArgsMetaCompareEnum | null),
+/** Custom field key */
+key?: (Scalars['String'] | null),
+/** Custom field value */
+type?: (RootQueryToGqlShortConnectionWhereArgsMetaTypeEnum | null),
+/** Custom field value */
+value?: (Scalars['String'] | null)}
+
+
+/** Connection between the RootQuery type and the GqlShort type */
+export interface RootQueryToGqlShortConnectionRequest{
+    /** Edges for the RootQueryToGqlShortConnection connection */
+    edges?: RootQueryToGqlShortConnectionEdgeRequest
+    /** The nodes of the connection, without the edges */
+    nodes?: GqlShortRequest
+    /** Information about pagination in a connection. */
+    pageInfo?: RootQueryToGqlShortConnectionPageInfoRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** An edge in a connection */
+export interface RootQueryToGqlShortConnectionEdgeRequest{
+    /** A cursor for use in pagination */
+    cursor?: boolean | number
+    /** The item at the end of the edge */
+    node?: GqlShortRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Pagination metadata specific to &quot;RootQueryToGqlShortConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToGqlShortConnection Nodes. */
+export interface RootQueryToGqlShortConnectionPageInfoRequest{
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: boolean | number
+    /** When paginating forwards, are there more items? */
+    hasNextPage?: boolean | number
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage?: boolean | number
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
 /** Arguments for filtering the RootQueryToMediaItemConnection connection */
 export interface RootQueryToMediaItemConnectionWhereArgs {
 /** The user that's connected as the author of the object. Use the userId for the author object. */
@@ -16874,6 +17636,7 @@ export interface MenuItemObjectUnionRequest{
     on_ArquivoAssessoria?:ArquivoAssessoriaRequest,
     on_Empreendimento?:EmpreendimentoRequest,
     on_CentraldeDecorado?:CentraldeDecoradoRequest,
+    on_GqlShort?:GqlShortRequest,
     on_Category?:CategoryRequest,
     on_Tag?:TagRequest,
     on_Node?: NodeRequest,
@@ -18223,6 +18986,7 @@ export interface NodeRequest{
     on_Banner?: BannerRequest
     on_DiscussionSettings?: DiscussionSettingsRequest
     on_GeneralSettings?: GeneralSettingsRequest
+    on_GqlShort?: GqlShortRequest
     on_Menu?: MenuRequest
     on_MenuItem?: MenuItemRequest
     on_PermalinkSettings?: PermalinkSettingsRequest
@@ -18252,6 +19016,7 @@ export interface DatabaseIdentifierRequest{
     on_PostFormat?: PostFormatRequest
     on_Tag?: TagRequest
     on_Banner?: BannerRequest
+    on_GqlShort?: GqlShortRequest
     on_Menu?: MenuRequest
     on_MenuItem?: MenuItemRequest
     on_CommentAuthor?: CommentAuthorRequest
@@ -18355,6 +19120,10 @@ export interface RootMutationRequest{
     createEmpreendimento?: [{
     /** Input for the createEmpreendimento mutation */
     input: CreateEmpreendimentoInput},CreateEmpreendimentoPayloadRequest]
+    /** The createGqlShort mutation */
+    createGqlShort?: [{
+    /** Input for the createGqlShort mutation */
+    input: CreateGqlShortInput},CreateGqlShortPayloadRequest]
     /** The createMediaItem mutation */
     createMediaItem?: [{
     /** Input for the createMediaItem mutation */
@@ -18403,6 +19172,10 @@ export interface RootMutationRequest{
     deleteEmpreendimento?: [{
     /** Input for the deleteEmpreendimento mutation */
     input: DeleteEmpreendimentoInput},DeleteEmpreendimentoPayloadRequest]
+    /** The deleteGqlShort mutation */
+    deleteGqlShort?: [{
+    /** Input for the deleteGqlShort mutation */
+    input: DeleteGqlShortInput},DeleteGqlShortPayloadRequest]
     /** The deleteMediaItem mutation */
     deleteMediaItem?: [{
     /** Input for the deleteMediaItem mutation */
@@ -18471,6 +19244,10 @@ export interface RootMutationRequest{
     updateEmpreendimento?: [{
     /** Input for the updateEmpreendimento mutation */
     input: UpdateEmpreendimentoInput},UpdateEmpreendimentoPayloadRequest]
+    /** The updateGqlShort mutation */
+    updateGqlShort?: [{
+    /** Input for the updateGqlShort mutation */
+    input: UpdateGqlShortInput},UpdateGqlShortPayloadRequest]
     /** The updateMediaItem mutation */
     updateMediaItem?: [{
     /** Input for the updateMediaItem mutation */
@@ -18723,6 +19500,35 @@ slug?: (Scalars['String'] | null)}
 export interface CreateEmpreendimentoPayloadRequest{
     /** The Post object mutation type. */
     empreendimento?: EmpreendimentoRequest
+    /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+    clientMutationId?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Input for the createGqlShort mutation. */
+export interface CreateGqlShortInput {
+/** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+clientMutationId?: (Scalars['String'] | null),
+/** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
+date?: (Scalars['String'] | null),
+/** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+menuOrder?: (Scalars['Int'] | null),
+/** The password used to protect the content of the object */
+password?: (Scalars['String'] | null),
+/** The slug of the object */
+slug?: (Scalars['String'] | null),
+/** The status of the object */
+status?: (PostStatusEnum | null),
+/** The title of the object */
+title?: (Scalars['String'] | null)}
+
+
+/** The payload for the createGqlShort mutation. */
+export interface CreateGqlShortPayloadRequest{
+    /** The Post object mutation type. */
+    gqlShort?: GqlShortRequest
     /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
     clientMutationId?: boolean | number
     __typename?: boolean | number
@@ -19157,6 +19963,31 @@ ignoreEditLock?: (Scalars['Boolean'] | null)}
 export interface DeleteEmpreendimentoPayloadRequest{
     /** The object before it was deleted */
     empreendimento?: EmpreendimentoRequest
+    /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+    clientMutationId?: boolean | number
+    /** The ID of the deleted object */
+    deletedId?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
+/** Input for the deleteGqlShort mutation. */
+export interface DeleteGqlShortInput {
+/** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+clientMutationId?: (Scalars['String'] | null),
+/** Whether the object should be force deleted instead of being moved to the trash */
+forceDelete?: (Scalars['Boolean'] | null),
+/** The ID of the GqlShort to delete */
+id: Scalars['ID'],
+/** Override the edit lock when another user is editing the post */
+ignoreEditLock?: (Scalars['Boolean'] | null)}
+
+
+/** The payload for the deleteGqlShort mutation. */
+export interface DeleteGqlShortPayloadRequest{
+    /** The object before it was deleted */
+    gqlShort?: GqlShortRequest
     /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
     clientMutationId?: boolean | number
     /** The ID of the deleted object */
@@ -19627,6 +20458,39 @@ export interface UpdateEmpreendimentoPayloadRequest{
 }
 
 
+/** Input for the updateGqlShort mutation. */
+export interface UpdateGqlShortInput {
+/** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+clientMutationId?: (Scalars['String'] | null),
+/** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
+date?: (Scalars['String'] | null),
+/** The ID of the GqlShort object */
+id: Scalars['ID'],
+/** Override the edit lock when another user is editing the post */
+ignoreEditLock?: (Scalars['Boolean'] | null),
+/** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+menuOrder?: (Scalars['Int'] | null),
+/** The password used to protect the content of the object */
+password?: (Scalars['String'] | null),
+/** The slug of the object */
+slug?: (Scalars['String'] | null),
+/** The status of the object */
+status?: (PostStatusEnum | null),
+/** The title of the object */
+title?: (Scalars['String'] | null)}
+
+
+/** The payload for the updateGqlShort mutation. */
+export interface UpdateGqlShortPayloadRequest{
+    /** The Post object mutation type. */
+    gqlShort?: GqlShortRequest
+    /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+    clientMutationId?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+
 /** Input for the updateMediaItem mutation. */
 export interface UpdateMediaItemInput {
 /** Alternative text to display when mediaItem is not displayed */
@@ -19961,7 +20825,7 @@ export const isArquivoAssessoria = (obj?: { __typename?: any } | null): obj is A
 
 
 
-const ContentNode_possibleTypes: string[] = ['ArquivoAssessoria','MediaItem','Page','Post','CentraldeDecorado','Empreendimento','Banner']
+const ContentNode_possibleTypes: string[] = ['ArquivoAssessoria','MediaItem','Page','Post','CentraldeDecorado','Empreendimento','Banner','GqlShort']
 export const isContentNode = (obj?: { __typename?: any } | null): obj is ContentNode => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isContentNode"')
   return ContentNode_possibleTypes.includes(obj.__typename)
@@ -19969,7 +20833,7 @@ export const isContentNode = (obj?: { __typename?: any } | null): obj is Content
 
 
 
-const UniformResourceIdentifiable_possibleTypes: string[] = ['ArquivoAssessoria','ContentType','User','Comment','MediaItem','Page','Post','Category','CentraldeDecorado','Empreendimento','PostFormat','Tag','Banner']
+const UniformResourceIdentifiable_possibleTypes: string[] = ['ArquivoAssessoria','ContentType','User','Comment','MediaItem','Page','Post','Category','CentraldeDecorado','Empreendimento','PostFormat','Tag','Banner','GqlShort']
 export const isUniformResourceIdentifiable = (obj?: { __typename?: any } | null): obj is UniformResourceIdentifiable => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isUniformResourceIdentifiable"')
   return UniformResourceIdentifiable_possibleTypes.includes(obj.__typename)
@@ -19985,7 +20849,7 @@ export const isContentNodeToContentTypeConnectionEdge = (obj?: { __typename?: an
 
 
 
-const OneToOneConnection_possibleTypes: string[] = ['ContentNodeToContentTypeConnectionEdge','ContentNodeToEditLockConnectionEdge','CommentToCommenterConnectionEdge','CommentToContentNodeConnectionEdge','CommentToParentCommentConnectionEdge','NodeWithAuthorToUserConnectionEdge','ContentNodeToEditLastConnectionEdge','HierarchicalContentNodeToParentContentNodeConnectionEdge','NodeWithFeaturedImageToMediaItemConnectionEdge','NodeWithRevisionsToContentNodeConnectionEdge','PageToPreviewConnectionEdge','CentraldeDecoradoToParentConnectionEdge','CentraldeDecoradoToPreviewConnectionEdge','EmpreendimentoToParentConnectionEdge','EmpreendimentoToPreviewConnectionEdge','CategoryToParentCategoryConnectionEdge','CategoryToTaxonomyConnectionEdge','PostToParentConnectionEdge','PostFormatToTaxonomyConnectionEdge','PostToPreviewConnectionEdge','TagToTaxonomyConnectionEdge','ArquivoAssessoriaToParentConnectionEdge','ArquivoAssessoriaToPreviewConnectionEdge','BannerToParentConnectionEdge','BannerToPreviewConnectionEdge','GeneralSettingsToMediaItemConnectionEdge','MenuItemToMenuItemLinkableConnectionEdge','MenuItemToMenuConnectionEdge']
+const OneToOneConnection_possibleTypes: string[] = ['ContentNodeToContentTypeConnectionEdge','ContentNodeToEditLockConnectionEdge','CommentToCommenterConnectionEdge','CommentToContentNodeConnectionEdge','CommentToParentCommentConnectionEdge','NodeWithAuthorToUserConnectionEdge','ContentNodeToEditLastConnectionEdge','HierarchicalContentNodeToParentContentNodeConnectionEdge','NodeWithFeaturedImageToMediaItemConnectionEdge','NodeWithRevisionsToContentNodeConnectionEdge','PageToPreviewConnectionEdge','CentraldeDecoradoToParentConnectionEdge','CentraldeDecoradoToPreviewConnectionEdge','EmpreendimentoToParentConnectionEdge','EmpreendimentoToPreviewConnectionEdge','CategoryToParentCategoryConnectionEdge','CategoryToTaxonomyConnectionEdge','PostToParentConnectionEdge','PostFormatToTaxonomyConnectionEdge','PostToPreviewConnectionEdge','TagToTaxonomyConnectionEdge','ArquivoAssessoriaToParentConnectionEdge','ArquivoAssessoriaToPreviewConnectionEdge','BannerToParentConnectionEdge','BannerToPreviewConnectionEdge','GeneralSettingsToMediaItemConnectionEdge','GqlShortToParentConnectionEdge','GqlShortToPreviewConnectionEdge','MenuItemToMenuItemLinkableConnectionEdge','MenuItemToMenuConnectionEdge']
 export const isOneToOneConnection = (obj?: { __typename?: any } | null): obj is OneToOneConnection => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isOneToOneConnection"')
   return OneToOneConnection_possibleTypes.includes(obj.__typename)
@@ -19993,7 +20857,7 @@ export const isOneToOneConnection = (obj?: { __typename?: any } | null): obj is 
 
 
 
-const Edge_possibleTypes: string[] = ['ContentNodeToContentTypeConnectionEdge','TaxonomyToContentTypeConnectionEdge','TermNodeToEnqueuedScriptConnectionEdge','TermNodeToEnqueuedStylesheetConnectionEdge','TaxonomyToTermNodeConnectionEdge','ContentTypeToTaxonomyConnectionEdge','ContentTypeToContentNodeConnectionEdge','ContentNodeToEditLockConnectionEdge','CommentToCommenterConnectionEdge','CommentToContentNodeConnectionEdge','CommentToParentCommentConnectionEdge','CommentToCommentConnectionEdge','UserToCommentConnectionEdge','UserToEnqueuedScriptConnectionEdge','UserToEnqueuedStylesheetConnectionEdge','NodeWithAuthorToUserConnectionEdge','HierarchicalContentNodeToContentNodeAncestorsConnectionEdge','HierarchicalContentNodeToContentNodeChildrenConnectionEdge','ContentNodeToEnqueuedScriptConnectionEdge','ContentNodeToEnqueuedStylesheetConnectionEdge','ContentNodeToEditLastConnectionEdge','HierarchicalContentNodeToParentContentNodeConnectionEdge','MediaItemToCommentConnectionEdge','UserToMediaItemConnectionEdge','NodeWithFeaturedImageToMediaItemConnectionEdge','NodeWithRevisionsToContentNodeConnectionEdge','PageToCommentConnectionEdge','PageToPreviewConnectionEdge','PageToRevisionConnectionEdge','UserToPageConnectionEdge','PostToPostConnectionEdge','CategoryToAncestorsCategoryConnectionEdge','CentraldeDecoradoToCentraldeDecoradoConnectionEdge','CentraldeDecoradoToCategoryConnectionEdge','CentraldeDecoradoToParentConnectionEdge','CentraldeDecoradoToPreviewConnectionEdge','CentraldeDecoradoToTermNodeConnectionEdge','CategoryToCentraldeDecoradoConnectionEdge','CategoryToCategoryConnectionEdge','CategoryToContentNodeConnectionEdge','EmpreendimentoToEmpreendimentoConnectionEdge','EmpreendimentoToCategoryConnectionEdge','EmpreendimentoToParentConnectionEdge','EmpreendimentoToPreviewConnectionEdge','EmpreendimentoToTermNodeConnectionEdge','CategoryToEmpreendimentoConnectionEdge','CategoryToParentCategoryConnectionEdge','CategoryToPostConnectionEdge','CategoryToTaxonomyConnectionEdge','PostToCategoryConnectionEdge','PostToCommentConnectionEdge','PostToParentConnectionEdge','PostFormatToContentNodeConnectionEdge','PostFormatToPostConnectionEdge','PostFormatToTaxonomyConnectionEdge','PostToPostFormatConnectionEdge','PostToPreviewConnectionEdge','PostToRevisionConnectionEdge','TagToContentNodeConnectionEdge','TagToPostConnectionEdge','TagToTaxonomyConnectionEdge','PostToTagConnectionEdge','PostToTermNodeConnectionEdge','UserToPostConnectionEdge','UserToRevisionsConnectionEdge','UserToUserRoleConnectionEdge','ArquivoAssessoriaToArquivoAssessoriaConnectionEdge','ArquivoAssessoriaToParentConnectionEdge','ArquivoAssessoriaToPreviewConnectionEdge','RootQueryToArquivoAssessoriaConnectionEdge','BannerToBannerConnectionEdge','BannerToParentConnectionEdge','BannerToPreviewConnectionEdge','RootQueryToBannerConnectionEdge','RootQueryToCategoryConnectionEdge','RootQueryToCentraldeDecoradoConnectionEdge','RootQueryToCommentConnectionEdge','RootQueryToContentNodeConnectionEdge','RootQueryToContentTypeConnectionEdge','RootQueryToEmpreendimentoConnectionEdge','GeneralSettingsToMediaItemConnectionEdge','RootQueryToMediaItemConnectionEdge','MenuItemToMenuItemConnectionEdge','MenuItemToMenuItemLinkableConnectionEdge','MenuItemToMenuConnectionEdge','MenuToMenuItemConnectionEdge','RootQueryToMenuItemConnectionEdge','RootQueryToMenuConnectionEdge','RootQueryToPageConnectionEdge','RootQueryToPluginConnectionEdge','RootQueryToPostFormatConnectionEdge','RootQueryToPostConnectionEdge','RootQueryToEnqueuedScriptConnectionEdge','RootQueryToEnqueuedStylesheetConnectionEdge','RootQueryToRevisionsConnectionEdge','RootQueryToTagConnectionEdge','RootQueryToTaxonomyConnectionEdge','RootQueryToTermNodeConnectionEdge','RootQueryToThemeConnectionEdge','RootQueryToUserRoleConnectionEdge','RootQueryToUserConnectionEdge']
+const Edge_possibleTypes: string[] = ['ContentNodeToContentTypeConnectionEdge','TaxonomyToContentTypeConnectionEdge','TermNodeToEnqueuedScriptConnectionEdge','TermNodeToEnqueuedStylesheetConnectionEdge','TaxonomyToTermNodeConnectionEdge','ContentTypeToTaxonomyConnectionEdge','ContentTypeToContentNodeConnectionEdge','ContentNodeToEditLockConnectionEdge','CommentToCommenterConnectionEdge','CommentToContentNodeConnectionEdge','CommentToParentCommentConnectionEdge','CommentToCommentConnectionEdge','UserToCommentConnectionEdge','UserToEnqueuedScriptConnectionEdge','UserToEnqueuedStylesheetConnectionEdge','NodeWithAuthorToUserConnectionEdge','HierarchicalContentNodeToContentNodeAncestorsConnectionEdge','HierarchicalContentNodeToContentNodeChildrenConnectionEdge','ContentNodeToEnqueuedScriptConnectionEdge','ContentNodeToEnqueuedStylesheetConnectionEdge','ContentNodeToEditLastConnectionEdge','HierarchicalContentNodeToParentContentNodeConnectionEdge','MediaItemToCommentConnectionEdge','UserToMediaItemConnectionEdge','NodeWithFeaturedImageToMediaItemConnectionEdge','NodeWithRevisionsToContentNodeConnectionEdge','PageToCommentConnectionEdge','PageToPreviewConnectionEdge','PageToRevisionConnectionEdge','UserToPageConnectionEdge','PostToPostConnectionEdge','CategoryToAncestorsCategoryConnectionEdge','CentraldeDecoradoToCentraldeDecoradoConnectionEdge','CentraldeDecoradoToCategoryConnectionEdge','CentraldeDecoradoToParentConnectionEdge','CentraldeDecoradoToPreviewConnectionEdge','CentraldeDecoradoToTermNodeConnectionEdge','CategoryToCentraldeDecoradoConnectionEdge','CategoryToCategoryConnectionEdge','CategoryToContentNodeConnectionEdge','EmpreendimentoToEmpreendimentoConnectionEdge','EmpreendimentoToCategoryConnectionEdge','EmpreendimentoToParentConnectionEdge','EmpreendimentoToPreviewConnectionEdge','EmpreendimentoToTermNodeConnectionEdge','CategoryToEmpreendimentoConnectionEdge','CategoryToParentCategoryConnectionEdge','CategoryToPostConnectionEdge','CategoryToTaxonomyConnectionEdge','PostToCategoryConnectionEdge','PostToCommentConnectionEdge','PostToParentConnectionEdge','PostFormatToContentNodeConnectionEdge','PostFormatToPostConnectionEdge','PostFormatToTaxonomyConnectionEdge','PostToPostFormatConnectionEdge','PostToPreviewConnectionEdge','PostToRevisionConnectionEdge','TagToContentNodeConnectionEdge','TagToPostConnectionEdge','TagToTaxonomyConnectionEdge','PostToTagConnectionEdge','PostToTermNodeConnectionEdge','UserToPostConnectionEdge','UserToRevisionsConnectionEdge','UserToUserRoleConnectionEdge','ArquivoAssessoriaToArquivoAssessoriaConnectionEdge','ArquivoAssessoriaToParentConnectionEdge','ArquivoAssessoriaToPreviewConnectionEdge','RootQueryToArquivoAssessoriaConnectionEdge','BannerToBannerConnectionEdge','BannerToParentConnectionEdge','BannerToPreviewConnectionEdge','RootQueryToBannerConnectionEdge','RootQueryToCategoryConnectionEdge','RootQueryToCentraldeDecoradoConnectionEdge','RootQueryToCommentConnectionEdge','RootQueryToContentNodeConnectionEdge','RootQueryToContentTypeConnectionEdge','RootQueryToEmpreendimentoConnectionEdge','GeneralSettingsToMediaItemConnectionEdge','GqlShortToGqlShortConnectionEdge','GqlShortToParentConnectionEdge','GqlShortToPreviewConnectionEdge','RootQueryToGqlShortConnectionEdge','RootQueryToMediaItemConnectionEdge','MenuItemToMenuItemConnectionEdge','MenuItemToMenuItemLinkableConnectionEdge','MenuItemToMenuConnectionEdge','MenuToMenuItemConnectionEdge','RootQueryToMenuItemConnectionEdge','RootQueryToMenuConnectionEdge','RootQueryToPageConnectionEdge','RootQueryToPluginConnectionEdge','RootQueryToPostFormatConnectionEdge','RootQueryToPostConnectionEdge','RootQueryToEnqueuedScriptConnectionEdge','RootQueryToEnqueuedStylesheetConnectionEdge','RootQueryToRevisionsConnectionEdge','RootQueryToTagConnectionEdge','RootQueryToTaxonomyConnectionEdge','RootQueryToTermNodeConnectionEdge','RootQueryToThemeConnectionEdge','RootQueryToUserRoleConnectionEdge','RootQueryToUserConnectionEdge']
 export const isEdge = (obj?: { __typename?: any } | null): obj is Edge => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isEdge"')
   return Edge_possibleTypes.includes(obj.__typename)
@@ -20033,7 +20897,7 @@ export const isTaxonomyConnection = (obj?: { __typename?: any } | null): obj is 
 
 
 
-const Connection_possibleTypes: string[] = ['ContentTypeToTaxonomyConnection','TaxonomyToContentTypeConnection','TaxonomyToTermNodeConnection','TermNodeToEnqueuedScriptConnection','TermNodeToEnqueuedStylesheetConnection','ContentTypeToContentNodeConnection','UserToCommentConnection','CommentToCommentConnection','UserToEnqueuedScriptConnection','UserToEnqueuedStylesheetConnection','UserToMediaItemConnection','HierarchicalContentNodeToContentNodeAncestorsConnection','HierarchicalContentNodeToContentNodeChildrenConnection','ContentNodeToEnqueuedScriptConnection','ContentNodeToEnqueuedStylesheetConnection','MediaItemToCommentConnection','UserToPageConnection','PageToCommentConnection','PageToRevisionConnection','UserToPostConnection','PostToPostConnection','PostToCategoryConnection','CategoryToAncestorsCategoryConnection','CategoryToCentraldeDecoradoConnection','CentraldeDecoradoToCentraldeDecoradoConnection','CentraldeDecoradoToCategoryConnection','CentraldeDecoradoToTermNodeConnection','CategoryToCategoryConnection','CategoryToContentNodeConnection','CategoryToEmpreendimentoConnection','EmpreendimentoToEmpreendimentoConnection','EmpreendimentoToCategoryConnection','EmpreendimentoToTermNodeConnection','CategoryToPostConnection','PostToCommentConnection','PostToPostFormatConnection','PostFormatToContentNodeConnection','PostFormatToPostConnection','PostToRevisionConnection','PostToTagConnection','TagToContentNodeConnection','TagToPostConnection','PostToTermNodeConnection','UserToRevisionsConnection','UserToUserRoleConnection','ArquivoAssessoriaToArquivoAssessoriaConnection','RootQueryToArquivoAssessoriaConnection','BannerToBannerConnection','RootQueryToBannerConnection','RootQueryToCategoryConnection','RootQueryToCentraldeDecoradoConnection','RootQueryToCommentConnection','RootQueryToContentNodeConnection','RootQueryToContentTypeConnection','RootQueryToEmpreendimentoConnection','RootQueryToMediaItemConnection','MenuToMenuItemConnection','MenuItemToMenuItemConnection','RootQueryToMenuItemConnection','RootQueryToMenuConnection','RootQueryToPageConnection','RootQueryToPluginConnection','RootQueryToPostFormatConnection','RootQueryToPostConnection','RootQueryToEnqueuedScriptConnection','RootQueryToEnqueuedStylesheetConnection','RootQueryToRevisionsConnection','RootQueryToTagConnection','RootQueryToTaxonomyConnection','RootQueryToTermNodeConnection','RootQueryToThemeConnection','RootQueryToUserRoleConnection','RootQueryToUserConnection']
+const Connection_possibleTypes: string[] = ['ContentTypeToTaxonomyConnection','TaxonomyToContentTypeConnection','TaxonomyToTermNodeConnection','TermNodeToEnqueuedScriptConnection','TermNodeToEnqueuedStylesheetConnection','ContentTypeToContentNodeConnection','UserToCommentConnection','CommentToCommentConnection','UserToEnqueuedScriptConnection','UserToEnqueuedStylesheetConnection','UserToMediaItemConnection','HierarchicalContentNodeToContentNodeAncestorsConnection','HierarchicalContentNodeToContentNodeChildrenConnection','ContentNodeToEnqueuedScriptConnection','ContentNodeToEnqueuedStylesheetConnection','MediaItemToCommentConnection','UserToPageConnection','PageToCommentConnection','PageToRevisionConnection','UserToPostConnection','PostToPostConnection','PostToCategoryConnection','CategoryToAncestorsCategoryConnection','CategoryToCentraldeDecoradoConnection','CentraldeDecoradoToCentraldeDecoradoConnection','CentraldeDecoradoToCategoryConnection','CentraldeDecoradoToTermNodeConnection','CategoryToCategoryConnection','CategoryToContentNodeConnection','CategoryToEmpreendimentoConnection','EmpreendimentoToEmpreendimentoConnection','EmpreendimentoToCategoryConnection','EmpreendimentoToTermNodeConnection','CategoryToPostConnection','PostToCommentConnection','PostToPostFormatConnection','PostFormatToContentNodeConnection','PostFormatToPostConnection','PostToRevisionConnection','PostToTagConnection','TagToContentNodeConnection','TagToPostConnection','PostToTermNodeConnection','UserToRevisionsConnection','UserToUserRoleConnection','ArquivoAssessoriaToArquivoAssessoriaConnection','RootQueryToArquivoAssessoriaConnection','BannerToBannerConnection','RootQueryToBannerConnection','RootQueryToCategoryConnection','RootQueryToCentraldeDecoradoConnection','RootQueryToCommentConnection','RootQueryToContentNodeConnection','RootQueryToContentTypeConnection','RootQueryToEmpreendimentoConnection','GqlShortToGqlShortConnection','RootQueryToGqlShortConnection','RootQueryToMediaItemConnection','MenuToMenuItemConnection','MenuItemToMenuItemConnection','RootQueryToMenuItemConnection','RootQueryToMenuConnection','RootQueryToPageConnection','RootQueryToPluginConnection','RootQueryToPostFormatConnection','RootQueryToPostConnection','RootQueryToEnqueuedScriptConnection','RootQueryToEnqueuedStylesheetConnection','RootQueryToRevisionsConnection','RootQueryToTagConnection','RootQueryToTaxonomyConnection','RootQueryToTermNodeConnection','RootQueryToThemeConnection','RootQueryToUserRoleConnection','RootQueryToUserConnection']
 export const isConnection = (obj?: { __typename?: any } | null): obj is Connection => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isConnection"')
   return Connection_possibleTypes.includes(obj.__typename)
@@ -20041,7 +20905,7 @@ export const isConnection = (obj?: { __typename?: any } | null): obj is Connecti
 
 
 
-const PageInfo_possibleTypes: string[] = ['TaxonomyToContentTypeConnectionPageInfo','TermNodeToEnqueuedScriptConnectionPageInfo','TermNodeToEnqueuedStylesheetConnectionPageInfo','TaxonomyToTermNodeConnectionPageInfo','ContentTypeToTaxonomyConnectionPageInfo','ContentTypeToContentNodeConnectionPageInfo','CommentToCommentConnectionPageInfo','UserToCommentConnectionPageInfo','UserToEnqueuedScriptConnectionPageInfo','UserToEnqueuedStylesheetConnectionPageInfo','HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo','HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo','ContentNodeToEnqueuedScriptConnectionPageInfo','ContentNodeToEnqueuedStylesheetConnectionPageInfo','MediaItemToCommentConnectionPageInfo','UserToMediaItemConnectionPageInfo','PageToCommentConnectionPageInfo','PageToRevisionConnectionPageInfo','UserToPageConnectionPageInfo','PostToPostConnectionPageInfo','CategoryToAncestorsCategoryConnectionPageInfo','CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo','CentraldeDecoradoToCategoryConnectionPageInfo','CentraldeDecoradoToTermNodeConnectionPageInfo','CategoryToCentraldeDecoradoConnectionPageInfo','CategoryToCategoryConnectionPageInfo','CategoryToContentNodeConnectionPageInfo','EmpreendimentoToEmpreendimentoConnectionPageInfo','EmpreendimentoToCategoryConnectionPageInfo','EmpreendimentoToTermNodeConnectionPageInfo','CategoryToEmpreendimentoConnectionPageInfo','CategoryToPostConnectionPageInfo','PostToCategoryConnectionPageInfo','PostToCommentConnectionPageInfo','PostFormatToContentNodeConnectionPageInfo','PostFormatToPostConnectionPageInfo','PostToPostFormatConnectionPageInfo','PostToRevisionConnectionPageInfo','TagToContentNodeConnectionPageInfo','TagToPostConnectionPageInfo','PostToTagConnectionPageInfo','PostToTermNodeConnectionPageInfo','UserToPostConnectionPageInfo','UserToRevisionsConnectionPageInfo','UserToUserRoleConnectionPageInfo','ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo','RootQueryToArquivoAssessoriaConnectionPageInfo','BannerToBannerConnectionPageInfo','RootQueryToBannerConnectionPageInfo','RootQueryToCategoryConnectionPageInfo','RootQueryToCentraldeDecoradoConnectionPageInfo','RootQueryToCommentConnectionPageInfo','RootQueryToContentNodeConnectionPageInfo','RootQueryToContentTypeConnectionPageInfo','RootQueryToEmpreendimentoConnectionPageInfo','RootQueryToMediaItemConnectionPageInfo','MenuItemToMenuItemConnectionPageInfo','MenuToMenuItemConnectionPageInfo','RootQueryToMenuItemConnectionPageInfo','RootQueryToMenuConnectionPageInfo','RootQueryToPageConnectionPageInfo','RootQueryToPluginConnectionPageInfo','RootQueryToPostFormatConnectionPageInfo','RootQueryToPostConnectionPageInfo','RootQueryToEnqueuedScriptConnectionPageInfo','RootQueryToEnqueuedStylesheetConnectionPageInfo','RootQueryToRevisionsConnectionPageInfo','RootQueryToTagConnectionPageInfo','RootQueryToTaxonomyConnectionPageInfo','RootQueryToTermNodeConnectionPageInfo','RootQueryToThemeConnectionPageInfo','RootQueryToUserRoleConnectionPageInfo','RootQueryToUserConnectionPageInfo']
+const PageInfo_possibleTypes: string[] = ['TaxonomyToContentTypeConnectionPageInfo','TermNodeToEnqueuedScriptConnectionPageInfo','TermNodeToEnqueuedStylesheetConnectionPageInfo','TaxonomyToTermNodeConnectionPageInfo','ContentTypeToTaxonomyConnectionPageInfo','ContentTypeToContentNodeConnectionPageInfo','CommentToCommentConnectionPageInfo','UserToCommentConnectionPageInfo','UserToEnqueuedScriptConnectionPageInfo','UserToEnqueuedStylesheetConnectionPageInfo','HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo','HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo','ContentNodeToEnqueuedScriptConnectionPageInfo','ContentNodeToEnqueuedStylesheetConnectionPageInfo','MediaItemToCommentConnectionPageInfo','UserToMediaItemConnectionPageInfo','PageToCommentConnectionPageInfo','PageToRevisionConnectionPageInfo','UserToPageConnectionPageInfo','PostToPostConnectionPageInfo','CategoryToAncestorsCategoryConnectionPageInfo','CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo','CentraldeDecoradoToCategoryConnectionPageInfo','CentraldeDecoradoToTermNodeConnectionPageInfo','CategoryToCentraldeDecoradoConnectionPageInfo','CategoryToCategoryConnectionPageInfo','CategoryToContentNodeConnectionPageInfo','EmpreendimentoToEmpreendimentoConnectionPageInfo','EmpreendimentoToCategoryConnectionPageInfo','EmpreendimentoToTermNodeConnectionPageInfo','CategoryToEmpreendimentoConnectionPageInfo','CategoryToPostConnectionPageInfo','PostToCategoryConnectionPageInfo','PostToCommentConnectionPageInfo','PostFormatToContentNodeConnectionPageInfo','PostFormatToPostConnectionPageInfo','PostToPostFormatConnectionPageInfo','PostToRevisionConnectionPageInfo','TagToContentNodeConnectionPageInfo','TagToPostConnectionPageInfo','PostToTagConnectionPageInfo','PostToTermNodeConnectionPageInfo','UserToPostConnectionPageInfo','UserToRevisionsConnectionPageInfo','UserToUserRoleConnectionPageInfo','ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo','RootQueryToArquivoAssessoriaConnectionPageInfo','BannerToBannerConnectionPageInfo','RootQueryToBannerConnectionPageInfo','RootQueryToCategoryConnectionPageInfo','RootQueryToCentraldeDecoradoConnectionPageInfo','RootQueryToCommentConnectionPageInfo','RootQueryToContentNodeConnectionPageInfo','RootQueryToContentTypeConnectionPageInfo','RootQueryToEmpreendimentoConnectionPageInfo','GqlShortToGqlShortConnectionPageInfo','RootQueryToGqlShortConnectionPageInfo','RootQueryToMediaItemConnectionPageInfo','MenuItemToMenuItemConnectionPageInfo','MenuToMenuItemConnectionPageInfo','RootQueryToMenuItemConnectionPageInfo','RootQueryToMenuConnectionPageInfo','RootQueryToPageConnectionPageInfo','RootQueryToPluginConnectionPageInfo','RootQueryToPostFormatConnectionPageInfo','RootQueryToPostConnectionPageInfo','RootQueryToEnqueuedScriptConnectionPageInfo','RootQueryToEnqueuedStylesheetConnectionPageInfo','RootQueryToRevisionsConnectionPageInfo','RootQueryToTagConnectionPageInfo','RootQueryToTaxonomyConnectionPageInfo','RootQueryToTermNodeConnectionPageInfo','RootQueryToThemeConnectionPageInfo','RootQueryToUserRoleConnectionPageInfo','RootQueryToUserConnectionPageInfo']
 export const isPageInfo = (obj?: { __typename?: any } | null): obj is PageInfo => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isPageInfo"')
   return PageInfo_possibleTypes.includes(obj.__typename)
@@ -20089,7 +20953,7 @@ export const isContentTypeConnectionPageInfo = (obj?: { __typename?: any } | nul
 
 
 
-const WPPageInfo_possibleTypes: string[] = ['TaxonomyToContentTypeConnectionPageInfo','TermNodeToEnqueuedScriptConnectionPageInfo','TermNodeToEnqueuedStylesheetConnectionPageInfo','TaxonomyToTermNodeConnectionPageInfo','ContentTypeToTaxonomyConnectionPageInfo','ContentTypeToContentNodeConnectionPageInfo','CommentToCommentConnectionPageInfo','UserToCommentConnectionPageInfo','UserToEnqueuedScriptConnectionPageInfo','UserToEnqueuedStylesheetConnectionPageInfo','HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo','HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo','ContentNodeToEnqueuedScriptConnectionPageInfo','ContentNodeToEnqueuedStylesheetConnectionPageInfo','MediaItemToCommentConnectionPageInfo','UserToMediaItemConnectionPageInfo','PageToCommentConnectionPageInfo','PageToRevisionConnectionPageInfo','UserToPageConnectionPageInfo','PostToPostConnectionPageInfo','CategoryToAncestorsCategoryConnectionPageInfo','CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo','CentraldeDecoradoToCategoryConnectionPageInfo','CentraldeDecoradoToTermNodeConnectionPageInfo','CategoryToCentraldeDecoradoConnectionPageInfo','CategoryToCategoryConnectionPageInfo','CategoryToContentNodeConnectionPageInfo','EmpreendimentoToEmpreendimentoConnectionPageInfo','EmpreendimentoToCategoryConnectionPageInfo','EmpreendimentoToTermNodeConnectionPageInfo','CategoryToEmpreendimentoConnectionPageInfo','CategoryToPostConnectionPageInfo','PostToCategoryConnectionPageInfo','PostToCommentConnectionPageInfo','PostFormatToContentNodeConnectionPageInfo','PostFormatToPostConnectionPageInfo','PostToPostFormatConnectionPageInfo','PostToRevisionConnectionPageInfo','TagToContentNodeConnectionPageInfo','TagToPostConnectionPageInfo','PostToTagConnectionPageInfo','PostToTermNodeConnectionPageInfo','UserToPostConnectionPageInfo','UserToRevisionsConnectionPageInfo','UserToUserRoleConnectionPageInfo','ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo','RootQueryToArquivoAssessoriaConnectionPageInfo','BannerToBannerConnectionPageInfo','RootQueryToBannerConnectionPageInfo','RootQueryToCategoryConnectionPageInfo','RootQueryToCentraldeDecoradoConnectionPageInfo','RootQueryToCommentConnectionPageInfo','RootQueryToContentNodeConnectionPageInfo','RootQueryToContentTypeConnectionPageInfo','RootQueryToEmpreendimentoConnectionPageInfo','RootQueryToMediaItemConnectionPageInfo','MenuItemToMenuItemConnectionPageInfo','MenuToMenuItemConnectionPageInfo','RootQueryToMenuItemConnectionPageInfo','RootQueryToMenuConnectionPageInfo','RootQueryToPageConnectionPageInfo','RootQueryToPluginConnectionPageInfo','RootQueryToPostFormatConnectionPageInfo','RootQueryToPostConnectionPageInfo','RootQueryToEnqueuedScriptConnectionPageInfo','RootQueryToEnqueuedStylesheetConnectionPageInfo','RootQueryToRevisionsConnectionPageInfo','RootQueryToTagConnectionPageInfo','RootQueryToTaxonomyConnectionPageInfo','RootQueryToTermNodeConnectionPageInfo','RootQueryToThemeConnectionPageInfo','RootQueryToUserRoleConnectionPageInfo','RootQueryToUserConnectionPageInfo']
+const WPPageInfo_possibleTypes: string[] = ['TaxonomyToContentTypeConnectionPageInfo','TermNodeToEnqueuedScriptConnectionPageInfo','TermNodeToEnqueuedStylesheetConnectionPageInfo','TaxonomyToTermNodeConnectionPageInfo','ContentTypeToTaxonomyConnectionPageInfo','ContentTypeToContentNodeConnectionPageInfo','CommentToCommentConnectionPageInfo','UserToCommentConnectionPageInfo','UserToEnqueuedScriptConnectionPageInfo','UserToEnqueuedStylesheetConnectionPageInfo','HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo','HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo','ContentNodeToEnqueuedScriptConnectionPageInfo','ContentNodeToEnqueuedStylesheetConnectionPageInfo','MediaItemToCommentConnectionPageInfo','UserToMediaItemConnectionPageInfo','PageToCommentConnectionPageInfo','PageToRevisionConnectionPageInfo','UserToPageConnectionPageInfo','PostToPostConnectionPageInfo','CategoryToAncestorsCategoryConnectionPageInfo','CentraldeDecoradoToCentraldeDecoradoConnectionPageInfo','CentraldeDecoradoToCategoryConnectionPageInfo','CentraldeDecoradoToTermNodeConnectionPageInfo','CategoryToCentraldeDecoradoConnectionPageInfo','CategoryToCategoryConnectionPageInfo','CategoryToContentNodeConnectionPageInfo','EmpreendimentoToEmpreendimentoConnectionPageInfo','EmpreendimentoToCategoryConnectionPageInfo','EmpreendimentoToTermNodeConnectionPageInfo','CategoryToEmpreendimentoConnectionPageInfo','CategoryToPostConnectionPageInfo','PostToCategoryConnectionPageInfo','PostToCommentConnectionPageInfo','PostFormatToContentNodeConnectionPageInfo','PostFormatToPostConnectionPageInfo','PostToPostFormatConnectionPageInfo','PostToRevisionConnectionPageInfo','TagToContentNodeConnectionPageInfo','TagToPostConnectionPageInfo','PostToTagConnectionPageInfo','PostToTermNodeConnectionPageInfo','UserToPostConnectionPageInfo','UserToRevisionsConnectionPageInfo','UserToUserRoleConnectionPageInfo','ArquivoAssessoriaToArquivoAssessoriaConnectionPageInfo','RootQueryToArquivoAssessoriaConnectionPageInfo','BannerToBannerConnectionPageInfo','RootQueryToBannerConnectionPageInfo','RootQueryToCategoryConnectionPageInfo','RootQueryToCentraldeDecoradoConnectionPageInfo','RootQueryToCommentConnectionPageInfo','RootQueryToContentNodeConnectionPageInfo','RootQueryToContentTypeConnectionPageInfo','RootQueryToEmpreendimentoConnectionPageInfo','GqlShortToGqlShortConnectionPageInfo','RootQueryToGqlShortConnectionPageInfo','RootQueryToMediaItemConnectionPageInfo','MenuItemToMenuItemConnectionPageInfo','MenuToMenuItemConnectionPageInfo','RootQueryToMenuItemConnectionPageInfo','RootQueryToMenuConnectionPageInfo','RootQueryToPageConnectionPageInfo','RootQueryToPluginConnectionPageInfo','RootQueryToPostFormatConnectionPageInfo','RootQueryToPostConnectionPageInfo','RootQueryToEnqueuedScriptConnectionPageInfo','RootQueryToEnqueuedStylesheetConnectionPageInfo','RootQueryToRevisionsConnectionPageInfo','RootQueryToTagConnectionPageInfo','RootQueryToTaxonomyConnectionPageInfo','RootQueryToTermNodeConnectionPageInfo','RootQueryToThemeConnectionPageInfo','RootQueryToUserRoleConnectionPageInfo','RootQueryToUserConnectionPageInfo']
 export const isWPPageInfo = (obj?: { __typename?: any } | null): obj is WPPageInfo => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isWPPageInfo"')
   return WPPageInfo_possibleTypes.includes(obj.__typename)
@@ -20593,7 +21457,7 @@ export const isMediaItem = (obj?: { __typename?: any } | null): obj is MediaItem
 
 
 
-const NodeWithTemplate_possibleTypes: string[] = ['ArquivoAssessoria','MediaItem','Page','Post','CentraldeDecorado','Empreendimento','Banner']
+const NodeWithTemplate_possibleTypes: string[] = ['ArquivoAssessoria','MediaItem','Page','Post','CentraldeDecorado','Empreendimento','Banner','GqlShort']
 export const isNodeWithTemplate = (obj?: { __typename?: any } | null): obj is NodeWithTemplate => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isNodeWithTemplate"')
   return NodeWithTemplate_possibleTypes.includes(obj.__typename)
@@ -20601,7 +21465,7 @@ export const isNodeWithTemplate = (obj?: { __typename?: any } | null): obj is No
 
 
 
-const NodeWithTitle_possibleTypes: string[] = ['ArquivoAssessoria','MediaItem','Page','Post','CentraldeDecorado','Empreendimento','Banner']
+const NodeWithTitle_possibleTypes: string[] = ['ArquivoAssessoria','MediaItem','Page','Post','CentraldeDecorado','Empreendimento','Banner','GqlShort']
 export const isNodeWithTitle = (obj?: { __typename?: any } | null): obj is NodeWithTitle => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isNodeWithTitle"')
   return NodeWithTitle_possibleTypes.includes(obj.__typename)
@@ -20865,7 +21729,7 @@ export const isPage = (obj?: { __typename?: any } | null): obj is Page => {
 
 
 
-const Previewable_possibleTypes: string[] = ['ArquivoAssessoria','Page','Post','CentraldeDecorado','Empreendimento','Banner']
+const Previewable_possibleTypes: string[] = ['ArquivoAssessoria','Page','Post','CentraldeDecorado','Empreendimento','Banner','GqlShort']
 export const isPreviewable = (obj?: { __typename?: any } | null): obj is Previewable => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isPreviewable"')
   return Previewable_possibleTypes.includes(obj.__typename)
@@ -20921,7 +21785,7 @@ export const isNodeWithPageAttributes = (obj?: { __typename?: any } | null): obj
 
 
 
-const MenuItemLinkable_possibleTypes: string[] = ['ArquivoAssessoria','Page','Post','Category','CentraldeDecorado','Empreendimento','Tag','Banner']
+const MenuItemLinkable_possibleTypes: string[] = ['ArquivoAssessoria','Page','Post','Category','CentraldeDecorado','Empreendimento','Tag','Banner','GqlShort']
 export const isMenuItemLinkable = (obj?: { __typename?: any } | null): obj is MenuItemLinkable => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isMenuItemLinkable"')
   return MenuItemLinkable_possibleTypes.includes(obj.__typename)
@@ -20937,7 +21801,7 @@ export const isPage_Assessoria = (obj?: { __typename?: any } | null): obj is Pag
 
 
 
-const AcfFieldGroup_possibleTypes: string[] = ['Page_Assessoria','Page_Conteusobre','Page_Conteusobre_item','Page_Conteudoindiqueeganhe','Page_Conteudoindiqueeganhe_EmObra','Page_Conteudoindiqueeganhe_Entregue','Page_Conteudolstore','Page_Conteudopoliticadequalidade','Page_Conteudopoliticadequalidade_certificacaoPq','Page_Conteudopoliticadequalidade_praticaItensPq','Page_Informacoesdecontato','CentraldeDecorado_Centraldedecorados','Empreendimento_Empreendimento','Empreendimento_Empreendimento_andamentoDaObra','Empreendimento_Empreendimento_diferenciaisItems','Empreendimento_Empreendimento_itemsPlantas','Empreendimento_Empreendimento_itensAreacomuns','Empreendimento_Empreendimento_pontosDeReferencia','Empreendimento_Empreendimento_videosOutos','Empreendimento_Housiverso','Empreendimento_Housiverso_diferencial','ArquivoAssessoria_DownAssessoria','Banner_BannerHome','Banner_BannerHome_BhConteudo','Banner_BannerHome_ImagensProntas']
+const AcfFieldGroup_possibleTypes: string[] = ['Page_Assessoria','Page_Conteudoblog','Page_Conteudoblog_blogImagemParaOsBanners','Page_Conteusobre','Page_Conteusobre_item','Page_Conteudoindiqueeganhe','Page_Conteudoindiqueeganhe_EmObra','Page_Conteudoindiqueeganhe_Entregue','Page_Conteudolstore','Page_Conteudopoliticadequalidade','Page_Conteudopoliticadequalidade_certificacaoPq','Page_Conteudopoliticadequalidade_praticaItensPq','Page_Conteudoshorts','Page_Informacoesdecontato','Post_Acoespost','CentraldeDecorado_Centraldedecorados','Empreendimento_Empreendimento','Empreendimento_Empreendimento_andamentoDaObra','Empreendimento_Empreendimento_diferenciaisItems','Empreendimento_Empreendimento_itemsPlantas','Empreendimento_Empreendimento_itensAreacomuns','Empreendimento_Empreendimento_pontosDeReferencia','Empreendimento_Empreendimento_videosOutos','Empreendimento_Housiverso','Empreendimento_Housiverso_diferencial','ArquivoAssessoria_DownAssessoria','Banner_BannerHome','Banner_BannerHome_BhConteudo','Banner_BannerHome_ImagensProntas','GqlShort_AcfShorts']
 export const isAcfFieldGroup = (obj?: { __typename?: any } | null): obj is AcfFieldGroup => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isAcfFieldGroup"')
   return AcfFieldGroup_possibleTypes.includes(obj.__typename)
@@ -20965,6 +21829,22 @@ const PageToCommentConnectionPageInfo_possibleTypes: string[] = ['PageToCommentC
 export const isPageToCommentConnectionPageInfo = (obj?: { __typename?: any } | null): obj is PageToCommentConnectionPageInfo => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isPageToCommentConnectionPageInfo"')
   return PageToCommentConnectionPageInfo_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const Page_Conteudoblog_possibleTypes: string[] = ['Page_Conteudoblog']
+export const isPage_Conteudoblog = (obj?: { __typename?: any } | null): obj is Page_Conteudoblog => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isPage_Conteudoblog"')
+  return Page_Conteudoblog_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const Page_Conteudoblog_blogImagemParaOsBanners_possibleTypes: string[] = ['Page_Conteudoblog_blogImagemParaOsBanners']
+export const isPage_Conteudoblog_blogImagemParaOsBanners = (obj?: { __typename?: any } | null): obj is Page_Conteudoblog_blogImagemParaOsBanners => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isPage_Conteudoblog_blogImagemParaOsBanners"')
+  return Page_Conteudoblog_blogImagemParaOsBanners_possibleTypes.includes(obj.__typename)
 }
 
 
@@ -21037,6 +21917,14 @@ const Page_Conteudopoliticadequalidade_praticaItensPq_possibleTypes: string[] = 
 export const isPage_Conteudopoliticadequalidade_praticaItensPq = (obj?: { __typename?: any } | null): obj is Page_Conteudopoliticadequalidade_praticaItensPq => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isPage_Conteudopoliticadequalidade_praticaItensPq"')
   return Page_Conteudopoliticadequalidade_praticaItensPq_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const Page_Conteudoshorts_possibleTypes: string[] = ['Page_Conteudoshorts']
+export const isPage_Conteudoshorts = (obj?: { __typename?: any } | null): obj is Page_Conteudoshorts => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isPage_Conteudoshorts"')
+  return Page_Conteudoshorts_possibleTypes.includes(obj.__typename)
 }
 
 
@@ -21149,6 +22037,14 @@ const NodeWithTrackbacks_possibleTypes: string[] = ['Post']
 export const isNodeWithTrackbacks = (obj?: { __typename?: any } | null): obj is NodeWithTrackbacks => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isNodeWithTrackbacks"')
   return NodeWithTrackbacks_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const Post_Acoespost_possibleTypes: string[] = ['Post_Acoespost']
+export const isPost_Acoespost = (obj?: { __typename?: any } | null): obj is Post_Acoespost => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isPost_Acoespost"')
+  return Post_Acoespost_possibleTypes.includes(obj.__typename)
 }
 
 
@@ -22529,6 +23425,110 @@ export const isGeneralSettingsToMediaItemConnectionEdge = (obj?: { __typename?: 
 
 
 
+const GqlShort_possibleTypes: string[] = ['GqlShort']
+export const isGqlShort = (obj?: { __typename?: any } | null): obj is GqlShort => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isGqlShort"')
+  return GqlShort_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const GqlShort_AcfShorts_possibleTypes: string[] = ['GqlShort_AcfShorts']
+export const isGqlShort_AcfShorts = (obj?: { __typename?: any } | null): obj is GqlShort_AcfShorts => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isGqlShort_AcfShorts"')
+  return GqlShort_AcfShorts_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const GqlShortToGqlShortConnection_possibleTypes: string[] = ['GqlShortToGqlShortConnection']
+export const isGqlShortToGqlShortConnection = (obj?: { __typename?: any } | null): obj is GqlShortToGqlShortConnection => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isGqlShortToGqlShortConnection"')
+  return GqlShortToGqlShortConnection_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const GqlShortConnection_possibleTypes: string[] = ['GqlShortToGqlShortConnection','RootQueryToGqlShortConnection']
+export const isGqlShortConnection = (obj?: { __typename?: any } | null): obj is GqlShortConnection => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isGqlShortConnection"')
+  return GqlShortConnection_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const GqlShortConnectionEdge_possibleTypes: string[] = ['GqlShortToGqlShortConnectionEdge','GqlShortToParentConnectionEdge','GqlShortToPreviewConnectionEdge','RootQueryToGqlShortConnectionEdge']
+export const isGqlShortConnectionEdge = (obj?: { __typename?: any } | null): obj is GqlShortConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isGqlShortConnectionEdge"')
+  return GqlShortConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const GqlShortConnectionPageInfo_possibleTypes: string[] = ['GqlShortToGqlShortConnectionPageInfo','RootQueryToGqlShortConnectionPageInfo']
+export const isGqlShortConnectionPageInfo = (obj?: { __typename?: any } | null): obj is GqlShortConnectionPageInfo => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isGqlShortConnectionPageInfo"')
+  return GqlShortConnectionPageInfo_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const GqlShortToGqlShortConnectionEdge_possibleTypes: string[] = ['GqlShortToGqlShortConnectionEdge']
+export const isGqlShortToGqlShortConnectionEdge = (obj?: { __typename?: any } | null): obj is GqlShortToGqlShortConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isGqlShortToGqlShortConnectionEdge"')
+  return GqlShortToGqlShortConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const GqlShortToGqlShortConnectionPageInfo_possibleTypes: string[] = ['GqlShortToGqlShortConnectionPageInfo']
+export const isGqlShortToGqlShortConnectionPageInfo = (obj?: { __typename?: any } | null): obj is GqlShortToGqlShortConnectionPageInfo => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isGqlShortToGqlShortConnectionPageInfo"')
+  return GqlShortToGqlShortConnectionPageInfo_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const GqlShortToParentConnectionEdge_possibleTypes: string[] = ['GqlShortToParentConnectionEdge']
+export const isGqlShortToParentConnectionEdge = (obj?: { __typename?: any } | null): obj is GqlShortToParentConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isGqlShortToParentConnectionEdge"')
+  return GqlShortToParentConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const GqlShortToPreviewConnectionEdge_possibleTypes: string[] = ['GqlShortToPreviewConnectionEdge']
+export const isGqlShortToPreviewConnectionEdge = (obj?: { __typename?: any } | null): obj is GqlShortToPreviewConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isGqlShortToPreviewConnectionEdge"')
+  return GqlShortToPreviewConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const RootQueryToGqlShortConnection_possibleTypes: string[] = ['RootQueryToGqlShortConnection']
+export const isRootQueryToGqlShortConnection = (obj?: { __typename?: any } | null): obj is RootQueryToGqlShortConnection => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isRootQueryToGqlShortConnection"')
+  return RootQueryToGqlShortConnection_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const RootQueryToGqlShortConnectionEdge_possibleTypes: string[] = ['RootQueryToGqlShortConnectionEdge']
+export const isRootQueryToGqlShortConnectionEdge = (obj?: { __typename?: any } | null): obj is RootQueryToGqlShortConnectionEdge => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isRootQueryToGqlShortConnectionEdge"')
+  return RootQueryToGqlShortConnectionEdge_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const RootQueryToGqlShortConnectionPageInfo_possibleTypes: string[] = ['RootQueryToGqlShortConnectionPageInfo']
+export const isRootQueryToGqlShortConnectionPageInfo = (obj?: { __typename?: any } | null): obj is RootQueryToGqlShortConnectionPageInfo => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isRootQueryToGqlShortConnectionPageInfo"')
+  return RootQueryToGqlShortConnectionPageInfo_possibleTypes.includes(obj.__typename)
+}
+
+
+
 const RootQueryToMediaItemConnection_possibleTypes: string[] = ['RootQueryToMediaItemConnection']
 export const isRootQueryToMediaItemConnection = (obj?: { __typename?: any } | null): obj is RootQueryToMediaItemConnection => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isRootQueryToMediaItemConnection"')
@@ -22641,7 +23641,7 @@ export const isMenuItemLinkableConnectionEdge = (obj?: { __typename?: any } | nu
 
 
 
-const MenuItemObjectUnion_possibleTypes: string[] = ['Post','Page','Banner','ArquivoAssessoria','Empreendimento','CentraldeDecorado','Category','Tag']
+const MenuItemObjectUnion_possibleTypes: string[] = ['Post','Page','Banner','ArquivoAssessoria','Empreendimento','CentraldeDecorado','GqlShort','Category','Tag']
 export const isMenuItemObjectUnion = (obj?: { __typename?: any } | null): obj is MenuItemObjectUnion => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isMenuItemObjectUnion"')
   return MenuItemObjectUnion_possibleTypes.includes(obj.__typename)
@@ -23161,7 +24161,7 @@ export const isWritingSettings = (obj?: { __typename?: any } | null): obj is Wri
 
 
 
-const Node_possibleTypes: string[] = ['ArquivoAssessoria','ContentType','Taxonomy','EnqueuedScript','EnqueuedStylesheet','User','Comment','MediaItem','Page','Post','Category','CentraldeDecorado','Empreendimento','PostFormat','Tag','UserRole','Banner','DiscussionSettings','GeneralSettings','Menu','MenuItem','PermalinkSettings','Plugin','ReadingSettings','Theme','WritingSettings','CommentAuthor']
+const Node_possibleTypes: string[] = ['ArquivoAssessoria','ContentType','Taxonomy','EnqueuedScript','EnqueuedStylesheet','User','Comment','MediaItem','Page','Post','Category','CentraldeDecorado','Empreendimento','PostFormat','Tag','UserRole','Banner','DiscussionSettings','GeneralSettings','GqlShort','Menu','MenuItem','PermalinkSettings','Plugin','ReadingSettings','Theme','WritingSettings','CommentAuthor']
 export const isNode = (obj?: { __typename?: any } | null): obj is Node => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isNode"')
   return Node_possibleTypes.includes(obj.__typename)
@@ -23169,7 +24169,7 @@ export const isNode = (obj?: { __typename?: any } | null): obj is Node => {
 
 
 
-const DatabaseIdentifier_possibleTypes: string[] = ['ArquivoAssessoria','User','Comment','MediaItem','Page','Post','Category','CentraldeDecorado','Empreendimento','PostFormat','Tag','Banner','Menu','MenuItem','CommentAuthor']
+const DatabaseIdentifier_possibleTypes: string[] = ['ArquivoAssessoria','User','Comment','MediaItem','Page','Post','Category','CentraldeDecorado','Empreendimento','PostFormat','Tag','Banner','GqlShort','Menu','MenuItem','CommentAuthor']
 export const isDatabaseIdentifier = (obj?: { __typename?: any } | null): obj is DatabaseIdentifier => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isDatabaseIdentifier"')
   return DatabaseIdentifier_possibleTypes.includes(obj.__typename)
@@ -23261,6 +24261,14 @@ const CreateEmpreendimentoPayload_possibleTypes: string[] = ['CreateEmpreendimen
 export const isCreateEmpreendimentoPayload = (obj?: { __typename?: any } | null): obj is CreateEmpreendimentoPayload => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isCreateEmpreendimentoPayload"')
   return CreateEmpreendimentoPayload_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const CreateGqlShortPayload_possibleTypes: string[] = ['CreateGqlShortPayload']
+export const isCreateGqlShortPayload = (obj?: { __typename?: any } | null): obj is CreateGqlShortPayload => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isCreateGqlShortPayload"')
+  return CreateGqlShortPayload_possibleTypes.includes(obj.__typename)
 }
 
 
@@ -23357,6 +24365,14 @@ const DeleteEmpreendimentoPayload_possibleTypes: string[] = ['DeleteEmpreendimen
 export const isDeleteEmpreendimentoPayload = (obj?: { __typename?: any } | null): obj is DeleteEmpreendimentoPayload => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isDeleteEmpreendimentoPayload"')
   return DeleteEmpreendimentoPayload_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const DeleteGqlShortPayload_possibleTypes: string[] = ['DeleteGqlShortPayload']
+export const isDeleteGqlShortPayload = (obj?: { __typename?: any } | null): obj is DeleteGqlShortPayload => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isDeleteGqlShortPayload"')
+  return DeleteGqlShortPayload_possibleTypes.includes(obj.__typename)
 }
 
 
@@ -23485,6 +24501,14 @@ const UpdateEmpreendimentoPayload_possibleTypes: string[] = ['UpdateEmpreendimen
 export const isUpdateEmpreendimentoPayload = (obj?: { __typename?: any } | null): obj is UpdateEmpreendimentoPayload => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isUpdateEmpreendimentoPayload"')
   return UpdateEmpreendimentoPayload_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const UpdateGqlShortPayload_possibleTypes: string[] = ['UpdateGqlShortPayload']
+export const isUpdateGqlShortPayload = (obj?: { __typename?: any } | null): obj is UpdateGqlShortPayload => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isUpdateGqlShortPayload"')
+  return UpdateGqlShortPayload_possibleTypes.includes(obj.__typename)
 }
 
 
@@ -23772,6 +24796,40 @@ where?: (RootQueryToEmpreendimentoConnectionWhereArgs | null)}) => RootQueryToEm
     
 /** Fields of the &#039;GeneralSettings&#039; settings group */
 generalSettings: (GeneralSettingsPromiseChain & {get: <R extends GeneralSettingsRequest>(request: R, defaultValue?: (FieldsSelection<GeneralSettings, R> | undefined)) => Promise<(FieldsSelection<GeneralSettings, R> | undefined)>}),
+    
+/** An object of the GqlShort Type.  */
+gqlShort: ((args: {
+/** The globally unique identifier of the object. */
+id: Scalars['ID'],
+/** Type of unique identifier to fetch by. Default is Global ID */
+idType?: (GqlShortIdType | null)}) => GqlShortPromiseChain & {get: <R extends GqlShortRequest>(request: R, defaultValue?: (FieldsSelection<GqlShort, R> | undefined)) => Promise<(FieldsSelection<GqlShort, R> | undefined)>}),
+    
+/**
+ * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
+ * A GqlShort object
+ */
+gqlShortBy: ((args?: {
+/** Get the GqlShort object by its global ID */
+id?: (Scalars['ID'] | null),
+/** Get the GqlShort by its database ID */
+gqlShortId?: (Scalars['Int'] | null),
+/** Get the GqlShort by its uri */
+uri?: (Scalars['String'] | null),
+/** Get the GqlShort by its slug (only available for non-hierarchical types) */
+slug?: (Scalars['String'] | null)}) => GqlShortPromiseChain & {get: <R extends GqlShortRequest>(request: R, defaultValue?: (FieldsSelection<GqlShort, R> | undefined)) => Promise<(FieldsSelection<GqlShort, R> | undefined)>})&(GqlShortPromiseChain & {get: <R extends GqlShortRequest>(request: R, defaultValue?: (FieldsSelection<GqlShort, R> | undefined)) => Promise<(FieldsSelection<GqlShort, R> | undefined)>}),
+    
+/** Connection between the RootQuery type and the GqlShort type */
+gqlShorts: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (RootQueryToGqlShortConnectionWhereArgs | null)}) => RootQueryToGqlShortConnectionPromiseChain & {get: <R extends RootQueryToGqlShortConnectionRequest>(request: R, defaultValue?: (FieldsSelection<RootQueryToGqlShortConnection, R> | undefined)) => Promise<(FieldsSelection<RootQueryToGqlShortConnection, R> | undefined)>})&(RootQueryToGqlShortConnectionPromiseChain & {get: <R extends RootQueryToGqlShortConnectionRequest>(request: R, defaultValue?: (FieldsSelection<RootQueryToGqlShortConnection, R> | undefined)) => Promise<(FieldsSelection<RootQueryToGqlShortConnection, R> | undefined)>}),
     
 /** An object of the mediaItem Type.  */
 mediaItem: ((args: {
@@ -24353,6 +25411,40 @@ where?: (RootQueryToEmpreendimentoConnectionWhereArgs | null)}) => RootQueryToEm
     
 /** Fields of the &#039;GeneralSettings&#039; settings group */
 generalSettings: (GeneralSettingsObservableChain & {get: <R extends GeneralSettingsRequest>(request: R, defaultValue?: (FieldsSelection<GeneralSettings, R> | undefined)) => Observable<(FieldsSelection<GeneralSettings, R> | undefined)>}),
+    
+/** An object of the GqlShort Type.  */
+gqlShort: ((args: {
+/** The globally unique identifier of the object. */
+id: Scalars['ID'],
+/** Type of unique identifier to fetch by. Default is Global ID */
+idType?: (GqlShortIdType | null)}) => GqlShortObservableChain & {get: <R extends GqlShortRequest>(request: R, defaultValue?: (FieldsSelection<GqlShort, R> | undefined)) => Observable<(FieldsSelection<GqlShort, R> | undefined)>}),
+    
+/**
+ * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
+ * A GqlShort object
+ */
+gqlShortBy: ((args?: {
+/** Get the GqlShort object by its global ID */
+id?: (Scalars['ID'] | null),
+/** Get the GqlShort by its database ID */
+gqlShortId?: (Scalars['Int'] | null),
+/** Get the GqlShort by its uri */
+uri?: (Scalars['String'] | null),
+/** Get the GqlShort by its slug (only available for non-hierarchical types) */
+slug?: (Scalars['String'] | null)}) => GqlShortObservableChain & {get: <R extends GqlShortRequest>(request: R, defaultValue?: (FieldsSelection<GqlShort, R> | undefined)) => Observable<(FieldsSelection<GqlShort, R> | undefined)>})&(GqlShortObservableChain & {get: <R extends GqlShortRequest>(request: R, defaultValue?: (FieldsSelection<GqlShort, R> | undefined)) => Observable<(FieldsSelection<GqlShort, R> | undefined)>}),
+    
+/** Connection between the RootQuery type and the GqlShort type */
+gqlShorts: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (RootQueryToGqlShortConnectionWhereArgs | null)}) => RootQueryToGqlShortConnectionObservableChain & {get: <R extends RootQueryToGqlShortConnectionRequest>(request: R, defaultValue?: (FieldsSelection<RootQueryToGqlShortConnection, R> | undefined)) => Observable<(FieldsSelection<RootQueryToGqlShortConnection, R> | undefined)>})&(RootQueryToGqlShortConnectionObservableChain & {get: <R extends RootQueryToGqlShortConnectionRequest>(request: R, defaultValue?: (FieldsSelection<RootQueryToGqlShortConnection, R> | undefined)) => Observable<(FieldsSelection<RootQueryToGqlShortConnection, R> | undefined)>}),
     
 /** An object of the mediaItem Type.  */
 mediaItem: ((args: {
@@ -30882,6 +31974,9 @@ contentType: (ContentNodeToContentTypeConnectionEdgePromiseChain & {get: <R exte
 /** The name of the Content Type the node belongs to */
 contentTypeName: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
     
+/** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo blog&quot; was set to Show in GraphQL. */
+conteuDoBlog: (Page_ConteudoblogPromiseChain & {get: <R extends Page_ConteudoblogRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteudoblog, R> | undefined)) => Promise<(FieldsSelection<Page_Conteudoblog, R> | undefined)>}),
+    
 /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo sobre&quot; was set to Show in GraphQL. */
 conteuSobre: (Page_ConteusobrePromiseChain & {get: <R extends Page_ConteusobreRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteusobre, R> | undefined)) => Promise<(FieldsSelection<Page_Conteusobre, R> | undefined)>}),
     
@@ -30893,6 +31988,9 @@ conteudoLStore: (Page_ConteudolstorePromiseChain & {get: <R extends Page_Conteud
     
 /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo política de qualidade&quot; was set to Show in GraphQL. */
 conteudoPoliticaDeQualidade: (Page_ConteudopoliticadequalidadePromiseChain & {get: <R extends Page_ConteudopoliticadequalidadeRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteudopoliticadequalidade, R> | undefined)) => Promise<(FieldsSelection<Page_Conteudopoliticadequalidade, R> | undefined)>}),
+    
+/** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo Shorts&quot; was set to Show in GraphQL. */
+conteudoShorts: (Page_ConteudoshortsPromiseChain & {get: <R extends Page_ConteudoshortsRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteudoshorts, R> | undefined)) => Promise<(FieldsSelection<Page_Conteudoshorts, R> | undefined)>}),
     
 /** The unique identifier stored in the database */
 databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>}),
@@ -31134,6 +32232,9 @@ contentType: (ContentNodeToContentTypeConnectionEdgeObservableChain & {get: <R e
 /** The name of the Content Type the node belongs to */
 contentTypeName: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
     
+/** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo blog&quot; was set to Show in GraphQL. */
+conteuDoBlog: (Page_ConteudoblogObservableChain & {get: <R extends Page_ConteudoblogRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteudoblog, R> | undefined)) => Observable<(FieldsSelection<Page_Conteudoblog, R> | undefined)>}),
+    
 /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo sobre&quot; was set to Show in GraphQL. */
 conteuSobre: (Page_ConteusobreObservableChain & {get: <R extends Page_ConteusobreRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteusobre, R> | undefined)) => Observable<(FieldsSelection<Page_Conteusobre, R> | undefined)>}),
     
@@ -31145,6 +32246,9 @@ conteudoLStore: (Page_ConteudolstoreObservableChain & {get: <R extends Page_Cont
     
 /** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo política de qualidade&quot; was set to Show in GraphQL. */
 conteudoPoliticaDeQualidade: (Page_ConteudopoliticadequalidadeObservableChain & {get: <R extends Page_ConteudopoliticadequalidadeRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteudopoliticadequalidade, R> | undefined)) => Observable<(FieldsSelection<Page_Conteudopoliticadequalidade, R> | undefined)>}),
+    
+/** Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo Shorts&quot; was set to Show in GraphQL. */
+conteudoShorts: (Page_ConteudoshortsObservableChain & {get: <R extends Page_ConteudoshortsRequest>(request: R, defaultValue?: (FieldsSelection<Page_Conteudoshorts, R> | undefined)) => Observable<(FieldsSelection<Page_Conteudoshorts, R> | undefined)>}),
     
 /** The unique identifier stored in the database */
 databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>}),
@@ -31680,6 +32784,60 @@ startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String']
 
 
 /** Field Group */
+export interface Page_ConteudoblogPromiseChain{
+    blogDescricaoBlog3: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    blogDescricaoHero: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    blogDescricaoShorts: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    blogImagemDeFundoHero: (MediaItemPromiseChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Promise<(FieldsSelection<MediaItem, R> | undefined)>}),
+    blogImagemParaOsBanners: ({get: <R extends Page_Conteudoblog_blogImagemParaOsBannersRequest>(request: R, defaultValue?: ((FieldsSelection<Page_Conteudoblog_blogImagemParaOsBanners, R> | undefined)[] | undefined)) => Promise<((FieldsSelection<Page_Conteudoblog_blogImagemParaOsBanners, R> | undefined)[] | undefined)>}),
+    blogLabelHero: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    blogTituloBloco3: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    blogTituloHero: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    blogTituloShorts: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface Page_ConteudoblogObservableChain{
+    blogDescricaoBlog3: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    blogDescricaoHero: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    blogDescricaoShorts: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    blogImagemDeFundoHero: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Observable<(FieldsSelection<MediaItem, R> | undefined)>}),
+    blogImagemParaOsBanners: ({get: <R extends Page_Conteudoblog_blogImagemParaOsBannersRequest>(request: R, defaultValue?: ((FieldsSelection<Page_Conteudoblog_blogImagemParaOsBanners, R> | undefined)[] | undefined)) => Observable<((FieldsSelection<Page_Conteudoblog_blogImagemParaOsBanners, R> | undefined)[] | undefined)>}),
+    blogLabelHero: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    blogTituloBloco3: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    blogTituloHero: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    blogTituloShorts: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface Page_Conteudoblog_blogImagemParaOsBannersPromiseChain{
+    blogImagemDesktopBanner: (MediaItemPromiseChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Promise<(FieldsSelection<MediaItem, R> | undefined)>}),
+    blogImagemMobileBanner: (MediaItemPromiseChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Promise<(FieldsSelection<MediaItem, R> | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface Page_Conteudoblog_blogImagemParaOsBannersObservableChain{
+    blogImagemDesktopBanner: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Observable<(FieldsSelection<MediaItem, R> | undefined)>}),
+    blogImagemMobileBanner: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Observable<(FieldsSelection<MediaItem, R> | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
 export interface Page_ConteusobrePromiseChain{
     descricao: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     descricaoLstore: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
@@ -31950,6 +33108,30 @@ export interface Page_Conteudopoliticadequalidade_praticaItensPqObservableChain{
 fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     imagemCertPq: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Observable<(FieldsSelection<MediaItem, R> | undefined)>}),
     tituloCertPq: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface Page_ConteudoshortsPromiseChain{
+    banner: (MediaItemPromiseChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Promise<(FieldsSelection<MediaItem, R> | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    shortsDescricao: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    shortsImagemDeFundo: (MediaItemPromiseChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Promise<(FieldsSelection<MediaItem, R> | undefined)>}),
+    shortsTitulo: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface Page_ConteudoshortsObservableChain{
+    banner: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Observable<(FieldsSelection<MediaItem, R> | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    shortsDescricao: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    shortsImagemDeFundo: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Observable<(FieldsSelection<MediaItem, R> | undefined)>}),
+    shortsTitulo: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
 }
 
 
@@ -32260,6 +33442,9 @@ node: (PostObservableChain & {get: <R extends PostRequest>(request: R, defaultVa
 /** A chronological content entry typically used for blog posts, news articles, or similar date-based content. */
 export interface PostPromiseChain{
     
+/** Added to the GraphQL Schema because the ACF Field Group &quot;Ações Post&quot; was set to Show in GraphQL. */
+acoesPost: (Post_AcoespostPromiseChain & {get: <R extends Post_AcoespostRequest>(request: R, defaultValue?: (FieldsSelection<Post_Acoespost, R> | undefined)) => Promise<(FieldsSelection<Post_Acoespost, R> | undefined)>}),
+    
 /**
  * @deprecated This content type is not hierarchical and typically will not have ancestors
  * The ancestors of the content node.
@@ -32541,6 +33726,9 @@ uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undef
 
 /** A chronological content entry typically used for blog posts, news articles, or similar date-based content. */
 export interface PostObservableChain{
+    
+/** Added to the GraphQL Schema because the ACF Field Group &quot;Ações Post&quot; was set to Show in GraphQL. */
+acoesPost: (Post_AcoespostObservableChain & {get: <R extends Post_AcoespostRequest>(request: R, defaultValue?: (FieldsSelection<Post_Acoespost, R> | undefined)) => Observable<(FieldsSelection<Post_Acoespost, R> | undefined)>}),
     
 /**
  * @deprecated This content type is not hierarchical and typically will not have ancestors
@@ -32878,6 +34066,26 @@ pinged: ({get: (request?: boolean|number, defaultValue?: ((Scalars['String'] | u
     
 /** URLs queued to be pinged. */
 toPing: ({get: (request?: boolean|number, defaultValue?: ((Scalars['String'] | undefined)[] | undefined)) => Observable<((Scalars['String'] | undefined)[] | undefined)>})
+}
+
+
+/** Field Group */
+export interface Post_AcoespostPromiseChain{
+    exibirAutorDaMateria: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    imagemDoBannerPost: (MediaItemPromiseChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Promise<(FieldsSelection<MediaItem, R> | undefined)>})
+}
+
+
+/** Field Group */
+export interface Post_AcoespostObservableChain{
+    exibirAutorDaMateria: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    imagemDoBannerPost: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Observable<(FieldsSelection<MediaItem, R> | undefined)>})
 }
 
 
@@ -39559,6 +40767,636 @@ node: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R,
 }
 
 
+/** The GqlShort type */
+export interface GqlShortPromiseChain{
+    
+/**
+ * @deprecated Deprecated in favor of the databaseId field
+ * The unique numeric identifier for the content node.
+ */
+gqlShortId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>}),
+    
+/** Added to the GraphQL Schema because the ACF Field Group &quot;Short do YouTube&quot; was set to Show in GraphQL. */
+acf_shorts: (GqlShort_AcfShortsPromiseChain & {get: <R extends GqlShort_AcfShortsRequest>(request: R, defaultValue?: (FieldsSelection<GqlShort_AcfShorts, R> | undefined)) => Promise<(FieldsSelection<GqlShort_AcfShorts, R> | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * The ancestors of the content node.
+ */
+ancestors: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null)}) => GqlShortToGqlShortConnectionPromiseChain & {get: <R extends GqlShortToGqlShortConnectionRequest>(request: R, defaultValue?: (FieldsSelection<GqlShortToGqlShortConnection, R> | undefined)) => Promise<(FieldsSelection<GqlShortToGqlShortConnection, R> | undefined)>})&(GqlShortToGqlShortConnectionPromiseChain & {get: <R extends GqlShortToGqlShortConnectionRequest>(request: R, defaultValue?: (FieldsSelection<GqlShortToGqlShortConnection, R> | undefined)) => Promise<(FieldsSelection<GqlShortToGqlShortConnection, R> | undefined)>}),
+    
+/** Connection between the ContentNode type and the ContentType type */
+contentType: (ContentNodeToContentTypeConnectionEdgePromiseChain & {get: <R extends ContentNodeToContentTypeConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToContentTypeConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToContentTypeConnectionEdge, R> | undefined)>}),
+    
+/** The name of the Content Type the node belongs to */
+contentTypeName: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
+    
+/** The unique identifier stored in the database */
+databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Promise<Scalars['Int']>}),
+    
+/** Post publishing date. */
+date: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The publishing date set in GMT. */
+dateGmt: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The desired slug of the post */
+desiredSlug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
+editingLockedBy: (ContentNodeToEditLockConnectionEdgePromiseChain & {get: <R extends ContentNodeToEditLockConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEditLockConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEditLockConnectionEdge, R> | undefined)>}),
+    
+/** The RSS enclosure for the object */
+enclosure: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** Connection between the ContentNode type and the EnqueuedScript type */
+enqueuedScripts: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)}) => ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
+    
+/** Connection between the ContentNode type and the EnqueuedStylesheet type */
+enqueuedStylesheets: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionPromiseChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+    
+/** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
+guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** Whether the shorts object is password protected. */
+hasPassword: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
+    
+/** The globally unique identifier of the shorts object. */
+id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Promise<Scalars['ID']>}),
+    
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether the node is a Content Node */
+isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** Whether the object is a node in the preview state */
+isPreview: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
+    
+/** Whether the object is restricted from the current viewer */
+isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Promise<(Scalars['Boolean'] | undefined)>}),
+    
+/** Whether the node is a Term */
+isTermNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** The user that most recently edited the node */
+lastEditedBy: (ContentNodeToEditLastConnectionEdgePromiseChain & {get: <R extends ContentNodeToEditLastConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEditLastConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<ContentNodeToEditLastConnectionEdge, R> | undefined)>}),
+    
+/** The permalink of the post */
+link: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
+modified: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
+modifiedGmt: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have a parent
+ * The parent of the content node.
+ */
+parent: (GqlShortToParentConnectionEdgePromiseChain & {get: <R extends GqlShortToParentConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<GqlShortToParentConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<GqlShortToParentConnectionEdge, R> | undefined)>}),
+    
+/** The password for the shorts object. */
+password: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** Connection between the GqlShort type and the GqlShort type */
+preview: (GqlShortToPreviewConnectionEdgePromiseChain & {get: <R extends GqlShortToPreviewConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<GqlShortToPreviewConnectionEdge, R> | undefined)) => Promise<(FieldsSelection<GqlShortToPreviewConnectionEdge, R> | undefined)>}),
+    
+/** The database id of the preview node */
+previewRevisionDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Promise<(Scalars['Int'] | undefined)>}),
+    
+/** Whether the object is a node in the preview state */
+previewRevisionId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Promise<(Scalars['ID'] | undefined)>}),
+    
+/** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
+slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The current status of the object */
+status: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The template assigned to the node */
+template: (ContentTemplatePromiseChain & {get: <R extends ContentTemplateRequest>(request: R, defaultValue?: (FieldsSelection<ContentTemplate, R> | undefined)) => Promise<(FieldsSelection<ContentTemplate, R> | undefined)>}),
+    
+/** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
+title: ((args?: {
+/** Format of the field output */
+format?: (PostObjectFieldFormatEnum | null)}) => {get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})&({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The unique resource identifier path */
+uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** The GqlShort type */
+export interface GqlShortObservableChain{
+    
+/**
+ * @deprecated Deprecated in favor of the databaseId field
+ * The unique numeric identifier for the content node.
+ */
+gqlShortId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>}),
+    
+/** Added to the GraphQL Schema because the ACF Field Group &quot;Short do YouTube&quot; was set to Show in GraphQL. */
+acf_shorts: (GqlShort_AcfShortsObservableChain & {get: <R extends GqlShort_AcfShortsRequest>(request: R, defaultValue?: (FieldsSelection<GqlShort_AcfShorts, R> | undefined)) => Observable<(FieldsSelection<GqlShort_AcfShorts, R> | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have ancestors
+ * The ancestors of the content node.
+ */
+ancestors: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null)}) => GqlShortToGqlShortConnectionObservableChain & {get: <R extends GqlShortToGqlShortConnectionRequest>(request: R, defaultValue?: (FieldsSelection<GqlShortToGqlShortConnection, R> | undefined)) => Observable<(FieldsSelection<GqlShortToGqlShortConnection, R> | undefined)>})&(GqlShortToGqlShortConnectionObservableChain & {get: <R extends GqlShortToGqlShortConnectionRequest>(request: R, defaultValue?: (FieldsSelection<GqlShortToGqlShortConnection, R> | undefined)) => Observable<(FieldsSelection<GqlShortToGqlShortConnection, R> | undefined)>}),
+    
+/** Connection between the ContentNode type and the ContentType type */
+contentType: (ContentNodeToContentTypeConnectionEdgeObservableChain & {get: <R extends ContentNodeToContentTypeConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToContentTypeConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToContentTypeConnectionEdge, R> | undefined)>}),
+    
+/** The name of the Content Type the node belongs to */
+contentTypeName: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
+    
+/** The unique identifier stored in the database */
+databaseId: ({get: (request?: boolean|number, defaultValue?: Scalars['Int']) => Observable<Scalars['Int']>}),
+    
+/** Post publishing date. */
+date: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The publishing date set in GMT. */
+dateGmt: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The desired slug of the post */
+desiredSlug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
+editingLockedBy: (ContentNodeToEditLockConnectionEdgeObservableChain & {get: <R extends ContentNodeToEditLockConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEditLockConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEditLockConnectionEdge, R> | undefined)>}),
+    
+/** The RSS enclosure for the object */
+enclosure: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** Connection between the ContentNode type and the EnqueuedScript type */
+enqueuedScripts: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedScriptConnectionWhereArgs | null)}) => ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>})&(ContentNodeToEnqueuedScriptConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedScriptConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedScriptConnection, R> | undefined)>}),
+    
+/** Connection between the ContentNode type and the EnqueuedStylesheet type */
+enqueuedStylesheets: ((args?: {
+/** The number of items to return after the referenced "after" cursor */
+first?: (Scalars['Int'] | null),
+/** The number of items to return before the referenced "before" cursor */
+last?: (Scalars['Int'] | null),
+/** Cursor used along with the "first" argument to reference where in the dataset to get data */
+after?: (Scalars['String'] | null),
+/** Cursor used along with the "last" argument to reference where in the dataset to get data */
+before?: (Scalars['String'] | null),
+/** Arguments for filtering the connection */
+where?: (ContentNodeToEnqueuedStylesheetConnectionWhereArgs | null)}) => ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>})&(ContentNodeToEnqueuedStylesheetConnectionObservableChain & {get: <R extends ContentNodeToEnqueuedStylesheetConnectionRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEnqueuedStylesheetConnection, R> | undefined)>}),
+    
+/** The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes. */
+guid: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** Whether the shorts object is password protected. */
+hasPassword: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
+    
+/** The globally unique identifier of the shorts object. */
+id: ({get: (request?: boolean|number, defaultValue?: Scalars['ID']) => Observable<Scalars['ID']>}),
+    
+/** Whether the node is a Comment */
+isComment: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether the node is a Content Node */
+isContentNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether the node represents the front page. */
+isFrontPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether  the node represents the blog page. */
+isPostsPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** Whether the object is a node in the preview state */
+isPreview: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
+    
+/** Whether the object is restricted from the current viewer */
+isRestricted: ({get: (request?: boolean|number, defaultValue?: (Scalars['Boolean'] | undefined)) => Observable<(Scalars['Boolean'] | undefined)>}),
+    
+/** Whether the node is a Term */
+isTermNode: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** The user that most recently edited the node */
+lastEditedBy: (ContentNodeToEditLastConnectionEdgeObservableChain & {get: <R extends ContentNodeToEditLastConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<ContentNodeToEditLastConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<ContentNodeToEditLastConnectionEdge, R> | undefined)>}),
+    
+/** The permalink of the post */
+link: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
+modified: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
+modifiedGmt: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/**
+ * @deprecated This content type is not hierarchical and typically will not have a parent
+ * The parent of the content node.
+ */
+parent: (GqlShortToParentConnectionEdgeObservableChain & {get: <R extends GqlShortToParentConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<GqlShortToParentConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<GqlShortToParentConnectionEdge, R> | undefined)>}),
+    
+/** The password for the shorts object. */
+password: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** Connection between the GqlShort type and the GqlShort type */
+preview: (GqlShortToPreviewConnectionEdgeObservableChain & {get: <R extends GqlShortToPreviewConnectionEdgeRequest>(request: R, defaultValue?: (FieldsSelection<GqlShortToPreviewConnectionEdge, R> | undefined)) => Observable<(FieldsSelection<GqlShortToPreviewConnectionEdge, R> | undefined)>}),
+    
+/** The database id of the preview node */
+previewRevisionDatabaseId: ({get: (request?: boolean|number, defaultValue?: (Scalars['Int'] | undefined)) => Observable<(Scalars['Int'] | undefined)>}),
+    
+/** Whether the object is a node in the preview state */
+previewRevisionId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Observable<(Scalars['ID'] | undefined)>}),
+    
+/** The URL-friendly, human-readable identifier for the content node, used in its permalink. */
+slug: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The current status of the object */
+status: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The template assigned to the node */
+template: (ContentTemplateObservableChain & {get: <R extends ContentTemplateRequest>(request: R, defaultValue?: (FieldsSelection<ContentTemplate, R> | undefined)) => Observable<(FieldsSelection<ContentTemplate, R> | undefined)>}),
+    
+/** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
+title: ((args?: {
+/** Format of the field output */
+format?: (PostObjectFieldFormatEnum | null)}) => {get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})&({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The unique resource identifier path */
+uri: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface GqlShort_AcfShortsPromiseChain{
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    imagemDoShort: (MediaItemPromiseChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Promise<(FieldsSelection<MediaItem, R> | undefined)>}),
+    linkDaImagemShort: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    linkIdVideoYoutube: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    tituloDoShort: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Field Group */
+export interface GqlShort_AcfShortsObservableChain{
+    
+/** The name of the ACF Field Group */
+fieldGroupName: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    imagemDoShort: (MediaItemObservableChain & {get: <R extends MediaItemRequest>(request: R, defaultValue?: (FieldsSelection<MediaItem, R> | undefined)) => Observable<(FieldsSelection<MediaItem, R> | undefined)>}),
+    linkDaImagemShort: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    linkIdVideoYoutube: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    tituloDoShort: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Connection between the GqlShort type and the GqlShort type */
+export interface GqlShortToGqlShortConnectionPromiseChain{
+    
+/** Edges for the GqlShortToGqlShortConnection connection */
+edges: ({get: <R extends GqlShortToGqlShortConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<GqlShortToGqlShortConnectionEdge, R>[]) => Promise<FieldsSelection<GqlShortToGqlShortConnectionEdge, R>[]>}),
+    
+/** The nodes of the connection, without the edges */
+nodes: ({get: <R extends GqlShortRequest>(request: R, defaultValue?: FieldsSelection<GqlShort, R>[]) => Promise<FieldsSelection<GqlShort, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (GqlShortToGqlShortConnectionPageInfoPromiseChain & {get: <R extends GqlShortToGqlShortConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<GqlShortToGqlShortConnectionPageInfo, R>) => Promise<FieldsSelection<GqlShortToGqlShortConnectionPageInfo, R>>})
+}
+
+
+/** Connection between the GqlShort type and the GqlShort type */
+export interface GqlShortToGqlShortConnectionObservableChain{
+    
+/** Edges for the GqlShortToGqlShortConnection connection */
+edges: ({get: <R extends GqlShortToGqlShortConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<GqlShortToGqlShortConnectionEdge, R>[]) => Observable<FieldsSelection<GqlShortToGqlShortConnectionEdge, R>[]>}),
+    
+/** The nodes of the connection, without the edges */
+nodes: ({get: <R extends GqlShortRequest>(request: R, defaultValue?: FieldsSelection<GqlShort, R>[]) => Observable<FieldsSelection<GqlShort, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (GqlShortToGqlShortConnectionPageInfoObservableChain & {get: <R extends GqlShortToGqlShortConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<GqlShortToGqlShortConnectionPageInfo, R>) => Observable<FieldsSelection<GqlShortToGqlShortConnectionPageInfo, R>>})
+}
+
+
+/** A paginated collection of GqlShort Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of GqlShort Nodes */
+export interface GqlShortConnectionPromiseChain{
+    
+/** A list of edges (relational context) between RootQuery and connected GqlShort Nodes */
+edges: ({get: <R extends GqlShortConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<GqlShortConnectionEdge, R>[]) => Promise<FieldsSelection<GqlShortConnectionEdge, R>[]>}),
+    
+/** A list of connected GqlShort Nodes */
+nodes: ({get: <R extends GqlShortRequest>(request: R, defaultValue?: FieldsSelection<GqlShort, R>[]) => Promise<FieldsSelection<GqlShort, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (GqlShortConnectionPageInfoPromiseChain & {get: <R extends GqlShortConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<GqlShortConnectionPageInfo, R>) => Promise<FieldsSelection<GqlShortConnectionPageInfo, R>>})
+}
+
+
+/** A paginated collection of GqlShort Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of GqlShort Nodes */
+export interface GqlShortConnectionObservableChain{
+    
+/** A list of edges (relational context) between RootQuery and connected GqlShort Nodes */
+edges: ({get: <R extends GqlShortConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<GqlShortConnectionEdge, R>[]) => Observable<FieldsSelection<GqlShortConnectionEdge, R>[]>}),
+    
+/** A list of connected GqlShort Nodes */
+nodes: ({get: <R extends GqlShortRequest>(request: R, defaultValue?: FieldsSelection<GqlShort, R>[]) => Observable<FieldsSelection<GqlShort, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (GqlShortConnectionPageInfoObservableChain & {get: <R extends GqlShortConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<GqlShortConnectionPageInfo, R>) => Observable<FieldsSelection<GqlShortConnectionPageInfo, R>>})
+}
+
+
+/** Represents a connection to a GqlShort. Contains both the GqlShort Node and metadata about the relationship. */
+export interface GqlShortConnectionEdgePromiseChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The connected GqlShort Node */
+node: (GqlShortPromiseChain & {get: <R extends GqlShortRequest>(request: R, defaultValue?: FieldsSelection<GqlShort, R>) => Promise<FieldsSelection<GqlShort, R>>})
+}
+
+
+/** Represents a connection to a GqlShort. Contains both the GqlShort Node and metadata about the relationship. */
+export interface GqlShortConnectionEdgeObservableChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The connected GqlShort Node */
+node: (GqlShortObservableChain & {get: <R extends GqlShortRequest>(request: R, defaultValue?: FieldsSelection<GqlShort, R>) => Observable<FieldsSelection<GqlShort, R>>})
+}
+
+
+/** Pagination metadata specific to &quot;GqlShortConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;GqlShortConnectionEdge&quot; Nodes. */
+export interface GqlShortConnectionPageInfoPromiseChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Pagination metadata specific to &quot;GqlShortConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;GqlShortConnectionEdge&quot; Nodes. */
+export interface GqlShortConnectionPageInfoObservableChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** An edge in a connection */
+export interface GqlShortToGqlShortConnectionEdgePromiseChain{
+    
+/** A cursor for use in pagination */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The item at the end of the edge */
+node: (GqlShortPromiseChain & {get: <R extends GqlShortRequest>(request: R, defaultValue?: FieldsSelection<GqlShort, R>) => Promise<FieldsSelection<GqlShort, R>>})
+}
+
+
+/** An edge in a connection */
+export interface GqlShortToGqlShortConnectionEdgeObservableChain{
+    
+/** A cursor for use in pagination */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The item at the end of the edge */
+node: (GqlShortObservableChain & {get: <R extends GqlShortRequest>(request: R, defaultValue?: FieldsSelection<GqlShort, R>) => Observable<FieldsSelection<GqlShort, R>>})
+}
+
+
+/** Pagination metadata specific to &quot;GqlShortToGqlShortConnection&quot; collections. Provides cursors and flags for navigating through sets of GqlShortToGqlShortConnection Nodes. */
+export interface GqlShortToGqlShortConnectionPageInfoPromiseChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Pagination metadata specific to &quot;GqlShortToGqlShortConnection&quot; collections. Provides cursors and flags for navigating through sets of GqlShortToGqlShortConnection Nodes. */
+export interface GqlShortToGqlShortConnectionPageInfoObservableChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** Connection between the GqlShort type and the GqlShort type */
+export interface GqlShortToParentConnectionEdgePromiseChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The node of the connection, without the edges */
+node: (GqlShortPromiseChain & {get: <R extends GqlShortRequest>(request: R, defaultValue?: FieldsSelection<GqlShort, R>) => Promise<FieldsSelection<GqlShort, R>>})
+}
+
+
+/** Connection between the GqlShort type and the GqlShort type */
+export interface GqlShortToParentConnectionEdgeObservableChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The node of the connection, without the edges */
+node: (GqlShortObservableChain & {get: <R extends GqlShortRequest>(request: R, defaultValue?: FieldsSelection<GqlShort, R>) => Observable<FieldsSelection<GqlShort, R>>})
+}
+
+
+/** Connection between the GqlShort type and the GqlShort type */
+export interface GqlShortToPreviewConnectionEdgePromiseChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The node of the connection, without the edges */
+node: (GqlShortPromiseChain & {get: <R extends GqlShortRequest>(request: R, defaultValue?: FieldsSelection<GqlShort, R>) => Promise<FieldsSelection<GqlShort, R>>})
+}
+
+
+/** Connection between the GqlShort type and the GqlShort type */
+export interface GqlShortToPreviewConnectionEdgeObservableChain{
+    
+/** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The node of the connection, without the edges */
+node: (GqlShortObservableChain & {get: <R extends GqlShortRequest>(request: R, defaultValue?: FieldsSelection<GqlShort, R>) => Observable<FieldsSelection<GqlShort, R>>})
+}
+
+
+/** Connection between the RootQuery type and the GqlShort type */
+export interface RootQueryToGqlShortConnectionPromiseChain{
+    
+/** Edges for the RootQueryToGqlShortConnection connection */
+edges: ({get: <R extends RootQueryToGqlShortConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<RootQueryToGqlShortConnectionEdge, R>[]) => Promise<FieldsSelection<RootQueryToGqlShortConnectionEdge, R>[]>}),
+    
+/** The nodes of the connection, without the edges */
+nodes: ({get: <R extends GqlShortRequest>(request: R, defaultValue?: FieldsSelection<GqlShort, R>[]) => Promise<FieldsSelection<GqlShort, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (RootQueryToGqlShortConnectionPageInfoPromiseChain & {get: <R extends RootQueryToGqlShortConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<RootQueryToGqlShortConnectionPageInfo, R>) => Promise<FieldsSelection<RootQueryToGqlShortConnectionPageInfo, R>>})
+}
+
+
+/** Connection between the RootQuery type and the GqlShort type */
+export interface RootQueryToGqlShortConnectionObservableChain{
+    
+/** Edges for the RootQueryToGqlShortConnection connection */
+edges: ({get: <R extends RootQueryToGqlShortConnectionEdgeRequest>(request: R, defaultValue?: FieldsSelection<RootQueryToGqlShortConnectionEdge, R>[]) => Observable<FieldsSelection<RootQueryToGqlShortConnectionEdge, R>[]>}),
+    
+/** The nodes of the connection, without the edges */
+nodes: ({get: <R extends GqlShortRequest>(request: R, defaultValue?: FieldsSelection<GqlShort, R>[]) => Observable<FieldsSelection<GqlShort, R>[]>}),
+    
+/** Information about pagination in a connection. */
+pageInfo: (RootQueryToGqlShortConnectionPageInfoObservableChain & {get: <R extends RootQueryToGqlShortConnectionPageInfoRequest>(request: R, defaultValue?: FieldsSelection<RootQueryToGqlShortConnectionPageInfo, R>) => Observable<FieldsSelection<RootQueryToGqlShortConnectionPageInfo, R>>})
+}
+
+
+/** An edge in a connection */
+export interface RootQueryToGqlShortConnectionEdgePromiseChain{
+    
+/** A cursor for use in pagination */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The item at the end of the edge */
+node: (GqlShortPromiseChain & {get: <R extends GqlShortRequest>(request: R, defaultValue?: FieldsSelection<GqlShort, R>) => Promise<FieldsSelection<GqlShort, R>>})
+}
+
+
+/** An edge in a connection */
+export interface RootQueryToGqlShortConnectionEdgeObservableChain{
+    
+/** A cursor for use in pagination */
+cursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The item at the end of the edge */
+node: (GqlShortObservableChain & {get: <R extends GqlShortRequest>(request: R, defaultValue?: FieldsSelection<GqlShort, R>) => Observable<FieldsSelection<GqlShort, R>>})
+}
+
+
+/** Pagination metadata specific to &quot;RootQueryToGqlShortConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToGqlShortConnection Nodes. */
+export interface RootQueryToGqlShortConnectionPageInfoPromiseChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** Pagination metadata specific to &quot;RootQueryToGqlShortConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToGqlShortConnection Nodes. */
+export interface RootQueryToGqlShortConnectionPageInfoObservableChain{
+    
+/** When paginating forwards, the cursor to continue. */
+endCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** When paginating forwards, are there more items? */
+hasNextPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, are there more items? */
+hasPreviousPage: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
+    
+/** When paginating backwards, the cursor to continue. */
+startCursor: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
 /** Connection between the RootQuery type and the mediaItem type */
 export interface RootQueryToMediaItemConnectionPromiseChain{
     
@@ -42254,6 +44092,11 @@ createEmpreendimento: ((args: {
 /** Input for the createEmpreendimento mutation */
 input: CreateEmpreendimentoInput}) => CreateEmpreendimentoPayloadPromiseChain & {get: <R extends CreateEmpreendimentoPayloadRequest>(request: R, defaultValue?: (FieldsSelection<CreateEmpreendimentoPayload, R> | undefined)) => Promise<(FieldsSelection<CreateEmpreendimentoPayload, R> | undefined)>}),
     
+/** The createGqlShort mutation */
+createGqlShort: ((args: {
+/** Input for the createGqlShort mutation */
+input: CreateGqlShortInput}) => CreateGqlShortPayloadPromiseChain & {get: <R extends CreateGqlShortPayloadRequest>(request: R, defaultValue?: (FieldsSelection<CreateGqlShortPayload, R> | undefined)) => Promise<(FieldsSelection<CreateGqlShortPayload, R> | undefined)>}),
+    
 /** The createMediaItem mutation */
 createMediaItem: ((args: {
 /** Input for the createMediaItem mutation */
@@ -42313,6 +44156,11 @@ input: DeleteCommentInput}) => DeleteCommentPayloadPromiseChain & {get: <R exten
 deleteEmpreendimento: ((args: {
 /** Input for the deleteEmpreendimento mutation */
 input: DeleteEmpreendimentoInput}) => DeleteEmpreendimentoPayloadPromiseChain & {get: <R extends DeleteEmpreendimentoPayloadRequest>(request: R, defaultValue?: (FieldsSelection<DeleteEmpreendimentoPayload, R> | undefined)) => Promise<(FieldsSelection<DeleteEmpreendimentoPayload, R> | undefined)>}),
+    
+/** The deleteGqlShort mutation */
+deleteGqlShort: ((args: {
+/** Input for the deleteGqlShort mutation */
+input: DeleteGqlShortInput}) => DeleteGqlShortPayloadPromiseChain & {get: <R extends DeleteGqlShortPayloadRequest>(request: R, defaultValue?: (FieldsSelection<DeleteGqlShortPayload, R> | undefined)) => Promise<(FieldsSelection<DeleteGqlShortPayload, R> | undefined)>}),
     
 /** The deleteMediaItem mutation */
 deleteMediaItem: ((args: {
@@ -42399,6 +44247,11 @@ updateEmpreendimento: ((args: {
 /** Input for the updateEmpreendimento mutation */
 input: UpdateEmpreendimentoInput}) => UpdateEmpreendimentoPayloadPromiseChain & {get: <R extends UpdateEmpreendimentoPayloadRequest>(request: R, defaultValue?: (FieldsSelection<UpdateEmpreendimentoPayload, R> | undefined)) => Promise<(FieldsSelection<UpdateEmpreendimentoPayload, R> | undefined)>}),
     
+/** The updateGqlShort mutation */
+updateGqlShort: ((args: {
+/** Input for the updateGqlShort mutation */
+input: UpdateGqlShortInput}) => UpdateGqlShortPayloadPromiseChain & {get: <R extends UpdateGqlShortPayloadRequest>(request: R, defaultValue?: (FieldsSelection<UpdateGqlShortPayload, R> | undefined)) => Promise<(FieldsSelection<UpdateGqlShortPayload, R> | undefined)>}),
+    
 /** The updateMediaItem mutation */
 updateMediaItem: ((args: {
 /** Input for the updateMediaItem mutation */
@@ -42469,6 +44322,11 @@ createEmpreendimento: ((args: {
 /** Input for the createEmpreendimento mutation */
 input: CreateEmpreendimentoInput}) => CreateEmpreendimentoPayloadObservableChain & {get: <R extends CreateEmpreendimentoPayloadRequest>(request: R, defaultValue?: (FieldsSelection<CreateEmpreendimentoPayload, R> | undefined)) => Observable<(FieldsSelection<CreateEmpreendimentoPayload, R> | undefined)>}),
     
+/** The createGqlShort mutation */
+createGqlShort: ((args: {
+/** Input for the createGqlShort mutation */
+input: CreateGqlShortInput}) => CreateGqlShortPayloadObservableChain & {get: <R extends CreateGqlShortPayloadRequest>(request: R, defaultValue?: (FieldsSelection<CreateGqlShortPayload, R> | undefined)) => Observable<(FieldsSelection<CreateGqlShortPayload, R> | undefined)>}),
+    
 /** The createMediaItem mutation */
 createMediaItem: ((args: {
 /** Input for the createMediaItem mutation */
@@ -42528,6 +44386,11 @@ input: DeleteCommentInput}) => DeleteCommentPayloadObservableChain & {get: <R ex
 deleteEmpreendimento: ((args: {
 /** Input for the deleteEmpreendimento mutation */
 input: DeleteEmpreendimentoInput}) => DeleteEmpreendimentoPayloadObservableChain & {get: <R extends DeleteEmpreendimentoPayloadRequest>(request: R, defaultValue?: (FieldsSelection<DeleteEmpreendimentoPayload, R> | undefined)) => Observable<(FieldsSelection<DeleteEmpreendimentoPayload, R> | undefined)>}),
+    
+/** The deleteGqlShort mutation */
+deleteGqlShort: ((args: {
+/** Input for the deleteGqlShort mutation */
+input: DeleteGqlShortInput}) => DeleteGqlShortPayloadObservableChain & {get: <R extends DeleteGqlShortPayloadRequest>(request: R, defaultValue?: (FieldsSelection<DeleteGqlShortPayload, R> | undefined)) => Observable<(FieldsSelection<DeleteGqlShortPayload, R> | undefined)>}),
     
 /** The deleteMediaItem mutation */
 deleteMediaItem: ((args: {
@@ -42613,6 +44476,11 @@ input: UpdateCommentInput}) => UpdateCommentPayloadObservableChain & {get: <R ex
 updateEmpreendimento: ((args: {
 /** Input for the updateEmpreendimento mutation */
 input: UpdateEmpreendimentoInput}) => UpdateEmpreendimentoPayloadObservableChain & {get: <R extends UpdateEmpreendimentoPayloadRequest>(request: R, defaultValue?: (FieldsSelection<UpdateEmpreendimentoPayload, R> | undefined)) => Observable<(FieldsSelection<UpdateEmpreendimentoPayload, R> | undefined)>}),
+    
+/** The updateGqlShort mutation */
+updateGqlShort: ((args: {
+/** Input for the updateGqlShort mutation */
+input: UpdateGqlShortInput}) => UpdateGqlShortPayloadObservableChain & {get: <R extends UpdateGqlShortPayloadRequest>(request: R, defaultValue?: (FieldsSelection<UpdateGqlShortPayload, R> | undefined)) => Observable<(FieldsSelection<UpdateGqlShortPayload, R> | undefined)>}),
     
 /** The updateMediaItem mutation */
 updateMediaItem: ((args: {
@@ -42783,6 +44651,28 @@ export interface CreateEmpreendimentoPayloadObservableChain{
     
 /** The Post object mutation type. */
 empreendimento: (EmpreendimentoObservableChain & {get: <R extends EmpreendimentoRequest>(request: R, defaultValue?: (FieldsSelection<Empreendimento, R> | undefined)) => Observable<(FieldsSelection<Empreendimento, R> | undefined)>}),
+    
+/** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+clientMutationId: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** The payload for the createGqlShort mutation. */
+export interface CreateGqlShortPayloadPromiseChain{
+    
+/** The Post object mutation type. */
+gqlShort: (GqlShortPromiseChain & {get: <R extends GqlShortRequest>(request: R, defaultValue?: (FieldsSelection<GqlShort, R> | undefined)) => Promise<(FieldsSelection<GqlShort, R> | undefined)>}),
+    
+/** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+clientMutationId: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** The payload for the createGqlShort mutation. */
+export interface CreateGqlShortPayloadObservableChain{
+    
+/** The Post object mutation type. */
+gqlShort: (GqlShortObservableChain & {get: <R extends GqlShortRequest>(request: R, defaultValue?: (FieldsSelection<GqlShort, R> | undefined)) => Observable<(FieldsSelection<GqlShort, R> | undefined)>}),
     
 /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
 clientMutationId: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
@@ -43080,6 +44970,34 @@ export interface DeleteEmpreendimentoPayloadObservableChain{
     
 /** The object before it was deleted */
 empreendimento: (EmpreendimentoObservableChain & {get: <R extends EmpreendimentoRequest>(request: R, defaultValue?: (FieldsSelection<Empreendimento, R> | undefined)) => Observable<(FieldsSelection<Empreendimento, R> | undefined)>}),
+    
+/** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+clientMutationId: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
+    
+/** The ID of the deleted object */
+deletedId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Observable<(Scalars['ID'] | undefined)>})
+}
+
+
+/** The payload for the deleteGqlShort mutation. */
+export interface DeleteGqlShortPayloadPromiseChain{
+    
+/** The object before it was deleted */
+gqlShort: (GqlShortPromiseChain & {get: <R extends GqlShortRequest>(request: R, defaultValue?: (FieldsSelection<GqlShort, R> | undefined)) => Promise<(FieldsSelection<GqlShort, R> | undefined)>}),
+    
+/** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+clientMutationId: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
+    
+/** The ID of the deleted object */
+deletedId: ({get: (request?: boolean|number, defaultValue?: (Scalars['ID'] | undefined)) => Promise<(Scalars['ID'] | undefined)>})
+}
+
+
+/** The payload for the deleteGqlShort mutation. */
+export interface DeleteGqlShortPayloadObservableChain{
+    
+/** The object before it was deleted */
+gqlShort: (GqlShortObservableChain & {get: <R extends GqlShortRequest>(request: R, defaultValue?: (FieldsSelection<GqlShort, R> | undefined)) => Observable<(FieldsSelection<GqlShort, R> | undefined)>}),
     
 /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
 clientMutationId: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
@@ -43495,6 +45413,28 @@ export interface UpdateEmpreendimentoPayloadObservableChain{
     
 /** The Post object mutation type. */
 empreendimento: (EmpreendimentoObservableChain & {get: <R extends EmpreendimentoRequest>(request: R, defaultValue?: (FieldsSelection<Empreendimento, R> | undefined)) => Observable<(FieldsSelection<Empreendimento, R> | undefined)>}),
+    
+/** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+clientMutationId: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
+}
+
+
+/** The payload for the updateGqlShort mutation. */
+export interface UpdateGqlShortPayloadPromiseChain{
+    
+/** The Post object mutation type. */
+gqlShort: (GqlShortPromiseChain & {get: <R extends GqlShortRequest>(request: R, defaultValue?: (FieldsSelection<GqlShort, R> | undefined)) => Promise<(FieldsSelection<GqlShort, R> | undefined)>}),
+    
+/** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+clientMutationId: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
+}
+
+
+/** The payload for the updateGqlShort mutation. */
+export interface UpdateGqlShortPayloadObservableChain{
+    
+/** The Post object mutation type. */
+gqlShort: (GqlShortObservableChain & {get: <R extends GqlShortRequest>(request: R, defaultValue?: (FieldsSelection<GqlShort, R> | undefined)) => Observable<(FieldsSelection<GqlShort, R> | undefined)>}),
     
 /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
 clientMutationId: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})

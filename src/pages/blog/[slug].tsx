@@ -44,17 +44,19 @@ export default function SinglePost({ data }: Props) {
 
         <div className="flex flex-col sm:flex-row items-start py-20">
           <aside className="w-full max-w-md space-y-6 xl:sticky top-44">
-            <div className="space-y-4 border-b border-white/20 pb-6">
-              <span className="text-xl sm:text-2xl text-green font-medium">
-                Autor:
-              </span>
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-full bg-zinc-400" />
-                <p className="text-xl sm:text-2xl">
-                  {post.author?.node.name || 'Equipe Lupema'}
-                </p>
+            {post.acoesPost?.exibirAutorDaMateria && (
+              <div className="space-y-4 border-b border-white/20 pb-6">
+                <span className="text-xl sm:text-2xl text-green font-medium">
+                  Autor:
+                </span>
+                <div className="flex items-center gap-4">
+                  <div className="w-16 h-16 rounded-full bg-zinc-400" />
+                  <p className="text-xl sm:text-2xl">
+                    {post.author?.node.name || 'Equipe Lupema'}
+                  </p>
+                </div>
               </div>
-            </div>
+            )}
 
             <div className="space-y-4 border-b border-white/20 pb-6">
               <span className="text-xl sm:text-2xl text-green font-medium">
@@ -105,28 +107,38 @@ export default function SinglePost({ data }: Props) {
                   />
                 )}
               </div>
-              <div dangerouslySetInnerHTML={{ __html: post.content || '' }} />
+              <div
+                className="post-content"
+                dangerouslySetInnerHTML={{ __html: post.content || '' }}
+              />
             </div>
 
-            <div className="relative xl:aspect-square rounded-3xl max-h-[310px] w-full my-16">
-              <Link href="/l-store">
-                <Image
-                  src="/banner-group.png"
-                  alt="Banner"
-                  width={1920}
-                  height={320}
-                  className="object-cover w-full h-full rounded-3xl"
-                />
-              </Link>
-            </div>
+            {post.acoesPost?.imagemDoBannerPost?.sourceUrl && (
+              <div className="relative xl:aspect-square rounded-3xl max-h-[310px] w-full my-16">
+                <Link href="/l-store">
+                  <Image
+                    src={
+                      post.acoesPost?.imagemDoBannerPost?.sourceUrl ||
+                      '/banner-group.png'
+                    }
+                    alt="Banner"
+                    width={1920}
+                    height={320}
+                    className="object-cover w-full h-full rounded-3xl"
+                  />
+                </Link>
+              </div>
+            )}
 
             <div className="space-y-8 px-0 xl:px-20 hidden"></div>
           </div>
         </div>
 
-        <div className="w-full xl:max-w-[80%] mx-auto">
-          <AuthorBlock />
-        </div>
+        {post.acoesPost?.exibirAutorDaMateria && (
+          <div className="w-full xl:max-w-[80%] mx-auto">
+            <AuthorBlock />
+          </div>
+        )}
       </div>
 
       <section className="py-16 sm:py-28">
@@ -182,7 +194,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     };
   }
 
-  const { post, empreendimentos, page, posts } = await ClientApp.query({
+  const { post, page, posts } = await ClientApp.query({
     post: [
       {
         id: `${slug}`,
@@ -196,6 +208,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         author: { node: { name: true } },
         featuredImage: {
           node: {
+            sourceUrl: true,
+          },
+        },
+        acoesPost: {
+          exibirAutorDaMateria: true,
+          imagemDoBannerPost: {
             sourceUrl: true,
           },
         },
@@ -235,25 +253,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         },
       },
     ],
-    empreendimentos: {
-      nodes: {
-        empreendimento: {
-          imagemPrincipal: {
-            sourceUrl: true,
-          },
-          nomeDoEmpreendimento: true,
-          estagioDaObra: {
-            name: true,
-            slug: true,
-          },
-          empCidade: true,
-          empMetragem: true,
-          empDormitorios: true,
-          empVagasDeGaragem: true,
-        },
-        slug: true,
-      },
-    },
   });
 
   if (!post) {
@@ -265,7 +264,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       data: {
         post: post,
         relatedPosts: (posts?.nodes || []).filter((item) => item.slug !== slug),
-        emp: empreendimentos,
         social: page?.informacoesDeContato,
       },
       revalidate: 30,

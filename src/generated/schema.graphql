@@ -339,6 +339,54 @@ type RootQuery {
   """Fields of the &#039;GeneralSettings&#039; settings group"""
   generalSettings: GeneralSettings
 
+  """An object of the GqlShort Type. """
+  gqlShort(
+    """The globally unique identifier of the object."""
+    id: ID!
+
+    """Type of unique identifier to fetch by. Default is Global ID"""
+    idType: GqlShortIdType
+  ): GqlShort
+
+  """A GqlShort object"""
+  gqlShortBy(
+    """Get the GqlShort object by its global ID"""
+    id: ID
+
+    """Get the GqlShort by its database ID"""
+    gqlShortId: Int
+
+    """Get the GqlShort by its uri"""
+    uri: String
+
+    """
+    Get the GqlShort by its slug (only available for non-hierarchical types)
+    """
+    slug: String
+  ): GqlShort @deprecated(reason: "Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)")
+
+  """Connection between the RootQuery type and the GqlShort type"""
+  gqlShorts(
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+
+    """Arguments for filtering the connection"""
+    where: RootQueryToGqlShortConnectionWhereArgs
+  ): RootQueryToGqlShortConnection
+
   """An object of the mediaItem Type. """
   mediaItem(
     """The globally unique identifier of the object."""
@@ -2486,6 +2534,9 @@ enum ContentTypeEnum {
 
   """The Type of Content object"""
   POST
+
+  """The Type of Content object"""
+  SHORTS
 }
 
 """Filter the connection based on input"""
@@ -6537,6 +6588,11 @@ type Page implements Node & ContentNode & UniformResourceIdentifiable & Database
   contentTypeName: String!
 
   """
+  Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo blog&quot; was set to Show in GraphQL.
+  """
+  conteuDoBlog: Page_Conteudoblog
+
+  """
   Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo sobre&quot; was set to Show in GraphQL.
   """
   conteuSobre: Page_Conteusobre
@@ -6555,6 +6611,11 @@ type Page implements Node & ContentNode & UniformResourceIdentifiable & Database
   Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo política de qualidade&quot; was set to Show in GraphQL.
   """
   conteudoPoliticaDeQualidade: Page_Conteudopoliticadequalidade
+
+  """
+  Added to the GraphQL Schema because the ACF Field Group &quot;Conteúdo Shorts&quot; was set to Show in GraphQL.
+  """
+  conteudoShorts: Page_Conteudoshorts
 
   """The unique identifier stored in the database"""
   databaseId: Int!
@@ -7081,6 +7142,51 @@ type PageToCommentConnectionPageInfo implements CommentConnectionPageInfo & WPPa
 }
 
 """Field Group"""
+type Page_Conteudoblog implements AcfFieldGroup {
+  """"""
+  blogDescricaoBlog3: String
+
+  """"""
+  blogDescricaoHero: String
+
+  """"""
+  blogDescricaoShorts: String
+
+  """"""
+  blogImagemDeFundoHero: MediaItem
+
+  """"""
+  blogImagemParaOsBanners: [Page_Conteudoblog_blogImagemParaOsBanners]
+
+  """"""
+  blogLabelHero: String
+
+  """"""
+  blogTituloBloco3: String
+
+  """"""
+  blogTituloHero: String
+
+  """"""
+  blogTituloShorts: String
+
+  """The name of the ACF Field Group"""
+  fieldGroupName: String
+}
+
+"""Field Group"""
+type Page_Conteudoblog_blogImagemParaOsBanners implements AcfFieldGroup {
+  """"""
+  blogImagemDesktopBanner: MediaItem
+
+  """"""
+  blogImagemMobileBanner: MediaItem
+
+  """The name of the ACF Field Group"""
+  fieldGroupName: String
+}
+
+"""Field Group"""
 type Page_Conteusobre implements AcfFieldGroup {
   """"""
   descricao: String
@@ -7327,6 +7433,24 @@ type Page_Conteudopoliticadequalidade_praticaItensPq implements AcfFieldGroup {
 
   """"""
   tituloCertPq: String
+}
+
+"""Field Group"""
+type Page_Conteudoshorts implements AcfFieldGroup {
+  """"""
+  banner: MediaItem
+
+  """The name of the ACF Field Group"""
+  fieldGroupName: String
+
+  """"""
+  shortsDescricao: String
+
+  """"""
+  shortsImagemDeFundo: MediaItem
+
+  """"""
+  shortsTitulo: String
 }
 
 """Field Group"""
@@ -7879,6 +8003,11 @@ interface PostConnectionEdge implements Edge {
 A chronological content entry typically used for blog posts, news articles, or similar date-based content.
 """
 type Post implements Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & NodeWithTemplate & Previewable & NodeWithTitle & NodeWithContentEditor & NodeWithAuthor & NodeWithFeaturedImage & NodeWithExcerpt & NodeWithComments & NodeWithTrackbacks & NodeWithRevisions & MenuItemLinkable {
+  """
+  Added to the GraphQL Schema because the ACF Field Group &quot;Ações Post&quot; was set to Show in GraphQL.
+  """
+  acoesPost: Post_Acoespost
+
   """The ancestors of the content node."""
   ancestors(
     """The number of items to return after the referenced "after" cursor"""
@@ -8282,6 +8411,18 @@ interface NodeWithTrackbacks implements Node {
 
   """URLs queued to be pinged."""
   toPing: [String]
+}
+
+"""Field Group"""
+type Post_Acoespost implements AcfFieldGroup {
+  """"""
+  exibirAutorDaMateria: Boolean
+
+  """The name of the ACF Field Group"""
+  fieldGroupName: String
+
+  """"""
+  imagemDoBannerPost: MediaItem
 }
 
 """Connection between the post type and the post type"""
@@ -15892,6 +16033,534 @@ type GeneralSettingsToMediaItemConnectionEdge implements OneToOneConnection & Ed
 }
 
 """
+Identifier types for retrieving a specific GqlShort. Specifies which unique attribute is used to find an exact GqlShort.
+"""
+enum GqlShortIdType {
+  """Identify a resource by the Database ID."""
+  DATABASE_ID
+
+  """Identify a resource by the (hashed) Global ID."""
+  ID
+
+  """
+  Identify a resource by the slug. Available to non-hierarchcial Types where the slug is a unique identifier.
+  """
+  SLUG
+
+  """Identify a resource by the URI."""
+  URI
+}
+
+"""The GqlShort type"""
+type GqlShort implements Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & NodeWithTemplate & Previewable & NodeWithTitle & MenuItemLinkable {
+  """The unique numeric identifier for the content node."""
+  gqlShortId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
+
+  """
+  Added to the GraphQL Schema because the ACF Field Group &quot;Short do YouTube&quot; was set to Show in GraphQL.
+  """
+  acf_shorts: GqlShort_AcfShorts
+
+  """The ancestors of the content node."""
+  ancestors(
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+  ): GqlShortToGqlShortConnection @deprecated(reason: "This content type is not hierarchical and typically will not have ancestors")
+
+  """Connection between the ContentNode type and the ContentType type"""
+  contentType: ContentNodeToContentTypeConnectionEdge
+
+  """The name of the Content Type the node belongs to"""
+  contentTypeName: String!
+
+  """The unique identifier stored in the database"""
+  databaseId: Int!
+
+  """Post publishing date."""
+  date: String
+
+  """The publishing date set in GMT."""
+  dateGmt: String
+
+  """The desired slug of the post"""
+  desiredSlug: String
+
+  """
+  If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds
+  """
+  editingLockedBy: ContentNodeToEditLockConnectionEdge
+
+  """The RSS enclosure for the object"""
+  enclosure: String
+
+  """Connection between the ContentNode type and the EnqueuedScript type"""
+  enqueuedScripts(
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+
+    """Arguments for filtering the connection"""
+    where: ContentNodeToEnqueuedScriptConnectionWhereArgs
+  ): ContentNodeToEnqueuedScriptConnection
+
+  """
+  Connection between the ContentNode type and the EnqueuedStylesheet type
+  """
+  enqueuedStylesheets(
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+
+    """Arguments for filtering the connection"""
+    where: ContentNodeToEnqueuedStylesheetConnectionWhereArgs
+  ): ContentNodeToEnqueuedStylesheetConnection
+
+  """
+  The global unique identifier for this content node. This is a stable, unique identifier for the node that does not change even if the node is moved or its url changes.
+  """
+  guid: String
+
+  """Whether the shorts object is password protected."""
+  hasPassword: Boolean
+
+  """The globally unique identifier of the shorts object."""
+  id: ID!
+
+  """Whether the node is a Comment"""
+  isComment: Boolean!
+
+  """Whether the node is a Content Node"""
+  isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
+
+  """Whether the object is a node in the preview state"""
+  isPreview: Boolean
+
+  """Whether the object is restricted from the current viewer"""
+  isRestricted: Boolean
+
+  """Whether the node is a Term"""
+  isTermNode: Boolean!
+
+  """The user that most recently edited the node"""
+  lastEditedBy: ContentNodeToEditLastConnectionEdge
+
+  """The permalink of the post"""
+  link: String
+
+  """
+  The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time.
+  """
+  modified: String
+
+  """
+  The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT.
+  """
+  modifiedGmt: String
+
+  """The parent of the content node."""
+  parent: GqlShortToParentConnectionEdge @deprecated(reason: "This content type is not hierarchical and typically will not have a parent")
+
+  """The password for the shorts object."""
+  password: String
+
+  """Connection between the GqlShort type and the GqlShort type"""
+  preview: GqlShortToPreviewConnectionEdge
+
+  """The database id of the preview node"""
+  previewRevisionDatabaseId: Int
+
+  """Whether the object is a node in the preview state"""
+  previewRevisionId: ID
+
+  """
+  The URL-friendly, human-readable identifier for the content node, used in its permalink.
+  """
+  slug: String
+
+  """The current status of the object"""
+  status: String
+
+  """The template assigned to the node"""
+  template: ContentTemplate
+
+  """
+  The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made.
+  """
+  title(
+    """Format of the field output"""
+    format: PostObjectFieldFormatEnum
+  ): String
+
+  """The unique resource identifier path"""
+  uri: String
+}
+
+"""Field Group"""
+type GqlShort_AcfShorts implements AcfFieldGroup {
+  """The name of the ACF Field Group"""
+  fieldGroupName: String
+
+  """"""
+  imagemDoShort: MediaItem
+
+  """"""
+  linkDaImagemShort: String
+
+  """"""
+  linkIdVideoYoutube: String
+
+  """"""
+  tituloDoShort: String
+}
+
+"""Connection between the GqlShort type and the GqlShort type"""
+type GqlShortToGqlShortConnection implements GqlShortConnection & Connection {
+  """Edges for the GqlShortToGqlShortConnection connection"""
+  edges: [GqlShortToGqlShortConnectionEdge!]!
+
+  """The nodes of the connection, without the edges"""
+  nodes: [GqlShort!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: GqlShortToGqlShortConnectionPageInfo!
+}
+
+"""
+A paginated collection of GqlShort Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of GqlShort Nodes
+"""
+interface GqlShortConnection implements Connection {
+  """
+  A list of edges (relational context) between RootQuery and connected GqlShort Nodes
+  """
+  edges: [GqlShortConnectionEdge!]!
+
+  """A list of connected GqlShort Nodes"""
+  nodes: [GqlShort!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: GqlShortConnectionPageInfo!
+}
+
+"""
+Represents a connection to a GqlShort. Contains both the GqlShort Node and metadata about the relationship.
+"""
+interface GqlShortConnectionEdge implements Edge {
+  """
+  Opaque reference to the nodes position in the connection. Value can be used with pagination args.
+  """
+  cursor: String
+
+  """The connected GqlShort Node"""
+  node: GqlShort!
+}
+
+"""
+Pagination metadata specific to &quot;GqlShortConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;GqlShortConnectionEdge&quot; Nodes.
+"""
+interface GqlShortConnectionPageInfo implements WPPageInfo & PageInfo {
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
+"""An edge in a connection"""
+type GqlShortToGqlShortConnectionEdge implements GqlShortConnectionEdge & Edge {
+  """A cursor for use in pagination"""
+  cursor: String
+
+  """The item at the end of the edge"""
+  node: GqlShort!
+}
+
+"""
+Pagination metadata specific to &quot;GqlShortToGqlShortConnection&quot; collections. Provides cursors and flags for navigating through sets of GqlShortToGqlShortConnection Nodes.
+"""
+type GqlShortToGqlShortConnectionPageInfo implements GqlShortConnectionPageInfo & WPPageInfo & PageInfo {
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
+"""Connection between the GqlShort type and the GqlShort type"""
+type GqlShortToParentConnectionEdge implements OneToOneConnection & Edge & GqlShortConnectionEdge {
+  """
+  Opaque reference to the nodes position in the connection. Value can be used with pagination args.
+  """
+  cursor: String
+
+  """The node of the connection, without the edges"""
+  node: GqlShort!
+}
+
+"""Connection between the GqlShort type and the GqlShort type"""
+type GqlShortToPreviewConnectionEdge implements OneToOneConnection & Edge & GqlShortConnectionEdge {
+  """
+  Opaque reference to the nodes position in the connection. Value can be used with pagination args.
+  """
+  cursor: String
+
+  """The node of the connection, without the edges"""
+  node: GqlShort!
+}
+
+"""Arguments for filtering the RootQueryToGqlShortConnection connection"""
+input RootQueryToGqlShortConnectionWhereArgs {
+  """Filter the connection based on dates"""
+  dateQuery: DateQueryInput
+
+  """
+  True for objects with passwords; False for objects without passwords; null for all objects with or without passwords
+  """
+  hasPassword: Boolean
+
+  """Specific database ID of the object"""
+  id: Int
+
+  """Array of IDs for the objects to retrieve"""
+  in: [ID]
+
+  """
+  True to limit the results to sticky posts; false to exclude sticky posts. Note: this filters the result set, it does not float sticky posts to the top of the results.
+  """
+  isSticky: Boolean
+  metaQuery: RootQueryToGqlShortConnectionWhereArgsMetaQuery
+
+  """Get objects with a specific mimeType property"""
+  mimeType: MimeTypeEnum
+
+  """Slug / post_name of the object"""
+  name: String
+
+  """Specify objects to retrieve. Use slugs"""
+  nameIn: [String]
+
+  """
+  Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
+  """
+  notIn: [ID]
+
+  """What parameter to use to order the objects by."""
+  orderby: [PostObjectsConnectionOrderbyInput]
+
+  """Use ID to return only children. Use 0 to return only top-level items"""
+  parent: ID
+
+  """Specify objects whose parent is in an array"""
+  parentIn: [ID]
+
+  """Specify posts whose parent is not in an array"""
+  parentNotIn: [ID]
+
+  """Show posts with a specific password."""
+  password: String
+
+  """Show Posts based on a keyword search"""
+  search: String
+
+  """Retrieve posts where post status is in an array."""
+  stati: [PostStatusEnum]
+
+  """Show posts with a specific status."""
+  status: PostStatusEnum
+  taxQuery: TaxQuery
+
+  """Filter the connection to content assigned a specific template."""
+  template: ContentTemplateEnum
+
+  """Title of the object"""
+  title: String
+}
+
+input RootQueryToGqlShortConnectionWhereArgsMetaQuery {
+  metaArray: [RootQueryToGqlShortConnectionWhereArgsMetaArray]
+  relation: RelationEnum
+}
+
+input RootQueryToGqlShortConnectionWhereArgsMetaArray {
+  """Custom field value"""
+  compare: RootQueryToGqlShortConnectionWhereArgsMetaCompareEnum
+
+  """Custom field key"""
+  key: String
+
+  """Custom field value"""
+  type: RootQueryToGqlShortConnectionWhereArgsMetaTypeEnum
+
+  """Custom field value"""
+  value: String
+}
+
+enum RootQueryToGqlShortConnectionWhereArgsMetaCompareEnum {
+  """"""
+  BETWEEN
+
+  """"""
+  EQUAL_TO
+
+  """"""
+  EXISTS
+
+  """"""
+  GREATER_THAN
+
+  """"""
+  GREATER_THAN_OR_EQUAL_TO
+
+  """"""
+  IN
+
+  """"""
+  LESS_THAN
+
+  """"""
+  LESS_THAN_OR_EQUAL_TO
+
+  """"""
+  LIKE
+
+  """"""
+  NOT_BETWEEN
+
+  """"""
+  NOT_EQUAL_TO
+
+  """"""
+  NOT_EXISTS
+
+  """"""
+  NOT_IN
+
+  """"""
+  NOT_LIKE
+}
+
+enum RootQueryToGqlShortConnectionWhereArgsMetaTypeEnum {
+  """"""
+  BINARY
+
+  """"""
+  CHAR
+
+  """"""
+  DATE
+
+  """"""
+  DATETIME
+
+  """"""
+  DECIMAL
+
+  """"""
+  NUMERIC
+
+  """"""
+  SIGNED
+
+  """"""
+  TIME
+
+  """"""
+  UNSIGNED
+}
+
+"""Connection between the RootQuery type and the GqlShort type"""
+type RootQueryToGqlShortConnection implements GqlShortConnection & Connection {
+  """Edges for the RootQueryToGqlShortConnection connection"""
+  edges: [RootQueryToGqlShortConnectionEdge!]!
+
+  """The nodes of the connection, without the edges"""
+  nodes: [GqlShort!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: RootQueryToGqlShortConnectionPageInfo!
+}
+
+"""An edge in a connection"""
+type RootQueryToGqlShortConnectionEdge implements GqlShortConnectionEdge & Edge {
+  """A cursor for use in pagination"""
+  cursor: String
+
+  """The item at the end of the edge"""
+  node: GqlShort!
+}
+
+"""
+Pagination metadata specific to &quot;RootQueryToGqlShortConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToGqlShortConnection Nodes.
+"""
+type RootQueryToGqlShortConnectionPageInfo implements GqlShortConnectionPageInfo & WPPageInfo & PageInfo {
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
+"""
 Identifier types for retrieving a specific MediaItem. Specifies which unique attribute is used to find an exact MediaItem.
 """
 enum MediaItemIdType {
@@ -16448,7 +17117,7 @@ interface MenuItemLinkableConnectionEdge implements Edge {
 }
 
 """Deprecated in favor of MenuItemLinkable Interface"""
-union MenuItemObjectUnion = Post | Page | Banner | ArquivoAssessoria | Empreendimento | CentraldeDecorado | Category | Tag
+union MenuItemObjectUnion = Post | Page | Banner | ArquivoAssessoria | Empreendimento | CentraldeDecorado | GqlShort | Category | Tag
 
 """Connection between the MenuItem type and the Menu type"""
 type MenuItemToMenuConnectionEdge implements OneToOneConnection & Edge & MenuConnectionEdge {
@@ -18385,6 +19054,9 @@ enum PublishableContentTypeEnum {
 
   """The Type of Content object"""
   POST
+
+  """The Type of Content object"""
+  SHORTS
 }
 
 """Options for ordering the connection"""
@@ -18694,6 +19366,12 @@ type RootMutation {
     input: CreateEmpreendimentoInput!
   ): CreateEmpreendimentoPayload
 
+  """The createGqlShort mutation"""
+  createGqlShort(
+    """Input for the createGqlShort mutation"""
+    input: CreateGqlShortInput!
+  ): CreateGqlShortPayload
+
   """The createMediaItem mutation"""
   createMediaItem(
     """Input for the createMediaItem mutation"""
@@ -18765,6 +19443,12 @@ type RootMutation {
     """Input for the deleteEmpreendimento mutation"""
     input: DeleteEmpreendimentoInput!
   ): DeleteEmpreendimentoPayload
+
+  """The deleteGqlShort mutation"""
+  deleteGqlShort(
+    """Input for the deleteGqlShort mutation"""
+    input: DeleteGqlShortInput!
+  ): DeleteGqlShortPayload
 
   """The deleteMediaItem mutation"""
   deleteMediaItem(
@@ -18867,6 +19551,12 @@ type RootMutation {
     """Input for the updateEmpreendimento mutation"""
     input: UpdateEmpreendimentoInput!
   ): UpdateEmpreendimentoPayload
+
+  """The updateGqlShort mutation"""
+  updateGqlShort(
+    """Input for the updateGqlShort mutation"""
+    input: UpdateGqlShortInput!
+  ): UpdateGqlShortPayload
 
   """The updateMediaItem mutation"""
   updateMediaItem(
@@ -19242,6 +19932,47 @@ input EmpreendimentoCategoriesNodeInput {
 type CreateEmpreendimentoPayload {
   """The Post object mutation type."""
   empreendimento: Empreendimento
+
+  """
+  If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+}
+
+"""Input for the createGqlShort mutation."""
+input CreateGqlShortInput {
+  """
+  This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
+  """
+  date: String
+
+  """
+  A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types.
+  """
+  menuOrder: Int
+
+  """The password used to protect the content of the object"""
+  password: String
+
+  """The slug of the object"""
+  slug: String
+
+  """The status of the object"""
+  status: PostStatusEnum
+
+  """The title of the object"""
+  title: String
+}
+
+"""The payload for the createGqlShort mutation."""
+type CreateGqlShortPayload {
+  """The Post object mutation type."""
+  gqlShort: GqlShort
 
   """
   If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
@@ -19888,6 +20619,39 @@ type DeleteEmpreendimentoPayload {
   deletedId: ID
 }
 
+"""Input for the deleteGqlShort mutation."""
+input DeleteGqlShortInput {
+  """
+  This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """
+  Whether the object should be force deleted instead of being moved to the trash
+  """
+  forceDelete: Boolean
+
+  """The ID of the GqlShort to delete"""
+  id: ID!
+
+  """Override the edit lock when another user is editing the post"""
+  ignoreEditLock: Boolean
+}
+
+"""The payload for the deleteGqlShort mutation."""
+type DeleteGqlShortPayload {
+  """The object before it was deleted"""
+  gqlShort: GqlShort
+
+  """
+  If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """The ID of the deleted object"""
+  deletedId: ID
+}
+
 """Input for the deleteMediaItem mutation."""
 input DeleteMediaItemInput {
   """
@@ -20504,6 +21268,53 @@ input UpdateEmpreendimentoInput {
 type UpdateEmpreendimentoPayload {
   """The Post object mutation type."""
   empreendimento: Empreendimento
+
+  """
+  If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+}
+
+"""Input for the updateGqlShort mutation."""
+input UpdateGqlShortInput {
+  """
+  This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
+  """
+  date: String
+
+  """The ID of the GqlShort object"""
+  id: ID!
+
+  """Override the edit lock when another user is editing the post"""
+  ignoreEditLock: Boolean
+
+  """
+  A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types.
+  """
+  menuOrder: Int
+
+  """The password used to protect the content of the object"""
+  password: String
+
+  """The slug of the object"""
+  slug: String
+
+  """The status of the object"""
+  status: PostStatusEnum
+
+  """The title of the object"""
+  title: String
+}
+
+"""The payload for the updateGqlShort mutation."""
+type UpdateGqlShortPayload {
+  """The Post object mutation type."""
+  gqlShort: GqlShort
 
   """
   If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.

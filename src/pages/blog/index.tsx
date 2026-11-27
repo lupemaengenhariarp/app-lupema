@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import HeroBlog from '../../components/layout/HeroBlog';
 import SlideApp from '../../components/layout/Slide';
@@ -8,15 +8,9 @@ import BlogItem from '../../components/layout/BlogItem';
 import ShortVideo from '../../components/layout/ShortVideo';
 import Link from 'next/link';
 import ClientApp from '../../lib/genql';
-import { Post } from '../../generated';
-
-const banner = {
-  image: '/15c4176de8643e3d7fc2160e2e460061b1e3e272.png',
-  label: 'UM NOVO OLHAR SOBRE MORAR BEM.',
-  title: 'SEU LUGAR. SEU TEMPO. SEU JEITO DE VIVER.',
-  description:
-    'Morar também é escolher o que faz parte da sua vida. Do endereço à decoração, descubra tendências, lançamentos e diferentes formas de viver o luxo, com informação e perspectivas sobre o mercado imobiliário.',
-};
+import { Page_Informacoesdecontato, Post } from '../../generated';
+import { GetStaticProps } from 'next';
+import { getYouTubeThumbnail, getYouTubeVideoId } from '../../utils/youtube';
 
 const movies = [
   {
@@ -46,26 +40,6 @@ const movies = [
   },
 ];
 
-const banners = [
-  { id: 1, img: '/destaques.jpg' },
-  { id: 2, img: '/destaques.jpg' },
-  { id: 3, img: '/destaques.jpg' },
-];
-
-const itemsBanner = banners.map((item) => {
-  return (
-    <div key={item.id} className="relative w-full h-full">
-      <Image
-        src={item.img}
-        alt="Banner"
-        width={1920}
-        height={1000}
-        className="object-contain w-full h-full"
-      />
-    </div>
-  );
-});
-
 const moviesItens = movies.map((item) => (
   <ShortVideo
     key={item.videoId}
@@ -84,6 +58,23 @@ const responsiveMovies = {
 const INITIAL_POSTS_COUNT = 8;
 const LOAD_MORE_COUNT = 4;
 const POSTS_PAGE_SIZE = 100;
+const SHORTS_PAGE_SIZE = 18;
+
+interface ShortVideoData {
+  videoId: string;
+  thumbnailSrc: string;
+  title?: string;
+}
+
+type SocialLinks = Pick<
+  Page_Informacoesdecontato,
+  | 'coTelefone'
+  | 'coWhatsapp'
+  | 'coEmail'
+  | 'linkFacebook'
+  | 'linkInstagram'
+  | 'linkYoutube'
+>;
 
 function normalizeText(value: string) {
   return value
@@ -92,60 +83,172 @@ function normalizeText(value: string) {
     .toLocaleLowerCase('pt-BR');
 }
 
-export default function Blog() {
-  const [allPosts, setAllPosts] = useState<Post[]>([]);
+interface Props {
+  initialPosts: Post[];
+  shortVideos: ShortVideoData[];
+  data: {
+    social: SocialLinks | null;
+  };
+  conteuDoBlog: {
+    blogImagemDeFundoHero?: { sourceUrl?: string } | null;
+    blogImagemParaOsBanners?: (
+      | {
+          blogImagemDesktopBanner?: { sourceUrl?: string } | null;
+          blogImagemMobileBanner?: { sourceUrl?: string } | null;
+        }
+      | undefined
+    )[];
+    blogLabelHero?: string;
+    blogTituloHero?: string;
+    blogDescricaoHero?: string;
+    blogTituloBloco3?: string;
+    blogDescricaoBlog3?: string;
+  } | null;
+}
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  // 1. Busca os campos ACF da página Blog
+  const blogResult = await ClientApp.query({
+    page: [
+      {
+        id: '1495',
+        idType: 'DATABASE_ID',
+      },
+      {
+        conteuDoBlog: {
+          blogImagemDeFundoHero: {
+            sourceUrl: true,
+          },
+          blogLabelHero: true,
+          blogTituloHero: true,
+          blogDescricaoHero: true,
+          blogImagemParaOsBanners: {
+            blogImagemDesktopBanner: {
+              sourceUrl: true,
+            },
+            blogImagemMobileBanner: {
+              sourceUrl: true,
+            },
+          },
+          blogTituloBloco3: true,
+          blogDescricaoBlog3: true,
+          blogTituloShorts: true,
+          blogDescricaoShorts: true,
+        },
+      },
+    ],
+  });
+
+  const { pageBy } = await ClientApp.query({
+    pageBy: [
+      { pageId: 201 },
+      {
+        informacoesDeContato: {
+          coTelefone: true,
+          coWhatsapp: true,
+          coEmail: true,
+          linkFacebook: true,
+          linkInstagram: true,
+          linkYoutube: true,
+        },
+      },
+    ],
+  });
+
+  const { gqlShorts } = await ClientApp.query({
+    gqlShorts: [
+      { first: SHORTS_PAGE_SIZE },
+      {
+        nodes: {
+          acf_shorts: {
+            imagemDoShort: { sourceUrl: true },
+            linkDaImagemShort: true,
+            linkIdVideoYoutube: true,
+            tituloDoShort: true,
+          },
+          slug: true,
+        },
+      },
+    ],
+  });
+
+  const shortVideos: ShortVideoData[] = (gqlShorts?.nodes ?? []).map((short) => ({
+    videoId: getYouTubeVideoId(short.acf_shorts?.linkIdVideoYoutube || ''),
+    thumbnailSrc: getYouTubeThumbnail(
+      short.acf_shorts?.linkDaImagemShort || '',
+      short.acf_shorts?.imagemDoShort?.sourceUrl || ''
+    ),
+    title: short.acf_shorts?.tituloDoShort || undefined,
+  }));
+
+  const blogContent = blogResult?.page?.conteuDoBlog ?? null;
+
+  // 2. Busca todas as matérias
+  const loadedPosts: Post[] = [];
+  let cursor: string | undefined;
+  let hasNextPage = true;
+
+  while (hasNextPage) {
+    const result = await ClientApp.query({
+      posts: [
+        {
+          first: POSTS_PAGE_SIZE,
+          ...(cursor ? { after: cursor } : {}),
+        },
+        {
+          nodes: {
+            title: true,
+            slug: true,
+            featuredImage: {
+              node: { sourceUrl: true },
+            },
+            excerpt: true,
+            categories: {
+              nodes: {
+                name: true,
+                slug: true,
+              },
+            },
+          },
+          pageInfo: {
+            hasNextPage: true,
+            endCursor: true,
+          },
+        },
+      ],
+    });
+
+    const connection = result?.posts;
+
+    if (Array.isArray(connection?.nodes)) {
+      loadedPosts.push(...(connection.nodes as Post[]));
+    }
+
+    hasNextPage = Boolean(connection?.pageInfo?.hasNextPage);
+    cursor = connection?.pageInfo?.endCursor || undefined;
+
+    if (!cursor) hasNextPage = false;
+  }
+
+  // 3. Entrega tudo para o componente
+  return {
+    props: {
+      initialPosts: loadedPosts,
+      conteuDoBlog: blogContent,
+      data: {
+        social: pageBy?.informacoesDeContato ?? null,
+      },
+      shortVideos,
+    },
+    revalidate: 300,
+  };
+};
+
+export default function Blog({ initialPosts, conteuDoBlog, shortVideos }: Props) {
+  const [allPosts] = useState<Post[]>(initialPosts);
   const [visibleCount, setVisibleCount] = useState(INITIAL_POSTS_COUNT);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    let ignore = false;
-
-    async function loadPosts() {
-      try {
-        const loadedPosts: Post[] = [];
-        let cursor: string | undefined;
-        let hasNextPage = true;
-
-        while (hasNextPage && !ignore) {
-          const result = await ClientApp.query({
-            posts: [
-              { first: POSTS_PAGE_SIZE, ...(cursor ? { after: cursor } : {}) },
-              {
-                nodes: {
-                  title: true,
-                  slug: true,
-                  featuredImage: { node: { sourceUrl: true } },
-                  excerpt: true,
-                  categories: { nodes: { name: true, slug: true } },
-                },
-                pageInfo: { hasNextPage: true, endCursor: true },
-              },
-            ],
-          });
-
-          const connection = result?.posts;
-          if (Array.isArray(connection?.nodes)) {
-            loadedPosts.push(...(connection.nodes as Post[]));
-          }
-          hasNextPage = Boolean(connection?.pageInfo?.hasNextPage);
-          cursor = connection?.pageInfo?.endCursor || undefined;
-          if (!cursor) hasNextPage = false;
-        }
-
-        if (!ignore) setAllPosts(loadedPosts);
-      } finally {
-        if (!ignore) setIsLoading(false);
-      }
-    }
-
-    loadPosts();
-
-    return () => {
-      ignore = true;
-    };
-  }, []);
 
   const filteredPosts = allPosts.filter((post) => {
     const search = normalizeText(searchTerm.trim());
@@ -176,6 +279,40 @@ export default function Blog() {
 
   const postsToShow = filteredPosts.slice(0, visibleCount);
   const hasMorePosts = visibleCount < filteredPosts.length;
+  const itemsBanner = (conteuDoBlog?.blogImagemParaOsBanners ?? [])
+    .map((item, index) => {
+      const desktopImage = item?.blogImagemDesktopBanner?.sourceUrl;
+      const mobileImage = item?.blogImagemMobileBanner?.sourceUrl;
+      const image = desktopImage || mobileImage;
+
+      if (!image) return null;
+
+      return (
+        <div key={`${image}-${index}`} className="relative w-full h-full">
+          <picture>
+            {mobileImage && (
+              <source media="(max-width: 767px)" srcSet={mobileImage} />
+            )}
+            <Image
+              src={image}
+              alt={`Banner ${index + 1}`}
+              width={1920}
+              height={1000}
+              className="object-contain w-full h-full"
+            />
+          </picture>
+        </div>
+      );
+    })
+    .filter(Boolean);
+  const dynamicMoviesItens = shortVideos.map((item, index) => (
+    <ShortVideo
+      key={`${item.videoId}-${index}`}
+      thumbnailSrc={item.thumbnailSrc}
+      title={item.title}
+      videoId={item.videoId}
+    />
+  ));
 
   function handleCategorySelect(category: string | null) {
     setSelectedCategory(category);
@@ -188,7 +325,12 @@ export default function Blog() {
   }
   return (
     <main className="blog bg-bgi border-b border-white/20 pb-24">
-      <HeroBlog {...banner} />
+      <HeroBlog
+        image={conteuDoBlog?.blogImagemDeFundoHero?.sourceUrl}
+        label={conteuDoBlog?.blogLabelHero}
+        title={conteuDoBlog?.blogTituloHero}
+        description={conteuDoBlog?.blogDescricaoHero}
+      />
       <SlideApp
         items={itemsBanner}
         largura={{ desktop: 0, mobile: 0 }}
@@ -206,7 +348,7 @@ export default function Blog() {
           ))}
         </div>
 
-        {!isLoading && postsToShow.length === 0 && (
+        {postsToShow.length === 0 && (
           <p className="text-center text-white pb-12">
             Nenhum artigo encontrado.
           </p>
@@ -226,17 +368,14 @@ export default function Blog() {
       <section className="container">
         <div className="text-center pt-24 pb-20 text-white">
           <h1 className="text-3xl font-light tracking-[8px] sm:tracking-[15px] uppercase text-green">
-            COMPARTILHE O JEITO LUPEMA DE VIVER
+            {conteuDoBlog?.blogTituloBloco3 || ''}
           </h1>
           <p className="max-w-screen-lg mx-auto mt-8">
-            Cada projeto tem uma história que vai além das imagens. Dê o play e
-            conheça espaços, ideias e conceitos que traduzem o jeito Lupema de
-            viver: alto padrão nos detalhes, arquitetura que inspira e conforto
-            para aproveitar a vida no seu ritmo.
+            {conteuDoBlog?.blogDescricaoBlog3 || ''}
           </p>
         </div>
         <SlideApp
-          items={moviesItens}
+          items={dynamicMoviesItens}
           largura={{ desktop: 0, mobile: 0 }}
           infinite={true}
           gap={16}

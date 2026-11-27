@@ -77,6 +77,7 @@ export declare const enumContentTypeEnum: {
   readonly EMPREENDIMENTOS: 'EMPREENDIMENTOS'
   readonly PAGE: 'PAGE'
   readonly POST: 'POST'
+  readonly SHORTS: 'SHORTS'
 }
 
 export declare const enumPostObjectsConnectionDateColumnEnum: {
@@ -999,6 +1000,42 @@ export declare const enumRootQueryToEmpreendimentoConnectionWhereArgsMetaTypeEnu
   readonly UNSIGNED: 'UNSIGNED'
 }
 
+export declare const enumGqlShortIdType: {
+  readonly DATABASE_ID: 'DATABASE_ID'
+  readonly ID: 'ID'
+  readonly SLUG: 'SLUG'
+  readonly URI: 'URI'
+}
+
+export declare const enumRootQueryToGqlShortConnectionWhereArgsMetaCompareEnum: {
+  readonly BETWEEN: 'BETWEEN'
+  readonly EQUAL_TO: 'EQUAL_TO'
+  readonly EXISTS: 'EXISTS'
+  readonly GREATER_THAN: 'GREATER_THAN'
+  readonly GREATER_THAN_OR_EQUAL_TO: 'GREATER_THAN_OR_EQUAL_TO'
+  readonly IN: 'IN'
+  readonly LESS_THAN: 'LESS_THAN'
+  readonly LESS_THAN_OR_EQUAL_TO: 'LESS_THAN_OR_EQUAL_TO'
+  readonly LIKE: 'LIKE'
+  readonly NOT_BETWEEN: 'NOT_BETWEEN'
+  readonly NOT_EQUAL_TO: 'NOT_EQUAL_TO'
+  readonly NOT_EXISTS: 'NOT_EXISTS'
+  readonly NOT_IN: 'NOT_IN'
+  readonly NOT_LIKE: 'NOT_LIKE'
+}
+
+export declare const enumRootQueryToGqlShortConnectionWhereArgsMetaTypeEnum: {
+  readonly BINARY: 'BINARY'
+  readonly CHAR: 'CHAR'
+  readonly DATE: 'DATE'
+  readonly DATETIME: 'DATETIME'
+  readonly DECIMAL: 'DECIMAL'
+  readonly NUMERIC: 'NUMERIC'
+  readonly SIGNED: 'SIGNED'
+  readonly TIME: 'TIME'
+  readonly UNSIGNED: 'UNSIGNED'
+}
+
 export declare const enumMediaItemIdType: {
   readonly DATABASE_ID: 'DATABASE_ID'
   readonly ID: 'ID'
@@ -1208,6 +1245,7 @@ export declare const enumPublishableContentTypeEnum: {
   readonly EMPREENDIMENTOS: 'EMPREENDIMENTOS'
   readonly PAGE: 'PAGE'
   readonly POST: 'POST'
+  readonly SHORTS: 'SHORTS'
 }
 
 export declare const enumUsersConnectionOrderbyEnum: {

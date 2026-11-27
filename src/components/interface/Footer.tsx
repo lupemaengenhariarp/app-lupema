@@ -6,7 +6,7 @@ import Logo from '../../../public/logo.svg';
 import { Page_Informacoesdecontato } from '../../generated';
 
 interface Props {
-  data: Page_Informacoesdecontato;
+  data?: Page_Informacoesdecontato | null;
 }
 
 const FooterApp = ({ data }: Props) => {
@@ -19,13 +19,13 @@ const FooterApp = ({ data }: Props) => {
             <Image src={Logo} width={225} height={100} alt="Logo Lupema" />
           </Link>
           <div className="flex gap-8 mt-6 sm:mt-0">
-            <a href={data?.linkFacebook} arial-label="Button Facebook">
+            <a href={data?.linkFacebook || undefined} aria-label="Button Facebook">
               <BsFacebook size={18} className="hover:text-green" />
             </a>
-            <a href={data?.linkInstagram} arial-label="Button Instagram">
+            <a href={data?.linkInstagram || undefined} aria-label="Button Instagram">
               <BsInstagram size={18} className="hover:text-green" />
             </a>
-            <a href={data?.linkYoutube} arial-label="Button Youtube">
+            <a href={data?.linkYoutube || undefined} aria-label="Button Youtube">
               <BsYoutube size={20} className="hover:text-green" />
             </a>
           </div>

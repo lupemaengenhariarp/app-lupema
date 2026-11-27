@@ -50,6 +50,7 @@ module.exports.enumContentTypeEnum = {
   EMPREENDIMENTOS: 'EMPREENDIMENTOS',
   PAGE: 'PAGE',
   POST: 'POST',
+  SHORTS: 'SHORTS',
 }
 
 module.exports.enumPostObjectsConnectionDateColumnEnum = {
@@ -998,6 +999,42 @@ module.exports.enumRootQueryToEmpreendimentoConnectionWhereArgsMetaTypeEnum = {
   UNSIGNED: 'UNSIGNED',
 }
 
+module.exports.enumGqlShortIdType = {
+  DATABASE_ID: 'DATABASE_ID',
+  ID: 'ID',
+  SLUG: 'SLUG',
+  URI: 'URI',
+}
+
+module.exports.enumRootQueryToGqlShortConnectionWhereArgsMetaCompareEnum = {
+  BETWEEN: 'BETWEEN',
+  EQUAL_TO: 'EQUAL_TO',
+  EXISTS: 'EXISTS',
+  GREATER_THAN: 'GREATER_THAN',
+  GREATER_THAN_OR_EQUAL_TO: 'GREATER_THAN_OR_EQUAL_TO',
+  IN: 'IN',
+  LESS_THAN: 'LESS_THAN',
+  LESS_THAN_OR_EQUAL_TO: 'LESS_THAN_OR_EQUAL_TO',
+  LIKE: 'LIKE',
+  NOT_BETWEEN: 'NOT_BETWEEN',
+  NOT_EQUAL_TO: 'NOT_EQUAL_TO',
+  NOT_EXISTS: 'NOT_EXISTS',
+  NOT_IN: 'NOT_IN',
+  NOT_LIKE: 'NOT_LIKE',
+}
+
+module.exports.enumRootQueryToGqlShortConnectionWhereArgsMetaTypeEnum = {
+  BINARY: 'BINARY',
+  CHAR: 'CHAR',
+  DATE: 'DATE',
+  DATETIME: 'DATETIME',
+  DECIMAL: 'DECIMAL',
+  NUMERIC: 'NUMERIC',
+  SIGNED: 'SIGNED',
+  TIME: 'TIME',
+  UNSIGNED: 'UNSIGNED',
+}
+
 module.exports.enumMediaItemIdType = {
   DATABASE_ID: 'DATABASE_ID',
   ID: 'ID',
@@ -1207,6 +1244,7 @@ module.exports.enumPublishableContentTypeEnum = {
   EMPREENDIMENTOS: 'EMPREENDIMENTOS',
   PAGE: 'PAGE',
   POST: 'POST',
+  SHORTS: 'SHORTS',
 }
 
 module.exports.enumUsersConnectionOrderbyEnum = {

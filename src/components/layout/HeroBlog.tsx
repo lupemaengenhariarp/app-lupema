@@ -1,26 +1,22 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-type HeroBlogProps = {
-  image: string;
-  title: string;
-  description: string;
+interface HeroBlogProps {
+  image?: string;
   label?: string;
-};
+  title?: string;
+  description?: string;
+}
 
-export default function HeroBlog({
-  image,
-  title,
-  description,
-  label,
-}: HeroBlogProps) {
+export default function HeroBlog({ image, label, title, description }: HeroBlogProps) {
   const router = useRouter();
   const isBlog = router.pathname === '/blog';
+
   return (
     <section className="w-full h-[100dvh] overflow-hidden relative">
       <Image
-        src={image}
-        alt={title}
+        src={image || ''}
+        alt={title || ''}
         fill
         className="w-full h-full object-cover"
       />
